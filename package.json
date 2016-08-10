@@ -1,0 +1,44 @@
+{
+  "name": "qtk",
+  "version": "1.0.0",
+  "description": "a template project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "clean": "rm -rf doc index.js coverage/ src/*.js",
+    "test": "tsc && webpack && ./node_modules/karma/bin/karma start",
+    "build": "tsc && webpack",
+    "gendoc": "./node_modules/typedoc/bin/typedoc --mode modules --out doc src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qtoolkit/qtk.git"
+  },
+  "keywords": [
+    "qtk"
+  ],
+  "author": "xianjimli@hotmail.com",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/qtoolkit/qtk/issues"
+  },
+  "homepage": "https://github.com/qtoolkit/qtk#readme",
+  "devDependencies": {
+    "karma": "^1.1.2",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.1.1",
+    "mocha": "^3.0.0",
+    "ts-loader": "^0.8.2",
+    "typedoc": "^0.4.4",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.2",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "es6-promise": "^3.2.1",
+    "eventemitter3": "^1.2.0",
+    "whatwg-fetch": "^1.0.0"
+  }
+}

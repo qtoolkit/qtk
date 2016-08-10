@@ -1,0 +1,38 @@
+{
+	"frames": {
+		"0.png": {
+			"frame": {
+				"x": 1,
+				"y": 12,
+				"w": 128,
+				"h": 128
+			}
+		},
+		"1.png": {
+			"frame": {
+				"x": 131,
+				"y": 12,
+				"w": 128,
+				"h": 128
+			}
+		},
+		"2.png": {
+			"frame": {
+				"x": 1,
+				"y": 147,
+				"w": 128,
+				"h": 128
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.tangide.com",
+		"version": "1.0",
+		"image": "images.png",
+		"scale": 1,
+		"size": {
+			"w": 264,
+			"h": 264
+		}
+	}
+}
