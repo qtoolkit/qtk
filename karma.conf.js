@@ -16,6 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'index.js',
+      '__tests__/context2d-mock.js',
       '__tests__/assert.js',
       '__tests__/*.test.js',
       {pattern: 'www/*', watched: false, included: false, served: true, nocache: false}

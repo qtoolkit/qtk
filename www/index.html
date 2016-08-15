@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head><title> TypeScript Greeter </title></head>
-  <body>
+	<head><title>Tester</title>
     <script src='../index.js'></script>
 	<script type="application/javascript">
-		console.log(foo);
+		var ctx = null;
+		var ImageTile = qtk.ImageTile;
+		var img = ImageTile.create("http://localhost:9876/base/www/images.json#0.png");
+
+		function render() {
+			if(img.complete) {
+				img.draw(ctx, ImageTile.DRAW_9PATCH, 0, 0, 60, 60);
+				img.draw(ctx, ImageTile.DRAW_9PATCH, 200, 0, 200, 200);
+				img.draw(ctx, ImageTile.DRAW_9PATCH, 0, 200, 200, 60);
+				img.draw(ctx, ImageTile.DRAW_9PATCH, 200, 200, 60, 200);
+			}
+
+			requestAnimationFrame(render);
+		}
+
+		window.onload = function() {
+			ctx = document.getElementById("main-canvas").getContext("2d");
+			requestAnimationFrame(render);
+		}
 	</script>
-  </body>
+</head>
+<body><canvas id="main-canvas" width="800" height="800" /></body>
 </html>
