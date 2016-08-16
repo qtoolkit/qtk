@@ -9,10 +9,14 @@
 
 		function render() {
 			if(img.complete) {
-				img.draw(ctx, ImageTile.DRAW_9PATCH, 0, 0, 60, 60);
-				img.draw(ctx, ImageTile.DRAW_9PATCH, 200, 0, 200, 200);
-				img.draw(ctx, ImageTile.DRAW_9PATCH, 0, 200, 200, 60);
-				img.draw(ctx, ImageTile.DRAW_9PATCH, 200, 200, 60, 200);
+				//img.draw(ctx, ImageTile.DRAW_TILE_H, 0, 0, 400, 125);
+				//img.draw(ctx, ImageTile.DRAW_TILE_H, 0, 200, 80, 200);
+				//img.draw(ctx, ImageTile.DRAW_TILE_V, 0, 0, 100, 100);
+				//img.draw(ctx, ImageTile.DRAW_TILE_V, 200, 0, 200, 400);
+				
+				img.draw(ctx, ImageTile.DRAW_TILE, 0, 0, 100, 100);
+				img.draw(ctx, ImageTile.DRAW_TILE, 200, 0, 200, 400);
+				
 			}
 
 			requestAnimationFrame(render);

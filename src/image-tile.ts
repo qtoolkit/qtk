@@ -246,6 +246,55 @@ export = class ImageTile extends EventEmitter {
 			ctx.drawImage(this.img, this.x, this.y+h, this.w, h, dx, dy+h, dw, ch);
 		}
 	}
+	
+	private drawTileH(ctx:any, dx:number, dy:number, dw:number, dh:number) {
+		var x = dx;
+		var w = 0;
+		var remainW = dw;
+
+		while(remainW > 0) {
+			w = Math.min(this.w, remainW);
+			ctx.drawImage(this.img, this.x, this.y, w, this.h, x, dy, w, dh);
+			x += w;
+			remainW -= w;
+		}
+	}
+	
+	private drawTileV(ctx:any, dx:number, dy:number, dw:number, dh:number) {
+		var y = dy;
+		var h = 0;
+		var remainH = dh;
+
+		while(remainH > 0) {
+			h = Math.min(this.h, remainH);
+			ctx.drawImage(this.img, this.x, this.y, this.w, h, dx, y, dw, h);
+			y += h;
+			remainH -= h;
+		}
+	}
+	
+	private drawTile(ctx:any, dx:number, dy:number, dw:number, dh:number) {
+		var x = dx;
+		var y = dy;
+		var w = 0;
+		var h = 0;
+		var remainW = dw;
+		var remainH = dh;
+
+		while(remainH > 0) {
+			h = Math.min(this.h, remainH);
+			while(remainW > 0) {
+				w = Math.min(this.w, remainW);
+				ctx.drawImage(this.img, this.x, this.y, w, h, x, y, w, h);
+				x += w;
+				remainW -= w;
+			}
+			x = 0;
+			remainW = dw;
+			y += h;
+			remainH -= h;
+ 		}
+	}
 
 	public draw(ctx:any, type:number, dx:number, dy:number, dw:number, dh:number) {
 		if(ctx && this.complete) {
@@ -261,6 +310,12 @@ export = class ImageTile extends EventEmitter {
 				this.draw3PatchV(ctx, dx, dy, dw, dh);
 			}else if(type === ImageTile.DRAW_9PATCH) {
 				this.draw9Patch(ctx, dx, dy, dw, dh);
+			}else if(type === ImageTile.DRAW_TILE_H) {
+				this.drawTileH(ctx, dx, dy, dw, dh);
+			}else if(type === ImageTile.DRAW_TILE_V) {
+				this.drawTileV(ctx, dx, dy, dw, dh);
+			}else if(type === ImageTile.DRAW_TILE) {
+				this.drawTile(ctx, dx, dy, dw, dh);
 			}
 		}
 	}
