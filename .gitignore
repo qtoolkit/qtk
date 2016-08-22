@@ -1,5 +1,6 @@
 node_modules/
 out/
+doc/
 index.js
 src/*.js
 coverage
