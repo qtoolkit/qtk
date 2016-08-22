@@ -5,7 +5,7 @@
 import "whatwg-fetch";
 import path = require("path");
 import {Promise} from 'es6-promise';
-import EventEmitter = require("eventemitter3");
+import Emitter = require("./emitter");
 import Assets = require("./assets");
 
 /**
@@ -39,7 +39,7 @@ import Assets = require("./assets");
  *
  *
  */
-export = class ImageTile extends EventEmitter {	
+export = class ImageTile extends Emitter {	
 	public x : number;
 	public y : number;
 	public w : number;
@@ -57,7 +57,14 @@ export = class ImageTile extends EventEmitter {
 		this._id = 0;
 		this.img = null;
 		this.src = src;
-		this.create(src);
+		if(src) {
+			
+			this.create(src);
+		}
+	}
+
+	public toJson() {
+		return this.src;
 	}
 
 	private create(src:string){

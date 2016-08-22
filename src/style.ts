@@ -1,6 +1,8 @@
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
 import Emitter = require("./emitter");
+import Events = require("./events");
+import ImageTile = require("./image-tile");
 
 /**
  * Style用来控制Widget的外观效果，如背景和字体等等。
@@ -14,6 +16,9 @@ export = class Style extends Emitter {
 	private _rightPadding : number;
 	private _topPadding : number;
 	private _bottomPadding : number;
+	private _lineWidth : number;
+	private _lineColor : string;
+	private _roundRadius : number;
 	private _fontFamily : string;
 	private _fontSize : number;
 	private _fontColor : string;
@@ -23,6 +28,84 @@ export = class Style extends Emitter {
 
 	constructor() {
 		super();
+	}
+
+	private notifyChanged() {
+		this.dispatchEvent({type:Events.CHANGED});
+	}
+
+	public clone() : Style {
+		var other = new Style();
+
+		if(this._backGroundColor) {
+			other._backGroundColor = this._backGroundColor;
+		}
+
+		if(this._forceGroundColor) {
+			other._forceGroundColor = this._forceGroundColor;
+		}
+
+		if(this._backGroundImage) {
+			other._backGroundImage = this._backGroundImage;
+		}
+
+		if(this._forceGroundImage) {
+			other._forceGroundImage = this._forceGroundImage;
+		}
+
+		if(this._leftPadding) {
+			other._leftPadding = this._leftPadding;
+		}
+
+		if(this._rightPadding) {
+			other._rightPadding = this._rightPadding;
+		}
+
+		if(this._topPadding) {
+			other._topPadding = this._topPadding;
+		}
+
+		if(this._bottomPadding) {
+			other._bottomPadding = this._bottomPadding;
+		}
+
+		if(this._fontFamily) {
+			other._fontFamily = this._fontFamily;
+		}
+
+		if(this._fontSize) {
+			other._fontSize = this._fontSize;
+		}
+
+		if(this._fontColor) {
+			other._fontColor = this._fontColor;
+		}
+
+		if(this._fontBold) {
+			other._fontBold = this._fontBold;
+		}
+
+		if(this._fontItalic) {
+			other._fontItalic = this._fontItalic;
+		}
+
+		if(this._fontUnderline) {
+			other._fontUnderline = this._fontUnderline;
+		}
+		
+		if(this._lineColor) {
+			other._lineColor = this._lineColor;
+		}
+
+		if(this._lineWidth) {
+			other._lineWidth = this._lineWidth;
+		}
+		
+		if(this._roundRadius) {
+			other._roundRadius = this._roundRadius;
+		}
+
+		return other;
 	}
 
 	public toJson() : any {
@@ -36,11 +119,11 @@ export = class Style extends Emitter {
 		}
 
 		if(this._backGroundImage) {
-			json.backGroundImage = this._backGroundImage;
+			json.backGroundImage = this._backGroundImage.toJson();
 		}
 
 		if(this._forceGroundImage) {
-			json.forceGroundImage = this._forceGroundImage;
+			json.forceGroundImage = this._forceGroundImage.toJson();
 		}
 
 		if(this._leftPadding) {
@@ -83,66 +166,95 @@ export = class Style extends Emitter {
 			json.fontUnderline = this._fontUnderline;
 		}
 
+		if(this._lineWidth) {
+			json.lineWidth = this._lineWidth;
+		}
+
+		if(this._lineColor) {
+			json.lineColor = this._lineColor;
+		}
+
+		if(this._roundRadius) {
+			json.roundRadius = this._roundRadius;
+		}
+
 		return json;
 	}
 
 	public fromJson(json:any) {
-		if(this._backGroundColor) {
+		if(json.backGroundColor) {
 			this._backGroundColor = json.backGroundColor;
 		}
 
-		if(this._forceGroundColor) {
+		if(json.forceGroundColor) {
 			this._forceGroundColor = json.forceGroundColor;
 		}
 
-		if(this._backGroundImage) {
-			this._backGroundImage = json.backGroundImage;
+		if(json.backGroundImage) {
+			this._backGroundImage = ImageTile.create(json.backGroundImage, evt => {
+				this.notifyChanged();
+			});
 		}
 
-		if(this._forceGroundImage) {
-			this._forceGroundImage = json.forceGroundImage;
+		if(json.forceGroundImage) {
+			this._forceGroundImage = ImageTile.create(json.forceGroundImage, evt => {
+				this.notifyChanged();
+			});
 		}
 
-		if(this._leftPadding) {
+		if(json.leftPadding) {
 			this._leftPadding = json.leftPadding;
 		}
 
-		if(this._rightPadding) {
+		if(json.rightPadding) {
 			this._rightPadding = json.rightPadding;
 		}
 
-		if(this._topPadding) {
+		if(json.topPadding) {
 			this._topPadding = json.topPadding;
 		}
 
-		if(this._bottomPadding) {
+		if(json.bottomPadding) {
 			this._bottomPadding = json.bottomPadding;
 		}
 
-		if(this._fontFamily) {
+		if(json.fontFamily) {
 			this._fontFamily = json.fontFamily;
 		}
 
-		if(this._fontSize) {
+		if(json.fontSize) {
 			this._fontSize = json.fontSize;
 		}
 
-		if(this._fontColor) {
+		if(json.fontColor) {
 			this._fontColor = json.fontColor;
 		}
 
-		if(this._fontBold) {
+		if(json.fontBold) {
 			this._fontBold = json.fontBold;
 		}
 
-		if(this._fontItalic) {
+		if(json.fontItalic) {
 			this._fontItalic = json.fontItalic;
 		}
 
-		if(this._fontUnderline) {
+		if(json.fontUnderline) {
 			this._fontUnderline = json.fontUnderline;
 		}
 
+		if(json.lineWidth) {
+			this._lineWidth = json.lineWidth;
+		}
+
+		if(json.lineColor) {
+			this._lineColor = json.lineColor;
+		}
+
+		if(json.roundRadius) {
+			this._roundRadius = json.roundRadius;
+		}
+
+		this.notifyChanged();
 	}
 
 	public get backGroundColor() {
@@ -150,6 +262,7 @@ export = class Style extends Emitter {
 	}
 	public set backGroundColor(value) {
 		this._backGroundColor = value;
+		this.notifyChanged();
 	}
 
 	public get forceGroundColor() {
@@ -157,6 +270,7 @@ export = class Style extends Emitter {
 	}
 	public set forceGroundColor(value) {
 		this._forceGroundColor = value;
+		this.notifyChanged();
 	}
 
 
@@ -165,6 +279,7 @@ export = class Style extends Emitter {
 	}
 	public set backGroundImage(value) {
 		this._backGroundImage = value;
+		this.notifyChanged();
 	}
 
 
@@ -173,6 +288,7 @@ export = class Style extends Emitter {
 	}
 	public set forceGroundImage(value) {
 		this._forceGroundImage = value;
+		this.notifyChanged();
 	}
 
 
@@ -181,6 +297,7 @@ export = class Style extends Emitter {
 	}
 	public set leftPadding(value) {
 		this._leftPadding = value;
+		this.notifyChanged();
 	}
 
 
@@ -189,6 +306,7 @@ export = class Style extends Emitter {
 	}
 	public set rightPadding(value) {
 		this._rightPadding = value;
+		this.notifyChanged();
 	}
 
 
@@ -197,6 +315,7 @@ export = class Style extends Emitter {
 	}
 	public set topPadding(value) {
 		this._topPadding = value;
+		this.notifyChanged();
 	}
 
 
@@ -205,6 +324,7 @@ export = class Style extends Emitter {
 	}
 	public set bottomPadding(value) {
 		this._bottomPadding = value;
+		this.notifyChanged();
 	}
 
 
@@ -213,6 +333,7 @@ export = class Style extends Emitter {
 	}
 	public set padding(value) {
 		this._leftPadding = this._topPadding = this._rightPadding = this.bottomPadding = value;
+		this.notifyChanged();
 	}
 
 
@@ -221,6 +342,7 @@ export = class Style extends Emitter {
 	}
 	public set fontFamily(value) {
 		this._fontFamily = value;
+		this.notifyChanged();
 	}
 
 
@@ -229,6 +351,7 @@ export = class Style extends Emitter {
 	}
 	public set fontSize(value) {
 		this._fontSize = value;
+		this.notifyChanged();
 	}
 
 
@@ -237,6 +360,7 @@ export = class Style extends Emitter {
 	}
 	public set fontColor(value) {
 		this._fontColor = value;
+		this.notifyChanged();
 	}
 
 
@@ -245,6 +369,7 @@ export = class Style extends Emitter {
 	}
 	public set fontBold(value) {
 		this._fontBold = value;
+		this.notifyChanged();
 	}
 
 
@@ -253,6 +378,7 @@ export = class Style extends Emitter {
 	}
 	public set fontItalic(value) {
 		this._fontItalic = value;
+		this.notifyChanged();
 	}
 
 
@@ -261,6 +387,31 @@ export = class Style extends Emitter {
 	}
 	public set fontUnderline(value) {
 		this._fontUnderline = value;
+		this.notifyChanged();
+	}
+
+	public get lineWidth() {
+		return this._lineWidth;
+	}
+	public set lineWidth(value) {
+		this._lineWidth = value;
+		this.notifyChanged();
+	}
+
+	public get lineColor() {
+		return this._lineColor;
+	}
+	public set lineColor(value) {
+		this._lineColor = value;
+		this.notifyChanged();
+	}
+
+	public get roundRadius() {
+		return this._roundRadius;
+	}
+	public set roundRadius(value) {
+		this._roundRadius = value;
+		this.notifyChanged();
 	}
 
 };
