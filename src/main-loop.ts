@@ -54,7 +54,7 @@ class MainLoop {
 	 * ```
 	 * 
 	 */
-	static requestRedraw() {
+	public static requestRedraw() {
 		MainLoopImpl.instance.redraw();
 	}
 

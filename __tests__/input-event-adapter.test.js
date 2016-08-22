@@ -18,7 +18,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch mouse down event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_POINTER_DOWN, (e) => {
+    	target.on(qtk.Events.POINTER_DOWN, (e) => {
     		var result = evt.x === e.detail.x && evt.y === e.detail.y;
     		done(result ? null : new Error("mousedown to qtk-pointer-down fail"));
 		});
@@ -29,7 +29,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch mouse move event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_POINTER_MOVE, (e) => {
+    	target.on(qtk.Events.POINTER_MOVE, (e) => {
     		var result = evt.x === e.detail.x && evt.y === e.detail.y;
     		done(result ? null : new Error("mousemove to qtk-pointer-move fail"));
 		});
@@ -40,7 +40,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch mouse up event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_POINTER_UP, (e) => {
+    	target.on(qtk.Events.POINTER_UP, (e) => {
     		var result = evt.x === e.detail.x && evt.y === e.detail.y;
     		done(result ? null : new Error("mouseup to qtk-pointer-up fail"));
 		});
@@ -51,7 +51,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch key down event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_KEYDOWN, (e) => {
+    	target.on(qtk.Events.KEYDOWN, (e) => {
     		var result = evt.keyCode === e.detail.keyCode
     		done(result ? null : new Error("keydown to qtk-keydown fail"));
 		});
@@ -62,7 +62,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch key up event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_KEYUP, (e) => {
+    	target.on(qtk.Events.KEYUP, (e) => {
     		var result = evt.keyCode === e.detail.keyCode
     		done(result ? null : new Error("keyup to qtk-keyup fail"));
 		});
@@ -73,7 +73,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch wheel event', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_WHEEL, (e) => {
+    	target.on(qtk.Events.WHEEL, (e) => {
     		var result = evt.wheelDelta === e.detail.delta
     		done(result ? null : new Error("mousewheel to qtk-wheel fail"));
 		});
@@ -84,7 +84,7 @@ describe('InputEventAdapter:', function() {
     it('test grab', (done) => {
 		qtk.inputEventAdapter.init(doc, win); 
     	qtk.inputEventAdapter.grab(grabTarget);
-    	grabTarget.on(qtk.inputEventAdapter.EVT_WHEEL, (e) => {
+    	grabTarget.on(qtk.Events.WHEEL, (e) => {
     		var result = evt.wheelDelta === e.detail.delta
     		done(result ? null : new Error("grab fail"));
     		qtk.inputEventAdapter.ungrab(grabTarget);
@@ -96,7 +96,7 @@ describe('InputEventAdapter:', function() {
     it('test dispatch touch event', (done) => {
 		qtk.inputEventAdapter.init(doc, win, false, false, true); 
     	target.removeAllListeners();
-    	target.on(qtk.inputEventAdapter.EVT_POINTER_DOWN, (e) => {
+    	target.on(qtk.Events.POINTER_DOWN, (e) => {
     		var result = evt.x === e.detail.x && evt.y === e.detail.y;
     		done(result ? null : new Error("touch start to qtk-pointer-down fail"));
 		});

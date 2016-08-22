@@ -1,4 +1,5 @@
 import KeyEvent = require("./key-event");
+import Events = require("./events");
 
 var grabs = [];
 var lastDetail : any;
@@ -36,23 +37,23 @@ function getPointerDetail(e) {
 }
 
 function onMouseDown(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_DOWN, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_DOWN, getPointerDetail(evt));
 }
 
 function onMouseMove(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_MOVE, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_MOVE, getPointerDetail(evt));
 }
 
 function onMouseUp(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_UP, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_UP, getPointerDetail(evt));
 }
 
 function onMouseOut(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_OUT, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_OUT, getPointerDetail(evt));
 }
 
 function onMouseOver(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_OVER, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_OVER, getPointerDetail(evt));
 }
 
 function getTouchPoints(evt) {
@@ -71,34 +72,34 @@ function getTouchPoints(evt) {
 
 function onTouchStart(evt) {
 	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, EVT_POINTER_DOWN, detail);
+	dispatchEvent(evt.target, Events.POINTER_DOWN, detail);
 }
 
 function onTouchMove(evt) {
 	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, EVT_POINTER_MOVE, detail);
+	dispatchEvent(evt.target, Events.POINTER_MOVE, detail);
 }
 
 function onTouchEnd(evt) {
 	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, EVT_POINTER_UP, detail);
+	dispatchEvent(evt.target, Events.POINTER_UP, detail);
 }
 
 function onPointerDown(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_DOWN, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_DOWN, getPointerDetail(evt));
 }
 
 function onPointerMove(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_MOVE, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_MOVE, getPointerDetail(evt));
 }
 
 function onPointerUp(evt) {
-	dispatchEvent(evt.target, EVT_POINTER_UP, getPointerDetail(evt));
+	dispatchEvent(evt.target, Events.POINTER_UP, getPointerDetail(evt));
 }
 
 function onWheel(evt) {
 	var detail = {delta : evt.wheelDelta || evt.detail * -8};
-	dispatchEvent(evt.target, EVT_WHEEL, detail);
+	dispatchEvent(evt.target, Events.WHEEL, detail);
 }
 
 function updateKeysStatus(keyCode, value) {
@@ -128,7 +129,7 @@ function onKeyDown(evt) {
 	};
 	
 	updateKeysStatus(detail.keyCode, true);
-	dispatchEvent(evt.target, EVT_KEYDOWN, detail);
+	dispatchEvent(evt.target, Events.KEYDOWN, detail);
 }
 
 function onKeyUp(evt) {
@@ -136,26 +137,16 @@ function onKeyUp(evt) {
 		keyCode:evt.keyCode
 	};
 	updateKeysStatus(detail.keyCode, false);
-	dispatchEvent(evt.target, EVT_KEYUP, detail);
+	dispatchEvent(evt.target, Events.KEYUP, detail);
 }
 
 function dispatchKeyEvent(target, keyCode) {
 	var detail = {
 		keyCode:keyCode
 	};
-	dispatchEvent(target, EVT_KEYDOWN, detail);
-	dispatchEvent(target, EVT_KEYUP, detail);
+	dispatchEvent(target, Events.KEYDOWN, detail);
+	dispatchEvent(target, Events.KEYUP, detail);
 }
-
-export const EVT_KEYUP = "qtk-keyup";
-export const EVT_WHEEL = "qtk-wheel";
-export const EVT_KEYDOWN = "qtk-keydown";
-export const EVT_CONTEXT_MENU = "qtk-context-menu";
-export const EVT_POINTER_DOWN = "qtk-pointer-down";
-export const EVT_POINTER_MOVE = "qtk-pointer-move";
-export const EVT_POINTER_UP   = "qtk-pointer-up";
-export const EVT_POINTER_OUT  = "qtk-pointer-out";
-export const EVT_POINTER_OVER = "qtk-pointer-over";
 
 /**
  * 初始化。
