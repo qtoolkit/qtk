@@ -1,0 +1,14 @@
+{
+	"button": {
+		"normal" : {
+			"backGroundColor" : "green",
+			"fontColor" : "red",
+			"fontSize" : 16
+		},
+		"active" : {
+			"backGroundColor" : "green",
+			"fontColor" : "red",
+			"fontSize" : 18
+		}
+	}
+}
