@@ -2,8 +2,10 @@
 
 import Emitter = require("./emitter");
 import Events = require("./events");
+import {IApplication} from "./iapplication";
+import {IThemeManager} from "./itheme-manager";
 
-export = class Widget extends Emitter {
+export class Widget extends Emitter {
 	private _x : number;
 	private _y : number;
 	private _w : number;
@@ -17,7 +19,21 @@ export = class Widget extends Emitter {
 	private _tips: string;
 	private _text : string;
 	private _dirty : boolean;
+	private _name : string;
+	private _id : string;
+	private _tag : string;
+	private _type : string;
 	private hasOwnCanvas : boolean;
+	
+	private _parent : Widget;
+	private _children : Array<Widget>;
+
+	private app : IApplication;
+	private themeManager : IThemeManager;
+
+	constructor() {
+		super();
+	}
 
 	public get dirty() {
 		return this._dirty;
@@ -170,7 +186,19 @@ export = class Widget extends Emitter {
 		return null;
 	}
 
-	public init(options) {
+	public setApp(app:IApplication) : Widget {
+		return this;
+	}
+
+	public addChild(child:Widget) : Widget {
+		return this;
+	}
+
+	public removeChild(child:Widget) : Widget {
+		return this;
+	}
+
+	public init(options:any) {
 		var hasOwnCanvas = options && options.hasOwnCanvas;
 		
 	}

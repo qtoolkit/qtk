@@ -45,7 +45,7 @@ class MainLoopImpl extends EventEmitter {
  * *.postdraw 绘制后一些收尾工作，如果绘制阶段只是生成命令队列，可以在此阶段提交。
  * 
  */
-class MainLoop {
+export class MainLoop {
 	/**
 	 * 请求重绘。
 	 * 
@@ -106,6 +106,4 @@ class MainLoop {
 		MainLoopImpl.instance.off(type, callback);
 	}
 }
-
-export = MainLoop;
 

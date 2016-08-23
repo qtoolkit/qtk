@@ -11,3 +11,4 @@ export const POINTER_OVER = "qtk-pointer-over";
 export const CHANGED = "changed"
 export const MOVE = "move";
 export const RESIZE = "resize";
+export const READY = "ready";
