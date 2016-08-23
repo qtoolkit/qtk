@@ -7,7 +7,7 @@ import ImageTile = require("./image-tile");
 /**
  * Style用来控制Widget的外观效果，如背景和字体等等。
  */
-export = class Style extends Emitter {
+export class Style extends Emitter {
 	private _backGroundColor : string;
 	private _forceGroundColor : string;
 	private _backGroundImage : any;
@@ -414,4 +414,11 @@ export = class Style extends Emitter {
 		this.notifyChanged();
 	}
 
+	static create(json?:any) {
+		var style = new Style();
+		if(json) {
+			style.fromJson(json);
+		}
+		return style;
+	}
 };
