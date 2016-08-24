@@ -1,5 +1,5 @@
 
-import Emitter = require("./emitter");
+import {Emitter} from "./emitter";
 
 /**
  * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
@@ -9,7 +9,7 @@ import Emitter = require("./emitter");
  * 2.支持高清屏。为了避免在高清屏上图片模糊，让Canvas的宽高乘以devicePixelRatio, Canvas的style.width/style.height仍然用实际的宽高，getContext时预先将矩阵乘以devicePixelRatio，从而让使用者无需关心当前屏幕的类型。 
  *
  */
-export = class Canvas extends Emitter {
+export class Canvas extends Emitter {
 	private _x : number;
 	private _y : number;
 	private _w: number;

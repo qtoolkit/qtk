@@ -5,7 +5,7 @@
 import "whatwg-fetch";
 import path = require("path");
 import {Promise} from 'es6-promise';
-import Emitter = require("./emitter");
+import {Emitter} from "./emitter";
 import Assets = require("./assets");
 
 /**

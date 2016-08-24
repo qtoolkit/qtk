@@ -8,6 +8,7 @@ export const POINTER_MOVE = "qtk-pointer-move";
 export const POINTER_UP   = "qtk-pointer-up";
 export const POINTER_OUT  = "qtk-pointer-out";
 export const POINTER_OVER = "qtk-pointer-over";
+export const CHANGE = "change"
 export const CHANGED = "changed"
 export const MOVE = "move";
 export const RESIZE = "resize";

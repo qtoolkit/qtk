@@ -1,8 +1,8 @@
 import Events = require("./events");
 import assets = require("./assets");
-import Emitter = require("./emitter");
 import * as Services from  "./services";
 import {MainLoop} from "./main-loop";
+import {Emitter} from "./emitter";
 import {IThemeManager} from "./itheme-manager";
 import {ThemeManager} from "./theme-manager";
 import {IApplication} from "./iapplication";

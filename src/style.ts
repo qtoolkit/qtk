@@ -1,6 +1,6 @@
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
-import Emitter = require("./emitter");
+import {Emitter} from "./emitter";
 import Events = require("./events");
 import ImageTile = require("./image-tile");
 

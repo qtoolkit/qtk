@@ -1,3 +1,5 @@
+import {Point} from "./point";
+
 /**
  * 2维矩阵变换
  */
@@ -83,8 +85,8 @@ export class Matrix {
 		return this;
 	};
 
-	public transformPoint(x:number, y:number, out) {
-		var p = out || {};
+	public transformPoint(x:number, y:number, out?:Point) {
+		var p = out || Point.create();
 		var a = this.data;
 
 		p.x = a[0] * x + a[2] * y + a[4];

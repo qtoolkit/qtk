@@ -2,13 +2,15 @@ import assets = require("./assets");
 import ImageTile = require("./image-tile");
 import {MainLoop} from "./main-loop";
 import {Widget} from "./widget";
+import {Matrix} from "./matrix";
+import {MatrixStack} from "./matrix-stack";
 import {Button} from "./button";
 import {Style} from "./style";
 import {WidgetFactory} from "./widget-factory";
 import {ThemeManager} from "./theme-manager";
-import Canvas = require("./canvas");
 import Events = require("./events");
-import Emitter = require("./emitter");
+import {Canvas} from "./canvas";
+import {Emitter} from "./emitter";
 import * as deviceInfo from "./device-info";
 import viewport = require("./view-port");
 import inputEventAdapter = require("./input-event-adapter");
@@ -19,6 +21,8 @@ export {
 	assets,
 	viewport,
 	MainLoop,
+	Matrix,
+	MatrixStack,
 	deviceInfo,
 	Application,
 	inputEventAdapter,
