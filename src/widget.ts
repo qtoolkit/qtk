@@ -2,9 +2,24 @@
 
 import Events = require("./events");
 import {Style} from "./style";
+import {Canvas} from "./canvas";
+import {Rect} from "./rect";
 import {Emitter} from "./emitter";
+import {MatrixStack} from "./matrix-stack";
 import {IApplication} from "./iapplication";
 import {IThemeManager} from "./itheme-manager";
+
+export enum WidgetMode {
+	RUNTIME,
+	DESIGN
+};
+	
+export enum WidgetState {
+	NORMAL,
+	OVER,
+	ACTIVE,
+	DISABLE
+};
 
 export class Widget extends Emitter {
 	private _x : number;
@@ -12,7 +27,7 @@ export class Widget extends Emitter {
 	private _z : number;
 	private _w : number;
 	private _h : number;
-	private _state : number;
+	private _state : WidgetState;
 	private _value : number;
 	private _selected : number;
 	private _opacity  : number;
@@ -35,6 +50,9 @@ export class Widget extends Emitter {
 	private _app : IApplication;
 	private _children : Array<Widget>;
 	private _themeManager : IThemeManager;
+	private _matrixStack : MatrixStack;
+	private _mode : WidgetMode;
+	private _canvas : Canvas;
 
 	constructor() {
 		super();
@@ -62,6 +80,7 @@ export class Widget extends Emitter {
 		this._parent = null;
 		this._children = [];
 		this._themeManager = null;
+		this._mode = WidgetMode.RUNTIME;
 	}
 
 	public get dirty() {
@@ -74,6 +93,9 @@ export class Widget extends Emitter {
 	public set x(value) {
 		this._dirty = true;
 		this._x = value;
+		if(this._canvas) {
+			this._canvas.x = value;
+		}
 	}
 
 
@@ -83,6 +105,9 @@ export class Widget extends Emitter {
 	public set y(value) {
 		this._dirty = true;
 		this._y = value;
+		if(this._canvas) {
+			this._canvas.y = value;
+		}
 	}
 
 	public get z() {
@@ -94,6 +119,9 @@ export class Widget extends Emitter {
 		if(this._parent) {
 			this._parent.sortChildren();
 		}
+		if(this._canvas) {
+			this._canvas.z = value;
+		}
 	}
 
 
@@ -103,6 +131,9 @@ export class Widget extends Emitter {
 	public set w(value) {
 		this._dirty = true;
 		this._w = value;
+		if(this._canvas) {
+			this._canvas.w = value;
+		}
 	}
 
 
@@ -112,6 +143,9 @@ export class Widget extends Emitter {
 	public set h(value) {
 		this._dirty = true;
 		this._h = value;
+		if(this._canvas) {
+			this._canvas.h = value;
+		}
 	}
 
 	public get state() {
@@ -279,6 +313,10 @@ export class Widget extends Emitter {
 		return null;
 	}
 
+	public get children() : Array<Widget> {
+		return this._children;
+	}
+
 	public isWindow() : boolean {
 		return this._isWindow;
 	}
@@ -349,6 +387,24 @@ export class Widget extends Emitter {
 	}
 
 ///////////////////////////////////////////
+	public onPointerDown(evt:any, ctx:MatrixStack) {
+	}
+
+	public onPointerMove(evt:any, ctx:MatrixStack) {
+	}
+
+	public onPointerUp(evt:any, ctx:MatrixStack) {
+	}
+	
+	public onKeyDown(evt:any) {
+	}
+	
+	public onKeyUp(evt:any) {
+	}
+	
+	public onWheel(evt:any) {
+	}
+///////////////////////////////////////////
 	public move(x:number, y:number) : Widget {
 		this._x = x;
 		this._y = y;
@@ -368,7 +424,20 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	public translateCavnas(ctx:any) : Widget {
+		if(this._canvas) {
+			ctx.translate(-this.x, -this.y);
+		}else{
+			ctx.translate(this.x, this.y);
+		}
+
+		return this;
+	}
+
 	public drawBackground(ctx:any, style:Style) : Widget {
+		ctx.fillStyle = "green";
+		ctx.fillRect(0, 0, this.w, this.h);
+
 		return this;
 	}
 	
@@ -384,15 +453,22 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public draw(ctx:any) : Widget {
+	public getDirtyRect(matrixStack:MatrixStack) : Rect {
+		return Rect.create(0, 0, this.w, this.h);
+	}
+
+	public draw(ctx:any) {
 		var style = this.getStyle();
+		ctx.save();
+		this.translateCavnas(ctx);
 
 		this.drawBackground(ctx, style)
 			.drawChildren(ctx, style)
 			.drawText(ctx, style)
 			.drawTips(ctx, style);
+		ctx.restore();
 
-		return this;
+		return;
 	}
 
 	public getStyle() : Style {
@@ -428,6 +504,10 @@ export class Widget extends Emitter {
 	}
 
 	public dispose(){
+		if(this._canvas) {
+			this._canvas.dispose();
+			this._canvas = null;
+		}
 	}
 
 	public relayoutChildren() : Widget {
@@ -435,12 +515,77 @@ export class Widget extends Emitter {
 	}
 
 	public removeChild(child:Widget) : Widget {
-		this.relayoutChildren();
+		var arr = this._children;
+		var index = arr.indexOf(child);
+		if(index >= 0) {
+			arr.splice(index, 1);
+			this.relayoutChildren();
+		}
 		return this;
 	}
 
-	static STATE_NORMAL = 0;
-	static STATE_OVER   = 1;
-	static STATE_ACTIVE = 2;
-	static STATE_DISABLE = 3;
+	public requestRedraw() : Widget {
+		this.app.getMainLoop().requestRedraw();
+
+		return this;
+	}
+
+	public initCanvas() : Widget {
+		var density = this.app.getViewPort().density;
+		var canvas = Canvas.create(this.x, this.y, this.w, this.h, density);
+		var matrixStack = new MatrixStack();
+
+		canvas.on(Events.POINTER_DOWN, evt => {
+			matrixStack.identity();
+			this.onPointerDown(evt, matrixStack);
+		});
+
+		canvas.on(Events.POINTER_MOVE, evt => {
+			matrixStack.identity();
+			this.onPointerMove(evt, matrixStack);
+		});
+
+		canvas.on(Events.POINTER_UP, evt => {
+			matrixStack.identity();
+			this.onPointerMove(evt, matrixStack);
+		});
+
+		canvas.on(Events.WHEEL, evt => {
+			this.onWheel(evt);
+		});
+
+		canvas.on(Events.KEYDOWN, evt => {
+			this.onKeyDown(evt);
+		});
+
+		canvas.on(Events.KEYUP, evt => {
+			this.onKeyUp(evt);
+		});
+
+		this._canvas = canvas;
+	
+		var mainLoop = this.app.getMainLoop();
+		mainLoop.on(Events.DRAW, evt => {
+			var ctx = canvas.getContext("2d");
+			this.draw(ctx);
+		});
+
+		return this;
+	}
+
+	public init(options:any) : Widget {
+		if(options.hasOwnCanvas) {
+			this.initCanvas();
+		}
+
+		return this;
+	}
+
+	public static create(app:IApplication, options:any) : Widget {
+		var widget = new Widget();
+
+		widget.app = app;
+
+		return widget;
+	}
 };
