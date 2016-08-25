@@ -3,6 +3,9 @@ import assets = require("./assets");
 import * as Services from  "./services";
 import {MainLoop} from "./main-loop";
 import {Emitter} from "./emitter";
+import {ViewPort} from "./view-port";
+import {IViewPort} from "./iview-port";
+import {IMainLoop} from "./imain-loop";
 import {IThemeManager} from "./itheme-manager";
 import {ThemeManager} from "./theme-manager";
 import {IApplication} from "./iapplication";
@@ -12,7 +15,9 @@ import {IApplication} from "./iapplication";
  *
  */
 export class Application extends Emitter implements IApplication {
-	private name : string;
+	public name : string;
+	private _viewPort : IViewPort; 
+	private _mainLoop : MainLoop;
 	private servicesManager : Services.Manager;
 
 	constructor(name:string) {
@@ -21,8 +26,12 @@ export class Application extends Emitter implements IApplication {
 		this.servicesManager = new Services.Manager();
 	}
 
-	public get mainLoop() {
-		return MainLoop;
+	public get mainLoop() : IMainLoop {
+		return this._mainLoop;
+	}
+
+	public getMainLoop() : IMainLoop {
+		return this._mainLoop;
 	}
 
 	public init(args) {
@@ -31,16 +40,14 @@ export class Application extends Emitter implements IApplication {
 
 		assets.loadJSON(themeDataURL).then(json => {
 			themeManager.init(json);
-			this.dispatchEvent({type:Events.READY});
+			this.dispatchEventAsync({type:Events.READY});
 		});
 
 		this.registerService(Services.THEME_MANAGER, themeManager);
+		this._viewPort = ViewPort.create(0, 0, 0);
+		this._mainLoop = MainLoop.create();
 
 		return this;
-	}
-
-	public requestRedraw() {
-		MainLoop.requestRedraw();
 	}
 
 	public getService(name:string) : any {
@@ -55,6 +62,14 @@ export class Application extends Emitter implements IApplication {
 
 	public getThemeManager() : IThemeManager {
 		return this.getService(Services.THEME_MANAGER);
+	}
+
+	public get viewPort() : IViewPort {
+		return this._viewPort;
+	}
+	
+	public getViewPort() : IViewPort {
+		return this._viewPort;
 	}
 
 	static create(name:string) {

@@ -3,24 +3,23 @@
 	<head><title>Tester</title>
     <script src='../index.js'></script>
 	<script type="application/javascript">
-		var ctx = null;
-		var ImageTile = qtk.ImageTile;
-		var img = ImageTile.create("http://localhost:9876/base/www/images.json#0.png");
-
-		function render() {
-			if(img.complete) {
-				img.draw(ctx, ImageTile.DRAW_TILE, 0, 0, 100, 100);
-				img.draw(ctx, ImageTile.DRAW_TILE, 200, 0, 200, 400);
-				
-			}
-		}
+		var app = new qtk.Application.create("test");
+		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 
 		window.onload = function() {
-			ctx = document.getElementById("main-canvas").getContext("2d");
-			qtk.MainLoop.on(qtk.MainLoop.DRAW, render);
+			var vp = app.getViewPort();
+			var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
+			
+			win.x = 0;
+			win.y = 0;
+			win.w = vp.width;
+			win.h = vp.height;
+
+			app.mainLoop.requestRedraw();
 			
 		}
 	</script>
 </head>
-<body><canvas id="main-canvas" width="800" height="800" /></body>
+<body>
+</body>
 </html>

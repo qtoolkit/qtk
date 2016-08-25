@@ -15,6 +15,12 @@ export class Emitter extends EventEmitter {
 		this.removeListener(type, callback);
 	}
 
+	public dispatchEventAsync(evt) {
+		setTimeout(e => {
+			this.dispatchEvent(evt);
+		}, 0);
+	}
+
 	public dispatchEvent(evt) {
 		this.emit(evt.type, evt);
 	}

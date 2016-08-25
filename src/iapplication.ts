@@ -1,14 +1,11 @@
+import {IViewPort} from "./iview-port";
+import {IMainLoop} from "./imain-loop";
 import {IThemeManager} from "./itheme-manager";
 
 /**
  * 代表整个应用程序。 
  */
 export interface IApplication {
-	/**
-	 * 请求重绘。
-	 */
-	requestRedraw();
-
 	/**
 	 * 获取指定名称的服务。
 	 */
@@ -23,5 +20,15 @@ export interface IApplication {
 	 * 获取主题管理器。
 	 */
 	getThemeManager() : IThemeManager;
+	
+	/**
+	 * 获取ViewPort。
+	 */
+	getViewPort() : IViewPort;
+	
+	/**
+	 * 获取MainLoop。
+	 */
+	getMainLoop() : IMainLoop;
 }
 

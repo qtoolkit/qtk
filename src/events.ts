@@ -13,3 +13,6 @@ export const CHANGED = "changed"
 export const MOVE = "move";
 export const RESIZE = "resize";
 export const READY = "ready";
+export const PREDRAW = "predraw";
+export const DRAW = "draw";
+export const POSTDRAW = "postdraw";

@@ -22,6 +22,7 @@ describe('Canvas:', function() {
 			&& parseInt(style.top) === y && parseInt(style.width) === w && parseInt(style.height) === h
 			&& canvas.canvas.width === dpr * w && canvas.canvas.height === dpr * h; 
 
+		canvas.dispose();
 		done(result ? null : new Error("canvas size wrong"));
     });
     
@@ -33,6 +34,7 @@ describe('Canvas:', function() {
     	canvas.on("qtk-pointer-down", evt => {
 			var result = evt.detail.x === detail.x - x && evt.detail.y === detail.y - y;;
 			done(result ? null : new Error("canvas size wrong"));
+			canvas.dispose();
 		});
     	canvas.canvas.dispatchEvent(event);
     });

@@ -1,5 +1,6 @@
 
 import {Emitter} from "./emitter";
+import Events = require("./events");
 
 /**
  * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
@@ -12,6 +13,7 @@ import {Emitter} from "./emitter";
 export class Canvas extends Emitter {
 	private _x : number;
 	private _y : number;
+	private _z : number;
 	private _w: number;
 	private _h: number;
 	private _id : string;
@@ -113,6 +115,11 @@ export class Canvas extends Emitter {
 		this._y = value;
 		this.moveCanvas(this.canvas);
 	}
+	
+	public set z(value) {
+		this._z = value;
+		this.canvas.style.zIndex = value;
+	}
 
 	public set w(value) {
 		this._w = value;
@@ -137,12 +144,12 @@ export class Canvas extends Emitter {
 		if(!this._offline) {
 			document.body.removeChild(canvas);
 		}
-		canvas.removeEventListener("qtk-pointer-down", this.onPointerEvent);
-		canvas.removeEventListener("qtk-pointer-move", this.onPointerEvent);
-		canvas.removeEventListener("qtk-pointer-up", this.onPointerEvent);
-		canvas.removeEventListener("qtk-wheel", this.onOtherEvent);
-		canvas.removeEventListener("qtk-keydown", this.onOtherEvent);
-		canvas.removeEventListener("qtk-keyup", this.onOtherEvent);
+		canvas.removeEventListener(Events.POINTER_DOWN, this.onPointerEvent);
+		canvas.removeEventListener(Events.POINTER_MOVE, this.onPointerEvent);
+		canvas.removeEventListener(Events.POINTER_UP, this.onPointerEvent);
+		canvas.removeEventListener(Events.WHEEL, this.onOtherEvent);
+		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
+		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
 	}
 
 	public createCanvas() {

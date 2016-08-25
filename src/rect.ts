@@ -16,9 +16,8 @@ export class Rect {
 	}
 
 	public static create(x?:number, y?:number, w?:number, h?:number) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		var r = new Rect(x || 0, y || 0, w || 0, h || 0);
+		
+		return r;
 	}
 };

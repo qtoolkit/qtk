@@ -1,11 +1,10 @@
 describe('Application', function() {
 	this.timeout(3000);
    
-	var app = new qtk.Application.create("test");
-   
-   	app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 
     it('test getService', (done) => {
+		var app = new qtk.Application.create("test");
+		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 		app.on(qtk.Events.READY, function() {
 			var themeManager = app.getService(qtk.Services.THEME_MANAGER);
 			var result = !!themeManager 
@@ -16,8 +15,10 @@ describe('Application', function() {
     });
     
     it('test requestRedraw', (done) => {
-		app.requestRedraw();
-		app.mainLoop.on(app.mainLoop.PREDRAW, function predraw(evt) {
+		var app = new qtk.Application.create("test");
+		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.mainLoop.requestRedraw();
+		app.mainLoop.on(qtk.Events.PREDRAW, function predraw(evt) {
 			done();
 		});
     });

@@ -1,8 +1,13 @@
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
-import EventEmitter = require("eventemitter3");
+import {Emitter} from "./emitter";
+import {IViewPort} from "./iview-port";
+import Events = require("./events");
 
-class ViewPortImpl extends EventEmitter {
+/**
+ * 表示屏幕大小和密度。
+ */
+export class ViewPort extends Emitter implements IViewPort {
 	private _width : number;
 	private _height : number;
 	private _density : number;
@@ -11,14 +16,14 @@ class ViewPortImpl extends EventEmitter {
 		super();
 	}
 
-	getScaleValues() {
+	private getScaleValues() {
 	    var scale = (1/(this.density)).toString();
 	    var str = "initial-scale=SS, minimum-scale=SS, maximum-scale=SS, user-scalable=0";
 	    
 	    return "target-densitydpi=device-dpi, width=device-width, " + str.replace(/SS/g, scale);
 	}
 
-	updateHeadViewportMeta(value) {
+	private updateHeadViewportMeta(value) {
 		var meta = null;
 		var head = document.getElementsByTagName('head')[0];
 		var arr = document.getElementsByTagName('meta');
@@ -39,62 +44,37 @@ class ViewPortImpl extends EventEmitter {
 		meta.content = value;
 	}
 
-	init(width?:number, height?:number, density?:number) {
+	public init(width?:number, height?:number, density?:number) {
 		this._density = density || window.devicePixelRatio;
 		this.updateHeadViewportMeta(this.getScaleValues());
 
 		this._width = width || window.innerWidth;
 		this._height = height || window.innerHeight;
-		window.addEventListener("resize", (evt) => {
+		window.addEventListener(Events.RESIZE, (evt) => {
 			this._width = window.innerWidth;
 			this._height = window.innerHeight;
+			this.dispatchEvent({type:"resize"});
 		});
 	}
 
-	get width() {
+	public get width() {
 		return this._width;
 	}
 
-	get height() {
+	public get height() {
 		return this._height;
 	}
 
-	get density() {
+	public get density() {
 		return this._density;
 	}
+
+	static create(width?:number, height?:number, density?:number) : IViewPort {
+		var vp = new ViewPort();
+
+		vp.init(width, height, density);
+
+		return vp;
+	}
 }
-
-/**
- * 表示屏幕大小和密度(单例对象，直接调用)。
- */
-class ViewPort {
-	private static instance = new ViewPortImpl();
-
-	public static init(width?:number, height?:number, density?:number) {
-		ViewPort.instance.init(width, height, density);
-	}
-
-	/**
-	 * 屏幕宽度
-	 */
-	public static get width() {
-		return ViewPort.instance.width;
-	}
-	
-	/**
-	 * 屏幕高度
-	 */
-	public static get height() {
-		return ViewPort.instance.height;
-	}
-	
-	/**
-	 * 屏幕密度
-	 */
-	public static get density() {
-		return ViewPort.instance.density;
-	}
-};
-
-export = ViewPort;
 
