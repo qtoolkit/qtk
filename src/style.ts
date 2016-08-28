@@ -2,7 +2,7 @@
 
 import {Emitter} from "./emitter";
 import Events = require("./events");
-import ImageTile = require("./image-tile");
+import {ImageDrawType, ImageTile} from "./image-tile";
 
 /**
  * Style用来控制Widget的外观效果，如背景和字体等等。
@@ -10,8 +10,10 @@ import ImageTile = require("./image-tile");
 export class Style extends Emitter {
 	private _backGroundColor : string;
 	private _forceGroundColor : string;
-	private _backGroundImage : any;
-	private _forceGroundImage : any;
+	private _backGroundImage : ImageTile;
+	private _backGroundImageDrawType : ImageDrawType;
+	private _forceGroundImage : ImageTile;
+	private _forceGroundImageDrawType : ImageDrawType;
 	private _leftPadding : number;
 	private _rightPadding : number;
 	private _topPadding : number;
@@ -31,7 +33,7 @@ export class Style extends Emitter {
 	}
 
 	private notifyChanged() {
-		this.dispatchEvent({type:Events.CHANGED});
+		this.dispatchEvent({type:Events.CHANGE});
 	}
 
 	public clone() : Style {
@@ -49,8 +51,16 @@ export class Style extends Emitter {
 			other._backGroundImage = this._backGroundImage;
 		}
 
+		if(this._backGroundImageDrawType) {
+			other._backGroundImageDrawType = this._backGroundImageDrawType;
+		}
+
 		if(this._forceGroundImage) {
 			other._forceGroundImage = this._forceGroundImage;
+		}
+
+		if(this._forceGroundImageDrawType) {
+			other._forceGroundImageDrawType = this._forceGroundImageDrawType;
 		}
 
 		if(this._leftPadding) {
@@ -122,8 +132,16 @@ export class Style extends Emitter {
 			json.backGroundImage = this._backGroundImage.toJson();
 		}
 
+		if(this._backGroundImageDrawType) {
+			json.backGroundImageDrawType = this._backGroundImageDrawType;
+		}
+
 		if(this._forceGroundImage) {
 			json.forceGroundImage = this._forceGroundImage.toJson();
+		}
+
+		if(this._forceGroundImageDrawType) {
+			json.forceGroundImageDrawType = this._forceGroundImageDrawType;
 		}
 
 		if(this._leftPadding) {
@@ -283,11 +301,29 @@ export class Style extends Emitter {
 	}
 
 
+	public get backGroundImageDrawType() {
+		return this._backGroundImageDrawType;
+	}
+	public set backGroundImageDrawType(value) {
+		this._backGroundImageDrawType = value;
+		this.notifyChanged();
+	}
+
+
 	public get forceGroundImage() {
 		return this._forceGroundImage;
 	}
 	public set forceGroundImage(value) {
 		this._forceGroundImage = value;
+		this.notifyChanged();
+	}
+
+
+	public get forceGroundImageDrawType() {
+		return this._forceGroundImageDrawType;
+	}
+	public set forceGroundImageDrawType(value) {
+		this._forceGroundImageDrawType = value;
 		this.notifyChanged();
 	}
 
@@ -336,6 +372,9 @@ export class Style extends Emitter {
 		this.notifyChanged();
 	}
 
+	public get font() {
+		return this._fontFamily + " " + this._fontSize + "px";
+	}
 
 	public get fontFamily() {
 		return this._fontFamily;

@@ -2,6 +2,7 @@
 import Events = require("./events");
 import {Emitter} from "./emitter";
 import {IMainLoop} from "./imain-loop";
+import {DrawEventDetail} from "./event-detail";
 
 /**
  * 负责渲染UI的主循环。为了省电，只有在调用requestRedraw之后，才会触发下一次渲染循环。
@@ -16,10 +17,18 @@ import {IMainLoop} from "./imain-loop";
  */
 export class MainLoop extends Emitter implements IMainLoop {
 	private pendingRedraw : number;
-	
+	private predrawEvent : Events.Event;
+	private drawEvent : Events.Event;
+	private postdrawEvent : Events.Event;
+	private eventDetail : DrawEventDetail;
+
 	constructor() {
 		super();	
 		this.pendingRedraw = 0;
+		this.eventDetail = DrawEventDetail.create();
+		this.predrawEvent = Events.createEvent(Events.PREDRAW, this.eventDetail);
+		this.drawEvent = Events.createEvent(Events.DRAW, this.eventDetail);
+		this.postdrawEvent = Events.createEvent(Events.POSTDRAW, this.eventDetail);
 	}
 
 	public requestRedraw() {
@@ -31,13 +40,11 @@ export class MainLoop extends Emitter implements IMainLoop {
 	}
 
 	private exec() {
-		var data = {
-			time : Date.now()
-		};
+		this.eventDetail.time = Date.now();
 
-		this.emit(Events.PREDRAW, data);
-		this.emit(Events.DRAW, data);
-		this.emit(Events.POSTDRAW, data);
+		this.dispatchEvent(this.predrawEvent);
+		this.dispatchEvent(this.drawEvent);
+		this.dispatchEvent(this.postdrawEvent);
 		this.pendingRedraw = 0;
 	}
 

@@ -1,9 +1,8 @@
 import assets = require("./assets");
-import ImageTile = require("./image-tile");
+import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
 import {Widget} from "./widget";
 import {WindowNormal} from "./window-normal";
-import {WindowManager} from "./window-manager";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Button} from "./button";
@@ -29,13 +28,13 @@ export {
 	Application,
 	inputEventAdapter,
 	ImageTile,
+	ImageDrawType,
 	Style,
 	Canvas,
 	Emitter,
 	Widget,
-	WindowManager,
-	WindowNormal,
 	Button,
+	WindowNormal,
 	Services,
 	WidgetFactory,
 	ThemeManager,

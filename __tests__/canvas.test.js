@@ -32,8 +32,8 @@ describe('Canvas:', function() {
     	var canvas = qtk.Canvas.create(x, y, w, h, dpr, false);
     	var ctx = canvas.getContext("2d");
     	canvas.on("qtk-pointer-down", evt => {
-			var result = evt.detail.x === detail.x - x && evt.detail.y === detail.y - y;;
-			done(result ? null : new Error("canvas size wrong"));
+			var result = evt.detail.x === detail.x  && evt.detail.y === detail.y;;
+			done(result ? null : new Error("dispatch event wrong"));
 			canvas.dispose();
 		});
     	canvas.canvas.dispatchEvent(event);

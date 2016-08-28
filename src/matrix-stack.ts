@@ -10,13 +10,13 @@ export class MatrixStack {
 		this.matrix = new Matrix();
 	}
 
-	public push() : MatrixStack {
+	public save() : MatrixStack {
 		this.stack.push(this.matrix.clone());
 		
 		return this;
 	}
 
-	public pop() : MatrixStack {
+	public restore() : MatrixStack {
 		if(this.stack.length) {
 			this.matrix = this.stack.pop();
 		}
@@ -54,6 +54,10 @@ export class MatrixStack {
 
 	public transformPoint(x:number, y:number, out?:Point) : Point {
 		return this.matrix.transformPoint(x, y, out);
+	}
+
+	public invert():Matrix {
+		return this.matrix.invert();
 	}
 
 	public matrixToString() : string {

@@ -24,8 +24,8 @@ export class Canvas extends Emitter {
 	private onPointerEvent : any;
 
 	private transformXY(detail:any) {
-		detail.x -= this.x;
-		detail.y -= this.y;
+//		detail.x -= this.x;
+//		detail.y -= this.y;
 	}
 
 	constructor(x?:number, y?:number, w?:number, h?:number,devicePixelRatio?:number, offline?:boolean) {
@@ -41,12 +41,15 @@ export class Canvas extends Emitter {
 
 		var me = this;
 		this.onPointerEvent = function(evt) {
-			me.transformXY(evt.detail);
-			me.dispatchEvent(evt);
+			var e = Events.createEvent(evt.type, evt.detail);
+			me.dispatchEvent(e);
+			e.dispose();
 		};
 
 		this.onOtherEvent = function(evt) {
-			me.dispatchEvent(evt);
+			var e = Events.createEvent(evt.type, evt.detail);
+			me.dispatchEvent(e);
+			e.dispose();
 		};
 	}
 
@@ -147,6 +150,7 @@ export class Canvas extends Emitter {
 		canvas.removeEventListener(Events.POINTER_DOWN, this.onPointerEvent);
 		canvas.removeEventListener(Events.POINTER_MOVE, this.onPointerEvent);
 		canvas.removeEventListener(Events.POINTER_UP, this.onPointerEvent);
+		canvas.removeEventListener(Events.CLICK, this.onPointerEvent);
 		canvas.removeEventListener(Events.WHEEL, this.onOtherEvent);
 		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
 		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
@@ -162,14 +166,21 @@ export class Canvas extends Emitter {
 			document.body.appendChild(canvas);
 		}
 
-		canvas.addEventListener("qtk-pointer-down", this.onPointerEvent);
-		canvas.addEventListener("qtk-pointer-move", this.onPointerEvent);
-		canvas.addEventListener("qtk-pointer-up", this.onPointerEvent);
-		canvas.addEventListener("qtk-wheel", this.onOtherEvent);
-		canvas.addEventListener("qtk-keydown", this.onOtherEvent);
-		canvas.addEventListener("qtk-keyup", this.onOtherEvent);
+		canvas.addEventListener(Events.POINTER_DOWN, this.onPointerEvent);
+		canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
+		canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
+		canvas.addEventListener(Events.CLICK, this.onPointerEvent);
+		canvas.addEventListener(Events.WHEEL, this.onOtherEvent);
+		canvas.addEventListener(Events.KEYDOWN, this.onOtherEvent);
+		canvas.addEventListener(Events.KEYDOWN, this.onOtherEvent);
 
 		return canvas;
+	}
+
+	public ensureCanvas() {
+		if(!this.canvas) {
+			this.canvas = this.createCanvas();
+		}
 	}
 
 	public getContext(type:string) {

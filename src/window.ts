@@ -6,5 +6,9 @@ export enum WindowType {
 };
 
 export class Window extends Widget {
+	constructor(type:string) {
+		super(type);
+	}
+
 	private windowType: WindowType;
 };

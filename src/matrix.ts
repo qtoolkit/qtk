@@ -107,6 +107,30 @@ export class Matrix {
 			&& a[5] === b[5];
 	}
 
+	public invert():Matrix{
+		var a = this.data;
+		var aa = a[0], ab = a[1], ac = a[2], ad = a[3],
+			atx = a[4], aty = a[5];
+
+		var det = aa * ad - ab * ac;
+		if(!det){
+			return null;
+		}
+		det = 1.0 / det;
+
+		var newMatrix = Matrix.create();
+		var out = newMatrix.data;
+		
+		out[0] = ad * det;
+		out[1] = -ab * det;
+		out[2] = -ac * det;
+		out[3] = aa * det;
+		out[4] = (ac * aty - ad * atx) * det;
+		out[5] = (ab * atx - aa * aty) * det;
+
+		return newMatrix;
+	};
+
 	public toString() : string {
 		var ret = Array.prototype.map.call(this.data, function(iter) {
 			return iter.toFixed(2);

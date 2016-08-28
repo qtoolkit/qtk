@@ -9,6 +9,8 @@ import {IMainLoop} from "./imain-loop";
 import {IThemeManager} from "./itheme-manager";
 import {ThemeManager} from "./theme-manager";
 import {IApplication} from "./iapplication";
+import * as deviceInfo from "./device-info";
+import inputEventAdapter = require("./input-event-adapter");
 
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
@@ -46,6 +48,9 @@ export class Application extends Emitter implements IApplication {
 		this.registerService(Services.THEME_MANAGER, themeManager);
 		this._viewPort = ViewPort.create(0, 0, 0);
 		this._mainLoop = MainLoop.create();
+		deviceInfo.init(navigator.language, navigator.userAgent);
+		inputEventAdapter.init(document, window, deviceInfo.isPointerSupported, 
+				deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
 
 		return this;
 	}

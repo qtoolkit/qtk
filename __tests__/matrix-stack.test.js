@@ -5,12 +5,12 @@ describe('MatrixStack', function() {
     	var m = qtk.MatrixStack.create();
 
     	m.translate(10, 20);
-		m.push();
+		m.save();
     	m.scale(2, 2);
-		m.push();
+		m.save();
     	m.rotate(10);
-		m.push();
-		m.pop();
+		m.save();
+		m.restore();
 
 		var p = m.transformPoint(30, 40);
 		var x = p.x.toFixed(2);

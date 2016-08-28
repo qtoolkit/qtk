@@ -1,59 +1,82 @@
 import KeyEvent = require("./key-event");
 import Events = require("./events");
+import {PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 var grabs = [];
-var lastDetail : any;
+var lastDetail : PointerEventDetail;
 var ctrlKey = false;
 var altKey = false;
 var shiftKey = false;
 var commandKey = false;
 var pointerDeviceType : string;
+var pointerDown = false;
+var pointerDownX = 0;
+var pointerDownY = 0;
+var pointerDownTime = 0;
 
 function dispatchEvent(target:any, type:string, detail:any) {
 	var realTarget = target;
-	detail.altKey = altKey;
-	detail.ctrlKey = ctrlKey;
-	detail.shiftKey = shiftKey;
-	detail.commandKey = commandKey;
-
 	if(grabs.length) {
 		realTarget = grabs[grabs.length-1];
 	}
 
-	var event = new CustomEvent(type, {detail : detail});
+	var event = new CustomEvent(type, {detail:detail});
+
 	realTarget.dispatchEvent(event);
 }
 
-function getPointerDetail(e) {
+function getPointerDetail(e) : PointerEventDetail {
 	if(e) {
-		lastDetail = {
-			id: e.identifier||0,
-			x:  Math.max(e.pageX||0, e.x || e.clientX),
-			y:  Math.max(e.pageY||0, e.y || e.clientY)
-		};
+		var id = e.identifier||0;
+		var x = Math.max(e.pageX||0, e.x || e.clientX);
+		var y = Math.max(e.pageY||0, e.y || e.clientY);
+		lastDetail = PointerEventDetail.create(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
 	}
 
 	return lastDetail;
 }
 
+function dispatchPointerEvent(type, target, detail) {
+	if(type === Events.POINTER_DOWN) {
+		pointerDown = true;
+		pointerDownX = detail.x;
+		pointerDownY = detail.y;
+		pointerDownTime = Date.now();
+	}else if(type === Events.POINTER_UP) {
+		detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+		var dx = Math.abs(detail.x - pointerDownX);
+		var dy = Math.abs(detail.y - pointerDownY);	
+		var isClick = dx < 5 && dy < 5;
+		pointerDown = false;
+		if(isClick) {
+			dispatchEvent(target, Events.CLICK, detail);
+		}
+	}else{
+		detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+	}
+
+	dispatchEvent(target, type, detail);
+	detail.dispose();
+}
+
 function onMouseDown(evt) {
-	dispatchEvent(evt.target, Events.POINTER_DOWN, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
 }
 
 function onMouseMove(evt) {
-	dispatchEvent(evt.target, Events.POINTER_MOVE, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
 }
 
 function onMouseUp(evt) {
-	dispatchEvent(evt.target, Events.POINTER_UP, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
 }
 
 function onMouseOut(evt) {
-	dispatchEvent(evt.target, Events.POINTER_OUT, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_OUT, evt.target, getPointerDetail(evt));
 }
 
 function onMouseOver(evt) {
-	dispatchEvent(evt.target, Events.POINTER_OVER, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_OVER, evt.target, getPointerDetail(evt));
 }
 
 function getTouchPoints(evt) {
@@ -71,35 +94,37 @@ function getTouchPoints(evt) {
 }
 
 function onTouchStart(evt) {
-	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, Events.POINTER_DOWN, detail);
+	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	dispatchPointerEvent(Events.POINTER_DOWN, evt.target, detail);
 }
 
 function onTouchMove(evt) {
-	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, Events.POINTER_MOVE, detail);
+	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	dispatchPointerEvent(Events.POINTER_MOVE, evt.target, detail);
 }
 
 function onTouchEnd(evt) {
-	var detail = getTouchPoints(evt)[0];
-	dispatchEvent(evt.target, Events.POINTER_UP, detail);
+	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	dispatchPointerEvent(Events.POINTER_UP, evt.target, detail);
 }
 
 function onPointerDown(evt) {
-	dispatchEvent(evt.target, Events.POINTER_DOWN, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
 }
 
 function onPointerMove(evt) {
-	dispatchEvent(evt.target, Events.POINTER_MOVE, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
 }
 
 function onPointerUp(evt) {
-	dispatchEvent(evt.target, Events.POINTER_UP, getPointerDetail(evt));
+	dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
 }
 
 function onWheel(evt) {
-	var detail = {delta : evt.wheelDelta || evt.detail * -8};
+	var delta = evt.wheelDelta || evt.detail * -8;
+	var detail = WheelEventDetail.create(delta, altKey, ctrlKey, shiftKey, commandKey);
 	dispatchEvent(evt.target, Events.WHEEL, detail);
+	detail.dispose();
 }
 
 function updateKeysStatus(keyCode, value) {
@@ -124,28 +149,24 @@ function updateKeysStatus(keyCode, value) {
 }
 
 function onKeyDown(evt) {
-	var detail = {
-		keyCode:evt.keyCode
-	};
-	
-	updateKeysStatus(detail.keyCode, true);
+	updateKeysStatus(evt.keyCode, true);
+	var detail = KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
 	dispatchEvent(evt.target, Events.KEYDOWN, detail);
+	detail.dispose();
 }
 
 function onKeyUp(evt) {
-	var detail = {
-		keyCode:evt.keyCode
-	};
-	updateKeysStatus(detail.keyCode, false);
+	updateKeysStatus(evt.keyCode, false);
+	var detail = KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
 	dispatchEvent(evt.target, Events.KEYUP, detail);
+	detail.dispose();
 }
 
 function dispatchKeyEvent(target, keyCode) {
-	var detail = {
-		keyCode:keyCode
-	};
+	var detail = KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);
 	dispatchEvent(target, Events.KEYDOWN, detail);
 	dispatchEvent(target, Events.KEYUP, detail);
+	detail.dispose();
 }
 
 /**

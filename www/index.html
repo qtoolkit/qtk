@@ -4,20 +4,60 @@
     <script src='../index.js'></script>
 	<script type="application/javascript">
 		var app = new qtk.Application.create("test");
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 
 		window.onload = function() {
-			var vp = app.getViewPort();
-			var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
+			app.init({themeDataURL:"/www/theme/default/theme.json"});
 			
-			win.x = 0;
-			win.y = 0;
-			win.w = vp.width;
-			win.h = vp.height;
+			app.on(qtk.Events.READY, function() {
+				var vp = app.getViewPort();
+				var win = qtk.WindowNormal.createEx(app, {hasOwnCanvas:true});
 
-			app.mainLoop.requestRedraw();
-			
+				win.x = 0;
+				win.y = 0;
+				win.w = vp.width;
+				win.h = vp.height;
+
+				var button = qtk.Button.create();
+				button.name = "button1";
+				button.x = 10;
+				button.y = 10;
+				button.w = 200;
+				button.h = 60;
+				win.addChild(button);
+
+				var button = qtk.Button.create();
+				button.styleType = "button-blue";
+				button.name = "button2";
+				button.x = 10;
+				button.y = 90;
+				button.w = 200;
+				button.h = 60;
+				win.addChild(button);
+				
+				button.on(qtk.Events.POINTER_DOWN, evt => {
+					console.log("pointer down:" + button.name);
+				});
+				button.on(qtk.Events.POINTER_UP, evt => {
+					console.log("pointer up:" + button.name);
+				});
+				
+				button.on(qtk.Events.CLICK, evt => {
+					evt.stopPropagation();
+					console.log("click:" + button.name);
+				});
+
+				win.on(qtk.Events.POINTER_UP, evt => {
+					console.log("pointer up:" + win.name);
+				});
+				win.on(qtk.Events.POINTER_UP, evt => {
+					console.log("pointer up capture:" + win.name);
+				}, true);
+
+
+				app.mainLoop.requestRedraw();
+			});
 		}
+
 	</script>
 </head>
 <body>

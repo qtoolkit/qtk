@@ -42,7 +42,6 @@ describe('Widget', function() {
 		widget.focusable = focusable;
 		widget.name = name;
 		widget.tag = tag;
-		widget.id = id;
 		widget.type = type;
 		widget.tips = tips;
 		widget.userData = userData;
@@ -75,7 +74,6 @@ describe('Widget', function() {
 				&& widget.value === value 
 				&& widget.name === name
 				&& widget.tag === tag
-				&& widget.id === id
 				&& widget.type === type
 				&& widget.tips === tips
 

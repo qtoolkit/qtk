@@ -2,12 +2,44 @@
 	"button": {
 		"normal" : {
 			"backGroundColor" : "green",
-			"fontColor" : "red",
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"fontSize" : 16
+		},
+		"over" : {
+			"backGroundColor" : "blue",
+			"fontColor" : "black",
+			"roundRadius" : 5,
 			"fontSize" : 16
 		},
 		"active" : {
+			"backGroundColor" : "red",
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"lineWidth" : 1,
+			"lineColor" : "green",
+			"fontSize" : 18
+		}
+	},
+	"button-blue": {
+		"normal" : {
+			"backGroundColor" : "blue",
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"fontSize" : 16
+		},
+		"over" : {
 			"backGroundColor" : "green",
-			"fontColor" : "red",
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"fontSize" : 16
+		},
+		"active" : {
+			"backGroundColor" : "red",
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"lineWidth" : 1,
+			"lineColor" : "green",
 			"fontSize" : 18
 		}
 	}

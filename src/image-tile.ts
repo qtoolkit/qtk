@@ -7,6 +7,54 @@ import path = require("path");
 import {Promise} from 'es6-promise';
 import {Emitter} from "./emitter";
 import Assets = require("./assets");
+import Events = require("./events");
+
+export enum ImageDrawType {
+	/**
+	 * 画在填满指定的矩形区域。
+	 */
+	DEFAULT = 0,
+	
+	/**
+	 * 按1比1大小画在指定的矩形区域的中间。
+	 */
+	CENTER = 1,
+
+	/**
+	 * 把图分成3行3列等大小的区域，按9宫格的方式填满指定的矩形区域。
+	 */
+	PATCH9 = 2,
+	
+	/**
+	 * 把图分成3行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
+	 */
+	PATCH3_V = 3,
+	
+	/**
+	 * 把图分成1行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
+	 */
+	PATCH3_H = 4,
+	
+	/**
+	 * 按平铺的方式填满指定的矩形区域。
+	 */
+	TILE = 5,
+	
+	/**
+	 * 按垂直平铺的方式填满指定的矩形区域。
+	 */
+	TILE_V = 6,
+	
+	/**
+	 * 按水平平铺的方式填满指定的矩形区域。
+	 */
+	TILE_H = 7,
+
+	/**
+	 * 保持比例缩放到指定的矩形区域。
+	 */
+	AUTO = 8
+}
 
 /**
  * 把多个小的图片合并成一张大图，不但可以减少网路请求和GPU的调用次数，还可以提高内存的利用率。
@@ -39,7 +87,7 @@ import Assets = require("./assets");
  *
  *
  */
-export = class ImageTile extends Emitter {	
+export class ImageTile extends Emitter {	
 	public x : number;
 	public y : number;
 	public w : number;
@@ -91,7 +139,7 @@ export = class ImageTile extends Emitter {
 		this.h = h;
 		this.img = img;
 
-		this.emit("loaded", this);
+		this.dispatchEventAsync({type:Events.LOAD, detail:this});
 	}
  
     public get complete():boolean {
@@ -305,72 +353,27 @@ export = class ImageTile extends Emitter {
 
 	public draw(ctx:any, type:number, dx:number, dy:number, dw:number, dh:number) {
 		if(ctx && this.complete) {
-			if(type === ImageTile.DRAW_DEFAULT) {
+			if(type === ImageDrawType.DEFAULT) {
 				this.drawDefault(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_CENTER) {
+			}else if(type === ImageDrawType.CENTER) {
 				this.drawCenter(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_AUTO) {
+			}else if(type === ImageDrawType.AUTO) {
 				this.drawAuto(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_3PATCH_H) {
+			}else if(type === ImageDrawType.PATCH3_H) {
 				this.draw3PatchH(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_3PATCH_V) {
+			}else if(type === ImageDrawType.PATCH3_V) {
 				this.draw3PatchV(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_9PATCH) {
+			}else if(type === ImageDrawType.PATCH9) {
 				this.draw9Patch(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_TILE_H) {
+			}else if(type === ImageDrawType.TILE_H) {
 				this.drawTileH(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_TILE_V) {
+			}else if(type === ImageDrawType.TILE_V) {
 				this.drawTileV(ctx, dx, dy, dw, dh);
-			}else if(type === ImageTile.DRAW_TILE) {
+			}else if(type === ImageDrawType.TILE) {
 				this.drawTile(ctx, dx, dy, dw, dh);
 			}
 		}
 	}
-
-	/**
-	 * 画在填满指定的矩形区域。
-	 */
-	static DRAW_DEFAULT = 0;
-	
-	/**
-	 * 按1比1大小画在指定的矩形区域的中间。
-	 */
-	static DRAW_CENTER = 1;
-
-	/**
-	 * 把图分成3行3列等大小的区域，按9宫格的方式填满指定的矩形区域。
-	 */
-	static DRAW_9PATCH = 2;
-	
-	/**
-	 * 把图分成3行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
-	 */
-	static DRAW_3PATCH_V = 3;
-	
-	/**
-	 * 把图分成1行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
-	 */
-	static DRAW_3PATCH_H = 4;
-	
-	/**
-	 * 按平铺的方式填满指定的矩形区域。
-	 */
-	static DRAW_TILE = 5;
-	
-	/**
-	 * 按垂直平铺的方式填满指定的矩形区域。
-	 */
-	static DRAW_TILE_V = 6;
-	
-	/**
-	 * 按水平平铺的方式填满指定的矩形区域。
-	 */
-	static DRAW_TILE_H = 7;
-
-	/**
-	 * 保持比例缩放到指定的矩形区域。
-	 */
-	static DRAW_AUTO = 8;
 
  	static cache = {};
 	static create(src:string, onDone:Function) : ImageTile {
@@ -385,11 +388,10 @@ export = class ImageTile extends Emitter {
 			if(it.complete) {
 				setTimeout(onDone, 0);
 			}else{
-				it.once("loaded", onDone)
+				it.once(Events.LOAD, onDone)
 			}
 		}
 
 		return it;
 	}
 };
-
