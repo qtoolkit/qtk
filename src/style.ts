@@ -27,6 +27,8 @@ export class Style extends Emitter {
 	private _fontBold : boolean;
 	private _fontItalic : boolean;
 	private _fontUnderline : boolean;
+	private _textAlign : string;
+	private _textBaseline : string;
 
 	constructor() {
 		super();
@@ -184,6 +186,14 @@ export class Style extends Emitter {
 			json.fontUnderline = this._fontUnderline;
 		}
 
+		if(this._textBaseline) {
+			json.textBaseline = this._textBaseline;
+		}
+
+		if(this._textAlign) {
+			json.textAlign = this._textAlign;
+		}
+
 		if(this._lineWidth) {
 			json.lineWidth = this._lineWidth;
 		}
@@ -258,6 +268,14 @@ export class Style extends Emitter {
 
 		if(json.fontUnderline) {
 			this._fontUnderline = json.fontUnderline;
+		}
+
+		if(json.textBaseline) {
+			this._textBaseline = json.textBaseline;
+		}
+
+		if(json.textAlign) {
+			this._textAlign = json.textAlign;
 		}
 
 		if(json.lineWidth) {
@@ -426,6 +444,22 @@ export class Style extends Emitter {
 	}
 	public set fontUnderline(value) {
 		this._fontUnderline = value;
+		this.notifyChanged();
+	}
+
+	public get textAlign() {
+		return this._textAlign || "center";
+	}
+	public set textAlign(value) {
+		this._textAlign = value;
+		this.notifyChanged();
+	}
+
+	public get textBaseline() {
+		return this._textBaseline || "middle";
+	}
+	public set textBaseline(value) {
+		this._textBaseline = value;
 		this.notifyChanged();
 	}
 

@@ -12,13 +12,23 @@ import {IApplication} from "./iapplication";
 import {IThemeManager} from "./itheme-manager";
 import {ChangeEventDetail, PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
+/**
+ * Widget是所有控件的基类。
+ */
 export class Widget extends Emitter {
 	constructor(type:string) {
 		super();
 		this.reset(type);
 	}
-	
-	public hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+
+	/**
+	 * 测试点是否落在当前控件中。
+	 * @param x X坐标，相对于全局原点的坐标。
+	 * @param y Y坐标，相对于全局原点的坐标。
+	 * @param ctx 矩阵变换上下文。ctx包含了从顶级父控件到当前控件的变化。
+	 * @returns 测试结果HitTestResult。
+	 */
+	private hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
 		var m = ctx.invert();
 		var p = m.transformPoint(x, y);
 
@@ -29,7 +39,7 @@ export class Widget extends Emitter {
 		return HitTestResult.NONE;
 	}
 
-	public dispatchPointerDown(evt:any, ctx:MatrixStack) {
+	private dispatchPointerDown(evt:any, ctx:MatrixStack) {
 		var detail = evt.detail;
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -54,6 +64,7 @@ export class Widget extends Emitter {
 			if(this.onpointerdown) {
 				this.onpointerdown(evt);
 			}
+			this.state = WidgetState.NORMAL;
 		}
 
 		ctx.restore();
@@ -62,7 +73,7 @@ export class Widget extends Emitter {
 		return hitTestResult !== HitTestResult.NONE;
 	}
 
-	public dispatchPointerMove(evt:any, ctx:MatrixStack) {
+	private dispatchPointerMove(evt:any, ctx:MatrixStack) {
 		var detail = evt.detail;
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -112,8 +123,7 @@ export class Widget extends Emitter {
 		}
 	}
 
-	public dispatchPointerUp(evt:any) {
-		var detail = evt.detail;
+	private dispatchPointerUp(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -130,7 +140,7 @@ export class Widget extends Emitter {
 		this.state = WidgetState.NORMAL;
 	}
 	
-	public dispatchClick(evt:any) {
+	private dispatchClick(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -145,7 +155,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	public dispatchKeyDown(evt:any) {
+	private dispatchKeyDown(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -160,7 +170,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchKeyUp(evt:any) {
+	private dispatchKeyUp(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -175,7 +185,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchWheel(evt:any) {
+	private dispatchWheel(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -194,10 +204,13 @@ export class Widget extends Emitter {
 		ctx.translate(this._x, this._y);
 		var px = this._pivotX * this._w;
 		var py = this._pivotY * this._h;
-		ctx.translate(px, py);
-		ctx.rotate(this._rotation);
-		ctx.scale(this._scaleX, this._scaleY);
-		ctx.translate(-px, -py);
+		
+		if(this._rotation || this._scaleX !== 1 || this._scaleY !== 1) {
+			ctx.translate(px, py);
+			ctx.rotate(this._rotation);
+			ctx.scale(this._scaleX, this._scaleY);
+			ctx.translate(-px, -py);
+		}
 
 		return this;
 	}
@@ -288,9 +301,7 @@ export class Widget extends Emitter {
 	}
 
 	public translateCavnas(ctx:any) : Widget {
-		if(this._canvas) {
-			ctx.translate(-this.x, -this.y);
-		}else{
+		if(!this._canvas) {
 			ctx.translate(this.x, this.y);
 		}
 
@@ -326,6 +337,8 @@ export class Widget extends Emitter {
 		if(text && style.fontColor) {
 			ctx.font = style.font;
 			ctx.fillStyle = style.fontColor;
+			ctx.textAlign = style.textAlign;
+			ctx.textBaseline = style.textBaseline;
 			ctx.fillText(text, this.w >> 1, this.h >> 1);
 		}
 
@@ -536,6 +549,7 @@ export class Widget extends Emitter {
 				}
 			}
 		});
+
 		return this;
 	}
 //////////////////////////////////////////////////
@@ -925,6 +939,15 @@ export class Widget extends Emitter {
 		this._tag = json.tag;
 		this._type = json.type;
 		this._mode = json.mode;
+		
+		var styles = json.styles;
+		if(styles) {
+			this._styles = {};
+			for(var key in styles){
+				var style = styles[key];
+				json._styles[key] = Style.create(style);
+			}
+		}
 	
 		return this;
 	}
@@ -958,6 +981,15 @@ export class Widget extends Emitter {
 		json.tag = this._tag;
 		json.type = this._type;
 		json.mode = this._mode;
+
+		var styles = this._styles;
+		if(styles) {
+			json.styles = {};
+			for(var key in styles){
+				var style = styles[key];
+				json.styles[key] = style.toJson();
+			}
+		}
 
 		return json;
 	}
