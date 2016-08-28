@@ -108,7 +108,7 @@ describe('Style', function() {
 	 
 	it('test changed', (done) => {
   		var style = new qtk.Style();
-		style.on(qtk.Events.CHANGED, function() {
+		style.on(qtk.Events.CHANGE, function() {
 			done()
 		});
 		style.lineWidth = lineWidth;

@@ -12,10 +12,11 @@
 				var vp = app.getViewPort();
 				var win = qtk.WindowNormal.createEx(app, {hasOwnCanvas:true});
 
-				win.x = 0;
-				win.y = 0;
+				win.x = 20;
+				win.y = 50;
 				win.w = vp.width;
 				win.h = vp.height;
+				win.styleType = "window";
 
 				var button = qtk.Button.create();
 				button.name = "button1";
@@ -32,6 +33,7 @@
 				button.y = 90;
 				button.w = 200;
 				button.h = 60;
+				button.text = "OK";
 				win.addChild(button);
 				
 				button.on(qtk.Events.POINTER_DOWN, evt => {

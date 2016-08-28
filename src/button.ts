@@ -7,10 +7,6 @@ export class Button extends Widget {
 		super(Button.TYPE);
 	}
 
-	public requestRedraw() : Widget {
-		return super.requestRedraw();
-	}
-
 	public static TYPE = "button";
 	public static create() : Widget {
 		var widget = new Button();

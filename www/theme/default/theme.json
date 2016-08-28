@@ -1,4 +1,9 @@
 {
+	"window": {
+		"normal" : {
+			"backGroundColor" : "#f0f0f0"
+		}
+	},
 	"button": {
 		"normal" : {
 			"backGroundColor" : "green",
@@ -24,9 +29,9 @@
 	"button-blue": {
 		"normal" : {
 			"backGroundColor" : "blue",
-			"fontColor" : "black",
+			"fontColor" : "white",
 			"roundRadius" : 5,
-			"fontSize" : 16
+			"fontSize" : 20
 		},
 		"over" : {
 			"backGroundColor" : "green",
