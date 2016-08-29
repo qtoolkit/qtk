@@ -19,6 +19,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {SimpleLayouter, SimpleLayouterParam} from "./simple-layouter";
 
 export {
 	assets,
@@ -45,5 +46,7 @@ export {
 	Services,
 	WidgetFactory,
 	ThemeManager,
-	Events
+	Events,
+	SimpleLayouter,
+	SimpleLayouterParam
 };

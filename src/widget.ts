@@ -4,6 +4,7 @@ import Events = require("./events");
 import {Style} from "./style";
 import {Canvas} from "./canvas";
 import {Rect} from "./rect";
+import {ILayouter} from './layouter';
 import {Emitter} from "./emitter";
 import {Graphics} from "./graphics";
 import {ImageTile} from "./image-tile";
@@ -237,6 +238,38 @@ export class Widget extends Emitter {
 
 ///////////////////////////////////////////
 
+	public relayoutChildren() : Widget {
+		if(this.childrenLayouter) {
+			this.childrenLayouter.layoutChildren(this, this.children);
+			this.requestRedraw();
+		}
+		return this;
+	}
+
+	public requestRelayout() : Widget {
+		if(this.parent) {
+			this.parent.relayoutChildren();	
+		}
+
+		return this;
+	}
+
+	public set childrenLayouter(layouter:ILayouter) {
+		this._childrenLayouter = layouter;
+	}
+
+	public get childrenLayouter() : ILayouter{
+		return this._childrenLayouter;
+	}
+
+	public set layoutParam(param:any) {
+		this._layoutParam = param;
+	}
+
+	public get layoutParam() : any {
+		return this._layoutParam;
+	}
+///////////////////////////////////////////
 	public findChild(func:Function) : Widget {
 		var i = 0;
 		var arr = this._children;
@@ -459,10 +492,8 @@ export class Widget extends Emitter {
 			this._canvas.dispose();
 			this._canvas = null;
 		}
-	}
-
-	public relayoutChildren() : Widget {
-		return this;
+		this._parent = null;
+		this._children = [];
 	}
 
 	public removeChild(child:Widget) : Widget {
@@ -774,7 +805,9 @@ export class Widget extends Emitter {
 	}
 	public set app(app) {
 		this._app = app;
-		this._themeManager = app.getThemeManager();
+		if(app) {
+			this._themeManager = app.getThemeManager();
+		}
 	}
 
 	public get win() : Widget {
@@ -874,7 +907,10 @@ export class Widget extends Emitter {
 	public onkeydown : Function;
 	public onkeyup : Function;
 
-	public reset(type:string) {
+	private _layoutParam : any;
+	private _childrenLayouter : ILayouter;
+
+	public reset(type:string) : Widget {
 		this._x  = 0;
 		this._y  = 0;
 		this._z  = 0;
@@ -920,6 +956,8 @@ export class Widget extends Emitter {
 		this.onwheel = null;
 		this.onkeydown = null;
 		this.onkeyup = null;
+		
+		return this;
 	}
 
 	public fromJson(json:any) : Widget{

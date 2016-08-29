@@ -17,31 +17,23 @@
 				win.w = vp.width;
 				win.h = vp.height;
 				win.styleType = "window";
+				win.childrenLayouter = qtk.SimpleLayouter.create();
 
 				var button = qtk.Button.create();
 				button.name = "button1";
-				button.x = 10;
-				button.y = 10;
-				button.w = 200;
-				button.h = 60;
+				button.layoutParam = qtk.SimpleLayouterParam.create("25%", "10px", "50%", "60px");
 				win.addChild(button);
 
 				var button = qtk.Button.create();
 				button.styleType = "button-blue";
 				button.name = "button2";
-				button.x = 10;
-				button.y = 90;
-				button.w = 200;
-				button.h = 60;
+				button.layoutParam = qtk.SimpleLayouterParam.create("-240px", "90px", "200px", "60px");
 				button.text = "OK";
 				win.addChild(button);
 				
 				var image = qtk.Image.create();
 				image.name = "image1";
-				image.x = 10;
-				image.y = 200;
-				image.w = 200;
-				image.h = 200;
+				image.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
 				image.value = "/www/test.jpg";
 				image.drawType = qtk.ImageDrawType.AUTO; 
 				win.addChild(image);
