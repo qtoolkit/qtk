@@ -3,6 +3,7 @@ import {Style} from "./style";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "./image-tile";
+import {RecyclableCreator} from "./recyclable-creator";
 
 /**
  * 图片控件。 
@@ -46,12 +47,17 @@ export class Image extends Widget {
 	public getStyle() : Style {
 		return this._style;
 	}
+	
+	public dispose() {
+		super.dispose();
+		Image.recyclbale.recycle(this);
+	}
 
 	public static TYPE = "image";
 	public static create() : Widget {
-		var widget = new Image();
-		return widget;
+		return Image.recyclbale.create().reset(Image.TYPE);
 	}
+	private static recyclbale = new RecyclableCreator<Image>(function() {return new Image()});
 };
 
 WidgetFactory.register(Image.TYPE, Image.create);
