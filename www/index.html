@@ -36,6 +36,16 @@
 				button.text = "OK";
 				win.addChild(button);
 				
+				var image = qtk.Image.create();
+				image.name = "image1";
+				image.x = 10;
+				image.y = 200;
+				image.w = 200;
+				image.h = 200;
+				image.value = "/www/test.jpg";
+				image.drawType = qtk.ImageDrawType.AUTO; 
+				win.addChild(image);
+				
 				button.on(qtk.Events.POINTER_DOWN, evt => {
 					console.log("pointer down:" + button.name);
 				});

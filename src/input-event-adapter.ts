@@ -1,5 +1,5 @@
-import KeyEvent = require("./key-event");
 import Events = require("./events");
+import {KeyEvent} from "./key-event";
 import {PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 var grabs = [];

@@ -1,5 +1,5 @@
 
-var KeyEvent = {
+export var KeyEvent = {
 	VK_CANCEL: 3,
 	VK_HELP: 6,
 	VK_BACK_SPACE: 8,
@@ -120,6 +120,3 @@ var KeyEvent = {
 	VK_QUOTE: 222,
 	VK_META: 224
 };
-
-export = KeyEvent;
-

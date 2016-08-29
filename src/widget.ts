@@ -402,8 +402,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public getStyle(state?:WidgetState) : Style {
-		state = state || this._state
+	public getStyleOfState(state : WidgetState) : Style {
 		var style = null;
 		var stateName = this.stateToString(state);
 		
@@ -414,8 +413,16 @@ export class Widget extends Emitter {
 			var styleType = this._styleType || this.type;
 			style = tm.get(styleType, stateName);
 		}
+		
+		return style;
+	}
 
-		//console.log(this.type + ":" + stateName);
+	public getStyle() : Style {
+		var state = this._state;
+		var style = this.getStyleOfState(state);
+		if(!style) {
+			style = this.getStyleOfState(WidgetState.NORMAL);
+		}
 		return style;
 	}
 
@@ -470,6 +477,7 @@ export class Widget extends Emitter {
 
 	public requestRedraw() : Widget {
 		var app = this._app;
+		this._dirty = true;
 		if(app) {
 			app.getMainLoop().requestRedraw();
 		}
@@ -826,7 +834,7 @@ export class Widget extends Emitter {
 	private _w : number;
 	private _h : number;
 	private _state : WidgetState;
-	private _value : number;
+	private _value : any;
 	private _enable : boolean;
 	private _visible : boolean;
 	private _selected : boolean;
@@ -921,7 +929,6 @@ export class Widget extends Emitter {
 		this._w = json.w;
 		this._h = json.h;
 		this._state = json.state;
-		this._value = json.value;
 		this._enable = json.enable;
 		this._visible = json.visible;
 		this._opacity = json.opacity;
@@ -939,6 +946,7 @@ export class Widget extends Emitter {
 		this._tag = json.tag;
 		this._type = json.type;
 		this._mode = json.mode;
+		this.value = json.value;
 		
 		var styles = json.styles;
 		if(styles) {
@@ -963,7 +971,6 @@ export class Widget extends Emitter {
 		json.w = this._w;
 		json.h = this._h;
 		json.state = this._state;
-		json.value = this._value;
 		json.enable = this._enable;
 		json.visible = this._visible;
 		json.opacity = this._opacity;
@@ -981,6 +988,8 @@ export class Widget extends Emitter {
 		json.tag = this._tag;
 		json.type = this._type;
 		json.mode = this._mode;
+
+		json.value = this.value;
 
 		var styles = this._styles;
 		if(styles) {
