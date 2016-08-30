@@ -4,7 +4,7 @@ import Events = require("./events");
 import {Style} from "./style";
 import {Canvas} from "./canvas";
 import {Rect} from "./rect";
-import {ILayouter} from './layouter';
+import {Layouter} from './layouter';
 import {Emitter} from "./emitter";
 import {Graphics} from "./graphics";
 import {ImageTile} from "./image-tile";
@@ -254,11 +254,11 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public set childrenLayouter(layouter:ILayouter) {
+	public set childrenLayouter(layouter:Layouter) {
 		this._childrenLayouter = layouter;
 	}
 
-	public get childrenLayouter() : ILayouter{
+	public get childrenLayouter() : Layouter{
 		return this._childrenLayouter;
 	}
 
@@ -908,7 +908,7 @@ export class Widget extends Emitter {
 	public onkeyup : Function;
 
 	private _layoutParam : any;
-	private _childrenLayouter : ILayouter;
+	private _childrenLayouter : Layouter;
 
 	public reset(type:string) : Widget {
 		this._x  = 0;

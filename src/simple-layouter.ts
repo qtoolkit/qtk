@@ -1,12 +1,16 @@
 import {Widget} from './widget';
-import {ILayouter} from './layouter';
+import {Layouter} from './layouter';
 
 const NAME = "SimpleLayouter";
 
 /**
  * 简单的布局器。
  */
-export class SimpleLayouter {
+export class SimpleLayouter extends Layouter {
+	public get name() : string {
+		return NAME;
+	}
+
 	public layoutChildren(widget:Widget, children:Array<Widget>) {
 		var pw = widget.w;
 		var ph = widget.h;
@@ -48,6 +52,8 @@ export class SimpleLayouter {
 		return new SimpleLayouter();
 	}
 };
+
+Layouter.register(NAME, SimpleLayouter.create);
 
 /**
  * 简单的布局器的参数。
