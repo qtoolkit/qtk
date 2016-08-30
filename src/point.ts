@@ -10,9 +10,11 @@ export class Point {
 	public dispose() {
 	}
 
-	public static create() : Point {
-		return new Point(0, 0);
+	public static create(x?:number, y?:number) : Point {
+		return new Point(x, y);
 	}
+
+	public static p = Point.create(0, 0);
 };
 
 

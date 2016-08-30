@@ -1,7 +1,7 @@
 {
-	"window": {
+	"window-normal": {
 		"normal" : {
-			"backGroundColor" : "#f0f0f0"
+			"backGroundColor" : "gray"
 		}
 	},
 	"button": {

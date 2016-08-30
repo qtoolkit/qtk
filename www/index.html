@@ -17,7 +17,6 @@
 				win.y = 0;
 				win.w = vp.width;
 				win.h = vp.height;
-				win.styleType = "window";
 				win.childrenLayouter = qtk.SimpleLayouter.create();
 
 				var button = qtk.Button.create();
@@ -43,7 +42,7 @@
 				image.name = "image1";
 				image.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
 				image.value = "/www/test.jpg";
-				image.drawType = qtk.ImageDrawType.AUTO; 
+				image.drawType = qtk.ImageDrawType.DEFAULT; 
 				win.addChild(image);
 				
 				button.on(qtk.Events.POINTER_DOWN, evt => {
@@ -77,7 +76,7 @@
 				//});
 				//image.pivotX = 0.5;
 				//image.pivotY = 0.5;
-				//image.rotateTo(Math.PI, 2000).repeat(5).yoyo(true).easing(TWEEN.Easing.Quadratic.In);
+				image.rotateTo(Math.PI, 2000).repeat(50).yoyo(true).easing(TWEEN.Easing.Quadratic.In);
 			});
 		}
 

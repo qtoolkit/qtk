@@ -189,7 +189,7 @@ export class Canvas extends Emitter {
 		}
 
 		var ctx = this.canvas.getContext("2d");
-		ctx.clearRect(0, 0, this.w, this.h);
+		//ctx.clearRect(0, 0, this.w, this.h);
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
 		ctx.scale(this._devicePixelRatio, this._devicePixelRatio);
 

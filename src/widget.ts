@@ -5,6 +5,7 @@ import TWEEN = require("tween.js");
 import Events = require("./events");
 import {Style} from "./style";
 import {Canvas} from "./canvas";
+import {Point} from "./point";
 import {Rect} from "./rect";
 import {Layouter} from './layouter';
 import {Emitter} from "./emitter";
@@ -13,6 +14,7 @@ import {ImageTile} from "./image-tile";
 import {MatrixStack} from "./matrix-stack";
 import {IApplication} from "./iapplication";
 import {IThemeManager} from "./itheme-manager";
+import {DirtyRectContext} from "./dirty-rect-context";
 import {ChangeEventDetail, PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 /**
@@ -423,11 +425,24 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public getDirtyRect(matrixStack:MatrixStack) : Rect {
-		return Rect.create(0, 0, this.w, this.h);
+	public computeDirtyRectSelf(ctx:DirtyRectContext) {
+		if(this._dirty) {
+			ctx.addRect(0, 0, this.w, this.h);
+		}
+	}
+
+	public computeDirtyRect(ctx:DirtyRectContext) {
+		ctx.save();
+		this.applyTransform(ctx);
+		this.computeDirtyRectSelf(ctx);
+		this.children.forEach(function(child) {
+			child.computeDirtyRect(ctx);
+		});
+		ctx.restore();
 	}
 
 	public draw(ctx:any) {
+		this._dirty = false;
 		var style = this.getStyle();
 		ctx.save();
 		this.applyTransform(ctx);
@@ -445,10 +460,9 @@ export class Widget extends Emitter {
 		return;
 	}
 
-	public stateToString(state?:WidgetState) : string {
-		var s = state || this.state;
+	public stateToString(state:WidgetState) : string {
 
-		return states[s];
+		return states[state];
 	};
 
 	public set styleType(styleType:string){
@@ -552,6 +566,7 @@ export class Widget extends Emitter {
 		var density = this.app.getViewPort().density;
 		var canvas = Canvas.create(this.x, this.y, this.w, this.h, density);
 		var matrixStack = MatrixStack.create();
+		var dirtyRectContext = DirtyRectContext.create();
 
 		canvas.ensureCanvas();
 		canvas.on(Events.POINTER_DOWN, evt => {
@@ -589,7 +604,28 @@ export class Widget extends Emitter {
 		var mainLoop = this.app.getMainLoop();
 		mainLoop.on(Events.DRAW, evt => {
 			var ctx = canvas.getContext("2d");
+			
+			dirtyRectContext.reset();
+			this.computeDirtyRect(dirtyRectContext);
+			var r = dirtyRectContext.getRect();
+
+			ctx.save();
+			if(r.w > 0 && r.h > 0) {
+				ctx.beginPath();
+				ctx.rect(r.x, r.y, r.w, r.h);
+				ctx.clip();
+				ctx.clearRect(r.x, r.y, r.w, r.h);
+			}
+
 			this.draw(ctx);
+			if(r.w > 0 && r.h > 0) {
+				ctx.strokeStyle = "gold";
+				ctx.lineWidth = 5;
+				ctx.beginPath();
+				ctx.rect(r.x, r.y, r.w, r.h);
+				ctx.stroke();
+			}
+			ctx.restore();
 		});
 
 		this.on(Events.CHANGE, evt => {
