@@ -41,11 +41,12 @@ export class MainLoop extends Emitter implements IMainLoop {
 
 	private exec() {
 		this.eventDetail.time = Date.now();
+		this.eventDetail.deltaTime = performance.now();
 
+		this.pendingRedraw = 0;
 		this.dispatchEvent(this.predrawEvent);
 		this.dispatchEvent(this.drawEvent);
 		this.dispatchEvent(this.postdrawEvent);
-		this.pendingRedraw = 0;
 	}
 
 	static create() {

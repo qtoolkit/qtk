@@ -1,5 +1,7 @@
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
+import {IMainLoop} from "./imain-loop";
+import TWEEN = require("tween.js");
 import Events = require("./events");
 import {Style} from "./style";
 import {Canvas} from "./canvas";
@@ -237,6 +239,33 @@ export class Widget extends Emitter {
 	}
 
 ///////////////////////////////////////////
+	public animate() : TWEEN.Tween {
+		var tween = new TWEEN.Tween(this);
+
+		return tween;
+	}
+
+	public scaleTo(sx:number, sy:number, duration?:number) : TWEEN.Tween {
+		var tween = new TWEEN.Tween(this);
+			tween.to({ scaleX : sx, scaleY : sy}, duration || 1000).start();
+
+		return tween;
+	}
+	
+	public rotateTo(rotation:number, duration?:number) : TWEEN.Tween {
+		var tween = new TWEEN.Tween(this);
+			tween.to({ rotation : rotation}, duration || 1000).start();
+
+		return tween;
+	}
+
+	public moveTo(x:number, y:number, duration?:number) : TWEEN.Tween {
+		var tween = new TWEEN.Tween(this);
+			tween.to({ x: x, y: y}, duration || 1000).start();
+
+		return tween;
+	}
+///////////////////////////////////////////
 
 	public relayoutChildren() : Widget {
 		if(this.childrenLayouter) {
@@ -319,6 +348,7 @@ export class Widget extends Emitter {
 		this._y = y;
 		this._dirty = true;
 		this.dispatchEvent({type:Events.MOVE});
+		this.requestRedraw();
 
 		return this;
 	}
@@ -329,6 +359,7 @@ export class Widget extends Emitter {
 		this._dirty = true;
 		
 		this.dispatchEvent({type:Events.RESIZE});
+		this.requestRedraw();
 
 		return this;
 	}
@@ -399,7 +430,7 @@ export class Widget extends Emitter {
 	public draw(ctx:any) {
 		var style = this.getStyle();
 		ctx.save();
-		this.translateCavnas(ctx);
+		this.applyTransform(ctx);
 		if(style) {
 			this.drawBackground(ctx, style)
 				.drawChildren(ctx)
@@ -806,6 +837,7 @@ export class Widget extends Emitter {
 	public set app(app) {
 		this._app = app;
 		if(app) {
+			this._mainLoop = app.getMainLoop();
 			this._themeManager = app.getThemeManager();
 		}
 	}
@@ -840,6 +872,7 @@ export class Widget extends Emitter {
 			this._dirty = true;
 			this.requestRedraw();
 			this[attrName] = newValue;
+			this.requestRedraw();
 		}
 
 		return this;
@@ -893,6 +926,7 @@ export class Widget extends Emitter {
 	private _parent : Widget;
 	private _app : IApplication;
 	private _children : Array<Widget>;
+	private _mainLoop : IMainLoop;
 	private _themeManager : IThemeManager;
 	private _mode : WidgetMode;
 	private _canvas : Canvas;
@@ -944,6 +978,7 @@ export class Widget extends Emitter {
 		this._app = null;
 		this._children = [];
 		this._themeManager = null;
+		this._mainLoop = null;
 		this._mode = WidgetMode.RUNTIME;
 		this._canvas = null;
 		this._styles = null;

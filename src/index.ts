@@ -21,11 +21,16 @@ import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
 import {SimpleLayouter, SimpleLayouterParam} from "./simple-layouter";
 
+/// <reference path="../typings/globals/tween.js/index.d.ts"/>
+
+import TWEEN = require("tween.js");
+
 export {
 	assets,
 	ViewPort,
 	MainLoop,
 	Matrix,
+	TWEEN,
 	KeyEvent,
 	MatrixStack,
 	deviceInfo,

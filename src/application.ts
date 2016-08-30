@@ -1,4 +1,5 @@
 import Events = require("./events");
+import TWEEN = require("tween.js");
 import assets = require("./assets");
 import * as Services from  "./services";
 import {MainLoop} from "./main-loop";
@@ -51,6 +52,12 @@ export class Application extends Emitter implements IApplication {
 		deviceInfo.init(navigator.language, navigator.userAgent);
 		inputEventAdapter.init(document, window, deviceInfo.isPointerSupported, 
 				deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
+
+		this._mainLoop.on(Events.PREDRAW, function(evt) {
+			var detail = evt.detail;
+			var time = detail.deltaTime;
+			TWEEN.update(time);
+		});
 
 		return this;
 	}
