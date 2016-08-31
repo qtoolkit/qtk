@@ -32,7 +32,7 @@ describe('Canvas:', function() {
     	var canvas = qtk.Canvas.create(x, y, w, h, dpr, false);
     	var ctx = canvas.getContext("2d");
     	canvas.on("qtk-pointer-down", evt => {
-			var result = evt.detail.x === detail.x  && evt.detail.y === detail.y;;
+			var result = evt.x === detail.x  && evt.y === detail.y;;
 			done(result ? null : new Error("dispatch event wrong"));
 			canvas.dispose();
 		});

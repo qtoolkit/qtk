@@ -79,8 +79,7 @@ export class Application extends Emitter implements IApplication {
 				deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
 
 		this._mainLoop.on(Events.PREDRAW, function(evt) {
-			var detail = evt.detail;
-			var time = detail.deltaTime;
+			var time = evt.deltaTime;
 			TWEEN.update(time);
 		});
 

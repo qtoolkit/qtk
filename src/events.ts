@@ -1,3 +1,5 @@
+import {InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail} from "./event-detail.ts";
+
 /**
  * 常见事件名称的定义。
  */
@@ -27,15 +29,15 @@ export const LOAD = "load";
 
 export class Event {
 	private _type : string;
-	private _detail : any;
 	private _target : any;
 	private _propagationStopped : boolean;
 
-	constructor(type:string, detail:any) {
+	public init(type:string, detail?:any) : any {
 		this._type = type;
-		this._detail = detail;
 		this._target = null;
 		this._propagationStopped = false;
+
+		return this;
 	}
 
 	public get propagationStopped() {
@@ -44,14 +46,6 @@ export class Event {
 
 	public stopPropagation() {
 		this._propagationStopped = true;
-	}
-
-	public set detail(value) {
-		this._detail = value;
-	}
-
-	public get detail() {
-		return this._detail;
 	}
 
 	public set type(value) {
@@ -72,19 +66,184 @@ export class Event {
 
 	public dispose() {
 	}
+};
 
-	public static create(type:string, detail:any) {
-		return new Event(type, detail);
+export class InputEvent extends Event {
+	/**
+	 * alt键是否按下。
+	 */
+	public altKey   : boolean;
+	/**
+	 * ctrl键是否按下。
+	 */
+	public ctrlKey  : boolean;
+	/**
+	 * shift键是否按下。
+	 */
+	public shiftKey : boolean;
+	/**
+	 * command键是否按下。
+	 */
+	public commandKey : boolean;
+
+	public init(type:string, detail:InputEventDetail) : any {
+		super.init(type);
+
+		this.altKey = detail.altKey;
+		this.ctrlKey = detail.ctrlKey;
+		this.shiftKey = detail.shiftKey;
+		this.commandKey = detail.commandKey;
+
+		return this;
 	}
 };
 
-/**
- * 创建事件。
- * @param type 事件的名称。
- * @param detail 事件的详细信息。参考event-detail
- * @returns CustomEvent 
- */
-export function createEvent(type:string, detail:any) : Event{
-	return Event.create(type, detail);
+export class PointerEvent extends InputEvent {
+	/**
+	 * 指针事件的ID。
+	 */
+	public id : number;
+	/**
+	 * 指针事件的x坐标。
+	 */
+	public x : number;
+	/**
+	 * 指针事件的y坐标。
+	 */
+	public y : number;
+	/**
+	 * 指针是否按下。
+	 */
+	public pointerDown : boolean;
+	/**
+	 * 如果指针按下，按下时的x坐标。
+	 */
+	public pointerDownX : number;
+	/**
+	 * 如果指针按下，按下时的y坐标。
+	 */
+	public pointerDownY : number;
+	/**
+	 * 如果指针按下，按下时的时间。
+	 */
+	public pointerDownTime : number;
+
+	public init(type:string, detail:PointerEventDetail) : any{
+		super.init(type, detail);
+
+		this.id = detail.id;
+		this.x = detail.x;
+		this.y = detail.y;
+		this.pointerDown = detail.pointerDown;
+		this.pointerDownX = detail.pointerDownX;
+		this.pointerDownY = detail.pointerDownY;
+		this.pointerDownTime = detail.pointerDownTime;
+
+		return this;
+	}
+
+	public static create(type:string, detail:PointerEventDetail) : PointerEvent {
+		var e = new PointerEvent();
+		
+		return e.init(type, detail);
+	}
 }
+
+export class WheelEvent extends InputEvent {
+	/**
+	 * 滚动的间隔。
+	 */
+	public delta : number;
+	public init(type:string, detail:WheelEventDetail) : any {
+		super.init(type, detail);
+		this.delta = detail.delta;
+
+		return this;
+	}
+
+	public static create(detail:WheelEventDetail) : WheelEvent {
+		var e = new WheelEvent();
+
+		return e.init(WHEEL, detail);
+	}
+}
+
+export class KeyEvent extends InputEvent {
+	public keyCode : number;
+	
+	public init(type:string, detail:KeyEventDetail) : any {
+		super.init(type, detail);
+		this.keyCode = detail.keyCode;
+
+		return this;
+	}
+
+	public static create(type:string, detail:KeyEventDetail) {
+		var e = new KeyEvent();
+
+		return e.init(type, detail);
+	}
+}
+
+export class DrawEvent extends Event {
+	/**
+	 * 当前时间。
+	 */
+	public time : number;
+	/**
+	 * 间隔时间。
+	 */
+	public deltaTime : number;
+	/**
+	 * 帧率。
+	 */
+	public fps : number;
+
+	public init(type:string, detail:any) : any {
+		super.init(type);
+
+		this.fps = detail.fps;
+		this.time = detail.time;
+		this.deltaTime = detail.deltaTime;
+
+		return this;
+	}
+
+	public static create(type:string) {
+		var e = new DrawEvent();
+
+		return e.init(type, {});
+	}
+};
+
+export class ChangeEvent extends Event {
+	/**
+	 * 属性名。
+	 */
+	public attr : string;
+	/**
+	 * 属性的旧值。
+	 */
+	public oldValue : any;
+	/**
+	 * 属性的新值。
+	 */
+	public newValue : any;
+
+	public init(type:string, detail:any) : any {
+		super.init(type);
+
+		this.attr = detail.attr;
+		this.oldValue = detail.oldValue;
+		this.newValue = detail.newValue;
+
+		return this;
+	}
+
+	public static create(attr:string, oldValue:any, newValue:any) : ChangeEvent {
+		var e = new ChangeEvent();
+
+		return e.init(CHANGE, {attr:attr, oldValue:oldValue, newValue:newValue});
+	}
+};
 

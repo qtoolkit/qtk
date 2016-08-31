@@ -24,7 +24,7 @@ export class Window extends Widget {
 	public grab() : Widget {
 		if(!this._grabbed && this.canvas) {
 			this._grabbed = true;
-			inputEventAdapter.grab(this.canvas);
+			this.canvas.grab();
 		}
 
 		return this;
@@ -33,7 +33,7 @@ export class Window extends Widget {
 	public ungrab() : Widget {
 		if(this._grabbed && this.canvas) {
 			this._grabbed = false;
-			inputEventAdapter.ungrab(this.canvas);
+			this.canvas.ungrab();
 		}
 
 		return this;

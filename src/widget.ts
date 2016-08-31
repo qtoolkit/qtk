@@ -15,7 +15,6 @@ import {MatrixStack} from "./matrix-stack";
 import {IApplication} from "./iapplication";
 import {IThemeManager} from "./itheme-manager";
 import {DirtyRectContext} from "./dirty-rect-context";
-import {ChangeEventDetail, PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 /**
  * Widget是所有控件的基类。
@@ -45,8 +44,8 @@ export class Widget extends Emitter {
 		return HitTestResult.NONE;
 	}
 
-	private dispatchPointerDown(evt:any, ctx:MatrixStack) {
-		var detail = evt.detail;
+	private dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+		var detail = evt;
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -79,8 +78,8 @@ export class Widget extends Emitter {
 		return hitTestResult !== HitTestResult.NONE;
 	}
 
-	private dispatchPointerMove(evt:any, ctx:MatrixStack) {
-		var detail = evt.detail;
+	private dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+		var detail = evt;
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -129,7 +128,7 @@ export class Widget extends Emitter {
 		}
 	}
 
-	private dispatchPointerUp(evt:any) {
+	private dispatchPointerUp(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -663,9 +662,9 @@ export class Widget extends Emitter {
 			mainLoop.off(Events.DRAW, draw);
 		});
 
-		this.on(Events.CHANGE, evt => {
-			var attr = evt.detail.attr;
-			var value = evt.detail.newValue;
+		this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
+			var attr = evt.attr;
+			var value = evt.newValue;
 
 			switch(attr) {
 				case "x": {
@@ -953,7 +952,7 @@ export class Widget extends Emitter {
 
 		if(oldValue !== newValue) {
 			if(notify) {
-				var evt = Events.createEvent(Events.CHANGE, ChangeEventDetail.create(attr, oldValue, newValue));
+				var evt = Events.ChangeEvent.create(attr, oldValue, newValue);
 				this.dispatchEvent(evt);
 			}
 			this.requestRedraw();

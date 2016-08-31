@@ -1,6 +1,7 @@
 
 import {Emitter} from "./emitter";
 import Events = require("./events");
+import inputEventAdapter = require("./input-event-adapter");
 
 /**
  * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
@@ -20,7 +21,8 @@ export class Canvas extends Emitter {
 	private _offline : boolean;
 	private _devicePixelRatio : number;
 	public canvas : HTMLCanvasElement;
-	private onOtherEvent : any;
+	private onWheelEvent : any;
+	private onKeyEvent : any;
 	private onPointerEvent : any;
 
 	private transformXY(detail:any) {
@@ -42,13 +44,19 @@ export class Canvas extends Emitter {
 		var me = this;
 		this.onPointerEvent = function(evt) {
 			me.transformXY(evt.detail);
-			var e = Events.createEvent(evt.type, evt.detail);
+			var e = Events.PointerEvent.create(evt.type, evt.detail);
 			me.dispatchEvent(e);
 			e.dispose();
 		};
 
-		this.onOtherEvent = function(evt) {
-			var e = Events.createEvent(evt.type, evt.detail);
+		this.onKeyEvent = function(evt) {
+			var e = Events.KeyEvent.create(evt.type, evt.detail);
+			me.dispatchEvent(e);
+			e.dispose();
+		};
+		
+		this.onWheelEvent = function(evt) {
+			var e = Events.WheelEvent.create(evt.detail);
 			me.dispatchEvent(e);
 			e.dispose();
 		};
@@ -87,6 +95,14 @@ export class Canvas extends Emitter {
 		if(this.canvas) {
 			this.canvas.id = value;
 		}
+	}
+
+	public grab() {
+		inputEventAdapter.grab(this.canvas);
+	}
+
+	public ungrab() {
+		inputEventAdapter.ungrab(this.canvas);
 	}
 
 	private moveCanvas(canvas:HTMLCanvasElement) {
@@ -152,9 +168,9 @@ export class Canvas extends Emitter {
 		canvas.removeEventListener(Events.POINTER_MOVE, this.onPointerEvent);
 		canvas.removeEventListener(Events.POINTER_UP, this.onPointerEvent);
 		canvas.removeEventListener(Events.CLICK, this.onPointerEvent);
-		canvas.removeEventListener(Events.WHEEL, this.onOtherEvent);
-		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
-		canvas.removeEventListener(Events.KEYDOWN, this.onOtherEvent);
+		canvas.removeEventListener(Events.WHEEL, this.onWheelEvent);
+		canvas.removeEventListener(Events.KEYDOWN, this.onKeyEvent);
+		canvas.removeEventListener(Events.KEYUP, this.onKeyEvent);
 	}
 
 	public createCanvas() {
@@ -171,9 +187,9 @@ export class Canvas extends Emitter {
 		canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
 		canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
 		canvas.addEventListener(Events.CLICK, this.onPointerEvent);
-		canvas.addEventListener(Events.WHEEL, this.onOtherEvent);
-		canvas.addEventListener(Events.KEYDOWN, this.onOtherEvent);
-		canvas.addEventListener(Events.KEYDOWN, this.onOtherEvent);
+		canvas.addEventListener(Events.WHEEL, this.onWheelEvent);
+		canvas.addEventListener(Events.KEYDOWN, this.onKeyEvent);
+		canvas.addEventListener(Events.KEYUP, this.onKeyEvent);
 
 		return canvas;
 	}
@@ -190,7 +206,6 @@ export class Canvas extends Emitter {
 		}
 
 		var ctx = this.canvas.getContext("2d");
-		//ctx.clearRect(0, 0, this.w, this.h);
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
 		ctx.scale(this._devicePixelRatio, this._devicePixelRatio);
 
