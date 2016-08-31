@@ -12,7 +12,7 @@ function createDialog(app, x, y, w, h) {
 	var button = qtk.Button.create();
 	button.name = "Close";
 	button.text = "Close";
-	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
+	button.layoutParam = qtk.SimpleLayouterParam.create("center", "middle", "200", "60");
 	dialog.addChild(button);
 	button.on(qtk.Events.CLICK, function(evt) {
 		dialog.scaleTo(0, 0, 1000).onComplete(function() {

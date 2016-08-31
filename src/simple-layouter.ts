@@ -23,11 +23,8 @@ export class SimpleLayouter extends Layouter {
 	public layoutChild(child:Widget, pw:number, ph:number) {
 		var param = <SimpleLayouterParam>child.layoutParam;
 		if(param && param.name === NAME && child.visible) {
-			var x = getValueOf(param.x, pw);
-			var y = getValueOf(param.y, ph);
 			var w = getValueOf(param.w, pw);
 			var h = getValueOf(param.h, ph);
-
 			if(param.minW >= 0) {
 				w = Math.max(w, param.minW);
 			}
@@ -43,6 +40,11 @@ export class SimpleLayouter extends Layouter {
 			if(param.maxH >= 0) {
 				h = Math.min(h, param.maxH);
 			}
+
+			var f = param.x[0];
+			var x = (f === "c" || f === "m") ? (pw - w) >> 1 : getValueOf(param.x, pw);
+			f = param.y[0];
+			var y = (f === "c" || f === "m") ? (ph - h) >> 1 : getValueOf(param.y, ph);
 
 			child.move(x, y).resize(w, h);
 		}
@@ -64,6 +66,9 @@ Layouter.register(NAME, SimpleLayouter.create);
  * *.如果以px结尾，则直接取它的值。
  * *.如果以%结尾，则表示父控件的宽度/高度的百分比。
  * *.如果以-开头，则表示父控件的宽度/高度的减去该值。
+ * 
+ * x也可以为『center』，表示水平居中。
+ * y也可以为『middle』，表示垂直居中。
  * 
  * 示例：
  *

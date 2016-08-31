@@ -54,6 +54,14 @@ describe('SimpleLayouter', function() {
     	done(result ? null : new Error("button x/y/w/h wrong"));
     });
 
+    it('test center/middle', (done) => {
+		var button = qtk.Button.create();
+		button.layoutParam = qtk.SimpleLayouterParam.create("center", "middle", "200px", "300px");
+    	win.addChild(button);
+		var result = button.x === 200 && button.y === 150 && button.w === 200 && button.h === 300;
+    	done(result ? null : new Error("button x/y/w/h wrong"));
+    });
+
 
 });
   
