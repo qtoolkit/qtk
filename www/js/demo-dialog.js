@@ -7,6 +7,7 @@ function createDialog(app, x, y, w, h) {
 	//dialog.scaleY = 0;
 	//dialog.scaleTo(1, 1, 1000);
 	dialog.moveTo(100, 100, 1000);
+	dialog.opacity = 0.5;
 	dialog.childrenLayouter = qtk.SimpleLayouter.create();
 
 	var button = qtk.Button.create();

@@ -211,7 +211,7 @@ export class Widget extends Emitter {
 		}
 		var px = this._pivotX * this._w;
 		var py = this._pivotY * this._h;
-		
+
 		if(this._rotation || this._scaleX !== 1 || this._scaleY !== 1) {
 			ctx.translate(px, py);
 			ctx.rotate(this._rotation);
@@ -446,6 +446,12 @@ export class Widget extends Emitter {
 		this._dirty = false;
 		var style = this.getStyle();
 		ctx.save();
+		
+		var opacity = this._opacity;
+		if(opacity !== 1) {
+			ctx.globalAlpha *= opacity;
+		}
+
 		this.applyTransform(ctx);
 		if(style) {
 			this.drawBackground(ctx, style)
@@ -615,7 +621,7 @@ export class Widget extends Emitter {
 		var debugDirtyRect = app.options.debugDirtyRect;
 		function drawWithDirtyRect(evt) {
 			var ctx = canvas.getContext("2d");
-			
+		
 			dirtyRectContext.reset();
 			this.computeDirtyRect(dirtyRectContext);
 			var dirtyRect = dirtyRectContext.getRect();
@@ -628,6 +634,7 @@ export class Widget extends Emitter {
 				ctx.rect(r.x, r.y, r.w, r.h);
 				ctx.clip();
 				
+				ctx.globalAlpha = 1;
 				this.draw(ctx);
 			
 				if(debugDirtyRect) {
@@ -643,6 +650,7 @@ export class Widget extends Emitter {
 
 		function drawWithoutDirtyRect(evt) {
 			var ctx = canvas.getContext("2d");
+			ctx.globalAlpha = 1;
 			this.draw(ctx);
 		}
 
