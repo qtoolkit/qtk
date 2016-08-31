@@ -9,6 +9,7 @@ function createDialog(app, x, y, w, h) {
 	dialog.moveTo(100, 100, 1000);
 	dialog.opacity = 0.5;
 	dialog.childrenLayouter = qtk.SimpleLayouter.create();
+	dialog.grab();
 
 	var button = qtk.Button.create();
 	button.name = "Close";

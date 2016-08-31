@@ -37,6 +37,11 @@ function getPointerDetail(e) : PointerEventDetail {
 }
 
 function dispatchPointerEvent(type, target, detail) {
+	if(target) {
+		detail.x -= target.offsetLeft || 0;
+		detail.y -= target.offsetTop || 0;
+	}
+
 	if(type === Events.POINTER_DOWN) {
 		pointerDown = true;
 		pointerDownX = detail.x;

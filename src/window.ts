@@ -9,12 +9,21 @@ export enum WindowType {
 };
 
 export class Window extends Widget {
+	private _grabbed : boolean;
+	private _shouldGrabWhenVisible : boolean;
+
 	constructor(type:string) {
 		super(type);
+		this._grabbed = false;
 	}
-	
+
+	public get grabbed() : boolean {
+		return this._grabbed;
+	}
+
 	public grab() : Widget {
-		if(this.canvas) {
+		if(!this._grabbed && this.canvas) {
+			this._grabbed = true;
 			inputEventAdapter.grab(this.canvas);
 		}
 
@@ -22,13 +31,28 @@ export class Window extends Widget {
 	}
 
 	public ungrab() : Widget {
-		if(this.canvas) {
+		if(this._grabbed && this.canvas) {
+			this._grabbed = false;
 			inputEventAdapter.ungrab(this.canvas);
 		}
 
 		return this;
 	}
 	
+	public setVisible(value) {
+		super.setVisible(value);
+		if(!value) {
+			if(this._grabbed) {
+				this.ungrab();
+				this._shouldGrabWhenVisible = true;
+			}
+		}else{
+			if(this._shouldGrabWhenVisible) {
+				this.grab();
+			}
+		}
+	}
+
 	public open() : Widget {
 		this.dispatchEvent({type:Events.OPEN});
 
@@ -38,6 +62,11 @@ export class Window extends Widget {
 	public close () {
 		this.dispatchEvent({type:Events.CLOSE});
 		this.dispose();
+	}
+
+	public dispose() {
+		this.ungrab();
+		super.dispose();
 	}
 
 	public init(app:IApplication, x?:number, y?:number, w?:number, h?:number, createCanvas?:boolean) : Widget {

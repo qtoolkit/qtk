@@ -24,8 +24,8 @@ export class Canvas extends Emitter {
 	private onPointerEvent : any;
 
 	private transformXY(detail:any) {
-		detail.x -= this.x;
-		detail.y -= this.y;
+	//	detail.x -= this.x;
+	//	detail.y -= this.y;
 	}
 
 	constructor(x?:number, y?:number, w?:number, h?:number,devicePixelRatio?:number, offline?:boolean) {

@@ -35,10 +35,11 @@ export class Widget extends Emitter {
 	 */
 	private hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
 		var m = ctx.invert();
-		var p = m.transformPoint(x, y);
-
-		if(p.x >= 0 && p.x < this.w && p.y >= 0 && p.y <= this.h) {
-			return HitTestResult.MM;
+		if(m || true) {
+			var p = m.transformPoint(x, y);
+			if(p.x >= 0 && p.x < this.w && p.y >= 0 && p.y <= this.h) {
+				return HitTestResult.MM;
+			}
 		}
 
 		return HitTestResult.NONE;
@@ -770,12 +771,17 @@ export class Widget extends Emitter {
 	public get visible() {
 		return this._visible;
 	}
+
+	public setVisible(value) {
+		this.setAttr("visible", value, true);
+		this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
+		this.requestRedraw();
+	}
+
 	public set visible(value) {
 		var oldValue = this._visible;
 		if(this.value !== oldValue) {
-			this.setAttr("visible", value, true);
-			this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
-			this.requestRedraw();
+			this.setVisible(value);
 		}
 	}
 
