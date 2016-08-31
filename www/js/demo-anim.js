@@ -10,7 +10,7 @@ function onReady(app) {
 	button.name = "button1";
 	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "10px", "50%", "60px");
 	win.addChild(button);
-	button.on(qtk.Events.CLICK, evt => {
+	button.on(qtk.Events.CLICK, function(evt){
 		console.log("click:" + button.name);
 		image.moveTo(0, 0, 1000).onComplete(function() {
 			console.log("done");			
@@ -32,14 +32,14 @@ function onReady(app) {
 	image.drawType = qtk.ImageDrawType.DEFAULT; 
 	win.addChild(image);
 	
-	button.on(qtk.Events.POINTER_DOWN, evt => {
+	button.on(qtk.Events.POINTER_DOWN, function(evt){
 		console.log("pointer down:" + button.name);
 	});
-	button.on(qtk.Events.POINTER_UP, evt => {
+	button.on(qtk.Events.POINTER_UP, function(evt) {
 		console.log("pointer up:" + button.name);
 	});
 	
-	button.on(qtk.Events.CLICK, evt => {
+	button.on(qtk.Events.CLICK, function(evt) {
 		evt.stopPropagation();
 		console.log("click:" + button.name);
 		image.moveTo(400, 400, 1000).onComplete(function() {
@@ -47,10 +47,10 @@ function onReady(app) {
 		}).easing(TWEEN.Easing.Quadratic.Out);;
 	});
 
-	win.on(qtk.Events.POINTER_UP, evt => {
+	win.on(qtk.Events.POINTER_UP, function(evt) {
 		console.log("pointer up:" + win.name);
 	});
-	win.on(qtk.Events.POINTER_UP, evt => {
+	win.on(qtk.Events.POINTER_UP, function(evt) {
 		console.log("pointer up capture:" + win.name);
 	}, true);
 
@@ -63,6 +63,6 @@ function onReady(app) {
 	//});
 	//image.pivotX = 0.5;
 	//image.pivotY = 0.5;
-	image.rotateTo(Math.PI, 2000).repeat(50).yoyo(true).easing(TWEEN.Easing.Quadratic.In);
+	image.rotateTo(Math.PI, 2000).repeat(2).yoyo(true).easing(TWEEN.Easing.Quadratic.In);
 }
 

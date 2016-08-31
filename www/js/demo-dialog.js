@@ -3,9 +3,10 @@ function createDialog(app, x, y, w, h) {
 	var dialog = qtk.Dialog.create();
 	dialog.init(app, x, y, w, h, true);
 	dialog.z = 200;
-	dialog.scaleX = 0;
-	dialog.scaleY = 0;
-	dialog.scaleTo(1, 1, 1000);
+	//dialog.scaleX = 0;
+	//dialog.scaleY = 0;
+	//dialog.scaleTo(1, 1, 1000);
+	dialog.moveTo(100, 100, 1000);
 	dialog.childrenLayouter = qtk.SimpleLayouter.create();
 
 	var button = qtk.Button.create();
@@ -13,7 +14,7 @@ function createDialog(app, x, y, w, h) {
 	button.text = "Close";
 	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
 	dialog.addChild(button);
-	button.on(qtk.Events.CLICK, evt => {
+	button.on(qtk.Events.CLICK, function(evt) {
 		dialog.scaleTo(0, 0, 1000).onComplete(function() {
 			dialog.close();
 		});
@@ -33,7 +34,7 @@ function onReady(app) {
 	button.name = "button1";
 	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "10px", "50%", "60px");
 	win.addChild(button);
-	button.on(qtk.Events.CLICK, evt => {
+	button.on(qtk.Events.CLICK, function(evt) {
 		createDialog(app, 10, 10, 300, 300);
 	});
 	
