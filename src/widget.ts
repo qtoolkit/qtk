@@ -267,6 +267,7 @@ export class Widget extends Emitter {
 
 		return tween;
 	}
+	
 ///////////////////////////////////////////
 
 	public relayoutChildren() : Widget {
@@ -348,7 +349,6 @@ export class Widget extends Emitter {
 	public move(x:number, y:number) : Widget {
 		this._x = x;
 		this._y = y;
-		this._dirty = true;
 		this.dispatchEvent({type:Events.MOVE});
 		this.requestRedraw();
 
@@ -358,7 +358,6 @@ export class Widget extends Emitter {
 	public resize(w:number, h:number) : Widget {
 		this._w = w;
 		this._h = h;
-		this._dirty = true;
 		
 		this.dispatchEvent({type:Events.RESIZE});
 		this.requestRedraw();
@@ -537,6 +536,10 @@ export class Widget extends Emitter {
 			this._canvas.dispose();
 			this._canvas = null;
 		}
+		this.removeAllListeners();
+		this._children.forEach(function(child) {
+			child.dispose();
+		});
 		this._parent = null;
 		this._children = [];
 	}
@@ -562,12 +565,12 @@ export class Widget extends Emitter {
 	}
 
 //////////////////////////////////////////////////
-	public initCanvas() : Widget {
-		var density = this.app.getViewPort().density;
+	public createCanvas() : Widget {
+		var app = this.app;
+		var density = app.getViewPort().density;
 		var canvas = Canvas.create(this.x, this.y, this.w, this.h, density);
+		
 		var matrixStack = MatrixStack.create();
-		var dirtyRectContext = DirtyRectContext.create();
-
 		canvas.ensureCanvas();
 		canvas.on(Events.POINTER_DOWN, evt => {
 			matrixStack.identity();
@@ -600,33 +603,50 @@ export class Widget extends Emitter {
 		});
 
 		this._canvas = canvas;
-	
+		
+		var widget = this;
 		var mainLoop = this.app.getMainLoop();
-		mainLoop.on(Events.DRAW, evt => {
+		var dirtyRectContext = DirtyRectContext.create();
+		var lastDirtyRect = Rect.create(0, 0, this.w, this.h);
+
+		var debugDirtyRect = app.options.debugDirtyRect;
+		function drawWithDirtyRect(evt) {
 			var ctx = canvas.getContext("2d");
 			
 			dirtyRectContext.reset();
-			this.computeDirtyRect(dirtyRectContext);
-			var r = dirtyRectContext.getRect();
+			widget.computeDirtyRect(dirtyRectContext);
+			var dirtyRect = dirtyRectContext.getRect();
+			var r = lastDirtyRect.merge(dirtyRect);
 
-			ctx.save();
 			if(r.w > 0 && r.h > 0) {
+				ctx.save();
 				ctx.beginPath();
 				ctx.rect(r.x, r.y, r.w, r.h);
 				ctx.clip();
-				ctx.clearRect(r.x, r.y, r.w, r.h);
-			}
+				
+				widget.draw(ctx);
+			
+				if(debugDirtyRect) {
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = "gold";
+					ctx.strokeRect(dirtyRect.x+1, dirtyRect.y+1, dirtyRect.w-2, dirtyRect.h-2);
+				}
 
-			this.draw(ctx);
-			if(r.w > 0 && r.h > 0) {
-				ctx.strokeStyle = "gold";
-				ctx.lineWidth = 5;
-				ctx.beginPath();
-				ctx.rect(r.x, r.y, r.w, r.h);
-				ctx.stroke();
+				ctx.restore();
 			}
-			ctx.restore();
-		});
+			lastDirtyRect.copy(dirtyRect);
+		}
+
+		function drawWithoutDirtyRect(evt) {
+			var ctx = canvas.getContext("2d");
+			widget.draw(ctx);
+		}
+
+		if(app.options.withoutDirtyRect) {
+			mainLoop.on(Events.DRAW, drawWithoutDirtyRect);
+		}else{
+			mainLoop.on(Events.DRAW, drawWithDirtyRect);
+		}
 
 		this.on(Events.CHANGE, evt => {
 			var attr = evt.detail.attr;
@@ -735,7 +755,12 @@ export class Widget extends Emitter {
 		return this._visible;
 	}
 	public set visible(value) {
-		this.setAttr("visible", value, true);
+		var oldValue = this._visible;
+		if(this.value !== oldValue) {
+			this.setAttr("visible", value, true);
+			this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
+			this.requestRedraw();
+		}
 	}
 
 	public get opacity() {
@@ -892,6 +917,10 @@ export class Widget extends Emitter {
 		return this._children;
 	}
 
+	public get canvas() : Canvas {
+		return this._canvas;
+	}
+
 	public isWindow() : boolean {
 		return this._isWindow;
 	}
@@ -905,7 +934,6 @@ export class Widget extends Emitter {
 				var evt = Events.createEvent(Events.CHANGE, ChangeEventDetail.create(attr, oldValue, newValue));
 				this.dispatchEvent(evt);
 			}
-			this._dirty = true;
 			this.requestRedraw();
 			this[attrName] = newValue;
 			this.requestRedraw();
@@ -920,14 +948,6 @@ export class Widget extends Emitter {
 
 	public setValue(value:number, notify:boolean) : Widget {
 		return this.setAttr("value", value, notify);
-	}
-
-	public init(options?:any) : Widget {
-		if(options && options.hasOwnCanvas) {
-			this.initCanvas();
-		}
-
-		return this;
 	}
 
 	private _x : number;
