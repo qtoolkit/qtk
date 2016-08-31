@@ -1,4 +1,9 @@
 {
+	"dialog": {
+		"normal" : {
+			"backGroundColor" : "#606060"
+		}
+	},
 	"window-normal": {
 		"normal" : {
 			"backGroundColor" : "gray"

@@ -30,5 +30,10 @@ export interface IApplication {
 	 * 获取MainLoop。
 	 */
 	getMainLoop() : IMainLoop;
+
+	/**
+	 * 获取App的参数。
+	 */
+	options : any;
 }
 

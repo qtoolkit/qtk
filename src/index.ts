@@ -1,8 +1,11 @@
+import {Point} from "./point";
+import {Rect} from "./rect";
 import assets = require("./assets");
 import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
 import {Widget, WidgetState, WidgetMode, HitTestResult} from "./widget";
 import {WindowNormal} from "./window-normal";
+import {Dialog} from "./dialog";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Button} from "./button";
@@ -27,6 +30,8 @@ import TWEEN = require("tween.js");
 
 export {
 	assets,
+	Point,
+	Rect,
 	ViewPort,
 	MainLoop,
 	Matrix,
@@ -47,6 +52,7 @@ export {
 	HitTestResult,
 	Button,
 	Image,
+	Dialog,
 	WindowNormal,
 	Services,
 	WidgetFactory,

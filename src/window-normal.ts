@@ -10,24 +10,16 @@ export class WindowNormal extends Window {
 		super(WindowNormal.TYPE);
 	}
 
-	static createEx(app:IApplication, options:any) {
-		var win = new WindowNormal();
-		win.app = app;
-	
-		return win.init(options);
-	}
-	
 	public dispose() {
 		super.dispose();
 		WindowNormal.recyclbale.recycle(this);
 	}
 
 	public static TYPE = "window-normal";
+	private static recyclbale = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
 	public static create() : Widget {
 		return WindowNormal.recyclbale.create().reset(WindowNormal.TYPE);
 	}
-
-	private static recyclbale = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
 };
 
 WidgetFactory.register(WindowNormal.TYPE, WindowNormal.create);

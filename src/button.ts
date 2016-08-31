@@ -14,11 +14,10 @@ export class Button extends Widget {
 	}
 
 	public static TYPE = "button";
+	private static recyclbale = new RecyclableCreator<Button>(function() {return new Button()});
 	public static create() : Widget {
 		return Button.recyclbale.create().reset(Button.TYPE);
 	}
-
-	private static recyclbale = new RecyclableCreator<Button>(function() {return new Button()});
 };
 
 WidgetFactory.register(Button.TYPE, Button.create);

@@ -19,6 +19,7 @@ import inputEventAdapter = require("./input-event-adapter");
  */
 export class Application extends Emitter implements IApplication {
 	public name : string;
+	private _options : any;
 	private _viewPort : IViewPort; 
 	private _mainLoop : MainLoop;
 	private servicesManager : Services.Manager;
@@ -26,6 +27,7 @@ export class Application extends Emitter implements IApplication {
 	constructor(name:string) {
 		super();
 		this.name = name;
+		this._options = {};
 		this.servicesManager = new Services.Manager();
 	}
 
@@ -37,8 +39,31 @@ export class Application extends Emitter implements IApplication {
 		return this._mainLoop;
 	}
 
-	public init(args) {
-		var themeDataURL = args.themeDataURL;
+	public get options() : any {
+		return this._options;
+	}
+
+	public set options(options){
+	}
+	
+	private initOptions(args:any) {
+		var options = this._options;
+
+		for(var key in args) {
+			options[key] = args[key];
+		}
+
+		var str = window.location.search.substr(1);
+		var arr = str.split('&');
+		arr.forEach(function(iter) {
+			var keyValue = iter.split("=");
+			options[keyValue[0]] = keyValue[1];
+		});
+	}
+
+	public init(args:any) {
+		this.initOptions(args);
+		var themeDataURL = this._options.themeDataURL;
 		var themeManager = new ThemeManager();
 
 		assets.loadJSON(themeDataURL).then(json => {

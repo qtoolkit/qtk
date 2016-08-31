@@ -54,10 +54,10 @@ export class Image extends Widget {
 	}
 
 	public static TYPE = "image";
+	private static recyclbale = new RecyclableCreator<Image>(function() {return new Image()});
 	public static create() : Widget {
 		return Image.recyclbale.create().reset(Image.TYPE);
 	}
-	private static recyclbale = new RecyclableCreator<Image>(function() {return new Image()});
 };
 
 WidgetFactory.register(Image.TYPE, Image.create);
