@@ -206,7 +206,9 @@ export class Widget extends Emitter {
 	}
 	
 	private applyTransform(ctx:MatrixStack) : Widget {
-		ctx.translate(this._x, this._y);
+		if(!this._canvas) {
+			ctx.translate(this._x, this._y);
+		}
 		var px = this._pivotX * this._w;
 		var py = this._pivotY * this._h;
 		
@@ -532,6 +534,8 @@ export class Widget extends Emitter {
 	}
 
 	public dispose(){
+		this.dispatchEvent({type:Events.DISPOSE});
+
 		if(this._canvas) {
 			this._canvas.dispose();
 			this._canvas = null;
@@ -604,7 +608,6 @@ export class Widget extends Emitter {
 
 		this._canvas = canvas;
 		
-		var widget = this;
 		var mainLoop = this.app.getMainLoop();
 		var dirtyRectContext = DirtyRectContext.create();
 		var lastDirtyRect = Rect.create(0, 0, this.w, this.h);
@@ -614,17 +617,18 @@ export class Widget extends Emitter {
 			var ctx = canvas.getContext("2d");
 			
 			dirtyRectContext.reset();
-			widget.computeDirtyRect(dirtyRectContext);
+			this.computeDirtyRect(dirtyRectContext);
 			var dirtyRect = dirtyRectContext.getRect();
 			var r = lastDirtyRect.merge(dirtyRect);
 
 			if(r.w > 0 && r.h > 0) {
 				ctx.save();
 				ctx.beginPath();
+				ctx.clearRect(r.x, r.y, r.w, r.h);
 				ctx.rect(r.x, r.y, r.w, r.h);
 				ctx.clip();
 				
-				widget.draw(ctx);
+				this.draw(ctx);
 			
 				if(debugDirtyRect) {
 					ctx.lineWidth = 1;
@@ -639,14 +643,16 @@ export class Widget extends Emitter {
 
 		function drawWithoutDirtyRect(evt) {
 			var ctx = canvas.getContext("2d");
-			widget.draw(ctx);
+			this.draw(ctx);
 		}
 
-		if(app.options.withoutDirtyRect) {
-			mainLoop.on(Events.DRAW, drawWithoutDirtyRect);
-		}else{
-			mainLoop.on(Events.DRAW, drawWithDirtyRect);
-		}
+		var withoutDirtyRect = app.options.withoutDirtyRect;
+		var draw = withoutDirtyRect ? drawWithoutDirtyRect.bind(this) : drawWithDirtyRect.bind(this);
+		
+		mainLoop.on(Events.DRAW, draw);
+		this.on(Events.DISPOSE, evt => {
+			mainLoop.off(Events.DRAW, draw);
+		});
 
 		this.on(Events.CHANGE, evt => {
 			var attr = evt.detail.attr;
@@ -727,7 +733,9 @@ export class Widget extends Emitter {
 		return this._state;
 	}
 	public set state(value) {
-		this.setAttr("state", value, true);
+		if(this._state !== value) {
+			this.setAttr("state", value, true);
+		}
 	}
 
 	public get value() {

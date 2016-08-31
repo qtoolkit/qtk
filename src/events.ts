@@ -12,6 +12,7 @@ export const POINTER_OUT  = "qtk-pointer-out";
 export const POINTER_OVER = "qtk-pointer-over";
 export const CLICK = "qtk-click";
 export const CHANGE = "change"
+export const DISPOSE = "dispose"
 export const SHOW = "show"
 export const HIDE = "hide"
 export const MOVE = "move";
