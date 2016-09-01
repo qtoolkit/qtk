@@ -7,6 +7,7 @@ import {Style} from "./style";
 import {Canvas} from "./canvas";
 import {Point} from "./point";
 import {Rect} from "./rect";
+import {Behavior, BehaviorFactory} from "./behaviors/behavior";
 import {Layouter} from './layouter';
 import {Emitter} from "./emitter";
 import {Graphics} from "./graphics";
@@ -25,6 +26,30 @@ export class Widget extends Emitter {
 		this.reset(type);
 	}
 
+	public toLocalPoint(p:Point) : Point {
+		var iter:Widget = this;
+		while(iter) {
+			p.x -= iter.x;
+			p.y -= iter.y;
+
+			iter = iter.parent;
+		}
+
+		return p;
+	}
+
+	public toGlobalPoint(p:Point) : Point {
+		var iter:Widget = this;
+		while(iter) {
+			p.x += iter.x;
+			p.y += iter.y;
+
+			iter = iter.parent;
+		}
+
+		return p;
+	}
+
 	/**
 	 * 测试点是否落在当前控件中。
 	 * @param x X坐标，相对于全局原点的坐标。
@@ -36,7 +61,7 @@ export class Widget extends Emitter {
 		var m = ctx.invert();
 		if(m || true) {
 			var p = m.transformPoint(x, y);
-			if(p.x >= 0 && p.x < this.w && p.y >= 0 && p.y <= this.h) {
+			if(p.x >= 0 && p.x <= this.w && p.y >= 0 && p.y <= this.h) {
 				return HitTestResult.MM;
 			}
 		}
@@ -78,54 +103,71 @@ export class Widget extends Emitter {
 		return hitTestResult !== HitTestResult.NONE;
 	}
 
-	private dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
-		var detail = evt;
-		if(!this._enable || !this._sensitive) {
-			return;
+	private dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
+		this.dispatchEvent(evt, true);
+		if(this.target) {
+			this.target.dispatchPointerMove(evt, ctx);
 		}
+		if(this.onpointermove) {
+			this.onpointermove(evt);
+		}
+		this.dispatchEvent(evt, false);
+	}
+
+	private dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
+		ctx.save();
+		this.applyTransform(ctx);
 		
-		if(detail.pointerDown) {
+		var detail = evt;
+		var hitTestResult = this.hitTest(detail.x, detail.y, ctx);
+	
+		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
-			if(this.target) {
-				this.target.dispatchPointerMove(evt, ctx);
+			var _lastOverWidget = this._lastOverWidget;
+			var overWidget  = this.findEventTargetChild(detail.x, detail.y, ctx);
+			if(_lastOverWidget !== overWidget) {
+				if(_lastOverWidget) {
+					_lastOverWidget.dispatchPointerMove(evt, ctx);
+				}
+
+				this._lastOverWidget = overWidget;
 			}
+			if(overWidget) {
+				overWidget.dispatchPointerMove(evt, ctx);
+			}
+
 			if(this.onpointermove) {
 				this.onpointermove(evt);
 			}
 			this.dispatchEvent(evt, false);
-		}else{
-			ctx.save();
-			this.applyTransform(ctx);
-			var hitTestResult = this.hitTest(detail.x, detail.y, ctx);
-		
-			if(hitTestResult) {
-				this.dispatchEvent(evt, true);
-				var _lastOverWidget = this._lastOverWidget;
-				var overWidget  = this.findEventTargetChild(detail.x, detail.y, ctx);
-				if(_lastOverWidget !== overWidget) {
-					if(_lastOverWidget) {
-						_lastOverWidget.dispatchPointerMove(evt, ctx);
-					}
 
-					if(overWidget) {
-						overWidget.dispatchPointerMove(evt, ctx);
-					}
-					this._lastOverWidget = overWidget;
-				}
-				if(this.onpointermove) {
-					this.onpointermove(evt);
-				}
-				this.dispatchEvent(evt, false);
-				this.state = WidgetState.OVER;
+			if(evt.pointerDown) {
+				this.state = WidgetState.ACTIVE;
 			}else{
-				this.state = WidgetState.NORMAL;
-				if(this.onpointermove) {
-					this.onpointermove(evt);
-				}
+				this.state = WidgetState.OVER;
 			}
-
-			ctx.restore();
+		}else{
+			this.dispatchEvent(evt, true);
+			if(this.onpointermove) {
+				this.onpointermove(evt);
+			}
+			this.dispatchEvent(evt, false);
+			this.state = WidgetState.NORMAL;
 		}
+
+		ctx.restore();
+	}
+
+	private dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+		if(!this._enable || !this._sensitive) {
+			return;
+		}
+		
+		if(evt.pointerDown) {
+			this.dispatchPointerMoveToTarget(evt, ctx);
+		}
+		
+		this.dispatchPointerMoveToUnder(evt, ctx);
 	}
 
 	private dispatchPointerUp(evt:Events.PointerEvent) {
@@ -140,8 +182,12 @@ export class Widget extends Emitter {
 		if(this.onpointerup) {
 			this.onpointerup(evt);
 		}
-		this.dispatchEvent(evt, false);
 
+		if(this._lastOverWidget && this.target !== this._lastOverWidget) {
+			this._lastOverWidget.dispatchPointerUp(evt);
+		}
+
+		this.dispatchEvent(evt, false);
 		this.state = WidgetState.NORMAL;
 	}
 	
@@ -250,24 +296,57 @@ export class Widget extends Emitter {
 	}
 
 	public scaleTo(sx:number, sy:number, duration?:number) : TWEEN.Tween {
-		var tween = new TWEEN.Tween(this);
-			tween.to({ scaleX : sx, scaleY : sy}, duration || 1000).start();
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({ scaleX : sx, scaleY : sy}, duration || 1000).start();
+			return tween;
+		}else{
+			this.scaleX = sx;
+			this.scaleY = sy;
 
-		return tween;
+			return null;
+		}
 	}
 	
 	public rotateTo(rotation:number, duration?:number) : TWEEN.Tween {
-		var tween = new TWEEN.Tween(this);
-			tween.to({ rotation : rotation}, duration || 1000).start();
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({ rotation : rotation}, duration || 1000).start();
 
-		return tween;
+			return tween;
+		}else{
+			this.rotation = rotation;
+
+			return null;
+		}
 	}
 
 	public moveTo(x:number, y:number, duration?:number) : TWEEN.Tween {
-		var tween = new TWEEN.Tween(this);
-			tween.to({ x: x, y: y}, duration || 1000).start();
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({ x: x, y: y}, duration || 1000).start();
 
-		return tween;
+			return tween;
+		}else{
+			this.x = x;
+			this.y = y;
+			return null;
+		}
+	}
+	
+	public moveResizeTo(x:number, y:number, w:number, h:number, duration?:number) : TWEEN.Tween {
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({ x: x, y: y, w:w, h:h}, duration || 1000).start();
+
+			return tween;
+		}else{
+			this.x = x;
+			this.x = x;
+			this.w = w;
+			this.h = h;
+			return null;
+		}
 	}
 	
 ///////////////////////////////////////////
@@ -428,7 +507,7 @@ export class Widget extends Emitter {
 
 	public computeDirtyRectSelf(ctx:DirtyRectContext) {
 		if(this._dirty) {
-			ctx.addRect(0, 0, this.w, this.h);
+			ctx.addRect(-5, -5, this.w+10, this.h+10);
 		}
 	}
 
@@ -453,6 +532,9 @@ export class Widget extends Emitter {
 		}
 
 		this.applyTransform(ctx);
+		var drawEvent = Events.DrawEvent.get();
+
+		this.dispatchEvent(drawEvent.reset(Events.BEFORE_DRAW, ctx, this));
 		if(style) {
 			this.drawBackground(ctx, style)
 				.drawChildren(ctx)
@@ -461,6 +543,7 @@ export class Widget extends Emitter {
 		}else{
 			this.drawChildren(ctx);
 		}
+		this.dispatchEvent(drawEvent.reset(Events.AFTER_DRAW, ctx, this));
 
 		ctx.restore();
 
@@ -657,9 +740,9 @@ export class Widget extends Emitter {
 		var withoutDirtyRect = app.options.withoutDirtyRect;
 		var draw = withoutDirtyRect ? drawWithoutDirtyRect.bind(this) : drawWithDirtyRect.bind(this);
 		
-		mainLoop.on(Events.DRAW, draw);
+		mainLoop.on(Events.TICK, draw);
 		this.on(Events.DISPOSE, evt => {
-			mainLoop.off(Events.DRAW, draw);
+			mainLoop.off(Events.TICK, draw);
 		});
 
 		this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
@@ -892,6 +975,20 @@ export class Widget extends Emitter {
 		this._userData = value;
 	}
 
+	public get draggable() {
+		return this._draggable;
+	}
+	public set draggable(value) {
+		this._draggable = value;
+	}
+
+	public get droppable() {
+		return this._droppable;
+	}
+	public set droppable(value) {
+		this._droppable = value;
+	}
+
 	public get target() {
 		return this._target;
 	}
@@ -971,6 +1068,15 @@ export class Widget extends Emitter {
 		return this.setAttr("value", value, notify);
 	}
 
+	public useBehavior(type:string, options:any) : Behavior {
+		if(!this._behaviors[type]) {
+			var behavior = BehaviorFactory.create(type, this, options);
+			this._behaviors[type] = behavior;
+		}
+
+		return this._behaviors[type];
+	}
+
 	private _x : number;
 	private _y : number;
 	private _z : number;
@@ -996,6 +1102,8 @@ export class Widget extends Emitter {
 	private _id : string;
 	private _tag : string;
 	private _type : string;
+	private _draggable : boolean;
+	private _droppable : boolean;
 	private _userData : any;
 	private _target : Widget;
 	private _hitTestResult : HitTestResult;
@@ -1010,6 +1118,7 @@ export class Widget extends Emitter {
 	private _styles : any;
 	private _styleType : string;
 	private _lastOverWidget : Widget;
+	private _behaviors : any;
 	public onclick : Function;
 	public onpointerdown : Function;
 	public onpointermove : Function;
@@ -1060,6 +1169,8 @@ export class Widget extends Emitter {
 		this._canvas = null;
 		this._styles = null;
 		this._styleType = null;
+		this.draggable = false;
+		this.droppable = false;
 		this._lastOverWidget = null;
 		this.onclick = null;
 		this.onpointerdown = null;
@@ -1068,7 +1179,8 @@ export class Widget extends Emitter {
 		this.onwheel = null;
 		this.onkeydown = null;
 		this.onkeyup = null;
-		
+		this._behaviors = {};
+
 		return this;
 	}
 
@@ -1097,7 +1209,8 @@ export class Widget extends Emitter {
 		this._type = json.type;
 		this._mode = json.mode;
 		this.value = json.value;
-		
+		this.draggable = json.draggable;
+		this.droppable = json.droppable;
 		var styles = json.styles;
 		if(styles) {
 			this._styles = {};
@@ -1138,6 +1251,8 @@ export class Widget extends Emitter {
 		json.tag = this._tag;
 		json.type = this._type;
 		json.mode = this._mode;
+		json.draggable = this._draggable;
+		json.droppable = this._droppable;
 
 		json.value = this.value;
 

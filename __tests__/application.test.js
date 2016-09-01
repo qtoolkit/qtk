@@ -18,7 +18,7 @@ describe('Application', function() {
 		var app = new qtk.Application.create("test");
 		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 		app.mainLoop.requestRedraw();
-		app.mainLoop.on(qtk.Events.PREDRAW, function predraw(evt) {
+		app.mainLoop.on(qtk.Events.PRETICK, function pretick(evt) {
 			done();
 		});
     });

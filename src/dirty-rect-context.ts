@@ -17,7 +17,7 @@ export class DirtyRectContext extends MatrixStack {
 	}
 
 	public addRect(x:number, y:number, w:number, h:number) {
-		var p = Point.p;
+		var p = Point.point;
 		this.addPoint(this.transformPoint(x, y, p));
 		this.addPoint(this.transformPoint(x+w, y, p));
 		this.addPoint(this.transformPoint(x+w, y+h, p));

@@ -1,5 +1,6 @@
 import Events = require("./events");
 import {KeyEvent} from "./key-event";
+import {Emitter} from "./emitter";
 import {PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 var grabs = [];
@@ -13,6 +14,7 @@ var pointerDown = false;
 var pointerDownX = 0;
 var pointerDownY = 0;
 var pointerDownTime = 0;
+var globalInputEmitter = new Emitter();
 
 function dispatchEvent(target:any, type:string, detail:any) {
 	var realTarget = target;
@@ -22,6 +24,7 @@ function dispatchEvent(target:any, type:string, detail:any) {
 
 	var event = new CustomEvent(type, {detail:detail});
 
+	globalInputEmitter.dispatchEvent(event);
 	realTarget.dispatchEvent(event);
 }
 
@@ -259,5 +262,19 @@ export function grab(target:any) {
  */
 export function ungrab(target?:any) {
 	return grabs.pop();
+}
+
+/**
+ * 注册全局的Input事件。
+ */
+export function on(type:string, callback:Function) {
+	globalInputEmitter.on(type, callback);
+}
+
+/**
+ * 注销全局的Input事件。
+ */
+export function off(type:string, callback:Function) {
+	globalInputEmitter.off(type, callback);
 }
 

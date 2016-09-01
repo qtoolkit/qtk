@@ -22,10 +22,21 @@ export const OPEN = "open"
 export const CLOSE = "close"
 export const RESIZE = "resize";
 export const READY = "ready";
-export const DRAW = "draw";
-export const PREDRAW = "predraw";
-export const POSTDRAW = "postdraw";
+export const TICK = "tick";
+export const PRETICK = "pretick";
+export const POSTTICK = "posttick";
 export const LOAD = "load";
+export const BEFORE_DRAW = "before-draw";
+export const AFTER_DRAW = "after-draw";
+
+export const DRAG = "drag";
+export const DROP = "drop";
+export const DRAGEND   = "dragend";
+export const DRAGENTER = "dragenter";
+export const DRAGEXIT  = "dragexit";
+export const DRAGLEAVE = "dragleave";
+export const DRAGOVER  = "dragover";
+export const DRAGSTART = "dragstart";
 
 export class Event {
 	private _type : string;
@@ -185,7 +196,7 @@ export class KeyEvent extends InputEvent {
 	}
 }
 
-export class DrawEvent extends Event {
+export class TickEvent extends Event {
 	/**
 	 * 当前时间。
 	 */
@@ -210,7 +221,7 @@ export class DrawEvent extends Event {
 	}
 
 	public static create(type:string) {
-		var e = new DrawEvent();
+		var e = new TickEvent();
 
 		return e.init(type, {});
 	}
@@ -245,5 +256,78 @@ export class ChangeEvent extends Event {
 
 		return e.init(CHANGE, {attr:attr, oldValue:oldValue, newValue:newValue});
 	}
+};
+
+export class DataTransfer {
+	private data : any;
+	public dragImage : any;
+	public dropEffect : string;
+
+	constructor() {
+		this.data = {};
+		this.dragImage = null;
+		this.dropEffect = "move";
+	}
+
+	public clearData(format?:string) {
+		if(format) {
+			delete this.data[format];
+		}else{
+			this.data = {};
+		}
+	}
+
+	public getData(format:string) : string {
+		return this.data[format];
+	}
+	
+	public setData(format:string, data:any) {
+		this.data[format] = data;
+	}
+
+	public setDragImage(dragImage:any) {
+		this.dragImage = dragImage;
+	}
+};
+
+export class DragEvent extends Event {
+	public dataTransfer : DataTransfer;
+
+	constructor() {
+		super();
+		this.dataTransfer = new DataTransfer();
+	}
+
+	public init(type:string, detail?:any) : any{
+		super.init(type, detail);
+
+		return this;
+	}
+
+	public static create(type:string) :DragEvent {
+		var e = new DragEvent();
+
+		return e.init(type);
+	}
+};
+
+export class DrawEvent extends Event {
+	public widget : any;
+	public ctx : any;
+
+	public reset(type:string, ctx:any, widget:any) : any {
+		super.init(type);
+
+		this.ctx = ctx;
+		this.widget = widget;
+
+		return this;
+	}
+
+	public static get() : DrawEvent {
+		return DrawEvent.event;
+	}
+
+	private static event = new DrawEvent();
 };
 

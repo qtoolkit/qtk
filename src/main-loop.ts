@@ -16,16 +16,16 @@ import {IMainLoop} from "./imain-loop";
  */
 export class MainLoop extends Emitter implements IMainLoop {
 	private pendingRedraw : number;
-	private predrawEvent : Events.DrawEvent;
-	private drawEvent : Events.DrawEvent;
-	private postdrawEvent : Events.DrawEvent;
+	private predrawEvent : Events.TickEvent;
+	private drawEvent : Events.TickEvent;
+	private postdrawEvent : Events.TickEvent;
 
 	constructor() {
 		super();	
 		this.pendingRedraw = 0;
-		this.predrawEvent = Events.DrawEvent.create(Events.PREDRAW);
-		this.drawEvent = Events.DrawEvent.create(Events.DRAW);
-		this.postdrawEvent = Events.DrawEvent.create(Events.POSTDRAW);
+		this.predrawEvent = Events.TickEvent.create(Events.PRETICK);
+		this.drawEvent = Events.TickEvent.create(Events.TICK);
+		this.postdrawEvent = Events.TickEvent.create(Events.POSTTICK);
 	}
 
 	public requestRedraw() {
@@ -42,9 +42,9 @@ export class MainLoop extends Emitter implements IMainLoop {
 		var deltaTime = performance.now();
 		var detail = {fps:fps, time:time, deltaTime:deltaTime};
 
-		this.drawEvent.init(Events.PREDRAW, detail);
-		this.predrawEvent.init(Events.DRAW, detail);
-		this.postdrawEvent.init(Events.POSTDRAW, detail);
+		this.drawEvent.init(Events.PRETICK, detail);
+		this.predrawEvent.init(Events.TICK, detail);
+		this.postdrawEvent.init(Events.POSTTICK, detail);
 		
 		this.pendingRedraw = 0;
 		this.dispatchEvent(this.predrawEvent);

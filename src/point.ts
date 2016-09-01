@@ -7,6 +7,13 @@ export class Point {
 		this.y = y;
 	}
 
+	init(x:number, y:number) : Point {
+		this.x = x;
+		this.y = y;
+
+		return this;
+	}
+
 	public dispose() {
 	}
 
@@ -14,7 +21,7 @@ export class Point {
 		return new Point(x, y);
 	}
 
-	public static p = Point.create(0, 0);
+	public static point = Point.create(0, 0);
 };
 
 

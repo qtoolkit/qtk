@@ -51,5 +51,5 @@ export class Rect {
 		return r;
 	}
 
-	public static r = Rect.create(0, 0, 0, 0);
+	public static rect = Rect.create(0, 0, 0, 0);
 };

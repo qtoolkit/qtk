@@ -5,23 +5,23 @@ describe('test main loop', function() {
 	var Events = qtk.Events;
 
     beforeEach(mainLoop.requestRedraw.bind(mainLoop));
-    it('test pre draw callback', (done) => {
-        mainLoop.on(Events.PREDRAW, function predraw(evt) {
-            console.log("predraw")
+    it('test pre tick callback', (done) => {
+        mainLoop.on(Events.PRETICK, function pretick(evt) {
+            console.log("pretick")
             done();
         })
     });
     
-    it('test draw callback', (done) => {
-        mainLoop.on(Events.PREDRAW, function predraw(evt) {
-            console.log("draw")
+    it('test tick callback', (done) => {
+        mainLoop.on(Events.PRETICK, function pretick(evt) {
+            console.log("tick")
             done();
         })
     });
     
-    it('test post draw callback', (done) => {
-        mainLoop.on(Events.PREDRAW, function predraw(evt) {
-            console.log("postdraw")
+    it('test post tick callback', (done) => {
+        mainLoop.on(Events.PRETICK, function pretick(evt) {
+            console.log("posttick")
             done();
         })
     });
