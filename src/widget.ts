@@ -8,7 +8,7 @@ import {Canvas} from "./canvas";
 import {Point} from "./point";
 import {Rect} from "./rect";
 import {Behavior, BehaviorFactory} from "./behaviors/behavior";
-import {Layouter} from './layouter';
+import {Layouter, LayouterFactory} from './layouter';
 import {Emitter} from "./emitter";
 import {Graphics} from "./graphics";
 import {ImageTile} from "./image-tile";
@@ -375,6 +375,12 @@ export class Widget extends Emitter {
 			this.parent.relayoutChildren();	
 		}
 
+		return this;
+	}
+
+	public useChildrenLayouter(type:string, options:any) : Widget {
+		this.childrenLayouter = LayouterFactory.create(type, options);	
+		
 		return this;
 	}
 

@@ -1,14 +1,14 @@
 import {Widget} from './widget';
-import {Layouter} from './layouter';
+import {Layouter, LayouterFactory} from './layouter';
 
-const NAME = "SimpleLayouter";
+const TYPE = "SimpleLayouter";
 
 /**
  * 简单的布局器。
  */
 export class SimpleLayouter extends Layouter {
-	public get name() : string {
-		return NAME;
+	public get type() : string {
+		return TYPE;
 	}
 
 	public layoutChildren(widget:Widget, children:Array<Widget>) {
@@ -22,7 +22,7 @@ export class SimpleLayouter extends Layouter {
 
 	public layoutChild(child:Widget, pw:number, ph:number) {
 		var param = <SimpleLayouterParam>child.layoutParam;
-		if(param && param.name === NAME && child.visible) {
+		if(param && param.type === TYPE && child.visible) {
 			var w = getValueOf(param.w, pw);
 			var h = getValueOf(param.h, ph);
 			if(param.minW >= 0) {
@@ -50,12 +50,14 @@ export class SimpleLayouter extends Layouter {
 		}
 	}
 
-	static create() : SimpleLayouter {
-		return new SimpleLayouter();
+	static create(options:any) : SimpleLayouter {
+		var layouter = new SimpleLayouter();
+
+		return layouter.setOptions(options);
 	}
 };
 
-Layouter.register(NAME, SimpleLayouter.create);
+LayouterFactory.register(TYPE, SimpleLayouter.create);
 
 /**
  * 简单的布局器的参数。
@@ -81,7 +83,7 @@ Layouter.register(NAME, SimpleLayouter.create);
  *
  */
 export class SimpleLayouterParam {
-	public name : string;
+	public type : string;
 	public x : string;
 	public y : string;
 	public w : string;
@@ -100,7 +102,7 @@ export class SimpleLayouterParam {
 		this.minH = -1;
 		this.maxW = -1;
 		this.maxH = -1;
-		this.name = NAME;
+		this.type = TYPE;
 	}
 
 	static create(x:string, y:string, w:string, h:string) {

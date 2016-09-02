@@ -1,37 +1,70 @@
 import {Widget} from "./widget";
 
+/**
+ * 子控件布局算法。
+ */
 export class Layouter {
-	public get name() : string {
+	/**
+	 * 布局算法的名称。
+	 */
+	public get type() : string {
 		return "dummy";
 	}
-
+	
+	/**
+	 * 转换成JSON数据。
+	 */
 	public toJson() : any {
-		return {name: this.name};
+		return {type: this.type};
 	}
 
+	/**
+	 * 从JSON数据创建。
+	 */
 	public fromJson(json:any) {
 		return;
 	}
 
+	/**
+	 * 设置参数。
+	 */
+	public setOptions(options:any) : any {
+		return this;
+	}
+
+	/**
+	 * 对子控件进行布局。
+	 */
 	public layoutChildren(widget:Widget, children:Array<Widget>) {
 	}
 
-	public static creators = {};
-	public static register(name:string, creator:Function) {
-		Layouter.creators[name] = creator;
+}
+
+/**
+ * Layouter的工厂。
+ */
+export class LayouterFactory {
+	private static creators = {};
+	
+	public static register(type:string, creator:Function) {
+		LayouterFactory.creators[type] = creator;
 	}
 
-	public static create(name:string) : Layouter {
-		var create = Layouter.creators[name];
-
-		return create ? <Layouter>create() : null;
+	public static create(type:string, options:any) : Layouter {
+		var create = LayouterFactory.creators[type];
+		if(create) {
+			return <Layouter>create(options);
+		}else{
+			return null;
+		}
 	}
 
 	public static createFromJson(json:any) {
-		var layouter = Layouter.create(json.name);
+		var layouter = <Layouter>LayouterFactory.create(json.type, null);
+
 		layouter.fromJson(json);
 
 		return layouter;
 	}
-};
+}
 
