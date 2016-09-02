@@ -21,7 +21,7 @@ export class MovableOptions {
 
 	constructor(moveParent:boolean, animateDuration:number) {
 		this.moveParent = moveParent || false;
-		this.animateDuration = animateDuration || 500;
+		this.animateDuration = animateDuration >= 0 ? animateDuration : 500;
 	}
 };
 

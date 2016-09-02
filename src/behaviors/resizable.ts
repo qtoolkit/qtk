@@ -56,7 +56,7 @@ export class ResizableOptions {
 		this.northEast = options.northEast || options.all || false;
 		this.southWest = options.southWest || options.all || false;
 		this.southEast = options.southEast || options.all || false;
-		this.animateDuration = options.animateDuration || 500;
+		this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
 	}
 };
 
@@ -132,7 +132,7 @@ export class Resizable extends Behavior {
 			}else if(p.x >= right && p.x <= w && options.east) {
 				return "e"; 
 			}
-		}else if(p.y >= bottom && p.y < h && options.southWest) {
+		}else if(p.y >= bottom && p.y <= h && options.southWest) {
 			if(p.x >= 0 && p.x <= delta) {
 				return "sw";
 			}else if(p.x > delta && p.x < right && options.south)  {
