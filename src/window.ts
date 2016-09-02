@@ -1,6 +1,8 @@
+import {Point} from "./point";
 import {Widget} from "./widget";
 import Events = require("./events");
 import {IApplication} from "./iapplication";
+import {MatrixStack} from "./matrix-stack";
 import inputEventAdapter = require("./input-event-adapter");
 
 export enum WindowType {
@@ -11,10 +13,28 @@ export enum WindowType {
 export class Window extends Widget {
 	private _grabbed : boolean;
 	private _shouldGrabWhenVisible : boolean;
+	private _pointerPosition : Point;
 
 	constructor(type:string) {
 		super(type);
+	}
+
+	public reset(type:string) : Widget {
+		super.reset(type);
+		this._isWindow = true;
 		this._grabbed = false;
+		this._pointerPosition = Point.create(0, 0);
+
+		return this;
+	}
+
+	public get pointerPosition() : Point {
+		return this._pointerPosition;
+	}
+
+	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+		this._pointerPosition.init(evt.x-this.x, evt.y-this.y);
+		super.dispatchPointerMove(evt, ctx);
 	}
 
 	public get grabbed() : boolean {

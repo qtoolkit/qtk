@@ -33,28 +33,32 @@ export class Behavior {
 		this.type = type;
 		this.widget = widget;
 
+		this.keyDownGlobalFunc = this.onKeyDownGlobal.bind(this);
+		this.keyUpGlobalFunc = this.onKeyUpGlobal.bind(this);
+		this.pointerEnterFunc = this.onPointerEnter.bind(this);
+		this.pointerLeaveFunc = this.onPointerLeave.bind(this);
 		this.pointerDownFunc = this.onPointerDown.bind(this);
 		this.pointerMoveFunc = this.onPointerMove.bind(this);
 		this.pointerUpFunc = this.onPointerUp.bind(this);
 		this.keyDownFunc = this.onKeyDown.bind(this);
 		this.keyUpFunc = this.onKeyUp.bind(this);
-		this.keyDownGlobalFunc = this.onKeyDownGlobal.bind(this);
-		this.keyUpGlobalFunc = this.onKeyUpGlobal.bind(this);
 		
+		inputEventAdapter.on(Events.KEYDOWN, this.keyDownGlobalFunc);
+		inputEventAdapter.on(Events.KEYUP, this.keyUpGlobalFunc);
+		widget.on(Events.POINTER_ENTER, this.pointerEnterFunc);
+		widget.on(Events.POINTER_LEAVE, this.pointerLeaveFunc);
 		widget.on(Events.POINTER_DOWN, this.pointerDownFunc);
 		widget.on(Events.POINTER_MOVE, this.pointerMoveFunc);
+		widget.on(Events.DISPOSE, this.dispose.bind(this));
 		widget.on(Events.POINTER_UP, this.pointerUpFunc);
 		widget.on(Events.KEYDOWN, this.keyDownFunc);
 		widget.on(Events.KEYUP, this.keyUpFunc);
-		inputEventAdapter.on(Events.KEYDOWN, this.keyDownGlobalFunc);
-		inputEventAdapter.on(Events.KEYUP, this.keyUpGlobalFunc);
-		widget.on(Events.DISPOSE, this.dispose.bind(this));
 
 		this.init(options || {});
 	}
 
 	/**
-	 * 初始化。具体的Behavior的实现可以重载此函数做些初始化的工作。
+	 * 初始化。在具体的Behavior的实现中，可以重载此函数做些初始化的工作。
 	 * @param options 初始化参数，与具体的Behavior有关。 
 	 */
 	protected init(options:any) : any {
@@ -66,13 +70,15 @@ export class Behavior {
 	 */
 	protected dispose() {
 		var widget = this.widget;
+		inputEventAdapter.off(Events.KEYDOWN, this.keyDownGlobalFunc);
+		inputEventAdapter.off(Events.KEYUP, this.keyUpGlobalFunc);
+		widget.off(Events.POINTER_ENTER, this.pointerEnterFunc);
+		widget.off(Events.POINTER_LEAVE, this.pointerLeaveFunc);
 		widget.off(Events.POINTER_DOWN, this.pointerDownFunc);
 		widget.off(Events.POINTER_MOVE, this.pointerMoveFunc);
 		widget.off(Events.POINTER_UP, this.pointerUpFunc);
 		widget.off(Events.KEYDOWN, this.keyDownFunc);
 		widget.off(Events.KEYUP, this.keyUpFunc);
-		inputEventAdapter.off(Events.KEYUP, this.keyUpGlobalFunc);
-		inputEventAdapter.off(Events.KEYDOWN, this.keyDownGlobalFunc);
 		this.widget = null;
 	}
 
@@ -101,6 +107,18 @@ export class Behavior {
 	}
 
 	/**
+	 * 子类重载此函数，可以处理Widget的PointerEnter事件。
+	 */
+	protected onPointerEnter(evt:Events.PointerEvent){
+	}
+		
+	/**
+	 * 子类重载此函数，可以处理Widget的PointerLeave事件。
+	 */
+	protected onPointerLeave(evt:Events.PointerEvent){
+	}
+		
+	/**
 	 * 子类重载此函数，可以处理Widget的PointerDown事件。
 	 */
 	protected onPointerDown(evt:Events.PointerEvent){
@@ -118,6 +136,8 @@ export class Behavior {
 	protected onPointerUp(evt:Events.PointerEvent){
 	}
 	
+	private pointerEnterFunc : Function;
+	private pointerLeaveFunc : Function;
 	private pointerDownFunc : Function;
 	private pointerMoveFunc : Function;
 	private pointerUpFunc : Function;

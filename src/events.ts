@@ -12,6 +12,8 @@ export const POINTER_MOVE = "qtk-pointer-move";
 export const POINTER_UP   = "qtk-pointer-up";
 export const POINTER_OUT  = "qtk-pointer-out";
 export const POINTER_OVER = "qtk-pointer-over";
+export const POINTER_ENTER = "qtk-pointer-enter";
+export const POINTER_LEAVE = "qtk-pointer-leave";
 export const CLICK = "qtk-click";
 export const CHANGE = "change"
 export const DISPOSE = "dispose"
@@ -139,7 +141,7 @@ export class PointerEvent extends InputEvent {
 	 */
 	public pointerDownTime : number;
 
-	public init(type:string, detail:PointerEventDetail) : any{
+	public init(type:string, detail:PointerEventDetail|PointerEvent) : any{
 		super.init(type, detail);
 
 		this.id = detail.id;
@@ -153,7 +155,7 @@ export class PointerEvent extends InputEvent {
 		return this;
 	}
 
-	public static create(type:string, detail:PointerEventDetail) : PointerEvent {
+	public static create(type:string, detail:PointerEventDetail|PointerEvent) : PointerEvent {
 		var e = new PointerEvent();
 		
 		return e.init(type, detail);
@@ -304,8 +306,18 @@ export class DragEvent extends Event {
 		return this;
 	}
 
-	public static create(type:string) :DragEvent {
-		var e = new DragEvent();
+	private static _isDragging : boolean = false;
+	public static get isDragging() : boolean {
+		return DragEvent._isDragging;
+	}
+
+	public static set isDragging(isDragging:boolean) {
+		DragEvent._isDragging = isDragging;
+	}
+
+	public static event = new DragEvent();
+	public static get(type:string) : DragEvent {
+		var e = DragEvent.event;
 
 		return e.init(type);
 	}

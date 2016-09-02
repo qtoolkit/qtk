@@ -57,7 +57,7 @@ export class Widget extends Emitter {
 	 * @param ctx 矩阵变换上下文。ctx包含了从顶级父控件到当前控件的变化。
 	 * @returns 测试结果HitTestResult。
 	 */
-	private hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+	protected hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
 		var m = ctx.invert();
 		if(m || true) {
 			var p = m.transformPoint(x, y);
@@ -69,7 +69,7 @@ export class Widget extends Emitter {
 		return HitTestResult.NONE;
 	}
 
-	private dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		var detail = evt;
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -103,7 +103,7 @@ export class Widget extends Emitter {
 		return hitTestResult !== HitTestResult.NONE;
 	}
 
-	private dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
+	protected dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this.dispatchEvent(evt, true);
 		if(this.target) {
 			this.target.dispatchPointerMove(evt, ctx);
@@ -114,7 +114,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	private dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
+	protected dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
 		ctx.save();
 		this.applyTransform(ctx);
 		
@@ -126,8 +126,19 @@ export class Widget extends Emitter {
 			var _lastOverWidget = this._lastOverWidget;
 			var overWidget  = this.findEventTargetChild(detail.x, detail.y, ctx);
 			if(_lastOverWidget !== overWidget) {
+				var e = null;
 				if(_lastOverWidget) {
 					_lastOverWidget.dispatchPointerMove(evt, ctx);
+
+					e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
+					_lastOverWidget.dispatchEvent(e, false);
+					e.dispose();
+				}
+			
+				if(overWidget) {
+					e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
+					overWidget.dispatchEvent(e, false);
+					e.dispose();
 				}
 
 				this._lastOverWidget = overWidget;
@@ -158,7 +169,7 @@ export class Widget extends Emitter {
 		ctx.restore();
 	}
 
-	private dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -170,12 +181,16 @@ export class Widget extends Emitter {
 		this.dispatchPointerMoveToUnder(evt, ctx);
 	}
 
-	private dispatchPointerUp(evt:Events.PointerEvent) {
+	protected dispatchPointerUp(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
 		
 		this.dispatchEvent(evt, true);
+		if(this._lastOverWidget && this.target !== this._lastOverWidget) {
+			this._lastOverWidget.dispatchPointerUp(evt);
+		}
+
 		if(this.target) {
 			this.target.dispatchPointerUp(evt);
 		}
@@ -183,15 +198,11 @@ export class Widget extends Emitter {
 			this.onpointerup(evt);
 		}
 
-		if(this._lastOverWidget && this.target !== this._lastOverWidget) {
-			this._lastOverWidget.dispatchPointerUp(evt);
-		}
-
 		this.dispatchEvent(evt, false);
 		this.state = WidgetState.NORMAL;
 	}
 	
-	private dispatchClick(evt:any) {
+	protected dispatchClick(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -206,7 +217,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	private dispatchKeyDown(evt:any) {
+	protected dispatchKeyDown(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -221,7 +232,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	private dispatchKeyUp(evt:any) {
+	protected dispatchKeyUp(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -236,7 +247,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	private dispatchWheel(evt:any) {
+	protected dispatchWheel(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -251,7 +262,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	private applyTransform(ctx:MatrixStack) : Widget {
+	protected applyTransform(ctx:MatrixStack) : Widget {
 		if(!this._canvas) {
 			ctx.translate(this._x, this._y);
 		}
@@ -268,7 +279,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 	
-	private findEventTargetChild(x:number, y:number, ctx:MatrixStack) : Widget {
+	protected findEventTargetChild(x:number, y:number, ctx:MatrixStack) : Widget {
 		var arr = this._children;
 		var n = arr.length;
 		for(var i = n-1; i >= 0; i--) {
@@ -1043,7 +1054,7 @@ export class Widget extends Emitter {
 		return this._isWindow;
 	}
 
-	private setAttr(attr:string, newValue:any, notify:boolean) : Widget {
+	protected setAttr(attr:string, newValue:any, notify:boolean) : Widget {
 		var attrName = "_"+attr;
 		var oldValue = this[attrName];
 
@@ -1077,48 +1088,48 @@ export class Widget extends Emitter {
 		return this._behaviors[type];
 	}
 
-	private _x : number;
-	private _y : number;
-	private _z : number;
-	private _w : number;
-	private _h : number;
-	private _state : WidgetState;
-	private _value : any;
-	private _enable : boolean;
-	private _visible : boolean;
-	private _selected : boolean;
-	private _opacity  : number;
-	private _scaleX   : number;
-	private _scaleY   : number;
-	private _pivotX   : number;
-	private _pivotY   : number;
-	private _rotation : number;
-	private _focusable : boolean;
-	private _sensitive : boolean;
-	private _tips : string;
-	private _text : string;
-	private _dirty : boolean;
-	private _name : string;
-	private _id : string;
-	private _tag : string;
-	private _type : string;
-	private _draggable : boolean;
-	private _droppable : boolean;
-	private _userData : any;
-	private _target : Widget;
-	private _hitTestResult : HitTestResult;
-	private _isWindow : boolean;
-	private _parent : Widget;
-	private _app : IApplication;
-	private _children : Array<Widget>;
-	private _mainLoop : IMainLoop;
-	private _themeManager : IThemeManager;
-	private _mode : WidgetMode;
-	private _canvas : Canvas;
-	private _styles : any;
-	private _styleType : string;
-	private _lastOverWidget : Widget;
-	private _behaviors : any;
+	protected _x : number;
+	protected _y : number;
+	protected _z : number;
+	protected _w : number;
+	protected _h : number;
+	protected _state : WidgetState;
+	protected _value : any;
+	protected _enable : boolean;
+	protected _visible : boolean;
+	protected _selected : boolean;
+	protected _opacity  : number;
+	protected _scaleX   : number;
+	protected _scaleY   : number;
+	protected _pivotX   : number;
+	protected _pivotY   : number;
+	protected _rotation : number;
+	protected _focusable : boolean;
+	protected _sensitive : boolean;
+	protected _tips : string;
+	protected _text : string;
+	protected _dirty : boolean;
+	protected _name : string;
+	protected _id : string;
+	protected _tag : string;
+	protected _type : string;
+	protected _draggable : boolean;
+	protected _droppable : boolean;
+	protected _userData : any;
+	protected _target : Widget;
+	protected _hitTestResult : HitTestResult;
+	protected _isWindow : boolean;
+	protected _parent : Widget;
+	protected _app : IApplication;
+	protected _children : Array<Widget>;
+	protected _mainLoop : IMainLoop;
+	protected _themeManager : IThemeManager;
+	protected _mode : WidgetMode;
+	protected _canvas : Canvas;
+	protected _styles : any;
+	protected _styleType : string;
+	protected _lastOverWidget : Widget;
+	protected _behaviors : any;
 	public onclick : Function;
 	public onpointerdown : Function;
 	public onpointermove : Function;
@@ -1127,8 +1138,8 @@ export class Widget extends Emitter {
 	public onkeydown : Function;
 	public onkeyup : Function;
 
-	private _layoutParam : any;
-	private _childrenLayouter : Layouter;
+	protected _layoutParam : any;
+	protected _childrenLayouter : Layouter;
 
 	public reset(type:string) : Widget {
 		this._x  = 0;

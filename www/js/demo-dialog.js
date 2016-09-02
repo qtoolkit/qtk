@@ -41,7 +41,7 @@ function onReady(app) {
 	});
 	
 	var button = qtk.Button.create();
-	button.name = "button1";
+	button.name = "button2";
 	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "400px", "50%", "60px");
 	win.addChild(button);
 }

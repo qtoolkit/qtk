@@ -1,30 +1,75 @@
 
 import {Widget} from "../widget";
-import {Behavior, BehaviorFactory} from "./behavior";
 import Events = require("../events");
+import {KeyEvent} from "../key-event";
+import {Behavior, BehaviorFactory} from "./behavior";
 import inputEventAdapter = require("../input-event-adapter");
 
+/**
+ * 让Widget具有拖放功能的拖动功能。
+ * 
+ */
 export class Draggable extends Behavior {
-	public x:number;
-	public y:number;
+	private dragging : boolean;
+	private onDrawDragging : Function;
 
-	public onPointerDown(evt:Events.PointerEvent){
-		this.x = this.widget.x;
-		this.y = this.widget.y;
-		document.body.style.cursor="move"; 
+	protected init(options:any) {
+		this.onDrawDragging = function(evt:Events.DrawEvent) {
+			var ctx = evt.ctx;
+			var win = evt.widget;
+			var p = win.pointerPosition;
+			var e = Events.DragEvent.get(Events.DRAGSTART);
+			var image = e.dataTransfer.dragImage;
+			
+			if(image) {
+				if(image.draw) {
+					image.draw(ctx, p.x, p.y);
+				}
+			}else{
+				ctx.fillStyle = "green";
+				ctx.fillRect(p.x, p.y, 10, 10);
+			}
+		}
+	}
+
+	protected onCancelled() {
+		var widget = this.widget;
+		widget.win.requestRedraw();
+		Events.DragEvent.isDragging = false;
+		widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
+		widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+	}
+
+	protected onKeyDownGlobal(evt:CustomEvent) {
+		var keyCode = evt.detail.keyCode;
+		if(keyCode === KeyEvent.VK_ESCAPE && this.dragging) {
+			this.dragging = false;
+			this.onCancelled();
+		}
+	}
+
+	protected onPointerDown(evt:Events.PointerEvent){
+		this.widget.win.on(Events.AFTER_DRAW, this.onDrawDragging);
 	}
 	
-	public onPointerUp(evt:Events.PointerEvent){
-		document.body.style.cursor="default"; 
+	protected onPointerUp(evt:Events.PointerEvent){
+		if(this.dragging) {
+			this.dragging = false;
+			Events.DragEvent.isDragging = false;
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+			this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
+		}
 	}
 
-	public onPointerMove(evt:Events.PointerEvent){
-		if(evt.pointerDown) {
-			var dx = evt.x - evt.pointerDownX;
-			var dy = evt.y - evt.pointerDownY;
+	protected onPointerMove(evt:Events.PointerEvent){
+		if(evt.pointerDown && !this.dragging) {
+			this.dragging = true;
+			Events.DragEvent.isDragging = true;
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART));
+		}
 
-			this.widget.x = this.x + dx;
-			this.widget.y = this.y + dy;
+		if(evt.pointerDown) {
+			this.widget.win.requestRedraw();
 		}
 	}
 

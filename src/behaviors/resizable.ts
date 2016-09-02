@@ -84,7 +84,7 @@ export class Resizable extends Behavior {
 	protected onKeyDownGlobal(evt:CustomEvent) {
 		var keyCode = evt.detail.keyCode;
 		if(keyCode === KeyEvent.VK_ESCAPE && this.resizing) {
-			this.resizing = true;
+			this.resizing = false;
 			this.onCancelled();
 		}
 	}

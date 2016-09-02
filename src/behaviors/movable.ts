@@ -13,6 +13,7 @@ export class MovableOptions {
 	 * 移动自己还是移动parent。
 	 */
 	public moveParent : boolean;
+	
 	/**
 	 * 取消时，恢复原位的动画时间，0表示无动画。
 	 */
@@ -30,11 +31,6 @@ export class MovableOptions {
  * move的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
  */
 export class Movable extends Behavior {
-	private x : number;
-	private y : number;
-	private dragging : boolean;
-	private options : MovableOptions;
-
 	protected init(options:any) {
 		this.options = new MovableOptions(options.moveParent, options.animateDuration);
 	}
@@ -56,7 +52,7 @@ export class Movable extends Behavior {
 	protected onKeyDownGlobal(evt:CustomEvent) {
 		var keyCode = evt.detail.keyCode;
 		if(keyCode === KeyEvent.VK_ESCAPE && this.dragging) {
-			this.dragging = true;
+			this.dragging = false;
 			this.onCancelled();
 		}
 	}
@@ -82,6 +78,11 @@ export class Movable extends Behavior {
 			this.moveWidget(this.x+dx, this.y+dy, false);
 		}
 	}
+
+	private x : number;
+	private y : number;
+	private dragging : boolean;
+	private options : MovableOptions;
 
 	constructor(widget:Widget, options:any) {
 		super(Movable.TYPE, widget, options);
