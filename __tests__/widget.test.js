@@ -26,25 +26,9 @@ describe('Widget', function() {
 	var userData = "userdata";
 	var app = new qtk.Application.create("test");
 	function initWidget(widget) {
-		widget.x = x;
-		widget.y = y;
-		widget.z = z;
-		widget.w = w;
-		widget.h = h;
-		widget.state = state;
-		widget.mode = mode;
-		widget.selected = selected;
-		widget.opacity = opacity;
-		widget.scaleX = scaleX;
-		widget.scaleY = scaleY;;
-		widget.pivotX = pivotX;
-		widget.rotation = rotation;;
-		widget.focusable = focusable;
-		widget.name = name;
-		widget.tag = tag;
-		widget.type = type;
-		widget.tips = tips;
-		widget.userData = userData;
+		widget.set({x:x, y:y, z:z, w:w, h:h, state:state, mode:mode, selected:selected, opacity:opacity});
+		widget.set({scaleX:scaleX, scaleY:scaleY, pivotX:pivotX, pivotY:pivotY, rotation:rotation});
+		widget.set({focusable:focusable, name:name, tag:tag, type:type, tips:tips, userData:userData});
 		widget.setText(text);
 		widget.setValue(value);
 	}
@@ -54,13 +38,17 @@ describe('Widget', function() {
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
 			var widget = qtk.Widget.create(app);
-		
+			var attrs = {x:0, y:0, z:0};		
 			initWidget(widget);
+			widget.get(attrs);
 			result = widget.app === app && widget.dirty && !widget.isWindow() && widget.x === x
 				&& widget.y === y
 				&& widget.z === z
 				&& widget.w === w
 				&& widget.h === h
+				&& attrs.x === x
+				&& attrs.y === y
+				&& attrs.z === z
 				&& widget.state === state
 				&& widget.mode === mode
 				&& widget.selected === selected

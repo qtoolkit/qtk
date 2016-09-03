@@ -50,6 +50,22 @@ export class Widget extends Emitter {
 		return p;
 	}
 
+	public set(attrs:any) : Widget {
+		for(var key in attrs) {
+			this[key] = attrs[key];
+		}
+
+		return this;
+	}
+
+	public get(attrs:any) : any {
+		for(var key in attrs) {
+			attrs[key] = this[key];
+		}
+
+		return attrs;
+	}
+
 	/**
 	 * 测试点是否落在当前控件中。
 	 * @param x X坐标，相对于全局原点的坐标。
