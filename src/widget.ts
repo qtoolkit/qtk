@@ -279,6 +279,8 @@ export class Widget extends Emitter {
 	}
 	
 	protected applyTransform(ctx:MatrixStack) : Widget {
+		var e = Events.ApplyTransformEvent.get();
+		this.dispatchEvent(e.reset(Events.BEFORE_APPLY_TRANSFORM, ctx, this));
 		if(!this._canvas) {
 			ctx.translate(this._x, this._y);
 		}
@@ -291,6 +293,7 @@ export class Widget extends Emitter {
 			ctx.scale(this._scaleX, this._scaleY);
 			ctx.translate(-px, -py);
 		}
+		this.dispatchEvent(e.reset(Events.AFTER_APPLY_TRANSFORM, ctx, this));
 
 		return this;
 	}

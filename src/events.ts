@@ -30,6 +30,8 @@ export const POSTTICK = "posttick";
 export const LOAD = "load";
 export const BEFORE_DRAW = "before-draw";
 export const AFTER_DRAW = "after-draw";
+export const BEFORE_APPLY_TRANSFORM = "before-apply-transform";
+export const AFTER_APPLY_TRANSFORM = "after-apply-transform";
 
 export const DRAG = "drag";
 export const DROP = "drop";
@@ -341,5 +343,25 @@ export class DrawEvent extends Event {
 	}
 
 	private static event = new DrawEvent();
+};
+
+export class ApplyTransformEvent extends Event {
+	public widget : any;
+	public ctx : any;
+
+	public reset(type:string, ctx:any, widget:any) : any {
+		super.init(type);
+
+		this.ctx = ctx;
+		this.widget = widget;
+
+		return this;
+	}
+
+	public static get() : ApplyTransformEvent {
+		return ApplyTransformEvent.event;
+	}
+
+	private static event = new ApplyTransformEvent();
 };
 
