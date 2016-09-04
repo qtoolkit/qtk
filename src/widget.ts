@@ -399,12 +399,21 @@ export class Widget extends Emitter {
 	
 ///////////////////////////////////////////
 
-	public relayoutChildren() : Widget {
+	protected getLayoutRect() : Rect {
+		return Rect.create(this.leftPadding, this.topPadding,
+				this.w - this.leftPadding - this.rightPadding,
+				this.h - this.topPadding - this.bottomPadding);
+	}
+
+	public relayoutChildren() : Rect {
 		if(this.childrenLayouter) {
-			this.childrenLayouter.layoutChildren(this, this.children);
+			var r = this.getLayoutRect();
+			this.childrenLayouter.layoutChildren(this, this.children, r);
+			r.dispose();
 			this.requestRedraw();
 		}
-		return this;
+
+		return null;
 	}
 
 	public requestRelayout() : Widget {
@@ -992,20 +1001,6 @@ export class Widget extends Emitter {
 		this._userData = value;
 	}
 
-	public get draggable() {
-		return this._draggable;
-	}
-	public set draggable(value) {
-		this._draggable = value;
-	}
-
-	public get droppable() {
-		return this._droppable;
-	}
-	public set droppable(value) {
-		this._droppable = value;
-	}
-
 	public get target() {
 		return this._target;
 	}
@@ -1058,6 +1053,46 @@ export class Widget extends Emitter {
 
 	public isWindow() : boolean {
 		return this._isWindow;
+	}
+
+	public get leftPadding() {
+		return this._leftPadding;
+	}
+	public set leftPadding(value) {
+		this.setAttr("leftPadding", value, true);
+	}
+
+	public get rightPadding() {
+		return this._rightPadding;
+	}
+	public set rightPadding(value) {
+		this.setAttr("rightPadding", value, true);
+	}
+
+	public get topPadding() {
+		return this._topPadding;
+	}
+	public set topPadding(value) {
+		this.setAttr("topPadding", value, true);
+	}
+
+
+	public get bottomPadding() {
+		return this._bottomPadding;
+	}
+	public set bottomPadding(value) {
+		this.setAttr("bottomPadding", value, true);
+	}
+
+
+	public get padding() {
+		return this._topPadding;
+	}
+	public set padding(value) {
+		this.setAttr("leftPadding", value, true);
+		this.setAttr("topPadding", value, true);
+		this.setAttr("rightPadding", value, true);
+		this.setAttr("bottomPadding", value, true);
 	}
 
 	protected setAttr(attr:string, newValue:any, notify:boolean) : Widget {
@@ -1120,8 +1155,6 @@ export class Widget extends Emitter {
 	protected _id : string;
 	protected _tag : string;
 	protected _type : string;
-	protected _draggable : boolean;
-	protected _droppable : boolean;
 	protected _userData : any;
 	protected _target : Widget;
 	protected _hitTestResult : HitTestResult;
@@ -1137,6 +1170,10 @@ export class Widget extends Emitter {
 	protected _styleType : string;
 	protected _lastOverWidget : Widget;
 	protected _behaviors : any;
+	private _leftPadding : number;
+	private _rightPadding : number;
+	private _topPadding : number;
+	private _bottomPadding : number;
 	public onclick : Function;
 	public onpointerdown : Function;
 	public onpointermove : Function;
@@ -1187,8 +1224,10 @@ export class Widget extends Emitter {
 		this._canvas = null;
 		this._styles = null;
 		this._styleType = null;
-		this.draggable = false;
-		this.droppable = false;
+		this._leftPadding = 0;
+		this._topPadding = 0;
+		this._rightPadding = 0;
+		this._bottomPadding = 0;
 		this._lastOverWidget = null;
 		this.onclick = null;
 		this.onpointerdown = null;
@@ -1227,8 +1266,11 @@ export class Widget extends Emitter {
 		this._type = json.type;
 		this._mode = json.mode;
 		this.value = json.value;
-		this.draggable = json.draggable;
-		this.droppable = json.droppable;
+		this._leftPadding = json.leftPadding;
+		this._rightPadding = json.rightPadding;
+		this._topPadding = json.topPadding;
+		this._bottomPadding = json.bottomPadding;
+
 		var styles = json.styles;
 		if(styles) {
 			this._styles = {};
@@ -1269,8 +1311,10 @@ export class Widget extends Emitter {
 		json.tag = this._tag;
 		json.type = this._type;
 		json.mode = this._mode;
-		json.draggable = this._draggable;
-		json.droppable = this._droppable;
+		json.leftPadding = this._leftPadding;
+		json.rightPadding = this._rightPadding;
+		json.topPadding = this._topPadding;
+		json.bottomPadding = this._bottomPadding;
 
 		json.value = this.value;
 

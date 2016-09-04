@@ -114,5 +114,13 @@ describe('Widget', function() {
 
 		done(result ? null : new Error("widget moveResizeTo."));
 	});
+  	
+  	it('test padding', (done) => {
+		var widget = qtk.Widget.create();
+		widget.padding = 4;
+		var result = widget.leftPadding === widget.padding && widget.topPadding === widget.padding
+			&& widget.bottomPadding === widget.padding;
+		done(result ? null : new Error("padding is wrong"))
+  	});
 });
   

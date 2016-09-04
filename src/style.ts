@@ -14,10 +14,6 @@ export class Style extends Emitter {
 	private _backGroundImageDrawType : ImageDrawType;
 	private _forceGroundImage : ImageTile;
 	private _forceGroundImageDrawType : ImageDrawType;
-	private _leftPadding : number;
-	private _rightPadding : number;
-	private _topPadding : number;
-	private _bottomPadding : number;
 	private _lineWidth : number;
 	private _lineColor : string;
 	private _roundRadius : number;
@@ -63,22 +59,6 @@ export class Style extends Emitter {
 
 		if(this._forceGroundImageDrawType) {
 			other._forceGroundImageDrawType = this._forceGroundImageDrawType;
-		}
-
-		if(this._leftPadding) {
-			other._leftPadding = this._leftPadding;
-		}
-
-		if(this._rightPadding) {
-			other._rightPadding = this._rightPadding;
-		}
-
-		if(this._topPadding) {
-			other._topPadding = this._topPadding;
-		}
-
-		if(this._bottomPadding) {
-			other._bottomPadding = this._bottomPadding;
 		}
 
 		if(this._fontFamily) {
@@ -146,21 +126,6 @@ export class Style extends Emitter {
 			json.forceGroundImageDrawType = this._forceGroundImageDrawType;
 		}
 
-		if(this._leftPadding) {
-			json.leftPadding = this._leftPadding;
-		}
-
-		if(this._rightPadding) {
-			json.rightPadding = this._rightPadding;
-		}
-
-		if(this._topPadding) {
-			json.topPadding = this._topPadding;
-		}
-
-		if(this._bottomPadding) {
-			json.bottomPadding = this._bottomPadding;
-		}
 
 		if(this._fontFamily) {
 			json.fontFamily = this._fontFamily;
@@ -228,22 +193,6 @@ export class Style extends Emitter {
 			this._forceGroundImage = ImageTile.create(json.forceGroundImage, evt => {
 				this.notifyChanged();
 			});
-		}
-
-		if(json.leftPadding) {
-			this._leftPadding = json.leftPadding;
-		}
-
-		if(json.rightPadding) {
-			this._rightPadding = json.rightPadding;
-		}
-
-		if(json.topPadding) {
-			this._topPadding = json.topPadding;
-		}
-
-		if(json.bottomPadding) {
-			this._bottomPadding = json.bottomPadding;
 		}
 
 		if(json.fontFamily) {
@@ -345,50 +294,6 @@ export class Style extends Emitter {
 		this.notifyChanged();
 	}
 
-
-	public get leftPadding() {
-		return this._leftPadding;
-	}
-	public set leftPadding(value) {
-		this._leftPadding = value;
-		this.notifyChanged();
-	}
-
-
-	public get rightPadding() {
-		return this._rightPadding;
-	}
-	public set rightPadding(value) {
-		this._rightPadding = value;
-		this.notifyChanged();
-	}
-
-
-	public get topPadding() {
-		return this._topPadding;
-	}
-	public set topPadding(value) {
-		this._topPadding = value;
-		this.notifyChanged();
-	}
-
-
-	public get bottomPadding() {
-		return this._bottomPadding;
-	}
-	public set bottomPadding(value) {
-		this._bottomPadding = value;
-		this.notifyChanged();
-	}
-
-
-	public get padding() {
-		return this._topPadding;
-	}
-	public set padding(value) {
-		this._leftPadding = this._topPadding = this._rightPadding = this.bottomPadding = value;
-		this.notifyChanged();
-	}
 
 	public get font() {
 		return this._fontFamily + " " + this._fontSize + "px";

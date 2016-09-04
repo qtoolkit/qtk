@@ -15,13 +15,6 @@ describe('Style', function() {
 	var image = qtk.ImageTile.create("http://localhost:9876/base/www/test.jpg", evt=> {
 	});
 	;
-  	it('test padding', (done) => {
-  		var style = new qtk.Style();
-		style.padding = 4;
-		var result = style.leftPadding === style.padding && style.topPadding === style.padding
-			&& style.bottomPadding === style.padding;
-		done(result ? null : new Error("padding is wrong"))
-  	});
   	
 	 it('test color', (done) => {
   		var style = new qtk.Style();
