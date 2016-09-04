@@ -1,3 +1,4 @@
+import {Rect} from './rect';
 import {Widget} from './widget';
 import {Layouter, LayouterFactory} from './layouter';
 
@@ -11,17 +12,20 @@ export class SimpleLayouter extends Layouter {
 		return TYPE;
 	}
 
-	public layoutChildren(widget:Widget, children:Array<Widget>) {
-		var pw = widget.w;
-		var ph = widget.h;
+	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
 		var arr = widget.children;
 		for(var i = 0, n = arr.length; i < n; i++) {
-			this.layoutChild(arr[i], pw, ph);
+			this.layoutChild(arr[i], rect);
 		}
+
+		return rect;
 	}
 
-	public layoutChild(child:Widget, pw:number, ph:number) {
+	public layoutChild(child:Widget, r:Rect) {
+		var pw = r.w;
+		var ph = r.h;
 		var param = <SimpleLayouterParam>child.layoutParam;
+		
 		if(param && param.type === TYPE && child.visible) {
 			var w = getValueOf(param.w, pw);
 			var h = getValueOf(param.h, ph);
@@ -46,7 +50,7 @@ export class SimpleLayouter extends Layouter {
 			f = param.y[0];
 			var y = (f === "c" || f === "m") ? (ph - h) >> 1 : getValueOf(param.y, ph);
 
-			child.moveResizeTo(x, y, w, h);
+			child.moveResizeTo(r.x + x, r.y + y, w, h);
 		}
 	}
 

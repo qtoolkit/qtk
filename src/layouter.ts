@@ -1,3 +1,4 @@
+import {Rect} from "./rect";
 import {Widget} from "./widget";
 
 /**
@@ -34,10 +35,13 @@ export class Layouter {
 
 	/**
 	 * 对子控件进行布局。
+	 * @param widget 父控件
+	 * @param children 只控件
+	 * @returns 全部子控件需要的区域。
 	 */
-	public layoutChildren(widget:Widget, children:Array<Widget>) {
+	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
+		return null;
 	}
-
 }
 
 /**
