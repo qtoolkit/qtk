@@ -106,13 +106,17 @@ export class ScrollView extends Widget {
 		}
 	}
 
-	public set offsetX(value:number) {
-		if(!this.slideToScroll) {
-			if(this.dragToScroll) {
-				value = Math.min(Math.max(0, value), this._cw - this.w);
-			}
-		}
+	public set validOffsetX(value:number) {
+		value = Math.min(Math.max(0, value), this._cw - this.w);
+		this.setAttr("ox", value, true);
+	}
+	
+	public set validOffsetY(value:number) {
+		value = Math.min(Math.max(0, value), this._ch - this.h);
+		this.setAttr("oy", value, true);
+	}
 
+	public set offsetX(value:number) {
 		this.setAttr("ox", value, true);
 	}
 
@@ -121,11 +125,6 @@ export class ScrollView extends Widget {
 	}
 
 	public set offsetY(value:number) {
-		if(!this.slideToScroll) {
-			if(this.dragToScroll) {
-				value = Math.min(Math.max(0, value), this._ch - this.h);
-			}
-		}
 		this.setAttr("oy", value, true);
 	}
 	public get offsetY() {
@@ -208,9 +207,11 @@ export class ScrollView extends Widget {
 			this.scroller.doTouchStart(this.pointerEventToTouches(evt), evt.timeStamp);
 		}
 
-		this.offsetPointerEvent(evt);
-		super.dispatchPointerDown(evt, ctx);
-		this.unOffsetPointerEvent(evt);
+		if(!this._pointerInBar) {
+			this.offsetPointerEvent(evt);
+			super.dispatchPointerDown(evt, ctx);
+			this.unOffsetPointerEvent(evt);
+		}
 	}
 
 	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
@@ -218,11 +219,11 @@ export class ScrollView extends Widget {
 			if(this.dragToScroll) {
 				if(this._pointerInVScrollDraggerRect) {
 					var dy = evt.y - evt.pointerDownY;
-					this.offsetY = this._saveOY + (dy/this.h)*this._ch;
+					this.validOffsetY = this._saveOY + (dy/this.h)*this._ch;
 				}
 				if(this._pointerInHScrollDraggerRect) {
 					var dx = evt.x - evt.pointerDownX;
-					this.offsetX = this._saveOX + (dx/this.w)*this._cw;
+					this.validOffsetX = this._saveOX + (dx/this.w)*this._cw;
 				}
 			}
 
@@ -230,9 +231,12 @@ export class ScrollView extends Widget {
 				this.scroller.doTouchMove(this.pointerEventToTouches(evt), evt.timeStamp);
 			}
 		}
-		this.offsetPointerEvent(evt);
-		super.dispatchPointerMove(evt, ctx);
-		this.unOffsetPointerEvent(evt);
+
+		if(!this._pointerInBar) {
+			this.offsetPointerEvent(evt);
+			super.dispatchPointerMove(evt, ctx);
+			this.unOffsetPointerEvent(evt);
+		}
 
 		this.requestRedraw();
 	}
@@ -240,13 +244,13 @@ export class ScrollView extends Widget {
 	protected dispatchPointerUp(evt:Events.PointerEvent) {
 		if(this.dragToScroll) {
 			if(this._pointerInVScrollBarRectUp) {
-				this.offsetY -= this.h;
+				this.validOffsetY = this.offsetY - this.h;
 			}else if(this._pointerInVScrollBarRectDown) {
-				this.offsetY += this.h;
+				this.validOffsetY = this.offsetY + this.h;
 			}else if(this._pointerInHScrollBarRectLeft) {
-				this.offsetX -= this.w;
+				this.validOffsetX = this.offsetX - this.w;
 			}else if(this._pointerInHScrollBarRectRight) {
-				this.offsetX += this.w;
+				this.validOffsetX = this.offsetX + this.w;
 			}
 			this._pointerInVScrollBarRectUp    = false;
 			this._pointerInVScrollBarRectDown  = false;
@@ -260,10 +264,13 @@ export class ScrollView extends Widget {
 			this.scroller.doTouchEnd(evt.timeStamp);
 		}
 
+		if(!this._pointerInBar) {
+			this.offsetPointerEvent(evt);
+			super.dispatchPointerUp(evt);
+			this.unOffsetPointerEvent(evt);
+		}
+
 		this._pointerInBar = false;
-		this.offsetPointerEvent(evt);
-		super.dispatchPointerUp(evt);
-		this.unOffsetPointerEvent(evt);
 	}
 
 	protected updateScrollerDimensions(w:number, h:number, contentWidth:number, contentHeight:number){
@@ -279,7 +286,7 @@ export class ScrollView extends Widget {
 	public hideScrollBar() {
 		if(!this.dragToScroll) {
 			var tween = new TWEEN.Tween(this);
-			tween.to({scrollBarOpacity:0}, 500).start()
+			tween.to({scrollBarOpacity:0}, 300).start()
 			tween.onComplete(function() {
 				this.scrollBarOpacity = 0;
 			});

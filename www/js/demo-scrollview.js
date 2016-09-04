@@ -7,14 +7,14 @@ function onReady(app) {
 	win.z = 100;
 	
 	var scrollView = qtk.ScrollView.create();
-	scrollView.dragToScroll = true;
+//	scrollView.dragToScroll = true;
 	scrollView.slideToScroll = true;
-	
+	scrollView.scrollBarOptions.hBarVisibility = qtk.ScrollerBarVisibility.INVISIBLE;
+
 	scrollView.name = "scrollView1";
 	scrollView.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
 	scrollView.set({contentWidth:500, contentHeight:6000});	
 	win.addChild(scrollView);
-	win.relayoutChildren();
 
 	var button = qtk.Button.create();
 	button.set({x:0, y:0, w:scrollView.w, h:60, text:"1"});

@@ -61,6 +61,8 @@ export {
 	HitTestResult,
 	Button,
 	ScrollView,
+	ScrollBarOptions,
+	ScrollerBarVisibility,
 	Image,
 	Dialog,
 	WindowNormal,
