@@ -19,6 +19,8 @@ export class InputEventDetail {
 	 */
 	public commandKey : boolean;
 
+	public timeStamp : number;
+
 	constructor(altKey?:boolean, ctrlKey?:boolean, shiftKey?:boolean, commandKey?:boolean) {
 		this.altKey = altKey;
 		this.ctrlKey = ctrlKey;

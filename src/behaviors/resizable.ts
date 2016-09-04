@@ -152,36 +152,28 @@ export class Resizable extends Behavior {
 			var dy = evt.y - evt.pointerDownY;
 			switch(this.pointerDownArea) {
 				case "n": {
-					widget.move(this.x, this.y+dy);
-					widget.resize(this.w, this.h-dy);
+					widget.moveResizeTo(this.x, this.y+dy, this.w, this.h-dy);
 					break;
 				}case "ne": {
-					widget.move(this.x, this.y+dy);
-					widget.resize(this.w+dx, this.h-dy);
+					widget.moveResizeTo(this.x, this.y+dy, this.w+dx, this.h-dy);
 					break;
 				}case "nw": {
-					widget.move(this.x+dx, this.y+dy);
-					widget.resize(this.w-dx, this.h-dy);
+					widget.moveResizeTo(this.x+dx, this.y+dy, this.w-dx, this.h-dy);
 					break;
 				}case "w": {
-					widget.move(this.x+dx, this.y);
-					widget.resize(this.w-dx, this.h);
+					widget.moveResizeTo(this.x+dx, this.y, this.w-dx, this.h);
 					break;
 				}case "e": {
-					widget.move(this.x, this.y);
-					widget.resize(this.w+dx, this.h);
+					widget.moveResizeTo(this.x, this.y, this.w+dx, this.h);
 					break;
 				}case "s": {
-					widget.move(this.x, this.y);
-					widget.resize(this.w, this.h+dy);
+					widget.moveResizeTo(this.x, this.y, this.w, this.h+dy);
 					break;
 				}case "se": {
-					widget.move(this.x, this.y);
-					widget.resize(this.w+dx, this.h+dy);
+					widget.moveResizeTo(this.x, this.y, this.w+dx, this.h+dy);
 					break;
 				}case "sw": {
-					widget.move(this.x+dx, this.y);
-					widget.resize(this.w-dx, this.h+dy);
+					widget.moveResizeTo(this.x+dx, this.y, this.w-dx, this.h+dy);
 					break;
 				}
 			}

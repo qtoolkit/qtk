@@ -1,3 +1,4 @@
+/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
 import {IMainLoop} from "./imain-loop";
@@ -7,6 +8,7 @@ import {Style} from "./style";
 import {Canvas} from "./canvas";
 import {Point} from "./point";
 import {Rect} from "./rect";
+import {Window} from "./window";
 import {Behavior, BehaviorFactory} from "./behaviors/behavior";
 import {Layouter, LayouterFactory} from './layouter';
 import {Emitter} from "./emitter";
@@ -84,6 +86,10 @@ export class Widget extends Emitter {
 
 		return HitTestResult.NONE;
 	}
+	
+	protected selfHitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+		return this.hitTest(x, y, ctx);	
+	}
 
 	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		var detail = evt;
@@ -93,7 +99,7 @@ export class Widget extends Emitter {
 
 		ctx.save();
 		this.applyTransform(ctx);
-		var hitTestResult = this.hitTest(detail.x, detail.y, ctx);
+		var hitTestResult = this.selfHitTest(detail.x, detail.y, ctx);
 
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
@@ -116,7 +122,6 @@ export class Widget extends Emitter {
 		ctx.restore();
 
 		this.hitTestResult = hitTestResult;
-		return hitTestResult !== HitTestResult.NONE;
 	}
 
 	protected dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
@@ -135,7 +140,7 @@ export class Widget extends Emitter {
 		this.applyTransform(ctx);
 		
 		var detail = evt;
-		var hitTestResult = this.hitTest(detail.x, detail.y, ctx);
+		var hitTestResult = this.selfHitTest(detail.x, detail.y, ctx);
 	
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
@@ -328,7 +333,7 @@ export class Widget extends Emitter {
 	public scaleTo(sx:number, sy:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
-				tween.to({ scaleX : sx, scaleY : sy}, duration || 1000).start();
+				tween.to({ scaleX : sx, scaleY : sy}, duration).start();
 			return tween;
 		}else{
 			this.scaleX = sx;
@@ -341,7 +346,7 @@ export class Widget extends Emitter {
 	public rotateTo(rotation:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
-				tween.to({ rotation : rotation}, duration || 1000).start();
+				tween.to({ rotation : rotation}, duration).start();
 
 			return tween;
 		}else{
@@ -354,7 +359,7 @@ export class Widget extends Emitter {
 	public moveTo(x:number, y:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
-				tween.to({ x: x, y: y}, duration || 1000).start();
+				tween.to({ x: x, y: y}, duration).start();
 
 			return tween;
 		}else{
@@ -367,12 +372,25 @@ export class Widget extends Emitter {
 	public moveResizeTo(x:number, y:number, w:number, h:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
-				tween.to({ x: x, y: y, w:w, h:h}, duration || 1000).start();
+				tween.to({ x: x, y: y, w:w, h:h}, duration).start();
 
 			return tween;
 		}else{
 			this.x = x;
-			this.x = x;
+			this.y = y;
+			this.w = w;
+			this.h = h;
+			return null;
+		}
+	}
+	
+	public resizeTo(w:number, h:number, duration?:number) : TWEEN.Tween {
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({w:w, h:h}, duration).start();
+
+			return tween;
+		}else{
 			this.w = w;
 			this.h = h;
 			return null;
@@ -462,49 +480,12 @@ export class Widget extends Emitter {
 		return ret;
 	}
 
-///////////////////////////////////////////
-	public move(x:number, y:number) : Widget {
-		this._x = x;
-		this._y = y;
-		this.dispatchEvent({type:Events.MOVE});
-		this.requestRedraw();
-
-		return this;
-	}
-
-	public resize(w:number, h:number) : Widget {
-		this._w = w;
-		this._h = h;
-		
-		this.dispatchEvent({type:Events.RESIZE});
-		this.requestRedraw();
-
-		return this;
-	}
-
-	public translateCavnas(ctx:any) : Widget {
-		if(!this._canvas) {
-			ctx.translate(this.x, this.y);
-		}
-
-		return this;
-	}
-
-	public drawBackground(ctx:any, style:Style) : Widget {
+	protected drawBackground(ctx:any, style:Style) : Widget {
 		if(style.backGroundImage) {
 			style.backGroundImage.draw(ctx, style.backGroundImageDrawType, 0, 0, this.w, this.h); 
 		}else if(style.backGroundColor || (style.lineColor && style.lineWidth)) {
-			Graphics.drawRoundRect(ctx, this.w, this.h, style.roundRadius||0);
-			if(style.backGroundColor) {
-				ctx.fillStyle = style.backGroundColor;
-				ctx.fill();
-			}
-
-			if(style.lineColor) {
-				ctx.lineWidth = style.lineWidth;
-				ctx.strokeStyle = style.lineColor;
-				ctx.stroke();
-			}
+			Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth,
+					0, 0, this.w, this.h, style.roundRadius);
 		}
 		return this;
 	}
@@ -513,7 +494,7 @@ export class Widget extends Emitter {
 		return this._text;
 	}
 
-	public drawText(ctx:any, style:Style) : Widget {
+	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
 
 		if(text && style.fontColor) {
@@ -527,7 +508,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public drawChildren(ctx:any) : Widget {
+	protected drawChildren(ctx:any) : Widget {
 		this._children.forEach(function(child) {
 			if(child.visible) {
 				child.draw(ctx);
@@ -537,7 +518,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public drawTips(ctx:any, style:Style) : Widget {
+	protected drawTips(ctx:any, style:Style) : Widget {
 		return this;
 	}
 
@@ -1057,10 +1038,10 @@ export class Widget extends Emitter {
 		}
 	}
 
-	public get win() : Widget {
+	public get win() : Window {
 		for(var iter:Widget = this; iter !== null; iter = iter._parent) {
 			if(iter._isWindow) {
-				return iter;
+				return <Window>iter;
 			}
 		}
 
@@ -1084,13 +1065,14 @@ export class Widget extends Emitter {
 		var oldValue = this[attrName];
 
 		if(oldValue !== newValue) {
+			this[attrName] = newValue;
+			this.requestRedraw();
+			
 			if(notify) {
 				var evt = Events.ChangeEvent.create(attr, oldValue, newValue);
 				this.dispatchEvent(evt);
+				evt.dispose();
 			}
-			this.requestRedraw();
-			this[attrName] = newValue;
-			this.requestRedraw();
 		}
 
 		return this;

@@ -5,13 +5,13 @@ describe('DnD', function() {
 	app.init({themeDataURL:"/base/www/theme/default/theme.json"});
 	var win = qtk.WindowNormal.create().init(app, 0, 0, 1000, 1000, false);
 	var widget = qtk.Widget.create();
-	widget.move(0, 0).resize(100, 100);
+	widget.moveResizeTo(0, 0, 100, 100);
 	win.addChild(widget);
 	widget.useBehavior("draggable");	
 	
 	var target = qtk.Widget.create();
 	target.name = "target";
-	target.move(200, 200).resize(200, 200);
+	target.moveResizeTo(200, 200, 200, 200);
 	win.addChild(target);
 	target.useBehavior("droppable");	
 

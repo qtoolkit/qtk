@@ -9,7 +9,7 @@ import {Dialog} from "./dialog";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Button} from "./button";
-import {ScrollView} from "./scroll-view";
+import {ScrollerBarVisibility, ScrollBarOptions, ScrollView} from "./scroll-view";
 import {Image} from "./image";
 import {Style} from "./style";
 import {WidgetFactory} from "./widget-factory";

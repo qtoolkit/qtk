@@ -46,7 +46,7 @@ export class SimpleLayouter extends Layouter {
 			f = param.y[0];
 			var y = (f === "c" || f === "m") ? (ph - h) >> 1 : getValueOf(param.y, ph);
 
-			child.move(x, y).resize(w, h);
+			child.moveResizeTo(x, y, w, h);
 		}
 	}
 

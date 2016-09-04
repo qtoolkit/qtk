@@ -47,6 +47,7 @@ export class Event {
 	private _target : any;
 	private _propagationStopped : boolean;
 
+	public timeStamp : number;
 	public init(type:string, detail?:any) : any {
 		this._type = type;
 		this._target = null;
@@ -149,6 +150,7 @@ export class PointerEvent extends InputEvent {
 		this.id = detail.id;
 		this.x = detail.x;
 		this.y = detail.y;
+		this.timeStamp = detail.timeStamp;
 		this.pointerDown = detail.pointerDown;
 		this.pointerDownX = detail.pointerDownX;
 		this.pointerDownY = detail.pointerDownY;
@@ -172,6 +174,7 @@ export class WheelEvent extends InputEvent {
 	public init(type:string, detail:WheelEventDetail) : any {
 		super.init(type, detail);
 		this.delta = detail.delta;
+		this.timeStamp = detail.timeStamp;
 
 		return this;
 	}
@@ -189,6 +192,7 @@ export class KeyEvent extends InputEvent {
 	public init(type:string, detail:KeyEventDetail) : any {
 		super.init(type, detail);
 		this.keyCode = detail.keyCode;
+		this.timeStamp = detail.timeStamp;
 
 		return this;
 	}

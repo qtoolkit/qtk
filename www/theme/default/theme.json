@@ -4,6 +4,13 @@
 			"backGroundColor" : "#606060"
 		}
 	},
+	"scroll-view": {
+		"normal" : {
+			"lineWidth" : 1,
+			"lineColor" : "#EEEEEE",
+			"backGroundColor" : "#FFFFFF"
+		}
+	},
 	"window-normal": {
 		"normal" : {
 			"backGroundColor" : "gray"

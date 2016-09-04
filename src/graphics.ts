@@ -6,7 +6,52 @@ export enum RoundType {
 };
 
 export class Graphics {
-	public static drawRoundRect(ctx:any, w:number, h:number, r:number, type?:RoundType) {
+	public static drawLine(ctx:any, strokeStyle:string, lineWidth:number, 
+						   x1:number, y1:number, x2:number, y2:number) {
+		if(strokeStyle && lineWidth > 0) {
+			ctx.beginPath();
+			ctx.lineWidth = lineWidth;
+			ctx.strokeStyle = strokeStyle;
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+			ctx.stroke();
+		}
+	}
+
+	public static drawRect(ctx:any, fillStyle:string, strokeStyle:string, lineWidth:number, 
+			x:number, y:number, w:number, h:number) {
+		if(fillStyle || (strokeStyle && lineWidth > 0)) {
+			ctx.beginPath();
+			ctx.rect(x, y, w, h);
+			if(fillStyle) {
+				ctx.fillStyle = fillStyle;
+				ctx.fill();
+			}
+			if(strokeStyle && lineWidth > 0) {
+				ctx.lineWidth = lineWidth;
+				ctx.strokeStyle = strokeStyle;
+				ctx.stroke();
+			}
+		}
+	}
+
+	public static drawRoundRect(ctx:any, fillStyle:string, strokeStyle:string, lineWidth:number, 
+			x:number, y:number, w:number, h:number, r:number, type?:RoundType) {
+		if(fillStyle || (strokeStyle && lineWidth > 0)) {
+			Graphics.roundRect(ctx, x, y, w, h, r, type);
+			if(fillStyle) {
+				ctx.fillStyle = fillStyle;
+				ctx.fill();
+			}
+			if(strokeStyle && lineWidth > 0) {
+				ctx.lineWidth = lineWidth;
+				ctx.strokeStyle = strokeStyle;
+				ctx.stroke();
+			}
+		}
+	}
+
+	public static roundRect(ctx:any, x:number, y:number, w:number, h:number, r:number, type?:RoundType) {
 		if(!type) {
 			type = RoundType.TL | RoundType.TR | RoundType.BL | RoundType.BR;
 		}
@@ -14,11 +59,12 @@ export class Graphics {
 		var d = r << 1;
 		ctx.beginPath();
 		if(w < d || h < d || !r) {
-			ctx.rect(0, 0, w, h);
+			ctx.rect(x, y, w, h);
 
 			return;
 		}
 
+		ctx.translate(x, y);
 		if(type & RoundType.TL) {
 			ctx.moveTo(0, r);
 			ctx.quadraticCurveTo(0, 0, r, 0);
@@ -48,5 +94,6 @@ export class Graphics {
 		}
 
 		ctx.closePath();
+		ctx.translate(-x, -y);
 	}
 };

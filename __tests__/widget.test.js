@@ -92,5 +92,27 @@ describe('Widget', function() {
 			done(result ? null : new Error("widget add/remove/find."));
 		});
     });
+    
+    it('test moveTo', (done) => {
+		var widget = qtk.Widget.create();
+		widget.moveTo(10, 20);
+		var result = widget.x === 10 && widget.y === 20;
+		done(result ? null : new Error("widget moveTo."));
+	});
+    
+    it('test resizeTo', (done) => {
+		var widget = qtk.Widget.create();
+		widget.resizeTo(30, 40);
+		var result = widget.w === 30 && widget.h === 40;
+		done(result ? null : new Error("widget resizeTo."));
+	});
+    
+    it('test moveResizeTo', (done) => {
+		var widget = qtk.Widget.create();
+		widget.moveResizeTo(10, 20, 30, 40);
+		var result = widget.x === 10 && widget.y === 20 && widget.w === 30 && widget.h === 40;
+
+		done(result ? null : new Error("widget moveResizeTo."));
+	});
 });
   

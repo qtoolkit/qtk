@@ -2,12 +2,12 @@
 describe('Movable', function() {
 	var Events = qtk.Events;
 	var app = new qtk.Application.create("test");
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
-		var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
-		var widget = qtk.Widget.create();
-		widget.move(0, 0).resize(100, 100);
-		win.addChild(widget);
-		widget.useBehavior("movable");	
+	app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+	var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
+	var widget = qtk.Widget.create();
+	widget.moveResizeTo(0, 0, 100, 100);
+	win.addChild(widget);
+	widget.useBehavior("movable");	
 	var matrixStack = qtk.MatrixStack.create();
 
     it('test Movable', (done) => {

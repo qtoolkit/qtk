@@ -34,6 +34,7 @@ function getPointerDetail(e) : PointerEventDetail {
 		var x = Math.max(e.pageX||0, e.x || e.clientX);
 		var y = Math.max(e.pageY||0, e.y || e.clientY);
 		lastDetail = PointerEventDetail.create(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
+		lastDetail.timeStamp = e.timeStamp;
 	}
 
 	return lastDetail;
@@ -131,6 +132,7 @@ function onPointerUp(evt) {
 function onWheel(evt) {
 	var delta = evt.wheelDelta || evt.detail * -8;
 	var detail = WheelEventDetail.create(delta, altKey, ctrlKey, shiftKey, commandKey);
+	detail.timeStamp = evt.timeStamp;
 	dispatchEvent(evt.target, Events.WHEEL, detail);
 	detail.dispose();
 }
@@ -159,6 +161,7 @@ function updateKeysStatus(keyCode, value) {
 function onKeyDown(evt) {
 	updateKeysStatus(evt.keyCode, true);
 	var detail = KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	detail.timeStamp = evt.timeStamp;
 	dispatchEvent(evt.target, Events.KEYDOWN, detail);
 	detail.dispose();
 }
@@ -166,6 +169,7 @@ function onKeyDown(evt) {
 function onKeyUp(evt) {
 	updateKeysStatus(evt.keyCode, false);
 	var detail = KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	detail.timeStamp = evt.timeStamp;
 	dispatchEvent(evt.target, Events.KEYUP, detail);
 	detail.dispose();
 }

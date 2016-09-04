@@ -3,7 +3,7 @@ describe('SimpleLayouter', function() {
 	this.timeout(3000);
 	
 	var win = qtk.WindowNormal.create();
-	win.resize(600, 600);
+	win.resizeTo(600, 600);
 	win.childrenLayouter = qtk.SimpleLayouter.create();
    
     it('test px', (done) => {
