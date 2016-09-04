@@ -1,4 +1,4 @@
-import {Widget} from "../widget";
+import {Widget} from "../controls/widget";
 import Events = require("../events");
 import inputEventAdapter = require("../input-event-adapter");
 

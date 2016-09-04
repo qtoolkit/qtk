@@ -1,23 +1,23 @@
-/// <reference path="../typings/globals/tween.js/index.d.ts"/>
-/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+/// <reference path="../../typings/globals/tween.js/index.d.ts"/>
+/// <reference path="../../typings/globals/eventemitter3/index.d.ts"/>
 
-import {IMainLoop} from "./imain-loop";
-import TWEEN = require("tween.js");
-import Events = require("./events");
-import {Style} from "./style";
-import {Canvas} from "./canvas";
-import {Point} from "./point";
-import {Rect} from "./rect";
+import {Rect} from "../rect";
+import {Point} from "../point";
+import {Style} from "../style";
+import {Canvas} from "../canvas";
 import {Window} from "./window";
-import {Behavior, BehaviorFactory} from "./behaviors/behavior";
-import {Layouter, LayouterFactory} from './layouter';
-import {Emitter} from "./emitter";
-import {Graphics} from "./graphics";
-import {ImageTile} from "./image-tile";
-import {MatrixStack} from "./matrix-stack";
-import {IApplication} from "./iapplication";
-import {IThemeManager} from "./itheme-manager";
-import {DirtyRectContext} from "./dirty-rect-context";
+import TWEEN = require("tween.js");
+import {Emitter} from "../emitter";
+import {Graphics} from "../graphics";
+import Events = require("../events");
+import {ImageTile} from "../image-tile";
+import {IMainLoop} from "../imain-loop";
+import {MatrixStack} from "../matrix-stack";
+import {IApplication} from "../iapplication";
+import {IThemeManager} from "../itheme-manager";
+import {Layouter, LayouterFactory} from '../layouter';
+import {DirtyRectContext} from "../dirty-rect-context";
+import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 
 /**
  * Widget是所有控件的基类。

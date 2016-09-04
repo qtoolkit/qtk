@@ -8,9 +8,8 @@ function onReady(app) {
 	
 	var scrollView = qtk.ScrollView.create();
 	scrollView.dragToScroll = true;
-//	scrollView.slideToScroll = true;
-	scrollView.scrollBarOpacity = 0.5;
-	scrollView.scrollBarOptions.hBarVisibility = qtk.ScrollerBarVisibility.INVISIBLE;
+	scrollView.slideToScroll = true;
+//	scrollView.scrollBarStyle.vBarVisibility = qtk.ScrollerBarVisibility.INVISIBLE;
 
 	scrollView.name = "scrollView1";
 	scrollView.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");

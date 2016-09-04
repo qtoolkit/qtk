@@ -1,9 +1,9 @@
 
 import {Widget} from "./widget";
 import {Window, WindowType} from "./window";
-import {IApplication} from "./iapplication";
+import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "./recyclable-creator";
+import {RecyclableCreator} from "../recyclable-creator";
 
 export class Dialog extends Window {
 	

@@ -1,18 +1,18 @@
-/// <reference path="../typings/globals/scroller/index.d.ts"/>
-/// <reference path="../typings/globals/tween.js/index.d.ts"/>
+/// <reference path="../../typings/globals/scroller/index.d.ts"/>
+/// <reference path="../../typings/globals/tween.js/index.d.ts"/>
 
-import {Point} from "./point";
-import {Rect} from "./rect";
-import {Style} from "./style";
-import {Graphics} from "./graphics";
-import {Scroller} from "scroller";
-import Events = require("./events");
-import TWEEN = require("tween.js");
-import {MatrixStack} from "./matrix-stack";
-import {WidgetFactory} from "./widget-factory";
+import {Rect} from "../rect";
+import {Point} from "../point";
+import {Style} from "../style";
 import {Window} from "./window";
+import {Scroller} from "scroller";
+import TWEEN = require("tween.js");
+import Events = require("../events");
+import {Graphics} from "../graphics";
+import {MatrixStack} from "../matrix-stack";
+import {WidgetFactory} from "./widget-factory";
+import {RecyclableCreator} from "../recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";
-import {RecyclableCreator} from "./recyclable-creator";
 
 /**
  * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
@@ -370,8 +370,7 @@ export class ScrollView extends Widget {
 		}
 	
 		var win : Window = this.win;
-		var p = this.toLocalPoint(Point.point.copy(win.pointerPosition));
-		if(p.isIn(draggerX, draggerY, draggerW, draggerH)) {
+		if(this._pointerInVScrollDraggerRect) {
 			draggerColor = options.foreGroundOverColor;
 		}
 		
@@ -410,8 +409,7 @@ export class ScrollView extends Widget {
 		}
 
 		var win : Window = this.win;
-		var p = this.toLocalPoint(Point.point.copy(win.pointerPosition));
-		if(p.isIn(draggerX, draggerY, draggerW, draggerH)) {
+		if(this._pointerInHScrollDraggerRect) {
 			draggerColor = options.foreGroundOverColor;
 		}
 

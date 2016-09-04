@@ -1,7 +1,7 @@
 
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "./recyclable-creator";
+import {RecyclableCreator} from "../recyclable-creator";
 
 export class Button extends Widget {
 	constructor() {

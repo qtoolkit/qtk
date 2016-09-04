@@ -1,5 +1,5 @@
 import {Rect} from './rect';
-import {Widget} from './widget';
+import {Widget} from './controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
 const TYPE = "SimpleLayouter";

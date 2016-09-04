@@ -1,5 +1,5 @@
 import {Widget} from "./widget";
-import {Factory} from "./factory";
+import {Factory} from "../factory";
 
 /**
  * Widget工厂，注册控件的创建函数和根据控件的类型创建控件。

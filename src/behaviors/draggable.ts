@@ -1,7 +1,7 @@
 
-import {Widget} from "../widget";
 import Events = require("../events");
 import {KeyEvent} from "../key-event";
+import {Widget} from "../controls/widget";
 import {Behavior, BehaviorFactory} from "./behavior";
 import inputEventAdapter = require("../input-event-adapter");
 

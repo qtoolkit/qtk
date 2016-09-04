@@ -1,9 +1,9 @@
-import {Point} from "./point";
+import {Point} from "../point";
 import {Widget} from "./widget";
-import Events = require("./events");
-import {IApplication} from "./iapplication";
-import {MatrixStack} from "./matrix-stack";
-import inputEventAdapter = require("./input-event-adapter");
+import Events = require("../events");
+import {IApplication} from "../iapplication";
+import {MatrixStack} from "../matrix-stack";
+import inputEventAdapter = require("../input-event-adapter");
 
 export enum WindowType {
 	NORMAL,

@@ -1,9 +1,9 @@
 
-import {Style} from "./style";
+import {Style} from "../style";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {ImageTile, ImageDrawType} from "./image-tile";
-import {RecyclableCreator} from "./recyclable-creator";
+import {ImageTile, ImageDrawType} from "../image-tile";
+import {RecyclableCreator} from "../recyclable-creator";
 
 /**
  * 图片控件。 
