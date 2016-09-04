@@ -14,42 +14,24 @@ import {Window} from "./window";
 import {Widget, WidgetState, HitTestResult} from "./widget";
 import {RecyclableCreator} from "./recyclable-creator";
 
+/**
+ * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
+ */
 export class ScrollView extends Widget {
-	protected _ox : number;
-	protected _oy : number;
-	protected _cw : number;
-	protected _ch : number;
-	protected _touches : any;
-	protected _saveOX : number;
-	protected _saveOY : number;
-	protected _scroller : Scroller;
-	protected _vScrollBarRect : Rect;
-	protected _hScrollBarRect : Rect;
-	protected _vScrollDraggerRect : Rect;
-	protected _hScrollDraggerRect : Rect;
-	
-	protected _dragToScroll : boolean;
-	protected _slideToScroll : boolean;
-	protected _scrollBarOpacity : number;
-	protected _scrollerOptions : any;
-	protected _scrollBarOptions : ScrollBarOptions;
-	
-	protected _pointerInBar : boolean;
-	protected _pointerInVScrollBarRectUp : boolean;
-	protected _pointerInVScrollBarRectDown : boolean;
-	protected _pointerInHScrollBarRectLeft : boolean;
-	protected _pointerInHScrollBarRectRight : boolean;
-	protected _pointerInVScrollDraggerRect : boolean;
-	protected _pointerInHScrollDraggerRect : boolean;
-
-	public set scrollBarOpacity(value:number) {
+	/*
+	 * 滚动条的透明度。Mobile风格的滚动条，滚动完成时，以动画方式隐藏。
+	 */
+	protected set scrollBarOpacity(value:number) {
 		this._scrollBarOpacity = value;
 		this.requestRedraw();
 	}
-	public get scrollBarOpacity() : number {
+	protected get scrollBarOpacity() : number {
 		return this._scrollBarOpacity;
 	}
 
+	/**
+	 * 启用滚动条拖动来实现滚动。
+	 */
 	public set dragToScroll(value:boolean) {
 		this._dragToScroll = value;
 	}
@@ -57,6 +39,9 @@ export class ScrollView extends Widget {
 		return this._dragToScroll;
 	}
 
+	/**
+	 * 启用手势滑动来实现滚动。
+	 */
 	public set slideToScroll(value:boolean) {
 		this._slideToScroll = value;
 		if(!this._scroller) {
@@ -68,16 +53,22 @@ export class ScrollView extends Widget {
 		return this._slideToScroll;
 	}
 
-	public set scrollBarOptions(value:ScrollBarOptions) {
-		this._scrollBarOptions = value;
+	/**
+	 * 滚动条的样式。
+	 */
+	public set scrollBarStyle(value:ScrollBarStyle) {
+		this._scrollBarStyle = value;
 	}
 
-	public get scrollBarOptions() : ScrollBarOptions {
-		return this._scrollBarOptions;
+	public get scrollBarStyle() : ScrollBarStyle {
+		return this._scrollBarStyle;
 	}
 
-	public isVScrollBarVisible() : boolean {
-		var visibility = this.scrollBarOptions.vBarVisibility;
+	/**
+	 * 垂直滚动条是否可见。
+	 */
+	protected isVScrollBarVisible() : boolean {
+		var visibility = this.scrollBarStyle.vBarVisibility;
 		switch(visibility) {
 			case ScrollerBarVisibility.INVISIBLE: {
 				return false;
@@ -91,8 +82,11 @@ export class ScrollView extends Widget {
 		}
 	}
 	
-	public isHScrollBarVisible() : boolean {
-		var visibility = this.scrollBarOptions.hBarVisibility;
+	/**
+	 * 水平滚动条是否可见。
+	 */
+	protected isHScrollBarVisible() : boolean {
+		var visibility = this.scrollBarStyle.hBarVisibility;
 		switch(visibility) {
 			case ScrollerBarVisibility.INVISIBLE: {
 				return false;
@@ -106,16 +100,25 @@ export class ScrollView extends Widget {
 		}
 	}
 
+	/**
+	 * 设置水平方向上的偏移，并确保其值的有些性。
+	 */
 	public set validOffsetX(value:number) {
 		value = Math.min(Math.max(0, value), this._cw - this.w);
 		this.setAttr("ox", value, true);
 	}
 	
+	/**
+	 * 设置垂直方向上的偏移，并确保其值的有些性。
+	 */
 	public set validOffsetY(value:number) {
 		value = Math.min(Math.max(0, value), this._ch - this.h);
 		this.setAttr("oy", value, true);
 	}
 
+	/**
+	 * 水平方向上的偏移。
+	 */
 	public set offsetX(value:number) {
 		this.setAttr("ox", value, true);
 	}
@@ -124,6 +127,9 @@ export class ScrollView extends Widget {
 		return this._ox;
 	}
 
+	/**
+	 * 垂直方向上的偏移。
+	 */
 	public set offsetY(value:number) {
 		this.setAttr("oy", value, true);
 	}
@@ -131,6 +137,9 @@ export class ScrollView extends Widget {
 		return this._oy;
 	}
 
+	/**
+	 * 滚动视图所包含内容的宽度。
+	 */
 	public set contentWidth(value:number) {
 		this.setAttr("cw", value, true);
 	}
@@ -138,6 +147,9 @@ export class ScrollView extends Widget {
 		return this._cw;
 	}
 
+	/**
+	 * 滚动视图所包含内容的高度。
+	 */
 	public set contentHeight(value:number) {
 		this.setAttr("ch", value, true);
 	}
@@ -149,15 +161,25 @@ export class ScrollView extends Widget {
 		return super.selfHitTest(x-this._ox, y-this._oy, ctx);
 	}
 
+	/*
+	 * 在处理指针事件前，先加上滚动的偏移。
+	 */
 	protected offsetPointerEvent(evt:Events.PointerEvent) {
 		evt.x += this._ox;
 		evt.y += this._oy;
 	}
+	
+	/*
+	 * 在处理指针事件后，再减去滚动的偏移。
+	 */
 	protected unOffsetPointerEvent(evt:Events.PointerEvent) {
 		evt.x -= this._ox;
 		evt.y -= this._oy;
 	}
 
+	/*
+	 * 把指针事件转换成touch，以便Scroller可以处理。
+	 */
 	protected pointerEventToTouches(evt:Events.PointerEvent) {
 		var touch = this._touches[0];
 		touch.id = evt.id;
@@ -167,10 +189,11 @@ export class ScrollView extends Widget {
 		return this._touches;
 	}
 
+	/*
+	 * 先处理滚动条的事件，再处理Scroller事件，最后发给子控件。
+	 */
 	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this._pointerInBar = false;
-		this._scrollBarOpacity = 1;
-
 		if(this.dragToScroll) {
 			this._saveOX = this._ox;
 			this._saveOY = this._oy;
@@ -204,6 +227,7 @@ export class ScrollView extends Widget {
 		}
 
 		if(!this._pointerInBar && this.slideToScroll) {
+			this._scrollBarOpacity = 1;
 			this.scroller.doTouchStart(this.pointerEventToTouches(evt), evt.timeStamp);
 		}
 
@@ -273,6 +297,9 @@ export class ScrollView extends Widget {
 		this._pointerInBar = false;
 	}
 
+	/*
+	 * 更新Scroller的参数。
+	 */
 	protected updateScrollerDimensions(w:number, h:number, contentWidth:number, contentHeight:number){
 		if(this._slideToScroll) {
 			this.scroller.setDimensions(w, h, contentWidth, contentHeight);
@@ -318,10 +345,13 @@ export class ScrollView extends Widget {
 		});
 	}
 
+	/*
+	 * 绘制垂直滚动条。
+	 */
 	protected drawScrollBarV(ctx:any, hBarVisible:boolean){
 		var w = this.w;
 		var h = this.h;
-		var options = this.scrollBarOptions;
+		var options = this.scrollBarStyle;
 		
 		var barY = 0;
 		var barH = h;
@@ -355,10 +385,13 @@ export class ScrollView extends Widget {
 		Graphics.drawLine(ctx, lineColor, lineWidth, barX, barY, barX, hBarVisible ? barH-barW : barH);		
 	}
 
+	/*
+	 * 绘制水平滚动条。
+	 */
 	protected drawScrollBarH(ctx:any, vBarVisible){
 		var w = this.w;
 		var h = this.h;
-		var options = this.scrollBarOptions;
+		var options = this.scrollBarStyle;
 		var barX = 0;
 		var barW = w;
 		var barH = options.size;
@@ -393,6 +426,9 @@ export class ScrollView extends Widget {
 		Graphics.drawLine(ctx, lineColor, lineWidth, barX, barY, vBarVisible ? barW-barH : barW, barY);		
 	}
 
+	/*
+	 * 绘制滚动条。
+	 */
 	protected drawScrollBar(ctx:any){
 		var hBarVisible = this.isHScrollBarVisible();
 		var vBarVisible = this.isVScrollBarVisible();
@@ -411,6 +447,13 @@ export class ScrollView extends Widget {
 		}
 	}
 
+	/*
+	 * 绘制子控件。
+	 */
+	protected doDrawChildren(ctx:any) {
+		super.drawChildren(ctx);
+	}
+
 	protected drawChildren(ctx:any) : Widget {
 		var ox = this._ox;
 		var oy = this._oy;
@@ -419,13 +462,16 @@ export class ScrollView extends Widget {
 		ctx.clip();
 		
 		ctx.translate(-ox, -oy);
-		super.drawChildren(ctx);
+		this.doDrawChildren(ctx);
 		ctx.translate(ox, oy);
 		this.drawScrollBar(ctx);
 
 		return this;
 	}
 
+	/**
+	 * 滚动到指定的位置。
+	 */
 	public scrollTo(offsetX:number, offsetY:number, duration:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
@@ -459,7 +505,7 @@ export class ScrollView extends Widget {
 		
 		this._scroller = null;
 		this._scrollBarOpacity = 1;
-		this._scrollBarOptions = new ScrollBarOptions();
+		this._scrollBarStyle = new ScrollBarStyle();
 		this._touches = [{pageX:0, pageY:0, id:0}];
 		this._hScrollBarRect = Rect.create(0, 0, 0, 0);
 		this._vScrollBarRect = Rect.create(0, 0, 0, 0);
@@ -472,6 +518,33 @@ export class ScrollView extends Widget {
 
 		return this;
 	}
+
+	protected _ox : number;
+	protected _oy : number;
+	protected _cw : number;
+	protected _ch : number;
+	protected _touches : any;
+	protected _saveOX : number;
+	protected _saveOY : number;
+	protected _scroller : Scroller;
+	protected _vScrollBarRect : Rect;
+	protected _hScrollBarRect : Rect;
+	protected _vScrollDraggerRect : Rect;
+	protected _hScrollDraggerRect : Rect;
+	
+	protected _dragToScroll : boolean;
+	protected _slideToScroll : boolean;
+	protected _scrollBarOpacity : number;
+	protected _scrollerOptions : any;
+	protected _scrollBarStyle : ScrollBarStyle;
+	
+	protected _pointerInBar : boolean;
+	protected _pointerInVScrollBarRectUp : boolean;
+	protected _pointerInVScrollBarRectDown : boolean;
+	protected _pointerInHScrollBarRectLeft : boolean;
+	protected _pointerInHScrollBarRectRight : boolean;
+	protected _pointerInVScrollDraggerRect : boolean;
+	protected _pointerInHScrollDraggerRect : boolean;
 
 	constructor() {
 		super(ScrollView.TYPE);
@@ -495,7 +568,7 @@ export enum ScrollerBarVisibility {
 	ALWAYS
 };
 
-export class ScrollBarOptions {
+export class ScrollBarStyle {
 	public size : number;
 	public roundRadius : number;
 	public draggerSize : number;
@@ -512,7 +585,7 @@ export class ScrollBarOptions {
 		this.draggerSize = 8;
 		this.roundRadius = 4;
 		this.lineColor = "#E7E7E7";
-		this.lineColor = "red";
+		this.lineColor = "#E0E0E0";
 		this.lineWidth = 0.5;
 		this.backGroundColor = "#FAFAFA";
 		this.foreGroundColor = "#c1c1c1";
@@ -521,7 +594,6 @@ export class ScrollBarOptions {
 		this.vBarVisibility = ScrollerBarVisibility.AUTO; 
 	}
 };
-
 
 WidgetFactory.register(ScrollView.TYPE, ScrollView.create);
 

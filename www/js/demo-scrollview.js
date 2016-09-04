@@ -7,8 +7,9 @@ function onReady(app) {
 	win.z = 100;
 	
 	var scrollView = qtk.ScrollView.create();
-//	scrollView.dragToScroll = true;
-	scrollView.slideToScroll = true;
+	scrollView.dragToScroll = true;
+//	scrollView.slideToScroll = true;
+	scrollView.scrollBarOpacity = 0.5;
 	scrollView.scrollBarOptions.hBarVisibility = qtk.ScrollerBarVisibility.INVISIBLE;
 
 	scrollView.name = "scrollView1";

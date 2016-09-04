@@ -9,7 +9,7 @@ import {Dialog} from "./dialog";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Button} from "./button";
-import {ScrollerBarVisibility, ScrollBarOptions, ScrollView} from "./scroll-view";
+import {ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./scroll-view";
 import {Image} from "./image";
 import {Style} from "./style";
 import {WidgetFactory} from "./widget-factory";
@@ -61,7 +61,7 @@ export {
 	HitTestResult,
 	Button,
 	ScrollView,
-	ScrollBarOptions,
+	ScrollBarStyle,
 	ScrollerBarVisibility,
 	Image,
 	Dialog,
