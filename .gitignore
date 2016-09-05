@@ -4,4 +4,6 @@ doc/
 index.js
 src/*.js
 src/behaviors/*.js
+src/constrols/*.js
+src/layouters/*.js
 coverage

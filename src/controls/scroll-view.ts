@@ -360,10 +360,10 @@ export class ScrollView extends Widget {
 		var barColor = options.backGroundColor;
 
 		var r = options.roundRadius;	
-		var draggerY = (this.offsetY/this.contentHeight) * h;
-		var draggerH = Math.min(h, h*h/this.contentHeight);
 		var draggerW = options.draggerSize;
+		var draggerH = Math.max(draggerW, Math.min(h, h*h/this.contentHeight));
 		var draggerX = barX + ((barW - draggerW) >> 1);
+		var draggerY = Math.min(h-draggerH, (this.offsetY/this.contentHeight) * h);
 		var draggerColor = options.foreGroundColor;
 		if(hBarVisible) {
 			draggerY = Math.min(draggerY, h - barW - draggerH);
@@ -398,10 +398,10 @@ export class ScrollView extends Widget {
 		var barColor = options.backGroundColor;
 
 		var r = options.roundRadius;	
-		var draggerX = (this.offsetX/this.contentWidth) * w;
-		var draggerW = Math.min(w, w*w/this.contentWidth);
 		var draggerH = options.draggerSize;
+		var draggerW = Math.max(draggerH, Math.min(w, w*w/this.contentWidth));
 		var draggerY = barY + ((barH - draggerH) >> 1);
+		var draggerX = Math.min(w-draggerW, (this.offsetX/this.contentWidth) * w);
 		var draggerColor = options.foreGroundColor;
 
 		if(vBarVisible) {
@@ -484,7 +484,7 @@ export class ScrollView extends Widget {
 	}
 
 	public onWheel(evt:Events.WheelEvent) {
-		this.offsetY -= evt.delta/10;
+		this.validOffsetY = this.offsetY - evt.delta/10;
 	}
 
 	public reset(type:string) : Widget {
@@ -544,8 +544,8 @@ export class ScrollView extends Widget {
 	protected _pointerInVScrollDraggerRect : boolean;
 	protected _pointerInHScrollDraggerRect : boolean;
 
-	constructor() {
-		super(ScrollView.TYPE);
+	constructor(type?:string) {
+		super(type ? type : ScrollView.TYPE);
 	}
 
 	public dispose() {

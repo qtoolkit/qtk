@@ -1,6 +1,6 @@
 
 import {Style} from "../style";
-import {Widget} from "./widget";
+import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
@@ -13,7 +13,6 @@ export class Image extends Widget {
 
 	constructor() {
 		super(Image.TYPE);
-		this._style = Style.create();
 	}
 
 	public get image() : ImageTile {
@@ -42,6 +41,23 @@ export class Image extends Widget {
 		var image = this._style.backGroundImage;
 		
 		return image ? image.src : null;
+	}
+
+	public setStyle(state:WidgetState, style:Style):Widget{
+		this._style = style;
+
+		return this;
+	}
+
+	public reset(type:string) : Widget {
+		super.reset(type);
+
+		this._style = Style.create();
+		this._style.fontSize = 16;
+		this._style.fontColor = "Black";
+		this.drawType = ImageDrawType.DEFAULT;
+
+		return this;
 	}
 
 	public getStyle() : Style {

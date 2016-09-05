@@ -8,13 +8,13 @@ import {Canvas} from "../canvas";
 import {Window} from "./window";
 import TWEEN = require("tween.js");
 import {Emitter} from "../emitter";
-import {Graphics} from "../graphics";
 import Events = require("../events");
 import {ImageTile} from "../image-tile";
 import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {IThemeManager} from "../itheme-manager";
+import {RoundType, Graphics} from "../graphics";
 import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {DirtyRectContext} from "../dirty-rect-context";
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
@@ -408,9 +408,11 @@ export class Widget extends Emitter {
 	public relayoutChildren() : Rect {
 		if(this.childrenLayouter) {
 			var r = this.getLayoutRect();
-			this.childrenLayouter.layoutChildren(this, this.children, r);
+			var ret = this.childrenLayouter.layoutChildren(this, this.children, r);
 			r.dispose();
 			this.requestRedraw();
+
+			return Rect.rect.copy(ret);
 		}
 
 		return null;
@@ -629,21 +631,29 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public appendChild(child:Widget) : Widget {
-		this._children.push(child);
-
+	public removeChild(child:Widget, fastMode?:boolean) : Widget {
+		var arr = this._children;
+		var index = arr.indexOf(child);
+		if(index >= 0) {
+			arr.splice(index, 1);
+			if(!fastMode) {
+				this.relayoutChildren();
+			}
+		}
 		return this;
 	}
 
-	public addChild(child:Widget) : Widget {
+	public addChild(child:Widget, fastMode?:boolean) : Widget {
 		var arr = this._children;
 		
 		arr.push(child);
-		
 		child.parent = this;
 		child.app = this.app;
-		this.sortChildren();
-		this.relayoutChildren();
+		
+		if(!fastMode) {
+			this.sortChildren();
+			this.relayoutChildren();
+		}
 
 		return this;
 	}
@@ -661,16 +671,6 @@ export class Widget extends Emitter {
 		});
 		this._parent = null;
 		this._children = [];
-	}
-
-	public removeChild(child:Widget) : Widget {
-		var arr = this._children;
-		var index = arr.indexOf(child);
-		if(index >= 0) {
-			arr.splice(index, 1);
-			this.relayoutChildren();
-		}
-		return this;
 	}
 
 	public requestRedraw() : Widget {

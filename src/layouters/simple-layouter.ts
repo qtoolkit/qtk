@@ -66,7 +66,7 @@ LayouterFactory.register(TYPE, SimpleLayouter.create);
 /**
  * 简单的布局器的参数。
  * 
- * 如果父控件使用SimpleLayouter布局器，则子控件需要把layoutParam设置为SimpleLayouter。
+ * 如果父控件使用SimpleLayouter布局器，则子控件需要把layoutParam设置为SimpleLayouterParam。
  * 
  * 对于x/y/w/h参数：
  * *.如果以px结尾，则直接取它的值。

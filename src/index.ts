@@ -8,6 +8,8 @@ import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
 import {Button} from "./controls/button";
 import {Dialog} from "./controls/dialog";
+import {ListItem, ListItemStyle} from "./controls/list-item";
+import {ListView} from "./controls/list-view";
 import {WindowNormal} from "./controls/window-normal";
 import {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
 import {ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
@@ -27,6 +29,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -65,11 +68,16 @@ export {
 	ScrollerBarVisibility,
 	Image,
 	Dialog,
+	ListView,
+	ListItem,
+	ListItemStyle,
 	WindowNormal,
 	Services,
 	WidgetFactory,
 	ThemeManager,
 	Events,
+	ListLayouter,
+	ListLayouterParam,
 	SimpleLayouter,
 	SimpleLayouterParam
 };

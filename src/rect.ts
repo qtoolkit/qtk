@@ -29,8 +29,8 @@ export class Rect {
 		return this.x === other.x && this.y === other.y && this.w === other.w && this.h === other.h;
 	}
 
-	copy(out:Rect) : Rect {
-		return this.init(out.x, out.y, out.w, out.h);
+	copy(other:Rect) : Rect {
+		return this.init(other.x, other.y, other.w, other.h);
 	}
 	
 	merge(other:Rect) : Rect {

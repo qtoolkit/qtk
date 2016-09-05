@@ -4,6 +4,23 @@
 			"backGroundColor" : "#606060"
 		}
 	},
+	"list-view": {
+		"normal" : {
+			"lineWidth" : 1,
+			"lineColor" : "#EEEEEE",
+			"backGroundColor" : "#FFFFFF"
+		}
+	},
+	"list-item": {
+		"normal" : {
+			"fontColor" : "black",
+			"roundRadius" : 5,
+			"fontSize" : 16,
+			"lineWidth" : 1,
+			"lineColor" : "#EEEEEE",
+			"backGroundColor" : "#FFFFFF"
+		}
+	},
 	"scroll-view": {
 		"normal" : {
 			"lineWidth" : 1,

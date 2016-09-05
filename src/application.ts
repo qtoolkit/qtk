@@ -61,6 +61,11 @@ export class Application extends Emitter implements IApplication {
 		});
 	}
 
+	public run() {
+		this.dispatchEvent({type:Events.RUN});
+		this._mainLoop.requestRedraw();
+	}
+
 	public init(args:any) {
 		this.initOptions(args);
 		var themeDataURL = this._options.themeDataURL;
