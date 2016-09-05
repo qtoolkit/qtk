@@ -12,7 +12,7 @@ import {ListItem, ListItemStyle} from "./controls/list-item";
 import {ListView} from "./controls/list-view";
 import {WindowNormal} from "./controls/window-normal";
 import {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
-import {ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
+import {ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
 import {Style} from "./style";
 import {WidgetFactory} from "./controls/widget-factory";
 import {ThemeManager} from "./theme-manager";
@@ -65,6 +65,7 @@ export {
 	Button,
 	ScrollView,
 	ScrollBarStyle,
+	ScrollerOptions,
 	ScrollerBarVisibility,
 	Image,
 	Dialog,

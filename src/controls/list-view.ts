@@ -65,6 +65,7 @@ export class ListView extends ScrollView {
 		super.reset(type);
 		this._itemSpacing = 0;
 		this._itemHeight = 80;
+		this.scrollerOptions.scrollingX = false;
 		this._childrenLayouter = ListLayouter.create({height:this.itemHeight, spacing:0});
 		
 		return this;

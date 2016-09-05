@@ -487,6 +487,10 @@ export class ScrollView extends Widget {
 		this.validOffsetY = this.offsetY - evt.delta/10;
 	}
 
+	public get scrollerOptions() : ScrollerOptions {
+		return this._scrollerOptions;
+	}
+
 	public reset(type:string) : Widget {
 		super.reset(type);
 
@@ -565,6 +569,21 @@ export enum ScrollerBarVisibility {
 	AUTO,
 	ALWAYS
 };
+
+export interface ScrollerOptions {
+    scrollingX?: boolean;
+    scrollingY?: boolean;
+    animating?: boolean;
+    animationDuration?: number;
+    bouncing?: boolean;
+    locking?: boolean;
+    paging?: boolean;
+    snapping?: boolean;
+    zooming?: boolean;
+    minZoom?: number;
+    maxZoom?: number;
+    speedMultiplier?: number;
+}
 
 export class ScrollBarStyle {
 	public size : number;
