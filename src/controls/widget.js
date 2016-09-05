@@ -14,7 +14,7 @@ var emitter_1 = require("../emitter");
 var graphics_1 = require("../graphics");
 var Events = require("../events");
 var matrix_stack_1 = require("../matrix-stack");
-var layouter_1 = require('../layouter');
+var layouter_1 = require('../layouters/layouter');
 var dirty_rect_context_1 = require("../dirty-rect-context");
 var behavior_1 = require("../behaviors/behavior");
 /**

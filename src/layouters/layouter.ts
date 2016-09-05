@@ -1,5 +1,5 @@
-import {Rect} from "./rect";
-import {Widget} from "./controls/widget";
+import {Rect} from "../rect";
+import {Widget} from "../controls/widget";
 
 /**
  * 子控件布局算法。

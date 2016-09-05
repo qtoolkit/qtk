@@ -15,7 +15,7 @@ import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {IThemeManager} from "../itheme-manager";
-import {Layouter, LayouterFactory} from '../layouter';
+import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {DirtyRectContext} from "../dirty-rect-context";
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 

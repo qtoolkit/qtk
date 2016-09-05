@@ -27,7 +27,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
-import {SimpleLayouter, SimpleLayouterParam} from "./simple-layouter";
+import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
