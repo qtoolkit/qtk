@@ -44,9 +44,6 @@ export class ScrollView extends Widget {
 	 */
 	public set slideToScroll(value:boolean) {
 		this._slideToScroll = value;
-		if(!this._scroller) {
-			this.initScroller(this._scrollerOptions);
-		}
 	}
 
 	public get slideToScroll() : boolean {
@@ -104,16 +101,21 @@ export class ScrollView extends Widget {
 	 * 设置水平方向上的偏移，并确保其值的有些性。
 	 */
 	public set validOffsetX(value:number) {
-		value = Math.min(Math.max(0, value), this._cw - this.w);
-		this.setAttr("ox", value, true);
+		this.setAttr("ox", this.toValidOffsetX(value), true);
 	}
 	
 	/**
 	 * 设置垂直方向上的偏移，并确保其值的有些性。
 	 */
 	public set validOffsetY(value:number) {
-		value = Math.min(Math.max(0, value), this._ch - this.h);
-		this.setAttr("oy", value, true);
+		this.setAttr("oy", this.toValidOffsetY(value), true);
+	}
+
+	protected toValidOffsetX(value:number) : number {
+		return Math.min(Math.max(0, value), this._cw - this.w);
+	}
+	protected toValidOffsetY(value:number) : number {
+		return Math.min(Math.max(0, value), this._ch - this.h);
 	}
 
 	/**
@@ -240,15 +242,20 @@ export class ScrollView extends Widget {
 
 	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		if(evt.pointerDown) {
+			var offsetX = this.offsetX;
+			var offsetY = this.offsetY;
+
 			if(this.dragToScroll) {
 				if(this._pointerInVScrollDraggerRect) {
 					var dy = evt.y - evt.pointerDownY;
-					this.validOffsetY = this._saveOY + (dy/this.h)*this._ch;
+					offsetY = this._saveOY + (dy/this.h)*this._ch;
 				}
 				if(this._pointerInHScrollDraggerRect) {
 					var dx = evt.x - evt.pointerDownX;
-					this.validOffsetX = this._saveOX + (dx/this.w)*this._cw;
+					offsetX = this._saveOX + (dx/this.w)*this._cw;
 				}
+
+				this.scroller.scrollTo(this.toValidOffsetX(offsetX), this.toValidOffsetY(offsetY));
 			}
 
 			if(!this._pointerInBar && this.slideToScroll) {
@@ -286,6 +293,9 @@ export class ScrollView extends Widget {
 
 		if(!this._pointerInBar && this.slideToScroll) {
 			this.scroller.doTouchEnd(evt.timeStamp);
+		}else{
+			this.scroller.scrollTo(this.offsetX, this.offsetY);
+			this.handleScrollDone();
 		}
 
 		if(!this._pointerInBar) {
@@ -321,19 +331,25 @@ export class ScrollView extends Widget {
 		}
 	}
 
-	public handleScroller(left:number, top:number) {
+	protected handleScrolling(left:number, top:number) {
 		this.offsetX = left;
 		this.offsetY = top;
+		this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, left, top));
 	}
 
-	public initScroller(options:any) {
+	protected handleScrollDone() {
+		this.hideScrollBar();
+		this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL_DONE, this, this.offsetX, this.offsetY));
+	}
+
+	protected initScroller(options:any) {
 		var me = this;
 		options.scrollingComplete = function() {
-			me.hideScrollBar();
+			me.handleScrollDone();
 		}
 
 		this._scroller = new Scroller(function(left:number, top:number){
-			me.handleScroller(left, top);
+			me.handleScrolling(left, top);
 		}, options);
 
 		this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
@@ -491,6 +507,16 @@ export class ScrollView extends Widget {
 		return this._scrollerOptions;
 	}
 
+	protected getLayoutRect() : Rect {
+		var w = this.w - this.leftPadding - this.rightPadding;
+		var h = this.h - this.topPadding - this.bottomPadding;
+		if(this.dragToScroll && this.isVScrollBarVisible()) {
+			w -= this._scrollBarStyle.size;
+		}
+
+		return Rect.create(this.leftPadding, this.topPadding, w, h);
+	}
+
 	public reset(type:string) : Widget {
 		super.reset(type);
 
@@ -513,10 +539,12 @@ export class ScrollView extends Widget {
 		this._vScrollBarRect = Rect.create(0, 0, 0, 0);
 		this._hScrollDraggerRect = Rect.create(0, 0, 0, 0);
 		this._vScrollDraggerRect = Rect.create(0, 0, 0, 0);
-
+		this.initScroller(this._scrollerOptions);
 		this.on(Events.WHEEL, evt => {
 			this.onWheel(evt);
 		});
+
+		this._scrollEvent = Events.ScrollEvent.create();
 
 		return this;
 	}
@@ -547,6 +575,8 @@ export class ScrollView extends Widget {
 	protected _pointerInHScrollBarRectRight : boolean;
 	protected _pointerInVScrollDraggerRect : boolean;
 	protected _pointerInHScrollDraggerRect : boolean;
+
+	protected _scrollEvent : Events.ScrollEvent;
 
 	constructor(type?:string) {
 		super(type ? type : ScrollView.TYPE);

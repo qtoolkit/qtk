@@ -9,6 +9,7 @@ import {Image} from "./controls/image";
 import {Button} from "./controls/button";
 import {Dialog} from "./controls/dialog";
 import {ListItem, ListItemStyle} from "./controls/list-item";
+import {GridView} from "./controls/grid-view";
 import {ListView} from "./controls/list-view";
 import {WindowNormal} from "./controls/window-normal";
 import {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
@@ -29,6 +30,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 
@@ -69,6 +71,7 @@ export {
 	ScrollerBarVisibility,
 	Image,
 	Dialog,
+	GridView,
 	ListView,
 	ListItem,
 	ListItemStyle,
@@ -77,6 +80,8 @@ export {
 	WidgetFactory,
 	ThemeManager,
 	Events,
+	GridLayouter,
+	GridLayouterParam,
 	ListLayouter,
 	ListLayouterParam,
 	SimpleLayouter,

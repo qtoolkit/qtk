@@ -11,6 +11,13 @@
 			"backGroundColor" : "#FFFFFF"
 		}
 	},
+	"grid-view": {
+		"normal" : {
+			"lineWidth" : 1,
+			"lineColor" : "#EEEEEE",
+			"backGroundColor" : "#FFFFFF"
+		}
+	},
 	"list-item": {
 		"normal" : {
 			"fontColor" : "black",

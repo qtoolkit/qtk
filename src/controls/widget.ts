@@ -26,7 +26,7 @@ import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 export class Widget extends Emitter {
 	constructor(type:string) {
 		super();
-		this.reset(type);
+		this.type = type;
 	}
 
 	public toLocalPoint(p:Point) : Point {

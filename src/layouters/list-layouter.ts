@@ -53,7 +53,7 @@ export class ListLayouter extends Layouter {
 			if(!child.visible) {
 				continue;
 			}
-			if(param) {
+			if(param && param.type === TYPE) {
 				h = param.height || this.height;
 				spacing = param.spacing || this.spacing;
 			}else {

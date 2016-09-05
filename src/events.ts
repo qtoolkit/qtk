@@ -35,6 +35,9 @@ export const AFTER_DRAW = "after-draw";
 export const BEFORE_APPLY_TRANSFORM = "before-apply-transform";
 export const AFTER_APPLY_TRANSFORM = "after-apply-transform";
 
+export const SCROLL = "scroll";
+export const SCROLL_DONE = "scroll-done";
+
 export const DRAG = "drag";
 export const DROP = "drop";
 export const DRAGEND   = "dragend";
@@ -369,5 +372,25 @@ export class ApplyTransformEvent extends Event {
 	}
 
 	private static event = new ApplyTransformEvent();
+};
+
+export class ScrollEvent extends Event {
+	public offsetX : number;
+	public offsetY : number;
+	public widget : any;
+
+	public reset(type:string, widget:any, offsetX:number, offsetY:number) : any {
+		super.init(type);
+
+		this.widget = widget;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+
+		return this;
+	}
+
+	public static create() : ScrollEvent  {
+		return new ScrollEvent();
+	}
 };
 
