@@ -8,6 +8,7 @@ import {Canvas} from "../canvas";
 import {Window} from "./window";
 import TWEEN = require("tween.js");
 import {Emitter} from "../emitter";
+import {stableSort} from "../utils";
 import Events = require("../events");
 import {ImageTile} from "../image-tile";
 import {IMainLoop} from "../imain-loop";
@@ -624,7 +625,7 @@ export class Widget extends Emitter {
 
 	public sortChildren() : Widget {
 		var arr = this._children;
-		arr.sort(function(a, b) {
+		stableSort(arr, function(a, b) {
 			return a.z - b.z;
 		});
 
