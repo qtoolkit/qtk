@@ -60,8 +60,8 @@ export class GridLayouter extends Layouter {
 			cols = Math.floor(r.w/this.colWidth);
 		}
 
-		var iw = this.colWidth || r.w/this.cols;
-		var ih = this.rowHeight || r.h/this.rows;
+		var iw = cols > 0 ? r.w/cols : this.colWidth;
+		var ih = rows > 0 ? r.h/rows : this.rowHeight;
 
 		var ret = this.rect.copy(r);
 		for(var i = 0; i < n; i++) {

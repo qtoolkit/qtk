@@ -6,7 +6,7 @@ function onReady(app) {
 
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create();
-	win.init(app, 0, 0, vp.width, vp.height, true);
+	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
 	var button = qtk.Button.create();
@@ -35,6 +35,6 @@ function onReady(app) {
 	image.scaleTo(2, 2, 2000).repeat(500).yoyo(true);
 	win.addChild(image);
 	
-	app.run();
+	win.open();
 }
 

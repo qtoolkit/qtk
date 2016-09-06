@@ -12,11 +12,20 @@ export enum WindowType {
 
 export class Window extends Widget {
 	private _grabbed : boolean;
-	private _shouldGrabWhenVisible : boolean;
+	private _hasOwnCanvas : boolean;
 	private _pointerPosition : Point;
+	private _shouldGrabWhenVisible : boolean;
 
 	constructor(type:string) {
 		super(type);
+	}
+
+	public set hasOwnCanvas(value:boolean) {
+		this._hasOwnCanvas = value;
+	}
+
+	public get hasOwnCanvas() : boolean{
+		return this._hasOwnCanvas;
 	}
 
 	public reset(type:string) : Widget {
@@ -74,6 +83,11 @@ export class Window extends Widget {
 	}
 
 	public open() : Widget {
+		if(this._hasOwnCanvas) {
+			this.createCanvas();
+		}
+
+		this.init();
 		this.dispatchEvent({type:Events.OPEN});
 
 		return this;
@@ -81,25 +95,13 @@ export class Window extends Widget {
 
 	public close () {
 		this.dispatchEvent({type:Events.CLOSE});
+		this.deinit();
 		this.dispose();
 	}
 
 	public dispose() {
 		this.ungrab();
 		super.dispose();
-	}
-
-	public init(app:IApplication, x?:number, y?:number, w?:number, h?:number, createCanvas?:boolean) : Widget {
-		this.app = app;
-		this.x = x || 0;
-		this.y = y || 0;
-		this.w = w || 0;
-		this.h = h || 0;
-		if(createCanvas) {
-			this.createCanvas();
-		}
-
-		return this;
 	}
 
 	private windowType: WindowType;

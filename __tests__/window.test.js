@@ -7,7 +7,9 @@ describe('Window', function() {
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
 			var win = qtk.WindowNormal.create();
-			win.init(app, 0, 0, 200, 200, true);
+			win.set({app:app, x:0, y:0, w:200, h:200, hasOwnCanvas:true});
+
+			win.open();
 			win.grab();
 			result = win.grabbed;
 			win.ungrab();
@@ -18,7 +20,7 @@ describe('Window', function() {
 			result = result && !win.grabbed;
 			win.visible = true;
 			result = result && win.grabbed;
-
+			
 			done(result ? null : "grab failed");
 		});
     });

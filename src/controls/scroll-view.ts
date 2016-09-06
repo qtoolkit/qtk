@@ -359,6 +359,7 @@ export class ScrollView extends Widget {
 				this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
 			}
 		});
+		this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
 	}
 
 	/*
@@ -510,11 +511,23 @@ export class ScrollView extends Widget {
 	protected getLayoutRect() : Rect {
 		var w = this.w - this.leftPadding - this.rightPadding;
 		var h = this.h - this.topPadding - this.bottomPadding;
-		if(this.dragToScroll && this.isVScrollBarVisible()) {
-			w -= this._scrollBarStyle.size;
+		
+		if(this.dragToScroll) {
+			if(this.isVScrollBarVisible()) {
+				w -= this._scrollBarStyle.size;
+			}
+			if(this.isHScrollBarVisible()) {
+				h -= this._scrollBarStyle.size;
+			}
 		}
 
 		return Rect.create(this.leftPadding, this.topPadding, w, h);
+	}
+
+	protected onInit() {
+		super.onInit();
+		this.initScroller(this._scrollerOptions);
+		this._scrollBarOpacity = this.dragToScroll ? 1 : 0;
 	}
 
 	public reset(type:string) : Widget {
@@ -532,18 +545,17 @@ export class ScrollView extends Widget {
 		};
 		
 		this._scroller = null;
-		this._scrollBarOpacity = 1;
 		this._scrollBarStyle = new ScrollBarStyle();
 		this._touches = [{pageX:0, pageY:0, id:0}];
 		this._hScrollBarRect = Rect.create(0, 0, 0, 0);
 		this._vScrollBarRect = Rect.create(0, 0, 0, 0);
 		this._hScrollDraggerRect = Rect.create(0, 0, 0, 0);
 		this._vScrollDraggerRect = Rect.create(0, 0, 0, 0);
-		this.initScroller(this._scrollerOptions);
+		
 		this.on(Events.WHEEL, evt => {
 			this.onWheel(evt);
 		});
-
+	
 		this._scrollEvent = Events.ScrollEvent.create();
 
 		return this;

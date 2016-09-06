@@ -1,4 +1,4 @@
-describe('Button', function() {
+describe('ScrollView', function() {
 	this.timeout(3000);
 	
 	var scrollBarStyle = new qtk.ScrollBarStyle();
@@ -12,12 +12,10 @@ describe('Button', function() {
 			h:300,
 			dragToScroll:true, 
 			slideToScroll:true, 
-			scrollBarStyle:scrollBarStyle,
-			offsetX:10,
-			offsetY:20
+			scrollBarStyle:scrollBarStyle
 		};
 
-		scrollView.set(attrs);
+		scrollView.set(attrs).init();
         var result = true;
         for(var key in attrs) {
 			if(scrollView[key] !== attrs[key]) {
@@ -45,7 +43,8 @@ describe('Button', function() {
 	}
 
     it('test event drag vbar', (done) => {
-		var win = qtk.WindowNormal.create().init(null, 0, 0, 1000, 1000, false);
+		var win = qtk.WindowNormal.create();
+		win.set({app:null, x:0, y:0, w:1000, h:1000, hasOwnCanvas:false});
     	var scrollView = qtk.ScrollView.create();
 		var attrs = {
 			x:0, 
@@ -58,6 +57,8 @@ describe('Button', function() {
 		};
 		scrollView.set(attrs);
 		win.addChild(scrollView);
+		win.open();
+
 		dispatchEventToScrollView(win, 295, 10, 295, 20);
 		
 		var result = scrollView.offsetY = 20;
@@ -65,7 +66,8 @@ describe('Button', function() {
 	});
     
     it('test event drag hbar', (done) => {
-		var win = qtk.WindowNormal.create().init(null, 0, 0, 1000, 1000, false);
+		var win = qtk.WindowNormal.create();
+		win.set({app:null, x:0, y:0, w:1000, h:1000, hasOwnCanvas:false});
     	var scrollView = qtk.ScrollView.create();
 		var attrs = {
 			x:0, 
@@ -78,6 +80,7 @@ describe('Button', function() {
 		};
 		scrollView.set(attrs);
 		win.addChild(scrollView);
+		win.open();
 		dispatchEventToScrollView(win, 10, 295, 20, 295);
 		
 		var result = scrollView.offsetX = 20;

@@ -53,6 +53,37 @@ export class Widget extends Emitter {
 		return p;
 	}
 
+	protected onInit() {
+		this._inited = true;
+	}
+
+	public init() : Widget {
+		this.onInit();
+		this.children.forEach(child => {
+			child.init();
+		});
+
+		return this;
+	}
+	
+	protected onDeinit() {
+		this._inited = false;
+	}
+
+	public deinit(){
+		this.onDeinit();
+		this.children.forEach(child => {
+			child.deinit();
+		});
+	}
+
+	public dispatchEventToAll(evt:any) {
+		this.dispatchEvent(evt);
+		this.children.forEach(child => {
+			child.dispatchEvent(evt);
+		});
+	}
+
 	public set(attrs:any) : Widget {
 		for(var key in attrs) {
 			this[key] = attrs[key];
@@ -632,15 +663,22 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public removeChild(child:Widget, fastMode?:boolean) : Widget {
+	public removeChild(child:Widget, fastMode?:boolean, destroy?:boolean) : Widget {
 		var arr = this._children;
 		var index = arr.indexOf(child);
+		
 		if(index >= 0) {
 			arr.splice(index, 1);
 			if(!fastMode) {
 				this.relayoutChildren();
 			}
 		}
+
+		if(destroy) {
+			child.deinit();
+			child.dispose();
+		}
+
 		return this;
 	}
 
@@ -650,7 +688,11 @@ export class Widget extends Emitter {
 		arr.push(child);
 		child.parent = this;
 		child.app = this.app;
-		
+	
+		if(this._inited) {
+			child.init();
+		}
+
 		if(!fastMode) {
 			this.sortChildren();
 			this.relayoutChildren();
@@ -1136,6 +1178,7 @@ export class Widget extends Emitter {
 	protected _z : number;
 	protected _w : number;
 	protected _h : number;
+	protected _inited : boolean;
 	protected _state : WidgetState;
 	protected _value : any;
 	protected _enable : boolean;
@@ -1238,6 +1281,7 @@ export class Widget extends Emitter {
 		this.onkeydown = null;
 		this.onkeyup = null;
 		this._behaviors = {};
+		this.removeAllListeners();
 
 		return this;
 	}
@@ -1334,6 +1378,7 @@ export class Widget extends Emitter {
 	public static create(app:IApplication, options:any) : Widget {
 		var widget = new Widget("dummy");
 
+		widget.reset("dummy");
 		widget.app = app;
 
 		return widget;

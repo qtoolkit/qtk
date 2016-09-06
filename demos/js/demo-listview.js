@@ -2,7 +2,7 @@
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create();
-	win.init(app, 0, 0, vp.width, vp.height, true);
+	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 	
 	var listView = qtk.ListView.create();
@@ -20,4 +20,6 @@ function onReady(app) {
 		listView.addChild(item, true);
 	}
 	listView.relayoutChildren();
+
+	win.open();
 }

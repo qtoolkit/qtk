@@ -1,11 +1,11 @@
 
 import {Rect} from "../rect";
 import {Widget} from "./widget";
-import {ScrollView} from "./scroll-view";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
 import {Layouter} from "../layouters/layouter";
+import {RecyclableCreator} from "../recyclable-creator";
 import {GridLayouter} from "../layouters/grid-layouter";
+import {ScrollView, ScrollerBarVisibility} from "./scroll-view";
 
 export class GridView extends ScrollView {
 	public set cols(value:number) {
@@ -76,11 +76,40 @@ export class GridView extends ScrollView {
 	}
 
 	public relayoutChildren() : Rect {
+		this.ensureOptions();
 		var r = super.relayoutChildren();
 		this.contentWidth = r.w + this.leftPadding + this.rightPadding;
 		this.contentHeight = r.h + this.topPadding + this.bottomPadding;
 		
 		return r;
+	}
+
+	protected ensureOptions() {
+		if(this.rows > 0 && this.cols > 0) {
+			this.scrollerOptions.scrollingX = false;
+			this.scrollerOptions.scrollingY = false;
+			this.scrollBarStyle.vBarVisibility = ScrollerBarVisibility.INVISIBLE;
+			this.scrollBarStyle.hBarVisibility = ScrollerBarVisibility.INVISIBLE;
+		}else if(this.cols > 0) {
+			this.scrollerOptions.scrollingX = false;
+			this.scrollerOptions.scrollingY = true;
+			this.scrollBarStyle.vBarVisibility = ScrollerBarVisibility.AUTO;
+			this.scrollBarStyle.hBarVisibility = ScrollerBarVisibility.INVISIBLE;
+		}else if(this.rows > 0) {
+			this.scrollerOptions.scrollingX = true;
+			this.scrollerOptions.scrollingY = false;
+			this.scrollBarStyle.hBarVisibility = ScrollerBarVisibility.AUTO;
+			this.scrollBarStyle.vBarVisibility = ScrollerBarVisibility.INVISIBLE;
+		}else {
+			this.scrollerOptions.scrollingX = false;
+			this.scrollerOptions.scrollingY = true;
+			this.scrollBarStyle.vBarVisibility = ScrollerBarVisibility.AUTO;
+			this.scrollBarStyle.hBarVisibility = ScrollerBarVisibility.INVISIBLE;
+		}
+	}
+
+	protected onInit() {
+		super.onInit();
 	}
 
 	protected _rows : number;
@@ -96,7 +125,6 @@ export class GridView extends ScrollView {
 		super.reset(type);
 		this._cols = 3;
 		this._rows = 3;
-		this.scrollerOptions.scrollingX = false;
 		this._childrenLayouter = GridLayouter.create({cols:this.cols, rows:this.rows});
 		
 		return this;
