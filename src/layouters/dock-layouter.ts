@@ -38,7 +38,7 @@ export class DockLayouter extends Layouter {
 					x = r.x;
 					y = r.y;
 					h = r.h;
-					w = Math.min(r.w, param.size ? getValueOf(param.size, r.w) : child.w);
+					w = Math.min(r.w, param.size ? Layouter.evalValue(param.size, r.w) : child.w);
 					r.x += w;
 					r.w -= w;
 					break;
@@ -46,7 +46,7 @@ export class DockLayouter extends Layouter {
 				case Direction.RIGHT : {
 					y = r.y;
 					h = r.h;
-					w = Math.min(r.w, param.size ? getValueOf(param.size, r.w) : child.w);
+					w = Math.min(r.w, param.size ? Layouter.evalValue(param.size, r.w) : child.w);
 					x = r.x + r.w - w;
 					r.w -= w;
 					break;
@@ -54,7 +54,7 @@ export class DockLayouter extends Layouter {
 				case Direction.BOTTOM : {
 					x = r.x;
 					w = r.w;
-					h = Math.min(r.h, param.size ? getValueOf(param.size, r.h) : child.h);
+					h = Math.min(r.h, param.size ? Layouter.evalValue(param.size, r.h) : child.h);
 					y = r.y + r.h - h;
 					r.h -= h;
 					break;
@@ -63,7 +63,7 @@ export class DockLayouter extends Layouter {
 					x = r.x;
 					y = r.y;
 					w = r.w;
-					h = Math.min(r.h, param.size ? getValueOf(param.size, r.h) : child.h);
+					h = Math.min(r.h, param.size ? Layouter.evalValue(param.size, r.h) : child.h);
 					r.h -= h;
 					r.y += h;
 					break;
@@ -109,17 +109,4 @@ export class DockLayouterParam {
 		return new DockLayouterParam(position, size||"");
 	}
 };
-
-function getValueOf(value:string, total:number) {
-	var v = parseFloat(value);
-	if(value.indexOf("%") > 0) {
-		v = total*v/100;
-	}
-
-	if(v < 0) {
-		v = total + v;
-	}
-
-	return v;
-}
 

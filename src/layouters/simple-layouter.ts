@@ -27,8 +27,8 @@ export class SimpleLayouter extends Layouter {
 		var param = <SimpleLayouterParam>child.layoutParam;
 		
 		if(param && param.type === TYPE && child.visible) {
-			var w = getValueOf(param.w, pw);
-			var h = getValueOf(param.h, ph);
+			var w = Layouter.evalValue(param.w, pw);
+			var h = Layouter.evalValue(param.h, ph);
 			if(param.minW >= 0) {
 				w = Math.max(w, param.minW);
 			}
@@ -46,9 +46,9 @@ export class SimpleLayouter extends Layouter {
 			}
 
 			var f = param.x[0];
-			var x = (f === "c" || f === "m") ? (pw - w) >> 1 : getValueOf(param.x, pw);
+			var x = (f === "c" || f === "m") ? (pw - w) >> 1 : Layouter.evalValue(param.x, pw);
 			f = param.y[0];
-			var y = (f === "c" || f === "m") ? (ph - h) >> 1 : getValueOf(param.y, ph);
+			var y = (f === "c" || f === "m") ? (ph - h) >> 1 : Layouter.evalValue(param.y, ph);
 
 			child.moveResizeTo(r.x + x, r.y + y, w, h);
 			child.relayoutChildren();
@@ -114,17 +114,4 @@ export class SimpleLayouterParam {
 		return new SimpleLayouterParam(x || '0px', y||'0px', w||'0px', h||'0px');
 	}
 };
-
-function getValueOf(value:string, total:number) {
-	var v = parseFloat(value);
-	if(value.indexOf("%") > 0) {
-		v = total*v/100;
-	}
-
-	if(v < 0) {
-		v = total + v;
-	}
-
-	return v;
-}
 

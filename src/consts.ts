@@ -1,10 +1,11 @@
-
-export enum Direction {
+export enum Orientation {
 	V = 1,
 	VERTICAL = 1,
 	H = 2,
 	HORIZONTAL = 2,
-	
+};
+
+export enum Direction {
 	W = 1,
 	WEST = 1,
 	E = 2,
@@ -42,3 +43,18 @@ export enum AlignV {
 	BOTTOM = 3
 };
 
+export enum Align {
+	L = 1,
+	LEFT = 1,
+	C = 2,
+	CENTER = 2,
+	R = 3,
+	RIGHT = 3,
+	
+	T = 1,
+	TOP = 1,
+	M = 2,
+	MIDDLE = 2,
+	B = 3,
+	BOTTOM = 3
+};

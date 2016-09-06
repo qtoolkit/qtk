@@ -1,12 +1,13 @@
 import {Point} from "./point";
 import {Rect} from "./rect";
-import {Direction} from "./consts";
+import {Direction, Align, Orientation} from "./consts";
 import assets = require("./assets");
 import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
+import {Group} from "./controls/Group";
 import {Button} from "./controls/button";
 import {Dialog} from "./controls/dialog";
 import {ListItem, ListItemStyle} from "./controls/list-item";
@@ -31,6 +32,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
 import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
 import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
@@ -44,6 +46,8 @@ export {
 	assets,
 	Point,
 	Rect,
+	Align,
+	Orientation,
 	Direction,
 	ViewPort,
 	MainLoop,
@@ -73,6 +77,7 @@ export {
 	ScrollerOptions,
 	ScrollerBarVisibility,
 	Image,
+	Group,
 	Dialog,
 	GridView,
 	ListView,
@@ -89,6 +94,8 @@ export {
 	GridLayouterParam,
 	ListLayouter,
 	ListLayouterParam,
+	LinearLayouter,
+	LinearLayouterParam,
 	SimpleLayouter,
 	SimpleLayouterParam
 };

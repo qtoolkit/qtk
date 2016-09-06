@@ -42,6 +42,20 @@ export class Layouter {
 	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
 		return null;
 	}
+
+	public static evalValue(value:string, total:number) {
+		var v = parseFloat(value);
+		if(value.indexOf("%") > 0) {
+			v = total*v/100;
+		}
+
+		if(v < 0) {
+			v = total + v;
+		}
+
+		return v;
+	}
+
 }
 
 /**
