@@ -1,5 +1,6 @@
 import {Point} from "./point";
 import {Rect} from "./rect";
+import {Direction} from "./consts";
 import assets = require("./assets");
 import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
@@ -30,6 +31,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
 import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
@@ -42,6 +44,7 @@ export {
 	assets,
 	Point,
 	Rect,
+	Direction,
 	ViewPort,
 	MainLoop,
 	Matrix,
@@ -80,6 +83,8 @@ export {
 	WidgetFactory,
 	ThemeManager,
 	Events,
+	DockLayouter,
+	DockLayouterParam,
 	GridLayouter,
 	GridLayouterParam,
 	ListLayouter,

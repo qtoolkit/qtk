@@ -96,6 +96,7 @@ export class GridLayouter extends Layouter {
 			var h = ih*spanRows - topMargin - bottomMargin;
 
 			child.moveResizeTo(x, y, w, h);
+			child.relayoutChildren();
 
 			ret.w = Math.max(x + w - r.x, r.w);
 			ret.h = Math.max(y + h - r.y, r.h);

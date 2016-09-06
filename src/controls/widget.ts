@@ -186,6 +186,7 @@ export class Widget extends Emitter {
 					e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
 					_lastOverWidget.dispatchEvent(e, false);
 					e.dispose();
+					_lastOverWidget.state = WidgetState.NORMAL;
 				}
 			
 				if(overWidget) {

@@ -62,6 +62,7 @@ export class ListLayouter extends Layouter {
 			}
 			y += spacing;
 			child.moveResizeTo(x, y, w, h);
+			child.relayoutChildren();
 			y += h;
 		}
 

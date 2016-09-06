@@ -1,0 +1,125 @@
+import {Rect} from '../rect';
+import {Direction} from '../consts';
+import {Widget} from '../controls/widget';
+import {Layouter, LayouterFactory} from './layouter';
+
+const TYPE = "DockLayouter";
+
+/**
+ * Dock布局器。
+ */
+export class DockLayouter extends Layouter {
+	public get type() : string {
+		return TYPE;
+	}
+
+	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
+		var r = rect.clone();
+		var arr = widget.children.forEach(child => {
+			if(r.w > 0 &&  r.h > 0) {
+				this.layoutChild(child, r);
+			}
+		});
+		r.dispose();
+
+		return rect;
+	}
+
+	public layoutChild(child:Widget, r:Rect) {
+		var x = 0;
+		var y = 0;
+		var w = 0;
+		var h = 0;
+		var param = <DockLayouterParam>child.layoutParam;
+
+		if(param && param.type === TYPE && child.visible) {
+			switch(param.position) {
+				case Direction.LEFT : {
+					x = r.x;
+					y = r.y;
+					h = r.h;
+					w = Math.min(r.w, param.size ? getValueOf(param.size, r.w) : child.w);
+					r.x += w;
+					r.w -= w;
+					break;
+				}
+				case Direction.RIGHT : {
+					y = r.y;
+					h = r.h;
+					w = Math.min(r.w, param.size ? getValueOf(param.size, r.w) : child.w);
+					x = r.x + r.w - w;
+					r.w -= w;
+					break;
+				}
+				case Direction.BOTTOM : {
+					x = r.x;
+					w = r.w;
+					h = Math.min(r.h, param.size ? getValueOf(param.size, r.h) : child.h);
+					y = r.y + r.h - h;
+					r.h -= h;
+					break;
+				}
+				default: {
+					x = r.x;
+					y = r.y;
+					w = r.w;
+					h = Math.min(r.h, param.size ? getValueOf(param.size, r.h) : child.h);
+					r.h -= h;
+					r.y += h;
+					break;
+				}
+			}
+
+			child.moveResizeTo(x, y, w, h);
+			child.relayoutChildren();
+		}
+	}
+
+	static create(options:any) : DockLayouter {
+		var layouter = new DockLayouter();
+
+		return layouter.setOptions(options);
+	}
+};
+
+LayouterFactory.register(TYPE, DockLayouter.create);
+
+/**
+ * Dock布局器的参数。
+ * 
+ * 如果父控件使用DockLayouter布局器，则子控件需要把layoutParam设置为DockLayouterParam。
+ * 
+ * 对于size参数：
+ * *.如果以px结尾，则直接取它的值。
+ * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
+ *
+ */
+export class DockLayouterParam {
+	public type : string;
+	public size : string;
+	public position : Direction;
+
+	constructor(position:Direction, size:string) {
+		this.type = TYPE;
+		this.size = size;
+		this.position = position;
+	}
+
+	static create(position:Direction, size?:string) {
+		return new DockLayouterParam(position, size||"");
+	}
+};
+
+function getValueOf(value:string, total:number) {
+	var v = parseFloat(value);
+	if(value.indexOf("%") > 0) {
+		v = total*v/100;
+	}
+
+	if(v < 0) {
+		v = total + v;
+	}
+
+	return v;
+}
+
