@@ -19,9 +19,29 @@ export class MovableOptions {
 	 */
 	public animateDuration : number;
 
-	constructor(moveParent:boolean, animateDuration:number) {
-		this.moveParent = moveParent || false;
-		this.animateDuration = animateDuration >= 0 ? animateDuration : 500;
+	public xMin : number;
+	public yMin : number;
+	public xMax : number;
+	public yMax : number;
+	public xLimit : boolean;
+	public yLimit : boolean;
+	public xMovable : boolean;
+	public yMovable : boolean;
+
+	constructor(opts:any) {
+		var options = opts || {};
+
+		this.xMin = options.xMin || 0;
+		this.yMin = options.yMin || 0;
+		this.xMax = options.xMax || 0;
+		this.yMax = options.yMax || 0;
+		this.xLimit = options.xLimit || false;
+		this.yLimit = options.yLimit || false;
+		this.xMovable = options.xMovable !== undefined ?  options.xMovable : true;
+		this.yMovable = options.yMovable !== undefined ? options.yMovable : true;
+
+		this.moveParent = options.moveParent || false;
+		this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
 	}
 };
 
@@ -32,13 +52,29 @@ export class MovableOptions {
  */
 export class Movable extends Behavior {
 	protected init(options:any) {
-		this.options = new MovableOptions(options.moveParent, options.animateDuration);
+		this.options = new MovableOptions(options);
 	}
 
 	protected moveWidget(x:number, y:number, animate) {
-		var moveParent = this.options.moveParent;
+		var options = this.options;
+
+		var moveParent = options.moveParent;
+		var duration = options.animateDuration;
 		var widget = moveParent ? this.widget.parent : this.widget;
-		var duration = this.options.animateDuration;
+
+		if(!options.xMovable) {
+			x = widget.x;
+		}
+		if(!options.yMovable) {
+			y = widget.y;
+		}
+
+		if(options.xLimit) {
+			x = Math.min(options.xMax, Math.max(options.xMin, x));
+		}
+		if(options.yLimit) {
+			y = Math.min(options.yMax, Math.max(options.yMin, y));
+		}
 
 		widget.moveTo(x, y, animate ? 500 : 0);
 	}
