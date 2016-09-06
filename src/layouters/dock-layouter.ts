@@ -105,8 +105,10 @@ export class DockLayouterParam {
 		this.position = position;
 	}
 
-	static create(position:Direction, size?:string) {
-		return new DockLayouterParam(position, size||"");
+	static create(opts:any) {
+		var options = opts || {};
+
+		return new DockLayouterParam(options.position, options.size||"");
 	}
 };
 

@@ -9,7 +9,7 @@ function onReady(app) {
 	var image = qtk.Image.create();
 	image.set({name:"image1", value:imageURL});
 	image.useBehavior("draggable");
-	image.layoutParam = qtk.SimpleLayouterParam.create("center", "10", "100", "100");
+	image.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"10", w:"100", h:"100"});
 	image.on(qtk.Events.DRAGSTART, function(evt) {
 		console.log("DRAGSTART");
 		var image = {
@@ -36,7 +36,7 @@ function onReady(app) {
 			"fontSize" : 16
 		});
 	targetImage.set({name:"targetImage2",  drawType:qtk.ImageDrawType.DEFAULT, text: "Drop On Me"});
-	targetImage.layoutParam = qtk.SimpleLayouterParam.create("center", "-210", "100%", "200");
+	targetImage.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"-210", w:"100%", h:"200"});
 	targetImage.on(qtk.Events.DRAGENTER, function(evt) {
 		console.log("DRAGENTER");
 	});

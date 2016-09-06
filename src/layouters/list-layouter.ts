@@ -11,7 +11,7 @@ export class ListLayouter extends Layouter {
 	/**
 	 * 列表项的高度。
 	 */
-	public height : number;
+	public h : number;
 	
 	/**
 	 * 列表项与前一项的间距。
@@ -32,7 +32,7 @@ export class ListLayouter extends Layouter {
 	 * 设置参数。
 	 */
 	public setOptions(options:any) : any {
-		this.height = options.height || 80;
+		this.h = options.h || 80;
 		this.spacing = options.spacing || 0;
 
 		return this;
@@ -42,7 +42,7 @@ export class ListLayouter extends Layouter {
 		var x = rect.x;
 		var y = rect.y;
 		var w = rect.w;
-		var h = this.height;
+		var h = this.h;
 		var spacing = this.spacing;
 
 		var arr = widget.children;
@@ -54,10 +54,10 @@ export class ListLayouter extends Layouter {
 				continue;
 			}
 			if(param && param.type === TYPE) {
-				h = param.height || this.height;
+				h = param.h || this.h;
 				spacing = param.spacing || this.spacing;
 			}else {
-				h = this.height;
+				h = this.h;
 				spacing = i ? this.spacing : 0;
 			}
 			y += spacing;
@@ -91,20 +91,21 @@ export class ListLayouterParam {
 	/**
 	 * 列表项的高度。
 	 */
-	public height : number;
+	public h : number;
 	/**
 	 * 列表项与前一项的间距。
 	 */
 	public spacing : number;
 
-	constructor(height:number, spacing:number) {
+	constructor(h:number, spacing:number) {
 		this.type = TYPE;
-		this.height = height || 0;
+		this.h = h || 0;
 		this.spacing = spacing || 0;
 	}
 
-	static create(height:number, spacing:number) {
-		return new ListLayouterParam(height, spacing);
+	static create(opt:any) {
+		var options = opt || {};
+		return new ListLayouterParam(options.h || options.height, options.spacing);
 	}
 };
 

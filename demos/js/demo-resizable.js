@@ -8,7 +8,7 @@ function onReady(app) {
 	var image = qtk.Image.create();
 	image.set({name:"image1", value:imageURL, text:"I'm resizable"});	
 	image.useBehavior("resizable", {all:true});
-	image.layoutParam = qtk.SimpleLayouterParam.create("center", "middle", "200", "200");
+	image.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"middle", w:"200", h:"200"});
 	
 	win.addChild(image);
 	win.open();

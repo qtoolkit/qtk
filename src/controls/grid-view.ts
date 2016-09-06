@@ -110,6 +110,7 @@ export class GridView extends ScrollView {
 
 	protected onInit() {
 		super.onInit();
+		this.relayoutChildren();
 	}
 
 	protected _rows : number;

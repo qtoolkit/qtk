@@ -20,7 +20,7 @@ export class ListView extends ScrollView {
 	public set itemHeight(value:number) {
 		this._itemHeight = value;
 		var layouter = <ListLayouter>this._childrenLayouter;
-		layouter.height = value;
+		layouter.h = value;
 	}
 	public get itemHeight() : number {
 		return this._itemHeight;

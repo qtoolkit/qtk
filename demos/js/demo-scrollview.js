@@ -9,7 +9,7 @@ function onReady(app) {
 	scrollView.dragToScroll = false;
 	scrollView.slideToScroll = true;
 
-	scrollView.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
+	scrollView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	scrollView.set({name:"scrollView", contentWidth:500, contentHeight:2000});	
 	win.addChild(scrollView);
 

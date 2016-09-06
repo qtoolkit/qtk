@@ -194,8 +194,9 @@ export class GridLayouterParam {
 		this.spanCols = spanCols || 1;
 	}
 
-	static create(row?:number, spanRows?:number, col?:number, spanCols?:number) {
-		return new GridLayouterParam(row, spanRows, col, spanCols);
+	static create(opts:any) {
+		var options = opts || {};
+		return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
 	}
 };
 

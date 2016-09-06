@@ -16,7 +16,7 @@ function onReady(app) {
 	
 	for(var i = 0; i < 30; i++) {
 		var item = qtk.Button.create();
-		//item.layoutParam = qtk.GridLayouterParam.create(i, 1, 0, i+1);
+		//item.layoutParam = qtk.GridLayouterParam.create({row:i, spanRows:1, col:0, spanCols:i+1);
 		item.set({text:i.toString()});
 		win.addChild(item, true);
 	}

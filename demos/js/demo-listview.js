@@ -10,7 +10,7 @@ function onReady(app) {
 	listView.slideToScroll = true;
 
 	listView.itemHeight = 60;
-	listView.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
+	listView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	listView.set({name:"listView", contentWidth:500, contentHeight:2000});	
 	win.addChild(listView);
 	

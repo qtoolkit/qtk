@@ -180,7 +180,8 @@ export class LinearLayouterParam {
 	public static defParam = LinearLayouterParam.create(null);
 	static create(opts:any) : LinearLayouterParam {
 		var options = opts || {};
-		return new LinearLayouterParam(options.w, options.h, options.spacing||0, options.align||Align.C);
+		return new LinearLayouterParam(options.w || options.width, options.h || options.height, 
+						 options.spacing||0, options.align||Align.C);
 	}
 };
 

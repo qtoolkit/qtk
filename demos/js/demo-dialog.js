@@ -8,7 +8,7 @@ function createDialog(app, x, y, w, h) {
 	
 	var button = qtk.Button.create();
 	button.text = "Close";
-	button.layoutParam = qtk.SimpleLayouterParam.create("center", "middle", "200", "60");
+	button.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"middle", w:"200", h:"60"});
 	dialog.addChild(button);
 	
 	button.on(qtk.Events.CLICK, function(evt) {
@@ -33,7 +33,7 @@ function onReady(app) {
 
 	var button = qtk.Button.create();
 	button.text = "Open Dialog";
-	button.layoutParam = qtk.SimpleLayouterParam.create("25%", "25%", "50%", "50%");
+	button.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	button.on(qtk.Events.CLICK, function(evt) {
 		createDialog(app, 10, 10, 300, 300);
 	});

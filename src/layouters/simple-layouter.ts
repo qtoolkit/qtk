@@ -110,8 +110,9 @@ export class SimpleLayouterParam {
 		this.type = TYPE;
 	}
 
-	static create(x:string, y:string, w:string, h:string) {
-		return new SimpleLayouterParam(x || '0px', y||'0px', w||'0px', h||'0px');
+	static create(opts:any) {
+		var options = opts || {};
+		return new SimpleLayouterParam(options.x || '0px', options.y||'0px', options.w||'0px', options.h||'0px');
 	}
 };
 
