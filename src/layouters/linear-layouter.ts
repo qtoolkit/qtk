@@ -8,10 +8,17 @@ import {Layouter, LayouterFactory} from './layouter';
 const TYPE = "LinearLayouter";
 
 /**
- * VLinear布局器。
+ * 线性布局器。可以设置为水平和垂直两个方向。
  */
 export class LinearLayouter extends Layouter {
+	/**
+	 * 控件之间的间距。
+	 */
 	public spacing : number;
+
+	/**
+	 * 布局的方向。
+	 */
 	public orientation : Orientation;
 
 	public get type() : string {
@@ -32,9 +39,15 @@ export class LinearLayouter extends Layouter {
 		var r = rect.clone();
 		
 		var arr = children.filter(function(child) {
-			return child.z > 0;
+			var param =  child.layoutParam || LinearLayouterParam.defParam;
+
+			return param.position > 0;
 		});
-		stableSort(arr, function(a, b) {return a.z - b.z;});
+		stableSort(arr, function(a, b) {
+			var ap =  a.layoutParam || LinearLayouterParam.defParam;
+			var bp =  b.layoutParam || LinearLayouterParam.defParam;
+			return ap.position - bp.position;
+		});
 		arr.forEach(child => {
 			if(r.w > 0 &&  r.h > 0) {
 				this.layoutChild(child, r);
@@ -42,7 +55,9 @@ export class LinearLayouter extends Layouter {
 		});
 		
 		arr = children.filter(function(child) {
-			return child.z === 0;
+			var param =  child.layoutParam || LinearLayouterParam.defParam;
+
+			return param.position === 0;
 		});
 		arr.forEach(child => {
 			if(r.w > 0 &&  r.h > 0) {
@@ -51,9 +66,15 @@ export class LinearLayouter extends Layouter {
 		});
 
 		arr = children.filter(function(child) {
-			return child.z < 0;
+			var param =  child.layoutParam || LinearLayouterParam.defParam;
+
+			return param.position < 0;
 		});
-		stableSort(arr, function(a, b) {return b.z - a.z;});
+		stableSort(arr, function(a, b) {
+			var ap =  a.layoutParam || LinearLayouterParam.defParam;
+			var bp =  b.layoutParam || LinearLayouterParam.defParam;
+			return bp.position - ap.position;
+		});
 		arr.forEach(child => {
 			if(r.w > 0 &&  r.h > 0) {
 				this.layoutChild(child, r);
@@ -70,9 +91,9 @@ export class LinearLayouter extends Layouter {
 		var y = 0;
 		var w = 0;
 		var h = 0;
-		var z = child.z;
 		var param = <LinearLayouterParam>child.layoutParam || LinearLayouterParam.defParam;
 
+		var position = param.position;
 		if(param && param.type === TYPE && child.visible) {
 			var spacing = param.spacing || this.spacing;
 			h = Math.min(r.h, param.h ? Layouter.evalValue(param.h, r.h) : child.h);
@@ -95,7 +116,7 @@ export class LinearLayouter extends Layouter {
 				}
 				
 				var spacingH = spacing + h;
-				if(z >= 0) {
+				if(position >= 0) {
 					y = r.y + spacing;
 					r.y += spacingH;
 				}else{
@@ -118,7 +139,7 @@ export class LinearLayouter extends Layouter {
 					}
 				}
 				var spacingW = spacing + w;
-				if(z >= 0) {
+				if(position >= 0) {
 					x = r.x + spacing;
 					r.x += spacingW;
 				}else{
@@ -131,7 +152,6 @@ export class LinearLayouter extends Layouter {
 			child.relayoutChildren();
 		}
 	}
-
 
 	public static createV(options:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
@@ -153,7 +173,7 @@ export class LinearLayouter extends Layouter {
 LayouterFactory.register(TYPE, LinearLayouter.createV);
 
 /**
- * VLinear布局器的参数。
+ * Linear布局器的参数。
  * 
  * 如果父控件使用LinearLayouter布局器，则子控件需要把layoutParam设置为LinearLayouterParam。
  * 
@@ -164,24 +184,46 @@ LayouterFactory.register(TYPE, LinearLayouter.createV);
  */
 export class LinearLayouterParam {
 	public type : string;
+	/**
+	 * 控件的宽度。
+	 */
 	public w : string;
+	/**
+	 * 控件的高度。
+	 */
 	public h : string;
+	/**
+	 * 控件的对齐方式。
+	 * 对于水平布局的情况，对齐方式决定控件的上下位置。
+	 * 对于垂直布局的情况，对齐方式决定控件的左右位置。
+	 */
 	public align : Align;
+	/**
+	 * 与前一个控件之间的间距。
+	 */
 	public spacing : number;
+	
+	/**
+	 * 控件的位置。
+	 * 对于水平布局的情况，position>0，从左边开始排列，position<0，从右边开始排列。
+	 * 对于垂直布局的情况，position>0，从顶部开始排列，position<0，从底部开始排列。
+	 */
+	public position : number;
 
-	constructor(w:string, h:string, spacing:number, align:Align) {
+	constructor(w:string, h:string, spacing:number, align:Align, position:number) {
 		this.type = TYPE;
 		this.w = w;
 		this.h = h;
 		this.align = align;
 		this.spacing = spacing;
+		this.position = position;
 	}
 
 	public static defParam = LinearLayouterParam.create(null);
-	static create(opts:any) : LinearLayouterParam {
+	public static create(opts:any) : LinearLayouterParam {
 		var options = opts || {};
 		return new LinearLayouterParam(options.w || options.width, options.h || options.height, 
-						 options.spacing||0, options.align||Align.C);
+						 options.spacing||0, options.align||Align.C, options.position);
 	}
 };
 

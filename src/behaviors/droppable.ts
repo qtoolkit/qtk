@@ -5,7 +5,7 @@ import {Widget} from "../controls/widget";
 import {Behavior, BehaviorFactory} from "./behavior";
 
 /**
- * 让Widget具有拖放功能的Drop目标。
+ * 让Widget可作为拖放功能的Drop目标。
  * 
  */
 export class Droppable extends Behavior {

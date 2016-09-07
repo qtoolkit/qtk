@@ -19,13 +19,39 @@ export class MovableOptions {
 	 */
 	public animateDuration : number;
 
+	/**
+	 * 如果xLimit为true, xMin代表控件在水平方向上可移动的最小值。
+	 */
 	public xMin : number;
+	/**
+	 * 如果yLimit为true, yMin代表控件在垂直方向上可移动的最小值。
+	 */
 	public yMin : number;
+	/**
+	 * 如果xLimit为true, xMax代表控件在水平方向上可移动的最大值。
+	 */
 	public xMax : number;
+	/**
+	 * 如果yLimit为true, yMax代表控件在垂直方向上可移动的最大值。
+	 */
 	public yMax : number;
+
+	/**
+	 * 是否启用在水平方向上可移动的范围限制。
+	 */
 	public xLimit : boolean;
+	/**
+	 * 是否启用在垂直方向上可移动的范围限制。
+	 */
 	public yLimit : boolean;
+	
+	/**
+	 * 控件在水平方向上是否可移动。
+	 */
 	public xMovable : boolean;
+	/**
+	 * 控件在垂直方向上是否可移动。
+	 */
 	public yMovable : boolean;
 
 	constructor(opts:any) {
@@ -48,7 +74,7 @@ export class MovableOptions {
 /**
  * 让Widget具有可以Movable的特性，按住鼠标可以拖动控件。
  *
- * move的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
+ * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
  */
 export class Movable extends Behavior {
 	protected init(options:any) {

@@ -1,7 +1,7 @@
 
 function addButton(group, z, w, h, spacing, align) {
-	group.addChild(qtk.Button.create().set({text:z.toString(), z:z,
-		layoutParam: qtk.LinearLayouterParam.create({w:w, h:h, spacing:spacing, align:align})
+	group.addChild(qtk.Button.create().set({text:z.toString(),
+		layoutParam: qtk.LinearLayouterParam.create({w:w, h:h, spacing:spacing, align:align, position:z})
 	}));
 }
 

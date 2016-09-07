@@ -2,8 +2,8 @@ describe('LinearLayouter', function() {
 	this.timeout(3000);
    
 	function addButton(group, z, w, h, spacing, align) {
-		var button = qtk.Button.create().set({text:z.toString(), z:z,
-			layoutParam: qtk.LinearLayouterParam.create({w:w, h:h, spacing:spacing, align:align})
+		var button = qtk.Button.create().set({text:z.toString(),
+			layoutParam: qtk.LinearLayouterParam.create({w:w, h:h, spacing:spacing, align:align, position:z})
 		});
 		group.addChild(button);
 
