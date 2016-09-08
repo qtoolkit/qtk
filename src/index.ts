@@ -10,6 +10,7 @@ import {Image} from "./controls/image";
 import {Group} from "./controls/Group";
 import {Button} from "./controls/button";
 import {Dialog} from "./controls/dialog";
+import {TreeItem} from "./controls/tree-item";
 import {ListItem, ListItemStyle} from "./controls/list-item";
 import {GridView} from "./controls/grid-view";
 import {ListView} from "./controls/list-view";
@@ -80,6 +81,7 @@ export {
 	Group,
 	Dialog,
 	GridView,
+	TreeItem,
 	ListView,
 	ListItem,
 	ListItemStyle,

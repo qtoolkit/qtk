@@ -108,10 +108,14 @@ export class Widget extends Emitter {
 	 * @returns 测试结果HitTestResult。
 	 */
 	protected hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h), ctx);
+	}
+	
+	protected doHitTest(x:number, y:number, r:Rect, ctx:MatrixStack) : HitTestResult {
 		var m = ctx.invert();
 		if(m || true) {
 			var p = m.transformPoint(x, y);
-			if(p.x >= 0 && p.x <= this.w && p.y >= 0 && p.y <= this.h) {
+			if(p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
 				return HitTestResult.MM;
 			}
 		}
@@ -538,15 +542,14 @@ export class Widget extends Emitter {
 		return this._text;
 	}
 
+	protected drawImage(ctx:any, style:Style) : Widget {
+		return this;
+	}
+
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
-
 		if(text && style.fontColor) {
-			ctx.font = style.font;
-			ctx.fillStyle = style.fontColor;
-			ctx.textAlign = style.textAlign;
-			ctx.textBaseline = style.textBaseline;
-			ctx.fillText(text, this.w >> 1, this.h >> 1);
+			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(0, 0, this.w, this.h));
 		}
 
 		return this;
@@ -599,6 +602,7 @@ export class Widget extends Emitter {
 		if(style) {
 			this.drawBackground(ctx, style)
 				.drawChildren(ctx)
+				.drawImage(ctx, style)
 				.drawText(ctx, style)
 				.drawTips(ctx, style);
 		}else{

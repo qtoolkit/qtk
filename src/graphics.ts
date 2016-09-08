@@ -1,3 +1,6 @@
+import {Rect} from "./rect";
+import {Style} from "./style";
+
 export enum RoundType {
 	TL = 1,
 	TR = 2,
@@ -6,6 +9,49 @@ export enum RoundType {
 };
 
 export class Graphics {
+	public static drawTextSL(ctx:any, text:string, style:Style, r:Rect) {
+		var x = 0;
+		var y = 0;
+
+		switch(style.textAlign) {
+			case "right": {
+				x = r.x + r.w;
+				break;
+			}
+			case "center": {
+				x = r.x + (r.w >> 1);
+				break;
+			}
+			default: {
+				x = r.x;
+				break;
+			}
+		}
+
+		switch(style.textBaseline) {
+			case "top": {
+				y = r.y;
+				break;
+			}
+			case "bottom": {
+				y = r.y + r.h;
+				break;
+			}
+			default: {
+				y = r.y + (r.h >> 1);
+				break;
+			}
+		}
+		
+		if(text && style.fontColor) {
+			ctx.font = style.font;
+			ctx.fillStyle = style.fontColor;
+			ctx.textAlign = style.textAlign;
+			ctx.textBaseline = style.textBaseline;
+			ctx.fillText(text, x, y, r.w);
+		}
+	}
+
 	public static drawLine(ctx:any, strokeStyle:string, lineWidth:number, 
 						   x1:number, y1:number, x2:number, y2:number) {
 		if(strokeStyle && lineWidth > 0) {

@@ -18,6 +18,20 @@
 			"backGroundColor" : "#FFFFFF"
 		}
 	},
+	"tree-item": {
+		"normal" : {
+			"fontSize" : 16,
+			"textAlign":"left",
+			"fontColor" : "black",
+			"backGroundColor" : "#FFFFFF"
+		},
+		"over" : {
+			"fontSize" : 16,
+			"textAlign":"left",
+			"fontColor" : "black",
+			"backGroundColor" : "#EEEEEE"
+		}
+	},
 	"list-item": {
 		"normal" : {
 			"fontColor" : "black",
