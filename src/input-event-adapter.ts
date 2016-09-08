@@ -80,6 +80,10 @@ function onMouseUp(evt) {
 	dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
 }
 
+function onDblClick(evt) {
+	dispatchPointerEvent(Events.DBLCLICK, evt.target, getPointerDetail(evt));
+}
+
 function onMouseOut(evt) {
 	dispatchPointerEvent(Events.POINTER_OUT, evt.target, getPointerDetail(evt));
 }
@@ -246,6 +250,7 @@ export function init(doc, win, pointerSupported, msPointerSupported, touchSuppor
 		doc.addEventListener('mouseup', onMouseUp);
 		doc.addEventListener('mouseout', onMouseOut);
 		doc.addEventListener('mouseover', onMouseOver);
+		doc.addEventListener('dblclick', onDblClick);
 	}
 
 	doc.addEventListener('mousewheel', onWheel);

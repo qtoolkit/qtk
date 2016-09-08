@@ -1,4 +1,5 @@
 import Events = require("./events");
+import path = require("path");
 import TWEEN = require("tween.js");
 import assets = require("./assets");
 import * as Services from  "./services";
@@ -72,7 +73,8 @@ export class Application extends Emitter implements IApplication {
 		var themeManager = new ThemeManager();
 
 		assets.loadJSON(themeDataURL).then(json => {
-			themeManager.init(json);
+			var baseURL = path.dirname(themeDataURL);
+			themeManager.init(json, baseURL);
 			this.dispatchEventAsync({type:Events.READY});
 		});
 

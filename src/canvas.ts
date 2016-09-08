@@ -187,6 +187,7 @@ export class Canvas extends Emitter {
 		canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
 		canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
 		canvas.addEventListener(Events.CLICK, this.onPointerEvent);
+		canvas.addEventListener(Events.DBLCLICK, this.onPointerEvent);
 		canvas.addEventListener(Events.WHEEL, this.onWheelEvent);
 		canvas.addEventListener(Events.KEYDOWN, this.onKeyEvent);
 		canvas.addEventListener(Events.KEYUP, this.onKeyEvent);

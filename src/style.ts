@@ -174,7 +174,7 @@ export class Style extends Emitter {
 		return json;
 	}
 
-	public fromJson(json:any) {
+	public fromJson(json:any, baseURL:string) {
 		if(json.backGroundColor) {
 			this._backGroundColor = json.backGroundColor;
 		}
@@ -184,13 +184,15 @@ export class Style extends Emitter {
 		}
 
 		if(json.backGroundImage) {
-			this._backGroundImage = ImageTile.create(json.backGroundImage, evt => {
+			var url = baseURL ? baseURL + "/" + json.backGroundImage : json.backGroundImage;
+			this._backGroundImage = ImageTile.create(url, evt => {
 				this.notifyChanged();
 			});
 		}
 
 		if(json.forceGroundImage) {
-			this._forceGroundImage = ImageTile.create(json.forceGroundImage, evt => {
+			var url = baseURL ? baseURL + "/" + json.forceGroundImage : json.forceGroundImage;
+			this._forceGroundImage = ImageTile.create(url, evt => {
 				this.notifyChanged();
 			});
 		}
@@ -296,7 +298,7 @@ export class Style extends Emitter {
 
 
 	public get font() {
-		return this._fontFamily + " " + this._fontSize + "px";
+		return (this._fontFamily||"Sans") + " " + this._fontSize + "px";
 	}
 
 	public get fontFamily() {
@@ -392,10 +394,10 @@ export class Style extends Emitter {
 		this.notifyChanged();
 	}
 
-	static create(json?:any) {
+	static create(json?:any, baseURL?:string) {
 		var style = new Style();
 		if(json) {
-			style.fromJson(json);
+			style.fromJson(json, baseURL);
 		}
 		return style;
 	}

@@ -9,6 +9,16 @@ export enum RoundType {
 };
 
 export class Graphics {
+	public static canvas = document.createElement("canvas");
+	
+	public static measureText(text:string, font:string) {
+		var ctx = Graphics.canvas.getContext("2d");
+		ctx.font = font;
+		var width = ctx.measureText(text).width;
+
+		return width;
+	}
+
 	public static drawTextSL(ctx:any, text:string, style:Style, r:Rect) {
 		var x = 0;
 		var y = 0;

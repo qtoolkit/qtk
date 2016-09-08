@@ -18,6 +18,8 @@ import {Widget, WidgetState, HitTestResult} from "./widget";
  * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
  */
 export class ScrollView extends Widget {
+	public isScrollView = true;
+
 	/*
 	 * 滚动条的透明度。Mobile风格的滚动条，滚动完成时，以动画方式隐藏。
 	 */
@@ -307,6 +309,22 @@ export class ScrollView extends Widget {
 		this._pointerInBar = false;
 	}
 
+	protected dispatchClick(evt:any) {
+		if(!this._pointerInBar) {
+			this.offsetPointerEvent(evt);
+			super.dispatchClick(evt);
+			this.unOffsetPointerEvent(evt);
+		}
+	}
+
+	protected dispatchDblClick(evt:any) {
+		if(!this._pointerInBar) {
+			this.offsetPointerEvent(evt);
+			super.dispatchDblClick(evt);
+			this.unOffsetPointerEvent(evt);
+		}
+	}
+
 	/*
 	 * 更新Scroller的参数。
 	 */
@@ -502,15 +520,28 @@ export class ScrollView extends Widget {
 
 	public onWheel(evt:Events.WheelEvent) {
 		this.validOffsetY = this.offsetY - evt.delta/10;
+		
+		if(this.slideToScroll) {
+			this.scroller.scrollTo(this.offsetX, this.offsetY);
+			this.handleScrollDone();
+		}
 	}
 
 	public get scrollerOptions() : ScrollerOptions {
 		return this._scrollerOptions;
 	}
 
+	protected getLayoutWidth() : number {
+		return this.w - this.leftPadding - this.rightPadding;
+	}
+
+	protected getLayoutHeight() : number {
+		return this.h - this.topPadding - this.bottomPadding;
+	}
+
 	protected getLayoutRect() : Rect {
-		var w = this.w - this.leftPadding - this.rightPadding;
-		var h = this.h - this.topPadding - this.bottomPadding;
+		var w = this.getLayoutWidth();
+		var h = this.getLayoutHeight();
 		
 		if(this.dragToScroll) {
 			if(this.isVScrollBarVisible()) {

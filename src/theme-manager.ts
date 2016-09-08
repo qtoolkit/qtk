@@ -7,6 +7,7 @@ import {IThemeManager} from "./itheme-manager";
  */
 export class ThemeManager implements IThemeManager {
 	private data : any;
+	private baseURL : string;
 
 	constructor() {
 		this.data = {};
@@ -37,15 +38,14 @@ export class ThemeManager implements IThemeManager {
 	/**
 	 * 初始化。
 	 */
-	public init(data:any) : ThemeManager {
+	public init(data:any, baseURL:string) : ThemeManager {
 		var json = this.expand(data);
-
 		for(var itemName in json) {
 			var itemInfo = json[itemName];
 
 			for(var stateName in itemInfo) {
 				var styleInfo = itemInfo[stateName];
-				this.set(itemName, stateName, Style.create(styleInfo));
+				this.set(itemName, stateName, Style.create(styleInfo, baseURL));
 			}
 		}
 
@@ -83,12 +83,16 @@ export class ThemeManager implements IThemeManager {
 			delete itemInfo["common"];
 			delete itemInfo["extends"];
 
-			if(common) {
-				this.expandCommon(itemInfo, common);
-			}
 			if(ext) {
-				var baseInfo = json[ext];
+				var baseInfo = JSON.parse(JSON.stringify(ret[ext]));
+				if(common) {
+					this.expandCommon(baseInfo, common);
+				}
 				itemInfo = this.expandExtends(itemInfo, baseInfo);
+			}else{
+				if(common) {
+					this.expandCommon(itemInfo, common);
+				}
 			}
 
 			ret[itemName] = itemInfo;

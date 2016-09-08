@@ -5,19 +5,19 @@
     <script src='js/demo-dialog.js'></script>
     <script src='js/demo-resizable.js'></script>
     <script src='js/demo-anim.js'></script>
-    <script src='js/demo-listview.js'></script>
     <script src='js/demo-scrollview.js'></script>
     <script src='js/demo-dnd.js'></script>
     <script src='js/demo-docklayout.js'></script>
     <script src='js/demo-movable.js'></script>
     <script src='js/demo-linearlayout.js'></script>
+    <script src='js/demo-listview.js'></script>
     <script src='js/demo-treeview.js'></script>
 	
 	<script type="application/javascript">
 		var app = new qtk.Application.create("test");
 
 		window.onload = function() {
-			app.init({themeDataURL:"/www/theme/default/theme.json"});
+			app.init({themeDataURL:"/demos/assets/theme/default/theme.json"});
 			app.on(qtk.Events.READY, function() {
 				onReady(app);
 				app.run();

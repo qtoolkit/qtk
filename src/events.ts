@@ -15,6 +15,7 @@ export const POINTER_OVER = "qtk-pointer-over";
 export const POINTER_ENTER = "qtk-pointer-enter";
 export const POINTER_LEAVE = "qtk-pointer-leave";
 export const CLICK = "qtk-click";
+export const DBLCLICK = "qtk-dblclick";
 export const CHANGE = "change"
 export const DISPOSE = "dispose"
 export const RUN = "run"

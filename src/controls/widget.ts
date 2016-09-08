@@ -30,22 +30,47 @@ export class Widget extends Emitter {
 	}
 
 	public toLocalPoint(p:Point) : Point {
-		var iter:Widget = this;
+		p.x -= this.x;
+		p.y -= this.y;
+		
+		var iter:Widget = this.parent;
 		while(iter) {
 			p.x -= iter.x;
 			p.y -= iter.y;
-
 			iter = iter.parent;
 		}
 
 		return p;
 	}
-
+	
 	public toGlobalPoint(p:Point) : Point {
-		var iter:Widget = this;
+		p.x += this.x;
+		p.y += this.y;
+		var iter:Widget = this.parent;
+		
 		while(iter) {
 			p.x += iter.x;
 			p.y += iter.y;
+			iter = iter.parent;
+		}
+
+		return p;
+	}
+	
+	public toViewPoint(p:Point) : Point {
+		p.x += this.x;
+		p.y += this.y;
+		var iter:any = this.parent;
+		
+		while(iter) {
+			p.x += iter.x;
+			p.y += iter.y;
+			if(iter.offsetX) {
+				p.x - iter.offsetX;
+			}
+			if(iter.offsetY) {
+				p.y - iter.offsetY;
+			}
 
 			iter = iter.parent;
 		}
@@ -274,6 +299,22 @@ export class Widget extends Emitter {
 		}
 		this.dispatchEvent(evt, false);
 	}
+	
+	protected dispatchDblClick(evt:any) {
+		if(!this._enable || !this._sensitive) {
+			return;
+		}
+		
+		this.dispatchEvent(evt, true);
+		if(this.target) {
+			this.target.dispatchDblClick(evt);
+		}
+		if(this.ondblclick) {
+			this.ondblclick(evt);
+		}
+		this.dispatchEvent(evt, false);
+	}
+
 
 	protected dispatchKeyDown(evt:any) {
 		if(!this._enable || !this._sensitive) {
@@ -635,6 +676,10 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	protected getStyleType() : string {
+		return this._styleType || this.type;
+	}
+
 	public getStyleOfState(state : WidgetState) : Style {
 		var style = null;
 		var stateName = this.stateToString(state);
@@ -643,7 +688,7 @@ export class Widget extends Emitter {
 			style = this._styles[stateName];
 		}else{
 			var tm = this._themeManager;
-			var styleType = this._styleType || this.type;
+			var styleType = this.getStyleType();
 			style = tm.get(styleType, stateName);
 		}
 		
@@ -755,6 +800,10 @@ export class Widget extends Emitter {
 
 		canvas.on(Events.CLICK, evt => {
 			this.dispatchClick(evt);
+		});
+
+		canvas.on(Events.DBLCLICK, evt => {
+			this.dispatchDblClick(evt);
 		});
 
 		canvas.on(Events.WHEEL, evt => {
@@ -1224,6 +1273,7 @@ export class Widget extends Emitter {
 	private _topPadding : number;
 	private _bottomPadding : number;
 	public onclick : Function;
+	public ondblclick : Function;
 	public onpointerdown : Function;
 	public onpointermove : Function;
 	public onpointerup : Function;
