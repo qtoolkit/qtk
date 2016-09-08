@@ -11,6 +11,8 @@ import {Group} from "./controls/Group";
 import {Button} from "./controls/button";
 import {Dialog} from "./controls/dialog";
 import {TreeItem} from "./controls/tree-item";
+import {TreeView} from "./controls/tree-view";
+import {TreeItemData} from "./controls/tree-item-data";
 import {ListItem, ListItemStyle} from "./controls/list-item";
 import {GridView} from "./controls/grid-view";
 import {ListView} from "./controls/list-view";
@@ -82,6 +84,8 @@ export {
 	Dialog,
 	GridView,
 	TreeItem,
+	TreeView,
+	TreeItemData,
 	ListView,
 	ListItem,
 	ListItemStyle,

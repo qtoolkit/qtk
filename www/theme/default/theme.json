@@ -1,101 +1,98 @@
 {
+	"widget" : {
+		"common" : {
+			"lineWidth" : 1,
+			"fontSize" : 16,
+			"fontColor" : "black",
+			"backGroundColor" : "#FFFFFF"
+		},
+		"normal" : {},
+		"active" : {},
+		"over" : {},
+		"disable" : {}
+	},
 	"dialog": {
+		"extends": "widget",
 		"normal" : {
 			"backGroundColor" : "#606060"
 		}
 	},
-	"list-view": {
+	"scroll-view": {
+		"extends": "widget",
 		"normal" : {
-			"lineWidth" : 1,
-			"lineColor" : "#EEEEEE",
-			"backGroundColor" : "#FFFFFF"
+			"lineColor" : "#EEEEEE"
 		}
 	},
 	"grid-view": {
-		"normal" : {
-			"lineWidth" : 1,
-			"lineColor" : "#EEEEEE",
-			"backGroundColor" : "#FFFFFF"
-		}
+		"extends": "scroll-view"
+	},
+	"list-view": {
+		"extends": "scroll-view"
+	},
+	"tree-view": {
+		"extends": "scroll-view"
 	},
 	"tree-item": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"left"
+		},
 		"normal" : {
-			"fontSize" : 16,
-			"textAlign":"left",
-			"fontColor" : "black",
-			"backGroundColor" : "#FFFFFF"
+			"backGroundColor" : "#FEFEFE"
 		},
 		"over" : {
-			"fontSize" : 16,
-			"textAlign":"left",
-			"fontColor" : "black",
 			"backGroundColor" : "#EEEEEE"
+		},
+		"active" : {
+			"backGroundColor" : "#DDDDDD"
 		}
 	},
 	"list-item": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"center"
+		},
 		"normal" : {
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"fontSize" : 16,
-			"lineWidth" : 1,
-			"lineColor" : "#EEEEEE",
 			"backGroundColor" : "#FFFFFF"
-		}
-	},
-	"scroll-view": {
-		"normal" : {
-			"lineWidth" : 1,
-			"lineColor" : "#EEEEEE",
-			"backGroundColor" : "#FFFFFF"
+		},
+		"over" : {
+			"backGroundColor" : "#EEEEEE"
+		},
+		"active" : {
+			"backGroundColor" : "#DDDDDD"
 		}
 	},
 	"window-normal": {
-		"normal" : {
-			"backGroundColor" : "gray"
-		}
+		"extends": "widget"
 	},
 	"button": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
 		"normal" : {
-			"backGroundColor" : "green",
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"fontSize" : 16
+			"backGroundColor" : "green"
 		},
 		"over" : {
-			"backGroundColor" : "blue",
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"fontSize" : 16
+			"backGroundColor" : "blue"
 		},
 		"active" : {
-			"backGroundColor" : "red",
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"lineWidth" : 1,
-			"lineColor" : "green",
-			"fontSize" : 18
+			"backGroundColor" : "red"
 		}
 	},
 	"button-blue": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
 		"normal" : {
-			"backGroundColor" : "blue",
-			"fontColor" : "white",
-			"roundRadius" : 5,
-			"fontSize" : 20
+			"backGroundColor" : "blue"
 		},
 		"over" : {
-			"backGroundColor" : "green",
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"fontSize" : 16
+			"backGroundColor" : "green"
 		},
 		"active" : {
-			"backGroundColor" : "red",
-			"fontColor" : "black",
-			"roundRadius" : 5,
-			"lineWidth" : 1,
-			"lineColor" : "green",
-			"fontSize" : 18
+			"backGroundColor" : "red"
 		}
 	}
 }

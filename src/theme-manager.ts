@@ -1,4 +1,5 @@
 import {Style} from "./style";
+import {assign} from "./utils";
 import {IThemeManager} from "./itheme-manager";
 
 /**
@@ -36,7 +37,9 @@ export class ThemeManager implements IThemeManager {
 	/**
 	 * 初始化。
 	 */
-	public init(json:any) : ThemeManager {
+	public init(data:any) : ThemeManager {
+		var json = this.expand(data);
+
 		for(var itemName in json) {
 			var itemInfo = json[itemName];
 
@@ -47,6 +50,51 @@ export class ThemeManager implements IThemeManager {
 		}
 
 		return this;
+	}
+	
+	protected expandCommon(itemInfo:any, common:any) : any {
+		for(var key in itemInfo) {
+			var value = itemInfo[key];
+			itemInfo[key] = assign(value, common);
+		}
+
+		return itemInfo;
+	}
+
+	protected expandExtends(extInfo:any, baseInfo:any) : any {
+		var ret = {};
+		for(var key in baseInfo) {
+			ret[key] = assign({}, baseInfo[key]);
+		}
+		
+		for(var key in extInfo) {
+			ret[key] = assign(ret[key]||{}, extInfo[key]);
+		}
+
+		return ret;
+	}
+
+	protected expand(json:any) : any {
+		var ret = {};
+		for(var itemName in json) {
+			var itemInfo = json[itemName];
+			var common = itemInfo["common"];
+			var ext = itemInfo["extends"];
+			delete itemInfo["common"];
+			delete itemInfo["extends"];
+
+			if(common) {
+				this.expandCommon(itemInfo, common);
+			}
+			if(ext) {
+				var baseInfo = json[ext];
+				itemInfo = this.expandExtends(itemInfo, baseInfo);
+			}
+
+			ret[itemName] = itemInfo;
+		}
+
+		return ret;
 	}
 }
 
