@@ -118,3 +118,15 @@ export function assign(target, other) : any{
   }
   return to;
 }
+
+export function aRemove(arr:any, obj:any) : boolean {
+	var i = arr.indexOf(obj);
+	if(i >= 0) {
+		arr.splice(i, 1);
+
+		return true;
+	}
+
+	return false;
+}
+

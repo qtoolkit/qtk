@@ -14,9 +14,6 @@ import {RecyclableCreator} from "../recyclable-creator";
  * 树形视图。
  */
 export class TreeView extends ListView {
-	protected _indention : number;
-	protected _multiSelectable : boolean;
-	
 	public get multiSelectable() : boolean {
 		return this._multiSelectable;
 	}
@@ -24,6 +21,9 @@ export class TreeView extends ListView {
 		this._multiSelectable = value;
 	}
 
+	/**
+	 * 每一层缩减的距离。
+	 */
 	public get indention() : number {
 		return this._indention || 30;
 	}
@@ -31,6 +31,9 @@ export class TreeView extends ListView {
 		this._indention = value;
 	}
 
+	/**
+	 * 选中一个子项。
+	 */
 	public setItemSelected(item:TreeItem, selected:boolean, exclude:boolean) : Widget {
 		if(!this.multiSelectable || exclude) {
 			this.children.forEach((child:TreeItem) => {
@@ -51,21 +54,33 @@ export class TreeView extends ListView {
 		return this;
 	}
 
-	private resetChilren() : Widget{
-		this.children.forEach(child => {
-			child.deinit();
-			child.dispose();
-		});
-		this.children.length = 0;
+	public addItem(parentData:TreeItemData, text:string,  data:any, image:string) : TreeItemData {
+		parentData = parentData ? parentData : this._rootData;
+		var itemData = parentData.addChild(text, image, data);
+		
+		this.reload();
 
-		return this;
+		return itemData;	
 	}
 
-	public doLoad(data:TreeItemData, parentItem:TreeItem, level:number) {
+	public removeAllItems() {
+		this._rootData.children.length = 0;
+		this.reload();
+	}
+
+	public removeItem(item:TreeItemData, destroy?:boolean) : boolean {
+		var ret = item.parent.removeChild(item, destroy);
+		this.reload();
+
+		return ret;
+	}
+
+	protected doLoad(data:TreeItemData, parentItem:TreeItem, level:number) {
 		var item = <TreeItem>TreeItem.create();
 		var isLeaf = !data.children || !data.children.length;
 
-		item.set({level:level, indention:this.indention, data:data, isLeaf:isLeaf, parentItem:parentItem});
+		data.treeItem = item;
+		item.set({level:level, indention:this.indention, data:data, parentItem:parentItem});
 		this.addChild(item, true);
 
 		if(!isLeaf) {
@@ -75,10 +90,22 @@ export class TreeView extends ListView {
 		}
 	}
 
-	public loadData(data:TreeItemData) : Widget {
+	public reload() {
 		this.resetChilren();
-		this.doLoad(data, null, 0);
+		this._rootData.children.forEach((data:TreeItemData) => {
+			this.doLoad(data, null, 0)
+		});
 		this.relayoutChildren();
+	}
+
+	public loadData(data:TreeItemData) : Widget {
+		if(data.text === "%root%") {
+			this._rootData = data;
+		}else{
+			this._rootData.children.length = 0;
+			this._rootData.children.push(data);
+		}
+		this.reload();
 
 		return this;
 	}
@@ -92,9 +119,23 @@ export class TreeView extends ListView {
 			}
 		});
 
-		return Math.max(this.w, w + this.itemHeight);
+		return Math.max(this.w, w + this.itemHeight * 2);
+	}
+	
+	private resetChilren() : Widget{
+		this.children.forEach(child => {
+			child.deinit();
+			child.dispose();
+		});
+		this.children.length = 0;
+
+		return this;
 	}
 
+	protected _indention : number;
+	protected _multiSelectable : boolean;
+	protected _rootData : TreeItemData;	
+	
 	constructor() {
 		super();
 		this.type = TreeView.TYPE;
@@ -102,6 +143,7 @@ export class TreeView extends ListView {
 
 	public reset(type:string) : Widget {
 		super.reset(type);
+		this._rootData = TreeItemData.create("root", null, null);
 		this.scrollerOptions.scrollingX = true;
 		
 		return this;
@@ -109,6 +151,7 @@ export class TreeView extends ListView {
 
 	public dispose() {
 		super.dispose();
+		this._rootData = null;
 		TreeView.recyclbaleTreeView.recycle(this);
 	}
 

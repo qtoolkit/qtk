@@ -11,11 +11,11 @@ import {RoundType, Graphics} from "../graphics";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 树形视图中，显示的一个子项。
+ */
 export class TreeItem extends Widget {
 	protected _level  : number;
-	protected _isLeaf : boolean;
-	protected _expanded : boolean;
-	protected _selected : boolean;
 	protected _indention : number;
 	protected _data : TreeItemData;
 	protected _parentItem : TreeItem;
@@ -23,6 +23,27 @@ export class TreeItem extends Widget {
 
 	constructor() {
 		super(TreeItem.TYPE);
+	}
+
+	/**
+	 * 显示的文本，从data中获取。
+	 */
+	public get text() : string {
+		return this._data.text;
+	}
+	
+	/**
+	 * 显示的图标，从data中获取。
+	 */
+	public get icon() : ImageTile{
+		return this._data.icon;
+	}
+
+	/**
+	 * 显示的图标，从data中获取。
+	 */
+	public get userData() : any{
+		return this._data.userData;
 	}
 
 	public get desireWidth() : number {
@@ -37,6 +58,9 @@ export class TreeItem extends Widget {
 		return w;
 	}
 
+	/**
+	 * 可见性判断：要求父控件没有折叠。
+	 */
 	public get visible() {
 		var item:TreeItem = this.parentItem;
 		while(item !== null) {
@@ -47,16 +71,6 @@ export class TreeItem extends Widget {
 		}
 
 		return this._visible;
-	}
-	
-	protected getStateForStyle() : WidgetState {
-		return this.selected ? WidgetState.SELECTED : this._state;
-	}
-
-	protected getStyleType() : string {
-		var appendix = this.isLeaf ? "leaf" : (this.expanded ? "expanded":"collapsed"); 
-		
-		return (this._styleType || this.type) +"."+appendix;
 	}
 	
 	public get parentItem() : TreeItem {
@@ -81,17 +95,15 @@ export class TreeItem extends Widget {
 	}
 	
 	public get selected() : boolean {
-		return this._selected;
+		return this.data.selected;
 	}
 	public set selected(value:boolean) {
-		this._selected = value;
+		this.data.selected = value;
 	}
 	
 	public get isLeaf() : boolean {
-		return this._isLeaf;
-	}
-	public set isLeaf(value:boolean) {
-		this._isLeaf = value;
+		var data = this._data;
+		return !data.children || !data.children.length;
 	}
 
 	public get data() : TreeItemData{
@@ -109,12 +121,22 @@ export class TreeItem extends Widget {
 	}
 
 	public get expanded() : boolean{
-		return this._expanded;
+		return this.data.expanded;
 	}
 	public set expanded(value:boolean) {
-		this._expanded = value;
+		this.data.expanded = value;
 	}
 
+	protected getStateForStyle() : WidgetState {
+		return this.selected ? WidgetState.SELECTED : this._state;
+	}
+
+	protected getStyleType() : string {
+		var appendix = this.isLeaf ? "leaf" : (this.expanded ? "expanded":"collapsed"); 
+		
+		return (this._styleType || this.type) +"."+appendix;
+	}
+	
 	protected drawImage(ctx:any, style:Style) : Widget {
 		var img = style.forceGroundImage;
 		if(img) {
@@ -179,6 +201,7 @@ export class TreeItem extends Widget {
 
 	public dispose() {
 		super.dispose();
+		this._data = null;
 		this.parentItem = null;
 		this._childrenItems = null;
 		TreeItem.recyclbale.recycle(this);
@@ -188,9 +211,7 @@ export class TreeItem extends Widget {
 		super.reset(type);
 		this._level = 0;
 		this._data = null;
-		this._isLeaf = false;
 		this._indention = 30;
-		this._expanded = false;
 		this._parentItem = null;
 		this._childrenItems = [];
 

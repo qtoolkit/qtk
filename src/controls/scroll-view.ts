@@ -230,9 +230,11 @@ export class ScrollView extends Widget {
 			}
 		}
 
-		if(!this._pointerInBar && this.slideToScroll) {
-			this._scrollBarOpacity = 1;
-			this.scroller.doTouchStart(this.pointerEventToTouches(evt), evt.timeStamp);
+		if(this.slideToScroll) {
+			if(!this._pointerInBar) {
+				this._scrollBarOpacity = 1;
+				this.scroller.doTouchStart(this.pointerEventToTouches(evt), evt.timeStamp);
+			}
 		}
 
 		if(!this._pointerInBar) {
@@ -257,11 +259,17 @@ export class ScrollView extends Widget {
 					offsetX = this._saveOX + (dx/this.w)*this._cw;
 				}
 
-				this.scroller.scrollTo(this.toValidOffsetX(offsetX), this.toValidOffsetY(offsetY));
 			}
 
-			if(!this._pointerInBar && this.slideToScroll) {
-				this.scroller.doTouchMove(this.pointerEventToTouches(evt), evt.timeStamp);
+			if(this.slideToScroll) {
+				if(!this._pointerInBar) {
+					this.scroller.doTouchMove(this.pointerEventToTouches(evt), evt.timeStamp);
+				}else{
+					this.scroller.scrollTo(this.toValidOffsetX(offsetX), this.toValidOffsetY(offsetY));
+				}
+			}else{
+				this.validOffsetX = offsetX;
+				this.validOffsetY = offsetY;
 			}
 		}
 
@@ -293,11 +301,13 @@ export class ScrollView extends Widget {
 			this._pointerInHScrollDraggerRect  = false;
 		}
 
-		if(!this._pointerInBar && this.slideToScroll) {
-			this.scroller.doTouchEnd(evt.timeStamp);
-		}else{
-			this.scroller.scrollTo(this.offsetX, this.offsetY);
-			this.handleScrollDone();
+		if(this.slideToScroll) {
+			if(!this._pointerInBar) {
+				this.scroller.doTouchEnd(evt.timeStamp);
+			}else{
+				this.scroller.scrollTo(this.offsetX, this.offsetY);
+				this.handleScrollDone();
+			}
 		}
 
 		if(!this._pointerInBar) {
