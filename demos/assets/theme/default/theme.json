@@ -1,0 +1,120 @@
+{
+	"widget" : {
+		"common" : {
+			"lineWidth" : 1,
+			"fontSize" : 16,
+			"fontColor" : "black",
+			"backGroundColor" : "#FFFFFF"
+		},
+		"normal" : {},
+		"active" : {},
+		"over" : {},
+		"selected" : {},
+		"disable" : {}
+	},
+	"dialog": {
+		"extends": "widget",
+		"normal" : {
+			"backGroundColor" : "#606060"
+		}
+	},
+	"scroll-view": {
+		"extends": "widget",
+		"normal" : {
+			"lineColor" : "#EEEEEE"
+		}
+	},
+	"grid-view": {
+		"extends": "scroll-view"
+	},
+	"list-view": {
+		"extends": "scroll-view"
+	},
+	"tree-view": {
+		"extends": "scroll-view"
+	},
+	"tree-item": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"left"
+		},
+		"normal" : {
+			"backGroundColor" : "#FEFEFE"
+		},
+		"over" : {
+			"backGroundColor" : "#EEEEEE"
+		},
+		"selected" : {
+			"backGroundColor" : "#CCCCCC"
+		},
+		"active" : {
+			"backGroundColor" : "#DDDDDD"
+		}
+	},
+	"tree-item.expanded": {
+		"extends": "tree-item",
+		"common" : {
+			"forceGroundImage":"images/expand.png"
+		}
+	},
+	"tree-item.collapsed": {
+		"extends": "tree-item",
+		"common" : {
+			"forceGroundImage":"images/collapse.png"
+		}
+	},
+	"tree-item.leaf": {
+		"extends": "tree-item",
+		"common" : {
+			"forceGroundImage":"images/leaf.png"
+		}
+	},
+	"list-item": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"center"
+		},
+		"normal" : {
+			"backGroundColor" : "#FFFFFF"
+		},
+		"over" : {
+			"backGroundColor" : "#EEEEEE"
+		},
+		"active" : {
+			"backGroundColor" : "#DDDDDD"
+		}
+	},
+	"window-normal": {
+		"extends": "widget"
+	},
+	"button": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"backGroundColor" : "green"
+		},
+		"over" : {
+			"backGroundColor" : "blue"
+		},
+		"active" : {
+			"backGroundColor" : "red"
+		}
+	},
+	"button-blue": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"backGroundColor" : "blue"
+		},
+		"over" : {
+			"backGroundColor" : "green"
+		},
+		"active" : {
+			"backGroundColor" : "red"
+		}
+	}
+}
