@@ -2,22 +2,53 @@
 import {Rect} from "../rect";
 import {Widget} from "./widget";
 import {TreeItem} from "./tree-item";
-import {TreeItemData} from "./tree-item-data";
+import {ListView} from "./list-view";
 import {ScrollView} from "./scroll-view";
+import {TreeItemData} from "./tree-item-data";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
 import {Layouter} from "../layouters/layouter";
 import {ListLayouter} from "../layouters/list-layouter";
-import {ListView} from "./list-view";
+import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 树形视图。
+ */
 export class TreeView extends ListView {
 	protected _indention : number;
+	protected _multiSelectable : boolean;
 	
+	public get multiSelectable() : boolean {
+		return this._multiSelectable;
+	}
+	public set multiSelectable(value:boolean) {
+		this._multiSelectable = value;
+	}
+
 	public get indention() : number {
 		return this._indention || 30;
 	}
 	public set indention(value:number) {
 		this._indention = value;
+	}
+
+	public setItemSelected(item:TreeItem, selected:boolean, exclude:boolean) : Widget {
+		if(!this.multiSelectable || exclude) {
+			this.children.forEach((child:TreeItem) => {
+				if(child === item) {
+					child.selected = selected;
+				}else{
+					if(child.selected) {
+						child.selected = false;
+					}
+				}
+			});
+		}else{
+			item.selected = selected;
+		}
+
+		this.requestRedraw();
+
+		return this;
 	}
 
 	private resetChilren() : Widget{
@@ -31,14 +62,15 @@ export class TreeView extends ListView {
 	}
 
 	public doLoad(data:TreeItemData, parentItem:TreeItem, level:number) {
-		var item = TreeItem.create();
+		var item = <TreeItem>TreeItem.create();
 		var isLeaf = !data.children || !data.children.length;
 
-		item.set({level:level, data:data, isLeaf:isLeaf, parentItem:parentItem});
+		item.set({level:level, indention:this.indention, data:data, isLeaf:isLeaf, parentItem:parentItem});
 		this.addChild(item, true);
+
 		if(!isLeaf) {
-			data.children.forEach(iter => {
-				this.doLoad(iter, <TreeItem>item, level+1);
+			data.children.forEach((iter) => {
+				this.doLoad(iter, item, level+1);
 			});
 		}
 	}
@@ -46,7 +78,6 @@ export class TreeView extends ListView {
 	public loadData(data:TreeItemData) : Widget {
 		this.resetChilren();
 		this.doLoad(data, null, 0);
-		
 		this.relayoutChildren();
 
 		return this;

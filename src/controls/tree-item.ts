@@ -2,8 +2,9 @@
 import {Rect} from "../rect";
 import {Point} from "../point";
 import {Style} from "../style";
+import {TreeView} from "./tree-view";
 import {TreeItemData} from "./tree-item-data";
-import {Widget, HitTestResult} from "./widget";
+import {Widget, WidgetState, HitTestResult} from "./widget";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
@@ -14,26 +15,30 @@ export class TreeItem extends Widget {
 	protected _level  : number;
 	protected _isLeaf : boolean;
 	protected _expanded : boolean;
+	protected _selected : boolean;
 	protected _indention : number;
 	protected _data : TreeItemData;
 	protected _parentItem : TreeItem;
+	protected _childrenItems : Array<TreeItem>;
 
 	constructor() {
 		super(TreeItem.TYPE);
 	}
 
 	public get desireWidth() : number {
-		var style = this.getStyle();
 		var text = this.data.text;
+		var style = this.getStyle();
 		var w = this._level * this._indention + this.h;
-
-		w += Graphics.measureText(text, style.font);
+		
+		if(text) {
+			w += Graphics.measureText(text, style.font);
+		}
 
 		return w;
 	}
 
 	public get visible() {
-		var item = this.parentItem;
+		var item:TreeItem = this.parentItem;
 		while(item !== null) {
 			if(!item.expanded) {
 				return false;
@@ -42,6 +47,10 @@ export class TreeItem extends Widget {
 		}
 
 		return this._visible;
+	}
+	
+	protected getStateForStyle() : WidgetState {
+		return this.selected ? WidgetState.SELECTED : this._state;
 	}
 
 	protected getStyleType() : string {
@@ -53,16 +62,29 @@ export class TreeItem extends Widget {
 	public get parentItem() : TreeItem {
 		return this._parentItem;
 	}
-	public set parentItem(value:TreeItem) {
-		this._parentItem = value;
+	public set parentItem(parentItem:TreeItem) {
+		this._parentItem = parentItem;
+		if(parentItem) {
+			parentItem._childrenItems.push(this);
+		}
 	}
 	
+	public get childrenItems() : Array<TreeItem> {
+		return this._childrenItems;
+	}
 
 	public get level() : number {
 		return this._level;
 	}
 	public set level(value:number) {
 		this._level = value;
+	}
+	
+	public get selected() : boolean {
+		return this._selected;
+	}
+	public set selected(value:boolean) {
+		this._selected = value;
 	}
 	
 	public get isLeaf() : boolean {
@@ -80,7 +102,7 @@ export class TreeItem extends Widget {
 	}
 
 	public get indention() : number {
-		return this._indention || 30;
+		return this._indention;
 	}
 	public set indention(value:number) {
 		this._indention = value;
@@ -94,13 +116,14 @@ export class TreeItem extends Widget {
 	}
 
 	protected drawImage(ctx:any, style:Style) : Widget {
-		if(style.forceGroundImage) {
+		var img = style.forceGroundImage;
+		if(img) {
 			var y = 0;
 			var w = this.h;
 			var h = this.h;
 			var x = this._level * this._indention;
 
-			style.forceGroundImage.draw(ctx, ImageDrawType.CENTER, x, y, w, h);
+			img.draw(ctx, ImageDrawType.CENTER, x, y, w, h);
 		}
 
 		return this;
@@ -143,20 +166,33 @@ export class TreeItem extends Widget {
 				this.parent.relayoutChildren();
 			}
 		}
+
+		var parent = <TreeView>this.parent;
+		if(evt.ctrlKey && parent.multiSelectable) {
+			parent.setItemSelected(this, !this.selected, false);
+		}
+		else{
+			parent.setItemSelected(this, true, true);
+		}
 		super.dispatchClick(evt);
 	}
 
 	public dispose() {
 		super.dispose();
+		this.parentItem = null;
+		this._childrenItems = null;
 		TreeItem.recyclbale.recycle(this);
 	}
 	
 	public reset(type:string) : Widget {
 		super.reset(type);
 		this._level = 0;
+		this._data = null;
 		this._isLeaf = false;
 		this._indention = 30;
 		this._expanded = false;
+		this._parentItem = null;
+		this._childrenItems = [];
 
 		return this;
 	}

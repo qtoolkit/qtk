@@ -1,6 +1,7 @@
 
 import {Emitter} from "./emitter";
 import Events = require("./events");
+import {PointerEventDetail} from "./event-detail";
 import inputEventAdapter = require("./input-event-adapter");
 
 /**
@@ -183,6 +184,7 @@ export class Canvas extends Emitter {
 			document.body.appendChild(canvas);
 		}
 
+		var me = this;
 		canvas.addEventListener(Events.POINTER_DOWN, this.onPointerEvent);
 		canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
 		canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
@@ -191,6 +193,13 @@ export class Canvas extends Emitter {
 		canvas.addEventListener(Events.WHEEL, this.onWheelEvent);
 		canvas.addEventListener(Events.KEYDOWN, this.onKeyEvent);
 		canvas.addEventListener(Events.KEYUP, this.onKeyEvent);
+		canvas.oncontextmenu = function(evt) {
+			evt.preventDefault();
+			var detail = PointerEventDetail.create(evt.which, evt.pageX, evt.pageY, 
+								evt.altKey, evt.ctrlKey, evt.shiftKey, false);
+			me.onPointerEvent({type:Events.CONTEXT_MENU, detail:detail});
+			detail.dispose();
+		}
 
 		return canvas;
 	}

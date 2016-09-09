@@ -300,6 +300,21 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
+	protected dispatchContextMenu(evt:any) {
+		if(!this._enable || !this._sensitive) {
+			return;
+		}
+		
+		this.dispatchEvent(evt, true);
+		if(this.target) {
+			this.target.dispatchContextMenu(evt);
+		}
+		if(this.oncontextmenu) {
+			this.oncontextmenu(evt);
+		}
+		this.dispatchEvent(evt, false);
+	}
+	
 	protected dispatchDblClick(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -695,8 +710,12 @@ export class Widget extends Emitter {
 		return style;
 	}
 
+	protected getStateForStyle() : WidgetState {
+		return this._state;
+	}
+
 	public getStyle() : Style {
-		var state = this._state;
+		var state = this.getStateForStyle();
 		var style = this.getStyleOfState(state);
 		if(!style) {
 			style = this.getStyleOfState(WidgetState.NORMAL);
@@ -804,6 +823,10 @@ export class Widget extends Emitter {
 
 		canvas.on(Events.DBLCLICK, evt => {
 			this.dispatchDblClick(evt);
+		});
+
+		canvas.on(Events.CONTEXT_MENU, evt => {
+			this.dispatchContextMenu(evt);
 		});
 
 		canvas.on(Events.WHEEL, evt => {
@@ -1274,6 +1297,7 @@ export class Widget extends Emitter {
 	private _bottomPadding : number;
 	public onclick : Function;
 	public ondblclick : Function;
+	public oncontextmenu: Function;
 	public onpointerdown : Function;
 	public onpointermove : Function;
 	public onpointerup : Function;
@@ -1329,6 +1353,7 @@ export class Widget extends Emitter {
 		this._bottomPadding = 0;
 		this._lastOverWidget = null;
 		this.onclick = null;
+		this.oncontextmenu = null;
 		this.onpointerdown = null;
 		this.onpointermove = null;
 		this.onpointerup = null;
