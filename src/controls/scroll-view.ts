@@ -114,10 +114,10 @@ export class ScrollView extends Widget {
 	}
 
 	protected toValidOffsetX(value:number) : number {
-		return Math.min(Math.max(0, value), this._cw - this.w);
+		return Math.min(Math.max(0, value), Math.max(0, this._cw - this.w));
 	}
 	protected toValidOffsetY(value:number) : number {
-		return Math.min(Math.max(0, value), this._ch - this.h);
+		return Math.min(Math.max(0, value), Math.max(0, this._ch - this.h));
 	}
 
 	/**
