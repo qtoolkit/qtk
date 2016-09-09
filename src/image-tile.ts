@@ -53,7 +53,12 @@ export enum ImageDrawType {
 	/**
 	 * 保持比例缩放到指定的矩形区域。
 	 */
-	AUTO = 8
+	AUTO = 8,
+	
+	/**
+	 * ICON
+	 */
+	ICON = 9
 }
 
 /**
@@ -139,6 +144,9 @@ export class ImageTile extends Emitter {
 		this.h = h;
 		this.img = img;
 
+		if(ImageTile.onImageLoaded) {
+			ImageTile.onImageLoaded(this);
+		}
 		this.dispatchEventAsync({type:Events.LOAD, detail:this});
 	}
  
@@ -223,6 +231,19 @@ export class ImageTile extends Emitter {
 
 	private drawDefault(ctx:any, dx:number, dy:number, dw:number, dh:number) {
 		ctx.drawImage(this.img, this.x, this.y, this.w, this.h, dx, dy, dw, dh);	  
+	}
+
+	private drawIcon(ctx:any, dx:number, dy:number, dw:number, dh:number) {
+		var cx = dx + (dw >> 1);
+		var cy = dy + (dh >> 1);
+		var x = dx + ((dw - this.w) >> 1);
+		var y = dy + ((dh - this.h) >> 1);
+		ctx.save();
+		ctx.translate(cx, cy);
+		ctx.scale(ImageTile.scale, ImageTile.scale);
+		ctx.translate(-cx, -cy);
+		ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, this.w, this.h);	  
+		ctx.restore();
 	}
 
 	private drawCenter(ctx:any, dx:number, dy:number, dw:number, dh:number) {
@@ -371,12 +392,31 @@ export class ImageTile extends Emitter {
 				this.drawTileV(ctx, dx, dy, dw, dh);
 			}else if(type === ImageDrawType.TILE) {
 				this.drawTile(ctx, dx, dy, dw, dh);
+			}else if(type === ImageDrawType.ICON) {
+				this.drawIcon(ctx, dx, dy, dw, dh);
 			}
 		}
 	}
 
+	private static scale = 1;
+	private static density = 1;
+	private static onImageLoaded : Function;
+
+	public static init(density:number, scale:number, onImageLoaded:Function) {
+		ImageTile.scale = scale;
+		ImageTile.density = density;
+		ImageTile.onImageLoaded = onImageLoaded;
+	}
+
  	static cache = {};
-	static create(src:string, onDone:Function) : ImageTile {
+	public static fixURL(src:string) : string {
+		var ret = src.replace("@density", "x"+ImageTile.density);
+
+		return ret;
+	}
+
+	public static create(_src:string, onDone:Function) : ImageTile {
+		var src = ImageTile.fixURL(_src);
 		var it = ImageTile.cache[src];
 
 		if(!it) {

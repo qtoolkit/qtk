@@ -123,7 +123,7 @@ export class TreeItem extends Widget {
 			var h = this.h;
 			var x = this._level * this._indention;
 
-			img.draw(ctx, ImageDrawType.CENTER, x, y, w, h);
+			img.draw(ctx, ImageDrawType.ICON, x, y, w, h);
 		}
 
 		return this;

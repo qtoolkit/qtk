@@ -54,19 +54,19 @@
 	"tree-item.expanded": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/expand.png"
+			"forceGroundImage":"images/@density/expand.png"
 		}
 	},
 	"tree-item.collapsed": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/collapse.png"
+			"forceGroundImage":"images/@density/collapse.png"
 		}
 	},
 	"tree-item.leaf": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/leaf.png"
+			"forceGroundImage":"images/@density/leaf.png"
 		}
 	},
 	"list-item": {

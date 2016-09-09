@@ -7,6 +7,7 @@ import {MainLoop} from "./main-loop";
 import {Emitter} from "./emitter";
 import {ViewPort} from "./view-port";
 import {IViewPort} from "./iview-port";
+import {ImageTile} from "./image-tile";
 import {IMainLoop} from "./imain-loop";
 import {IThemeManager} from "./itheme-manager";
 import {ThemeManager} from "./theme-manager";
@@ -84,6 +85,13 @@ export class Application extends Emitter implements IApplication {
 		deviceInfo.init(navigator.language, navigator.userAgent);
 		inputEventAdapter.init(document, window, deviceInfo.isPointerSupported, 
 				deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
+
+		if(deviceInfo.isMacOS) {
+			var density = this.viewPort.density;
+			ImageTile.init(density, 1/density, (img) => {
+				this.mainLoop.requestRedraw();
+			});
+		}
 
 		this._mainLoop.on(Events.PRETICK, function(evt) {
 			var time = evt.deltaTime;
