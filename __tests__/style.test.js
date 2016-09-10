@@ -4,7 +4,7 @@ describe('Style', function() {
 
 	var fontFamily = "sans";
 	var fontSize = 16;
-	var fontColor = "green";
+	var textColor = "green";
 	var fontBold = "bold";
 	var fontItalic = true;
 	var fontUnderline = true;

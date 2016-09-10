@@ -153,7 +153,7 @@ export class TreeItem extends Widget {
 	
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.data.text;
-		if(text && style.fontColor) {
+		if(text && style.textColor) {
 			var y = 0;
 			var h = this.h;
 			var x = this._level * this._indention;

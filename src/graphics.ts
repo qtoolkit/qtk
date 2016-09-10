@@ -58,9 +58,9 @@ export class Graphics {
 			}
 		}
 		
-		if(text && style.fontColor) {
+		if(text && style.textColor) {
 			ctx.font = style.font;
-			ctx.fillStyle = style.fontColor;
+			ctx.fillStyle = style.textColor;
 			ctx.textAlign = style.textAlign;
 			ctx.textBaseline = style.textBaseline;
 			ctx.fillText(text, x, y);

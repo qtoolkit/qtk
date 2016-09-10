@@ -609,7 +609,7 @@ export class Widget extends Emitter {
 
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
-		if(text && style.fontColor) {
+		if(text && style.textColor) {
 			var x = this.leftPadding;
 			var y = this.topPadding;
 			var w = this.w - x - this.rightPadding;

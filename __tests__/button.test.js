@@ -4,19 +4,19 @@ describe('Button', function() {
 	var styles = {
 		"normal" : {
 			"backGroundColor" : "green",
-			"fontColor" : "black",
+			"textColor" : "black",
 			"roundRadius" : 5,
 			"fontSize" : 16
 		},
 		"over" : {
 			"backGroundColor" : "blue",
-			"fontColor" : "black",
+			"textColor" : "black",
 			"roundRadius" : 5,
 			"fontSize" : 16
 		},
 		"active" : {
 			"backGroundColor" : "red",
-			"fontColor" : "black",
+			"textColor" : "black",
 			"roundRadius" : 5,
 			"lineWidth" : 1,
 			"lineColor" : "green",

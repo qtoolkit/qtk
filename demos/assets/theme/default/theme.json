@@ -3,7 +3,7 @@
 		"common" : {
 			"lineWidth" : 1,
 			"fontSize" : 16,
-			"fontColor" : "black",
+			"textColor" : "black",
 			"backGroundColor" : "#FFFFFF"
 		},
 		"normal" : {},

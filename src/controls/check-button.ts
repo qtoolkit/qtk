@@ -19,7 +19,7 @@ export class CheckButton extends Widget {
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
 
-		if(text && style.fontColor) {
+		if(text && style.textColor) {
 			var x = this.w>>1;
 			var y = this.h>>1;
 			var img = style.foreGroundImage;
@@ -27,7 +27,7 @@ export class CheckButton extends Widget {
 			ctx.font = style.font;
 			ctx.textAlign = "center";
 			ctx.textBaseline = "middle";
-			ctx.fillStyle = style.fontColor;
+			ctx.fillStyle = style.textColor;
 
 			if(img) {
 				var textAlign = style.textAlign;
@@ -62,7 +62,7 @@ export class CheckButton extends Widget {
 			var y = 0;
 			var w = this.w;
 			var h = this.h;
-			if(text && style.fontColor) {
+			if(text && style.textColor) {
 				var textAlign = style.textAlign;
 				switch(textAlign) {
 					case "right": {

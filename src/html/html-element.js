@@ -42,6 +42,13 @@ var HtmlElement = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(HtmlElement.prototype, "fontFamily", {
+        set: function (fontFamily) {
+            this.element.style.fontFamily = fontFamily;
+        },
+        enumerable: true,
+        configurable: true
+    });
     HtmlElement.prototype.show = function () {
         this.element.style.visibility = 'visible';
         this.element.style.zIndex = this.z;

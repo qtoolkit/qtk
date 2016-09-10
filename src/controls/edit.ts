@@ -9,6 +9,8 @@ import {RecyclableCreator} from "../recyclable-creator";
 export class Edit extends Widget {
 	protected _isEditing : boolean;
 	protected _input : HtmlInputText; 
+	protected _eChange = Events.ChangeEvent.create();
+
 	constructor() {
 		super(Edit.TYPE);
 	}
@@ -25,21 +27,26 @@ export class Edit extends Widget {
 		var p = this.toViewPoint(Point.point.init(0, 0));
 		input.move(p.x, p.y);
 		input.resize(this.w, this.h);
-		input.text = this.text || "test";
+		input.text = this.text; 
 		input.show();
 		input.fontSize = style.fontSize;
-		input.textColor = style.fontColor;
+		input.textColor = style.textColor;
+		input.fontFamily = style.fontFamily;
 
+		this.dispatchEvent({type:Events.FOCUS});
 		input.on(Events.HIDE, evt => {
 			this._isEditing = false;
+			this.dispatchEvent({type:Events.BLUR});
 		});
 		
 		input.on(Events.CHANGING, evt => {
 			this.text = evt.value;
+			this.dispatchEvent(evt);
 		});
 		
 		input.on(Events.CHANGE, evt => {
 			this.text = evt.value;
+			this.dispatchEvent(evt);
 		});
 	}
 

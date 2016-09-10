@@ -28,6 +28,10 @@ export class HtmlElement extends Emitter {
 	public set fontSize(fontSize:number) {
 		this.element.style.fontSize = fontSize + "px";
 	}
+	
+	public set fontFamily(fontFamily:string) {
+		this.element.style.fontFamily = fontFamily;
+	}
 
 	public show() : HtmlElement {
 		this.element.style.visibility = 'visible';

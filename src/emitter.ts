@@ -16,9 +16,9 @@ function toCaptureEventName(name:string) : string {
  * 事件分发器。
  */
 export class Emitter {
-	private emiiter : EmitterImpl;
+	private emitter : EmitterImpl;
 	constructor() {
-		this.emiiter = new EmitterImpl();
+		this.emitter = new EmitterImpl();
 	}
 
 	/***
@@ -38,7 +38,7 @@ export class Emitter {
 	 * @param useCapture 是否注册为capture阶段的处理函数。
 	 */
 	public once(type:string, callback:Function) {
-		this.emiiter.once(type, callback);
+		this.emitter.once(type, callback);
 	}
 	/***
 	 * 注消事件处理函数。
@@ -58,9 +58,9 @@ export class Emitter {
 	 */
 	public addEventListener(type:string, callback:Function, useCapture?:boolean) {
 		if(useCapture) {
-			this.emiiter.addListener(toCaptureEventName(type), callback);
+			this.emitter.addListener(toCaptureEventName(type), callback);
 		}else{
-			this.emiiter.addListener(type, callback);
+			this.emitter.addListener(type, callback);
 		}
 	}
 	
@@ -72,9 +72,9 @@ export class Emitter {
 	 */
 	public removeEventListener(type:string, callback:Function, useCapture?:boolean) {
 		if(useCapture) {
-			this.emiiter.removeListener(toCaptureEventName(type), callback);
+			this.emitter.removeListener(toCaptureEventName(type), callback);
 		}else{
-			this.emiiter.removeListener(type, callback);
+			this.emitter.removeListener(type, callback);
 		}
 	}
 
@@ -100,14 +100,15 @@ export class Emitter {
 			return;
 		}
 
+		var emitter = this.emitter;
 		if(useCapture) {
-			this.emiiter.emit(toCaptureEventName(evt.type), evt);
+			emitter.emit(toCaptureEventName(evt.type), evt);
 		}else{
-			this.emiiter.emit(evt.type, evt);
+			emitter.emit(evt.type, evt);
 		}
 	}
 
 	public removeAllListeners(event?: string) {
-		this.emiiter.removeAllListeners(event);
+		this.emitter.removeAllListeners(event);
 	}
 }

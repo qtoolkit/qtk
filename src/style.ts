@@ -19,7 +19,7 @@ export class Style extends Emitter {
 	private _roundRadius : number;
 	private _fontFamily : string;
 	private _fontSize : number;
-	private _fontColor : string;
+	private _textColor : string;
 	private _fontBold : boolean;
 	private _fontItalic : boolean;
 	private _fontUnderline : boolean;
@@ -69,8 +69,8 @@ export class Style extends Emitter {
 			other._fontSize = this._fontSize;
 		}
 
-		if(this._fontColor) {
-			other._fontColor = this._fontColor;
+		if(this._textColor) {
+			other._textColor = this._textColor;
 		}
 
 		if(this._fontBold) {
@@ -135,8 +135,8 @@ export class Style extends Emitter {
 			json.fontSize = this._fontSize;
 		}
 
-		if(this._fontColor) {
-			json.fontColor = this._fontColor;
+		if(this._textColor) {
+			json.textColor = this._textColor;
 		}
 
 		if(this._fontBold) {
@@ -205,8 +205,8 @@ export class Style extends Emitter {
 			this._fontSize = json.fontSize;
 		}
 
-		if(json.fontColor) {
-			this._fontColor = json.fontColor;
+		if(json.textColor) {
+			this._textColor = json.textColor;
 		}
 
 		if(json.fontBold) {
@@ -302,7 +302,7 @@ export class Style extends Emitter {
 	}
 
 	public get fontFamily() {
-		return this._fontFamily;
+		return this._fontFamily || "Sans";
 	}
 	public set fontFamily(value) {
 		this._fontFamily = value;
@@ -319,11 +319,11 @@ export class Style extends Emitter {
 	}
 
 
-	public get fontColor() {
-		return this._fontColor;
+	public get textColor() {
+		return this._textColor;
 	}
-	public set fontColor(value) {
-		this._fontColor = value;
+	public set textColor(value) {
+		this._textColor = value;
 		this.notifyChanged();
 	}
 

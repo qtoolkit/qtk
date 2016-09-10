@@ -5,7 +5,7 @@ describe('ThemeManager', function() {
 			"common" : {
 				"lineWidth" : 1,
 				"fontSize" : 16,
-				"fontColor" : "black",
+				"textColor" : "black",
 				"backGroundColor" : "#FFFFFF"
 			},
 			"normal" : {},
@@ -36,7 +36,7 @@ describe('ThemeManager', function() {
     it('test get', (done) => {
 		var style = themeManager.get("dialog", "normal");
 		var result = style.fontSize === json.widget.common.fontSize
-			&& style.fontColor === json.widget.common.fontColor;
+			&& style.textColor === json.widget.common.textColor;
 
 		done(result ? null : "ThemeManager get fail.");
     });
