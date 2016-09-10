@@ -69,6 +69,42 @@
 			"forceGroundImage":"images/@density/leaf.png"
 		}
 	},
+	"radio-button": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"right"
+		}
+	},
+	"radio-button.checked": {
+		"extends": "radio-button",
+		"common" : {
+			"forceGroundImage":"images/@density/radio-button-checked.png"
+		}
+	},
+	"radio-button.unchecked": {
+		"extends": "radio-button",
+		"common" : {
+			"forceGroundImage":"images/@density/radio-button-unchecked.png"
+		}
+	},
+	"check-button": {
+		"extends": "widget",
+		"common" : {
+			"textAlign":"right"
+		}
+	},
+	"check-button.checked": {
+		"extends": "check-button",
+		"common" : {
+			"forceGroundImage":"images/@density/check-button-checked.png"
+		}
+	},
+	"check-button.unchecked": {
+		"extends": "check-button",
+		"common" : {
+			"forceGroundImage":"images/@density/check-button-unchecked.png"
+		}
+	},
 	"list-item": {
 		"extends": "widget",
 		"common" : {

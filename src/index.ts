@@ -9,6 +9,8 @@ import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
 import {Group} from "./controls/Group";
 import {Button} from "./controls/button";
+import {CheckButton} from "./controls/check-button";
+import {RadioButton} from "./controls/radio-button";
 import {Dialog} from "./controls/dialog";
 import {TreeItem} from "./controls/tree-item";
 import {TreeView} from "./controls/tree-view";
@@ -75,6 +77,8 @@ export {
 	WidgetMode,
 	HitTestResult,
 	Button,
+	RadioButton,
+	CheckButton,
 	ScrollView,
 	ScrollBarStyle,
 	ScrollerOptions,
