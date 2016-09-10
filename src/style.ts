@@ -9,11 +9,11 @@ import {ImageDrawType, ImageTile} from "./image-tile";
  */
 export class Style extends Emitter {
 	private _backGroundColor : string;
-	private _forceGroundColor : string;
+	private _foreGroundColor : string;
 	private _backGroundImage : ImageTile;
 	private _backGroundImageDrawType : ImageDrawType;
-	private _forceGroundImage : ImageTile;
-	private _forceGroundImageDrawType : ImageDrawType;
+	private _foreGroundImage : ImageTile;
+	private _foreGroundImageDrawType : ImageDrawType;
 	private _lineWidth : number;
 	private _lineColor : string;
 	private _roundRadius : number;
@@ -41,8 +41,8 @@ export class Style extends Emitter {
 			other._backGroundColor = this._backGroundColor;
 		}
 
-		if(this._forceGroundColor) {
-			other._forceGroundColor = this._forceGroundColor;
+		if(this._foreGroundColor) {
+			other._foreGroundColor = this._foreGroundColor;
 		}
 
 		if(this._backGroundImage) {
@@ -53,12 +53,12 @@ export class Style extends Emitter {
 			other._backGroundImageDrawType = this._backGroundImageDrawType;
 		}
 
-		if(this._forceGroundImage) {
-			other._forceGroundImage = this._forceGroundImage;
+		if(this._foreGroundImage) {
+			other._foreGroundImage = this._foreGroundImage;
 		}
 
-		if(this._forceGroundImageDrawType) {
-			other._forceGroundImageDrawType = this._forceGroundImageDrawType;
+		if(this._foreGroundImageDrawType) {
+			other._foreGroundImageDrawType = this._foreGroundImageDrawType;
 		}
 
 		if(this._fontFamily) {
@@ -106,8 +106,8 @@ export class Style extends Emitter {
 			json.backGroundColor = this._backGroundColor;
 		}
 
-		if(this._forceGroundColor) {
-			json.forceGroundColor = this._forceGroundColor;
+		if(this._foreGroundColor) {
+			json.foreGroundColor = this._foreGroundColor;
 		}
 
 		if(this._backGroundImage) {
@@ -118,12 +118,12 @@ export class Style extends Emitter {
 			json.backGroundImageDrawType = this._backGroundImageDrawType;
 		}
 
-		if(this._forceGroundImage) {
-			json.forceGroundImage = this._forceGroundImage.toJson();
+		if(this._foreGroundImage) {
+			json.foreGroundImage = this._foreGroundImage.toJson();
 		}
 
-		if(this._forceGroundImageDrawType) {
-			json.forceGroundImageDrawType = this._forceGroundImageDrawType;
+		if(this._foreGroundImageDrawType) {
+			json.foreGroundImageDrawType = this._foreGroundImageDrawType;
 		}
 
 
@@ -179,8 +179,8 @@ export class Style extends Emitter {
 			this._backGroundColor = json.backGroundColor;
 		}
 
-		if(json.forceGroundColor) {
-			this._forceGroundColor = json.forceGroundColor;
+		if(json.foreGroundColor) {
+			this._foreGroundColor = json.foreGroundColor;
 		}
 
 		if(json.backGroundImage) {
@@ -190,9 +190,9 @@ export class Style extends Emitter {
 			});
 		}
 
-		if(json.forceGroundImage) {
-			var url = baseURL ? baseURL + "/" + json.forceGroundImage : json.forceGroundImage;
-			this._forceGroundImage = ImageTile.create(url, evt => {
+		if(json.foreGroundImage) {
+			var url = baseURL ? baseURL + "/" + json.foreGroundImage : json.foreGroundImage;
+			this._foreGroundImage = ImageTile.create(url, evt => {
 				this.notifyChanged();
 			});
 		}
@@ -252,11 +252,11 @@ export class Style extends Emitter {
 		this.notifyChanged();
 	}
 
-	public get forceGroundColor() {
-		return this._forceGroundColor;
+	public get foreGroundColor() {
+		return this._foreGroundColor;
 	}
-	public set forceGroundColor(value) {
-		this._forceGroundColor = value;
+	public set foreGroundColor(value) {
+		this._foreGroundColor = value;
 		this.notifyChanged();
 	}
 
@@ -279,20 +279,20 @@ export class Style extends Emitter {
 	}
 
 
-	public get forceGroundImage() {
-		return this._forceGroundImage;
+	public get foreGroundImage() {
+		return this._foreGroundImage;
 	}
-	public set forceGroundImage(value) {
-		this._forceGroundImage = value;
+	public set foreGroundImage(value) {
+		this._foreGroundImage = value;
 		this.notifyChanged();
 	}
 
 
-	public get forceGroundImageDrawType() {
-		return this._forceGroundImageDrawType;
+	public get foreGroundImageDrawType() {
+		return this._foreGroundImageDrawType;
 	}
-	public set forceGroundImageDrawType(value) {
-		this._forceGroundImageDrawType = value;
+	public set foreGroundImageDrawType(value) {
+		this._foreGroundImageDrawType = value;
 		this.notifyChanged();
 	}
 

@@ -22,7 +22,7 @@ export class CheckButton extends Widget {
 		if(text && style.fontColor) {
 			var x = this.w>>1;
 			var y = this.h>>1;
-			var img = style.forceGroundImage;
+			var img = style.foreGroundImage;
 		
 			ctx.font = style.font;
 			ctx.textAlign = "center";
@@ -54,7 +54,7 @@ export class CheckButton extends Widget {
 	}
 	
 	protected drawImage(ctx:any, style:Style) : Widget {
-		var img = style.forceGroundImage;
+		var img = style.foreGroundImage;
 		var text = this.text;
 
 		if(img) {

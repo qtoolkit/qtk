@@ -114,7 +114,16 @@ export class Graphics {
 
 		var d = r << 1;
 		ctx.beginPath();
-		if(w < d || h < d || !r) {
+		if(d > w || d > h) {
+			var cx = x + (w >> 1);
+			var cy = y + (h >> 1);
+			r = Math.min(w>>1, h>>1);
+			ctx.arc(cx, cy, r, 0, Math.PI * 2);
+
+			return;
+		}
+
+		if(!r) {
 			ctx.rect(x, y, w, h);
 
 			return;

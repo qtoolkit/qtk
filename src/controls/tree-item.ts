@@ -138,7 +138,7 @@ export class TreeItem extends Widget {
 	}
 	
 	protected drawImage(ctx:any, style:Style) : Widget {
-		var img = style.forceGroundImage;
+		var img = style.foreGroundImage;
 		if(img) {
 			var y = 0;
 			var w = this.h;
@@ -157,7 +157,7 @@ export class TreeItem extends Widget {
 			var y = 0;
 			var h = this.h;
 			var x = this._level * this._indention;
-			if(style.forceGroundImage) {
+			if(style.foreGroundImage) {
 				x += h; 
 			}
 			var w = this.x + this.w - x;

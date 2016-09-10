@@ -64,6 +64,10 @@ export class Behavior {
 	protected init(options:any) : any {
 		return this;
 	}
+	
+	public setOptions(options:any) : any {
+		this.init(options);
+	}
 
 	/**
 	 * 析构函数。 主要是注销事件的处理函数。

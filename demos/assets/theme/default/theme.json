@@ -12,10 +12,60 @@
 		"selected" : {},
 		"disable" : {}
 	},
+	"button": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"backGroundColor" : "green"
+		},
+		"over" : {
+			"backGroundColor" : "blue"
+		},
+		"active" : {
+			"backGroundColor" : "red"
+		}
+	},
+	"button-blue": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"backGroundColor" : "blue"
+		},
+		"over" : {
+			"backGroundColor" : "green"
+		},
+		"active" : {
+			"backGroundColor" : "red"
+		}
+	},
 	"dialog": {
 		"extends": "widget",
 		"normal" : {
 			"backGroundColor" : "#606060"
+		}
+	},
+	"progress-bar": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth" : 2,
+			"lineColor" : "green",
+			"roundRadius" : 5,
+			"backGroundColor" : "#606060",
+			"foreGroundColor" : "#d0d0d0"
+		}
+	},
+	"slider": {
+		"extends": "progress-bar"
+	},
+	"slider-dragger": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 50,
+			"backGroundColor" : "green"
 		}
 	},
 	"scroll-view": {
@@ -122,35 +172,5 @@
 	},
 	"window-normal": {
 		"extends": "widget"
-	},
-	"button": {
-		"extends": "widget",
-		"common" : {
-			"roundRadius" : 5
-		},
-		"normal" : {
-			"backGroundColor" : "green"
-		},
-		"over" : {
-			"backGroundColor" : "blue"
-		},
-		"active" : {
-			"backGroundColor" : "red"
-		}
-	},
-	"button-blue": {
-		"extends": "widget",
-		"common" : {
-			"roundRadius" : 5
-		},
-		"normal" : {
-			"backGroundColor" : "blue"
-		},
-		"over" : {
-			"backGroundColor" : "green"
-		},
-		"active" : {
-			"backGroundColor" : "red"
-		}
 	}
 }

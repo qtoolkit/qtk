@@ -584,18 +584,23 @@ export class Widget extends Emitter {
 		return ret;
 	}
 
+	protected drawColorBackground(ctx:any, style:Style) : Widget {
+		Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth,
+				0, 0, this.w, this.h, style.roundRadius);
+		return this;
+	}
+
 	protected drawBackground(ctx:any, style:Style) : Widget {
 		if(style.backGroundImage) {
 			style.backGroundImage.draw(ctx, style.backGroundImageDrawType, 0, 0, this.w, this.h); 
 		}else if(style.backGroundColor || (style.lineColor && style.lineWidth)) {
-			Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth,
-					0, 0, this.w, this.h, style.roundRadius);
+			this.drawColorBackground(ctx, style);
 		}
 		return this;
 	}
 	
 	public getLocaleText() : string {
-		return this._text;
+		return this.text;
 	}
 
 	protected drawImage(ctx:any, style:Style) : Widget {
@@ -657,8 +662,8 @@ export class Widget extends Emitter {
 		this.dispatchEvent(drawEvent.reset(Events.BEFORE_DRAW, ctx, this));
 		if(style) {
 			this.drawBackground(ctx, style)
-				.drawChildren(ctx)
 				.drawImage(ctx, style)
+				.drawChildren(ctx)
 				.drawText(ctx, style)
 				.drawTips(ctx, style);
 		}else{
@@ -1242,12 +1247,16 @@ export class Widget extends Emitter {
 	}
 
 	public useBehavior(type:string, options:any) : Behavior {
+		var behavior : Behavior;
 		if(!this._behaviors[type]) {
-			var behavior = BehaviorFactory.create(type, this, options);
+			behavior = BehaviorFactory.create(type, this, options);
 			this._behaviors[type] = behavior;
+		}else{
+			behavior = this._behaviors[type];
+			behavior.setOptions(options);
 		}
 
-		return this._behaviors[type];
+		return behavior;
 	}
 
 	protected _x : number;
