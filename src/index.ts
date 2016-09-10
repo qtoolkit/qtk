@@ -8,6 +8,7 @@ import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
 import {Group} from "./controls/Group";
+import {Edit} from "./controls/edit";
 import {Button} from "./controls/button";
 import {Slider} from "./controls/slider";
 import {CheckButton} from "./controls/check-button";
@@ -80,6 +81,7 @@ export {
 	HitTestResult,
 	Slider,
 	Button,
+	Edit,
 	RadioButton,
 	CheckButton,
 	ProgressBar,

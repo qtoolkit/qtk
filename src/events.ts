@@ -17,6 +17,8 @@ export const POINTER_LEAVE = "qtk-pointer-leave";
 export const CLICK = "qtk-click";
 export const DBLCLICK = "qtk-dblclick";
 export const CHANGE = "change"
+export const CHANGING = "changing"
+export const ATTR_CHANGE = "attr-change"
 export const DISPOSE = "dispose"
 export const RUN = "run"
 export const QUIT = "quit"
@@ -245,10 +247,6 @@ export class TickEvent extends Event {
 
 export class ChangeEvent extends Event {
 	/**
-	 * 属性名。
-	 */
-	public attr : string;
-	/**
 	 * 属性的旧值。
 	 */
 	public oldValue : any;
@@ -256,21 +254,46 @@ export class ChangeEvent extends Event {
 	 * 属性的新值。
 	 */
 	public newValue : any;
+	
+	/**
+	 * 属性的新值。
+	 */
+	public value : any;
 
 	public init(type:string, detail:any) : any {
 		super.init(type);
 
-		this.attr = detail.attr;
+		this.value = detail.newValue;
 		this.oldValue = detail.oldValue;
 		this.newValue = detail.newValue;
 
 		return this;
 	}
 
-	public static create(attr:string, oldValue:any, newValue:any) : ChangeEvent {
+	public static create() : ChangeEvent {
 		var e = new ChangeEvent();
 
-		return e.init(CHANGE, {attr:attr, oldValue:oldValue, newValue:newValue});
+		return e;
+	}
+};
+
+export class AttrChangeEvent extends ChangeEvent {
+	/**
+	 * 属性名。
+	 */
+	public attr : string;
+
+	public init(type:string, detail:any) : any {
+		super.init(type, detail);
+		this.attr = detail.attr;
+
+		return this;
+	}
+
+	public static create() : AttrChangeEvent {
+		var e = new AttrChangeEvent();
+
+		return e;
 	}
 };
 

@@ -12,6 +12,22 @@
 		"selected" : {},
 		"disable" : {}
 	},
+	"edit": {
+		"extends": "widget",
+		"common" : {
+			"textAlign" : "left",
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"lineColor" : "green"
+		},
+		"over" : {
+			"lineColor" : "blue"
+		},
+		"active" : {
+			"lineColor" : "red"
+		}
+	},
 	"button": {
 		"extends": "widget",
 		"common" : {

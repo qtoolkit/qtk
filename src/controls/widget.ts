@@ -610,7 +610,11 @@ export class Widget extends Emitter {
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
 		if(text && style.fontColor) {
-			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(0, 0, this.w, this.h));
+			var x = this.leftPadding;
+			var y = this.topPadding;
+			var w = this.w - x - this.rightPadding;
+			var h = this.h - y - this.bottomPadding;
+			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(x, y, w, h));
 		}
 
 		return this;
@@ -896,7 +900,7 @@ export class Widget extends Emitter {
 			mainLoop.off(Events.TICK, draw);
 		});
 
-		this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
+		this.on(Events.CHANGE, (evt:Events.AttrChangeEvent) => {
 			var attr = evt.attr;
 			var value = evt.newValue;
 
@@ -1229,9 +1233,9 @@ export class Widget extends Emitter {
 			this.requestRedraw();
 			
 			if(notify) {
-				var evt = Events.ChangeEvent.create(attr, oldValue, newValue);
+				var evt = this.eAttrChange;
+				evt.init(Events.ATTR_CHANGE, {attr:attr, oldValue:oldValue, newValue:newValue});
 				this.dispatchEvent(evt);
-				evt.dispose();
 			}
 		}
 
@@ -1313,7 +1317,7 @@ export class Widget extends Emitter {
 	public onwheel : Function;
 	public onkeydown : Function;
 	public onkeyup : Function;
-
+	protected eAttrChange = Events.AttrChangeEvent.create();
 	protected _layoutParam : any;
 	protected _childrenLayouter : Layouter;
 

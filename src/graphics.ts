@@ -23,6 +23,11 @@ export class Graphics {
 		var x = 0;
 		var y = 0;
 
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(r.x, r.y, r.w, r.h);
+		ctx.clip();
+
 		switch(style.textAlign) {
 			case "right": {
 				x = r.x + r.w;
@@ -58,8 +63,10 @@ export class Graphics {
 			ctx.fillStyle = style.fontColor;
 			ctx.textAlign = style.textAlign;
 			ctx.textBaseline = style.textBaseline;
-			ctx.fillText(text, x, y, r.w);
+			ctx.fillText(text, x, y);
 		}
+
+		ctx.restore();
 	}
 
 	public static drawLine(ctx:any, strokeStyle:string, lineWidth:number, 

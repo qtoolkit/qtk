@@ -380,7 +380,7 @@ export class ScrollView extends Widget {
 			me.handleScrolling(left, top);
 		}, options);
 
-		this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
+		this.on(Events.ATTR_CHANGE, (evt:Events.AttrChangeEvent) => {
 			var attr = evt.attr;
 			var value = evt.newValue;
 			if(attr === "w" || attr === "h" || attr === "cw" || attr === "ch") {
