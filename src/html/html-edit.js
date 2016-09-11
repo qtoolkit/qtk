@@ -12,6 +12,15 @@ var HtmlEdit = (function (_super) {
         _super.apply(this, arguments);
         this.e = Events.ChangeEvent.create();
     }
+    Object.defineProperty(HtmlEdit.prototype, "inputType", {
+        set: function (value) {
+            if (this.tag === "input") {
+                this.element.type = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(HtmlEdit.prototype, "text", {
         get: function () {
             return this.element.value;
@@ -34,13 +43,12 @@ var HtmlEdit = (function (_super) {
         return _super.prototype.hide.call(this);
     };
     HtmlEdit.prototype.create = function (tag) {
-        var me = this;
         _super.prototype.create.call(this, tag);
+        var me = this;
         var element = this.element;
-        element.type = "text";
         element.onkeypress = function (e) {
             var detail = { oldValue: this.value, newValue: this.value };
-            if (e.keyCode === 13) {
+            if (e.keyCode === 13 && tag === "input") {
                 this.blur();
                 me.e.init(Events.CHANGE, detail);
             }
@@ -59,6 +67,29 @@ var HtmlEdit = (function (_super) {
         };
         return this;
     };
+    Object.defineProperty(HtmlEdit, "input", {
+        get: function () {
+            if (!HtmlEdit._input) {
+                HtmlEdit._input = new HtmlEdit();
+                HtmlEdit._input.create("input");
+                HtmlEdit._input.element.type = "text";
+            }
+            return HtmlEdit._input;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HtmlEdit, "textArea", {
+        get: function () {
+            if (!HtmlEdit._textArea) {
+                HtmlEdit._textArea = new HtmlEdit();
+                HtmlEdit._textArea.create("textarea");
+            }
+            return HtmlEdit._textArea;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return HtmlEdit;
 }(html_element_1.HtmlElement));
 exports.HtmlEdit = HtmlEdit;

@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5"
+    "target": "es5",
+    "allowJs" : true
   },
   "files": [
     "src/assets.ts",

@@ -34,6 +34,10 @@ export class Style extends Emitter {
 		this.dispatchEvent({type:Events.CHANGE});
 	}
 
+	public get textLineHeight() : number {
+		return Math.round(this.fontSize * 1.2);
+	}
+
 	public clone() : Style {
 		var other = new Style();
 

@@ -9,14 +9,17 @@ var HtmlElement = (function (_super) {
     __extends(HtmlElement, _super);
     function HtmlElement() {
         _super.call(this);
-        this._z = 10;
     }
-    Object.defineProperty(HtmlElement.prototype, "z", {
+    Object.defineProperty(HtmlElement.prototype, "tag", {
         get: function () {
-            return this._z;
+            return this._tag;
         },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HtmlElement.prototype, "z", {
         set: function (value) {
-            this._z = value;
+            this.element.style.zIndex = value;
         },
         enumerable: true,
         configurable: true
@@ -51,14 +54,15 @@ var HtmlElement = (function (_super) {
     });
     HtmlElement.prototype.show = function () {
         this.element.style.visibility = 'visible';
-        this.element.style.zIndex = this.z;
         this.element.style.opacity = 1;
+        this.element.style.display = 'block';
         return this;
     };
     HtmlElement.prototype.hide = function () {
         this.element.style.opacity = 0;
-        this.element.style.zIndex = 0;
+        this.element.style.zIndex = -1;
         this.element.style.visibility = 'hidden';
+        this.element.style.display = 'none';
         return this;
     };
     HtmlElement.prototype.move = function (x, y) {
@@ -72,9 +76,16 @@ var HtmlElement = (function (_super) {
         this.element.style.height = (h - 4) + "px";
         return this;
     };
+    HtmlElement.prototype.destroy = function () {
+        if (this.element) {
+            document.body.removeChild(this.element);
+            this.element = null;
+        }
+    };
     HtmlElement.prototype.create = function (tag) {
-        this.element = document.createElement(tag || "div");
+        this.element = document.createElement(tag);
         document.body.appendChild(this.element);
+        this._tag = tag;
         return this;
     };
     return HtmlElement;

@@ -3,18 +3,18 @@ import {Emitter} from "../emitter";
 
 export class HtmlElement extends Emitter {
 	public element : any;
-	protected _z : number = 10;
+	protected _tag : string;
 
 	constructor() {
 		super();
 	}
 
-	public set z(value:number) {
-		this._z = value;
+	public get tag() : string {
+		return this._tag;
 	}
 
-	public get z() {
-		return this._z;
+	public set z(value:number) {
+		this.element.style.zIndex = value;
 	}
 
 	public set textColor(color:string) {
@@ -35,16 +35,17 @@ export class HtmlElement extends Emitter {
 
 	public show() : HtmlElement {
 		this.element.style.visibility = 'visible';
-		this.element.style.zIndex = this.z;
 		this.element.style.opacity = 1;
+		this.element.style.display = 'block';
 		
 		return this;
 	}
 
 	public hide() : HtmlElement {
 		this.element.style.opacity = 0;
-		this.element.style.zIndex = 0;
+		this.element.style.zIndex = -1;
 		this.element.style.visibility = 'hidden';
+		this.element.style.display = 'none';
 		
 		return this;
 	}
@@ -64,10 +65,18 @@ export class HtmlElement extends Emitter {
 		return this;
 	}
 
-	public create(tag?:string) : HtmlElement {
-		this.element = document.createElement(tag||"div");
+	public destroy() {
+		if(this.element) {
+			document.body.removeChild(this.element);
+			this.element = null;
+		}
+	}
+
+	public create(tag:string) : HtmlElement {
+		this.element = document.createElement(tag);
 		document.body.appendChild(this.element);
-		
+		this._tag = tag;
+
 		return this;
 	}
 };

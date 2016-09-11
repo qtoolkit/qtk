@@ -87,7 +87,7 @@ describe('Events', function() {
     });
    
     it('test ChangeEvent', (done) => {
-    	var e = Events.ChangeEvent.create("test", "old", "new");
+    	var e = Events.AttrChangeEvent.create("test", "old", "new");
 		var result = e.type === Events.CHANGE
 			&& e.attr === "test"
 			&& e.oldValue === "old"

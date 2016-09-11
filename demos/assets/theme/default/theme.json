@@ -12,6 +12,12 @@
 		"selected" : {},
 		"disable" : {}
 	},
+	"label": {
+		"extends": "widget",
+		"common" : {
+			"textAlign" : "left"
+		}
+	},
 	"edit": {
 		"extends": "widget",
 		"common" : {
@@ -26,6 +32,17 @@
 		},
 		"active" : {
 			"lineColor" : "red"
+		}
+	},
+	"edit.sl": {
+		"extends": "edit"
+	},
+	"edit.ml": {
+		"extends": "edit",
+		"common" : {
+			"textAlign" : "left",
+			"textBaseline" : "top",
+			"roundRadius" : 5
 		}
 	},
 	"button": {

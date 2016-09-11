@@ -4,6 +4,12 @@ import {HtmlElement} from "./html-element";
 
 export class HtmlEdit extends HtmlElement {
 	protected e : Events.ChangeEvent = Events.ChangeEvent.create();
+	
+	public set inputType(value:string) {
+		if(this.tag === "input") {
+			this.element.type = value;
+		}
+	}
 
 	public set text(value:string) {
 		this.element.value = value;
@@ -28,15 +34,14 @@ export class HtmlEdit extends HtmlElement {
 		return super.hide();
 	}
 
-	public create(tag?:string) : HtmlElement {
-		var me = this;
+	public create(tag : string) : HtmlEdit {
 		super.create(tag);
+		
+		var me = this;
 		var element = this.element;
-
-		element.type = "text";
 		element.onkeypress = function(e) {
 			var detail = {oldValue:this.value, newValue:this.value};
-			if(e.keyCode === 13) {
+			if(e.keyCode === 13 && tag === "input") {
 				this.blur();
 				me.e.init(Events.CHANGE, detail);
 			}else{
@@ -56,6 +61,25 @@ export class HtmlEdit extends HtmlElement {
 		}
 
 		return this;
+	}
+	
+	protected static _input : HtmlEdit ;
+	public static get input() : HtmlEdit {
+		if(!HtmlEdit._input) {
+			HtmlEdit._input = new HtmlEdit();
+			HtmlEdit._input.create("input");
+			HtmlEdit._input.element.type = "text";
+		}
+		return HtmlEdit._input;
+	}
+	
+	protected static _textArea : HtmlEdit ;
+	public static get textArea() : HtmlEdit {
+		if(!HtmlEdit._textArea) {
+			HtmlEdit._textArea = new HtmlEdit();
+			HtmlEdit._textArea.create("textarea");
+		}
+		return HtmlEdit._textArea;
 	}
 };
 

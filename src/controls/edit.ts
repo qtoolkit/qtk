@@ -1,41 +1,70 @@
 
 import {Point} from "../point";
+import {Label} from "./label";
 import {Widget} from "./widget";
 import Events = require("../events");
 import {WidgetFactory} from "./widget-factory";
-import {HtmlInputText} from "../html/html-input-text";
+import {HtmlEdit} from "../html/html-edit";
 import {RecyclableCreator} from "../recyclable-creator";
 
-export class Edit extends Widget {
+export class Edit extends Label {
+	protected _input : HtmlEdit; 
 	protected _isEditing : boolean;
-	protected _input : HtmlInputText; 
-	protected _eChange = Events.ChangeEvent.create();
+	protected _inputType : string;
 
-	constructor() {
-		super(Edit.TYPE);
+	public set inputType(value:string) {
+		this._inputType = value;
 	}
 
-	public dispose() {
-		super.dispose();
-		Edit.recyclbale.recycle(this);
+	public get inputType() : string {
+		return this._inputType;
+	}
+
+	public draw(ctx:any) {
+		if(!this._isEditing) {
+			super.draw(ctx);
+		}
+	}
+
+	protected getStyleType() : string {
+		if(this._styleType) {
+			return this._styleType;
+		}else {
+			var appendix = this.multiLines ? "ml" : "sl";
+			return (this.type) +"."+appendix;
+		}
+	}
+
+	public relayoutText() : Widget {
+		if(!this._isEditing) {
+			super.relayoutText();
+		}
+
+		return this;
 	}
 
 	protected showEditor() {
-		this._input = <HtmlInputText>HtmlInputText.input;
 		var style = this.getStyle();
+		this._input = this.multiLines ? HtmlEdit.textArea : HtmlEdit.input;
+		
 		var input = this._input;
 		var p = this.toViewPoint(Point.point.init(0, 0));
+
 		input.move(p.x, p.y);
-		input.resize(this.w, this.h);
 		input.text = this.text; 
-		input.show();
+		input.resize(this.w, this.h);
 		input.fontSize = style.fontSize;
+		input.inputType = this.inputType;
 		input.textColor = style.textColor;
 		input.fontFamily = style.fontFamily;
+		input.show();
+		input.z = this.win.z + 1;
 
 		this.dispatchEvent({type:Events.FOCUS});
 		input.on(Events.HIDE, evt => {
 			this._isEditing = false;
+			this.relayoutText();
+			this._input = null;
 			this.dispatchEvent({type:Events.BLUR});
 		});
 		
@@ -50,13 +79,15 @@ export class Edit extends Widget {
 		});
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-		this.padding = 5;
-
-		return this;
+	constructor() {
+		super(Edit.TYPE);
 	}
 
+	public dispose() {
+		super.dispose();
+		Edit.r.recycle(this);
+	}
+	
 	protected dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this._isEditing) {
@@ -66,9 +97,9 @@ export class Edit extends Widget {
 	}
 
 	public static TYPE = "edit";
-	private static recyclbale = new RecyclableCreator<Edit>(function() {return new Edit()});
+	private static r = new RecyclableCreator<Edit>(function() {return new Edit()});
 	public static create() : Widget {
-		return Edit.recyclbale.create().reset(Edit.TYPE);
+		return Edit.r.create().reset(Edit.TYPE);
 	}
 };
 

@@ -41,6 +41,7 @@
     "eventemitter3": "^1.2.0",
     "scroller": "0.0.3",
     "tween.js": "^16.3.5",
+    "unicode-tokenizer": "git+https://github.com/qtoolkit/unicode-tokenizer.git",
     "whatwg-fetch": "^1.0.0"
   }
 }

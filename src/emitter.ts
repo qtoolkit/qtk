@@ -38,7 +38,7 @@ export class Emitter {
 	 * @param useCapture 是否注册为capture阶段的处理函数。
 	 */
 	public once(type:string, callback:Function) {
-		this.emitter.once(type, callback);
+		this.emitter.once(type, callback, this);
 	}
 	/***
 	 * 注消事件处理函数。
@@ -58,9 +58,9 @@ export class Emitter {
 	 */
 	public addEventListener(type:string, callback:Function, useCapture?:boolean) {
 		if(useCapture) {
-			this.emitter.addListener(toCaptureEventName(type), callback);
+			this.emitter.addListener(toCaptureEventName(type), callback, this);
 		}else{
-			this.emitter.addListener(type, callback);
+			this.emitter.addListener(type, callback, this);
 		}
 	}
 	
@@ -72,9 +72,9 @@ export class Emitter {
 	 */
 	public removeEventListener(type:string, callback:Function, useCapture?:boolean) {
 		if(useCapture) {
-			this.emitter.removeListener(toCaptureEventName(type), callback);
+			this.emitter.removeListener(toCaptureEventName(type), callback, this);
 		}else{
-			this.emitter.removeListener(type, callback);
+			this.emitter.removeListener(type, callback, this);
 		}
 	}
 

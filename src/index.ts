@@ -10,6 +10,7 @@ import {Image} from "./controls/image";
 import {Group} from "./controls/Group";
 import {Edit} from "./controls/edit";
 import {Button} from "./controls/button";
+import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {CheckButton} from "./controls/check-button";
 import {RadioButton} from "./controls/radio-button";
@@ -81,6 +82,7 @@ export {
 	HitTestResult,
 	Slider,
 	Button,
+	Label,
 	Edit,
 	RadioButton,
 	CheckButton,
