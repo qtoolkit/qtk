@@ -3,6 +3,7 @@ import Events = require("../events");
 import {HtmlElement} from "./html-element";
 
 export class HtmlEdit extends HtmlElement {
+	protected _visible : boolean;	
 	protected e : Events.ChangeEvent = Events.ChangeEvent.create();
 	
 	public set inputType(value:string) {
@@ -22,14 +23,19 @@ export class HtmlEdit extends HtmlElement {
 	public show() : HtmlElement {
 		super.show();
 		this.element.focus();
+		this._visible = true;
 		this.dispatchEvent({type:Events.SHOW});
 
 		return this;
 	}
 
 	public hide() : HtmlElement {
-		this.element.blur();
-		this.dispatchEvent({type:Events.HIDE});
+		if(this._visible) {
+			this._visible = false;
+			this.element.blur();
+			this.dispatchEvent({type:Events.HIDE});
+		}
+		this.removeAllListeners();
 
 		return super.hide();
 	}

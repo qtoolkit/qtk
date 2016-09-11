@@ -34,12 +34,17 @@ var HtmlEdit = (function (_super) {
     HtmlEdit.prototype.show = function () {
         _super.prototype.show.call(this);
         this.element.focus();
+        this._visible = true;
         this.dispatchEvent({ type: Events.SHOW });
         return this;
     };
     HtmlEdit.prototype.hide = function () {
-        this.element.blur();
-        this.dispatchEvent({ type: Events.HIDE });
+        if (this._visible) {
+            this._visible = false;
+            this.element.blur();
+            this.dispatchEvent({ type: Events.HIDE });
+        }
+        this.removeAllListeners();
         return _super.prototype.hide.call(this);
     };
     HtmlEdit.prototype.create = function (tag) {
