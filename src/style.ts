@@ -14,6 +14,9 @@ export class Style extends Emitter {
 	private _backGroundImageDrawType : ImageDrawType;
 	private _foreGroundImage : ImageTile;
 	private _foreGroundImageDrawType : ImageDrawType;
+	private _lineCap : number;
+	private _lineJoin : number;
+	private _dashLine : Array<number>;
 	private _lineWidth : number;
 	private _lineColor : string;
 	private _roundRadius : number;
@@ -96,6 +99,18 @@ export class Style extends Emitter {
 		if(this._lineWidth) {
 			other._lineWidth = this._lineWidth;
 		}
+
+		if(this._lineJoin) {
+			other._lineJoin = this._lineJoin;
+		}
+		
+		if(this._lineCap) {
+			other._lineCap = this._lineCap;
+		}
+
+		if(this._dashLine) {
+			other._dashLine = this._dashLine;
+		}
 		
 		if(this._roundRadius) {
 			other._roundRadius = this._roundRadius;
@@ -167,6 +182,18 @@ export class Style extends Emitter {
 			json.lineWidth = this._lineWidth;
 		}
 
+		if(this._lineJoin) {
+			json.lineJoin = this._lineJoin;
+		}
+
+		if(this._lineCap) {
+			json.lineCap = this._lineCap;
+		}
+
+		if(this._dashLine) {
+			json.dashLine = this._dashLine;
+		}
+
 		if(this._lineColor) {
 			json.lineColor = this._lineColor;
 		}
@@ -235,6 +262,18 @@ export class Style extends Emitter {
 
 		if(json.lineWidth) {
 			this._lineWidth = json.lineWidth;
+		}
+		
+		if(json.lineJoin) {
+			this._lineJoin = json.lineJoin;
+		}
+
+		if(json.lineCap) {
+			this._lineCap = json.lineCap;
+		}
+
+		if(json.dashLine) {
+			this._dashLine = json.dashLine;
 		}
 
 		if(json.lineColor) {
@@ -379,6 +418,30 @@ export class Style extends Emitter {
 	}
 	public set lineWidth(value) {
 		this._lineWidth = value;
+		this.notifyChanged();
+	}
+
+	public get lineJoin() {
+		return this._lineJoin;
+	}
+	public set lineJoin(value) {
+		this._lineJoin = value;
+		this.notifyChanged();
+	}
+
+	public get lineCap() {
+		return this._lineCap;
+	}
+	public set lineCap(value) {
+		this._lineCap = value;
+		this.notifyChanged();
+	}
+
+	public get dashLine() {
+		return this._dashLine;
+	}
+	public set dashLine(value) {
+		this._dashLine = value;
 		this.notifyChanged();
 	}
 

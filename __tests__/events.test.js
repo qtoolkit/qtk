@@ -86,8 +86,8 @@ describe('Events', function() {
 		done(result ? null : new Error("test KeyEvent failed."));
     });
    
-    it('test ChangeEvent', (done) => {
-    	var e = Events.AttrChangeEvent.create("test", "old", "new");
+    it('test AttrChangeEvent', (done) => {
+    	var e = Events.AttrChangeEvent.create().init(Events.CHANGE, {attr:"test",oldValue:"old",newValue:"new"});
 		var result = e.type === Events.CHANGE
 			&& e.attr === "test"
 			&& e.oldValue === "old"

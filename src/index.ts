@@ -1,6 +1,6 @@
 import {Point} from "./point";
 import {Rect} from "./rect";
-import {Direction, Align, Orientation} from "./consts";
+import {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
 import assets = require("./assets");
 import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
@@ -13,6 +13,7 @@ import {Button} from "./controls/button";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {CheckButton} from "./controls/check-button";
+import {ColorTile, ColorLine} from "./controls/color-tile";
 import {RadioButton} from "./controls/radio-button";
 import {ProgressBarType, ProgressBar} from "./controls/progress-bar";
 import {Dialog} from "./controls/dialog";
@@ -56,6 +57,8 @@ export {
 	Point,
 	Rect,
 	Align,
+	AlignV,
+	AlignH,
 	Orientation,
 	Direction,
 	ViewPort,
@@ -86,6 +89,8 @@ export {
 	Edit,
 	RadioButton,
 	CheckButton,
+	ColorTile,
+	ColorLine,
 	ProgressBar,
 	ProgressBarType,
 	ScrollView,

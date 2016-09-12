@@ -35,7 +35,7 @@ describe('Button', function() {
 		button.setStyle(qtk.WidgetState.NORMAL, styles.normal);
 		button.text = "OK";
 		button.draw(ctx);
-		var expected = '{"cmds":[0,4,10,90,14,4,0,0,31,0,5,33,0,0,5,0,32,195,0,33,200,0,200,5,32,200,55,33,200,60,195,60,32,5,60,33,0,60,0,55,30,4,0,0,10,0,15,27,1,10,2,28,1,29,1,18,3,0,30,200,1],"strs":["green",null,"black","OK"]}';
+		var expected = '{"cmds":[0,4,10,90,14,4,0,0,31,0,5,33,0,0,5,0,32,195,0,33,200,0,200,5,32,200,55,33,200,60,195,60,32,5,60,33,0,60,0,55,30,4,0,0,10,0,15,27,1,10,2,28,1,29,1,18,3,0,30,null,1],"strs":["green",null,"black","OK"]}';
 
         var str = ctx.toString();
         console.log(str);
