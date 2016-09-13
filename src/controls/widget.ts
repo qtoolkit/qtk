@@ -101,7 +101,7 @@ export class Widget extends Emitter {
 	}
 
 	protected onInit() {
-		if(!this.app) {
+		if(!this.app && this.parent) {
 			this.app = this.parent.app;
 		}
 

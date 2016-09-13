@@ -230,17 +230,22 @@ export class ComboBox extends Widget {
 			listView.addChild(item, true);
 		}
 		listView.relayoutChildren();
+		listView.relayoutChildren();
 		
 		dialog.open();
 		dialog.grab();
 		this._isPopupOpened = true;
 		dialog.on(Events.CLICK, evt => {
 			var item = <ComboBoxItem>listView.target;
-			var data = item ? item.data : null;
-			this.onItemSelected(data);
-			this._isPopupOpened = false;
-			
-			dialog.close();
+			if(item || !dialog.hitTestResult) {
+				if(item) {	
+					var data = item.data;
+					this.onItemSelected(data);
+				}
+
+				this._isPopupOpened = false;
+				dialog.close();
+			}
 		});
 	}
 

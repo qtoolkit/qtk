@@ -12,6 +12,7 @@ describe('ListLayouter', function() {
     	listView.addChild(item);
 		
 		var item1 = qtk.ListItem.create();
+    	listView.padding = 0;
     	listView.addChild(item1);
 
 		var result = item.x === 0 && item.y === 0 && item.h === listView.itemHeight
