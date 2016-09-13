@@ -41,8 +41,13 @@ export class Window extends Widget {
 		return this._pointerPosition;
 	}
 
+	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+		this._pointerPosition.init(evt.x, evt.y);
+		super.dispatchPointerDown(evt, ctx);
+	}
+
 	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
-		this._pointerPosition.init(evt.x-this.x, evt.y-this.y);
+		this._pointerPosition.init(evt.x, evt.y);
 		super.dispatchPointerMove(evt, ctx);
 	}
 

@@ -43,6 +43,28 @@ export class Widget extends Emitter {
 		return p;
 	}
 	
+	public eventPointToLocal(p:Point) : Point {
+		if(this._canvas) {
+			return p;
+		}
+
+		p.x -= this.x;
+		p.y -= this.y;
+		
+		var iter:Widget = this.parent;
+		while(iter) {
+			if(iter._canvas) {
+				break;
+			}
+			p.x -= iter.x;
+			p.y -= iter.y;
+			iter = iter.parent;
+		}
+
+		return p;
+	}
+	
+	
 	public toGlobalPoint(p:Point) : Point {
 		p.x += this.x;
 		p.y += this.y;
@@ -79,6 +101,10 @@ export class Widget extends Emitter {
 	}
 
 	protected onInit() {
+		if(!this.app) {
+			this.app = this.parent.app;
+		}
+
 		this._inited = true;
 	}
 
@@ -527,6 +553,7 @@ export class Widget extends Emitter {
 
 	public set childrenLayouter(layouter:Layouter) {
 		this._childrenLayouter = layouter;
+		this.relayoutChildren();
 	}
 
 	public get childrenLayouter() : Layouter{
@@ -535,6 +562,9 @@ export class Widget extends Emitter {
 
 	public set layoutParam(param:any) {
 		this._layoutParam = param;
+		if(this.parent) {
+			this.parent.relayoutChildren();
+		}
 	}
 
 	public get layoutParam() : any {

@@ -5,6 +5,7 @@ import {Point} from "../point";
 import {Widget} from "./widget";
 import {Dialog} from "./dialog";
 import {Graphics} from "../graphics";
+import {IViewPort} from "../iview-port";
 import Events = require("../events");
 import {ListView} from "./list-view";
 import {ListItem} from "./list-item";
@@ -14,11 +15,11 @@ import {ImageTile, ImageDrawType} from "../image-tile";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
 export class ComboBoxOption {
-	image: ImageTile;
-	color : string;
-	text : string;
-	value : any;
-	isDefault: boolean;
+	public value : any;
+	public text : string;
+	public color : string;
+	public image: ImageTile;
+	public isDefault: boolean;
 
 	constructor(text:string, value?:any, imageURL?:string, color?:string) {
 		this.text = text;
@@ -30,7 +31,6 @@ export class ComboBoxOption {
 };
 
 export class ComboBoxItem extends ListItem {
-	public index : number;
 	public data : ComboBoxOption;
 
 	constructor() {
@@ -39,8 +39,7 @@ export class ComboBoxItem extends ListItem {
 
 	public reset(type:string) : Widget {
 		super.reset(type);
-		this.padding = 4;
-		this.index = 0;
+		this.padding = 2;
 
 		return this;
 	}
@@ -73,7 +72,8 @@ export class ComboBoxItem extends ListItem {
 		}else if(data.color) {
 			ctx.fillStyle = data.color;
 			ctx.fillRect(x, y, h, h);
-		}else if(style.foreGroundImage) {
+		}
+		if(style.foreGroundImage) {
 			style.foreGroundImage.draw(ctx, ImageDrawType.AUTO, x, y, h, h); 
 		}
 		x += h + this.leftPadding;
@@ -103,6 +103,15 @@ export class ComboBox extends Widget {
 	protected _current : ComboBoxOption;
 	protected _isPopupOpened : boolean;
 	protected _options : Array<ComboBoxOption>;
+	protected _itemHeight : number;
+
+	public get itemHeight() : number {
+		return this._itemHeight || 25;
+	}
+
+	public set itemHeight(value:number) {
+		this._itemHeight = value;
+	}
 
 	public get text() {
 		return this._current ? this._current.text : "";
@@ -133,7 +142,7 @@ export class ComboBox extends Widget {
 		return this;
 	}
 
-	public addOption(text:string, value:any, imageURL:string, color:string) : Widget {
+	public addOption(text:string, value?:any, imageURL?:string, color?:string) : Widget {
 		var item = new ComboBoxOption(text, value, imageURL, color);
 		this._options.push(item);
 
@@ -164,65 +173,82 @@ export class ComboBox extends Widget {
 		}
 	}
 
-	protected onItemSelected(index:number, data:ComboBoxOption) {
-		this._current = data;
-		this.requestRedraw();
-		console.log("onItemSelected:" + index + " " + data.text);
+	protected onItemSelected(data:ComboBoxOption) {
+		if(data) {
+			this._current = data;
+			this.requestRedraw();
+		}
 	}
 
 	protected showPopup() {
+		var vp = this.app.getViewPort();
 		var p = this.toViewPoint(Point.point.init(0, 0));
 
-		var x = p.x-1;
-		var y = p.y+this.h;
+		var x = p.x;
 		var w = this.w;
-		var itemHeight = 20;
+		var y = p.y+this.h;
+		var padding = 4;
+		var scrollable = false;	
+		var itemHeight = this.itemHeight;
+		var options = this._options;
 		var dialog = <Dialog>Dialog.create();
 		var n = this._options.length || 1;
-		var h = n * itemHeight + 8;
+		var h = n * itemHeight + padding + padding;
 
-		var options = this._options;
+		var halfH = vp.h >> 1;
+		if((y + h) > vp.h) {
+			if(h < halfH) {
+				y = p.y - h;
+			}else{
+				h = halfH;
+				if((y + h) > vp.h) {
+					y = p.y - h;
+				}
+				scrollable = true;
+			}
+		}
+
 		dialog.set({x:x, y:y, w:w, h:h, hasOwnCanvas:true, app:this.app});
-		dialog.childrenLayouter = SimpleLayouter.create();
 		dialog.styleType = "widget.transparent";
+		dialog.childrenLayouter = SimpleLayouter.create();
+		
 		var listView = <ListView>ListView.create();
-		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
-		listView.styleType = "combo-box-popup";
-		listView.padding = 5;
-		dialog.addChild(listView);
+		listView.padding = padding;
 		listView.itemHeight = itemHeight;
+		listView.styleType = "combo-box-popup";
+		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
+		listView.dragToScroll = scrollable;
+	
+		dialog.addChild(listView);
+		dialog.target = listView;
 
 		for(var i = 0; i < n; i++) {
 			var iter = options[i];
 			var item = ComboBoxItem.create();
 			iter.isDefault = this._current === iter;
-			item.set({index:i, data:iter});
-			listView.addChild(item);
+			item.set({data:iter});
+			listView.addChild(item, true);
 		}
-
 		listView.relayoutChildren();
-		this._isPopupOpened = true;
 		
 		dialog.open();
 		dialog.grab();
+		this._isPopupOpened = true;
 		dialog.on(Events.CLICK, evt => {
 			var item = <ComboBoxItem>listView.target;
 			var data = item ? item.data : null;
-			var index = item ? item.index : 0;
-			this.onItemSelected(index, data);
-
-			dialog.close();
-		});
-
-		dialog.on(Events.CLOSE, evt => {
+			this.onItemSelected(data);
 			this._isPopupOpened = false;
+			
+			dialog.close();
 		});
 	}
 
 	public reset(type:string) : Widget {
 		super.reset(type);
 		this._options = [];
-		this.padding = 5;
+		this.padding = 6;
+
 		return this;
 	}
 

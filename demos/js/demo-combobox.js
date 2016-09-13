@@ -23,5 +23,21 @@ function onReady(app) {
 	comboBox.value = 1;
 	win.addChild(comboBox);
 	
+	var comboBox = qtk.ComboBox.create();
+	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"-60px", w:"50%", h:"30px"});
+	comboBox.addOption("item1", 1);
+	comboBox.addOption("item2", 2);
+	comboBox.addOption("item3", 3);
+	comboBox.value = 1;
+	win.addChild(comboBox);
+	
+	var comboBox = qtk.ComboBox.create();
+	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"-120px", w:"50%", h:"30px"});
+	for(var i = 0; i < 100; i++) {
+		comboBox.addOption("item"+i, i);
+	}
+	comboBox.value = 1;
+	win.addChild(comboBox);
+	
 	win.open();
 }

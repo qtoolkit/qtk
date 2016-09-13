@@ -64,6 +64,14 @@ export class ViewPort extends Emitter implements IViewPort {
 	public get height() {
 		return this._height;
 	}
+	
+	public get w() {
+		return this._width;
+	}
+
+	public get h() {
+		return this._height;
+	}
 
 	public get density() {
 		return this._density;

@@ -202,7 +202,7 @@ export class ScrollView extends Widget {
 			this._saveOX = this._ox;
 			this._saveOY = this._oy;
 			var win = this.win;
-			var p = this.toLocalPoint(Point.point.copy(win.pointerPosition));
+			var p = this.eventPointToLocal(Point.point.copy(win.pointerPosition));
 			if(p.isInRect(this._vScrollBarRect)) {
 				if(p.isInRect(this._vScrollDraggerRect)) {
 					this._pointerInVScrollDraggerRect = true;
@@ -500,13 +500,20 @@ export class ScrollView extends Widget {
 	protected drawChildren(ctx:any) : Widget {
 		var ox = this._ox;
 		var oy = this._oy;
+		var x = this.leftPadding;
+		var y = this.topPadding;
+		var w = this.w - x - this.rightPadding;
+		var h = this.h - y - this.bottomPadding;
+		
+		ctx.save();
 		ctx.beginPath();
-		ctx.rect(0, 0, this.w, this.h);
+		ctx.rect(x, y, w, h);
 		ctx.clip();
 		
 		ctx.translate(-ox, -oy);
 		this.doDrawChildren(ctx);
-		ctx.translate(ox, oy);
+		ctx.restore();
+
 		this.drawScrollBar(ctx);
 
 		return this;
@@ -584,7 +591,8 @@ export class ScrollView extends Widget {
 				decelerationRate:0.95, 
 				penetrationAcceleration:0.08
 		};
-		
+	
+		this.padding = 2;
 		this._scroller = null;
 		this._scrollBarStyle = new ScrollBarStyle();
 		this._touches = [{pageX:0, pageY:0, id:0}];
