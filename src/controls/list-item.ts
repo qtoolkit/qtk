@@ -14,8 +14,8 @@ export enum ListItemStyle {
 export class ListItem extends Widget {
 	public listItemStyle : ListItemStyle;
 
-	constructor() {
-		super(ListItem.TYPE);
+	constructor(type?:string) {
+		super(type || ListItem.TYPE);
 	}
 
 	protected drawBackground(ctx:any, style:Style) : Widget {

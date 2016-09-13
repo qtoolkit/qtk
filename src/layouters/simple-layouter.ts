@@ -55,7 +55,7 @@ export class SimpleLayouter extends Layouter {
 		}
 	}
 
-	static create(options:any) : SimpleLayouter {
+	static create(options?:any) : SimpleLayouter {
 		var layouter = new SimpleLayouter();
 
 		return layouter.setOptions(options);

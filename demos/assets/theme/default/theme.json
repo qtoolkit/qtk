@@ -137,19 +137,19 @@
 	"tree-item.expanded": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/@density/expand.png"
+			"foreGroundImage":"images/@density/expand.png"
 		}
 	},
 	"tree-item.collapsed": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/@density/collapse.png"
+			"foreGroundImage":"images/@density/collapse.png"
 		}
 	},
 	"tree-item.leaf": {
 		"extends": "tree-item",
 		"common" : {
-			"forceGroundImage":"images/@density/leaf.png"
+			"foreGroundImage":"images/@density/leaf.png"
 		}
 	},
 	"radio-button": {
@@ -161,13 +161,13 @@
 	"radio-button.checked": {
 		"extends": "radio-button",
 		"common" : {
-			"forceGroundImage":"images/@density/radio-button-checked.png"
+			"foreGroundImage":"images/@density/radio-button-checked.png"
 		}
 	},
 	"radio-button.unchecked": {
 		"extends": "radio-button",
 		"common" : {
-			"forceGroundImage":"images/@density/radio-button-unchecked.png"
+			"foreGroundImage":"images/@density/radio-button-unchecked.png"
 		}
 	},
 	"check-button": {
@@ -179,13 +179,13 @@
 	"check-button.checked": {
 		"extends": "check-button",
 		"common" : {
-			"forceGroundImage":"images/@density/check-button-checked.png"
+			"foreGroundImage":"images/@density/check-button-checked.png"
 		}
 	},
 	"check-button.unchecked": {
 		"extends": "check-button",
 		"common" : {
-			"forceGroundImage":"images/@density/check-button-unchecked.png"
+			"foreGroundImage":"images/@density/check-button-unchecked.png"
 		}
 	},
 	"list-item": {
@@ -202,6 +202,34 @@
 		"active" : {
 			"backGroundColor" : "#DDDDDD"
 		}
+	},
+	"combo-box": {
+		"extends": "button",
+		"common" : {
+			"foreGroundImage" : "images/@density/combo-box.png"
+		}
+	},
+	"combo-box-item": {
+		"extends": "list-item",
+		"common" : {
+			"textAlign" : "left"
+		}
+	},
+	"combo-box-item.current": {
+		"extends": "combo-box-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/combo-box-item-current.png"
+		}
+	},
+	"combo-box-popup": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth":1,
+			"roundRadius":5,
+			"lineColor":"#CCCCCC"
+		}
+	},
+	"widget.transparent": {
 	},
 	"window-normal": {
 		"extends": "widget"

@@ -132,9 +132,13 @@ export class TreeItem extends Widget {
 	}
 
 	protected getStyleType() : string {
+		if(this._styleType) {
+			return this._styleType;
+		}
+
 		var appendix = this.isLeaf ? "leaf" : (this.expanded ? "expanded":"collapsed"); 
 		
-		return (this._styleType || this.type) +"."+appendix;
+		return (this.type) +"."+appendix;
 	}
 	
 	protected drawImage(ctx:any, style:Style) : Widget {
