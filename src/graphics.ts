@@ -241,8 +241,7 @@ export class Graphics {
 			ctx.beginPath();
 			ctx.rect(x, y, w, h);
 			if(fillStyle) {
-				ctx.fillStyle = fillStyle;
-				ctx.fill();
+				Style.fill(ctx, fillStyle, h);
 			}
 			if(strokeStyle && lineWidth > 0) {
 				ctx.lineWidth = lineWidth;
@@ -257,8 +256,7 @@ export class Graphics {
 		if(fillStyle || (strokeStyle && lineWidth > 0)) {
 			Graphics.roundRect(ctx, x, y, w, h, r, type);
 			if(fillStyle) {
-				ctx.fillStyle = fillStyle;
-				ctx.fill();
+				Style.fill(ctx, fillStyle, h);
 			}
 			if(strokeStyle && lineWidth > 0) {
 				ctx.lineWidth = lineWidth;

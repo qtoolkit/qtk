@@ -51,13 +51,16 @@
 			"roundRadius" : 5
 		},
 		"normal" : {
-			"backGroundColor" : "green"
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
 		},
 		"over" : {
-			"backGroundColor" : "blue"
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
 		},
 		"active" : {
-			"backGroundColor" : "red"
+			"lineColor" : "#4D90FC",
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
 		}
 	},
 	"button-blue": {

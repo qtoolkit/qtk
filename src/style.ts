@@ -468,4 +468,34 @@ export class Style extends Emitter {
 		}
 		return style;
 	}
+
+	static fillStyles = {};
+
+	static fill(ctx:any, fillStyle:string, h:number){
+		
+		if(!fillStyle || typeof fillStyle === "string") {
+			ctx.fillStyle = fillStyle;
+		}else{	
+			var key = fillStyle + "." + h;
+			var value = Style.fillStyles[key];
+			if(!value) {
+				var data = fillStyle;
+				var n = data.length;
+				var delta = 1/n;
+				var value = ctx.createLinearGradient(0,0,0,h);
+				
+				for(var i = 0; i < n; i++) {
+					var color = data[i];
+					value.addColorStop(i*delta, color);
+				}
+
+				Style.fillStyles[key] = value;
+			}
+			ctx.fillStyle = value;
+		}
+
+		ctx.fill();
+
+		return;
+	}
 };
