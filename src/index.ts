@@ -12,6 +12,7 @@ import {Edit} from "./controls/edit";
 import {Button} from "./controls/button";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
+import {Switch} from "./controls/switch";
 import {ComboBox} from "./controls/combo-box";
 import {CheckButton} from "./controls/check-button";
 import {ColorTile, ColorLine} from "./controls/color-tile";
@@ -85,6 +86,7 @@ export {
 	WidgetMode,
 	HitTestResult,
 	Slider,
+	Switch,
 	ComboBox,
 	Button,
 	Label,

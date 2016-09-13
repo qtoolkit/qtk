@@ -229,6 +229,15 @@
 			"lineColor":"#CCCCCC"
 		}
 	},
+	"switch": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth":1,
+			"backGroundColor":"green",
+			"foreGroundColor":"#EEEEEE",
+			"lineColor":"#CCCCCC"
+		}
+	},
 	"widget.transparent": {
 	},
 	"window-normal": {

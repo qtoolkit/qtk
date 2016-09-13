@@ -217,6 +217,24 @@ export class Graphics {
 		}
 	}
 
+	public static drawCircle(ctx:any, fillStyle:string, strokeStyle:string, lineWidth:number, 
+			x:number, y:number, r:number) {
+		if(fillStyle || (strokeStyle && lineWidth > 0)) {
+			ctx.beginPath();
+			ctx.arc(x, y, r, 0, Math.PI * 2); 
+			if(fillStyle) {
+				ctx.fillStyle = fillStyle;
+				ctx.fill();
+			}
+
+			if(strokeStyle && lineWidth > 0) {
+				ctx.strokeStyle = strokeStyle;
+				ctx.lineWidth = 1;
+				ctx.stroke();
+			}
+		}
+	}
+
 	public static drawRect(ctx:any, fillStyle:string, strokeStyle:string, lineWidth:number, 
 			x:number, y:number, w:number, h:number) {
 		if(fillStyle || (strokeStyle && lineWidth > 0)) {
