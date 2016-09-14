@@ -9,7 +9,10 @@ import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
 import {Group} from "./controls/Group";
 import {Edit} from "./controls/edit";
+import {Page} from "./controls/page";
+import {Pages} from "./controls/pages";
 import {Button} from "./controls/button";
+import {TabButton} from "./controls/tab-button";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {Switch} from "./controls/switch";
@@ -89,6 +92,9 @@ export {
 	Switch,
 	ComboBox,
 	Button,
+	TabButton,
+	Page,
+	Pages,
 	Label,
 	Edit,
 	RadioButton,

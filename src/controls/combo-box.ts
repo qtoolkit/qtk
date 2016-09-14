@@ -67,16 +67,19 @@ export class ComboBoxItem extends ListItem {
 		var w = this.w - x - this.rightPadding;
 		var h = this.h - y - this.bottomPadding;
 
-		if(data.image) {
-			data.image.draw(ctx, ImageDrawType.AUTO, x, y, h, h); 
-		}else if(data.color) {
-			ctx.fillStyle = data.color;
-			ctx.fillRect(x, y, h, h);
-		}
 		if(style.foreGroundImage) {
 			style.foreGroundImage.draw(ctx, ImageDrawType.AUTO, x, y, h, h); 
 		}
 		x += h + this.leftPadding;
+		
+		if(data.image) {
+			data.image.draw(ctx, ImageDrawType.AUTO, x, y, h, h); 
+			x += h + this.leftPadding;
+		}else if(data.color) {
+			ctx.fillStyle = data.color;
+			ctx.fillRect(x, y, h, h);
+			x += h + this.leftPadding;
+		}
 
 		var text = this.getLocaleText();
 		if(text && style.textColor) {
@@ -177,6 +180,10 @@ export class ComboBox extends Widget {
 		if(data) {
 			this._current = data;
 			this.requestRedraw();
+			var e = Events.ChangeEvent.create();
+			e.init(Events.CHANGE, {oldValue:null, newValue:data.value});
+			this.dispatchEvent(e);
+			e.dispose();
 		}
 	}
 

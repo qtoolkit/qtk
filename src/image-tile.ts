@@ -415,7 +415,7 @@ export class ImageTile extends Emitter {
 		return ret;
 	}
 
-	public static create(_src:string, onDone:Function) : ImageTile {
+	public static create(_src:string, onDone?:Function) : ImageTile {
 		var src = ImageTile.fixURL(_src);
 		var it = ImageTile.cache[src];
 

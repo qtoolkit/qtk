@@ -243,6 +243,15 @@
 	},
 	"widget.transparent": {
 	},
+	"tab-button": {
+		"extends": "button"
+	},
+	"tab-button.current": {
+		"extends": "tab-button"
+	},
+	"tab-button.normal": {
+		"extends": "tab-button"
+	},
 	"window-normal": {
 		"extends": "widget"
 	}

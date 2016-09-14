@@ -5,18 +5,19 @@ import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
 export class RadioButton extends CheckButton {
-	constructor() {
-		super(RadioButton.TYPE);
+	constructor(type?:string) {
+		super(type || RadioButton.TYPE);
 	}
 	
 	public get value() {
 		return this._value;
 	}
 	public set value(value) {
+		var type = this.type;
 		if(this.parent && value) {
 			var arr = this.parent.children;
 			arr.forEach((child:any) => {
-				if(child !== this && child.type === RadioButton.TYPE) {
+				if(child !== this && child.type === type) {
 					if(child.value) {
 						child.setAttr("value", false, true);
 					}
