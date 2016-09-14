@@ -3,7 +3,7 @@ describe('Window', function() {
    
 	var app = new qtk.Application.create("test");
     it('test grab', (done) => {
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
 			var win = qtk.WindowNormal.create();

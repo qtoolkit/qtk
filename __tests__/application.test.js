@@ -4,7 +4,7 @@ describe('Application', function() {
 
     it('test getService', (done) => {
 		var app = new qtk.Application.create("test");
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		app.on(qtk.Events.READY, function() {
 			var themeManager = app.getService(qtk.Services.THEME_MANAGER);
 			var result = !!themeManager 
@@ -16,7 +16,7 @@ describe('Application', function() {
     
     it('test requestRedraw', (done) => {
 		var app = new qtk.Application.create("test");
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		app.mainLoop.requestRedraw();
 		app.mainLoop.on(qtk.Events.PRETICK, function pretick(evt) {
 			done();

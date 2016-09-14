@@ -571,6 +571,10 @@ export class Widget extends Emitter {
 		return this._layoutParam;
 	}
 ///////////////////////////////////////////
+	public indexOfChild(child:Widget) : number {
+		return this.children.indexOf(child);
+	}
+
 	public findChild(func:Function) : Widget {
 		var i = 0;
 		var arr = this._children;
@@ -736,12 +740,12 @@ export class Widget extends Emitter {
 
 	public getStyleOfState(state : WidgetState) : Style {
 		var style = null;
+		var tm = this._themeManager;
 		var stateName = this.stateToString(state);
 		
 		if(this._styles) {
 			style = this._styles[stateName];
-		}else{
-			var tm = this._themeManager;
+		}else if(tm){
 			var styleType = this.getStyleType();
 			style = tm.get(styleType, stateName);
 		}
@@ -989,6 +993,9 @@ export class Widget extends Emitter {
 		}
 	}
 
+	public get desireWidth() {
+		return this._w;
+	}
 
 	public get w() {
 		return this._w;

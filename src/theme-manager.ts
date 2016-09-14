@@ -7,7 +7,6 @@ import {IThemeManager} from "./itheme-manager";
  */
 export class ThemeManager implements IThemeManager {
 	private data : any;
-	private baseURL : string;
 
 	constructor() {
 		this.data = {};
@@ -38,7 +37,7 @@ export class ThemeManager implements IThemeManager {
 	/**
 	 * 初始化。
 	 */
-	public init(data:any, baseURL:string) : ThemeManager {
+	public load(data:any, baseURL:string) : ThemeManager {
 		var json = this.expand(data);
 		for(var itemName in json) {
 			var itemInfo = json[itemName];

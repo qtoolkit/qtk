@@ -134,7 +134,7 @@ export class Style extends Emitter {
 		}
 
 		if(this._backGroundImageDrawType) {
-			json.backGroundImageDrawType = this._backGroundImageDrawType;
+			json._backGroundImageDrawType = ImageDrawType[this._backGroundImageDrawType];
 		}
 
 		if(this._foreGroundImage) {
@@ -142,7 +142,7 @@ export class Style extends Emitter {
 		}
 
 		if(this._foreGroundImageDrawType) {
-			json.foreGroundImageDrawType = this._foreGroundImageDrawType;
+			json._foreGroundImageDrawType = ImageDrawType[this._foreGroundImageDrawType];
 		}
 
 
@@ -226,6 +226,14 @@ export class Style extends Emitter {
 			this._foreGroundImage = ImageTile.create(url, evt => {
 				this.notifyChanged();
 			});
+		}
+
+		if(json.backGroundImageDrawType) {
+			this._backGroundImageDrawType =<ImageDrawType>parseInt(ImageDrawType[json.backGroundImageDrawType]);
+		}
+	
+		if(json.foreGroundImageDrawType) {
+			this._foreGroundImageDrawType = <ImageDrawType>parseInt(ImageDrawType[json.foreGroundImageDrawType]);
 		}
 
 		if(json.fontFamily) {

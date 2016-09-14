@@ -34,7 +34,7 @@ describe('Widget', function() {
 	}
 
     it('test basic attr', (done) => {
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
 			var widget = qtk.Widget.create(app);
@@ -70,7 +70,7 @@ describe('Widget', function() {
     });
     
     it('test add/remmove/find', (done) => {
-		app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
 			var child = qtk.Widget.create(app);

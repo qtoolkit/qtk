@@ -2,7 +2,7 @@
 describe('Resizable', function() {
 	var Events = qtk.Events;
 	var app = new qtk.Application.create("test");
-	app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+	app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 	var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
 	var widget = qtk.Widget.create();
 	widget.moveResizeTo(0, 0, 100, 100);

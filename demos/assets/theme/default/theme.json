@@ -243,14 +243,51 @@
 	},
 	"widget.transparent": {
 	},
-	"tab-button": {
-		"extends": "button"
+	"tab-button.close": {
+		"extends": "button",
+		"common" : {
+			"backGroundImageDrawType":"ICON"
+		},
+		 "normal" : {"backGroundImage" : "images/@density/close.normal.png"},
+		 "over" : {"backGroundImage" : "images/@density/close.over.png"},
+		 "active" : {"backGroundImage" : "images/@density/close.over.png"}
 	},
 	"tab-button.current": {
-		"extends": "tab-button"
+		"extends": "widget",
+		"common" : {
+			"lineColor" : "#4D90FC"
+		},
+		"normal" : {
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		},
+		"over" : {
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
+		},
+		"active" : {
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
 	},
 	"tab-button.normal": {
-		"extends": "tab-button"
+		"extends": "widget",
+		"common" : {
+			"lineColor" : "#A8A8A8"
+		},
+		"normal" : {
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		},
+		"over" : {
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
+		},
+		"active" : {
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
+	},
+	"tab-control": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth":1,
+			"lineColor":"#CCCCCC"
+		}
 	},
 	"window-normal": {
 		"extends": "widget"

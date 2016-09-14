@@ -2,7 +2,7 @@
 describe('DnD', function() {
 	var Events = qtk.Events;
 	var app = new qtk.Application.create("test");
-	app.init({themeDataURL:"/base/www/theme/default/theme.json"});
+	app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 	var win = qtk.WindowNormal.create();
 	win.set({app:app, x:0, y:0, w:1000, h:1000, hasOwnCanvas:false});
 	var widget = qtk.Widget.create();

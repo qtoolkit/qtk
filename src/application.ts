@@ -70,14 +70,28 @@ export class Application extends Emitter implements IApplication {
 
 	public init(args:any) {
 		this.initOptions(args);
-		var themeDataURL = this._options.themeDataURL;
 		var themeManager = new ThemeManager();
+		var sysThemeDataURL = this._options.sysThemeDataURL;
+		var appThemeDataURL = this._options.appThemeDataURL;
 
-		assets.loadJSON(themeDataURL).then(json => {
-			var baseURL = path.dirname(themeDataURL);
-			themeManager.init(json, baseURL);
-			this.dispatchEventAsync({type:Events.READY});
-		});
+		if(sysThemeDataURL) {
+			assets.loadJSON(sysThemeDataURL).then(json => {
+				var baseURL = path.dirname(sysThemeDataURL);
+				themeManager.load(json, baseURL);
+				
+				return appThemeDataURL;
+			}).then(url => {
+				if(url) {
+					assets.loadJSON(url).then(json => {
+						var baseURL = path.dirname(url);
+						themeManager.load(json, baseURL);
+						this.dispatchEventAsync({type:Events.READY});
+					});
+				}else{
+					this.dispatchEventAsync({type:Events.READY});
+				}
+			});
+		}
 
 		this.registerService(Services.THEME_MANAGER, themeManager);
 		this._viewPort = ViewPort.create(0, 0, 0);

@@ -20,12 +20,16 @@
     <script src='js/demo-combobox.js'></script>
     <script src='js/demo-check-button.js'></script>
     <script src='js/demo-tabbutton.js'></script>
+    <script src='js/demo-tabcontrol.js'></script>
 	
 	<script type="application/javascript">
 		var app = new qtk.Application.create("test");
 
 		window.onload = function() {
-			app.init({themeDataURL:"/demos/assets/theme/default/theme.json"});
+			app.init({
+				sysThemeDataURL:"/demos/assets/theme/default/theme.json",
+				appThemeDataURL:"/demos/assets/theme/default/demo.json"
+			});
 			app.on(qtk.Events.READY, function() {
 				onReady(app);
 				app.run();

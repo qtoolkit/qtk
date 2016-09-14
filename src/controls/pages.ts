@@ -16,6 +16,12 @@ export class Pages extends Widget {
 		return this._value;
 	}
 
+	public setValueByPage(page:Widget) : Widget {
+		this.value = this.indexOfChild(page);
+
+		return this;
+	}
+
 	public set target(value:Widget){
 	}
 	public get target() : Widget {
@@ -66,8 +72,8 @@ export class Pages extends Widget {
 
 	public static TYPE = "pages";
 	private static recyclbale = new RecyclableCreator<Pages>(function() {return new Pages()});
-	public static create() : Widget {
-		return Pages.recyclbale.create().reset(Pages.TYPE);
+	public static create() : Pages {
+		return <Pages>Pages.recyclbale.create().reset(Pages.TYPE);
 	}
 };
 

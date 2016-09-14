@@ -12,7 +12,10 @@ import {Edit} from "./controls/edit";
 import {Page} from "./controls/page";
 import {Pages} from "./controls/pages";
 import {Button} from "./controls/button";
+import {TabPage} from "./controls/tab-page";
 import {TabButton} from "./controls/tab-button";
+import {TabControl} from "./controls/tab-control";
+import {TabButtonGroup} from "./controls/tab-button-group";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {Switch} from "./controls/switch";
@@ -92,7 +95,10 @@ export {
 	Switch,
 	ComboBox,
 	Button,
+	TabPage,
+	TabControl,
 	TabButton,
+	TabButtonGroup,
 	Page,
 	Pages,
 	Label,

@@ -4,8 +4,8 @@ import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
 export class Page extends Widget {
-	constructor() {
-		super(Page.TYPE);
+	constructor(type?:string) {
+		super(type||Page.TYPE);
 	}
 
 	public dispose() {
