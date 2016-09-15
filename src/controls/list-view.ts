@@ -5,7 +5,7 @@ import {ScrollView} from "./scroll-view";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 import {Layouter} from "../layouters/layouter";
-import {ListLayouter} from "../layouters/list-layouter";
+import {ListLayouter, ListLayouterParam} from "../layouters/list-layouter";
 
 export class ListView extends ScrollView {
 	public set itemSpacing(value:number) {
@@ -44,6 +44,22 @@ export class ListView extends ScrollView {
 		});
 
 		return this;
+	}
+
+	public get desireHeight() : number {
+		var itemHeight = this.itemHeight;
+		var h = this.topPadding + this.bottomPadding;
+		this.children.forEach(child => {
+			var param = <ListLayouterParam>child.layoutParam;
+			if(param) {
+				h += param.h || itemHeight; 
+			}else{
+				h += child.h || itemHeight; 
+			}
+
+		});
+
+		return h;
 	}
 
 	public relayoutChildren() : Rect {

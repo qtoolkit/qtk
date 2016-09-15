@@ -21,6 +21,8 @@ import {Slider} from "./controls/slider";
 import {Switch} from "./controls/switch";
 import {ComboBox} from "./controls/combo-box";
 import {CheckButton} from "./controls/check-button";
+import {Menu, MenuItem} from "./controls/menu";
+import {MenuBar, MenuBarItem} from "./controls/menu-bar";
 import {ColorTile, ColorLine} from "./controls/color-tile";
 import {RadioButton} from "./controls/radio-button";
 import {ProgressBarType, ProgressBar} from "./controls/progress-bar";
@@ -123,6 +125,10 @@ export {
 	ListView,
 	ListItem,
 	ListItemStyle,
+	Menu,
+	MenuItem,
+	MenuBar,
+	MenuBarItem,
 	WindowNormal,
 	Services,
 	WidgetFactory,

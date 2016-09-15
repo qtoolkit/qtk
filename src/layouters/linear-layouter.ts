@@ -57,7 +57,7 @@ export class LinearLayouter extends Layouter {
 		arr = children.filter(function(child) {
 			var param =  child.layoutParam || LinearLayouterParam.defParam;
 
-			return param.position === 0;
+			return !param.position;
 		});
 		arr.forEach(child => {
 			if(r.w > 0 &&  r.h > 0) {

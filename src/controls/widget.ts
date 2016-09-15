@@ -775,6 +775,17 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	public removeAllChildren() : Widget {
+		this.children.forEach(child => {
+			child.dispose();
+		});
+		this.children.length = 0;
+		this.target = null;
+		this._lastOverWidget = null;
+
+		return this;
+	}
+
 	public removeChild(child:Widget, fastMode?:boolean, destroy?:boolean) : Widget {
 		var arr = this._children;
 		var index = arr.indexOf(child);
@@ -934,7 +945,7 @@ export class Widget extends Emitter {
 			mainLoop.off(Events.TICK, draw);
 		});
 
-		this.on(Events.CHANGE, (evt:Events.AttrChangeEvent) => {
+		this.on(Events.ATTR_CHANGE, (evt:Events.AttrChangeEvent) => {
 			var attr = evt.attr;
 			var value = evt.newValue;
 

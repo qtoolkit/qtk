@@ -45,6 +45,10 @@ export class Layouter {
 
 	public static evalValue(value:string, total:number) {
 		var v = parseFloat(value);
+		if(typeof value === "number") {
+			return v;
+		}
+
 		if(value.indexOf("%") > 0) {
 			v = total*v/100;
 		}

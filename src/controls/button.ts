@@ -15,8 +15,8 @@ export class Button extends Widget {
 
 	public static TYPE = "button";
 	private static recyclbale = new RecyclableCreator<Button>(function() {return new Button()});
-	public static create() : Widget {
-		return Button.recyclbale.create().reset(Button.TYPE);
+	public static create() : Button {
+		return <Button>Button.recyclbale.create().reset(Button.TYPE);
 	}
 };
 

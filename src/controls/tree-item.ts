@@ -4,12 +4,12 @@ import {Point} from "../point";
 import {Style} from "../style";
 import {TreeView} from "./tree-view";
 import {TreeItemData} from "./tree-item-data";
-import {Widget, WidgetState, HitTestResult} from "./widget";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
+import {Widget, WidgetState, HitTestResult} from "./widget";
 
 /**
  * 树形视图中，显示的一个子项。

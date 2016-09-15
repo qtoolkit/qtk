@@ -228,7 +228,15 @@
 		"extends": "widget",
 		"common" : {
 			"lineWidth":1,
-			"roundRadius":5,
+			"roundRadius":0,
+			"lineColor":"#CCCCCC"
+		}
+	},
+	"menu": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth":1,
+			"roundRadius":0,
 			"lineColor":"#CCCCCC"
 		}
 	},
@@ -242,6 +250,7 @@
 		}
 	},
 	"widget.transparent": {
+		 "normal" : {}
 	},
 	"tab-button.close": {
 		"extends": "button",
@@ -287,6 +296,56 @@
 		"common" : {
 			"lineWidth":1,
 			"lineColor":"#CCCCCC"
+		}
+	},
+	"menu-bar": {
+		"extends": "widget",
+		"common" : {
+			"backGroundColor" : "#E8EbF2"
+		}
+	},
+	"menu-bar-item": {
+		"extends": "widget",
+		"normal" : {
+			"backGroundColor" : null
+		},
+		"over" : {
+			"backGroundColor" : "#3E93F9"
+		},
+		"active" : {
+			"backGroundColor" : "#3E93F9"
+		}
+	},
+	"menu-item": {
+		"extends": "list-item",
+		"common" : {
+			"lineWidth":0,
+			"textAlign" : "left",
+			"lineColor":"#CCCCCC"
+		},
+		"normal" : {
+			"backGroundColor" : null
+		},
+		"over" : {
+			"backGroundColor" : "#3E93F9"
+		},
+		"active" : {
+			"backGroundColor" : "#3E93F9"
+		}
+	},
+	"menu-item.space": {
+		"extends": "list-item",
+		"common" : {
+			"lineWidth":0,
+			"textAlign" : "left",
+			"lineColor":"#CCCCCC",
+			"backGroundColor" : null
+		}
+	},
+	"menu-item.checkable": {
+		"extends": "menu-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/combo-box-item-current.png"
 		}
 	},
 	"window-normal": {

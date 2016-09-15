@@ -7,8 +7,8 @@ import {RecyclableCreator} from "../recyclable-creator";
 
 export class Dialog extends Window {
 	
-	constructor() {
-		super(Dialog.TYPE);
+	constructor(type?:string) {
+		super(type||Dialog.TYPE);
 	}
 
 	public dispose() {
