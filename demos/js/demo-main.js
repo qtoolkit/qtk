@@ -1,0 +1,47 @@
+
+function onReady(app) {
+	var Events = qtk.Events;
+	var ListItem = qtk.ListItem;
+	var ListView = qtk.ListView;
+	var WindowNormal = qtk.WindowNormal;
+
+	var vp = app.getViewPort();
+	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
+	
+	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
+	listView.layoutParam = win.createChildLayoutParam({x:"25%", y:"25%", w:"50%", h:"50%"});
+	win.addChild(listView);
+
+	var items = [
+		{title:"Edit", data:"edit"},
+		{title:"Menu", data:"menu"},
+		{title:"Label", data:"label"},
+		{title:"Pages", data:"pages"},
+		{title:"Dialog", data:"dialog"},
+		{title:"Movable", data:"movable"},
+		{title:"Drag & Drop", data:"dnd"},
+		{title:"ListView", data:"listview"},
+		{title:"ComboBox", data:"combobox"},
+		{title:"Animation", data:"animation"},
+		{title:"ProgressBar", data:"progressbar"},
+		{title:"DockLayouter", data:"docklayout"},
+		{title:"GridLayouter", data:"gridlayout"},
+		{title:"LinearLayouter", data:"linearlayout"},
+		{title:"ColorTile & ColorLine", data:"color"},
+		{title:"CheckButton & RadioButton", data:"check-button"},
+	];
+
+	function onItemClick() {
+		var data = this.userData;
+		window.open(location.href+"?demo="+data, "_blank");
+	}
+
+	items.forEach(iter => {
+		var item = ListItem.create({text:iter.title, userData:iter.data});
+		item.on(Events.CLICK, onItemClick);
+		listView.addChild(item, true);
+	});
+	listView.relayoutChildren();
+
+	win.open();
+}
