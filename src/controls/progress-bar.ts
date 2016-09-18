@@ -36,7 +36,7 @@ export class ProgressBar extends Widget {
 
 	public set value(value) {
 		var v = Math.min(1, Math.max(0, value));
-		this.setAttr("value", v, true);
+		this.setProp("value", v, true);
 	}
 	
 	protected drawColorForeGround(ctx:any, style:Style) : Widget {

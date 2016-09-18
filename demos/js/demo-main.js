@@ -8,6 +8,15 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
 	
+	var label = qtk.Label.create({text:"QToolKit Demos"});
+	label.layoutParam = win.createChildLayoutParam({x:"25%", y:"10%", w:"50%", h:"40"});
+	label.setStyle(qtk.WidgetState.NORMAL, qtk.Style.create({
+			"textColor" : "green",
+			"textAlign" : "center",
+			"fontSize" : 30
+		}));
+	win.addChild(label);
+	
 	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
 	listView.layoutParam = win.createChildLayoutParam({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(listView);

@@ -135,21 +135,21 @@ export class Widget extends Emitter {
 		});
 	}
 
-	public set(attrs?:any) : Widget {
-		if(attrs) {
-			for(var key in attrs) {
-				this[key] = attrs[key];
+	public set(props?:any) : Widget {
+		if(props) {
+			for(var key in props) {
+				this[key] = props[key];
 			}
 		}
 		return this;
 	}
 
-	public get(attrs:any) : any {
-		for(var key in attrs) {
-			attrs[key] = this[key];
+	public get(props:any) : any {
+		for(var key in props) {
+			props[key] = this[key];
 		}
 
-		return attrs;
+		return props;
 	}
 
 	/**
@@ -957,11 +957,11 @@ export class Widget extends Emitter {
 			mainLoop.off(Events.TICK, draw);
 		});
 
-		this.on(Events.ATTR_CHANGE, (evt:Events.AttrChangeEvent) => {
-			var attr = evt.attr;
+		this.on(Events.PROP_CHANGE, (evt:Events.PropChangeEvent) => {
+			var prop = evt.prop;
 			var value = evt.newValue;
 
-			switch(attr) {
+			switch(prop) {
 				case "x": {
 					canvas.x = value;
 					break;
@@ -996,21 +996,21 @@ export class Widget extends Emitter {
 		return this._x;
 	}
 	public set x(value) {
-		this.setAttr("x", value, true);
+		this.setProp("x", value, true);
 	}
 
 	public get y() {
 		return this._y;
 	}
 	public set y(value) {
-		this.setAttr("y", value, true);
+		this.setProp("y", value, true);
 	}
 
 	public get z() {
 		return this._z;
 	}
 	public set z(value) {
-		this.setAttr("z", value, true);
+		this.setProp("z", value, true);
 		if(this._parent) {
 			this._parent.sortChildren();
 		}
@@ -1024,14 +1024,14 @@ export class Widget extends Emitter {
 		return this._w;
 	}
 	public set w(value) {
-		this.setAttr("w", value, true);
+		this.setProp("w", value, true);
 	}
 	
 	public get width() {
 		return this._w;
 	}
 	public set width(value) {
-		this.setAttr("w", value, true);
+		this.setProp("w", value, true);
 	}
 
 
@@ -1039,13 +1039,13 @@ export class Widget extends Emitter {
 		return this._h;
 	}
 	public set height(value) {
-		this.setAttr("h", value, true);
+		this.setProp("h", value, true);
 	}
 	public get h() {
 		return this._h;
 	}
 	public set h(value) {
-		this.setAttr("h", value, true);
+		this.setProp("h", value, true);
 	}
 
 	public get state() {
@@ -1053,7 +1053,7 @@ export class Widget extends Emitter {
 	}
 	public set state(value) {
 		if(this._state !== value) {
-			this.setAttr("state", value, true);
+			this.setProp("state", value, true);
 		}
 	}
 
@@ -1061,21 +1061,21 @@ export class Widget extends Emitter {
 		return this._value;
 	}
 	public set value(value) {
-		this.setAttr("value", value, true);
+		this.setProp("value", value, true);
 	}
 
 	public get selected() {
 		return this._selected;
 	}
 	public set selected(value) {
-		this.setAttr("selected", value, true);
+		this.setProp("selected", value, true);
 	}
 
 	public get enable() {
 		return this._enable;
 	}
 	public set enable(value) {
-		this.setAttr("enable", value, true);
+		this.setProp("enable", value, true);
 	}
 
 	public get visible() {
@@ -1083,7 +1083,7 @@ export class Widget extends Emitter {
 	}
 
 	public setVisible(value) {
-		this.setAttr("visible", value, true);
+		this.setProp("visible", value, true);
 		this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
 		this.requestRedraw();
 	}
@@ -1099,7 +1099,7 @@ export class Widget extends Emitter {
 		return this._opacity;
 	}
 	public set opacity(value) {
-		this.setAttr("opacity", value, true);
+		this.setProp("opacity", value, true);
 	}
 
 
@@ -1107,7 +1107,7 @@ export class Widget extends Emitter {
 		return this._scaleX;
 	}
 	public set scaleX(value) {
-		this.setAttr("scaleX", value, true);
+		this.setProp("scaleX", value, true);
 	}
 
 
@@ -1115,7 +1115,7 @@ export class Widget extends Emitter {
 		return this._scaleY;
 	}
 	public set scaleY(value) {
-		this.setAttr("scaleY", value, true);
+		this.setProp("scaleY", value, true);
 	}
 
 
@@ -1123,28 +1123,28 @@ export class Widget extends Emitter {
 		return this._rotation;
 	}
 	public set rotation(value) {
-		this.setAttr("rotation", value, true);
+		this.setProp("rotation", value, true);
 	}
 
 	public get focusable() {
 		return this._focusable;
 	}
 	public set focusable(value) {
-		this.setAttr("focusable", value, true);
+		this.setProp("focusable", value, true);
 	}
 
 	public get sensitive() {
 		return this._sensitive;
 	}
 	public set sensitive(value) {
-		this.setAttr("sensitive", value, true);
+		this.setProp("sensitive", value, true);
 	}
 
 	public get pivotX() {
 		return this._pivotX;
 	}
 	public set pivotX(value) {
-		this.setAttr("pivotX", value, true);
+		this.setProp("pivotX", value, true);
 	}
 
 
@@ -1152,14 +1152,14 @@ export class Widget extends Emitter {
 		return this._pivotY;
 	}
 	public set pivotY(value) {
-		this.setAttr("pivotY", value, true);
+		this.setProp("pivotY", value, true);
 	}
 
 	public get tips() {
 		return this._tips;
 	}
 	public set tips(value) {
-		this.setAttr("tips", value, true);
+		this.setProp("tips", value, true);
 	}
 
 
@@ -1167,7 +1167,7 @@ export class Widget extends Emitter {
 		return this._text;
 	}
 	public set text(value) {
-		this.setAttr("text", value, true);
+		this.setProp("text", value, true);
 	}
 
 
@@ -1175,14 +1175,14 @@ export class Widget extends Emitter {
 		return this._name;
 	}
 	public set name(value) {
-		this.setAttr("name", value, true);
+		this.setProp("name", value, true);
 	}
 	
 	public get type() {
 		return this._type;
 	}
 	public set type(value) {
-		this.setAttr("type", value, true);
+		this.setProp("type", value, true);
 	}
 
 	public get id() {
@@ -1193,7 +1193,7 @@ export class Widget extends Emitter {
 		return this._tag;
 	}
 	public set tag(value) {
-		this.setAttr("tag", value, true);
+		this.setProp("tag", value, true);
 	}
 
 	public get userData() {
@@ -1261,21 +1261,21 @@ export class Widget extends Emitter {
 		return this._leftPadding;
 	}
 	public set leftPadding(value) {
-		this.setAttr("leftPadding", value, true);
+		this.setProp("leftPadding", value, true);
 	}
 
 	public get rightPadding() {
 		return this._rightPadding;
 	}
 	public set rightPadding(value) {
-		this.setAttr("rightPadding", value, true);
+		this.setProp("rightPadding", value, true);
 	}
 
 	public get topPadding() {
 		return this._topPadding;
 	}
 	public set topPadding(value) {
-		this.setAttr("topPadding", value, true);
+		this.setProp("topPadding", value, true);
 	}
 
 
@@ -1283,7 +1283,7 @@ export class Widget extends Emitter {
 		return this._bottomPadding;
 	}
 	public set bottomPadding(value) {
-		this.setAttr("bottomPadding", value, true);
+		this.setProp("bottomPadding", value, true);
 	}
 
 
@@ -1291,23 +1291,23 @@ export class Widget extends Emitter {
 		return this._topPadding;
 	}
 	public set padding(value) {
-		this.setAttr("leftPadding", value, true);
-		this.setAttr("topPadding", value, true);
-		this.setAttr("rightPadding", value, true);
-		this.setAttr("bottomPadding", value, true);
+		this.setProp("leftPadding", value, true);
+		this.setProp("topPadding", value, true);
+		this.setProp("rightPadding", value, true);
+		this.setProp("bottomPadding", value, true);
 	}
 
-	protected setAttr(attr:string, newValue:any, notify:boolean) : Widget {
-		var attrName = "_"+attr;
-		var oldValue = this[attrName];
+	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {
+		var propName = "_"+prop;
+		var oldValue = this[propName];
 
 		if(oldValue !== newValue) {
-			this[attrName] = newValue;
+			this[propName] = newValue;
 			this.requestRedraw();
 			
 			if(notify) {
-				var evt = this.eAttrChange;
-				evt.init(Events.ATTR_CHANGE, {attr:attr, oldValue:oldValue, newValue:newValue});
+				var evt = this.ePropChangeEvent;
+				evt.init(Events.PROP_CHANGE, {prop:prop, oldValue:oldValue, newValue:newValue});
 				this.dispatchEvent(evt);
 			}
 		}
@@ -1316,11 +1316,11 @@ export class Widget extends Emitter {
 	}
 
 	public setText(text:string, notify:boolean) : Widget {
-		return this.setAttr("text", text, notify);
+		return this.setProp("text", text, notify);
 	}
 
 	public setValue(value:number, notify:boolean) : Widget {
-		return this.setAttr("value", value, notify);
+		return this.setProp("value", value, notify);
 	}
 
 	public useBehavior(type:string, options:any) : Behavior {
@@ -1390,7 +1390,9 @@ export class Widget extends Emitter {
 	public onwheel : Function;
 	public onkeydown : Function;
 	public onkeyup : Function;
-	protected eAttrChange = Events.AttrChangeEvent.create();
+	
+	protected eChangeEvent = Events.ChangeEvent.create();
+	protected ePropChangeEvent = Events.PropChangeEvent.create();
 	protected _layoutParam : any;
 	protected _childrenLayouter : Layouter;
 

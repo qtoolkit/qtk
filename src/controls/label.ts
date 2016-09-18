@@ -14,7 +14,7 @@ export class Label extends Widget {
 	}
 
 	public set multiLines(value:boolean) {
-		this.setAttr("multiLines", value, true);
+		this.setProp("multiLines", value, true);
 	}
 
 	public get value() {
@@ -79,9 +79,9 @@ export class Label extends Widget {
 		return this;
 	};
 
-	protected setAttr(attr:string, newValue:any, notify:boolean) : Widget {
-		super.setAttr(attr, newValue, notify);
-		if(attr === "w" || attr === "h" || attr === "value" || attr === "text") {
+	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {
+		super.setProp(prop, newValue, notify);
+		if(prop === "w" || prop === "h" || prop === "value" || prop === "text") {
 			this.relayoutText();
 		}
 

@@ -19,13 +19,13 @@ export class RadioButton extends CheckButton {
 			arr.forEach((child:any) => {
 				if(child !== this && child.type === type) {
 					if(child.value) {
-						child.setAttr("value", false, true);
+						child.setProp("value", false, true);
 					}
 				}
 			});
 		}
 
-		this.setAttr("value", true, true);
+		this.setProp("value", true, true);
 	}
 
 	public dispose() {

@@ -103,14 +103,14 @@ export class ScrollView extends Widget {
 	 * 设置水平方向上的偏移，并确保其值的有些性。
 	 */
 	public set validOffsetX(value:number) {
-		this.setAttr("ox", this.toValidOffsetX(value), true);
+		this.setProp("ox", this.toValidOffsetX(value), true);
 	}
 	
 	/**
 	 * 设置垂直方向上的偏移，并确保其值的有些性。
 	 */
 	public set validOffsetY(value:number) {
-		this.setAttr("oy", this.toValidOffsetY(value), true);
+		this.setProp("oy", this.toValidOffsetY(value), true);
 	}
 
 	protected toValidOffsetX(value:number) : number {
@@ -124,7 +124,7 @@ export class ScrollView extends Widget {
 	 * 水平方向上的偏移。
 	 */
 	public set offsetX(value:number) {
-		this.setAttr("ox", value, true);
+		this.setProp("ox", value, true);
 	}
 
 	public get offsetX() {
@@ -135,7 +135,7 @@ export class ScrollView extends Widget {
 	 * 垂直方向上的偏移。
 	 */
 	public set offsetY(value:number) {
-		this.setAttr("oy", value, true);
+		this.setProp("oy", value, true);
 	}
 	public get offsetY() {
 		return this._oy;
@@ -145,7 +145,7 @@ export class ScrollView extends Widget {
 	 * 滚动视图所包含内容的宽度。
 	 */
 	public set contentWidth(value:number) {
-		this.setAttr("cw", value, true);
+		this.setProp("cw", value, true);
 	}
 	public get contentWidth() {
 		return this._cw;
@@ -155,7 +155,7 @@ export class ScrollView extends Widget {
 	 * 滚动视图所包含内容的高度。
 	 */
 	public set contentHeight(value:number) {
-		this.setAttr("ch", value, true);
+		this.setProp("ch", value, true);
 	}
 	public get contentHeight() {
 		return this._ch;
@@ -380,10 +380,10 @@ export class ScrollView extends Widget {
 			me.handleScrolling(left, top);
 		}, options);
 
-		this.on(Events.ATTR_CHANGE, (evt:Events.AttrChangeEvent) => {
-			var attr = evt.attr;
+		this.on(Events.PROP_CHANGE, (evt:Events.PropChangeEvent) => {
+			var prop = evt.prop;
 			var value = evt.newValue;
-			if(attr === "w" || attr === "h" || attr === "cw" || attr === "ch") {
+			if(prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
 				this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
 			}
 		});

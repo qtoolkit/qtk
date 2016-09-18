@@ -18,13 +18,14 @@ export const CLICK = "qtk-click";
 export const DBLCLICK = "qtk-dblclick";
 export const CHANGE = "change"
 export const CHANGING = "changing"
-export const ATTR_CHANGE = "attr-change"
+export const PROP_CHANGE = "prop-change"
 export const DISPOSE = "dispose"
 export const RUN = "run"
 export const QUIT = "quit"
 export const SHOW = "show"
 export const HIDE = "hide"
 export const MOVE = "move";
+export const MOVING = "moving";
 export const OPEN = "open"
 export const INIT = "init"
 export const FOCUS = "focus"
@@ -279,21 +280,21 @@ export class ChangeEvent extends Event {
 	}
 };
 
-export class AttrChangeEvent extends ChangeEvent {
+export class PropChangeEvent extends ChangeEvent {
 	/**
 	 * 属性名。
 	 */
-	public attr : string;
+	public prop : string;
 
 	public init(type:string, detail:any) : any {
 		super.init(type, detail);
-		this.attr = detail.attr;
+		this.prop = detail.prop;
 
 		return this;
 	}
 
-	public static create() : AttrChangeEvent {
-		var e = new AttrChangeEvent();
+	public static create() : PropChangeEvent {
+		var e = new PropChangeEvent();
 
 		return e;
 	}

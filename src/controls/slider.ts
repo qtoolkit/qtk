@@ -16,7 +16,8 @@ export class Slider extends ProgressBar {
 		super(type || Slider.TYPE);
 	}
 	
-	public onDraggerMoved(){
+	public onDraggerMoved(dragEnd:boolean){
+		var oldValue = this.value;
 		if(this.barType === ProgressBarType.V) {
 			var h = this.dragger.h;
 			var y = this.h - this.dragger.y;
@@ -42,6 +43,12 @@ export class Slider extends ProgressBar {
 
 			this._value = x/this.w;
 		}
+		if(dragEnd) {
+			this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:oldValue});
+		}else{
+			this.eChangeEvent.init(Events.CHANGING, {newValue:this.value, oldValue:oldValue});
+		}
+		this.dispatchEvent(this.eChangeEvent);
 		this.requestRedraw();
 	}
 
@@ -71,17 +78,17 @@ export class Slider extends ProgressBar {
 		this.dragger = Button.create();
 		this.addChild(this.dragger);
 		this.dragger.styleType  = "slider-dragger";
-		this.dragger.on(Events.ATTR_CHANGE, evt => {
-			 var attr = evt.attr;
-			if(attr === "x" || attr === "y") {
-				this.onDraggerMoved();
-			}
+		this.dragger.on(Events.MOVING, evt => {
+			this.onDraggerMoved(false);
+		});
+		this.dragger.on(Events.MOVE, evt => {
+			this.onDraggerMoved(true);
 		});
 	}
 
-	protected setAttr(attr:string, newValue:any, notify:boolean) : Widget {
-		super.setAttr(attr, newValue, notify);
-		if(attr === "w" || attr === "h" || attr === "value") {
+	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {
+		super.setProp(prop, newValue, notify);
+		if(prop === "w" || prop === "h" || prop === "value") {
 			this.relayoutChildren();
 		}
 

@@ -77,11 +77,14 @@ export class MovableOptions {
  * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
  */
 export class Movable extends Behavior {
+	protected moveEvent = {type:Events.MOVE};
+	protected movingEvent = {type:Events.MOVING};
+
 	protected init(options:any) {
 		this.options = new MovableOptions(options);
 	}
 
-	protected moveWidget(x:number, y:number, animate) {
+	protected moveWidget(x:number, y:number, animate:boolean, end:boolean) {
 		var options = this.options;
 
 		var moveParent = options.moveParent;
@@ -103,11 +106,16 @@ export class Movable extends Behavior {
 		}
 
 		widget.moveTo(x, y, animate ? 500 : 0);
+		if(end) {
+			widget.dispatchEvent(this.moveEvent);
+		}else{
+			widget.dispatchEvent(this.movingEvent);
+		}
 	}
 
 	protected onCancelled() {
 		this.widget.requestRedraw();
-		this.moveWidget(this.x, this.y, true);
+		this.moveWidget(this.x, this.y, true, true);
 		document.body.style.cursor = "default"; 
 	}
 
@@ -129,15 +137,20 @@ export class Movable extends Behavior {
 	}
 	
 	protected onPointerUp(evt:Events.PointerEvent){
-		this.dragging = false;
 		document.body.style.cursor = "default"; 
+		if(this.dragging) {
+			this.dragging = false;
+			var dx = evt.x - evt.pointerDownX;
+			var dy = evt.y - evt.pointerDownY;
+			this.moveWidget(this.x+dx, this.y+dy, false, true);
+		}
 	}
 
 	protected onPointerMove(evt:Events.PointerEvent){
 		if(this.dragging) {
 			var dx = evt.x - evt.pointerDownX;
 			var dy = evt.y - evt.pointerDownY;
-			this.moveWidget(this.x+dx, this.y+dy, false);
+			this.moveWidget(this.x+dx, this.y+dy, false, false);
 		}
 	}
 
