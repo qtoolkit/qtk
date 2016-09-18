@@ -1,20 +1,38 @@
 
-function createFileMenu(menu) {
-	menu.addItem("Open");
-	menu.addItem("Close");
+function onClick(evt) {
+	console.log("clicked:" + this.text);
 }
 
-function createEditMenu(menu) {
-	menu.addItem("Copy");
-	menu.addItem("Paste");
+function onInitFileMenu(menu) {
+	menu.addItem("New", onClick, "/demos/assets/icons/@density/new.png");
+	menu.addItem("Open", onClick, "/demos/assets/icons/@density/open.png");
+	menu.addItem("Save", onClick, "/demos/assets/icons/@density/save.png");
+	menu.addItem("Save All", onClick);
+	menu.addFolderItem("More", onInitMoreMenu);
+	menu.addFolderItem("Options", onInitExtMenu);
 }
 
-function createViewMenu(menu) {
-	menu.addItem("Zoom In");
-	menu.addItem("Zoom Out");
+function onInitMoreMenu(menu) {
+	menu.addItem("Copy", onClick);
+	menu.addItem("Paste", onClick);
+}
+
+function onInitExtMenu(menu) {
+	menu.addItem("Copy", onClick);
+	menu.addItem("Paste", onClick);
+}
+
+function onInitEditMenu(menu) {
+	menu.addItem("Copy", onClick);
+	menu.addItem("Paste", onClick);
+}
+
+function onInitViewMenu(menu) {
+	menu.addItem("Zoom In", onClick);
+	menu.addItem("Zoom Out", onClick);
 	menu.addSpace();
-	menu.addItem("Zoom Out");
-	menu.addCheckableItem("Zoom Out", true, "Ctrl+T");
+	menu.addCheckableItem("Show RefLine", onClick, true, "Ctrl+T");
+	menu.addCheckableItem("Show Grid", onClick, true, "Ctrl+T");
 }
 
 function onReady(app) {
@@ -24,14 +42,17 @@ function onReady(app) {
 
 	win.childrenLayouter = qtk.DockLayouter.create();
 
-	var menuBar = qtk.MenuBar.create().set({h:30});
+	var menuBar = qtk.MenuBar.create().set({h:30, itemWidth:40});
 	menuBar.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP});
 	win.addChild(menuBar);
 	
-	menuBar.addImageItem("/demos/assets/icons/x2/apple.png", null, 40, 1);	
-	menuBar.addTextItem("File", 40, 1, createFileMenu);	
-	menuBar.addTextItem("Edit", 40, 2, createEditMenu);	
-	menuBar.addTextItem("View", 40, 3, createViewMenu);
+	menuBar.addLogo("/demos/assets/icons/x2/apple.png", null);	
+	menuBar.addItem("File", onInitFileMenu);	
+	menuBar.addItem("Edit", onInitEditMenu);
+	menuBar.addItem("View", onInitViewMenu);
+	menuBar.addSpace();
+	menuBar.addTextButton("About", onClick);
+	menuBar.addTextButton("Login", onClick, 100, -1);
 
 	win.open();
 }

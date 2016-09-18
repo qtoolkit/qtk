@@ -1,5 +1,6 @@
 
 import {Menu} from "./menu";
+import {Point} from "../point";
 import {Style} from "../style";
 import Events = require("../events");
 import {Widget, WidgetState} from "./widget";
@@ -37,13 +38,14 @@ export class MenuBar extends Widget {
 
 	public onItemEnter(child:MenuBarItem){
 		var openedMenu = this._openedMenu;
-		if(child.menuCreator && openedMenu && openedMenu.trigger !== child) {
-			openedMenu.clearContent();
-			child.menuCreator(openedMenu);
-			openedMenu.set({trigger:child});
-			openedMenu.moveResizeToContent();
-
-			console.log("onItemEnter:" + child.text);
+		if(openedMenu) {
+			if(openedMenu.trigger !== child) {
+				if(child.onInitSubMenu) {
+					child.reopenMenu(openedMenu);
+				}else{
+					openedMenu.close();
+				}
+			}
 		}
 	}
 
@@ -55,20 +57,51 @@ export class MenuBar extends Widget {
 		return super.addChild(child, fastMode);
 	}
 
-	public addImageItem(normalIconURL:string, overActiveIconURL:string, width:number, position:number) : Widget {
+	public addSpace(width?:number, position?:number) : Widget {
 		var item = MenuBarItem.create();
 		item.styleType = "widget.transparent";
-		item.setIcons(normalIconURL, overActiveIconURL);
 		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;
 	}
 
-	public addTextItem(text:string, width:number, position:number, menuCreator:Function) : Widget {
+	public addLogo(iconURL) : Widget {
 		var item = MenuBarItem.create();
-		item.set({text:text, menuCreator:menuCreator});
+		item.styleType = "widget.transparent";
+		item.setIcons(iconURL, iconURL);
+		item.layoutParam = LinearLayouterParam.create({w:this.h, h:"100%", position:0.1});
+		this.addChild(item);
+
+		return item;
+	}
+
+	public addItem(text:string, onInitSubMenu:Function, width?:number, position?:number) : Widget {
+		var item = MenuBarItem.create();
+		item.set({text:text, onInitSubMenu:onInitSubMenu});
 		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
+		this.addChild(item);
+
+		return item;
+	}
+
+	public addTextButton(text:string, onClick:Function, width?:number, position?:number) : Widget {
+		var item = MenuBarItem.create();
+		item.set({text:text});
+		item.on(Events.CLICK, onClick);
+		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
+		this.addChild(item);
+
+		return item;
+	}
+	
+	public addImageButton(normalIconURL:string, overIconURL:string, activeIconURL:string, 
+				disableIconURL:string, checkedIconURL:string, onClick:Function, position?:number) : Widget {
+		var item = MenuBarItem.create();
+		item.on(Events.CLICK, onClick);
+		item.styleType = "widget.transparent";
+		item.setIcons(normalIconURL, overIconURL, activeIconURL, disableIconURL, checkedIconURL);
+		item.layoutParam = LinearLayouterParam.create({w:this.h, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;
@@ -76,7 +109,7 @@ export class MenuBar extends Widget {
 
 	public reset(type:string) : Widget {
 		super.reset(type);
-		this.itemWidth = 60;
+		this.itemWidth = 40;
 		this.childrenLayouter = LinearLayouter.createH({spacing:1}); 
 		return this;
 	}
@@ -94,32 +127,42 @@ export class MenuBar extends Widget {
 };
 
 export class MenuBarItem extends Widget {
-	public menuCreator : Function;
+	public onInitSubMenu : Function;
 	protected _normalIcon : ImageTile;
-	protected _overActiveIcon : ImageTile;
+	protected _overIcon : ImageTile;
+	protected _activeIcon : ImageTile;
+	protected _disableIcon : ImageTile;
+	protected _checkedIcon : ImageTile;
 
-	public setIcons(normalIconURL:string, overActiveIconURL:string) {
-		if(normalIconURL) {
-			this._normalIcon = ImageTile.create(normalIconURL, evt => {
-				this.requestRedraw();
-			});
-		}else{
-			this._normalIcon = null;
-		}
+	public setIcons(normalIconURL:string, overIconURL?:string, activeIconURL?:string,
+					disableIconURL?:string, checkedIconURL?:string) {
+		var redraw = this.requestRedraw.bind(this);
 
-		if(overActiveIconURL) {
-			this._overActiveIcon = ImageTile.create(overActiveIconURL, evt => {
-				this.requestRedraw();
-			});
-		}else{
-			this._overActiveIcon = null;
-		}
+		this._normalIcon = normalIconURL ? ImageTile.create(normalIconURL, redraw) : null;
+		this._overIcon = overIconURL ? ImageTile.create(overIconURL, redraw) : null;
+		this._activeIcon = activeIconURL ? ImageTile.create(activeIconURL, redraw) : null;
+		this._disableIcon = disableIconURL ? ImageTile.create(disableIconURL, redraw) : null;
+		this._checkedIcon = checkedIconURL ? ImageTile.create(checkedIconURL, redraw) : null;
 	}
 	
 	protected drawImage(ctx:any, style:Style) : Widget {
-		var icon = (this.state === WidgetState.NORMAL || !this._overActiveIcon) ?
-			this._normalIcon : this._overActiveIcon;
-
+		var icon = null;
+		if(!this._enable) {
+			icon = this._disableIcon;
+		}else{
+			if(this._value) {
+				icon = this._checkedIcon;
+			}else{
+				if(this.state === WidgetState.OVER) {
+					icon = this._overIcon;
+				}else if(this.state === WidgetState.ACTIVE) {
+					icon = this._activeIcon;
+				}
+			}
+		}
+		if(!icon) {
+			icon = this._normalIcon;
+		}
 		if(icon) {
 			icon.draw(ctx, ImageDrawType.ICON, 0, 0, this.w, this.h);
 		}
@@ -127,20 +170,36 @@ export class MenuBarItem extends Widget {
 		return this;
 	}
 
+	public reopenMenu(menu:Menu) {
+		menu.clearContent();
+		this.onInitSubMenu(menu);
+		menu.set({trigger:this});
+	
+		var p = this.toViewPoint(Point.point.init(0, this.h));
+		menu.moveTo(p.x-menu.leftPadding, p.y);
+		menu.resizeToContent();
+	}
+
+	protected openMenu() {
+		var menuBar = <MenuBar>this.parent;
+		var menu = Menu.create();
+		menu.set({trigger:this, owner:menuBar});
+
+		this.onInitSubMenu(menu);
+		if(menu.hasItems()) {
+			var p = this.toViewPoint(Point.point.init(0, this.h));
+			menu.moveTo(p.x-menu.leftPadding, p.y);
+			menuBar.openedMenu = menu;
+			menu.open();
+		}else{
+			menu.dispose();
+		}
+	}
+
 	protected dispatchClick(evt:any) {
 		super.dispatchClick(evt);
-		if(this.menuCreator) {
-			var menuBar = <MenuBar>this.parent;
-			var menu = Menu.create();
-			menu.set({trigger:this, owner:menuBar});
-
-			this.menuCreator(menu);
-			if(menu.hasItems()) {
-				menuBar.openedMenu = menu;
-				menu.open();
-			}else{
-				menu.dispose();
-			}
+		if(this.onInitSubMenu) {
+			this.openMenu();
 		}
 	}
 
@@ -159,7 +218,6 @@ export class MenuBarItem extends Widget {
 		return <MenuBarItem>MenuBarItem.recyclbale.create().reset(MenuBarItem.TYPE);
 	}
 };
-
 
 WidgetFactory.register(MenuBar.TYPE, MenuBar.create);
 WidgetFactory.register(MenuBarItem.TYPE, MenuBarItem.create);

@@ -345,7 +345,13 @@
 	"menu-item.checkable": {
 		"extends": "menu-item",
 		"common" : {
-			"foreGroundImage" : "images/@density/combo-box-item-current.png"
+			"foreGroundImage" : "images/@density/menu-item-checked.png"
+		}
+	},
+	"menu-item.folder": {
+		"extends": "menu-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/menu-item-more.png"
 		}
 	},
 	"window-normal": {

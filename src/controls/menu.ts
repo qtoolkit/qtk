@@ -20,6 +20,18 @@ export class Menu extends Dialog {
 	protected _openedMenu : Menu;
 	protected _listView : ListView;
 
+	public set openedMenu(value:Menu) {
+		this._openedMenu = value;
+		if(value) {
+			value.on(Events.CLOSE, evt => {
+				this._openedMenu = null;
+			});
+		}
+	}
+	public get openedMenu() : Menu {
+		return this._openedMenu;
+	}
+
 	public hasItems() : boolean {
 		return this._listView.children.length > 0;
 	}
@@ -31,26 +43,46 @@ export class Menu extends Dialog {
 		return this._listView.itemHeight;
 	}
 
+	/**
+	 * owner代表上级菜单或菜单条。
+	 */
 	public set owner(owner:Widget) {
 		this._owner = owner;
 	}
-
 	public get owner() : Widget {
 		return this._owner;
 	}
 
+	/**
+	 * 触发该菜单的MenuBarItem或MenuItem。
+	 */
 	public set trigger(trigger:Widget) {
 		this._trigger = trigger;
 		this.app = trigger.app;
-		
 	}
 
 	public get trigger() : Widget {
 		return this._trigger;
 	}
+	
+	public onItemEnter(child:MenuItem){
+		var openedMenu = this._openedMenu;
+		if(child.onInitSubMenu) {
+			if(!openedMenu) {
+				child.openSubMenu();
+			}else if(openedMenu.trigger !== child) {
+				child.reopenSubMenu(openedMenu);
+			}
+		}else if(openedMenu) {
+			openedMenu.close();
+		}
+	}
 
 	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		var owner:any = this.owner;
+		/*
+		 * 如果事件在当前菜单外，把事件转发给owner处理。
+		 */
 		if(!evt.pointerDown && owner) {
 			var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
 			if(!hitTestResult) {
@@ -60,7 +92,11 @@ export class Menu extends Dialog {
 				var y = this.y;
 				evt.x += x;
 				evt.y += y;
+				evt.x -= owner.x;
+				evt.y -= owner.y;
 				owner.dispatchPointerMove(evt, ctx);
+				evt.x += owner.x;
+				evt.y += owner.y;
 				evt.x -= x;
 				evt.y -= y;
 				ctx.restore();
@@ -80,13 +116,7 @@ export class Menu extends Dialog {
 		return this;
 	}
 
-	public moveResizeToContent() : Widget {
-		if(this._trigger) {
-			var trigger = this._trigger;
-			var p = trigger.toViewPoint(Point.point.init(0, trigger.h));
-			this.moveTo(p.x-this.leftPadding, p.y);
-		}
-
+	public resizeToContent() : Widget {
 		var w = this.w || 200;
 		var listView = this._listView;
 		var h = listView.desireHeight + this.topPadding + this.bottomPadding;
@@ -98,7 +128,7 @@ export class Menu extends Dialog {
 	}
 
 	public open() : Widget {
-		this.moveResizeToContent();
+		this.resizeToContent();
 		super.open();
 		this.grab();
 
@@ -107,25 +137,42 @@ export class Menu extends Dialog {
 	
 	protected dispatchClick(evt:any) {
 		super.dispatchClick(evt);
-		this.close();
+		if(!this.hitTestResult) {
+			this.close();
+		}
 	}
 
 	public addSpace() : Widget {
-		var item = this.addItem("-", null);
+		var item = this.addItemExt("-", null);
 		item.styleType = item.type + ".space";
 
 		return item;
 	}
 	
-	public addCheckableItem(text:string, value:boolean, shortcut?:string) : Widget {
-		var item = this.addItem(text, null, shortcut, null);
+	public addCheckableItem(text:string, onClick:Function, value?:boolean, shortcut?:string) : Widget {
+		var item = this.addItemExt(text, null, shortcut, null);
 		item.set({checkable:true, value:value});
 		item.styleType = item.type + ".checkable";
+		item.on(Events.CLICK, onClick);
+
+		return item;
+	}
+	
+	public addItem(text:string, onClick:Function, iconURL?:string, shortcut?:string) : Widget {
+		var item = this.addItemExt(text, iconURL, shortcut, null);
+		item.on(Events.CLICK, onClick);
+
+		return item;
+	}
+	
+	public addFolderItem(text:string, onInitSubMenu:Function) : Widget {
+		var item = this.addItemExt(text, null, null, onInitSubMenu);
+		item.styleType = item.type + ".folder";
 
 		return item;
 	}
 
-	public addItem(text:string, iconURL:string, shortcut?:string, menuCreator?:Function) : Widget {
+	public addItemExt(text:string, iconURL:string, shortcut?:string, onInitSubMenu?:Function) : Widget {
 		var listView = this._listView;
 		if(!listView.app) {
 			listView.app = this.app;
@@ -134,9 +181,13 @@ export class Menu extends Dialog {
 		var item = MenuItem.create();
 		var h = text === "-" ? this.itemHeight >> 1 : this.itemHeight;
 
-		item.set({iconURL:iconURL, text:text, shortcut:shortcut, menuCreator:menuCreator});
+		item.set({iconURL:iconURL, text:text, shortcut:shortcut, onInitSubMenu:onInitSubMenu});
 		item.layoutParam = ListLayouterParam.create({h:h});
 		listView.addChild(item);
+
+		item.on(Events.POINTER_ENTER, (evt:PointerEvent) => {
+			this.onItemEnter(<MenuItem>item);	
+		});
 
 		return item;
 	}
@@ -190,7 +241,7 @@ export class MenuItem extends Widget {
 	protected _shortCutStyle : Style;	
 	public shortcut : string;
 	public checkable : boolean;
-	public menuCreator : Function;
+	public onInitSubMenu : Function;
 
 	public set iconURL(value:string) {
 		if(value) {
@@ -203,6 +254,13 @@ export class MenuItem extends Widget {
 		this._iconURL = value;
 	}
 
+	protected dispatchClick(evt:any) {
+		super.dispatchClick(evt);
+		if(!this.onInitSubMenu) {
+			this.closeMenu();
+		}
+	}
+
 	protected drawImage(ctx:any, style:Style) : Widget {
 		var icon = this._icon;
 		var y = this.topPadding;
@@ -210,8 +268,11 @@ export class MenuItem extends Widget {
 		var h = this.h - this.topPadding - this.bottomPadding;
 		var w = h;
 
-		if(this.checkable && this.value) {
+		if(this.checkable && this.value || this.onInitSubMenu) {
 			icon = style.foreGroundImage;
+			if(this.onInitSubMenu) {
+				x = this.w - this.rightPadding - w;
+			}
 		}
 
 		if(icon) {
@@ -249,6 +310,51 @@ export class MenuItem extends Widget {
 
 		return this;
 	}
+	
+	public reopenSubMenu(menu:Menu) {
+		var ownerMenu = <Menu>this.win;
+
+		menu.clearContent();
+		this.onInitSubMenu(menu);
+		menu.set({trigger:this});
+
+		var p = this.toViewPoint(Point.point.init(this.w, 0));
+		var x = p.x-menu.leftPadding;
+		var y = p.y-menu.topPadding;
+		menu.moveTo(x, y);
+		menu.resizeToContent();
+	}
+
+	public openSubMenu() {
+		var ownerMenu = <Menu>this.win;
+		var menu = Menu.create();
+		menu.set({trigger:this, owner:ownerMenu});
+
+		this.onInitSubMenu(menu);
+		if(menu.hasItems()) {
+			var p = this.toViewPoint(Point.point.init(this.w, 0));
+			var x = p.x-menu.leftPadding;
+			var y = p.y-menu.topPadding;
+			menu.moveTo(x, y);
+			ownerMenu.openedMenu = menu;
+			menu.open();
+		}else{
+			menu.dispose();
+		}
+	}
+	
+	public closeMenu() {
+		var menu : Menu = <Menu>this.win;
+		while(menu) {
+			var owner = menu.owner;
+			menu.close();
+			if(owner.type === Menu.TYPE) {
+				menu = <Menu>owner;	
+			}else{
+				break;
+			}
+		}
+	}
 
 	constructor() {
 		super(MenuItem.TYPE);
@@ -260,7 +366,7 @@ export class MenuItem extends Widget {
 		this._iconURL = null;
 		this.checkable = false;
 		this.shortcut = null;
-		this.menuCreator = null;
+		this.onInitSubMenu = null;
 		this.leftPadding = 2;
 		this.rightPadding = 4;
 
@@ -273,7 +379,7 @@ export class MenuItem extends Widget {
 		this._iconURL = null;
 		this.checkable = false;
 		this.shortcut = null;
-		this.menuCreator = null;
+		this.onInitSubMenu = null;
 
 		MenuItem.recyclbale.recycle(this);
 	}

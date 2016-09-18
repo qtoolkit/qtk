@@ -31,7 +31,7 @@ describe('ThemeManager', function() {
 	};
 
 	var themeManager = new qtk.ThemeManager();
-	themeManager.init(JSON.parse(JSON.stringify(json)));
+	themeManager.load(JSON.parse(JSON.stringify(json)));
     
     it('test get', (done) => {
 		var style = themeManager.get("dialog", "normal");
