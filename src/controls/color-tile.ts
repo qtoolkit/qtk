@@ -92,13 +92,13 @@ export class ColorTile extends Color {
 
 	public dispose() {
 		super.dispose();
-		ColorTile.recyclbale.recycle(this);
+		ColorTile.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "color-tile";
-	private static recyclbale = new RecyclableCreator<ColorTile>(function() {return new ColorTile()});
-	public static create() : Widget {
-		return ColorTile.recyclbale.create().reset(ColorTile.TYPE);
+	private static recycleBin = new RecyclableCreator<ColorTile>(function() {return new ColorTile()});
+	public static create(options?:any) : ColorTile {
+		return <ColorTile>ColorTile.recycleBin.create().reset(ColorTile.TYPE).set(options);
 	}
 };
 
@@ -219,13 +219,13 @@ export class ColorLine extends Color {
 
 	public dispose() {
 		super.dispose();
-		ColorLine.recyclbale.recycle(this);
+		ColorLine.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "color-tile";
-	private static recyclbale = new RecyclableCreator<ColorLine>(function() {return new ColorLine()});
-	public static create() : Widget {
-		return ColorLine.recyclbale.create().reset(ColorLine.TYPE);
+	private static recycleBin = new RecyclableCreator<ColorLine>(function() {return new ColorLine()});
+	public static create(options?:any) : ColorLine {
+		return <ColorLine>ColorLine.recycleBin.create().reset(ColorLine.TYPE).set(options);
 	}
 };
 

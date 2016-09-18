@@ -12,13 +12,13 @@ export class WindowNormal extends Window {
 
 	public dispose() {
 		super.dispose();
-		WindowNormal.recyclbale.recycle(this);
+		WindowNormal.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "window-normal";
-	private static recyclbale = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
-	public static create() : Widget {
-		return WindowNormal.recyclbale.create().reset(WindowNormal.TYPE);
+	private static recycleBin = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
+	public static create(options?:any) : Window {
+		return <WindowNormal>WindowNormal.recycleBin.create().reset(WindowNormal.TYPE).set(options);
 	}
 };
 

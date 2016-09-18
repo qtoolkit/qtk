@@ -155,8 +155,8 @@ export class TabControl extends Widget {
 
 	public  static TYPE = "tab-control";
 	private static r = new RecyclableCreator<TabControl>(function() {return new TabControl()});
-	public static create() : TabControl {
-		return <TabControl>TabControl.r.create().reset(TabControl.TYPE);
+	public static create(options?:any) : TabControl {
+		return <TabControl>TabControl.r.create().reset(TabControl.TYPE).set(options);
 	}
 };
 

@@ -135,11 +135,12 @@ export class Widget extends Emitter {
 		});
 	}
 
-	public set(attrs:any) : Widget {
-		for(var key in attrs) {
-			this[key] = attrs[key];
+	public set(attrs?:any) : Widget {
+		if(attrs) {
+			for(var key in attrs) {
+				this[key] = attrs[key];
+			}
 		}
-
 		return this;
 	}
 

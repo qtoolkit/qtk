@@ -94,13 +94,13 @@ export class Switch extends Widget {
 
 	public dispose() {
 		super.dispose();
-		Switch.recyclbale.recycle(this);
+		Switch.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "switch";
-	private static recyclbale = new RecyclableCreator<Switch>(function() {return new Switch()});
-	public static create() : Widget {
-		return Switch.recyclbale.create().reset(Switch.TYPE);
+	private static recycleBin = new RecyclableCreator<Switch>(function() {return new Switch()});
+	public static create(options?:any) : Switch{
+		return <Switch>Switch.recycleBin.create().reset(Switch.TYPE).set(options);
 	}
 };
 

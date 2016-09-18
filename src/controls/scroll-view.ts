@@ -645,13 +645,13 @@ export class ScrollView extends Widget {
 
 	public dispose() {
 		super.dispose();
-		ScrollView.recyclbale.recycle(this);
+		ScrollView.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "scroll-view";
-	private static recyclbale = new RecyclableCreator<ScrollView>(function() {return new ScrollView()});
-	public static create() : Widget {
-		return ScrollView.recyclbale.create().reset(ScrollView.TYPE);
+	private static recycleBin = new RecyclableCreator<ScrollView>(function() {return new ScrollView()});
+	public static create(options?:any) : ScrollView{
+		return <ScrollView>ScrollView.recycleBin.create().reset(ScrollView.TYPE).set(options);
 	}
 };
 

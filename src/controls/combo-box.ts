@@ -96,8 +96,8 @@ export class ComboBoxItem extends ListItem {
 
 	public static TYPE = "combo-box-item";
 	private static r = new RecyclableCreator<ComboBoxItem>(function() {return new ComboBoxItem()});
-	public static create() : Widget {
-		return ComboBoxItem.r.create().reset(ComboBoxItem.TYPE);
+	public static create(options?:any) : ComboBoxItem {
+		return <ComboBoxItem>ComboBoxItem.r.create().reset(ComboBoxItem.TYPE).set(options);
 	}
 };
 
@@ -270,13 +270,13 @@ export class ComboBox extends Widget {
 
 	public dispose() {
 		super.dispose();
-		ComboBox.recyclbale.recycle(this);
+		ComboBox.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "combo-box";
-	private static recyclbale = new RecyclableCreator<ComboBox>(function() {return new ComboBox()});
-	public static create() : Widget {
-		return ComboBox.recyclbale.create().reset(ComboBox.TYPE);
+	private static recycleBin = new RecyclableCreator<ComboBox>(function() {return new ComboBox()});
+	public static create(options?:any) : ComboBox {
+		return <ComboBox>ComboBox.recycleBin.create().reset(ComboBox.TYPE).set(options);
 	}
 };
 

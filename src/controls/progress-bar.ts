@@ -87,13 +87,13 @@ export class ProgressBar extends Widget {
 	
 	public dispose() {
 		super.dispose();
-		ProgressBar.recyclbale.recycle(this);
+		ProgressBar.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "progress-bar";
-	private static recyclbale = new RecyclableCreator<ProgressBar>(function() {return new ProgressBar()});
-	public static create() : Widget {
-		return ProgressBar.recyclbale.create().reset(ProgressBar.TYPE);
+	private static recycleBin = new RecyclableCreator<ProgressBar>(function() {return new ProgressBar()});
+	public static create(options?:any) : ProgressBar{
+		return <ProgressBar>ProgressBar.recycleBin.create().reset(ProgressBar.TYPE).set(options);
 	}
 };
 

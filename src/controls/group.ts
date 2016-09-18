@@ -30,13 +30,13 @@ export class Group extends Widget {
 	
 	public dispose() {
 		super.dispose();
-		Group.recyclbale.recycle(this);
+		Group.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "group";
-	private static recyclbale = new RecyclableCreator<Group>(function() {return new Group()});
-	public static create() : Widget {
-		return Group.recyclbale.create().reset(Group.TYPE);
+	private static recycleBin = new RecyclableCreator<Group>(function() {return new Group()});
+	public static create(options?:any) : Group {
+		return <Group>Group.recycleBin.create().reset(Group.TYPE).set(options);
 	}
 };
 

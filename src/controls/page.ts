@@ -10,13 +10,13 @@ export class Page extends Widget {
 
 	public dispose() {
 		super.dispose();
-		Page.recyclbale.recycle(this);
+		Page.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "page";
-	private static recyclbale = new RecyclableCreator<Page>(function() {return new Page()});
-	public static create() : Widget {
-		return Page.recyclbale.create().reset(Page.TYPE);
+	private static recycleBin = new RecyclableCreator<Page>(function() {return new Page()});
+	public static create(options?:any) : Page {
+		return <Page>Page.recycleBin.create().reset(Page.TYPE).set(options);
 	}
 };
 

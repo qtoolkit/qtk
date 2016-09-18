@@ -66,13 +66,13 @@ export class Image extends Widget {
 	
 	public dispose() {
 		super.dispose();
-		Image.recyclbale.recycle(this);
+		Image.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "image";
-	private static recyclbale = new RecyclableCreator<Image>(function() {return new Image()});
-	public static create() : Widget {
-		return Image.recyclbale.create().reset(Image.TYPE);
+	private static recycleBin = new RecyclableCreator<Image>(function() {return new Image()});
+	public static create(options?:any) : Image{
+		return <Image>Image.recycleBin.create().reset(Image.TYPE).set(options);
 	}
 };
 

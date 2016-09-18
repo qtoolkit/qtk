@@ -208,7 +208,7 @@ export class TreeItem extends Widget {
 		this._data = null;
 		this.parentItem = null;
 		this._childrenItems = null;
-		TreeItem.recyclbale.recycle(this);
+		TreeItem.recycleBin.recycle(this);
 	}
 	
 	public reset(type:string) : Widget {
@@ -223,9 +223,9 @@ export class TreeItem extends Widget {
 	}
 
 	public static TYPE = "tree-item";
-	private static recyclbale = new RecyclableCreator<TreeItem>(function() {return new TreeItem()});
-	public static create() : Widget {
-		return TreeItem.recyclbale.create().reset(TreeItem.TYPE);
+	private static recycleBin = new RecyclableCreator<TreeItem>(function() {return new TreeItem()});
+	public static create(options?:any) : TreeItem{
+		return <TreeItem>TreeItem.recycleBin.create().reset(TreeItem.TYPE).set(options);
 	}
 };
 

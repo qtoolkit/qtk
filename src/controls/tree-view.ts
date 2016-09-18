@@ -152,13 +152,13 @@ export class TreeView extends ListView {
 	public dispose() {
 		super.dispose();
 		this._rootData = null;
-		TreeView.recyclbaleTreeView.recycle(this);
+		TreeView.recycleBinTreeView.recycle(this);
 	}
 
 	public static TYPE = "tree-view";
-	private static recyclbaleTreeView = new RecyclableCreator<TreeView>(function() {return new TreeView()});
-	public static create() : Widget {
-		return TreeView.recyclbaleTreeView.create().reset(TreeView.TYPE);
+	private static recycleBinTreeView = new RecyclableCreator<TreeView>(function() {return new TreeView()});
+	public static create(options?:any) : TreeView {
+		return <TreeView>TreeView.recycleBinTreeView.create().reset(TreeView.TYPE).set(options);
 	}
 };
 

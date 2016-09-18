@@ -133,13 +133,13 @@ export class GridView extends ScrollView {
 
 	public dispose() {
 		super.dispose();
-		GridView.recyclbaleGridView.recycle(this);
+		GridView.recycleBinGridView.recycle(this);
 	}
 
 	public static TYPE = "grid-view";
-	private static recyclbaleGridView = new RecyclableCreator<GridView>(function() {return new GridView()});
-	public static create() : Widget {
-		return GridView.recyclbaleGridView.create().reset(GridView.TYPE);
+	private static recycleBinGridView = new RecyclableCreator<GridView>(function() {return new GridView()});
+	public static create(options?:any) : GridView {
+		return <GridView>GridView.recycleBinGridView.create().reset(GridView.TYPE).set(options);
 	}
 };
 

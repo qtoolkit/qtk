@@ -35,8 +35,8 @@ export class RadioButton extends CheckButton {
 
 	public static TYPE = "radio-button";
 	private static r = new RecyclableCreator<RadioButton>(function() {return new RadioButton()});
-	public static create() : Widget {
-		return RadioButton.r.create().reset(RadioButton.TYPE);
+	public static create(options?:any) : RadioButton {
+		return <RadioButton>RadioButton.r.create().reset(RadioButton.TYPE).set(options);
 	}
 };
 

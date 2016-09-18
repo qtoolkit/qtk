@@ -13,13 +13,13 @@ export class Dialog extends Window {
 
 	public dispose() {
 		super.dispose();
-		Dialog.recyclbale.recycle(this);
+		Dialog.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "dialog";
-	private static recyclbale = new RecyclableCreator<Dialog>(function() {return new Dialog()});
-	public static create() : Widget {
-		return Dialog.recyclbale.create().reset(Dialog.TYPE);
+	private static recycleBin = new RecyclableCreator<Dialog>(function() {return new Dialog()});
+	public static create(options?:any) : Dialog {
+		return <Dialog>Dialog.recycleBin.create().reset(Dialog.TYPE).set(options);
 	}
 };
 

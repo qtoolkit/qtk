@@ -106,8 +106,8 @@ export class TabButtonGroup extends Widget {
 
 	public static TYPE = "tab-button-group";
 	private static r = new RecyclableCreator<TabButtonGroup>(function() {return new TabButtonGroup()});
-	public static create() : TabButtonGroup {
-		return <TabButtonGroup>TabButtonGroup.r.create().reset(TabButtonGroup.TYPE);
+	public static create(options?:any) : TabButtonGroup {
+		return <TabButtonGroup>TabButtonGroup.r.create().reset(TabButtonGroup.TYPE).set(options);
 	}
 };
 

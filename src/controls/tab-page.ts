@@ -26,8 +26,8 @@ export class TabPage extends Page{
 
 	public  static TYPE = "page";
 	private static r = new RecyclableCreator<TabPage>(function() {return new TabPage()});
-	public static create() : TabPage {
-		return <TabPage>TabPage.r.create().reset(TabPage.TYPE);
+	public static create(options?:any) : TabPage {
+		return <TabPage>TabPage.r.create().reset(TabPage.TYPE).set(options);
 	}
 };
 

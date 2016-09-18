@@ -67,13 +67,13 @@ export class Pages extends Widget {
 
 	public dispose() {
 		super.dispose();
-		Pages.recyclbale.recycle(this);
+		Pages.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "pages";
-	private static recyclbale = new RecyclableCreator<Pages>(function() {return new Pages()});
+	private static recycleBin = new RecyclableCreator<Pages>(function() {return new Pages()});
 	public static create() : Pages {
-		return <Pages>Pages.recyclbale.create().reset(Pages.TYPE);
+		return <Pages>Pages.recycleBin.create().reset(Pages.TYPE);
 	}
 };
 

@@ -89,13 +89,13 @@ export class ListView extends ScrollView {
 
 	public dispose() {
 		super.dispose();
-		ListView.recyclbaleListView.recycle(this);
+		ListView.recycleBinListView.recycle(this);
 	}
 
 	public static TYPE = "list-view";
-	private static recyclbaleListView = new RecyclableCreator<ListView>(function() {return new ListView()});
-	public static create() : Widget {
-		return ListView.recyclbaleListView.create().reset(ListView.TYPE);
+	private static recycleBinListView = new RecyclableCreator<ListView>(function() {return new ListView()});
+	public static create(options?:any) : ListView{
+		return <ListView>ListView.recycleBinListView.create().reset(ListView.TYPE).set(options);
 	}
 };
 

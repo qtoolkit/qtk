@@ -34,13 +34,13 @@ export class ListItem extends Widget {
 
 	public dispose() {
 		super.dispose();
-		ListItem.recyclbale.recycle(this);
+		ListItem.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "list-item";
-	private static recyclbale = new RecyclableCreator<ListItem>(function() {return new ListItem()});
-	public static create() : Widget {
-		return ListItem.recyclbale.create().reset(ListItem.TYPE);
+	private static recycleBin = new RecyclableCreator<ListItem>(function() {return new ListItem()});
+	public static create(options?:any) : ListItem {
+		return <ListItem>ListItem.recycleBin.create().reset(ListItem.TYPE).set(options);
 	}
 };
 

@@ -87,7 +87,7 @@ export class Label extends Widget {
 
 	public dispose() {
 		super.dispose();
-		Label.recyclbale.recycle(this);
+		Label.recycleBin.recycle(this);
 	}
 
 	protected onInit() {
@@ -103,9 +103,9 @@ export class Label extends Widget {
 	}
 
 	public static TYPE = "label";
-	private static recyclbale = new RecyclableCreator<Label>(function() {return new Label()});
-	public static create() : Widget {
-		return Label.recyclbale.create().reset(Label.TYPE);
+	private static recycleBin = new RecyclableCreator<Label>(function() {return new Label()});
+	public static create(options?:any) : Label {
+		return <Label>Label.recycleBin.create().reset(Label.TYPE).set(options);
 	}
 };
 

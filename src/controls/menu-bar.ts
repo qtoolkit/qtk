@@ -116,13 +116,13 @@ export class MenuBar extends Widget {
 
 	public dispose() {
 		super.dispose();
-		MenuBar.recyclbale.recycle(this);
+		MenuBar.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "menu-bar";
-	private static recyclbale = new RecyclableCreator<MenuBar>(function() {return new MenuBar()});
-	public static create() : MenuBar {
-		return <MenuBar>MenuBar.recyclbale.create().reset(MenuBar.TYPE);
+	private static recycleBin = new RecyclableCreator<MenuBar>(function() {return new MenuBar()});
+	public static create(options?:any) : MenuBar {
+		return <MenuBar>MenuBar.recycleBin.create().reset(MenuBar.TYPE).set(options);
 	}
 };
 
@@ -209,13 +209,13 @@ export class MenuBarItem extends Widget {
 
 	public dispose() {
 		super.dispose();
-		MenuBarItem.recyclbale.recycle(this);
+		MenuBarItem.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "menu-bar-item";
-	private static recyclbale = new RecyclableCreator<MenuBarItem>(function() {return new MenuBarItem()});
-	public static create() : MenuBarItem {
-		return <MenuBarItem>MenuBarItem.recyclbale.create().reset(MenuBarItem.TYPE);
+	private static recycleBin = new RecyclableCreator<MenuBarItem>(function() {return new MenuBarItem()});
+	public static create(options?:any) : MenuBarItem {
+		return <MenuBarItem>MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE).set(options);
 	}
 };
 

@@ -230,8 +230,8 @@ export class Menu extends Dialog {
 
 	public static TYPE = "menu";
 	private static r = new RecyclableCreator<Menu>(function() {return new Menu()});
-	public static create() : Menu {
-		return <Menu>Menu.r.create().reset(Menu.TYPE);
+	public static create(options?:any) : Menu {
+		return <Menu>Menu.r.create().reset(Menu.TYPE).set(options);
 	}
 };
 
@@ -381,13 +381,13 @@ export class MenuItem extends Widget {
 		this.shortcut = null;
 		this.onInitSubMenu = null;
 
-		MenuItem.recyclbale.recycle(this);
+		MenuItem.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "menu-item";
-	private static recyclbale = new RecyclableCreator<MenuItem>(function() {return new MenuItem()});
+	private static recycleBin = new RecyclableCreator<MenuItem>(function() {return new MenuItem()});
 	public static create() : MenuItem {
-		return <MenuItem>MenuItem.recyclbale.create().reset(MenuItem.TYPE);
+		return <MenuItem>MenuItem.recycleBin.create().reset(MenuItem.TYPE);
 	}
 };
 

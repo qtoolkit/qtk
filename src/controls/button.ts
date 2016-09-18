@@ -10,13 +10,13 @@ export class Button extends Widget {
 
 	public dispose() {
 		super.dispose();
-		Button.recyclbale.recycle(this);
+		Button.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "button";
-	private static recyclbale = new RecyclableCreator<Button>(function() {return new Button()});
-	public static create() : Button {
-		return <Button>Button.recyclbale.create().reset(Button.TYPE);
+	private static recycleBin = new RecyclableCreator<Button>(function() {return new Button()});
+	public static create(options?:any) : Button {
+		return <Button>Button.recycleBin.create().reset(Button.TYPE).set(options);
 	}
 };
 
