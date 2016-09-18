@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html>
-	<head><title>Tester</title>
-    <script src='../index.js'></script>
-    <script src='js/demo-dialog.js'></script>
-    <script src='js/demo-resizable.js'></script>
-    <script src='js/demo-anim.js'></script>
-    <script src='js/demo-scrollview.js'></script>
-    <script src='js/demo-dnd.js'></script>
-    <script src='js/demo-docklayout.js'></script>
-    <script src='js/demo-movable.js'></script>
-    <script src='js/demo-linearlayout.js'></script>
-    <script src='js/demo-treeview.js'></script>
-    <script src='js/demo-progressbar.js'></script>
-    <script src='js/demo-edit.js'></script>
-    <script src='js/demo-color.js'></script>
-    <script src='js/demo-listview.js'></script>
-    <script src='js/demo-switch.js'></script>
-    <script src='js/demo-pages.js'></script>
-    <script src='js/demo-combobox.js'></script>
-    <script src='js/demo-check-button.js'></script>
-    <script src='js/demo-tabbutton.js'></script>
-    <script src='js/demo-tabcontrol.js'></script>
-    <script src='js/demo-menu.js'></script>
-	
-	<script type="application/javascript">
-		var app = new qtk.Application.create("test");
+<head>
+<meta name="format-detection" content="telephone=no"/>
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
-		window.onload = function() {
-			app.init({
-				sysThemeDataURL:"/demos/assets/theme/default/theme.json",
-				appThemeDataURL:"/demos/assets/theme/default/demo.json"
-			});
-			app.on(qtk.Events.READY, function() {
-				onReady(app);
-				app.run();
-			});
-		}
+<style type="text/css">
+* 
+{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+@-ms-viewport {
+    width: device-width;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
+@-moz-viewport {
+    width: device-width;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
+@viewport {
+    width: device-width;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
 
-	</script>
+body { -ms-touch-action:none; }
+</style>
+
+<title>QToolKit Demos</title>
+<script src='../index.js'></script>
+
+<script type="application/javascript">
+
+var app = new qtk.Application.create("test");
+app.init({
+	sysThemeDataURL:"/demos/assets/theme/default/theme.json",
+	appThemeDataURL:"/demos/assets/theme/default/demo.json"
+});
+
+var demo = app.options["demo"] || "main";
+app.assets.loadScript("js/demo-"+demo+".js");	
+
+window.onload = function() {
+	app.onReady(function() {
+		onReady(app);
+
+		app.run();
+	});
+}
+
+</script>
 </head>
 <body>
 </body>

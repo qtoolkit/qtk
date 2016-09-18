@@ -546,6 +546,12 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	public createChildLayoutParam(options:any) : any {
+		var layouter = this.childrenLayouter;
+
+		return layouter ? layouter.createParam(options) : null; 
+	}
+
 	public useChildrenLayouter(type:string, options:any) : Widget {
 		this.childrenLayouter = LayouterFactory.create(type, options);	
 		
@@ -553,7 +559,12 @@ export class Widget extends Emitter {
 	}
 
 	public set childrenLayouter(layouter:Layouter) {
-		this._childrenLayouter = layouter;
+		if(typeof layouter === "string") {
+			this._childrenLayouter = LayouterFactory.create(layouter.toString(), null);
+		}
+		else{
+			this._childrenLayouter = layouter;
+		}
 		this.relayoutChildren();
 	}
 
@@ -1015,8 +1026,21 @@ export class Widget extends Emitter {
 	public set w(value) {
 		this.setAttr("w", value, true);
 	}
+	
+	public get width() {
+		return this._w;
+	}
+	public set width(value) {
+		this.setAttr("w", value, true);
+	}
 
 
+	public get height() {
+		return this._h;
+	}
+	public set height(value) {
+		this.setAttr("h", value, true);
+	}
 	public get h() {
 		return this._h;
 	}

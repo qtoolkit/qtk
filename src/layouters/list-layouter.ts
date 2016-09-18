@@ -2,7 +2,7 @@ import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
-const TYPE = "ListLayouter";
+const TYPE = "list";
 
 /**
  * 列表布局器。

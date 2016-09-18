@@ -374,9 +374,7 @@ export class ImageTile extends Emitter {
 
 	public draw(ctx:any, type:number, dx:number, dy:number, dw:number, dh:number) {
 		if(ctx && this.complete) {
-			if(type === ImageDrawType.DEFAULT) {
-				this.drawDefault(ctx, dx, dy, dw, dh);
-			}else if(type === ImageDrawType.CENTER) {
+			if(type === ImageDrawType.CENTER) {
 				this.drawCenter(ctx, dx, dy, dw, dh);
 			}else if(type === ImageDrawType.AUTO) {
 				this.drawAuto(ctx, dx, dy, dw, dh);
@@ -394,6 +392,8 @@ export class ImageTile extends Emitter {
 				this.drawTile(ctx, dx, dy, dw, dh);
 			}else if(type === ImageDrawType.ICON) {
 				this.drawIcon(ctx, dx, dy, dw, dh);
+			}else {
+				this.drawDefault(ctx, dx, dy, dw, dh);
 			}
 		}
 	}

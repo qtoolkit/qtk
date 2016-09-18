@@ -1,6 +1,6 @@
 import {Rect} from "../rect";
 import {Style} from "../style";
-import {Widget} from "./widget";
+import {Widget, WidgetState} from "./widget";
 import {Graphics, TextLine} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
@@ -22,6 +22,13 @@ export class Label extends Widget {
 	}
 	public set value(value) {
 		this.text = value;
+	}
+	
+	public setStyle(state:WidgetState, style:Style):Widget{
+		super.setStyle(state, style);
+		this.relayoutText();
+
+		return this;
 	}
 
 	protected drawTextSL(ctx:any, style:Style) : Widget {

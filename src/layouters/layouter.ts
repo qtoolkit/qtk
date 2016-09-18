@@ -60,6 +60,9 @@ export class Layouter {
 		return v;
 	}
 
+	public createParam(options?:any) : any {
+		return null;
+	}
 }
 
 /**

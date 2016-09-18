@@ -1,16 +1,34 @@
-var imageURL = "/demos/assets/test.jpg";
 
 function onReady(app) {
-	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	var TWEEN = qtk.TWEEN;
+	var Group = qtk.Group;
+	var Align = qtk.Align;
+	var AlignV = qtk.AlignV;
+	var AlignH = qtk.AlignH;
+	var Events = qtk.Events;
+	var Image = qtk.Image;
+	var Button = qtk.Button;
+	var Direction = qtk.Direction;
+	var WidgetState = qtk.WidgetState;
+	var Orientation = qtk.Orientation;
+	var RadioButton = qtk.RadioButton;
+	var WindowNormal = qtk.WindowNormal;
+	var ImageDrawType = qtk.ImageDrawType;
+	var SimpleLayouter = qtk.SimpleLayouter;
+	var SimpleLayouterParam= qtk.SimpleLayouterParam;
+	var LinearLayouter = qtk.LinearLayouter;
+	var LinearLayouterParam = qtk.LinearLayouterParam;
+	var imageURL = "/demos/assets/test.jpg";
 	
-	var image = qtk.Image.create();
-	image.set({name:"image1", value:imageURL});
+	var vp = app.getViewPort();
+	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
+	win.childrenLayouter = SimpleLayouter.create();
+	
+	var image = Image.create({name:"image1", text:"DragMe", value:imageURL});
 	image.useBehavior("draggable");
-	image.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"10", w:"100", h:"100"});
-	image.on(qtk.Events.DRAGSTART, function(evt) {
+	image.layoutParam = SimpleLayouterParam.create({x:"center", y:"10", w:"100", h:"100"});
+	
+	image.on(Events.DRAGSTART, function(evt) {
 		console.log("DRAGSTART");
 		var image = {
 			draw : function(ctx, x, y) {
@@ -21,32 +39,32 @@ function onReady(app) {
 		evt.dataTransfer.setDragImage(image);
 		evt.dataTransfer.setData("text/plain", imageURL);
 	});
-	image.on(qtk.Events.DRAGEND, function(evt) {
+	image.on(Events.DRAGEND, function(evt) {
 		console.log("DRAGEND");
 	});
 	win.addChild(image);
 	
-	var targetImage = qtk.Image.create();
+	var targetImage = Image.create({name:"targetImage2",  drawType:ImageDrawType.DEFAULT, text: "Drop On Me"});
 	targetImage.useBehavior("droppable");
-	targetImage.setStyle(qtk.WidgetState.NORMAL,
+	targetImage.setStyle(WidgetState.NORMAL,
 		{
-			"fontColor" : "black",
+			"textColor" : "black",
 			"lineColor" : "black",
+			"textAlign" : "center",
 			"lineWidth" : 1,
 			"fontSize" : 16
 		});
-	targetImage.set({name:"targetImage2",  drawType:qtk.ImageDrawType.DEFAULT, text: "Drop On Me"});
-	targetImage.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"-210", w:"100%", h:"200"});
-	targetImage.on(qtk.Events.DRAGENTER, function(evt) {
+	targetImage.layoutParam = SimpleLayouterParam.create({x:"center", y:"-210", w:"100%", h:"200"});
+	targetImage.on(Events.DRAGENTER, function(evt) {
 		console.log("DRAGENTER");
 	});
-	targetImage.on(qtk.Events.DRAGLEAVE, function(evt) {
+	targetImage.on(Events.DRAGLEAVE, function(evt) {
 		console.log("DRAGLEAVE");
 	});
-	targetImage.on(qtk.Events.DRAGOVER, function(evt) {
+	targetImage.on(Events.DRAGOVER, function(evt) {
 		console.log("DRAGOVER");
 	});
-	targetImage.on(qtk.Events.DROP, function(evt) {
+	targetImage.on(Events.DROP, function(evt) {
 		var url = evt.dataTransfer.getData("text/plain");
 		targetImage.value = url;
 		console.log("DROP:" + url);

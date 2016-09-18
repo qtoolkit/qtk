@@ -1,7 +1,7 @@
 import Events = require("./events");
 import path = require("path");
 import TWEEN = require("tween.js");
-import assets = require("./assets");
+import Assets = require("./assets");
 import * as Services from  "./services";
 import {MainLoop} from "./main-loop";
 import {Emitter} from "./emitter";
@@ -22,6 +22,7 @@ import inputEventAdapter = require("./input-event-adapter");
 export class Application extends Emitter implements IApplication {
 	public name : string;
 	private _options : any;
+	private _isReady : boolean;
 	private _viewPort : IViewPort; 
 	private _mainLoop : MainLoop;
 	private servicesManager : Services.Manager;
@@ -31,6 +32,14 @@ export class Application extends Emitter implements IApplication {
 		this.name = name;
 		this._options = {};
 		this.servicesManager = new Services.Manager();
+	}
+
+	public get isReady() : boolean {
+		return this._isReady;
+	}
+
+	public get assets() : any{
+		return Assets;
 	}
 
 	public get mainLoop() : IMainLoop {
@@ -75,20 +84,22 @@ export class Application extends Emitter implements IApplication {
 		var appThemeDataURL = this._options.appThemeDataURL;
 
 		if(sysThemeDataURL) {
-			assets.loadJSON(sysThemeDataURL).then(json => {
+			Assets.loadJSON(sysThemeDataURL).then(json => {
 				var baseURL = path.dirname(sysThemeDataURL);
 				themeManager.load(json, baseURL);
 				
 				return appThemeDataURL;
 			}).then(url => {
 				if(url) {
-					assets.loadJSON(url).then(json => {
+					Assets.loadJSON(url).then(json => {
 						var baseURL = path.dirname(url);
 						themeManager.load(json, baseURL);
 						this.dispatchEventAsync({type:Events.READY});
+						this._isReady = true;
 					});
 				}else{
 					this.dispatchEventAsync({type:Events.READY});
+					this._isReady = true;
 				}
 			});
 		}
@@ -135,6 +146,14 @@ export class Application extends Emitter implements IApplication {
 	
 	public getViewPort() : IViewPort {
 		return this._viewPort;
+	}
+
+	public onReady(func:Function) {
+		if(this._isReady) {
+			func.call(this);
+		}else{
+			this.on(Events.READY, func);
+		}
 	}
 
 	static create(name:string) {

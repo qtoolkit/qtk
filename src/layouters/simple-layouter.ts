@@ -2,7 +2,7 @@ import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
-const TYPE = "SimpleLayouter";
+const TYPE = "simple";
 
 /**
  * 简单的布局器。
@@ -53,6 +53,10 @@ export class SimpleLayouter extends Layouter {
 			child.moveResizeTo(r.x + x, r.y + y, w, h);
 			child.relayoutChildren();
 		}
+	}
+
+	public createParam(options?:any) {
+		return SimpleLayouterParam.create(options);
 	}
 
 	static create(options?:any) : SimpleLayouter {

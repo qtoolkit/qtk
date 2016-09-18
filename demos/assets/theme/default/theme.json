@@ -2,7 +2,7 @@
 	"widget" : {
 		"common" : {
 			"lineWidth" : 1,
-			"fontSize" : 16,
+			"fontSize" : 12,
 			"textColor" : "black",
 			"backGroundColor" : "#FFFFFF"
 		},
@@ -22,16 +22,14 @@
 		"extends": "widget",
 		"common" : {
 			"textAlign" : "left",
+			"lineColor" : "#cccccc",
 			"roundRadius" : 5
 		},
-		"normal" : {
-			"lineColor" : "green"
-		},
 		"over" : {
-			"lineColor" : "blue"
+			"lineColor" : "#AAAAAA"
 		},
 		"active" : {
-			"lineColor" : "red"
+			"lineColor" : "#AAAAAA"
 		}
 	},
 	"edit.sl": {
@@ -80,15 +78,13 @@
 	},
 	"dialog": {
 		"extends": "widget",
-		"normal" : {
+		"common" : {
 			"backGroundColor" : "#606060"
 		}
 	},
 	"progress-bar": {
 		"extends": "widget",
 		"common" : {
-			"lineWidth" : 2,
-			"lineColor" : "green",
 			"roundRadius" : 5,
 			"backGroundColor" : "#606060",
 			"foreGroundColor" : "#d0d0d0"
@@ -106,7 +102,7 @@
 	},
 	"scroll-view": {
 		"extends": "widget",
-		"normal" : {
+		"common" : {
 			"lineColor" : "#EEEEEE"
 		}
 	},

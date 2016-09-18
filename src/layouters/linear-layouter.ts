@@ -5,7 +5,8 @@ import {stableSort} from "../utils";
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
-const TYPE = "LinearLayouter";
+const TYPE_H = "linear-h";
+const TYPE_V = "linear-v";
 
 /**
  * 线性布局器。可以设置为水平和垂直两个方向。
@@ -22,7 +23,7 @@ export class LinearLayouter extends Layouter {
 	public orientation : Orientation;
 
 	public get type() : string {
-		return TYPE;
+		return this.orientation === Orientation.V ? TYPE_V : TYPE_H;
 	}
 	
 	/**
@@ -37,15 +38,16 @@ export class LinearLayouter extends Layouter {
 
 	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
 		var r = rect.clone();
-		
+		var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+
 		var arr = children.filter(function(child) {
-			var param =  child.layoutParam || LinearLayouterParam.defParam;
+			var param =  child.layoutParam || defParam;
 
 			return param.position > 0;
 		});
 		stableSort(arr, function(a, b) {
-			var ap =  a.layoutParam || LinearLayouterParam.defParam;
-			var bp =  b.layoutParam || LinearLayouterParam.defParam;
+			var ap =  a.layoutParam || defParam;
+			var bp =  b.layoutParam || defParam;
 			return ap.position - bp.position;
 		});
 		arr.forEach(child => {
@@ -55,7 +57,7 @@ export class LinearLayouter extends Layouter {
 		});
 		
 		arr = children.filter(function(child) {
-			var param =  child.layoutParam || LinearLayouterParam.defParam;
+			var param =  child.layoutParam || defParam;
 
 			return !param.position;
 		});
@@ -66,13 +68,13 @@ export class LinearLayouter extends Layouter {
 		});
 
 		arr = children.filter(function(child) {
-			var param =  child.layoutParam || LinearLayouterParam.defParam;
+			var param =  child.layoutParam || defParam;
 
 			return param.position < 0;
 		});
 		stableSort(arr, function(a, b) {
-			var ap =  a.layoutParam || LinearLayouterParam.defParam;
-			var bp =  b.layoutParam || LinearLayouterParam.defParam;
+			var ap =  a.layoutParam || defParam;
+			var bp =  b.layoutParam || defParam;
 			return bp.position - ap.position;
 		});
 		arr.forEach(child => {
@@ -91,10 +93,11 @@ export class LinearLayouter extends Layouter {
 		var y = 0;
 		var w = 0;
 		var h = 0;
-		var param = <LinearLayouterParam>child.layoutParam || LinearLayouterParam.defParam;
+		var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+		var param = <LinearLayouterParam>child.layoutParam || defParam;
 
 		var position = param.position;
-		if(param && param.type === TYPE && child.visible) {
+		if(param && param.type.indexOf("linear") >= 0 && child.visible) {
 			var spacing = param.spacing || this.spacing;
 			h = Math.min(r.h, param.h ? Layouter.evalValue(param.h, r.h) : child.h);
 			w = Math.min(r.w, param.w ? Layouter.evalValue(param.w, r.w) : child.w);
@@ -153,6 +156,10 @@ export class LinearLayouter extends Layouter {
 		}
 	}
 
+	public createParam(options?:any) {
+		return LinearLayouterParam.createWithType(this.type, options);
+	}
+
 	public static createV(options:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
 		layouter.setOptions(options);
@@ -163,14 +170,15 @@ export class LinearLayouter extends Layouter {
 
 	public static createH(options:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
-		layouter.setOptions(options);
+		layouter.setOptions(options || {});
 		layouter.orientation = Orientation.H;
 
 		return layouter;
 	}
 };
 
-LayouterFactory.register(TYPE, LinearLayouter.createV);
+LayouterFactory.register(TYPE_H, LinearLayouter.createH);
+LayouterFactory.register(TYPE_V, LinearLayouter.createV);
 
 /**
  * Linear布局器的参数。
@@ -210,8 +218,8 @@ export class LinearLayouterParam {
 	 */
 	public position : number;
 
-	constructor(w:string, h:string, spacing:number, align:Align, position:number) {
-		this.type = TYPE;
+	constructor(type:string, w:string, h:string, spacing:number, align:Align, position:number) {
+		this.type = type || TYPE_V;
 		this.w = w;
 		this.h = h;
 		this.align = align;
@@ -219,11 +227,16 @@ export class LinearLayouterParam {
 		this.position = position;
 	}
 
-	public static defParam = LinearLayouterParam.create(null);
-	public static create(opts:any) : LinearLayouterParam {
+	public static defParamV = LinearLayouterParam.createWithType(TYPE_V, null);
+	public static defParamH = LinearLayouterParam.createWithType(TYPE_H, null);
+	public static createWithType(type:string, opts:any) : LinearLayouterParam {
 		var options = opts || {};
-		return new LinearLayouterParam(options.w || options.width, options.h || options.height, 
+		return new LinearLayouterParam(type, options.w || options.width, options.h || options.height, 
 						 options.spacing||0, options.align||Align.C, options.position);
+	}
+
+	public static create(opts:any) : LinearLayouterParam {
+		return this.createWithType(TYPE_H, opts);
 	}
 };
 

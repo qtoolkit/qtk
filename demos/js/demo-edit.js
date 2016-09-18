@@ -1,15 +1,34 @@
 
 var imageURL = "/demos/assets/test.jpg";
 function onReady(app) {
+	var Edit = qtk.Edit;
+	var TWEEN = qtk.TWEEN;
+	var Group = qtk.Group;
+	var Align = qtk.Align;
+	var AlignV = qtk.AlignV;
+	var AlignH = qtk.AlignH;
 	var Events = qtk.Events;
-	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	var Image = qtk.Image;
+	var Button = qtk.Button;
+	var Direction = qtk.Direction;
+	var WidgetState = qtk.WidgetState;
+	var Orientation = qtk.Orientation;
+	var RadioButton = qtk.RadioButton;
+	var WindowNormal = qtk.WindowNormal;
+	var ImageDrawType = qtk.ImageDrawType;
+	var SimpleLayouter = qtk.SimpleLayouter;
+	var SimpleLayouterParam= qtk.SimpleLayouterParam;
+	var DockLayouter = qtk.DockLayouter;
+	var DockLayouterParam = qtk.DockLayouterParam;
+	var Events = qtk.Events;
 	
-	var edit = qtk.Edit.create();
-	edit.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
-	edit.childrenLayouter = qtk.SimpleLayouter.create();
+	var vp = app.getViewPort();
+	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
+	win.childrenLayouter = SimpleLayouter.create();
+	
+	var edit = Edit.create();
+	edit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
+	edit.childrenLayouter = SimpleLayouter.create();
 	win.addChild(edit);
 
 	edit.on(Events.CHANGING, function(evt) {
@@ -28,9 +47,9 @@ function onReady(app) {
 		console.log("Blur:" + this.value);
 	});
 	
-	var mlEdit = qtk.Edit.create();
-	mlEdit.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
-	mlEdit.childrenLayouter = qtk.SimpleLayouter.create();
+	var mlEdit = Edit.create();
+	mlEdit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
+	mlEdit.childrenLayouter = SimpleLayouter.create();
 	mlEdit.multiLines = true;
 	win.addChild(mlEdit);
 
@@ -50,12 +69,5 @@ function onReady(app) {
 		console.log("Blur:" + this.value);
 	});
 
-	var label = qtk.Label.create();
-	label.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"400px", w:"50%", h:"300px"});
-	label.childrenLayouter = qtk.SimpleLayouter.create();
-	label.multiLines = true;
-	label.text = "注册hello world登录后，所有生成的二维码\n都会保存在账号里，方便之后进行管理和查看 !";
-	win.addChild(label);
-	
 	win.open();
 }

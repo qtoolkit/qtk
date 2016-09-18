@@ -60,7 +60,7 @@ export class MenuBar extends Widget {
 	public addSpace(width?:number, position?:number) : Widget {
 		var item = MenuBarItem.create();
 		item.styleType = "widget.transparent";
-		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
+		item.layoutParam = this.createChildLayoutParam({w:width||this.itemWidth, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;
@@ -70,7 +70,7 @@ export class MenuBar extends Widget {
 		var item = MenuBarItem.create();
 		item.styleType = "widget.transparent";
 		item.setIcons(iconURL, iconURL);
-		item.layoutParam = LinearLayouterParam.create({w:this.h, h:"100%", position:0.1});
+		item.layoutParam = this.createChildLayoutParam({w:this.h, h:"100%", position:0.1});
 		this.addChild(item);
 
 		return item;
@@ -79,7 +79,7 @@ export class MenuBar extends Widget {
 	public addItem(text:string, onInitSubMenu:Function, width?:number, position?:number) : Widget {
 		var item = MenuBarItem.create();
 		item.set({text:text, onInitSubMenu:onInitSubMenu});
-		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
+		item.layoutParam = this.createChildLayoutParam({w:width||this.itemWidth, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;
@@ -89,7 +89,7 @@ export class MenuBar extends Widget {
 		var item = MenuBarItem.create();
 		item.set({text:text});
 		item.on(Events.CLICK, onClick);
-		item.layoutParam = LinearLayouterParam.create({w:width||this.itemWidth, h:"100%", position:position||1});
+		item.layoutParam = this.createChildLayoutParam({w:width||this.itemWidth, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;
@@ -101,7 +101,7 @@ export class MenuBar extends Widget {
 		item.on(Events.CLICK, onClick);
 		item.styleType = "widget.transparent";
 		item.setIcons(normalIconURL, overIconURL, activeIconURL, disableIconURL, checkedIconURL);
-		item.layoutParam = LinearLayouterParam.create({w:this.h, h:"100%", position:position||1});
+		item.layoutParam = this.createChildLayoutParam({w:this.h, h:"100%", position:position||1});
 		this.addChild(item);
 
 		return item;

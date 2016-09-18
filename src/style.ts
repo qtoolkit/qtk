@@ -349,7 +349,7 @@ export class Style extends Emitter {
 
 
 	public get font() {
-		return (this._fontFamily||"Sans") + " " + this._fontSize + "px";
+		return this._fontSize + "px " + (this._fontFamily||"Sans");
 	}
 
 	public get fontFamily() {

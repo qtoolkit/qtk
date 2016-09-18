@@ -1,5 +1,6 @@
 
 import {Widget} from "./widget";
+import {IViewPort} from "../iview-port";
 import {Window, WindowType} from "./window";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
@@ -9,6 +10,16 @@ export class Dialog extends Window {
 	
 	constructor(type?:string) {
 		super(type||Dialog.TYPE);
+	}
+
+	public moveToCenter() : Widget {
+		if(this.app) {
+			var vp = this.app.getViewPort();
+			this.x = (vp.w - this.w) >> 1;
+			this.y = (vp.h - this.h) >> 1;
+		}
+
+		return this;
 	}
 
 	public dispose() {

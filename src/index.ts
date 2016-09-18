@@ -1,7 +1,7 @@
 import {Point} from "./point";
 import {Rect} from "./rect";
 import {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
-import assets = require("./assets");
+import Assets = require("./assets");
 import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
 import {Matrix} from "./matrix";
@@ -63,7 +63,7 @@ import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 import TWEEN = require("tween.js");
 
 export {
-	assets,
+	Assets,
 	Point,
 	Rect,
 	Align,

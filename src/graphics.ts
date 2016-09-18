@@ -83,15 +83,13 @@ export class Graphics {
 				for(var i = 0; i < n; i++) {
 					var c = token[i];
 					width = ctx.measureText(c).width;
-					if((line.width + width) <= maxWidth) {
-						line.text += c;
-						line.width += width;
-					}
 					
 					if(line.width >= maxWidth) {
 						ret.push(line);
 						line = new TextLine();
 					}
+					line.text += c;
+					line.width += width;
 				}
 			}
 		});

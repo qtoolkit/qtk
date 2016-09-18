@@ -7,7 +7,7 @@ function createPage(pages, index) {
 
 	var button = qtk.Button.create();
 	button.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
-	button.text = index.toString();
+	button.text = "This button is on page-" + index.toString();
 	button.on(qtk.Events.CLICK, function(evt) {
 		console.log(this.text);
 	});
@@ -20,8 +20,7 @@ function createPage(pages, index) {
 function onReady(app) {
 	var Events = qtk.Events;
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
+	var win = qtk.WindowNormal.create({app:app, w:vp.w, h:vp.h});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 	
 	var imageURL = "/demos/assets/theme/default/images/x2/check-button-checked.png";

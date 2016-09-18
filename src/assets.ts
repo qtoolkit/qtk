@@ -102,6 +102,28 @@ export function loadImage(url:string) : Promise<Image> {
 }
 
 /**
+ * Load Script
+ * @param url URL Of Script.
+ * @returns Promise
+ */
+export function loadScript(url:string) : Promise<any> {
+	var item = new Promise ((resolve: (script: any)=>void, reject: (err: any)=>void) => {
+		var node = document.head ? document.head : document.body;
+		var script = document.createElement("script");
+		script.onload = function (){
+			resolve(script);
+		}
+		script.onerror = function(err) {
+			reject(err);
+		}
+		script.src = url;
+		node.appendChild(script);
+	});
+
+    return item;
+}
+
+/**
  * Load Audio and Cache It.
  * @param url URL Of Audio.
  * @returns Promise

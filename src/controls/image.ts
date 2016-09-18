@@ -53,7 +53,7 @@ export class Image extends Widget {
 		super.reset(type);
 
 		this._style = Style.create();
-		this._style.fontSize = 16;
+		this._style.fontSize = 12;
 		this._style.textColor = "Black";
 		this.drawType = ImageDrawType.DEFAULT;
 

@@ -2,8 +2,7 @@
 var imageURL = "/demos/assets/test.jpg";
 function onReady(app) {
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
+	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 	
 	var button = qtk.Button.create();
@@ -42,8 +41,8 @@ function onReady(app) {
 	win.addChild(image);
 	
 	var image = qtk.Image.create();
-	image.set({name:"image1", value:imageURL, text:"x{100,500}"});	
-	image.useBehavior("movable", {yMovable:false, xLimit:true, xMin:100, xMax:500});
+	image.set({name:"image1", value:imageURL, text:"x{100,800}"});	
+	image.useBehavior("movable", {yMovable:false, xLimit:true, xMin:100, xMax:800});
 	image.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"510", w:"100", h:"100"});
 	win.addChild(image);
 	

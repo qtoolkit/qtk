@@ -32,6 +32,7 @@ export class Window extends Widget {
 		super.reset(type);
 		this._isWindow = true;
 		this._grabbed = false;
+		this.hasOwnCanvas = true;
 		this._pointerPosition = Point.create(0, 0);
 
 		return this;

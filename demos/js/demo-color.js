@@ -1,52 +1,63 @@
 
-var imageURL = "/demos/assets/test.jpg";
+var Group = qtk.Group;
+var Align = qtk.Align;
+var AlignV = qtk.AlignV;
+var AlignH = qtk.AlignH;
+var Events = qtk.Events;
+var ColorLine = qtk.ColorLine;
+var ColorTile = qtk.ColorTile;;
+var Direction = qtk.Direction;
+var Orientation = qtk.Orientation;
+var RadioButton = qtk.RadioButton;
+var WindowNormal = qtk.WindowNormal;
+var SimpleLayouter = qtk.SimpleLayouter;
+var SimpleLayouterParam= qtk.SimpleLayouterParam;
+var LinearLayouter = qtk.LinearLayouter;
+var LinearLayouterParam = qtk.LinearLayouterParam;
+
 function onReady(app) {
-	var Events = qtk.Events;
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
+	win.childrenLayouter = SimpleLayouter.create();
 	
-	var color = qtk.ColorTile.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({value:"blue", roundRadius:5, lineColor:"green", lineWidth:1});
+	var color = ColorTile.create({value:"blue", roundRadius:5, lineColor:"green", lineWidth:1});
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
 	win.addChild(color);
 
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({orientation:qtk.Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create({orientation:Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
 	win.addChild(color);
 	
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({vAlign:qtk.AlignV.T, orientation:qtk.Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create();
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
+	color.set({vAlign:AlignV.T, orientation:Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
 	win.addChild(color);
 	
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({vAlign:qtk.AlignV.B, orientation:qtk.Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create();
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
+	color.set({vAlign:AlignV.B, orientation:Orientation.H, lineColor:"green", lineWidth:1, dashLine:[4,4]});
 	win.addChild(color);
 
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({orientation:qtk.Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create();
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
+	color.set({orientation:Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
 	win.addChild(color);
 
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({hAlign:qtk.AlignH.L, orientation:qtk.Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create();
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
+	color.set({hAlign:AlignH.L, orientation:Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
 	win.addChild(color);
 	
-	color = qtk.ColorLine.create();
-	color.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
-	color.childrenLayouter = qtk.SimpleLayouter.create();
-	color.set({hAlign:qtk.AlignH.R, orientation:qtk.Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
+	color = ColorLine.create();
+	color.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"30px"});
+	color.childrenLayouter = SimpleLayouter.create();
+	color.set({hAlign:AlignH.R, orientation:Orientation.V, lineColor:"green", lineWidth:1, dashLine:[4,4]});
 	win.addChild(color);
 	
 	win.open();

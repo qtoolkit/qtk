@@ -3,7 +3,7 @@ import {Direction} from '../consts';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
-const TYPE = "DockLayouter";
+const TYPE = "dock";
 
 /**
  * Dock布局器。
@@ -73,6 +73,10 @@ export class DockLayouter extends Layouter {
 			child.moveResizeTo(x, y, w, h);
 			child.relayoutChildren();
 		}
+	}
+
+	public createParam(options?:any) {
+		return DockLayouterParam.create(options);
 	}
 
 	static create(options:any) : DockLayouter {

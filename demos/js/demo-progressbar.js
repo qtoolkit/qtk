@@ -2,8 +2,7 @@
 var imageURL = "/demos/assets/test.jpg";
 function onReady(app) {
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
+	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 	
 	var bar = qtk.ProgressBar.create();

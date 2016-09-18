@@ -1,21 +1,15 @@
 
 function onReady(app) {
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
+	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
-	var listView = qtk.ListView.create();
-	listView.dragToScroll = true;
-	listView.slideToScroll = true;
 
-	listView.itemHeight = 60;
+	var listView = qtk.ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
 	listView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
-	listView.set({name:"listView", contentWidth:500, contentHeight:2000});	
 	win.addChild(listView);
 	
-	for(var i = 0; i < 100; i++) {
-		var item = qtk.ListItem.create();
-		item.set({text:i.toString()});
+	for(var i = 0; i < 1000; i++) {
+		var item = qtk.ListItem.create({text:i.toString()});
 		listView.addChild(item, true);
 	}
 	listView.relayoutChildren();

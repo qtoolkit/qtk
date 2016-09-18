@@ -71,7 +71,7 @@ export class Slider extends ProgressBar {
 		this.dragger = Button.create();
 		this.addChild(this.dragger);
 		this.dragger.styleType  = "slider-dragger";
-		this.dragger.on(Events.CHANGE, evt => {
+		this.dragger.on(Events.ATTR_CHANGE, evt => {
 			 var attr = evt.attr;
 			if(attr === "x" || attr === "y") {
 				this.onDraggerMoved();

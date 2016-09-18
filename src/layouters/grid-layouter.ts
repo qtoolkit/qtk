@@ -2,7 +2,7 @@ import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory} from './layouter';
 
-const TYPE = "GridLayouter";
+const TYPE = "grid";
 
 /**
  * 网格布局器。
@@ -25,10 +25,10 @@ export class GridLayouter extends Layouter {
 		this.rows = options.rows || 0;
 		this.colWidth  = options.colWidth || 0;
 		this.rowHeight = options.rowHeight || 0;
-		this.leftMargin   = options.leftMargin || 0;
-		this.rightMargin  = options.rightMargin || 0;
-		this.topMargin    = options.topMargin || 0;
-		this.bottomMargin = options.bottomMargin || 0;
+		this.leftMargin   = options.leftMargin || options.margin || 0;
+		this.rightMargin  = options.rightMargin || options.margin || 0;
+		this.topMargin    = options.topMargin || options.margin || 0;
+		this.bottomMargin = options.bottomMargin || options.margin || 0;
 
 		if(!this.cols && !this.colWidth) {
 			this.cols = 3;
@@ -145,6 +145,9 @@ export class GridLayouter extends Layouter {
 	 */
 	public rowHeight : number;
 	
+	public createParam(options?:any) {
+		return GridLayouterParam.create(options);
+	}
 
 	private rect : Rect;
 

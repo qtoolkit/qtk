@@ -1,42 +1,54 @@
 
-var imageURL = "/demos/assets/test.jpg";
+
+var Group = qtk.Group;
+var Align = qtk.Align;
+var AlignV = qtk.AlignV;
+var AlignH = qtk.AlignH;
+var Events = qtk.Events;
+var ComboBox = qtk.ComboBox;
+var Direction = qtk.Direction;
+var Orientation = qtk.Orientation;
+var RadioButton = qtk.RadioButton;
+var WindowNormal = qtk.WindowNormal;
+var SimpleLayouter = qtk.SimpleLayouter;
+var SimpleLayouterParam= qtk.SimpleLayouterParam;
+var LinearLayouter = qtk.LinearLayouter;
+var LinearLayouterParam = qtk.LinearLayouterParam;
+
+var imageURL = "/demos/assets/icons/x2/";
+
 function onReady(app) {
-	var Events = qtk.Events;
+	var Events = Events;
 	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create();
-	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
+	win.childrenLayouter = SimpleLayouter.create();
 	
-	var imageURL = "/demos/assets/theme/default/images/x2/check-button-checked.png";
-	var comboBox = qtk.ComboBox.create();
-	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
-	comboBox.addOption("item1", 1, imageURL, "red");
-	comboBox.addOption("item2", 2, null, "green");
-	comboBox.addOption("item3", 3, null, "blue");
+	var comboBox = ComboBox.create();
+	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
+	comboBox.addOption("item1", 1, imageURL + "favor.normal.png");
+	comboBox.addOption("item1", 2, imageURL + "home.current.png");
+	comboBox.addOption("item1", 3, imageURL + "close.normal.png");
 	win.addChild(comboBox);
 
-	var comboBox = qtk.ComboBox.create();
-	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"100px", w:"50%", h:"30px"});
+	var comboBox = ComboBox.create({value:1});
+	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"100px", w:"50%", h:"30px"});
+	comboBox.addOption("red", 1, null, "red");
+	comboBox.addOption("green", 2, null, "green");
+	comboBox.addOption("blue", 3, null, "blue");
+	win.addChild(comboBox);
+	
+	comboBox = ComboBox.create({value:1});
+	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"-60px", w:"50%", h:"30px"});
 	comboBox.addOption("item1", 1);
 	comboBox.addOption("item2", 2);
 	comboBox.addOption("item3", 3);
-	comboBox.value = 1;
 	win.addChild(comboBox);
 	
-	var comboBox = qtk.ComboBox.create();
-	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"-60px", w:"50%", h:"30px"});
-	comboBox.addOption("item1", 1);
-	comboBox.addOption("item2", 2);
-	comboBox.addOption("item3", 3);
-	comboBox.value = 1;
-	win.addChild(comboBox);
-	
-	var comboBox = qtk.ComboBox.create();
-	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"-120px", w:"50%", h:"30px"});
+	comboBox = ComboBox.create({value:1});
+	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"-120px", w:"50%", h:"30px"});
 	for(var i = 0; i < 100; i++) {
 		comboBox.addOption("item"+i, i);
 	}
-	comboBox.value = 1;
 	win.addChild(comboBox);
 	
 	win.open();
