@@ -17,12 +17,17 @@ function onReady(app) {
 		{title:"Menu", data:"menu"},
 		{title:"Label", data:"label"},
 		{title:"Pages", data:"pages"},
+		{title:"Switch", data:"switch"},
 		{title:"Dialog", data:"dialog"},
 		{title:"Movable", data:"movable"},
 		{title:"Drag & Drop", data:"dnd"},
+		{title:"TreeView", data:"treeview"},
 		{title:"ListView", data:"listview"},
 		{title:"ComboBox", data:"combobox"},
+		{title:"Resizable", data:"resizable"},
 		{title:"Animation", data:"animation"},
+		{title:"ScrollView", data:"scrollview"},
+		{title:"TabControl", data:"tabcontrol"},
 		{title:"ProgressBar", data:"progressbar"},
 		{title:"DockLayouter", data:"docklayout"},
 		{title:"GridLayouter", data:"gridlayout"},
@@ -42,6 +47,6 @@ function onReady(app) {
 		listView.addChild(item, true);
 	});
 	listView.relayoutChildren();
-
+	win.target = listView;
 	win.open();
 }
