@@ -99,11 +99,6 @@ export class TabButtonGroup extends Widget {
 		super(TabButtonGroup.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		TabButtonGroup.r.recycle(this);
-	}
-
 	public static TYPE = "tab-button-group";
 	private static r = new RecyclableCreator<TabButtonGroup>(function() {return new TabButtonGroup()});
 	public static create(options?:any) : TabButtonGroup {

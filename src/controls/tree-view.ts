@@ -152,7 +152,6 @@ export class TreeView extends ListView {
 	public dispose() {
 		super.dispose();
 		this._rootData = null;
-		TreeView.recycleBinTreeView.recycle(this);
 	}
 
 	public static TYPE = "tree-view";

@@ -87,11 +87,6 @@ export class ListView extends ScrollView {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		ListView.recycleBinListView.recycle(this);
-	}
-
 	public static TYPE = "list-view";
 	private static recycleBinListView = new RecyclableCreator<ListView>(function() {return new ListView()});
 	public static create(options?:any) : ListView{

@@ -133,11 +133,6 @@ export class Slider extends ProgressBar {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		Slider.r.recycle(this);
-	}
-
 	public static TYPE = "slider";
 	private static r = new RecyclableCreator<Slider>(function() {return new Slider()});
 	public static create(options?:any) : Slider {

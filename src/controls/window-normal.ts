@@ -10,11 +10,6 @@ export class WindowNormal extends Window {
 		super(WindowNormal.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		WindowNormal.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "window-normal";
 	private static recycleBin = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
 	public static create(options?:any) : Window {

@@ -92,11 +92,6 @@ export class Switch extends Widget {
 		super(Switch.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Switch.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "switch";
 	private static recycleBin = new RecyclableCreator<Switch>(function() {return new Switch()});
 	public static create(options?:any) : Switch{

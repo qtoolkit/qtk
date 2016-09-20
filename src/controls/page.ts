@@ -8,11 +8,6 @@ export class Page extends Widget {
 		super(type||Page.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Page.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "page";
 	private static recycleBin = new RecyclableCreator<Page>(function() {return new Page()});
 	public static create(options?:any) : Page {

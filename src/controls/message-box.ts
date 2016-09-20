@@ -2,6 +2,7 @@
 import {Group} from "./group";
 import {Dialog} from "./dialog";
 import {Label} from "./label";
+import {Edit} from "./edit";
 import {Image} from "./image";
 import {Button} from "./button";
 import TWEEN = require("tween.js");
@@ -292,7 +293,7 @@ export class MessageBox extends Dialog {
 		buttonsOption.buttons.push({styleType: "button.ok", text:"Close", onClick : null});
 
 		var titleOptions = new TitleOptions(msg, "messagebox.info.icon", false);
-		messageBox.createChildren(titleOptions, buttonsOption, msg);
+		messageBox.createChildren(titleOptions, buttonsOption, null);
 		
 		var group = messageBox.content;
 		var progressBar = ProgressBar.create();
@@ -316,6 +317,33 @@ export class MessageBox extends Dialog {
 		messageBox.open();
 
 		taskStart(onProgress);
+	}
+	
+	public static showInput(tips:string, value:string, isValueValid:Function, onDone:Function, w?:number) {
+		var rw = w || 200;
+		var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
+
+		var messageBox = MessageBox.create({app:Application.get(), w:rw, h:rh});
+
+		var buttonsOption = new ButtonsOptions();
+		buttonsOption.buttons.push({styleType: "button.ok", text:"Cancel", onClick : null});
+		buttonsOption.buttons.push({styleType: "button.ok", text:"OK", onClick : null});
+
+		var titleOptions = new TitleOptions(tips, "messagebox.info.icon", false);
+		messageBox.createChildren(titleOptions, buttonsOption, null);
+		
+		var group = messageBox.content;
+		var edit = Edit.create({inputTips:tips, value:value});
+		group.padding = 10;
+		group.topPadding = 20;
+		group.childrenLayouter = SimpleLayouter.create();
+		edit.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"100%", h:"20px"});
+
+		var okButton = messageBox.buttons.children[1];
+		okButton.enable = false;
+
+		group.addChild(edit);
+		messageBox.open();
 	}
 
 	public static TITLE_H = 25;

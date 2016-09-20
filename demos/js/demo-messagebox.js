@@ -51,6 +51,20 @@ function addShowProgress(win, w, h) {
 	win.addChild(item, true);
 }
 
+function isInputValid(value) {
+	return value && value.length > 3;
+}
+
+function addShowInput(win, msg, value, w, h) {
+	var item = qtk.Button.create({text:"Show Input"});
+	item.on(qtk.Events.CLICK, function(evt) {
+		qtk.MessageBox.showInput(msg, value, isInputValid, function(value) {
+			console.log("input:" + value);
+		}, w);
+	});
+	win.addChild(item, true);
+}
+
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app,  w:vp.width, h:vp.height, padding : 10});
@@ -74,6 +88,9 @@ function onReady(app) {
 	addShowToast(win, text);
 	addShowToast(win, text, 300);
 
+	addShowInput(win, "Name", "Jim");
+	addShowInput(win, "Age");
+	addShowInput(win, "Address", null, 400);
 	win.relayoutChildren();
 	win.open();
 }

@@ -114,11 +114,6 @@ export class MenuBar extends Widget {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		MenuBar.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "menu-bar";
 	private static recycleBin = new RecyclableCreator<MenuBar>(function() {return new MenuBar()});
 	public static create(options?:any) : MenuBar {

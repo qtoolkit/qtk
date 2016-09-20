@@ -28,11 +28,6 @@ export class RadioButton extends CheckButton {
 		this.setProp("value", true, true);
 	}
 
-	public dispose() {
-		super.dispose();
-		RadioButton.r.recycle(this);
-	}
-
 	public static TYPE = "radio-button";
 	private static r = new RecyclableCreator<RadioButton>(function() {return new RadioButton()});
 	public static create(options?:any) : RadioButton {

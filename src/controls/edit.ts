@@ -106,11 +106,6 @@ export class Edit extends Label {
 		super(Edit.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Edit.r.recycle(this);
-	}
-	
 	protected dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this._isEditing) {

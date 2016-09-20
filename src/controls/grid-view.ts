@@ -131,11 +131,6 @@ export class GridView extends ScrollView {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		GridView.recycleBinGridView.recycle(this);
-	}
-
 	public static TYPE = "grid-view";
 	private static recycleBinGridView = new RecyclableCreator<GridView>(function() {return new GridView()});
 	public static create(options?:any) : GridView {

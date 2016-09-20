@@ -881,7 +881,11 @@ export class Widget extends Emitter {
 		this._parent = null;
 		this._children = [];
 		this._layoutParam = null;
-		this._childrenLayouter = null
+		this._childrenLayouter = null;
+
+		if(this.recycle) {
+			this.recycle();
+		}
 	}
 
 	public requestRedraw() : Widget {
@@ -1428,6 +1432,7 @@ export class Widget extends Emitter {
 	protected ePropChangeEvent = Events.PropChangeEvent.create();
 	protected _layoutParam : any;
 	protected _childrenLayouter : Layouter;
+	protected recycle : Function;
 
 	public reset(type:string) : Widget {
 		this._x  = 0;

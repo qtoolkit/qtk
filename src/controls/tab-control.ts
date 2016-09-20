@@ -150,7 +150,6 @@ export class TabControl extends Widget {
 		super.dispose();
 		this._pages = null;
 		this._buttonGroup = null;
-		TabControl.r.recycle(this);
 	}
 
 	public  static TYPE = "tab-control";

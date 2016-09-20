@@ -208,7 +208,6 @@ export class TreeItem extends Widget {
 		this._data = null;
 		this.parentItem = null;
 		this._childrenItems = null;
-		TreeItem.recycleBin.recycle(this);
 	}
 	
 	public reset(type:string) : Widget {

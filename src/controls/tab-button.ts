@@ -187,7 +187,6 @@ export class TabButton extends RadioButton {
 		this._closeButton = null;
 		this._normalIcon = null;
 		this._currentIcon = null;
-		TabButton.re.recycle(this);
 	}
 
 	public static TYPE = "tab-button";

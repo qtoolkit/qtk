@@ -90,11 +90,6 @@ export class ColorTile extends Color {
 		super(ColorTile.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		ColorTile.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "color-tile";
 	private static recycleBin = new RecyclableCreator<ColorTile>(function() {return new ColorTile()});
 	public static create(options?:any) : ColorTile {

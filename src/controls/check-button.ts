@@ -90,11 +90,6 @@ export class CheckButton extends Widget {
 		super.dispatchClick(evt);
 	}
 
-	public dispose() {
-		super.dispose();
-		CheckButton.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "check-button";
 	private static recycleBin = new RecyclableCreator<CheckButton>(function() {return new CheckButton()});
 	public static create(options?:any) : CheckButton {

@@ -32,11 +32,6 @@ export class ListItem extends Widget {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		ListItem.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "list-item";
 	private static recycleBin = new RecyclableCreator<ListItem>(function() {return new ListItem()});
 	public static create(options?:any) : ListItem {

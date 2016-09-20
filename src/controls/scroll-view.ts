@@ -643,11 +643,6 @@ export class ScrollView extends Widget {
 		super(type ? type : ScrollView.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		ScrollView.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "scroll-view";
 	private static recycleBin = new RecyclableCreator<ScrollView>(function() {return new ScrollView()});
 	public static create(options?:any) : ScrollView{

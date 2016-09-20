@@ -9,11 +9,6 @@ export class Group extends Widget {
 		super(Group.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Group.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "group";
 	private static recycleBin = new RecyclableCreator<Group>(function() {return new Group()});
 	public static create(options?:any) : Group {

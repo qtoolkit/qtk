@@ -91,11 +91,6 @@ export class Label extends Widget {
 		super(type || Label.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Label.recycleBin.recycle(this);
-	}
-
 	protected onInit() {
 		super.onInit();
 		this.relayoutText();

@@ -89,11 +89,6 @@ export class ComboBoxItem extends ListItem {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		ComboBoxItem.r.recycle(this);
-	}
-
 	public static TYPE = "combo-box-item";
 	private static r = new RecyclableCreator<ComboBoxItem>(function() {return new ComboBoxItem()});
 	public static create(options?:any) : ComboBoxItem {

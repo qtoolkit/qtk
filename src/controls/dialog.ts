@@ -22,11 +22,6 @@ export class Dialog extends Window {
 		return this;
 	}
 
-	public dispose() {
-		super.dispose();
-		Dialog.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "dialog";
 	private static recycleBin = new RecyclableCreator<Dialog>(function() {return new Dialog()});
 	public static create(options?:any) : Dialog {

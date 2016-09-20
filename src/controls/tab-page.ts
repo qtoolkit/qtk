@@ -21,7 +21,7 @@ export class TabPage extends Page{
 
 	public dispose() {
 		super.dispose();
-		TabPage.r.recycle(this);
+		this._tabButton = null;
 	}
 
 	public  static TYPE = "page";

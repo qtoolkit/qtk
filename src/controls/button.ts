@@ -8,11 +8,6 @@ export class Button extends Widget {
 		super(Button.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Button.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "button";
 	private static recycleBin = new RecyclableCreator<Button>(function() {return new Button()});
 	public static create(options?:any) : Button {

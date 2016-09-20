@@ -64,11 +64,6 @@ export class Image extends Widget {
 		return this._style;
 	}
 	
-	public dispose() {
-		super.dispose();
-		Image.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "image";
 	private static recycleBin = new RecyclableCreator<Image>(function() {return new Image()});
 	public static create(options?:any) : Image{

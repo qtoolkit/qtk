@@ -224,8 +224,6 @@ export class Menu extends Dialog {
 		this._trigger = null;
 		this._listView = null;
 		this._openedMenu = null;
-
-		Menu.r.recycle(this);
 	}
 
 	public static TYPE = "menu";

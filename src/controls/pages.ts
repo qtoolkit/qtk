@@ -65,11 +65,6 @@ export class Pages extends Widget {
 		super(Pages.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		Pages.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "pages";
 	private static recycleBin = new RecyclableCreator<Pages>(function() {return new Pages()});
 	public static create() : Pages {
