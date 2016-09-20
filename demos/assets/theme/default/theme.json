@@ -33,6 +33,13 @@
 			"lineColor" : "#AAAAAA"
 		}
 	},
+	"edit.tips": {
+		"extends": "edit",
+		"common" : {
+			"textBaseline" : "top",
+			"textColor" : "#CCCCCC"
+		}
+	},
 	"edit.sl": {
 		"extends": "edit"
 	},

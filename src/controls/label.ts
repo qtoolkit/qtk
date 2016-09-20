@@ -31,9 +31,7 @@ export class Label extends Widget {
 		return this;
 	}
 
-	protected drawTextSL(ctx:any, style:Style) : Widget {
-		var text = this._textLines[0].text;
-
+	protected drawTextSL(ctx:any, text:string, style:Style) : Widget {
 		if(text && style.textColor) {
 			var x = this.leftPadding;
 			var y = this.topPadding;
@@ -62,7 +60,8 @@ export class Label extends Widget {
 			if(this._multiLines) {
 				this.drawTextML(ctx, style);
 			}else{
-				this.drawTextSL(ctx, style);
+				var text = this._textLines[0].text;
+				this.drawTextSL(ctx, text, style);
 			}
 		}
 

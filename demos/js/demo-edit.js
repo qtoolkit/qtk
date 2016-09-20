@@ -26,7 +26,7 @@ function onReady(app) {
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = SimpleLayouter.create();
 	
-	var edit = Edit.create();
+	var edit = Edit.create({inputTips:"Title"});
 	edit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
 	edit.childrenLayouter = SimpleLayouter.create();
 	win.addChild(edit);
@@ -47,7 +47,7 @@ function onReady(app) {
 		console.log("Blur:" + this.value);
 	});
 	
-	var mlEdit = Edit.create();
+	var mlEdit = Edit.create({inputTips:"Content"});
 	mlEdit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
 	mlEdit.childrenLayouter = SimpleLayouter.create();
 	mlEdit.multiLines = true;
