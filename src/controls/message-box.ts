@@ -237,8 +237,8 @@ export class MessageBox extends Dialog {
 		});
 	}
 
-	public static showMessage(msg:string, w:number, h:number, onClose:Function) {
-		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:h||0});
+	public static showMessage(msg:string, onClose:Function, w?:number) {
+		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:0});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.ok", text:"Close", onClick : null});
@@ -250,8 +250,8 @@ export class MessageBox extends Dialog {
 		messageBox.open();
 	}
 	
-	public static showConfirm(msg:string, w:number, h:number, onYes:Function, onNo:Function) {
-		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:h||0});
+	public static showConfirm(msg:string, onYes:Function, onNo:Function, w?:number) {
+		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:0});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : onNo});
@@ -264,8 +264,8 @@ export class MessageBox extends Dialog {
 		messageBox.open();
 	}
 	
-	public static showToast(msg:string, w:number, h:number, duration:number) {
-		var messageBox = MessageBox.create({app:Application.get(), styleType:"messagebox.toast", w:w||0, h:h||0});
+	public static showToast(msg:string, duration:number, w?:number) {
+		var messageBox = MessageBox.create({app:Application.get(), styleType:"messagebox.toast", w:w||0, h:0});
 
 		messageBox.createChildren(null, null, msg);
 		messageBox.on(Events.POINTER_UP, function(evt) {
@@ -283,9 +283,9 @@ export class MessageBox extends Dialog {
 		messageBox.open();
 	}
 	
-	public static showProgress(msg:string, w:number, h:number, taskStart:Function, onDone:Function) {
+	public static showProgress(msg:string, taskStart:Function, onDone:Function, w?:number) {
 		var rw = w || 200;
-		var rh = Math.max(h || 0, MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50);
+		var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
 
 		var messageBox = MessageBox.create({app:Application.get(), w:rw, h:rh});
 
