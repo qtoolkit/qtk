@@ -446,11 +446,13 @@ export class Widget extends Emitter {
 ///////////////////////////////////////////
 	public animate() : TWEEN.Tween {
 		var tween = new TWEEN.Tween(this);
+		this.requestRedraw();
 
 		return tween;
 	}
 
 	public scaleTo(sx:number, sy:number, duration?:number) : TWEEN.Tween {
+		this.requestRedraw();
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
 				tween.to({ scaleX : sx, scaleY : sy}, duration).start();
@@ -463,7 +465,20 @@ export class Widget extends Emitter {
 		}
 	}
 	
+	public opacityTo(opacity:number, duration?:number) : TWEEN.Tween {
+		this.requestRedraw();
+		if(duration > 0) {
+			var tween = new TWEEN.Tween(this);
+				tween.to({opacity:opacity}, duration).start();
+			return tween;
+		}else{
+			this.opacity = opacity;;
+			return null;
+		}
+	}
+	
 	public rotateTo(rotation:number, duration?:number) : TWEEN.Tween {
+		this.requestRedraw();
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
 				tween.to({ rotation : rotation}, duration).start();
@@ -477,6 +492,7 @@ export class Widget extends Emitter {
 	}
 
 	public moveTo(x:number, y:number, duration?:number) : TWEEN.Tween {
+		this.requestRedraw();
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
 				tween.to({ x: x, y: y}, duration).start();
@@ -631,8 +647,23 @@ export class Widget extends Emitter {
 	}
 
 	protected drawColorBackground(ctx:any, style:Style) : Widget {
+		var roundType = 0;
+		var roundTypeName = style.roundType;
+
+		if(roundTypeName) {
+			if(roundTypeName === "top") {
+				roundType = RoundType.TL | RoundType.TR;
+			}else if(roundTypeName === "bottom") {
+				roundType = RoundType.BL | RoundType.BR;
+			}else if(roundTypeName === "left") {
+				roundType = RoundType.BL | RoundType.TL;
+			}else if(roundTypeName === "right") {
+				roundType = RoundType.TR | RoundType.BR;
+			}
+		}
+
 		Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth,
-				0, 0, this.w, this.h, style.roundRadius);
+				0, 0, this.w, this.h, style.roundRadius, roundType);
 		return this;
 	}
 
@@ -766,7 +797,7 @@ export class Widget extends Emitter {
 	}
 
 	protected getStateForStyle() : WidgetState {
-		return this._state;
+		return this.enable ? this._state : WidgetState.DISABLE;
 	}
 
 	public getStyle() : Style {
@@ -849,6 +880,8 @@ export class Widget extends Emitter {
 		});
 		this._parent = null;
 		this._children = [];
+		this._layoutParam = null;
+		this._childrenLayouter = null
 	}
 
 	public requestRedraw() : Widget {

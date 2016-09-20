@@ -168,7 +168,7 @@ export class LinearLayouter extends Layouter {
 		return layouter;
 	}
 
-	public static createH(options:any) : LinearLayouter {
+	public static createH(options?:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
 		layouter.setOptions(options || {});
 		layouter.orientation = Orientation.H;

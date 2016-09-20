@@ -31,6 +31,7 @@ function onReady(app) {
 		{title:"Movable", data:"movable"},
 		{title:"Drag & Drop", data:"dnd"},
 		{title:"TreeView", data:"treeview"},
+		{title:"MessageBox", data:"messagebox"},
 		{title:"ListView", data:"listview"},
 		{title:"ComboBox", data:"combobox"},
 		{title:"Resizable", data:"resizable"},

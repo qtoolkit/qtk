@@ -156,8 +156,17 @@ export class Application extends Emitter implements IApplication {
 		}
 	}
 
-	static create(name:string) {
+	private static instance : Application;
+	public static get() : Application {
+		return Application.instance;
+	}
+
+	public static create(name:string) {
 		var app = new Application(name);
+
+		if(!Application.instance) {
+			Application.instance = app;
+		}
 
 		return app;
 	}

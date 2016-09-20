@@ -15,6 +15,7 @@
 	"label": {
 		"extends": "widget",
 		"common" : {
+			"backGroundColor" : null,
 			"textAlign" : "left"
 		}
 	},
@@ -56,9 +57,60 @@
 			"lineColor" : "#A8A8A8",
 			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
 		},
+		"disable" : {
+			"lineColor" : "#D7D7D7",
+			"textColor" : "#B1B1B1",
+			"backGroundColor" : "#F6F6F6"
+		},
 		"active" : {
 			"lineColor" : "#4D90FC",
 			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
+	},
+	"button.ok": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"lineColor" : "#9BC4ED",
+			"backGroundColor" : ["#6EB4F7","#53A5F8","#409bF9", "#268BFA", "#1A82FB"]
+		},
+		"over" : {
+			"lineColor" : "#2C82FB",
+			"backGroundColor" : ["#6EB4F7","#53A5F8","#409bF9", "#268BFA", "#1A82FB"]
+		},
+		"disable" : {
+			"lineColor" : "#D7D7D7",
+			"textColor" : "#B1B1B1",
+			"backGroundColor" : "#F6F6F6"
+		},
+		"active" : {
+			"lineColor" : "#2C82FB",
+			"backGroundColor" : ["#509AFB","#3F8EF4","#2B7EEC", "#2074E7", "#1469E1"]
+		}
+	},
+	"button.cancel": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5
+		},
+		"normal" : {
+			"lineColor" : "#D6D6D6",
+			"backGroundColor" : "#FFFFFF"
+		},
+		"over" : {
+			"lineColor" : "#2C82FB",
+			"backGroundColor" : "#FFFFFF"
+		},
+		"disable" : {
+			"lineColor" : "#D7D7D7",
+			"textColor" : "#B1B1B1",
+			"backGroundColor" : "#F6F6F6"
+		},
+		"active" : {
+			"lineColor" : "#2C82FB",
+			"backGroundColor" : ["#509AFB","#3F8EF4","#2B7EEC", "#2074E7", "#1469E1"]
 		}
 	},
 	"button-blue": {
@@ -349,6 +401,73 @@
 		"common" : {
 			"foreGroundImage" : "images/@density/menu-item-more.png"
 		}
+	},
+	"dialog.title-bg": {
+		"extends": "widget",
+		"common" : {
+			"roundType" : "top",
+			"roundRadius" : 5,
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		}
+	},
+	"dialog.title-text": {
+		"extends": "label",
+		"common" : {
+			"textAlign" : "left"
+		}
+	},
+	"messagebox.content": {
+		"extends": "label",
+		"common" : {
+			"textAlign" : "left",
+			"textBaseline" : "middle"
+		}
+	},
+	"messagebox": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5,
+			"backGroundColor" : "#ECECEC",
+			"lineColor" : "#9D9D9D"
+		}
+	},
+	"messagebox.toast": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 5,
+			"backGroundColor" : "#CCCCCC",
+			"lineColor" : null
+		}
+	},
+	"messagebox.alert.icon": {
+		"extends": "widget",
+		"common" : {
+			"backGroundImage" : "images/@density/alert.png",
+			"backGroundImageDrawType":"ICON"
+		}
+	},
+	"messagebox.info.icon": {
+		"extends": "widget",
+		"common" : {
+			"backGroundImage" : "images/@density/info.png",
+			"backGroundImageDrawType":"ICON"
+		}
+	},
+	"messagebox.question.icon": {
+		"extends": "widget",
+		"common" : {
+			"backGroundImage" : "images/@density/question.png",
+			"backGroundImageDrawType":"ICON"
+		}
+	},
+	"messagebox.button.close": {
+		"extends": "button",
+		"common" : {
+			"backGroundImageDrawType":"ICON"
+		},
+		 "normal" : {"backGroundImage" : "images/@density/close.normal.png"},
+		 "over" : {"backGroundImage" : "images/@density/close.over.png"},
+		 "active" : {"backGroundImage" : "images/@density/close.over.png"}
 	},
 	"window-normal": {
 		"extends": "widget"

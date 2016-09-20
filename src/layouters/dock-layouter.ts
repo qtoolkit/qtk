@@ -79,7 +79,7 @@ export class DockLayouter extends Layouter {
 		return DockLayouterParam.create(options);
 	}
 
-	static create(options:any) : DockLayouter {
+	static create(options?:any) : DockLayouter {
 		var layouter = new DockLayouter();
 
 		return layouter.setOptions(options);

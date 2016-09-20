@@ -7,7 +7,7 @@ import {MainLoop} from "./main-loop";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
 import {Image} from "./controls/image";
-import {Group} from "./controls/Group";
+import {Group} from "./controls/group";
 import {Edit} from "./controls/edit";
 import {Page} from "./controls/page";
 import {Pages} from "./controls/pages";
@@ -15,6 +15,7 @@ import {Button} from "./controls/button";
 import {TabPage} from "./controls/tab-page";
 import {TabButton} from "./controls/tab-button";
 import {TabControl} from "./controls/tab-control";
+import {MessageBox} from "./controls/message-box";
 import {TabButtonGroup} from "./controls/tab-button-group";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
@@ -101,6 +102,7 @@ export {
 	TabControl,
 	TabButton,
 	TabButtonGroup,
+	MessageBox,
 	Page,
 	Pages,
 	Label,

@@ -71,6 +71,10 @@ export class ListLayouter extends Layouter {
 		return this.rect;
 	}
 
+	public createParam(options?:any) { 
+		return ListLayouterParam.create(options);
+	}
+
 	static create(options:any) : ListLayouter {
 		var layouter = new ListLayouter();
 

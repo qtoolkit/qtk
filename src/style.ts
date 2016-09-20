@@ -20,6 +20,7 @@ export class Style extends Emitter {
 	private _lineWidth : number;
 	private _lineColor : string;
 	private _roundRadius : number;
+	private _roundType : string;
 	private _fontFamily : string;
 	private _fontSize : number;
 	private _textColor : string;
@@ -115,6 +116,10 @@ export class Style extends Emitter {
 		if(this._roundRadius) {
 			other._roundRadius = this._roundRadius;
 		}
+		
+		if(this._roundType) {
+			other._roundType = this._roundType;
+		}
 
 		return other;
 	}
@@ -200,6 +205,9 @@ export class Style extends Emitter {
 
 		if(this._roundRadius) {
 			json.roundRadius = this._roundRadius;
+		}
+		if(this._roundType) {
+			json.roundType = this._roundType;
 		}
 
 		return json;
@@ -290,6 +298,9 @@ export class Style extends Emitter {
 
 		if(json.roundRadius) {
 			this._roundRadius = json.roundRadius;
+		}
+		if(json.roundType) {
+			this._roundType = json.roundType;
 		}
 
 		this.notifyChanged();
@@ -466,6 +477,14 @@ export class Style extends Emitter {
 	}
 	public set roundRadius(value) {
 		this._roundRadius = value;
+		this.notifyChanged();
+	}
+
+	public get roundType() {
+		return this._roundType;
+	}
+	public set roundType(value) {
+		this._roundType = value;
 		this.notifyChanged();
 	}
 

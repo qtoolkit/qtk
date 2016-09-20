@@ -59,7 +59,10 @@ export class Window extends Widget {
 	public grab() : Widget {
 		if(!this._grabbed && this.canvas) {
 			this._grabbed = true;
-			this.canvas.grab();
+			var canvas = this.canvas;
+			setTimeout(evt => {
+				canvas.grab();
+			}, 0);
 		}
 
 		return this;

@@ -105,6 +105,11 @@ export class GridLayouter extends Layouter {
 		return ret;
 	}
 	
+	public createParam(options?:any) { 
+		return GridLayouterParam.create(options);
+	}
+
+	
 	/**
 	 * 网格项的左边的空白。
 	 */
@@ -145,10 +150,6 @@ export class GridLayouter extends Layouter {
 	 */
 	public rowHeight : number;
 	
-	public createParam(options?:any) {
-		return GridLayouterParam.create(options);
-	}
-
 	private rect : Rect;
 
 	static create(options:any) : GridLayouter {
