@@ -51,7 +51,7 @@ var HtmlEdit = (function (_super) {
         _super.prototype.create.call(this, tag);
         var me = this;
         var element = this.element;
-        element.onkeypress = function (e) {
+        element.onkeyup = function (e) {
             var detail = { oldValue: this.value, newValue: this.value };
             if (e.keyCode === 13 && tag === "input") {
                 this.blur();

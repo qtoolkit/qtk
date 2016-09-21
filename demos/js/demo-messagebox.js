@@ -1,35 +1,35 @@
 
-function addShowMessage(win, msg, w, h) {
+function addShowMessage(win, msg, w) {
 	var item = qtk.Button.create({text:"Show Message"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showMessage(msg, w, h, function(evt) {
+		qtk.MessageBox.showMessage(msg, function(evt) {
 			console.log("close");
-		});
+		}, w);
 	});
 	win.addChild(item, true);
 }
 
-function addShowConfirm(win, msg, w, h) {
+function addShowConfirm(win, msg, w) {
 	var item = qtk.Button.create({text:"Show Confirm"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showConfirm(msg, w, h, function(evt) {
+		qtk.MessageBox.showConfirm(msg, function(evt) {
 			console.log("yes");
 		},function(evt) {
 			console.log("no");
-		});
+		}, w);
 	});
 	win.addChild(item, true);
 }
 
-function addShowToast(win, msg, w, h) {
+function addShowToast(win, msg, w) {
 	var item = qtk.Button.create({text:"Show Toast"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showToast(msg, w, h, 1000);
+		qtk.MessageBox.showToast(msg, 1000, w);
 	});
 	win.addChild(item, true);
 }
 
-function addShowProgress(win, w, h) {
+function addShowProgress(win, w) {
 	function download(onProgress) {
 		var progress = 0;
 		function updateProgress() {
@@ -44,9 +44,9 @@ function addShowProgress(win, w, h) {
 
 	var item = qtk.Button.create({text:"Show Progress"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showProgress("Downloading...", w, h, download, function(evt) {
+		qtk.MessageBox.showProgress("Downloading...",  download, function(evt) {
 			console.log("done");
-		});
+		}, w);
 	});
 	win.addChild(item, true);
 }
@@ -55,12 +55,12 @@ function isInputValid(value) {
 	return value && value.length > 3;
 }
 
-function addShowInput(win, msg, value, w, h) {
+function addShowInput(win, inputTips, value, inputType, w) {
 	var item = qtk.Button.create({text:"Show Input"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showInput(msg, value, isInputValid, function(value) {
+		qtk.MessageBox.showInput("Please Input...", inputTips, value, isInputValid, function(value) {
 			console.log("input:" + value);
-		}, w);
+		}, inputType, w);
 	});
 	win.addChild(item, true);
 }
@@ -81,16 +81,17 @@ function onReady(app) {
 	addShowConfirm(win, text, 300);
 	
 	addShowProgress(win);
+	addShowProgress(win, 500);
 	addShowProgress(win, 300);
-	addShowProgress(win, 300, 200);
 
 	addShowToast(win, "Hello QToolKit!");
 	addShowToast(win, text);
 	addShowToast(win, text, 300);
 
 	addShowInput(win, "Name", "Jim");
-	addShowInput(win, "Age");
-	addShowInput(win, "Address", null, 400);
+	addShowInput(win, "Age", null, "number");
+	addShowInput(win, "Address", null, null, 400);
+
 	win.relayoutChildren();
 	win.open();
 }
