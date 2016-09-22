@@ -37,6 +37,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "carota": "git+https://github.com/qtoolkit/carota.git",
     "es6-promise": "^3.2.1",
     "eventemitter3": "^1.2.0",
     "scroller": "0.0.3",

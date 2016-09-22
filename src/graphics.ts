@@ -1,5 +1,6 @@
 import {Rect} from "./rect";
 import {Style} from "./style";
+var carota = require('carota');
 var ut = require('unicode-tokenizer')
 var tokenizer = ut.createTokenizerStream();
 var Token = ut.Token;

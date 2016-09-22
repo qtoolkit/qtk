@@ -4,6 +4,7 @@ import {Emitter} from "./emitter";
 import {PointerEventDetail, KeyEventDetail, WheelEventDetail} from "./event-detail";
 
 var grabs = [];
+var keyGrabs = [];
 var lastDetail : PointerEventDetail;
 var ctrlKey = false;
 var altKey = false;
@@ -20,6 +21,10 @@ function dispatchEvent(target:any, type:string, detail:any) {
 	var realTarget = target;
 	if(grabs.length) {
 		realTarget = grabs[grabs.length-1];
+	}else if(keyGrabs.length) {
+		if((type === Events.KEYDOWN || type === Events.KEYUP) && target.tagName === "BODY") {
+			realTarget = keyGrabs[keyGrabs.length-1];
+		}
 	}
 
 	var event = new CustomEvent(type, {detail:detail});
@@ -266,6 +271,20 @@ export function grab(target:any) {
  */
 export function ungrab(target?:any) {
 	return grabs.pop();
+}
+
+/**
+ * grab输入事件。输入事件后发送给最后grab的target。
+ */
+export function grabKey(target:any) {
+	keyGrabs.push(target);
+}
+
+/**
+ * ungrab移出最后grab的target。
+ */
+export function ungrabKey(target?:any) {
+	return keyGrabs.pop();
 }
 
 /**

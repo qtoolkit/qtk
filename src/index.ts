@@ -17,6 +17,8 @@ import {TabButton} from "./controls/tab-button";
 import {TabControl} from "./controls/tab-control";
 import {MessageBox} from "./controls/message-box";
 import {TabButtonGroup} from "./controls/tab-button-group";
+import {RichText} from "./controls/rich-text";
+import {RichTextEdit} from "./controls/rich-text-edit";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {Switch} from "./controls/switch";
@@ -102,6 +104,8 @@ export {
 	TabControl,
 	TabButton,
 	TabButtonGroup,
+	RichText,
+	RichTextEdit,
 	MessageBox,
 	Page,
 	Pages,

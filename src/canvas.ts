@@ -99,6 +99,14 @@ export class Canvas extends Emitter {
 			this.canvas.id = value;
 		}
 	}
+	
+	public grabKey() {
+		inputEventAdapter.grabKey(this.canvas);
+	}
+
+	public ungrabKey() {
+		inputEventAdapter.ungrabKey(this.canvas);
+	}
 
 	public grab() {
 		inputEventAdapter.grab(this.canvas);

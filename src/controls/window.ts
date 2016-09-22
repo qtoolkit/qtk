@@ -94,6 +94,7 @@ export class Window extends Widget {
 	public open() : Widget {
 		if(this._hasOwnCanvas) {
 			this.createCanvas();
+			this._canvas.grabKey();
 		}
 
 		this.init();
@@ -103,6 +104,9 @@ export class Window extends Widget {
 	}
 
 	public close () {
+		if(this._hasOwnCanvas) {
+			this._canvas.ungrabKey();
+		}
 		this.dispatchEvent({type:Events.CLOSE});
 		this.deinit();
 		this.dispose();

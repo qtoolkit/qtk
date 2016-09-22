@@ -476,6 +476,12 @@
 		 "over" : {"backGroundImage" : "images/@density/close.over.png"},
 		 "active" : {"backGroundImage" : "images/@density/close.over.png"}
 	},
+	"rich-text": {
+		"extends": "widget"
+	},
+	"rich-text-edit": {
+		"extends": "widget"
+	},
 	"window-normal": {
 		"extends": "widget"
 	}
