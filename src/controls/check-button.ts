@@ -20,10 +20,6 @@ export class CheckButton extends Widget {
 		this.notifyChange();	
 	}
 
-	protected notifyChange() {
-		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:!this.value}));
-	}
-
 	protected getStyleType() : string {
 		var appendix = this.value ? "checked" : "unchecked";
 		

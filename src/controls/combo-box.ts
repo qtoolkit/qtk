@@ -263,11 +263,6 @@ export class ComboBox extends Widget {
 		super(ComboBox.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		ComboBox.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "combo-box";
 	private static recycleBin = new RecyclableCreator<ComboBox>(function() {return new ComboBox()});
 	public static create(options?:any) : ComboBox {

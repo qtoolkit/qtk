@@ -61,7 +61,7 @@ export class Edit extends Label {
 			if(this._text || this._isEditing) {
 				return this.multiLines ? "edit.ml" : "edit.sl";
 			}else{
-				return "edit.tips";
+				return this.multiLines ? "edit.ml.tips" : "edit.sl.tips";
 			}
 		}
 	}

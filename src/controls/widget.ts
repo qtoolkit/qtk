@@ -16,8 +16,8 @@ import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {IThemeManager} from "../itheme-manager";
 import {RoundType, Graphics} from "../graphics";
-import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {DirtyRectContext} from "../dirty-rect-context";
+import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 
 /**
@@ -684,14 +684,19 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	protected getTextRect(style:Style) : Rect {
+		var x = this.leftPadding;
+		var y = this.topPadding;
+		var w = this.w - x - this.rightPadding;
+		var h = this.h - y - this.bottomPadding;
+
+		return Rect.rect.init(x, y, w, h);
+	}
+
 	protected drawText(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
 		if(text && style.textColor) {
-			var x = this.leftPadding;
-			var y = this.topPadding;
-			var w = this.w - x - this.rightPadding;
-			var h = this.h - y - this.bottomPadding;
-			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(x, y, w, h));
+			Graphics.drawTextSL(ctx, text, style, this.getTextRect(style));
 		}
 
 		return this;
@@ -1356,10 +1361,6 @@ export class Widget extends Emitter {
 		return this.setProp("text", text, notify);
 	}
 
-	public setValue(value:number, notify:boolean) : Widget {
-		return this.setProp("value", value, notify);
-	}
-
 	public useBehavior(type:string, options:any) : Behavior {
 		var behavior : Behavior;
 		if(!this._behaviors[type]) {
@@ -1433,6 +1434,32 @@ export class Widget extends Emitter {
 	protected _layoutParam : any;
 	protected _childrenLayouter : Layouter;
 	protected recycle : Function;
+	
+	protected notifyChange() {
+		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:!this.value}));
+	}
+	
+	public setValue(value:boolean, notify:boolean, exclude:boolean) {
+		if(exclude) {
+			var type = this.type;
+			if(this.parent && value) {
+				var arr = this.parent.children;
+				arr.forEach((child:any) => {
+					if(child !== this && child.type === type) {
+						if(child.value) {
+							child.setProp("value", false, true);
+						}
+					}
+				});
+			}
+			this.setProp("value", true, notify);
+		}else{
+			this.setProp("value", value, notify);
+		}
+		if(notify) {
+			this.notifyChange();	
+		}
+	}
 
 	public reset(type:string) : Widget {
 		this._x  = 0;

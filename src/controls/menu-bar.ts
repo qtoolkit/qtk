@@ -204,7 +204,6 @@ export class MenuBarItem extends Widget {
 
 	public dispose() {
 		super.dispose();
-		MenuBarItem.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "menu-bar-item";

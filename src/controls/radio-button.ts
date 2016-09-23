@@ -14,20 +14,7 @@ export class RadioButton extends CheckButton {
 	}
 
 	public set value(value:boolean) {
-		var type = this.type;
-		if(this.parent && value) {
-			var arr = this.parent.children;
-			arr.forEach((child:any) => {
-				if(child !== this && child.type === type) {
-					if(child.value) {
-						child.setProp("value", false, true);
-					}
-				}
-			});
-		}
-
-		this.setProp("value", true, true);
-		this.notifyChange();	
+		this.setValue(value, true, true);
 	}
 
 	public static TYPE = "radio-button";

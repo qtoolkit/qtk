@@ -212,11 +212,6 @@ export class ColorLine extends Color {
 		super(ColorLine.TYPE);
 	}
 
-	public dispose() {
-		super.dispose();
-		ColorLine.recycleBin.recycle(this);
-	}
-
 	public static TYPE = "color-tile";
 	private static recycleBin = new RecyclableCreator<ColorLine>(function() {return new ColorLine()});
 	public static create(options?:any) : ColorLine {

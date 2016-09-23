@@ -33,13 +33,6 @@
 			"lineColor" : "#AAAAAA"
 		}
 	},
-	"edit.tips": {
-		"extends": "edit",
-		"common" : {
-			"textBaseline" : "top",
-			"textColor" : "#CCCCCC"
-		}
-	},
 	"edit.sl": {
 		"extends": "edit"
 	},
@@ -49,6 +42,20 @@
 			"textAlign" : "left",
 			"textBaseline" : "top",
 			"roundRadius" : 5
+		}
+	},
+	"edit.sl.tips": {
+		"extends": "edit",
+		"common" : {
+			"textBaseline" : "middle",
+			"textColor" : "#CCCCCC"
+		}
+	},
+	"edit.ml.tips": {
+		"extends": "edit",
+		"common" : {
+			"textBaseline" : "top",
+			"textColor" : "#CCCCCC"
 		}
 	},
 	"button": {
@@ -398,6 +405,12 @@
 		}
 	},
 	"menu-item.checkable": {
+		"extends": "menu-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/menu-item-checked.png"
+		}
+	},
+	"list-item.checkable": {
 		"extends": "menu-item",
 		"common" : {
 			"foreGroundImage" : "images/@density/menu-item-checked.png"

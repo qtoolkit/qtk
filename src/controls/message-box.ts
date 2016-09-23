@@ -8,6 +8,7 @@ import {Button} from "./button";
 import TWEEN = require("tween.js");
 import Events = require("../events");
 import {Graphics} from "../graphics";
+import {ListView} from "./list-view";
 import {ProgressBar} from "./progress-bar";
 import {Application} from "../application";
 import {IApplication} from "../iapplication";
@@ -16,6 +17,7 @@ import {WidgetFactory} from "./widget-factory";
 import {Direction, Orientation} from "../consts";
 import {RecyclableCreator} from "../recyclable-creator";
 import {ImageTile, ImageDrawType} from "../image-tile";
+import {ListItem, ListItemCheckable} from "./list-item";
 import {DockLayouter, DockLayouterParam} from "../layouters/dock-layouter";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 import {GridLayouter, GridLayouterParam} from "../layouters/grid-layouter";
@@ -220,7 +222,6 @@ export class MessageBox extends Dialog {
 		this._title = null;
 		this._content = null;
 		this._buttons = null;
-		MessageBox.rBin.recycle(this);
 	}
 
 	public open() : Widget {
@@ -238,7 +239,10 @@ export class MessageBox extends Dialog {
 	}
 
 	public static showMessage(msg:string, onClose:Function, w?:number) {
-		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:0});
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var rw = Math.min(vp.w, w || 0);
+		var messageBox = MessageBox.create({app:app, w:rw, h:0});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.ok", text:"Close", onClick : null});
@@ -251,7 +255,10 @@ export class MessageBox extends Dialog {
 	}
 	
 	public static showConfirm(msg:string, onYes:Function, onNo:Function, w?:number) {
-		var messageBox = MessageBox.create({app:Application.get(), w:w||0, h:0});
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var rw = Math.min(vp.w, w || 0);
+		var messageBox = MessageBox.create({app:app, w:rw, h:0});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : onNo});
@@ -265,7 +272,10 @@ export class MessageBox extends Dialog {
 	}
 	
 	public static showToast(msg:string, duration:number, w?:number) {
-		var messageBox = MessageBox.create({app:Application.get(), styleType:"messagebox.toast", w:w||0, h:0});
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var rw = Math.min(vp.w, w || 0);
+		var messageBox = MessageBox.create({app:app, styleType:"messagebox.toast", w:rw, h:0});
 
 		messageBox.createChildren(null, null, msg);
 		messageBox.on(Events.POINTER_UP, function(evt) {
@@ -284,10 +294,12 @@ export class MessageBox extends Dialog {
 	}
 	
 	public static showProgress(msg:string, taskStart:Function, onDone:Function, w?:number) {
-		var rw = w || 200;
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var rw = Math.min(vp.w, w || 0) || 200;
 		var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
 
-		var messageBox = MessageBox.create({app:Application.get(), w:rw, h:rh});
+		var messageBox = MessageBox.create({app:app, w:rw, h:rh});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.ok", text:"Close", onClick : null});
@@ -321,10 +333,12 @@ export class MessageBox extends Dialog {
 	
 	public static showInput(title:string, inputTips:string, value:string, 
 						isValueValid:Function, onDone:Function, inputType?:string, w?:number) {
-		var rw = w || 200;
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var rw = Math.min(vp.w, w || 0) || 200;
 		var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
 
-		var messageBox = MessageBox.create({app:Application.get(), w:rw, h:rh});
+		var messageBox = MessageBox.create({app:app, w:rw, h:rh});
 
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : null});
@@ -352,6 +366,57 @@ export class MessageBox extends Dialog {
 		okButton.enable = isValueValid(value);
 
 		group.addChild(edit);
+		messageBox.open();
+	}
+	
+	public static showChoice(title:string, data:Array<any>, multiple:boolean, 
+							 onDone:Function, w?:number, h?:number) {
+		var itemHeight = 30;
+		var app = Application.get();
+		var vp = app.getViewPort();
+		var contentHeight = Math.min(8, data.length) * itemHeight;
+		var rw = Math.min(vp.w, w || 0) || 300;
+		var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
+
+		var messageBox = MessageBox.create({app:app, w:rw, h:rh});
+
+		var buttonsOption = new ButtonsOptions();
+		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : null});
+		buttonsOption.buttons.push({styleType: "button.ok", text:"OK", onClick : onOK});
+
+		var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
+		messageBox.createChildren(titleOptions, buttonsOption, null);
+		
+		var group = messageBox.content;
+		var listView = ListView.create({itemHeight:itemHeight, dragToScroll:true});
+		group.padding = 5;
+		group.topPadding = 5;
+		group.childrenLayouter = SimpleLayouter.create();
+		listView.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"100%", h:"100%"});
+
+		data.forEach(iter => {
+			var item = ListItemCheckable.create({
+				multiCheckable:multiple, 
+				iconURL:iter.iconURL,
+				text:iter.text,
+				userData:iter,
+				leftPadding:2
+			});
+			listView.addChild(item, true);	
+		});
+		listView.relayoutChildren();
+
+		function onOK() {
+			var ret = [];
+			listView.children.forEach((iter:ListItemCheckable)=> {
+				if(iter.value) {
+					ret.push(iter.userData);
+				}
+			});
+			onDone(ret);
+		}
+
+		group.addChild(listView);
 		messageBox.open();
 	}
 

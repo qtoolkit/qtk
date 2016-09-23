@@ -378,8 +378,6 @@ export class MenuItem extends Widget {
 		this.checkable = false;
 		this.shortcut = null;
 		this.onInitSubMenu = null;
-
-		MenuItem.recycleBin.recycle(this);
 	}
 
 	public static TYPE = "menu-item";

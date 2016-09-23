@@ -65,7 +65,7 @@ export class ListView extends ScrollView {
 	public relayoutChildren() : Rect {
 		var r = super.relayoutChildren();
 		this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-		this.contentHeight = r.h + this.topPadding + this.bottomPadding + this.itemHeight;
+		this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
 
 		return r;
 	}
@@ -80,7 +80,7 @@ export class ListView extends ScrollView {
 	public reset(type:string) : Widget {
 		super.reset(type);
 		this._itemSpacing = 0;
-		this._itemHeight = 80;
+		this._itemHeight = 30;
 		this.scrollerOptions.scrollingX = false;
 		this._childrenLayouter = ListLayouter.create({height:this.itemHeight, spacing:0});
 		

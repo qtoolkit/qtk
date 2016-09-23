@@ -65,6 +65,26 @@ function addShowInput(win, inputTips, value, inputType, w) {
 	win.addChild(item, true);
 }
 
+
+function addShowChoice(win, multiple, w, h) {
+	var iconURL = multiple ? null : '/demos/assets/icons/x2/favor.normal.png';
+	var data = [
+			{text:"First", iconURL:iconURL},
+			{text:"Second", iconURL:iconURL},
+			{text:"Third", iconURL:iconURL},
+			{text:"Left", iconURL:iconURL},
+			{text:"Center", iconURL:iconURL},
+			{text:"Right", iconURL:iconURL},
+		];
+	var item = qtk.Button.create({text:"showChoose"});
+	item.on(qtk.Events.CLICK, function(evt) {
+		qtk.MessageBox.showChoice("Please Choose", data, multiple, function onDone(ret) {
+			console.log(ret);
+		}, w, h);
+	});
+	win.addChild(item, true);
+}
+
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app,  w:vp.width, h:vp.height, padding : 10});
@@ -92,6 +112,10 @@ function onReady(app) {
 	addShowInput(win, "Age", null, "number");
 	addShowInput(win, "Address", null, null, 400);
 
+	addShowChoice(win, true);
+	addShowChoice(win, false);
+	addShowChoice(win, true, 500);
+	
 	win.relayoutChildren();
 	win.open();
 }
