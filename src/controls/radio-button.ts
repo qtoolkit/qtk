@@ -9,10 +9,11 @@ export class RadioButton extends CheckButton {
 		super(type || RadioButton.TYPE);
 	}
 	
-	public get value() {
+	public get value() : boolean {
 		return this._value;
 	}
-	public set value(value) {
+
+	public set value(value:boolean) {
 		var type = this.type;
 		if(this.parent && value) {
 			var arr = this.parent.children;
@@ -26,6 +27,7 @@ export class RadioButton extends CheckButton {
 		}
 
 		this.setProp("value", true, true);
+		this.notifyChange();	
 	}
 
 	public static TYPE = "radio-button";

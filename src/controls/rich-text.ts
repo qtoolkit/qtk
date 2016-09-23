@@ -5,13 +5,16 @@ import Events = require("../events");
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
+import {ScrollView, ScrollerBarVisibility} from "./scroll-view";
+
 var carota = require('carota');
 var rect = carota.rect;
 var createDoc = carota.document;
 
-export class RichText extends Widget {
+export class RichText extends ScrollView {
 	protected _doc : any;
 	protected _data : any;
+    protected _verticalAlignment = 'top';
 
 	protected hasFocus() : boolean {
 		return false;
@@ -27,34 +30,75 @@ export class RichText extends Widget {
 	constructor(type?:string) {
 		super(type||RichText.TYPE);
 	}
+    
+    protected getVerticalOffset() {
+    	var h = this.h;
+    	var doc = this._doc;
+        var docHeight = doc.frame.bounds().h;
+        if (docHeight < h) { 
+            switch (this._verticalAlignment) {
+                case 'middle':
+                    return (h - docHeight) / 2;
+                case 'bottom':
+                    return h - docHeight;
+            }
+        }
+        return 0;
+    }
 
-	protected drawText(ctx:any, style:Style) : Widget {
-		var w = this.w;
-		var h = this.h;
+	protected doDrawChildren(ctx:any) : Widget{
 		var doc = this._doc;
-        var availableWidth = w;
-        if (doc.width() !== availableWidth) {
-            doc.width(availableWidth);
+		var x = this.leftPadding;
+		var y = this.topPadding;
+		var w = this.w - this.leftPadding - this.rightPadding;
+		var h = this.h - this.topPadding - this.bottomPadding;
+       
+       	if(this.isVScrollBarVisible()) {
+			w -= this.scrollBarStyle.size;
+		}
+
+        if (doc.width() !== w) {
+            doc.width(w);
         }
 
-        var logicalHeight = h;
-        var docHeight = doc.frame.bounds().h;
-        var logicalWidth = Math.max(doc.frame.actualWidth(), w);
-        
 		ctx.save();
-        ctx.clearRect(0, 0, logicalWidth, logicalHeight);
-        doc.draw(ctx, rect(0, 0, logicalWidth, logicalHeight));
+        ctx.translate(x, y);
+        doc.draw(ctx, rect(0, this._oy, w, h));
         doc.drawSelection(ctx, this.hasFocus());
         ctx.restore();
     	
 		return this;
 	};
 
+	protected adjustSize() {
+		var doc = this._doc;
+		var w = this.w - this.leftPadding - this.rightPadding;
+		var h = this.h - this.topPadding - this.bottomPadding;
+
+        doc.width(w);
+        var r = doc.frame.bounds();
+        if(r.h > h) {
+        	w -= this.scrollBarStyle.size;
+        	doc.width(w);
+		}
+        
+        var r = doc.frame.bounds();
+		this.contentWidth = r.w;
+		this.contentHeight = r.h;
+	}
+
 	protected onInit() {
+		this.dragToScroll = true;
+		this.scrollerOptions.scrollingX = false;
+		
 		super.onInit();
-		this._doc = createDoc();
-		this._doc.load(this._data);
-		this._doc.toggleCaret();
+		
+		var doc = createDoc();
+		doc.load(this._data);
+		doc.toggleCaret();
+        
+        this._doc = doc;
+        this.adjustSize();
 	}
 
 	public dispose(){
@@ -63,9 +107,9 @@ export class RichText extends Widget {
 	}
 
 	public static TYPE = "rich-text";
-	private static recycleBin = new RecyclableCreator<RichText>(function() {return new RichText()});
+	private static reBin = new RecyclableCreator<RichText>(function() {return new RichText()});
 	public static create(options?:any) : RichText {
-		return <RichText>RichText.recycleBin.create().reset(RichText.TYPE).set(options);
+		return <RichText>RichText.reBin.create().reset(RichText.TYPE).set(options);
 	}
 };
 

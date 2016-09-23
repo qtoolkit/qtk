@@ -35,10 +35,88 @@ export class RichTextEdit extends RichText {
 	protected _richClipboard = null;
 	protected _plainClipboard = null;
 	protected _selectDragStart = null;
-    protected _verticalAlignment = 'top';
 
 	constructor() {
 		super(RichTextEdit.TYPE);
+	}
+
+	public undo() {
+		this._doc.performUndo();
+	}
+	
+	public redo() {
+		this._doc.performUndo(true);
+	}
+
+	public selectAll() {
+		var length = this._doc.frame.length - 1;
+		this._doc.select(0, length);
+	}
+
+	public setSelectedFont(value:any) {
+		this.setSelectedFormatting("font", value);
+	}
+	public getSelectedFont() : any {
+		return this.getSelectedFormatting("font");
+	}
+	public setSelectedSize(value:any) {
+		this.setSelectedFormatting("size", value);
+	}
+	public getSelectedSize() : any {
+		return this.getSelectedFormatting("size");
+	}
+	public setSelectedBold(value:any) {
+		this.setSelectedFormatting("bold", value);
+	}
+	public getSelectedBold() : any {
+		return this.getSelectedFormatting("bold");
+	}
+	public setSelectedItalic(value:any) {
+		this.setSelectedFormatting("italic", value);
+	}
+	public getSelectedItalic() : any {
+		return this.getSelectedFormatting("italic");
+	}
+	public setSelectedUnderline(value:any) {
+		this.setSelectedFormatting("underline", value);
+	}
+	public getSelectedUnderline() : any {
+		return this.getSelectedFormatting("underline");
+	}
+	public setSelectedStrikeout(value:any) {
+		this.setSelectedFormatting("strikeout", value);
+	}
+	public getSelectedStrikeout() : any {
+		return this.getSelectedFormatting("strikeout");
+	}
+	public setSelectedAlign(value:any) {
+		this.setSelectedFormatting("align", value);
+	}
+	public getSelectedAlign() : any {
+		return this.getSelectedFormatting("align");
+	}
+	public setSelectedScript(value:any) {
+		this.setSelectedFormatting("script", value);
+	}
+	public getSelectedScript() : any {
+		return this.getSelectedFormatting("script");
+	}
+	public setSelectedColor(value:any) {
+		this.setSelectedFormatting("color", value);
+	}
+	public getSelectedColor() : any {
+		return this.getSelectedFormatting("color");
+	}
+
+	public setSelectedFormatting(id:string, value:any) : Widget {
+		var range = this._doc.selectedRange();
+		range.setFormatting(id, value);
+
+		return this;
+	}
+	
+	public getSelectedFormatting(id:string) : any {
+		return  null;
 	}
 
     protected exhausted(ordinal, direction) {
@@ -264,24 +342,9 @@ export class RichTextEdit extends RichText {
         return handled;
     };
     
-    protected getVerticalOffset() {
-    	var h = this.h;
-    	var doc = this._doc;
-        var docHeight = doc.frame.bounds().h;
-        if (docHeight < h) { 
-            switch (this._verticalAlignment) {
-                case 'middle':
-                    return (h - docHeight) / 2;
-                case 'bottom':
-                    return h - docHeight;
-            }
-        }
-        return 0;
-    }
-
 	protected findNodeByEvent(evt:any) {
-		var x = evt.x - this.x;
-		var y = evt.y - this.y;
+		var x = evt.x - this.x + this.offsetX;
+		var y = evt.y - this.y + this.offsetY;
         var node = this._doc.byCoordinate(x, y - this.getVerticalOffset());
 
         return node;

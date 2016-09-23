@@ -1,6 +1,7 @@
 
 import {Widget} from "./widget";
 import {Style} from "../style";
+import Events = require("../events");
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
@@ -8,6 +9,19 @@ import {RecyclableCreator} from "../recyclable-creator";
 export class CheckButton extends Widget {
 	constructor(type?:string) {
 		super(type || CheckButton.TYPE);
+	}
+
+	public get value() : boolean {
+		return this._value;
+	}
+
+	public set value(value:boolean) {
+		this.setProp("value", value, true);
+		this.notifyChange();	
+	}
+
+	protected notifyChange() {
+		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:!this.value}));
 	}
 
 	protected getStyleType() : string {
