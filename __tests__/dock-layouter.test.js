@@ -1,7 +1,10 @@
 
 describe('DockLayouter', function() {
 	this.timeout(3000);
-	var win = qtk.WindowNormal.create();
+	var app = new qtk.Application.create("test");
+	app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
+
+	var win = qtk.WindowNormal.create({app:app});
 	win.resizeTo(600, 600);
 	win.childrenLayouter = qtk.DockLayouter.create();
    

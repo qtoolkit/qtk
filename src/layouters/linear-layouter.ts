@@ -232,7 +232,8 @@ export class LinearLayouterParam {
 	public static createWithType(type:string, opts:any) : LinearLayouterParam {
 		var options = opts || {};
 		return new LinearLayouterParam(type, options.w || options.width, options.h || options.height, 
-						 options.spacing||0, options.align||Align.C, options.position || 1);
+						 options.spacing||0, options.align||Align.C, 
+						 options.position === undefined ? 1 : options.position);
 	}
 
 	public static create(opts:any) : LinearLayouterParam {
