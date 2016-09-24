@@ -279,15 +279,17 @@ export class MessageBox extends Dialog {
 
 		messageBox.createChildren(null, null, msg);
 		messageBox.on(Events.POINTER_UP, function(evt) {
-			this.animateClose();
-			messageBox = null;
+			if(messageBox) {
+				this.animateClose();
+				messageBox = null;
+			}
 		});
 		
 		setTimeout(evt => {
 			if(messageBox) {
 				messageBox.animateClose();
+				messageBox = null;
 			}
-			messageBox = null;
 		}, duration || 3000);
 
 		messageBox.open();
