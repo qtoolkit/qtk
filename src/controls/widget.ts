@@ -29,6 +29,35 @@ export class Widget extends Emitter {
 		this.type = type;
 	}
 
+	/**
+	 * 同时设置多个属性。
+	 */
+	public set(props?:any) : Widget {
+		if(props) {
+			for(var key in props) {
+				this[key] = props[key];
+			}
+		}
+		return this;
+	}
+
+	/**
+	 * 同时获取多个属性。
+	 */
+	public get(props:any) : any {
+		if(props) {
+			for(var key in props) {
+				props[key] = this[key];
+			}
+		}
+		return props;
+	}
+
+	/**
+	 * 把全局的坐标转换成相对于当前控件左上角的坐标。
+	 * @param p 全局坐标。
+	 * @returns 相对于当前控件左上角的坐标。
+	 */
 	public toLocalPoint(p:Point) : Point {
 		p.x -= this.x;
 		p.y -= this.y;
@@ -43,6 +72,11 @@ export class Widget extends Emitter {
 		return p;
 	}
 	
+	/**
+	 * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
+	 * @param p Pointer事件的坐标。
+	 * @returns 相对于当前控件左上角的坐标。
+	 */
 	public eventPointToLocal(p:Point) : Point {
 		if(this._canvas) {
 			return p;
@@ -64,7 +98,11 @@ export class Widget extends Emitter {
 		return p;
 	}
 	
-	
+	/**
+	 * 把相对于当前控件左上角的坐标转换成全局坐标。
+	 * @param p 相对于当前控件左上角的坐标。
+	 * @returns 全局坐标。
+	 */
 	public toGlobalPoint(p:Point) : Point {
 		p.x += this.x;
 		p.y += this.y;
@@ -79,6 +117,11 @@ export class Widget extends Emitter {
 		return p;
 	}
 	
+	/**
+	 * 把相对于当前控件左上角的坐标转换成屏幕上的坐标。
+	 * @param p 相对于当前控件左上角的坐标。
+	 * @returns 屏幕上的坐标。
+	 */
 	public toViewPoint(p:Point) : Point {
 		p.x += this.x;
 		p.y += this.y;
@@ -101,13 +144,15 @@ export class Widget extends Emitter {
 	}
 
 	protected onInit() {
+		this._inited = true;
 		if(!this.app && this.parent) {
 			this.app = this.parent.app;
 		}
-
-		this._inited = true;
 	}
 
+	/**
+	 * 初始化。在窗口打开后，对窗口上所有控件调用，或者在窗口打开后，对新创建的控件调用。
+	 */
 	public init() : Widget {
 		this.onInit();
 		this.children.forEach(child => {
@@ -121,35 +166,24 @@ export class Widget extends Emitter {
 		this._inited = false;
 	}
 
+	/**
+	 * ~初始化。在窗口关闭后，对窗口上所有控件调用，或者对被移出的控件调用。
+	 */
 	public deinit(){
-		this.onDeinit();
 		this.children.forEach(child => {
 			child.deinit();
 		});
+		this.onDeinit();
 	}
 
+	/**
+	 * 分发一个事件到当前控件及其子控件。
+	 */
 	public dispatchEventToAll(evt:any) {
 		this.dispatchEvent(evt);
 		this.children.forEach(child => {
 			child.dispatchEvent(evt);
 		});
-	}
-
-	public set(props?:any) : Widget {
-		if(props) {
-			for(var key in props) {
-				this[key] = props[key];
-			}
-		}
-		return this;
-	}
-
-	public get(props:any) : any {
-		for(var key in props) {
-			props[key] = this[key];
-		}
-
-		return props;
 	}
 
 	/**
@@ -165,7 +199,7 @@ export class Widget extends Emitter {
 	
 	protected doHitTest(x:number, y:number, r:Rect, ctx:MatrixStack) : HitTestResult {
 		var m = ctx.invert();
-		if(m || true) {
+		if(m) {
 			var p = m.transformPoint(x, y);
 			if(p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
 				return HitTestResult.MM;
@@ -180,18 +214,17 @@ export class Widget extends Emitter {
 	}
 
 	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
-		var detail = evt;
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
 
 		ctx.save();
 		this.applyTransform(ctx);
-		var hitTestResult = this.selfHitTest(detail.x, detail.y, ctx);
+		var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
 
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
-			this.target = this.findEventTargetChild(detail.x, detail.y, ctx);
+			this.target = this.findEventTargetChild(evt.x, evt.y, ctx);
 			if(this.target) {
 				this.target.dispatchPointerDown(evt, ctx);
 			}
@@ -226,14 +259,12 @@ export class Widget extends Emitter {
 	protected dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
 		ctx.save();
 		this.applyTransform(ctx);
-		
-		var detail = evt;
-		var hitTestResult = this.selfHitTest(detail.x, detail.y, ctx);
+		var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
 	
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
 			var _lastOverWidget = this._lastOverWidget;
-			var overWidget  = this.findEventTargetChild(detail.x, detail.y, ctx);
+			var overWidget  = this.findEventTargetChild(evt.x, evt.y, ctx);
 			if(_lastOverWidget !== overWidget) {
 				var e = null;
 				if(_lastOverWidget) {
@@ -357,7 +388,6 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-
 	protected dispatchKeyDown(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -409,9 +439,9 @@ export class Widget extends Emitter {
 		if(!this._canvas) {
 			ctx.translate(this._x, this._y);
 		}
+		
 		var px = this._pivotX * this._w;
 		var py = this._pivotY * this._h;
-
 		if(this._rotation || this._scaleX !== 1 || this._scaleY !== 1) {
 			ctx.translate(px, py);
 			ctx.rotate(this._rotation);
@@ -535,25 +565,31 @@ export class Widget extends Emitter {
 	
 ///////////////////////////////////////////
 
+	protected layoutRect = Rect.create(0, 0, 0, 0);
 	protected getLayoutRect() : Rect {
-		return Rect.create(this.leftPadding, this.topPadding,
+		return this.layoutRect.init(this.leftPadding, this.topPadding,
 				this.w - this.leftPadding - this.rightPadding,
 				this.h - this.topPadding - this.bottomPadding);
 	}
 
+	/**
+	 * 根据当前的childrenLayouter重新布局子控件。
+	 */
 	public relayoutChildren() : Rect {
-		if(this.childrenLayouter) {
-			var r = this.getLayoutRect();
-			var ret = this.childrenLayouter.layoutChildren(this, this.children, r);
-			r.dispose();
-			this.requestRedraw();
+		this.requestRedraw();
 
-			return Rect.rect.copy(ret);
+		if(this.childrenLayouter) {
+			var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
+
+			return this.layoutRect.copy(ret);
 		}
 
 		return null;
 	}
 
+	/**
+	 * 请求重新布局当前控件。
+	 */
 	public requestRelayout() : Widget {
 		if(this.parent) {
 			this.parent.relayoutChildren();	
@@ -562,18 +598,27 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	/**
+	 * 根据当前的childrenLayouter创建子控件的布局参数。
+	 */
 	public createChildLayoutParam(options:any) : any {
 		var layouter = this.childrenLayouter;
 
 		return layouter ? layouter.createParam(options) : null; 
 	}
 
+	/**
+	 * 启用指定的childrenLayouter。
+	 */
 	public useChildrenLayouter(type:string, options:any) : Widget {
 		this.childrenLayouter = LayouterFactory.create(type, options);	
 		
 		return this;
 	}
 
+	/**
+	 * 设置childrenLayouter。
+	 */
 	public set childrenLayouter(layouter:Layouter) {
 		if(typeof layouter === "string") {
 			this._childrenLayouter = LayouterFactory.create(layouter.toString(), null);
@@ -588,6 +633,9 @@ export class Widget extends Emitter {
 		return this._childrenLayouter;
 	}
 
+	/**
+	 * 布局参数是父控件在布局当前控件时使用的。
+	 */
 	public set layoutParam(param:any) {
 		this._layoutParam = param;
 		if(this.parent) {
@@ -598,6 +646,7 @@ export class Widget extends Emitter {
 	public get layoutParam() : any {
 		return this._layoutParam;
 	}
+
 ///////////////////////////////////////////
 	public indexOfChild(child:Widget) : number {
 		return this.children.indexOf(child);
@@ -675,15 +724,24 @@ export class Widget extends Emitter {
 		}
 		return this;
 	}
-	
+
+	/**
+	 * 获取本地化后的文本。
+	 */
 	public getLocaleText() : string {
 		return this.text;
 	}
 
+	/**
+	 * 绘制前景图片，子控件根据需要重载。
+	 */
 	protected drawImage(ctx:any, style:Style) : Widget {
 		return this;
 	}
 
+	/**
+	 * 获取文本显示区域。
+	 */
 	protected getTextRect(style:Style) : Rect {
 		var x = this.leftPadding;
 		var y = this.topPadding;
@@ -716,12 +774,15 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	public computeDirtyRectSelf(ctx:DirtyRectContext) {
+	protected computeDirtyRectSelf(ctx:DirtyRectContext) {
 		if(this._dirty) {
 			ctx.addRect(-5, -5, this.w+10, this.h+10);
 		}
 	}
 
+	/**
+	 * 计算脏矩形。
+	 */
 	public computeDirtyRect(ctx:DirtyRectContext) {
 		ctx.save();
 		this.applyTransform(ctx);
@@ -763,7 +824,6 @@ export class Widget extends Emitter {
 	}
 
 	public stateToString(state:WidgetState) : string {
-
 		return states[state];
 	};
 
@@ -811,6 +871,7 @@ export class Widget extends Emitter {
 		if(!style) {
 			style = this.getStyleOfState(WidgetState.NORMAL);
 		}
+
 		return style;
 	}
 
@@ -825,10 +886,12 @@ export class Widget extends Emitter {
 
 	public removeAllChildren() : Widget {
 		this.children.forEach(child => {
+			child.deinit();
 			child.dispose();
 		});
-		this.children.length = 0;
+		
 		this.target = null;
+		this.children.length = 0;
 		this._lastOverWidget = null;
 
 		return this;
@@ -883,6 +946,8 @@ export class Widget extends Emitter {
 		this._children.forEach(function(child) {
 			child.dispose();
 		});
+
+		this._app = null;
 		this._parent = null;
 		this._children = [];
 		this._layoutParam = null;
@@ -1103,7 +1168,7 @@ export class Widget extends Emitter {
 		return this._value;
 	}
 	public set value(value) {
-		this.setProp("value", value, true);
+		this.setValue(value, true, false);
 	}
 
 	public get selected() {
@@ -1429,11 +1494,11 @@ export class Widget extends Emitter {
 	public onkeydown : Function;
 	public onkeyup : Function;
 	
-	protected eChangeEvent = Events.ChangeEvent.create();
-	protected ePropChangeEvent = Events.PropChangeEvent.create();
+	protected recycle : Function;
 	protected _layoutParam : any;
 	protected _childrenLayouter : Layouter;
-	protected recycle : Function;
+	protected eChangeEvent = Events.ChangeEvent.create();
+	protected ePropChangeEvent = Events.PropChangeEvent.create();
 	
 	protected notifyChange() {
 		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:!this.value}));
