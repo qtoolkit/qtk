@@ -4,7 +4,7 @@ var libraryName = 'qtk';
 module.exports = {  
   cache: true,
   entry: {
-    index : './src/index.js'
+    index : './js/index.js'
   },
   output: {
     path: '',
