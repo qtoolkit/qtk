@@ -7,11 +7,9 @@
     "lib": ["es6", "es2015", "dom"]
   },
   "files": [
-    "src/assets.ts",
-    "src/index.ts",
-    "typings/index.d.ts"
+    "src/index.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules", "typings"
   ]
 }
