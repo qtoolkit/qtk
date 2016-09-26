@@ -1,0 +1,32 @@
+import { Rect } from "../rect";
+import { Style } from "../style";
+import { Widget } from "./widget";
+import { TabPage } from "./tab-page";
+import { Orientation } from "../consts";
+import { RadioButton } from "./radio-button";
+import { ImageTile } from "../image-tile";
+export declare class TabButton extends RadioButton {
+    protected _orientation: Orientation;
+    protected _normalIcon: ImageTile;
+    protected _currentIcon: ImageTile;
+    protected _tabPage: TabPage;
+    protected _closeButton: Widget;
+    protected _closeButtonAtLeft: boolean;
+    closeButton: Widget;
+    closeButtonAtLeft: boolean;
+    relayoutChildren(): Rect;
+    closable: boolean;
+    desireWidth: number;
+    tabPage: TabPage;
+    orientation: Orientation;
+    setIcons(normalIconURL: string, currentIconURL: string): void;
+    protected getStyleType(): string;
+    protected drawImage(ctx: any, style: Style): Widget;
+    protected drawText(ctx: any, style: Style): Widget;
+    constructor();
+    reset(type: string): Widget;
+    dispose(): void;
+    static TYPE: string;
+    private static re;
+    static create(): TabButton;
+}

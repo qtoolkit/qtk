@@ -1,9 +1,11 @@
 /// <reference path="../typings/globals/es6-promise/index.d.ts"/>
 /// <reference path="../typings/globals/node/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+/// <reference path="../typings/globals/whatwg-fetch/index.d.ts"/>
 
 import "whatwg-fetch";
 import path = require("path");
+import Events = require("./events");
 import {Promise} from 'es6-promise';
 import {Emitter} from "./emitter";
 
@@ -192,10 +194,9 @@ export class Group extends Emitter {
     public loaded : number;
     public event = {
         total : 0,
-        loaded : 0
+        loaded : 0,
+        type:Events.PROGRESS
     };
-
-    public static EVENT_PROGRESS = "progress";
 
     constructor(items:Array<Item>) {
         super();
@@ -211,13 +212,13 @@ export class Group extends Emitter {
      * Register of a progress callback function
      */
     onProgress(callback:Function) {
-        this.on(Group.EVENT_PROGRESS, callback);
+        this.on(Events.PROGRESS, callback);
     }
 
     private addLoaded() :void {
         this.loaded++;
         this.event.loaded = this.loaded;
-        this.emit(Group.EVENT_PROGRESS, this.event);
+        this.dispatchEvent(this.event);
     }
 
     private loadOne(item:Item) : void {

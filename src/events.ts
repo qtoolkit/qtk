@@ -17,6 +17,7 @@ export const POINTER_LEAVE = "qtk-pointer-leave";
 export const CLICK = "qtk-click";
 export const DBLCLICK = "qtk-dblclick";
 export const CHANGE = "change"
+export const PROGRESS = "progress"
 export const CHANGING = "changing"
 export const PROP_CHANGE = "prop-change"
 export const DISPOSE = "dispose"
