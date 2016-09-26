@@ -1,9 +1,4 @@
 node_modules/
 out/
 doc/
-index.js
-src/*.js
-src/behaviors/*.js
-src/controls/*.js
-src/layouters/*.js
 coverage
