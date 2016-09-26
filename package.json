@@ -1,14 +1,15 @@
 {
   "name": "qtk",
   "version": "1.0.0",
-  "description": "a template project",
+  "description": "QToolKit",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "scripts": {
     "start": "node app.js",
     "clean": "rm -rf doc index.js coverage/ src/*.js",
     "test": "tsc && webpack && ./node_modules/karma/bin/karma start",
-    "build": "tsc && webpack",
+    "build": "tsc  && webpack",
+    "postinstall": "tsc  && webpack",
     "gendoc": "./node_modules/typedoc/bin/typedoc --mode modules --out doc src/"
   },
   "repository": {
@@ -39,7 +40,6 @@
   },
   "dependencies": {
     "carota": "git+https://github.com/qtoolkit/carota.git",
-    "es6-promise": "^3.2.1",
     "eventemitter3": "^1.2.0",
     "scroller": "0.0.3",
     "tween.js": "^16.3.5",

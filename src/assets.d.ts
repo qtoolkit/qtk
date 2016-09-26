@@ -1,4 +1,3 @@
-/// <reference path="../typings/globals/es6-promise/index.d.ts" />
 /// <reference path="../typings/globals/node/index.d.ts" />
 /// <reference path="../typings/globals/eventemitter3/index.d.ts" />
 /// <reference path="../typings/globals/whatwg-fetch/index.d.ts" />

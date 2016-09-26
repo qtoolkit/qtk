@@ -1,10 +1,8 @@
-/// <reference path="../typings/globals/es6-promise/index.d.ts"/>
 /// <reference path="../typings/globals/node/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 
 import "whatwg-fetch";
 import path = require("path");
-import {Promise} from 'es6-promise';
 import {Emitter} from "./emitter";
 import Assets = require("./assets");
 import Events = require("./events");

@@ -3,7 +3,7 @@
     "module": "commonjs",
     "target": "es5",
     "declaration": true,
-    "allowJs" : true
+    "lib": ["es6", "es2015", "dom"]
   },
   "files": [
     "src/assets.ts",

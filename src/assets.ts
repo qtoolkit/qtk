@@ -1,4 +1,3 @@
-/// <reference path="../typings/globals/es6-promise/index.d.ts"/>
 /// <reference path="../typings/globals/node/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 /// <reference path="../typings/globals/whatwg-fetch/index.d.ts"/>
@@ -6,7 +5,6 @@
 import "whatwg-fetch";
 import path = require("path");
 import Events = require("./events");
-import {Promise} from 'es6-promise';
 import {Emitter} from "./emitter";
 
 export const AUDIO = "audio";
