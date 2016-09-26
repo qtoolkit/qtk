@@ -21,6 +21,8 @@ QTK主要特色如下：
 
 [BLOG](https://qtoolkit.github.io/)
 
+[Demos](https://qtoolkit.github.io/demos/index.html)
+
 
 
 
