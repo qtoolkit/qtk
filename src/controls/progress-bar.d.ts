@@ -12,7 +12,7 @@ export declare class ProgressBar extends Widget {
     barType: ProgressBarType;
     textFormater: (value: number) => string;
     constructor(type?: string);
-    text: string;
+    readonly text: string;
     value: any;
     protected drawColorForeGround(ctx: any, style: Style): Widget;
     protected drawImage(ctx: any, style: Style): Widget;

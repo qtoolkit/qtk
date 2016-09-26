@@ -14,7 +14,7 @@ export declare class LinearLayouter extends Layouter {
      * 布局的方向。
      */
     orientation: Orientation;
-    type: string;
+    readonly type: string;
     /**
      * 设置参数。
      */

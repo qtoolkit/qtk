@@ -1,4 +1,4 @@
-import { InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail } from "./event-detail.ts";
+import { InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail } from "./event-detail";
 /**
  * 常见事件名称的定义。
  */
@@ -58,7 +58,7 @@ export declare class Event {
     private _propagationStopped;
     timeStamp: number;
     init(type: string, detail?: any): any;
-    propagationStopped: boolean;
+    readonly propagationStopped: boolean;
     stopPropagation(): void;
     type: string;
     target: any;

@@ -88,7 +88,7 @@ export declare class ImageTile extends Emitter {
     toJson(): string;
     private create(src);
     private init(img, x, y, w, h);
-    complete: boolean;
+    readonly complete: boolean;
     id: number;
     private createNormal(src);
     private createXYWH(base, meta);

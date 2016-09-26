@@ -28,7 +28,7 @@ export declare class Style extends Emitter {
     private _textBaseline;
     constructor();
     private notifyChanged();
-    textLineHeight: number;
+    readonly textLineHeight: number;
     clone(): Style;
     toJson(): any;
     fromJson(json: any, baseURL: string): void;
@@ -38,7 +38,7 @@ export declare class Style extends Emitter {
     backGroundImageDrawType: ImageDrawType;
     foreGroundImage: ImageTile;
     foreGroundImageDrawType: ImageDrawType;
-    font: string;
+    readonly font: string;
     fontFamily: string;
     fontSize: number;
     textColor: string;

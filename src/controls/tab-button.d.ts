@@ -12,11 +12,11 @@ export declare class TabButton extends RadioButton {
     protected _tabPage: TabPage;
     protected _closeButton: Widget;
     protected _closeButtonAtLeft: boolean;
-    closeButton: Widget;
+    readonly closeButton: Widget;
     closeButtonAtLeft: boolean;
     relayoutChildren(): Rect;
     closable: boolean;
-    desireWidth: number;
+    readonly desireWidth: number;
     tabPage: TabPage;
     orientation: Orientation;
     setIcons(normalIconURL: string, currentIconURL: string): void;

@@ -9,7 +9,7 @@ export declare class HtmlEdit extends HtmlElement {
     hide(): HtmlElement;
     create(tag: string): HtmlEdit;
     protected static _input: HtmlEdit;
-    static input: HtmlEdit;
+    static readonly input: HtmlEdit;
     protected static _textArea: HtmlEdit;
-    static textArea: HtmlEdit;
+    static readonly textArea: HtmlEdit;
 }

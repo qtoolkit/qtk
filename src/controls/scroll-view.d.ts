@@ -68,7 +68,7 @@ export declare class ScrollView extends Widget {
     protected dispatchClick(evt: any): void;
     protected dispatchDblClick(evt: any): void;
     protected updateScrollerDimensions(w: number, h: number, contentWidth: number, contentHeight: number): void;
-    protected scroller: Scroller;
+    protected readonly scroller: Scroller;
     hideScrollBar(): void;
     protected handleScrolling(left: number, top: number): void;
     protected handleScrollDone(): void;
@@ -83,7 +83,7 @@ export declare class ScrollView extends Widget {
      */
     scrollTo(offsetX: number, offsetY: number, duration: number): TWEEN.Tween;
     onWheel(evt: Events.WheelEvent): void;
-    scrollerOptions: ScrollerOptions;
+    readonly scrollerOptions: ScrollerOptions;
     protected getLayoutWidth(): number;
     protected getLayoutHeight(): number;
     protected getLayoutRect(): Rect;

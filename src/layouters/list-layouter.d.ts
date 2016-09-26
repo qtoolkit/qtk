@@ -14,7 +14,7 @@ export declare class ListLayouter extends Layouter {
      */
     spacing: number;
     private rect;
-    type: string;
+    readonly type: string;
     constructor();
     /**
      * 设置参数。

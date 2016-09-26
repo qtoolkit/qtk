@@ -6,7 +6,7 @@ import { Layouter } from './layouter';
  * Dock布局器。
  */
 export declare class DockLayouter extends Layouter {
-    type: string;
+    readonly type: string;
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     layoutChild(child: Widget, r: Rect): void;
     createParam(options?: any): DockLayouterParam;

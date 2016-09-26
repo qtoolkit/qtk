@@ -7,7 +7,7 @@ export declare class ListView extends ScrollView {
     itemHeight: number;
     childrenLayouter: Layouter;
     protected doDrawChildren(ctx: any): Widget;
-    desireHeight: number;
+    readonly desireHeight: number;
     relayoutChildren(): Rect;
     protected _itemHeight: number;
     protected _itemSpacing: number;

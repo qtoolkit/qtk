@@ -621,7 +621,7 @@ export class Widget extends Emitter {
 	 */
 	public set childrenLayouter(layouter:Layouter) {
 		if(typeof layouter === "string") {
-			this._childrenLayouter = LayouterFactory.create(layouter.toString(), null);
+			this._childrenLayouter = LayouterFactory.create(<string>layouter, null);
 		}
 		else{
 			this._childrenLayouter = layouter;

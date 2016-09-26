@@ -7,7 +7,7 @@ export declare class Layouter {
     /**
      * 布局算法的名称。
      */
-    type: string;
+    readonly type: string;
     /**
      * 转换成JSON数据。
      */

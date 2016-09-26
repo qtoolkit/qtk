@@ -1,4 +1,4 @@
-import {InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail} from "./event-detail.ts";
+import {InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail} from "./event-detail";
 
 /**
  * 常见事件名称的定义。

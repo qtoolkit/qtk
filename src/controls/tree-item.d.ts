@@ -15,25 +15,25 @@ export declare class TreeItem extends Widget {
     /**
      * 显示的文本，从data中获取。
      */
-    text: string;
+    readonly text: string;
     /**
      * 显示的图标，从data中获取。
      */
-    icon: ImageTile;
+    readonly icon: ImageTile;
     /**
      * 显示的图标，从data中获取。
      */
-    userData: any;
-    desireWidth: number;
+    readonly userData: any;
+    readonly desireWidth: number;
     /**
      * 可见性判断：要求父控件没有折叠。
      */
-    visible: boolean;
+    readonly visible: boolean;
     parentItem: TreeItem;
-    childrenItems: Array<TreeItem>;
+    readonly childrenItems: Array<TreeItem>;
     level: number;
     selected: boolean;
-    isLeaf: boolean;
+    readonly isLeaf: boolean;
     data: TreeItemData;
     indention: number;
     expanded: boolean;

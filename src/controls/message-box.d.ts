@@ -17,7 +17,7 @@ export declare class ButtonOption {
 export declare class ButtonsOptions {
     h: number;
     buttons: Array<ButtonOption>;
-    buttonCount: number;
+    readonly buttonCount: number;
     constructor();
 }
 export declare class MessageBox extends Dialog {
@@ -25,9 +25,9 @@ export declare class MessageBox extends Dialog {
     protected _content: Group;
     protected _buttons: Group;
     protected _contentPadding: number;
-    title: Group;
-    content: Group;
-    buttons: Group;
+    readonly title: Group;
+    readonly content: Group;
+    readonly buttons: Group;
     constructor(type?: string);
     protected initTitle(titleOptions: TitleOptions): void;
     protected initButtons(buttonsOptions: ButtonsOptions): this;

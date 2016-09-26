@@ -14,7 +14,7 @@ export declare class ComboBoxItem extends ListItem {
     data: ComboBoxOption;
     constructor();
     reset(type: string): Widget;
-    text: string;
+    readonly text: string;
     protected getStyleType(): string;
     protected drawText(ctx: any, style: Style): Widget;
     static TYPE: string;
@@ -28,7 +28,7 @@ export declare class ComboBox extends Widget {
     protected _options: Array<ComboBoxOption>;
     protected _itemHeight: number;
     itemHeight: number;
-    text: string;
+    readonly text: string;
     value: any;
     resetOptions(): Widget;
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;

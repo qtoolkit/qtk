@@ -5,7 +5,7 @@ import { Layouter } from './layouter';
  * 简单的布局器。
  */
 export declare class SimpleLayouter extends Layouter {
-    type: string;
+    readonly type: string;
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     layoutChild(child: Widget, r: Rect): void;
     createParam(options?: any): SimpleLayouterParam;

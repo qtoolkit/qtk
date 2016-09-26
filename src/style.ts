@@ -506,7 +506,7 @@ export class Style extends Emitter {
 			var key = fillStyle + "." + h;
 			var value = Style.fillStyles[key];
 			if(!value) {
-				var data = fillStyle;
+				var data:any = fillStyle;
 				var n = data.length;
 				var delta = 1/n;
 				var value = ctx.createLinearGradient(0,0,0,h);

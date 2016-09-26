@@ -11,8 +11,8 @@ export declare class TabControl extends Widget {
     protected _buttonGroup: TabButtonGroup;
     protected _buttonGroupHeight: number;
     value: number;
-    pages: Pages;
-    buttonGroup: TabButtonGroup;
+    readonly pages: Pages;
+    readonly buttonGroup: TabButtonGroup;
     buttonGroupAtTop: boolean;
     buttonGroupHeight: number;
     removePage(tabPage: TabPage, destroy?: boolean): void;

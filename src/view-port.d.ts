@@ -12,10 +12,10 @@ export declare class ViewPort extends Emitter implements IViewPort {
     private getScaleValues();
     private updateHeadViewportMeta(value);
     init(width?: number, height?: number, density?: number): void;
-    width: number;
-    height: number;
-    w: number;
-    h: number;
-    density: number;
+    readonly width: number;
+    readonly height: number;
+    readonly w: number;
+    readonly h: number;
+    readonly density: number;
     static create(width?: number, height?: number, density?: number): IViewPort;
 }

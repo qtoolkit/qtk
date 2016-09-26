@@ -5,7 +5,7 @@ import { Layouter } from './layouter';
  * 网格布局器。
  */
 export declare class GridLayouter extends Layouter {
-    type: string;
+    readonly type: string;
     constructor();
     /**
      * 设置参数。

@@ -15,9 +15,9 @@ export declare class Application extends Emitter implements IApplication {
     private _mainLoop;
     private servicesManager;
     constructor(name: string);
-    isReady: boolean;
-    assets: any;
-    mainLoop: IMainLoop;
+    readonly isReady: boolean;
+    readonly assets: any;
+    readonly mainLoop: IMainLoop;
     getMainLoop(): IMainLoop;
     options: any;
     private initOptions(args);
@@ -26,7 +26,7 @@ export declare class Application extends Emitter implements IApplication {
     getService(name: string): any;
     registerService(name: string, service: any): Application;
     getThemeManager(): IThemeManager;
-    viewPort: IViewPort;
+    readonly viewPort: IViewPort;
     getViewPort(): IViewPort;
     onReady(func: Function): void;
     private static instance;
