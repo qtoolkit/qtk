@@ -2,7 +2,8 @@
   "name": "qtk",
   "version": "1.0.0",
   "description": "a template project",
-  "main": "index.js",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "start": "node app.js",
     "clean": "rm -rf doc index.js coverage/ src/*.js",

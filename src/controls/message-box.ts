@@ -23,7 +23,7 @@ import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter"
 import {GridLayouter, GridLayouterParam} from "../layouters/grid-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
-class TitleOptions {
+export class TitleOptions {
 	public h : number;
 	public text : string;
 	public draggable : boolean;
@@ -45,7 +45,7 @@ export class ButtonOption {
 	public onClick : Function;
 }
 
-class ButtonsOptions {
+export class ButtonsOptions {
 	public h : number;
 	public buttons : Array<ButtonOption>; 
 

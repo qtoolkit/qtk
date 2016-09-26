@@ -5,7 +5,7 @@
 import "whatwg-fetch";
 import path = require("path");
 import {Promise} from 'es6-promise';
-import EventEmitter = require("eventemitter3");
+import {Emitter} from "./emitter";
 
 export const AUDIO = "audio";
 export const IMAGE = "image";
@@ -187,7 +187,7 @@ export class Item {
  * });
  * ```
  */
-export class Group extends EventEmitter {
+export class Group extends Emitter {
     public total : number;
     public loaded : number;
     public event = {
