@@ -13,6 +13,11 @@ export class Edit extends Label {
 	protected _isEditing : boolean;
 	protected _inputType : string;
 	protected _inputTips : string;
+	protected _inputFilter : Function;
+
+	public set inputFilter(value:(value:string) => string) {
+		this._inputFilter = value;
+	}
 
 	public set inputTips(value:string) {
 		this._inputTips = value;
@@ -66,6 +71,10 @@ export class Edit extends Label {
 		}
 	}
 
+	protected filterText(value:string) : string {
+		return this._inputFilter ? this._inputFilter(value) : value;
+	}
+
 	protected showEditor() {
 		var style = this.getStyle();
 		this._input = this.multiLines ? HtmlEdit.textArea : HtmlEdit.input;
@@ -92,18 +101,26 @@ export class Edit extends Label {
 		});
 		
 		input.on(Events.CHANGING, evt => {
-			this.text = evt.value;
+			this.text = this.filterText(evt.value);
 			this.dispatchEvent(evt);
 		});
 		
 		input.on(Events.CHANGE, evt => {
-			this.text = evt.value;
+			this.text = this.filterText(evt.value);
 			this.dispatchEvent(evt);
 		});
 	}
 
 	constructor() {
 		super(Edit.TYPE);
+	}
+
+	public dispose() {
+		super.dispose();
+		this._inputFilter = null;
+		this._inputType = null;
+		this._inputTips = null;
+		this._input = null;
 	}
 
 	protected dispatchClick(evt:any) {

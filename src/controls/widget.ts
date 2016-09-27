@@ -1141,6 +1141,13 @@ export class Widget extends Emitter {
 		this.setProp("w", value, true);
 	}
 
+	public get clientW() {
+		return this._w - this.leftPadding - this.rightPadding;
+	}
+	
+	public get clientH() {
+		return this._h - this.topPadding - this.bottomPadding;
+	}
 
 	public get height() {
 		return this._h;

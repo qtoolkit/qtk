@@ -50,41 +50,41 @@ var qtk =
 	exports.Point = point_1.Point;
 	var rect_1 = __webpack_require__(2);
 	exports.Rect = rect_1.Rect;
-	var consts_1 = __webpack_require__(3);
+	var Assets = __webpack_require__(3);
+	exports.Assets = Assets;
+	var main_loop_1 = __webpack_require__(10);
+	exports.MainLoop = main_loop_1.MainLoop;
+	var matrix_1 = __webpack_require__(11);
+	exports.Matrix = matrix_1.Matrix;
+	var matrix_stack_1 = __webpack_require__(12);
+	exports.MatrixStack = matrix_stack_1.MatrixStack;
+	var image_1 = __webpack_require__(13);
+	exports.Image = image_1.Image;
+	var group_1 = __webpack_require__(80);
+	exports.Group = group_1.Group;
+	var edit_1 = __webpack_require__(81);
+	exports.Edit = edit_1.Edit;
+	var page_1 = __webpack_require__(85);
+	exports.Page = page_1.Page;
+	var pages_1 = __webpack_require__(86);
+	exports.Pages = pages_1.Pages;
+	var button_1 = __webpack_require__(87);
+	exports.Button = button_1.Button;
+	var tab_page_1 = __webpack_require__(88);
+	exports.TabPage = tab_page_1.TabPage;
+	var tab_button_1 = __webpack_require__(89);
+	exports.TabButton = tab_button_1.TabButton;
+	var tab_control_1 = __webpack_require__(93);
+	exports.TabControl = tab_control_1.TabControl;
+	var image_tile_1 = __webpack_require__(15);
+	exports.ImageDrawType = image_tile_1.ImageDrawType;
+	exports.ImageTile = image_tile_1.ImageTile;
+	var consts_1 = __webpack_require__(90);
 	exports.Direction = consts_1.Direction;
 	exports.Align = consts_1.Align;
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
-	var Assets = __webpack_require__(4);
-	exports.Assets = Assets;
-	var image_tile_1 = __webpack_require__(11);
-	exports.ImageDrawType = image_tile_1.ImageDrawType;
-	exports.ImageTile = image_tile_1.ImageTile;
-	var main_loop_1 = __webpack_require__(12);
-	exports.MainLoop = main_loop_1.MainLoop;
-	var matrix_1 = __webpack_require__(13);
-	exports.Matrix = matrix_1.Matrix;
-	var matrix_stack_1 = __webpack_require__(14);
-	exports.MatrixStack = matrix_stack_1.MatrixStack;
-	var image_1 = __webpack_require__(15);
-	exports.Image = image_1.Image;
-	var group_1 = __webpack_require__(81);
-	exports.Group = group_1.Group;
-	var edit_1 = __webpack_require__(82);
-	exports.Edit = edit_1.Edit;
-	var page_1 = __webpack_require__(86);
-	exports.Page = page_1.Page;
-	var pages_1 = __webpack_require__(87);
-	exports.Pages = pages_1.Pages;
-	var button_1 = __webpack_require__(88);
-	exports.Button = button_1.Button;
-	var tab_page_1 = __webpack_require__(89);
-	exports.TabPage = tab_page_1.TabPage;
-	var tab_button_1 = __webpack_require__(90);
-	exports.TabButton = tab_button_1.TabButton;
-	var tab_control_1 = __webpack_require__(93);
-	exports.TabControl = tab_control_1.TabControl;
 	var message_box_1 = __webpack_require__(95);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
@@ -96,7 +96,7 @@ var qtk =
 	exports.RichText = rich_text_1.RichText;
 	var rich_text_edit_1 = __webpack_require__(116);
 	exports.RichTextEdit = rich_text_edit_1.RichTextEdit;
-	var label_1 = __webpack_require__(83);
+	var label_1 = __webpack_require__(82);
 	exports.Label = label_1.Label;
 	var slider_1 = __webpack_require__(117);
 	exports.Slider = slider_1.Slider;
@@ -137,7 +137,7 @@ var qtk =
 	exports.ListView = list_view_1.ListView;
 	var window_normal_1 = __webpack_require__(127);
 	exports.WindowNormal = window_normal_1.WindowNormal;
-	var widget_1 = __webpack_require__(17);
+	var widget_1 = __webpack_require__(16);
 	exports.Widget = widget_1.Widget;
 	exports.WidgetState = widget_1.WidgetState;
 	exports.WidgetMode = widget_1.WidgetMode;
@@ -146,15 +146,15 @@ var qtk =
 	exports.ScrollerBarVisibility = scroll_view_1.ScrollerBarVisibility;
 	exports.ScrollBarStyle = scroll_view_1.ScrollBarStyle;
 	exports.ScrollView = scroll_view_1.ScrollView;
-	var style_1 = __webpack_require__(16);
+	var style_1 = __webpack_require__(14);
 	exports.Style = style_1.Style;
-	var widget_factory_1 = __webpack_require__(78);
+	var widget_factory_1 = __webpack_require__(77);
 	exports.WidgetFactory = widget_factory_1.WidgetFactory;
 	var theme_manager_1 = __webpack_require__(108);
 	exports.ThemeManager = theme_manager_1.ThemeManager;
-	var Events = __webpack_require__(8);
+	var Events = __webpack_require__(7);
 	exports.Events = Events;
-	var canvas_1 = __webpack_require__(18);
+	var canvas_1 = __webpack_require__(17);
 	exports.Canvas = canvas_1.Canvas;
 	var draggable_1 = __webpack_require__(128);
 	exports.Draggable = draggable_1.Draggable;
@@ -164,21 +164,21 @@ var qtk =
 	exports.Movable = movable_1.Movable;
 	var resizable_1 = __webpack_require__(131);
 	exports.Resizable = resizable_1.Resizable;
-	var emitter_1 = __webpack_require__(9);
+	var emitter_1 = __webpack_require__(8);
 	exports.Emitter = emitter_1.Emitter;
 	var view_port_1 = __webpack_require__(107);
 	exports.ViewPort = view_port_1.ViewPort;
 	var deviceInfo = __webpack_require__(109);
 	exports.deviceInfo = deviceInfo;
-	var inputEventAdapter = __webpack_require__(20);
+	var inputEventAdapter = __webpack_require__(19);
 	exports.inputEventAdapter = inputEventAdapter;
 	var application_1 = __webpack_require__(105);
 	exports.Application = application_1.Application;
 	var Services = __webpack_require__(106);
 	exports.Services = Services;
-	var key_event_1 = __webpack_require__(21);
+	var key_event_1 = __webpack_require__(20);
 	exports.KeyEvent = key_event_1.KeyEvent;
-	var graphics_1 = __webpack_require__(24);
+	var graphics_1 = __webpack_require__(23);
 	exports.RoundType = graphics_1.RoundType;
 	exports.Graphics = graphics_1.Graphics;
 	var linear_layouter_1 = __webpack_require__(112);
@@ -196,10 +196,12 @@ var qtk =
 	var simple_layouter_1 = __webpack_require__(114);
 	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
+	var title_edit_1 = __webpack_require__(132);
+	exports.TitleEdit = title_edit_1.TitleEdit;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
-	var TWEEN = __webpack_require__(22);
+	var TWEEN = __webpack_require__(21);
 	exports.TWEEN = TWEEN;
-	var recyclable_creator_1 = __webpack_require__(80);
+	var recyclable_creator_1 = __webpack_require__(79);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
 
 
@@ -292,77 +294,6 @@ var qtk =
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
-
-	"use strict";
-	(function (Orientation) {
-	    Orientation[Orientation["V"] = 1] = "V";
-	    Orientation[Orientation["VERTICAL"] = 1] = "VERTICAL";
-	    Orientation[Orientation["H"] = 2] = "H";
-	    Orientation[Orientation["HORIZONTAL"] = 2] = "HORIZONTAL";
-	})(exports.Orientation || (exports.Orientation = {}));
-	var Orientation = exports.Orientation;
-	;
-	(function (Direction) {
-	    Direction[Direction["W"] = 1] = "W";
-	    Direction[Direction["WEST"] = 1] = "WEST";
-	    Direction[Direction["E"] = 2] = "E";
-	    Direction[Direction["EAST"] = 2] = "EAST";
-	    Direction[Direction["N"] = 3] = "N";
-	    Direction[Direction["NORTH"] = 3] = "NORTH";
-	    Direction[Direction["S"] = 4] = "S";
-	    Direction[Direction["SOUTH"] = 4] = "SOUTH";
-	    Direction[Direction["L"] = 1] = "L";
-	    Direction[Direction["LEFT"] = 1] = "LEFT";
-	    Direction[Direction["R"] = 2] = "R";
-	    Direction[Direction["RIGHT"] = 2] = "RIGHT";
-	    Direction[Direction["T"] = 3] = "T";
-	    Direction[Direction["TOP"] = 3] = "TOP";
-	    Direction[Direction["B"] = 4] = "B";
-	    Direction[Direction["BOTTOM"] = 4] = "BOTTOM";
-	})(exports.Direction || (exports.Direction = {}));
-	var Direction = exports.Direction;
-	;
-	(function (AlignH) {
-	    AlignH[AlignH["L"] = 1] = "L";
-	    AlignH[AlignH["LEFT"] = 1] = "LEFT";
-	    AlignH[AlignH["C"] = 2] = "C";
-	    AlignH[AlignH["CENTER"] = 2] = "CENTER";
-	    AlignH[AlignH["R"] = 3] = "R";
-	    AlignH[AlignH["RIGHT"] = 3] = "RIGHT";
-	})(exports.AlignH || (exports.AlignH = {}));
-	var AlignH = exports.AlignH;
-	;
-	(function (AlignV) {
-	    AlignV[AlignV["T"] = 1] = "T";
-	    AlignV[AlignV["TOP"] = 1] = "TOP";
-	    AlignV[AlignV["M"] = 2] = "M";
-	    AlignV[AlignV["MIDDLE"] = 2] = "MIDDLE";
-	    AlignV[AlignV["B"] = 3] = "B";
-	    AlignV[AlignV["BOTTOM"] = 3] = "BOTTOM";
-	})(exports.AlignV || (exports.AlignV = {}));
-	var AlignV = exports.AlignV;
-	;
-	(function (Align) {
-	    Align[Align["L"] = 1] = "L";
-	    Align[Align["LEFT"] = 1] = "LEFT";
-	    Align[Align["C"] = 2] = "C";
-	    Align[Align["CENTER"] = 2] = "CENTER";
-	    Align[Align["R"] = 3] = "R";
-	    Align[Align["RIGHT"] = 3] = "RIGHT";
-	    Align[Align["T"] = 1] = "T";
-	    Align[Align["TOP"] = 1] = "TOP";
-	    Align[Align["M"] = 2] = "M";
-	    Align[Align["MIDDLE"] = 2] = "MIDDLE";
-	    Align[Align["B"] = 3] = "B";
-	    Align[Align["BOTTOM"] = 3] = "BOTTOM";
-	})(exports.Align || (exports.Align = {}));
-	var Align = exports.Align;
-	;
-
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/node/index.d.ts"/>
@@ -374,10 +305,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	__webpack_require__(5);
-	var path = __webpack_require__(6);
-	var Events = __webpack_require__(8);
-	var emitter_1 = __webpack_require__(9);
+	__webpack_require__(4);
+	var path = __webpack_require__(5);
+	var Events = __webpack_require__(7);
+	var emitter_1 = __webpack_require__(8);
 	exports.AUDIO = "audio";
 	exports.IMAGE = "image";
 	exports.BLOB = "blob";
@@ -587,7 +518,7 @@ var qtk =
 
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -1026,7 +957,7 @@ var qtk =
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -1254,10 +1185,10 @@ var qtk =
 	    }
 	;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1423,7 +1354,7 @@ var qtk =
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1782,7 +1713,7 @@ var qtk =
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
@@ -1792,7 +1723,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var EventEmitter = __webpack_require__(10);
+	var EventEmitter = __webpack_require__(9);
 	var EmitterImpl = (function (_super) {
 	    __extends(EmitterImpl, _super);
 	    function EmitterImpl() {
@@ -1903,7 +1834,7 @@ var qtk =
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2198,424 +2129,7 @@ var qtk =
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../typings/globals/node/index.d.ts"/>
-	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	__webpack_require__(5);
-	var path = __webpack_require__(6);
-	var emitter_1 = __webpack_require__(9);
-	var Assets = __webpack_require__(4);
-	var Events = __webpack_require__(8);
-	(function (ImageDrawType) {
-	    /**
-	     * 画在填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["DEFAULT"] = 1] = "DEFAULT";
-	    /**
-	     * 按1比1大小画在指定的矩形区域的中间。
-	     */
-	    ImageDrawType[ImageDrawType["CENTER"] = 2] = "CENTER";
-	    /**
-	     * 把图分成3行3列等大小的区域，按9宫格的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["PATCH9"] = 3] = "PATCH9";
-	    /**
-	     * 把图分成3行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["PATCH3_V"] = 4] = "PATCH3_V";
-	    /**
-	     * 把图分成1行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["PATCH3_H"] = 5] = "PATCH3_H";
-	    /**
-	     * 按平铺的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["TILE"] = 6] = "TILE";
-	    /**
-	     * 按垂直平铺的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["TILE_V"] = 7] = "TILE_V";
-	    /**
-	     * 按水平平铺的方式填满指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["TILE_H"] = 8] = "TILE_H";
-	    /**
-	     * 保持比例缩放到指定的矩形区域。
-	     */
-	    ImageDrawType[ImageDrawType["AUTO"] = 9] = "AUTO";
-	    /**
-	     * ICON
-	     */
-	    ImageDrawType[ImageDrawType["ICON"] = 10] = "ICON";
-	})(exports.ImageDrawType || (exports.ImageDrawType = {}));
-	var ImageDrawType = exports.ImageDrawType;
-	/**
-	 * 把多个小的图片合并成一张大图，不但可以减少网路请求和GPU的调用次数，还可以提高内存的利用率。
-	 * ImageTile用来表示大图中的一张小图，QTK中支持下面几种方式：
-	 *
-	 * 0.普通图片。如果URL中没有#，则表示一张普通图片，它的位置为(0,0)，大小为图片的整个大小。
-	 *
-	 * 1.指定子图的位置和大小，#之前的部分是大图的URL，后面是子图的位置和大小信息。
-	 *  字母x后紧跟x坐标，字母y后紧跟y坐标，字母w后紧跟宽度，字母h后紧跟高度。
-	 *  下面的URL表示图片demo.png中位置为(100,200)，大小为(300,400)的子图。
-	 *
-	 * ```
-	 * https://qtoolkit.github.io/demo.png#x100y200w300h400
-	 * ```
-	 *
-	 * 2.指定图片的行列数以及小图的序数，#之前的部分是大图的URL，后面是行数、列数和序数。
-	 *  字母r紧跟行数，字母c后紧跟列数，字母i后紧跟序数。
-	 *
-	 *  下面的URL表示图片demo.png分成3行3列，序数为0的子图。
-	 *
-	 * ```
-	 * https://qtoolkit.github.io/demo.png#r3c3i0
-	 * ```
-	 *
-	 * 3.用TexturePacker打包的JSON Hash格式。#之前部分是JSON的URL，后面是子图的名称。如：
-	 *
-	 * ```
-	 * https://qtoolkit.github.io/demo.json#demo.png
-	 * ```
-	 *
-	 *
-	 */
-	var ImageTile = (function (_super) {
-	    __extends(ImageTile, _super);
-	    function ImageTile(src) {
-	        _super.call(this);
-	        this.x = 0;
-	        this.y = 0;
-	        this.w = 0;
-	        this.h = 0;
-	        this._id = 0;
-	        this.img = null;
-	        this.src = src;
-	        if (src) {
-	            this.create(src);
-	        }
-	    }
-	    ImageTile.prototype.toJson = function () {
-	        return this.src;
-	    };
-	    ImageTile.prototype.create = function (src) {
-	        var index = src.indexOf('#');
-	        if (index < 0) {
-	            this.createNormal(src);
-	        }
-	        else {
-	            var base = src.substr(0, index);
-	            var ext = src.substr(index + 1);
-	            if (ext[0] === 'x') {
-	                this.createXYWH(base, ext);
-	            }
-	            else if (ext[0] === 'r') {
-	                this.createRowColIndex(base, ext);
-	            }
-	            else {
-	                this.createTexturePacker(base, ext);
-	            }
-	        }
-	    };
-	    ImageTile.prototype.init = function (img, x, y, w, h) {
-	        this.x = x;
-	        this.y = y;
-	        this.w = w;
-	        this.h = h;
-	        this.img = img;
-	        if (ImageTile.onImageLoaded) {
-	            ImageTile.onImageLoaded(this);
-	        }
-	        this.dispatchEventAsync({ type: Events.LOAD, detail: this });
-	    };
-	    Object.defineProperty(ImageTile.prototype, "complete", {
-	        get: function () {
-	            return this.img && this.img.width;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ImageTile.prototype, "id", {
-	        get: function () {
-	            return this._id;
-	        },
-	        set: function (id) {
-	            this._id = id;
-	            if (this.img) {
-	                this.img.imgID = id;
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ImageTile.prototype.createNormal = function (src) {
-	        var _this = this;
-	        Assets.loadImage(src).then(function (img) {
-	            _this.init(img, 0, 0, img.width, img.height);
-	        }).catch(function (err) {
-	            _this.init(null, 0, 0, 0, 0);
-	        });
-	    };
-	    ImageTile.prototype.createXYWH = function (base, meta) {
-	        var _this = this;
-	        var xywh = meta.match(/x([0-9]+)y([0-9]+)w([0-9]+)h([0-9]+)/i);
-	        var x = parseInt(xywh[1]);
-	        var y = parseInt(xywh[2]);
-	        var w = parseInt(xywh[3]);
-	        var h = parseInt(xywh[4]);
-	        Assets.loadImage(base).then(function (img) {
-	            _this.init(img, x, y, w, h);
-	        }).catch(function (err) {
-	            _this.init(null, 0, 0, 0, 0);
-	        });
-	    };
-	    ImageTile.prototype.createRowColIndex = function (base, meta) {
-	        var _this = this;
-	        var rowcolIndex = meta.match(/r([0-9]+)c([0-9]+)i([0-9]+)/i);
-	        var rows = parseInt(rowcolIndex[1]);
-	        var cols = parseInt(rowcolIndex[2]);
-	        var index = parseInt(rowcolIndex[3]);
-	        Assets.loadImage(base).then(function (img) {
-	            var w = img.width / cols;
-	            var h = img.height / rows;
-	            var r = (index / cols) >> 0;
-	            var c = index % cols;
-	            var x = c * w;
-	            var y = r * h;
-	            _this.init(img, x, y, w, h);
-	        }).catch(function (err) {
-	            _this.init(null, 0, 0, 0, 0);
-	        });
-	    };
-	    ImageTile.prototype.createTexturePacker = function (jsonURL, name) {
-	        var _this = this;
-	        Assets.loadJSON(jsonURL).then(function (json) {
-	            var info = json.frames[name];
-	            var imgSRC = path.dirname(jsonURL) + "/" + (json.file || json.meta.image);
-	            Assets.loadImage(imgSRC).then(function (img) {
-	                var rect = info.frame || info;
-	                var x = rect.x;
-	                var y = rect.y;
-	                var w = rect.w;
-	                var h = rect.h;
-	                if (!info.trimmed && !info.rotate) {
-	                    _this.init(img, x, y, w, h);
-	                }
-	                else {
-	                    console.log("Not support trimmed mode or rotated mode");
-	                    _this.init(null, 0, 0, 0, 0);
-	                }
-	            }).catch(function (err) {
-	                _this.init(null, 0, 0, 0, 0);
-	            });
-	        }).catch(function (err) {
-	            _this.init(null, 0, 0, 0, 0);
-	        });
-	    };
-	    ImageTile.prototype.drawDefault = function (ctx, dx, dy, dw, dh) {
-	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, dx, dy, dw, dh);
-	    };
-	    ImageTile.prototype.drawIcon = function (ctx, dx, dy, dw, dh) {
-	        var cx = dx + (dw >> 1);
-	        var cy = dy + (dh >> 1);
-	        var x = dx + ((dw - this.w) >> 1);
-	        var y = dy + ((dh - this.h) >> 1);
-	        ctx.save();
-	        ctx.translate(cx, cy);
-	        ctx.scale(ImageTile.scale, ImageTile.scale);
-	        ctx.translate(-cx, -cy);
-	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, this.w, this.h);
-	        ctx.restore();
-	    };
-	    ImageTile.prototype.drawCenter = function (ctx, dx, dy, dw, dh) {
-	        var x = dx + ((dw - this.w) >> 1);
-	        var y = dy + ((dh - this.h) >> 1);
-	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, this.w, this.h);
-	    };
-	    ImageTile.prototype.drawAuto = function (ctx, dx, dy, dw, dh) {
-	        var x = dx;
-	        var y = dy;
-	        var w = 0;
-	        var h = 0;
-	        var scaleX = dw / this.w;
-	        var scaleY = dh / this.h;
-	        if (scaleX >= scaleY) {
-	            h = dh;
-	            w = scaleY * this.w;
-	            x += ((dw - w) >> 1);
-	        }
-	        else {
-	            w = dw;
-	            h = scaleX * this.h;
-	            y += ((dh - h) >> 1);
-	        }
-	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, w, h);
-	    };
-	    ImageTile.prototype.draw3PatchH = function (ctx, dx, dy, dw, dh) {
-	        var w = Math.min(dw >> 1, (this.w / 3) >> 0);
-	        ctx.drawImage(this.img, this.x, this.y, w, this.h, dx, dy, w, dh);
-	        ctx.drawImage(this.img, this.x + this.w - w, this.y, w, this.h, dx + dw - w, dy, w, dh);
-	        var cw = dw - w - w;
-	        if (cw > 0) {
-	            ctx.drawImage(this.img, this.x + w, this.y, w, this.h, dx + w, dy, cw, dh);
-	        }
-	    };
-	    ImageTile.prototype.draw9Patch = function (ctx, dx, dy, dw, dh) {
-	        var w = Math.min(dw >> 1, (this.w / 3) >> 0);
-	        var h = Math.min(dh >> 1, (this.h / 3) >> 0);
-	        var cw = dw - w - w;
-	        var ch = dh - h - h;
-	        var rightSX = this.x + this.w - w;
-	        var rightDX = dx + dw - w;
-	        var bottomSY = this.y + this.h - h;
-	        var bottomDY = dy + dh - h;
-	        ctx.drawImage(this.img, this.x, this.y, w, h, dx, dy, w, h);
-	        ctx.drawImage(this.img, rightSX, this.y, w, h, rightDX, dy, w, h);
-	        if (cw > 0) {
-	            ctx.drawImage(this.img, this.x + w, this.y, w, h, dx + w, dy, cw, h);
-	        }
-	        ctx.drawImage(this.img, this.x, this.y + h, w, h, dx, dy + h, w, ch);
-	        ctx.drawImage(this.img, rightSX, this.y + h, w, h, rightDX, dy + h, w, ch);
-	        if (cw > 0 && ch > 0) {
-	            ctx.drawImage(this.img, this.x + w, this.y + h, w, h, dx + w, dy + h, cw, ch);
-	        }
-	        ctx.drawImage(this.img, this.x, bottomSY, w, h, dx, bottomDY, w, h);
-	        ctx.drawImage(this.img, rightSX, bottomSY, w, h, rightDX, bottomDY, w, h);
-	        if (cw > 0) {
-	            ctx.drawImage(this.img, this.x + w, bottomSY, w, h, dx + w, bottomDY, cw, h);
-	        }
-	    };
-	    ImageTile.prototype.draw3PatchV = function (ctx, dx, dy, dw, dh) {
-	        var h = Math.min(dh >> 1, (this.h / 3) >> 0);
-	        ctx.drawImage(this.img, this.x, this.y, this.w, h, dx, dy, dw, h);
-	        ctx.drawImage(this.img, this.x, this.y + this.h - h, this.w, h, dx, dy + dh - h, dw, h);
-	        var ch = dh - h - h;
-	        if (ch > 0) {
-	            ctx.drawImage(this.img, this.x, this.y + h, this.w, h, dx, dy + h, dw, ch);
-	        }
-	    };
-	    ImageTile.prototype.drawTileH = function (ctx, dx, dy, dw, dh) {
-	        var x = dx;
-	        var w = 0;
-	        var remainW = dw;
-	        while (remainW > 0) {
-	            w = Math.min(this.w, remainW);
-	            ctx.drawImage(this.img, this.x, this.y, w, this.h, x, dy, w, dh);
-	            x += w;
-	            remainW -= w;
-	        }
-	    };
-	    ImageTile.prototype.drawTileV = function (ctx, dx, dy, dw, dh) {
-	        var y = dy;
-	        var h = 0;
-	        var remainH = dh;
-	        while (remainH > 0) {
-	            h = Math.min(this.h, remainH);
-	            ctx.drawImage(this.img, this.x, this.y, this.w, h, dx, y, dw, h);
-	            y += h;
-	            remainH -= h;
-	        }
-	    };
-	    ImageTile.prototype.drawTile = function (ctx, dx, dy, dw, dh) {
-	        var x = dx;
-	        var y = dy;
-	        var w = 0;
-	        var h = 0;
-	        var remainW = dw;
-	        var remainH = dh;
-	        while (remainH > 0) {
-	            h = Math.min(this.h, remainH);
-	            while (remainW > 0) {
-	                w = Math.min(this.w, remainW);
-	                ctx.drawImage(this.img, this.x, this.y, w, h, x, y, w, h);
-	                x += w;
-	                remainW -= w;
-	            }
-	            x = 0;
-	            remainW = dw;
-	            y += h;
-	            remainH -= h;
-	        }
-	    };
-	    ImageTile.prototype.draw = function (ctx, type, dx, dy, dw, dh) {
-	        if (ctx && this.complete) {
-	            if (type === ImageDrawType.CENTER) {
-	                this.drawCenter(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.AUTO) {
-	                this.drawAuto(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.PATCH3_H) {
-	                this.draw3PatchH(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.PATCH3_V) {
-	                this.draw3PatchV(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.PATCH9) {
-	                this.draw9Patch(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.TILE_H) {
-	                this.drawTileH(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.TILE_V) {
-	                this.drawTileV(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.TILE) {
-	                this.drawTile(ctx, dx, dy, dw, dh);
-	            }
-	            else if (type === ImageDrawType.ICON) {
-	                this.drawIcon(ctx, dx, dy, dw, dh);
-	            }
-	            else {
-	                this.drawDefault(ctx, dx, dy, dw, dh);
-	            }
-	        }
-	    };
-	    ImageTile.init = function (density, scale, onImageLoaded) {
-	        ImageTile.scale = scale;
-	        ImageTile.density = density;
-	        ImageTile.onImageLoaded = onImageLoaded;
-	    };
-	    ImageTile.fixURL = function (src) {
-	        var ret = src.replace("@density", "x" + ImageTile.density);
-	        return ret;
-	    };
-	    ImageTile.create = function (_src, onDone) {
-	        var src = ImageTile.fixURL(_src);
-	        var it = ImageTile.cache[src];
-	        if (!it) {
-	            it = new ImageTile(src);
-	            ImageTile.cache[src] = it;
-	        }
-	        if (onDone) {
-	            if (it.complete) {
-	                setTimeout(onDone, 0);
-	            }
-	            else {
-	                it.once(Events.LOAD, onDone);
-	            }
-	        }
-	        return it;
-	    };
-	    ImageTile.scale = 1;
-	    ImageTile.density = 1;
-	    ImageTile.cache = {};
-	    return ImageTile;
-	}(emitter_1.Emitter));
-	exports.ImageTile = ImageTile;
-	;
-
-
-/***/ },
-/* 12 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2624,8 +2138,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var emitter_1 = __webpack_require__(9);
+	var Events = __webpack_require__(7);
+	var emitter_1 = __webpack_require__(8);
 	/**
 	 * 负责渲染UI的主循环。为了省电，只有在调用requestRedraw之后，才会触发下一次渲染循环。
 	 * 每个渲染循环分为三个阶段：
@@ -2676,7 +2190,7 @@ var qtk =
 
 
 /***/ },
-/* 13 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2807,11 +2321,11 @@ var qtk =
 
 
 /***/ },
-/* 14 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var matrix_1 = __webpack_require__(13);
+	var matrix_1 = __webpack_require__(11);
 	var MatrixStack = (function () {
 	    function MatrixStack() {
 	        this.stack = [];
@@ -2865,7 +2379,7 @@ var qtk =
 
 
 /***/ },
-/* 15 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2874,11 +2388,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var style_1 = __webpack_require__(16);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var style_1 = __webpack_require__(14);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
 	/**
 	 * 图片控件。
 	 */
@@ -2949,7 +2463,7 @@ var qtk =
 
 
 /***/ },
-/* 16 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
@@ -2959,9 +2473,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(9);
-	var Events = __webpack_require__(8);
-	var image_tile_1 = __webpack_require__(11);
+	var emitter_1 = __webpack_require__(8);
+	var Events = __webpack_require__(7);
+	var image_tile_1 = __webpack_require__(15);
 	/**
 	 * Style用来控制Widget的外观效果，如背景和字体等等。
 	 */
@@ -3457,7 +2971,424 @@ var qtk =
 
 
 /***/ },
-/* 17 */
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../typings/globals/node/index.d.ts"/>
+	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	__webpack_require__(4);
+	var path = __webpack_require__(5);
+	var emitter_1 = __webpack_require__(8);
+	var Assets = __webpack_require__(3);
+	var Events = __webpack_require__(7);
+	(function (ImageDrawType) {
+	    /**
+	     * 画在填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["DEFAULT"] = 1] = "DEFAULT";
+	    /**
+	     * 按1比1大小画在指定的矩形区域的中间。
+	     */
+	    ImageDrawType[ImageDrawType["CENTER"] = 2] = "CENTER";
+	    /**
+	     * 把图分成3行3列等大小的区域，按9宫格的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["PATCH9"] = 3] = "PATCH9";
+	    /**
+	     * 把图分成3行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["PATCH3_V"] = 4] = "PATCH3_V";
+	    /**
+	     * 把图分成1行1列等大小的区域，按3宫格的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["PATCH3_H"] = 5] = "PATCH3_H";
+	    /**
+	     * 按平铺的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["TILE"] = 6] = "TILE";
+	    /**
+	     * 按垂直平铺的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["TILE_V"] = 7] = "TILE_V";
+	    /**
+	     * 按水平平铺的方式填满指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["TILE_H"] = 8] = "TILE_H";
+	    /**
+	     * 保持比例缩放到指定的矩形区域。
+	     */
+	    ImageDrawType[ImageDrawType["AUTO"] = 9] = "AUTO";
+	    /**
+	     * ICON
+	     */
+	    ImageDrawType[ImageDrawType["ICON"] = 10] = "ICON";
+	})(exports.ImageDrawType || (exports.ImageDrawType = {}));
+	var ImageDrawType = exports.ImageDrawType;
+	/**
+	 * 把多个小的图片合并成一张大图，不但可以减少网路请求和GPU的调用次数，还可以提高内存的利用率。
+	 * ImageTile用来表示大图中的一张小图，QTK中支持下面几种方式：
+	 *
+	 * 0.普通图片。如果URL中没有#，则表示一张普通图片，它的位置为(0,0)，大小为图片的整个大小。
+	 *
+	 * 1.指定子图的位置和大小，#之前的部分是大图的URL，后面是子图的位置和大小信息。
+	 *  字母x后紧跟x坐标，字母y后紧跟y坐标，字母w后紧跟宽度，字母h后紧跟高度。
+	 *  下面的URL表示图片demo.png中位置为(100,200)，大小为(300,400)的子图。
+	 *
+	 * ```
+	 * https://qtoolkit.github.io/demo.png#x100y200w300h400
+	 * ```
+	 *
+	 * 2.指定图片的行列数以及小图的序数，#之前的部分是大图的URL，后面是行数、列数和序数。
+	 *  字母r紧跟行数，字母c后紧跟列数，字母i后紧跟序数。
+	 *
+	 *  下面的URL表示图片demo.png分成3行3列，序数为0的子图。
+	 *
+	 * ```
+	 * https://qtoolkit.github.io/demo.png#r3c3i0
+	 * ```
+	 *
+	 * 3.用TexturePacker打包的JSON Hash格式。#之前部分是JSON的URL，后面是子图的名称。如：
+	 *
+	 * ```
+	 * https://qtoolkit.github.io/demo.json#demo.png
+	 * ```
+	 *
+	 *
+	 */
+	var ImageTile = (function (_super) {
+	    __extends(ImageTile, _super);
+	    function ImageTile(src) {
+	        _super.call(this);
+	        this.x = 0;
+	        this.y = 0;
+	        this.w = 0;
+	        this.h = 0;
+	        this._id = 0;
+	        this.img = null;
+	        this.src = src;
+	        if (src) {
+	            this.create(src);
+	        }
+	    }
+	    ImageTile.prototype.toJson = function () {
+	        return this.src;
+	    };
+	    ImageTile.prototype.create = function (src) {
+	        var index = src.indexOf('#');
+	        if (index < 0) {
+	            this.createNormal(src);
+	        }
+	        else {
+	            var base = src.substr(0, index);
+	            var ext = src.substr(index + 1);
+	            if (ext[0] === 'x') {
+	                this.createXYWH(base, ext);
+	            }
+	            else if (ext[0] === 'r') {
+	                this.createRowColIndex(base, ext);
+	            }
+	            else {
+	                this.createTexturePacker(base, ext);
+	            }
+	        }
+	    };
+	    ImageTile.prototype.init = function (img, x, y, w, h) {
+	        this.x = x;
+	        this.y = y;
+	        this.w = w;
+	        this.h = h;
+	        this.img = img;
+	        if (ImageTile.onImageLoaded) {
+	            ImageTile.onImageLoaded(this);
+	        }
+	        this.dispatchEventAsync({ type: Events.LOAD, detail: this });
+	    };
+	    Object.defineProperty(ImageTile.prototype, "complete", {
+	        get: function () {
+	            return this.img && this.img.width;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ImageTile.prototype, "id", {
+	        get: function () {
+	            return this._id;
+	        },
+	        set: function (id) {
+	            this._id = id;
+	            if (this.img) {
+	                this.img.imgID = id;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ImageTile.prototype.createNormal = function (src) {
+	        var _this = this;
+	        Assets.loadImage(src).then(function (img) {
+	            _this.init(img, 0, 0, img.width, img.height);
+	        }).catch(function (err) {
+	            _this.init(null, 0, 0, 0, 0);
+	        });
+	    };
+	    ImageTile.prototype.createXYWH = function (base, meta) {
+	        var _this = this;
+	        var xywh = meta.match(/x([0-9]+)y([0-9]+)w([0-9]+)h([0-9]+)/i);
+	        var x = parseInt(xywh[1]);
+	        var y = parseInt(xywh[2]);
+	        var w = parseInt(xywh[3]);
+	        var h = parseInt(xywh[4]);
+	        Assets.loadImage(base).then(function (img) {
+	            _this.init(img, x, y, w, h);
+	        }).catch(function (err) {
+	            _this.init(null, 0, 0, 0, 0);
+	        });
+	    };
+	    ImageTile.prototype.createRowColIndex = function (base, meta) {
+	        var _this = this;
+	        var rowcolIndex = meta.match(/r([0-9]+)c([0-9]+)i([0-9]+)/i);
+	        var rows = parseInt(rowcolIndex[1]);
+	        var cols = parseInt(rowcolIndex[2]);
+	        var index = parseInt(rowcolIndex[3]);
+	        Assets.loadImage(base).then(function (img) {
+	            var w = img.width / cols;
+	            var h = img.height / rows;
+	            var r = (index / cols) >> 0;
+	            var c = index % cols;
+	            var x = c * w;
+	            var y = r * h;
+	            _this.init(img, x, y, w, h);
+	        }).catch(function (err) {
+	            _this.init(null, 0, 0, 0, 0);
+	        });
+	    };
+	    ImageTile.prototype.createTexturePacker = function (jsonURL, name) {
+	        var _this = this;
+	        Assets.loadJSON(jsonURL).then(function (json) {
+	            var info = json.frames[name];
+	            var imgSRC = path.dirname(jsonURL) + "/" + (json.file || json.meta.image);
+	            Assets.loadImage(imgSRC).then(function (img) {
+	                var rect = info.frame || info;
+	                var x = rect.x;
+	                var y = rect.y;
+	                var w = rect.w;
+	                var h = rect.h;
+	                if (!info.trimmed && !info.rotate) {
+	                    _this.init(img, x, y, w, h);
+	                }
+	                else {
+	                    console.log("Not support trimmed mode or rotated mode");
+	                    _this.init(null, 0, 0, 0, 0);
+	                }
+	            }).catch(function (err) {
+	                _this.init(null, 0, 0, 0, 0);
+	            });
+	        }).catch(function (err) {
+	            _this.init(null, 0, 0, 0, 0);
+	        });
+	    };
+	    ImageTile.prototype.drawDefault = function (ctx, dx, dy, dw, dh) {
+	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, dx, dy, dw, dh);
+	    };
+	    ImageTile.prototype.drawIcon = function (ctx, dx, dy, dw, dh) {
+	        var cx = dx + (dw >> 1);
+	        var cy = dy + (dh >> 1);
+	        var x = dx + ((dw - this.w) >> 1);
+	        var y = dy + ((dh - this.h) >> 1);
+	        ctx.save();
+	        ctx.translate(cx, cy);
+	        ctx.scale(ImageTile.scale, ImageTile.scale);
+	        ctx.translate(-cx, -cy);
+	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, this.w, this.h);
+	        ctx.restore();
+	    };
+	    ImageTile.prototype.drawCenter = function (ctx, dx, dy, dw, dh) {
+	        var x = dx + ((dw - this.w) >> 1);
+	        var y = dy + ((dh - this.h) >> 1);
+	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, this.w, this.h);
+	    };
+	    ImageTile.prototype.drawAuto = function (ctx, dx, dy, dw, dh) {
+	        var x = dx;
+	        var y = dy;
+	        var w = 0;
+	        var h = 0;
+	        var scaleX = dw / this.w;
+	        var scaleY = dh / this.h;
+	        if (scaleX >= scaleY) {
+	            h = dh;
+	            w = scaleY * this.w;
+	            x += ((dw - w) >> 1);
+	        }
+	        else {
+	            w = dw;
+	            h = scaleX * this.h;
+	            y += ((dh - h) >> 1);
+	        }
+	        ctx.drawImage(this.img, this.x, this.y, this.w, this.h, x, y, w, h);
+	    };
+	    ImageTile.prototype.draw3PatchH = function (ctx, dx, dy, dw, dh) {
+	        var w = Math.min(dw >> 1, (this.w / 3) >> 0);
+	        ctx.drawImage(this.img, this.x, this.y, w, this.h, dx, dy, w, dh);
+	        ctx.drawImage(this.img, this.x + this.w - w, this.y, w, this.h, dx + dw - w, dy, w, dh);
+	        var cw = dw - w - w;
+	        if (cw > 0) {
+	            ctx.drawImage(this.img, this.x + w, this.y, w, this.h, dx + w, dy, cw, dh);
+	        }
+	    };
+	    ImageTile.prototype.draw9Patch = function (ctx, dx, dy, dw, dh) {
+	        var w = Math.min(dw >> 1, (this.w / 3) >> 0);
+	        var h = Math.min(dh >> 1, (this.h / 3) >> 0);
+	        var cw = dw - w - w;
+	        var ch = dh - h - h;
+	        var rightSX = this.x + this.w - w;
+	        var rightDX = dx + dw - w;
+	        var bottomSY = this.y + this.h - h;
+	        var bottomDY = dy + dh - h;
+	        ctx.drawImage(this.img, this.x, this.y, w, h, dx, dy, w, h);
+	        ctx.drawImage(this.img, rightSX, this.y, w, h, rightDX, dy, w, h);
+	        if (cw > 0) {
+	            ctx.drawImage(this.img, this.x + w, this.y, w, h, dx + w, dy, cw, h);
+	        }
+	        ctx.drawImage(this.img, this.x, this.y + h, w, h, dx, dy + h, w, ch);
+	        ctx.drawImage(this.img, rightSX, this.y + h, w, h, rightDX, dy + h, w, ch);
+	        if (cw > 0 && ch > 0) {
+	            ctx.drawImage(this.img, this.x + w, this.y + h, w, h, dx + w, dy + h, cw, ch);
+	        }
+	        ctx.drawImage(this.img, this.x, bottomSY, w, h, dx, bottomDY, w, h);
+	        ctx.drawImage(this.img, rightSX, bottomSY, w, h, rightDX, bottomDY, w, h);
+	        if (cw > 0) {
+	            ctx.drawImage(this.img, this.x + w, bottomSY, w, h, dx + w, bottomDY, cw, h);
+	        }
+	    };
+	    ImageTile.prototype.draw3PatchV = function (ctx, dx, dy, dw, dh) {
+	        var h = Math.min(dh >> 1, (this.h / 3) >> 0);
+	        ctx.drawImage(this.img, this.x, this.y, this.w, h, dx, dy, dw, h);
+	        ctx.drawImage(this.img, this.x, this.y + this.h - h, this.w, h, dx, dy + dh - h, dw, h);
+	        var ch = dh - h - h;
+	        if (ch > 0) {
+	            ctx.drawImage(this.img, this.x, this.y + h, this.w, h, dx, dy + h, dw, ch);
+	        }
+	    };
+	    ImageTile.prototype.drawTileH = function (ctx, dx, dy, dw, dh) {
+	        var x = dx;
+	        var w = 0;
+	        var remainW = dw;
+	        while (remainW > 0) {
+	            w = Math.min(this.w, remainW);
+	            ctx.drawImage(this.img, this.x, this.y, w, this.h, x, dy, w, dh);
+	            x += w;
+	            remainW -= w;
+	        }
+	    };
+	    ImageTile.prototype.drawTileV = function (ctx, dx, dy, dw, dh) {
+	        var y = dy;
+	        var h = 0;
+	        var remainH = dh;
+	        while (remainH > 0) {
+	            h = Math.min(this.h, remainH);
+	            ctx.drawImage(this.img, this.x, this.y, this.w, h, dx, y, dw, h);
+	            y += h;
+	            remainH -= h;
+	        }
+	    };
+	    ImageTile.prototype.drawTile = function (ctx, dx, dy, dw, dh) {
+	        var x = dx;
+	        var y = dy;
+	        var w = 0;
+	        var h = 0;
+	        var remainW = dw;
+	        var remainH = dh;
+	        while (remainH > 0) {
+	            h = Math.min(this.h, remainH);
+	            while (remainW > 0) {
+	                w = Math.min(this.w, remainW);
+	                ctx.drawImage(this.img, this.x, this.y, w, h, x, y, w, h);
+	                x += w;
+	                remainW -= w;
+	            }
+	            x = 0;
+	            remainW = dw;
+	            y += h;
+	            remainH -= h;
+	        }
+	    };
+	    ImageTile.prototype.draw = function (ctx, type, dx, dy, dw, dh) {
+	        if (ctx && this.complete) {
+	            if (type === ImageDrawType.CENTER) {
+	                this.drawCenter(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.AUTO) {
+	                this.drawAuto(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.PATCH3_H) {
+	                this.draw3PatchH(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.PATCH3_V) {
+	                this.draw3PatchV(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.PATCH9) {
+	                this.draw9Patch(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.TILE_H) {
+	                this.drawTileH(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.TILE_V) {
+	                this.drawTileV(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.TILE) {
+	                this.drawTile(ctx, dx, dy, dw, dh);
+	            }
+	            else if (type === ImageDrawType.ICON) {
+	                this.drawIcon(ctx, dx, dy, dw, dh);
+	            }
+	            else {
+	                this.drawDefault(ctx, dx, dy, dw, dh);
+	            }
+	        }
+	    };
+	    ImageTile.init = function (density, scale, onImageLoaded) {
+	        ImageTile.scale = scale;
+	        ImageTile.density = density;
+	        ImageTile.onImageLoaded = onImageLoaded;
+	    };
+	    ImageTile.fixURL = function (src) {
+	        var ret = src.replace("@density", "x" + ImageTile.density);
+	        return ret;
+	    };
+	    ImageTile.create = function (_src, onDone) {
+	        var src = ImageTile.fixURL(_src);
+	        var it = ImageTile.cache[src];
+	        if (!it) {
+	            it = new ImageTile(src);
+	            ImageTile.cache[src] = it;
+	        }
+	        if (onDone) {
+	            if (it.complete) {
+	                setTimeout(onDone, 0);
+	            }
+	            else {
+	                it.once(Events.LOAD, onDone);
+	            }
+	        }
+	        return it;
+	    };
+	    ImageTile.scale = 1;
+	    ImageTile.density = 1;
+	    ImageTile.cache = {};
+	    return ImageTile;
+	}(emitter_1.Emitter));
+	exports.ImageTile = ImageTile;
+	;
+
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/globals/tween.js/index.d.ts"/>
@@ -3469,17 +3400,17 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var style_1 = __webpack_require__(16);
-	var canvas_1 = __webpack_require__(18);
-	var TWEEN = __webpack_require__(22);
-	var emitter_1 = __webpack_require__(9);
-	var utils_1 = __webpack_require__(23);
-	var Events = __webpack_require__(8);
-	var matrix_stack_1 = __webpack_require__(14);
-	var graphics_1 = __webpack_require__(24);
-	var dirty_rect_context_1 = __webpack_require__(75);
-	var layouter_1 = __webpack_require__(76);
-	var behavior_1 = __webpack_require__(77);
+	var style_1 = __webpack_require__(14);
+	var canvas_1 = __webpack_require__(17);
+	var TWEEN = __webpack_require__(21);
+	var emitter_1 = __webpack_require__(8);
+	var utils_1 = __webpack_require__(22);
+	var Events = __webpack_require__(7);
+	var matrix_stack_1 = __webpack_require__(12);
+	var graphics_1 = __webpack_require__(23);
+	var dirty_rect_context_1 = __webpack_require__(74);
+	var layouter_1 = __webpack_require__(75);
+	var behavior_1 = __webpack_require__(76);
 	/**
 	 * Widget是所有控件的基类。
 	 */
@@ -4471,6 +4402,20 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(Widget.prototype, "clientW", {
+	        get: function () {
+	            return this._w - this.leftPadding - this.rightPadding;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Widget.prototype, "clientH", {
+	        get: function () {
+	            return this._h - this.topPadding - this.bottomPadding;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Widget.prototype, "height", {
 	        get: function () {
 	            return this._h;
@@ -5061,7 +5006,7 @@ var qtk =
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5070,10 +5015,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(9);
-	var Events = __webpack_require__(8);
-	var event_detail_1 = __webpack_require__(19);
-	var inputEventAdapter = __webpack_require__(20);
+	var emitter_1 = __webpack_require__(8);
+	var Events = __webpack_require__(7);
+	var event_detail_1 = __webpack_require__(18);
+	var inputEventAdapter = __webpack_require__(19);
 	/**
 	 * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
 	 *
@@ -5294,7 +5239,7 @@ var qtk =
 
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5392,14 +5337,14 @@ var qtk =
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Events = __webpack_require__(8);
-	var key_event_1 = __webpack_require__(21);
-	var emitter_1 = __webpack_require__(9);
-	var event_detail_1 = __webpack_require__(19);
+	var Events = __webpack_require__(7);
+	var key_event_1 = __webpack_require__(20);
+	var emitter_1 = __webpack_require__(8);
+	var event_detail_1 = __webpack_require__(18);
 	var grabs = [];
 	var keyGrabs = [];
 	var lastDetail;
@@ -5671,7 +5616,7 @@ var qtk =
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5799,7 +5744,7 @@ var qtk =
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -6673,10 +6618,10 @@ var qtk =
 
 	})(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	//! stable.js 0.1.5, https://github.com/Two-Screen/stable
@@ -6800,13 +6745,13 @@ var qtk =
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var style_1 = __webpack_require__(16);
-	var carota = __webpack_require__(25);
-	var ut = __webpack_require__(46);
+	var style_1 = __webpack_require__(14);
+	var carota = __webpack_require__(24);
+	var ut = __webpack_require__(45);
 	var tokenizer = ut.createTokenizerStream();
 	var Token = ut.Token;
 	var Break = ut.Break;
@@ -7097,18 +7042,18 @@ var qtk =
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var node = __webpack_require__(26);
-	var editor = __webpack_require__(31);
-	var doc = __webpack_require__(32);
-	var dom = __webpack_require__(44);
-	var runs = __webpack_require__(28);
-	var html = __webpack_require__(45);
-	var frame = __webpack_require__(39);
-	var text = __webpack_require__(37);
-	var rect = __webpack_require__(29);
+	var node = __webpack_require__(25);
+	var editor = __webpack_require__(30);
+	var doc = __webpack_require__(31);
+	var dom = __webpack_require__(43);
+	var runs = __webpack_require__(27);
+	var html = __webpack_require__(44);
+	var frame = __webpack_require__(38);
+	var text = __webpack_require__(36);
+	var rect = __webpack_require__(28);
 
 	var bundle = {
 	    node: node,
@@ -7133,13 +7078,13 @@ var qtk =
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var per = __webpack_require__(27);
-	var runs = __webpack_require__(28);
-	var rect = __webpack_require__(29);
-	var util = __webpack_require__(30);
+	var per = __webpack_require__(26);
+	var runs = __webpack_require__(27);
+	var rect = __webpack_require__(28);
+	var util = __webpack_require__(29);
 
 	exports.prototype = {
 	    children: function() {
@@ -7286,7 +7231,7 @@ var qtk =
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -7571,7 +7516,7 @@ var qtk =
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	exports.formattingKeys = [ 'bold', 'italic', 'underline', 'strikeout', 'color', 'font', 'size', 'align', 'script' ];
@@ -7748,7 +7693,7 @@ var qtk =
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	
@@ -7789,7 +7734,7 @@ var qtk =
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	exports.event = function() {
@@ -7818,13 +7763,13 @@ var qtk =
 	};
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var per = __webpack_require__(27);
-	var carotaDoc = __webpack_require__(32);
-	var dom = __webpack_require__(44);
-	var rect = __webpack_require__(29);
+	var per = __webpack_require__(26);
+	var carotaDoc = __webpack_require__(31);
+	var dom = __webpack_require__(43);
+	var rect = __webpack_require__(28);
 
 	setInterval(function() {
 	    var editors = document.querySelectorAll('.carotaEditorCanvas');
@@ -8310,20 +8255,20 @@ var qtk =
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var per = __webpack_require__(27);
-	var characters = __webpack_require__(33);
-	var split = __webpack_require__(34);
-	var word = __webpack_require__(35);
-	var node = __webpack_require__(26);
-	var runs = __webpack_require__(28);
-	var range = __webpack_require__(38);
-	var util = __webpack_require__(30);
-	var frame = __webpack_require__(39);
-	var codes = __webpack_require__(43);
-	var rect = __webpack_require__(29);
+	var per = __webpack_require__(26);
+	var characters = __webpack_require__(32);
+	var split = __webpack_require__(33);
+	var word = __webpack_require__(34);
+	var node = __webpack_require__(25);
+	var runs = __webpack_require__(27);
+	var range = __webpack_require__(37);
+	var util = __webpack_require__(29);
+	var frame = __webpack_require__(38);
+	var codes = __webpack_require__(42);
+	var rect = __webpack_require__(28);
 
 	var makeEditCommand = function(doc, start, count, words) {
 	    var selStart = doc.selection.start, selEnd = doc.selection.end;
@@ -8776,10 +8721,10 @@ var qtk =
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var runs = __webpack_require__(28);
+	var runs = __webpack_require__(27);
 
 	var compatible = function(a, b) {
 	    if (a._runs !== b._runs) {
@@ -8847,7 +8792,7 @@ var qtk =
 	};
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports) {
 
 	/*  Creates a stateful transformer function that consumes Characters and produces "word coordinate"
@@ -8925,12 +8870,12 @@ var qtk =
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var per = __webpack_require__(27);
-	var part = __webpack_require__(36);
-	var runs = __webpack_require__(28);
+	var per = __webpack_require__(26);
+	var part = __webpack_require__(35);
+	var runs = __webpack_require__(27);
 
 	/*  A Word has the following properties:
 
@@ -9067,10 +9012,10 @@ var qtk =
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var text = __webpack_require__(37);
+	var text = __webpack_require__(36);
 
 	var defaultInline = {
 	    measure: function(formatting) {
@@ -9149,10 +9094,10 @@ var qtk =
 
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var runs = __webpack_require__(28);
+	var runs = __webpack_require__(27);
 
 	/*  Returns a font CSS/Canvas string based on the settings in a run
 	 */
@@ -9315,11 +9260,11 @@ var qtk =
 	};
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var per = __webpack_require__(27);
-	var runs = __webpack_require__(28);
+	var per = __webpack_require__(26);
+	var runs = __webpack_require__(27);
 
 	function Range(doc, start, end) {
 	    this.doc = doc;
@@ -9408,12 +9353,12 @@ var qtk =
 	};
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var node = __webpack_require__(26);
-	var wrap = __webpack_require__(40);
-	var rect = __webpack_require__(29);
+	var node = __webpack_require__(25);
+	var wrap = __webpack_require__(39);
+	var rect = __webpack_require__(28);
 
 	var prototype = node.derive({
 	    bounds: function() {
@@ -9497,10 +9442,10 @@ var qtk =
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var line = __webpack_require__(41);
+	var line = __webpack_require__(40);
 
 	/*  A stateful transformer function that accepts words and emits lines. If the first word
 	    is too wide, it will overhang; if width is zero or negative, there will be one word on
@@ -9598,13 +9543,13 @@ var qtk =
 
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var positionedWord = __webpack_require__(42);
-	var rect = __webpack_require__(29);
-	var node = __webpack_require__(26);
-	var runs = __webpack_require__(28);
+	var positionedWord = __webpack_require__(41);
+	var rect = __webpack_require__(28);
+	var node = __webpack_require__(25);
+	var runs = __webpack_require__(27);
 
 	/*  A Line is returned by the wrap function. It contains an array of PositionedWord objects that are
 	    all on the same physical line in the wrapped text.
@@ -9699,15 +9644,15 @@ var qtk =
 
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var rect = __webpack_require__(29);
-	var part = __webpack_require__(36);
-	var text = __webpack_require__(37);
-	var node = __webpack_require__(26);
-	var word = __webpack_require__(35);
-	var runs = __webpack_require__(28);
+	var rect = __webpack_require__(28);
+	var part = __webpack_require__(35);
+	var text = __webpack_require__(36);
+	var node = __webpack_require__(25);
+	var word = __webpack_require__(34);
+	var runs = __webpack_require__(27);
 
 	var newLineWidth = function(run) {
 	    return text.measure(text.enter, run).width;
@@ -9824,14 +9769,14 @@ var qtk =
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var text = __webpack_require__(37);
-	var frame = __webpack_require__(39);
-	var node = __webpack_require__(26);
-	var rect = __webpack_require__(29);
-	var util = __webpack_require__(30);
+	var text = __webpack_require__(36);
+	var frame = __webpack_require__(38);
+	var node = __webpack_require__(25);
+	var rect = __webpack_require__(28);
+	var util = __webpack_require__(29);
 
 	var inlineNodePrototype = node.derive({
 	    parent: function() {
@@ -10031,7 +9976,7 @@ var qtk =
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	
@@ -10074,11 +10019,11 @@ var qtk =
 	};
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var runs = __webpack_require__(28);
-	var per = __webpack_require__(27);
+	var runs = __webpack_require__(27);
+	var per = __webpack_require__(26);
 
 	var tag = function(name, formattingProperty) {
 	    return function(node, formatting) {
@@ -10275,15 +10220,15 @@ var qtk =
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stream = __webpack_require__(47).Stream,
-	    util = __webpack_require__(68),
-	    TokenType = __webpack_require__(70),
-	    BreakType = __webpack_require__(71),
-	    tokenizer = __webpack_require__(72),
-	    LineBreak = __webpack_require__(74);
+	var Stream = __webpack_require__(46).Stream,
+	    util = __webpack_require__(67),
+	    TokenType = __webpack_require__(69),
+	    BreakType = __webpack_require__(70),
+	    tokenizer = __webpack_require__(71),
+	    LineBreak = __webpack_require__(73);
 
 	function TokenizerStream() {
 	    Stream.call(this);
@@ -10339,7 +10284,7 @@ var qtk =
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -10365,15 +10310,15 @@ var qtk =
 
 	module.exports = Stream;
 
-	var EE = __webpack_require__(48).EventEmitter;
-	var inherits = __webpack_require__(49);
+	var EE = __webpack_require__(47).EventEmitter;
+	var inherits = __webpack_require__(48);
 
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(50);
-	Stream.Writable = __webpack_require__(64);
-	Stream.Duplex = __webpack_require__(65);
-	Stream.Transform = __webpack_require__(66);
-	Stream.PassThrough = __webpack_require__(67);
+	Stream.Readable = __webpack_require__(49);
+	Stream.Writable = __webpack_require__(63);
+	Stream.Duplex = __webpack_require__(64);
+	Stream.Transform = __webpack_require__(65);
+	Stream.PassThrough = __webpack_require__(66);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -10472,7 +10417,7 @@ var qtk =
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -10780,7 +10725,7 @@ var qtk =
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -10809,24 +10754,24 @@ var qtk =
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(51);
-	exports.Stream = __webpack_require__(47);
+	/* WEBPACK VAR INJECTION */(function(process) {exports = module.exports = __webpack_require__(50);
+	exports.Stream = __webpack_require__(46);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(60);
-	exports.Duplex = __webpack_require__(59);
-	exports.Transform = __webpack_require__(62);
-	exports.PassThrough = __webpack_require__(63);
+	exports.Writable = __webpack_require__(59);
+	exports.Duplex = __webpack_require__(58);
+	exports.Transform = __webpack_require__(61);
+	exports.PassThrough = __webpack_require__(62);
 	if (!process.browser && process.env.READABLE_STREAM === 'disable') {
-	  module.exports = __webpack_require__(47);
+	  module.exports = __webpack_require__(46);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -10853,17 +10798,17 @@ var qtk =
 	module.exports = Readable;
 
 	/*<replacement>*/
-	var isArray = __webpack_require__(52);
+	var isArray = __webpack_require__(51);
 	/*</replacement>*/
 
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(53).Buffer;
+	var Buffer = __webpack_require__(52).Buffer;
 	/*</replacement>*/
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(48).EventEmitter;
+	var EE = __webpack_require__(47).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -10871,18 +10816,18 @@ var qtk =
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(47);
+	var Stream = __webpack_require__(46);
 
 	/*<replacement>*/
-	var util = __webpack_require__(57);
-	util.inherits = __webpack_require__(49);
+	var util = __webpack_require__(56);
+	util.inherits = __webpack_require__(48);
 	/*</replacement>*/
 
 	var StringDecoder;
 
 
 	/*<replacement>*/
-	var debug = __webpack_require__(58);
+	var debug = __webpack_require__(57);
 	if (debug && debug.debuglog) {
 	  debug = debug.debuglog('stream');
 	} else {
@@ -10894,7 +10839,7 @@ var qtk =
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(59);
+	  var Duplex = __webpack_require__(58);
 
 	  options = options || {};
 
@@ -10955,14 +10900,14 @@ var qtk =
 	  this.encoding = null;
 	  if (options.encoding) {
 	    if (!StringDecoder)
-	      StringDecoder = __webpack_require__(61).StringDecoder;
+	      StringDecoder = __webpack_require__(60).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(59);
+	  var Duplex = __webpack_require__(58);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -11065,7 +11010,7 @@ var qtk =
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function(enc) {
 	  if (!StringDecoder)
-	    StringDecoder = __webpack_require__(61).StringDecoder;
+	    StringDecoder = __webpack_require__(60).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -11781,10 +11726,10 @@ var qtk =
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = Array.isArray || function (arr) {
@@ -11793,7 +11738,7 @@ var qtk =
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -11806,9 +11751,9 @@ var qtk =
 
 	'use strict'
 
-	var base64 = __webpack_require__(54)
-	var ieee754 = __webpack_require__(55)
-	var isArray = __webpack_require__(56)
+	var base64 = __webpack_require__(53)
+	var ieee754 = __webpack_require__(54)
+	var isArray = __webpack_require__(55)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -13345,10 +13290,10 @@ var qtk =
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -13478,7 +13423,7 @@ var qtk =
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -13568,7 +13513,7 @@ var qtk =
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -13579,7 +13524,7 @@ var qtk =
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
@@ -13690,16 +13635,16 @@ var qtk =
 	  return Object.prototype.toString.call(o);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52).Buffer))
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -13740,12 +13685,12 @@ var qtk =
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(57);
-	util.inherits = __webpack_require__(49);
+	var util = __webpack_require__(56);
+	util.inherits = __webpack_require__(48);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(51);
-	var Writable = __webpack_require__(60);
+	var Readable = __webpack_require__(50);
+	var Writable = __webpack_require__(59);
 
 	util.inherits(Duplex, Readable);
 
@@ -13792,10 +13737,10 @@ var qtk =
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -13826,18 +13771,18 @@ var qtk =
 	module.exports = Writable;
 
 	/*<replacement>*/
-	var Buffer = __webpack_require__(53).Buffer;
+	var Buffer = __webpack_require__(52).Buffer;
 	/*</replacement>*/
 
 	Writable.WritableState = WritableState;
 
 
 	/*<replacement>*/
-	var util = __webpack_require__(57);
-	util.inherits = __webpack_require__(49);
+	var util = __webpack_require__(56);
+	util.inherits = __webpack_require__(48);
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(47);
+	var Stream = __webpack_require__(46);
 
 	util.inherits(Writable, Stream);
 
@@ -13848,7 +13793,7 @@ var qtk =
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(59);
+	  var Duplex = __webpack_require__(58);
 
 	  options = options || {};
 
@@ -13936,7 +13881,7 @@ var qtk =
 	}
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(59);
+	  var Duplex = __webpack_require__(58);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -14276,10 +14221,10 @@ var qtk =
 	  state.ended = true;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -14303,7 +14248,7 @@ var qtk =
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	var Buffer = __webpack_require__(53).Buffer;
+	var Buffer = __webpack_require__(52).Buffer;
 
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -14506,7 +14451,7 @@ var qtk =
 
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -14575,11 +14520,11 @@ var qtk =
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(59);
+	var Duplex = __webpack_require__(58);
 
 	/*<replacement>*/
-	var util = __webpack_require__(57);
-	util.inherits = __webpack_require__(49);
+	var util = __webpack_require__(56);
+	util.inherits = __webpack_require__(48);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -14721,7 +14666,7 @@ var qtk =
 
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -14751,11 +14696,11 @@ var qtk =
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(62);
+	var Transform = __webpack_require__(61);
 
 	/*<replacement>*/
-	var util = __webpack_require__(57);
-	util.inherits = __webpack_require__(49);
+	var util = __webpack_require__(56);
+	util.inherits = __webpack_require__(48);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -14773,17 +14718,24 @@ var qtk =
 
 
 /***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(59)
+
+
+/***/ },
 /* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(60)
+	module.exports = __webpack_require__(58)
 
 
 /***/ },
 /* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(59)
+	module.exports = __webpack_require__(61)
 
 
 /***/ },
@@ -14795,13 +14747,6 @@ var qtk =
 
 /***/ },
 /* 67 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(63)
-
-
-/***/ },
-/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -15329,7 +15274,7 @@ var qtk =
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(69);
+	exports.isBuffer = __webpack_require__(68);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -15373,7 +15318,7 @@ var qtk =
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(49);
+	exports.inherits = __webpack_require__(48);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -15391,10 +15336,10 @@ var qtk =
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(6)))
 
 /***/ },
-/* 69 */
+/* 68 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -15405,7 +15350,7 @@ var qtk =
 	}
 
 /***/ },
-/* 70 */
+/* 69 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -15450,7 +15395,7 @@ var qtk =
 
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -15482,13 +15427,13 @@ var qtk =
 
 
 /***/ },
-/* 72 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var util = __webpack_require__(68),
-	    Stream = __webpack_require__(47).Stream,
-	    types = __webpack_require__(70),
-	    tokens = __webpack_require__(73),
+	var util = __webpack_require__(67),
+	    Stream = __webpack_require__(46).Stream,
+	    types = __webpack_require__(69),
+	    tokens = __webpack_require__(72),
 	    tokenClasses = Object.keys(tokens),
 	    tokenRegExp = {};
 
@@ -15588,7 +15533,7 @@ var qtk =
 
 
 /***/ },
-/* 73 */
+/* 72 */
 /***/ function(module, exports) {
 
 	// This file is auto-generated. Do not modify.
@@ -15635,13 +15580,13 @@ var qtk =
 
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var EventEmitter = __webpack_require__(48).EventEmitter,
-	    TokenType = __webpack_require__(70),
-	    BreakType = __webpack_require__(71),
-	    util = __webpack_require__(68);
+	var EventEmitter = __webpack_require__(47).EventEmitter,
+	    TokenType = __webpack_require__(69),
+	    BreakType = __webpack_require__(70),
+	    util = __webpack_require__(67);
 
 	function LineBreak() {
 	    EventEmitter.call(this);
@@ -15764,7 +15709,7 @@ var qtk =
 
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -15775,7 +15720,7 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var matrix_stack_1 = __webpack_require__(14);
+	var matrix_stack_1 = __webpack_require__(12);
 	var DirtyRectContext = (function (_super) {
 	    __extends(DirtyRectContext, _super);
 	    function DirtyRectContext() {
@@ -15839,7 +15784,7 @@ var qtk =
 
 
 /***/ },
-/* 76 */
+/* 75 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -15935,12 +15880,12 @@ var qtk =
 
 
 /***/ },
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Events = __webpack_require__(8);
-	var inputEventAdapter = __webpack_require__(20);
+	var Events = __webpack_require__(7);
+	var inputEventAdapter = __webpack_require__(19);
 	/**
 	 * Behavior代表控件的一种行为特性，比如Resizable/Movable/Draggable/Droppable等。
 	 * 把这些行为特性抽象出来单独实现，一方面可以避免让Widget变得太复杂，另一方面可以最大限度的重用这些行为特性。
@@ -16089,11 +16034,11 @@ var qtk =
 
 
 /***/ },
-/* 78 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var factory_1 = __webpack_require__(79);
+	var factory_1 = __webpack_require__(78);
 	/**
 	 * Widget工厂，注册控件的创建函数和根据控件的类型创建控件。
 	 * 主要用于根据UI编辑器生成的UI数据创建UI，每个控件都要向WidgetFactory注册。
@@ -16120,7 +16065,7 @@ var qtk =
 
 
 /***/ },
-/* 79 */
+/* 78 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -16148,7 +16093,7 @@ var qtk =
 
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -16191,7 +16136,7 @@ var qtk =
 
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16200,9 +16145,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Group = (function (_super) {
 	    __extends(Group, _super);
 	    function Group() {
@@ -16221,7 +16166,7 @@ var qtk =
 
 
 /***/ },
-/* 82 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16231,16 +16176,23 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var point_1 = __webpack_require__(1);
-	var label_1 = __webpack_require__(83);
-	var Events = __webpack_require__(8);
-	var widget_factory_1 = __webpack_require__(78);
-	var html_edit_1 = __webpack_require__(84);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var label_1 = __webpack_require__(82);
+	var Events = __webpack_require__(7);
+	var widget_factory_1 = __webpack_require__(77);
+	var html_edit_1 = __webpack_require__(83);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Edit = (function (_super) {
 	    __extends(Edit, _super);
 	    function Edit() {
 	        _super.call(this, Edit.TYPE);
 	    }
+	    Object.defineProperty(Edit.prototype, "inputFilter", {
+	        set: function (value) {
+	            this._inputFilter = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Edit.prototype, "inputTips", {
 	        get: function () {
 	            return this._inputTips;
@@ -16294,6 +16246,9 @@ var qtk =
 	            }
 	        }
 	    };
+	    Edit.prototype.filterText = function (value) {
+	        return this._inputFilter ? this._inputFilter(value) : value;
+	    };
 	    Edit.prototype.showEditor = function () {
 	        var _this = this;
 	        var style = this.getStyle();
@@ -16317,13 +16272,20 @@ var qtk =
 	            _this.dispatchEvent({ type: Events.BLUR });
 	        });
 	        input.on(Events.CHANGING, function (evt) {
-	            _this.text = evt.value;
+	            _this.text = _this.filterText(evt.value);
 	            _this.dispatchEvent(evt);
 	        });
 	        input.on(Events.CHANGE, function (evt) {
-	            _this.text = evt.value;
+	            _this.text = _this.filterText(evt.value);
 	            _this.dispatchEvent(evt);
 	        });
+	    };
+	    Edit.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._inputFilter = null;
+	        this._inputType = null;
+	        this._inputTips = null;
+	        this._input = null;
 	    };
 	    Edit.prototype.dispatchClick = function (evt) {
 	        _super.prototype.dispatchClick.call(this, evt);
@@ -16345,7 +16307,7 @@ var qtk =
 
 
 /***/ },
-/* 83 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16355,10 +16317,10 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(17);
-	var graphics_1 = __webpack_require__(24);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var graphics_1 = __webpack_require__(23);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Label = (function (_super) {
 	    __extends(Label, _super);
 	    function Label(type) {
@@ -16459,7 +16421,7 @@ var qtk =
 
 
 /***/ },
-/* 84 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16468,8 +16430,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var html_element_1 = __webpack_require__(85);
+	var Events = __webpack_require__(7);
+	var html_element_1 = __webpack_require__(84);
 	var HtmlEdit = (function (_super) {
 	    __extends(HtmlEdit, _super);
 	    function HtmlEdit() {
@@ -16566,7 +16528,7 @@ var qtk =
 
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16575,7 +16537,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(9);
+	var emitter_1 = __webpack_require__(8);
 	var HtmlElement = (function (_super) {
 	    __extends(HtmlElement, _super);
 	    function HtmlElement() {
@@ -16666,7 +16628,7 @@ var qtk =
 
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16675,9 +16637,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Page = (function (_super) {
 	    __extends(Page, _super);
 	    function Page(type) {
@@ -16696,7 +16658,7 @@ var qtk =
 
 
 /***/ },
-/* 87 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16705,9 +16667,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Pages = (function (_super) {
 	    __extends(Pages, _super);
 	    function Pages() {
@@ -16778,7 +16740,7 @@ var qtk =
 
 
 /***/ },
-/* 88 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16787,9 +16749,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Button = (function (_super) {
 	    __extends(Button, _super);
 	    function Button() {
@@ -16808,7 +16770,7 @@ var qtk =
 
 
 /***/ },
-/* 89 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16817,9 +16779,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var page_1 = __webpack_require__(86);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var page_1 = __webpack_require__(85);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var TabPage = (function (_super) {
 	    __extends(TabPage, _super);
 	    function TabPage() {
@@ -16852,7 +16814,7 @@ var qtk =
 
 
 /***/ },
-/* 90 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16862,13 +16824,13 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var button_1 = __webpack_require__(88);
-	var graphics_1 = __webpack_require__(24);
-	var consts_1 = __webpack_require__(3);
+	var button_1 = __webpack_require__(87);
+	var graphics_1 = __webpack_require__(23);
+	var consts_1 = __webpack_require__(90);
 	var radio_button_1 = __webpack_require__(91);
-	var widget_factory_1 = __webpack_require__(78);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var TabButton = (function (_super) {
 	    __extends(TabButton, _super);
 	    function TabButton() {
@@ -17057,6 +17019,77 @@ var qtk =
 
 
 /***/ },
+/* 90 */
+/***/ function(module, exports) {
+
+	"use strict";
+	(function (Orientation) {
+	    Orientation[Orientation["V"] = 1] = "V";
+	    Orientation[Orientation["VERTICAL"] = 1] = "VERTICAL";
+	    Orientation[Orientation["H"] = 2] = "H";
+	    Orientation[Orientation["HORIZONTAL"] = 2] = "HORIZONTAL";
+	})(exports.Orientation || (exports.Orientation = {}));
+	var Orientation = exports.Orientation;
+	;
+	(function (Direction) {
+	    Direction[Direction["W"] = 1] = "W";
+	    Direction[Direction["WEST"] = 1] = "WEST";
+	    Direction[Direction["E"] = 2] = "E";
+	    Direction[Direction["EAST"] = 2] = "EAST";
+	    Direction[Direction["N"] = 3] = "N";
+	    Direction[Direction["NORTH"] = 3] = "NORTH";
+	    Direction[Direction["S"] = 4] = "S";
+	    Direction[Direction["SOUTH"] = 4] = "SOUTH";
+	    Direction[Direction["L"] = 1] = "L";
+	    Direction[Direction["LEFT"] = 1] = "LEFT";
+	    Direction[Direction["R"] = 2] = "R";
+	    Direction[Direction["RIGHT"] = 2] = "RIGHT";
+	    Direction[Direction["T"] = 3] = "T";
+	    Direction[Direction["TOP"] = 3] = "TOP";
+	    Direction[Direction["B"] = 4] = "B";
+	    Direction[Direction["BOTTOM"] = 4] = "BOTTOM";
+	})(exports.Direction || (exports.Direction = {}));
+	var Direction = exports.Direction;
+	;
+	(function (AlignH) {
+	    AlignH[AlignH["L"] = 1] = "L";
+	    AlignH[AlignH["LEFT"] = 1] = "LEFT";
+	    AlignH[AlignH["C"] = 2] = "C";
+	    AlignH[AlignH["CENTER"] = 2] = "CENTER";
+	    AlignH[AlignH["R"] = 3] = "R";
+	    AlignH[AlignH["RIGHT"] = 3] = "RIGHT";
+	})(exports.AlignH || (exports.AlignH = {}));
+	var AlignH = exports.AlignH;
+	;
+	(function (AlignV) {
+	    AlignV[AlignV["T"] = 1] = "T";
+	    AlignV[AlignV["TOP"] = 1] = "TOP";
+	    AlignV[AlignV["M"] = 2] = "M";
+	    AlignV[AlignV["MIDDLE"] = 2] = "MIDDLE";
+	    AlignV[AlignV["B"] = 3] = "B";
+	    AlignV[AlignV["BOTTOM"] = 3] = "BOTTOM";
+	})(exports.AlignV || (exports.AlignV = {}));
+	var AlignV = exports.AlignV;
+	;
+	(function (Align) {
+	    Align[Align["L"] = 1] = "L";
+	    Align[Align["LEFT"] = 1] = "LEFT";
+	    Align[Align["C"] = 2] = "C";
+	    Align[Align["CENTER"] = 2] = "CENTER";
+	    Align[Align["R"] = 3] = "R";
+	    Align[Align["RIGHT"] = 3] = "RIGHT";
+	    Align[Align["T"] = 1] = "T";
+	    Align[Align["TOP"] = 1] = "TOP";
+	    Align[Align["M"] = 2] = "M";
+	    Align[Align["MIDDLE"] = 2] = "MIDDLE";
+	    Align[Align["B"] = 3] = "B";
+	    Align[Align["BOTTOM"] = 3] = "BOTTOM";
+	})(exports.Align || (exports.Align = {}));
+	var Align = exports.Align;
+	;
+
+
+/***/ },
 /* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -17067,8 +17100,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var check_button_1 = __webpack_require__(92);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var RadioButton = (function (_super) {
 	    __extends(RadioButton, _super);
 	    function RadioButton(type) {
@@ -17106,10 +17139,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var CheckButton = (function (_super) {
 	    __extends(CheckButton, _super);
 	    function CheckButton(type) {
@@ -17218,14 +17251,14 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var pages_1 = __webpack_require__(87);
-	var widget_1 = __webpack_require__(17);
-	var tab_page_1 = __webpack_require__(89);
-	var Events = __webpack_require__(8);
-	var tab_button_1 = __webpack_require__(90);
+	var pages_1 = __webpack_require__(86);
+	var widget_1 = __webpack_require__(16);
+	var tab_page_1 = __webpack_require__(88);
+	var Events = __webpack_require__(7);
+	var tab_button_1 = __webpack_require__(89);
 	var tab_button_group_1 = __webpack_require__(94);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var TabControl = (function (_super) {
 	    __extends(TabControl, _super);
 	    function TabControl() {
@@ -17380,9 +17413,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var TabButtonGroup = (function (_super) {
 	    __extends(TabButtonGroup, _super);
 	    function TabButtonGroup() {
@@ -17489,20 +17522,20 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var group_1 = __webpack_require__(81);
+	var group_1 = __webpack_require__(80);
 	var dialog_1 = __webpack_require__(96);
-	var label_1 = __webpack_require__(83);
-	var edit_1 = __webpack_require__(82);
-	var button_1 = __webpack_require__(88);
-	var Events = __webpack_require__(8);
-	var graphics_1 = __webpack_require__(24);
+	var label_1 = __webpack_require__(82);
+	var edit_1 = __webpack_require__(81);
+	var button_1 = __webpack_require__(87);
+	var Events = __webpack_require__(7);
+	var graphics_1 = __webpack_require__(23);
 	var list_view_1 = __webpack_require__(98);
 	var progress_bar_1 = __webpack_require__(104);
 	var application_1 = __webpack_require__(105);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var consts_1 = __webpack_require__(3);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var consts_1 = __webpack_require__(90);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var list_item_1 = __webpack_require__(110);
 	var dock_layouter_1 = __webpack_require__(111);
 	var linear_layouter_1 = __webpack_require__(112);
@@ -17868,8 +17901,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var window_1 = __webpack_require__(97);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Dialog = (function (_super) {
 	    __extends(Dialog, _super);
 	    function Dialog(type) {
@@ -17906,8 +17939,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var point_1 = __webpack_require__(1);
-	var widget_1 = __webpack_require__(17);
-	var Events = __webpack_require__(8);
+	var widget_1 = __webpack_require__(16);
+	var Events = __webpack_require__(7);
 	(function (WindowType) {
 	    WindowType[WindowType["NORMAL"] = 0] = "NORMAL";
 	    WindowType[WindowType["POPUP"] = 1] = "POPUP";
@@ -18028,8 +18061,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var scroll_view_1 = __webpack_require__(99);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var list_layouter_1 = __webpack_require__(103);
 	var ListView = (function (_super) {
 	    __extends(ListView, _super);
@@ -18139,12 +18172,12 @@ var qtk =
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
 	var scroller_1 = __webpack_require__(100);
-	var TWEEN = __webpack_require__(22);
-	var Events = __webpack_require__(8);
-	var graphics_1 = __webpack_require__(24);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
-	var widget_1 = __webpack_require__(17);
+	var TWEEN = __webpack_require__(21);
+	var Events = __webpack_require__(7);
+	var graphics_1 = __webpack_require__(23);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_1 = __webpack_require__(16);
 	/**
 	 * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
 	 */
@@ -20182,7 +20215,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var layouter_1 = __webpack_require__(76);
+	var layouter_1 = __webpack_require__(75);
 	var TYPE = "list";
 	/**
 	 * 列表布局器。
@@ -20281,10 +20314,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var graphics_1 = __webpack_require__(24);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var graphics_1 = __webpack_require__(23);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	(function (ProgressBarType) {
 	    ProgressBarType[ProgressBarType["V"] = 1] = "V";
 	    ProgressBarType[ProgressBarType["VERTICAL"] = 1] = "VERTICAL";
@@ -20386,18 +20419,18 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var path = __webpack_require__(6);
-	var TWEEN = __webpack_require__(22);
-	var Assets = __webpack_require__(4);
+	var Events = __webpack_require__(7);
+	var path = __webpack_require__(5);
+	var TWEEN = __webpack_require__(21);
+	var Assets = __webpack_require__(3);
 	var Services = __webpack_require__(106);
-	var main_loop_1 = __webpack_require__(12);
-	var emitter_1 = __webpack_require__(9);
+	var main_loop_1 = __webpack_require__(10);
+	var emitter_1 = __webpack_require__(8);
 	var view_port_1 = __webpack_require__(107);
-	var image_tile_1 = __webpack_require__(11);
+	var image_tile_1 = __webpack_require__(15);
 	var theme_manager_1 = __webpack_require__(108);
 	var deviceInfo = __webpack_require__(109);
-	var inputEventAdapter = __webpack_require__(20);
+	var inputEventAdapter = __webpack_require__(19);
 	/**
 	 * 代表整个应用程序，可以通过Application获取各种服务。
 	 *
@@ -20583,8 +20616,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(9);
-	var Events = __webpack_require__(8);
+	var emitter_1 = __webpack_require__(8);
+	var Events = __webpack_require__(7);
 	/**
 	 * 表示屏幕大小和密度。
 	 */
@@ -20678,8 +20711,8 @@ var qtk =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var style_1 = __webpack_require__(16);
-	var utils_1 = __webpack_require__(23);
+	var style_1 = __webpack_require__(14);
+	var utils_1 = __webpack_require__(22);
 	/**
 	 * 主题用来统一控制Widget的外观风格。
 	 */
@@ -20805,11 +20838,11 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var graphics_1 = __webpack_require__(24);
-	var recyclable_creator_1 = __webpack_require__(80);
-	var image_tile_1 = __webpack_require__(11);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var graphics_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var image_tile_1 = __webpack_require__(15);
 	(function (ListItemStyle) {
 	    ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
 	    ListItemStyle[ListItemStyle["FIRST"] = 1] = "FIRST";
@@ -20952,8 +20985,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(3);
-	var layouter_1 = __webpack_require__(76);
+	var consts_1 = __webpack_require__(90);
+	var layouter_1 = __webpack_require__(75);
 	var TYPE = "dock";
 	/**
 	 * Dock布局器。
@@ -21076,9 +21109,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(3);
-	var utils_1 = __webpack_require__(23);
-	var layouter_1 = __webpack_require__(76);
+	var consts_1 = __webpack_require__(90);
+	var utils_1 = __webpack_require__(22);
+	var layouter_1 = __webpack_require__(75);
 	var TYPE_H = "linear-h";
 	var TYPE_V = "linear-v";
 	/**
@@ -21248,8 +21281,8 @@ var qtk =
 	var LinearLayouterParam = (function () {
 	    function LinearLayouterParam(type, w, h, spacing, align, position) {
 	        this.type = type || TYPE_V;
-	        this.w = w;
-	        this.h = h;
+	        this.w = w || "100%";
+	        this.h = h || "100%";
 	        this.align = align;
 	        this.spacing = spacing;
 	        this.position = position;
@@ -21280,7 +21313,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var layouter_1 = __webpack_require__(76);
+	var layouter_1 = __webpack_require__(75);
 	var TYPE = "grid";
 	/**
 	 * 网格布局器。
@@ -21417,7 +21450,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var layouter_1 = __webpack_require__(76);
+	var layouter_1 = __webpack_require__(75);
 	var TYPE = "simple";
 	/**
 	 * 简单的布局器。
@@ -21517,7 +21550,7 @@ var qtk =
 	    }
 	    SimpleLayouterParam.create = function (opts) {
 	        var options = opts || {};
-	        return new SimpleLayouterParam(options.x || '0px', options.y || '0px', options.w || '0px', options.h || '0px');
+	        return new SimpleLayouterParam(options.x || '0px', options.y || '0px', options.w || '100%', options.h || '100%');
 	    };
 	    return SimpleLayouterParam;
 	}());
@@ -21535,10 +21568,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var scroll_view_1 = __webpack_require__(99);
-	var carota = __webpack_require__(25);
+	var carota = __webpack_require__(24);
 	var rect = carota.rect;
 	var createDoc = carota.document;
 	var RichText = (function (_super) {
@@ -21645,9 +21678,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rich_text_1 = __webpack_require__(115);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
-	var carota = __webpack_require__(25);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var carota = __webpack_require__(24);
 	var createDoc = carota.document;
 	var dom = carota.dom;
 	var node = carota.node;
@@ -22159,11 +22192,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var button_1 = __webpack_require__(88);
-	var graphics_1 = __webpack_require__(24);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var Events = __webpack_require__(7);
+	var button_1 = __webpack_require__(87);
+	var graphics_1 = __webpack_require__(23);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var progress_bar_1 = __webpack_require__(104);
 	var Slider = (function (_super) {
 	    __extends(Slider, _super);
@@ -22305,11 +22338,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(17);
-	var TWEEN = __webpack_require__(22);
-	var graphics_1 = __webpack_require__(24);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_1 = __webpack_require__(16);
+	var TWEEN = __webpack_require__(21);
+	var graphics_1 = __webpack_require__(23);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var Switch = (function (_super) {
 	    __extends(Switch, _super);
 	    function Switch() {
@@ -22411,15 +22444,15 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var widget_1 = __webpack_require__(17);
+	var widget_1 = __webpack_require__(16);
 	var dialog_1 = __webpack_require__(96);
-	var graphics_1 = __webpack_require__(24);
-	var Events = __webpack_require__(8);
+	var graphics_1 = __webpack_require__(23);
+	var Events = __webpack_require__(7);
 	var list_view_1 = __webpack_require__(98);
 	var list_item_1 = __webpack_require__(110);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
-	var image_tile_1 = __webpack_require__(11);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var image_tile_1 = __webpack_require__(15);
 	var simple_layouter_1 = __webpack_require__(114);
 	var ComboBoxOption = (function () {
 	    function ComboBoxOption(text, value, imageURL, color) {
@@ -22669,13 +22702,13 @@ var qtk =
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
 	var dialog_1 = __webpack_require__(96);
-	var graphics_1 = __webpack_require__(24);
+	var graphics_1 = __webpack_require__(23);
 	var list_view_1 = __webpack_require__(98);
-	var Events = __webpack_require__(8);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var Events = __webpack_require__(7);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var list_layouter_1 = __webpack_require__(103);
 	var simple_layouter_1 = __webpack_require__(114);
 	var Menu = (function (_super) {
@@ -23034,11 +23067,11 @@ var qtk =
 	};
 	var menu_1 = __webpack_require__(120);
 	var point_1 = __webpack_require__(1);
-	var Events = __webpack_require__(8);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var Events = __webpack_require__(7);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var linear_layouter_1 = __webpack_require__(112);
 	var MenuBar = (function (_super) {
 	    __extends(MenuBar, _super);
@@ -23239,12 +23272,12 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var style_1 = __webpack_require__(16);
-	var widget_1 = __webpack_require__(17);
-	var widget_factory_1 = __webpack_require__(78);
-	var graphics_1 = __webpack_require__(24);
-	var consts_1 = __webpack_require__(3);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var style_1 = __webpack_require__(14);
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var graphics_1 = __webpack_require__(23);
+	var consts_1 = __webpack_require__(90);
+	var recyclable_creator_1 = __webpack_require__(79);
 	/**
 	 * 颜色控件。
 	 */
@@ -23490,11 +23523,11 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var widget_factory_1 = __webpack_require__(78);
-	var graphics_1 = __webpack_require__(24);
-	var image_tile_1 = __webpack_require__(11);
-	var recyclable_creator_1 = __webpack_require__(80);
-	var widget_1 = __webpack_require__(17);
+	var widget_factory_1 = __webpack_require__(77);
+	var graphics_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(15);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_1 = __webpack_require__(16);
 	/**
 	 * 树形视图中，显示的一个子项。
 	 */
@@ -23744,8 +23777,8 @@ var qtk =
 	var tree_item_1 = __webpack_require__(123);
 	var list_view_1 = __webpack_require__(98);
 	var tree_item_data_1 = __webpack_require__(125);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	/**
 	 * 树形视图。
 	 */
@@ -23897,9 +23930,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var utils_1 = __webpack_require__(23);
-	var emitter_1 = __webpack_require__(9);
-	var image_tile_1 = __webpack_require__(11);
+	var utils_1 = __webpack_require__(22);
+	var emitter_1 = __webpack_require__(8);
+	var image_tile_1 = __webpack_require__(15);
 	/**
 	 * TreeItem对应的数据信息。
 	 */
@@ -23986,8 +24019,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var grid_layouter_1 = __webpack_require__(113);
 	var scroll_view_1 = __webpack_require__(99);
 	var GridView = (function (_super) {
@@ -24138,8 +24171,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var window_1 = __webpack_require__(97);
-	var widget_factory_1 = __webpack_require__(78);
-	var recyclable_creator_1 = __webpack_require__(80);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
 	var WindowNormal = (function (_super) {
 	    __extends(WindowNormal, _super);
 	    function WindowNormal() {
@@ -24167,9 +24200,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var key_event_1 = __webpack_require__(21);
-	var behavior_1 = __webpack_require__(77);
+	var Events = __webpack_require__(7);
+	var key_event_1 = __webpack_require__(20);
+	var behavior_1 = __webpack_require__(76);
 	/**
 	 * 让Widget具有拖放功能的拖动功能。
 	 *
@@ -24252,8 +24285,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var behavior_1 = __webpack_require__(77);
+	var Events = __webpack_require__(7);
+	var behavior_1 = __webpack_require__(76);
 	/**
 	 * 让Widget可作为拖放功能的Drop目标。
 	 *
@@ -24303,9 +24336,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(8);
-	var key_event_1 = __webpack_require__(21);
-	var behavior_1 = __webpack_require__(77);
+	var Events = __webpack_require__(7);
+	var key_event_1 = __webpack_require__(20);
+	var behavior_1 = __webpack_require__(76);
 	/**
 	 * Movable Behavior的初始化参数。
 	 */
@@ -24424,8 +24457,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var point_1 = __webpack_require__(1);
-	var key_event_1 = __webpack_require__(21);
-	var behavior_1 = __webpack_require__(77);
+	var key_event_1 = __webpack_require__(20);
+	var behavior_1 = __webpack_require__(76);
 	/**
 	 * Resizable Behavior的初始化参数。
 	 */
@@ -24587,6 +24620,198 @@ var qtk =
 	behavior_1.BehaviorFactory.register(Resizable.TYPE, function (widget, options) {
 	    return new Resizable(widget, options);
 	});
+
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var edit_1 = __webpack_require__(81);
+	var title_value_1 = __webpack_require__(133);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleEdit = (function (_super) {
+	    __extends(TitleEdit, _super);
+	    function TitleEdit(type) {
+	        _super.call(this, type || TitleEdit.TYPE);
+	    }
+	    Object.defineProperty(TitleEdit.prototype, "inputFilter", {
+	        get: function () {
+	            return this._inputFilter;
+	        },
+	        set: function (value) {
+	            this._inputFilter = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputFilter: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleEdit.prototype, "inputType", {
+	        get: function () {
+	            return this._inputType;
+	        },
+	        set: function (value) {
+	            this._inputType = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputType: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleEdit.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleEdit.prototype.createValueWidget = function (options) {
+	        var opts = options || {};
+	        if (this._inputTips) {
+	            opts.inputTips = this._inputTips;
+	        }
+	        if (this._inputType) {
+	            opts.inputType = this._inputType;
+	        }
+	        if (this._inputFilter) {
+	            opts.inputFilter = this._inputFilter;
+	        }
+	        return edit_1.Edit.create(opts);
+	    };
+	    TitleEdit.create = function (options) {
+	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE).set(options);
+	    };
+	    TitleEdit.TYPE = "title-edit";
+	    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
+	    return TitleEdit;
+	}(title_value_1.TitleValue));
+	exports.TitleEdit = TitleEdit;
+	;
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var label_1 = __webpack_require__(82);
+	var widget_1 = __webpack_require__(16);
+	var linear_layouter_1 = __webpack_require__(112);
+	var TitleValue = (function (_super) {
+	    __extends(TitleValue, _super);
+	    function TitleValue(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(TitleValue.prototype, "title", {
+	        get: function () {
+	            return this._title;
+	        },
+	        set: function (value) {
+	            this._title = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "titleW", {
+	        get: function () {
+	            return this._titleW;
+	        },
+	        set: function (value) {
+	            this._titleW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "valueW", {
+	        get: function () {
+	            return this._valueW;
+	        },
+	        set: function (value) {
+	            this._valueW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "titleWidget", {
+	        get: function () {
+	            return this._titleWidget;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "valueWidget", {
+	        get: function () {
+	            return this._valueWidget;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "value", {
+	        get: function () {
+	            return this._valueWidget ? this.valueWidget.value : this._value;
+	        },
+	        set: function (value) {
+	            this._value = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.value = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /*
+	     * Child must override
+	     */
+	    TitleValue.prototype.createValueWidget = function (options) {
+	        return null;
+	    };
+	    TitleValue.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        var h = this.clientH;
+	        var titleWidget = label_1.Label.create({ text: this._title });
+	        titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: h });
+	        this.addChild(titleWidget);
+	        this._titleWidget = titleWidget;
+	        var valueWidget = this.createValueWidget();
+	        if (valueWidget) {
+	            valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: h });
+	            this.addChild(valueWidget);
+	            this._valueWidget = valueWidget;
+	        }
+	    };
+	    TitleValue.prototype.reset = function (type) {
+	        _super.prototype.reset.call(this, type);
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+	        return this;
+	    };
+	    TitleValue.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._titleWidget = null;
+	        this._valueWidget = null;
+	    };
+	    return TitleValue;
+	}(widget_1.Widget));
+	exports.TitleValue = TitleValue;
+	;
 
 
 /***/ }

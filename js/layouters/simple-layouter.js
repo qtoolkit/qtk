@@ -104,7 +104,7 @@ var SimpleLayouterParam = (function () {
     }
     SimpleLayouterParam.create = function (opts) {
         var options = opts || {};
-        return new SimpleLayouterParam(options.x || '0px', options.y || '0px', options.w || '0px', options.h || '0px');
+        return new SimpleLayouterParam(options.x || '0px', options.y || '0px', options.w || '100%', options.h || '100%');
     };
     return SimpleLayouterParam;
 }());

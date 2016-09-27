@@ -1009,6 +1009,20 @@ var Widget = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Widget.prototype, "clientW", {
+        get: function () {
+            return this._w - this.leftPadding - this.rightPadding;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Widget.prototype, "clientH", {
+        get: function () {
+            return this._h - this.topPadding - this.bottomPadding;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Widget.prototype, "height", {
         get: function () {
             return this._h;

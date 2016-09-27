@@ -171,6 +171,8 @@ export declare class Widget extends Emitter {
     readonly desireWidth: number;
     w: number;
     width: number;
+    readonly clientW: number;
+    readonly clientH: number;
     height: number;
     h: number;
     state: WidgetState;

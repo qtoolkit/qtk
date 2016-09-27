@@ -176,8 +176,8 @@ layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
 var LinearLayouterParam = (function () {
     function LinearLayouterParam(type, w, h, spacing, align, position) {
         this.type = type || TYPE_V;
-        this.w = w;
-        this.h = h;
+        this.w = w || "100%";
+        this.h = h || "100%";
         this.align = align;
         this.spacing = spacing;
         this.position = position;

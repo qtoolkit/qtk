@@ -1,8 +1,6 @@
 import {Point} from "./point";
 import {Rect} from "./rect";
-import {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
 import Assets = require("./assets");
-import {ImageDrawType, ImageTile} from "./image-tile";
 import {MainLoop} from "./main-loop";
 import {Matrix} from "./matrix";
 import {MatrixStack} from "./matrix-stack";
@@ -15,6 +13,8 @@ import {Button} from "./controls/button";
 import {TabPage} from "./controls/tab-page";
 import {TabButton} from "./controls/tab-button";
 import {TabControl} from "./controls/tab-control";
+import {ImageDrawType, ImageTile} from "./image-tile";
+import {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
 import {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";
 import {TabButtonGroup} from "./controls/tab-button-group";
 import {RichText} from "./controls/rich-text";
@@ -61,6 +61,7 @@ import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
 import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
+import {TitleEdit} from "./controls-ext/title-edit";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
@@ -148,6 +149,7 @@ export {
 	WidgetFactory,
 	ThemeManager,
 	Events,
+	TitleEdit,
 	DockLayouter,
 	DockLayouterParam,
 	GridLayouter,

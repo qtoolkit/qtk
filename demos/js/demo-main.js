@@ -29,6 +29,7 @@ function onReady(app) {
 		{title:"Switch", data:"switch"},
 		{title:"Dialog", data:"dialog"},
 		{title:"Movable", data:"movable"},
+		{title:"Title Value", data:"titlevalue"},
 		{title:"Drag & Drop", data:"dnd"},
 		{title:"TreeView", data:"treeview"},
 		{title:"RichText", data:"richtext"},

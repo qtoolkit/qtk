@@ -220,8 +220,8 @@ export class LinearLayouterParam {
 
 	constructor(type:string, w:string, h:string, spacing:number, align:Align, position:number) {
 		this.type = type || TYPE_V;
-		this.w = w;
-		this.h = h;
+		this.w = w || "100%";
+		this.h = h || "100%";
 		this.align = align;
 		this.spacing = spacing;
 		this.position = position;
