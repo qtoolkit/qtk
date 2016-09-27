@@ -15,7 +15,7 @@ import {Button} from "./controls/button";
 import {TabPage} from "./controls/tab-page";
 import {TabButton} from "./controls/tab-button";
 import {TabControl} from "./controls/tab-control";
-import {MessageBox} from "./controls/message-box";
+import {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";
 import {TabButtonGroup} from "./controls/tab-button-group";
 import {RichText} from "./controls/rich-text";
 import {RichTextEdit} from "./controls/rich-text-edit";
@@ -112,6 +112,9 @@ export {
 	RichText,
 	RichTextEdit,
 	MessageBox,
+	ButtonsOptions,
+	TitleOptions,
+	ButtonOption,
 	Page,
 	Pages,
 	Label,
