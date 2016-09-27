@@ -15,7 +15,7 @@ var SimpleLayouterParam= qtk.SimpleLayouterParam;
 var LinearLayouter = qtk.LinearLayouter;
 var LinearLayouterParam = qtk.LinearLayouterParam;
 
-var imageURL = "/demos/assets/icons/x2/";
+var imageURL = "/demos/assets/icons/@density/";
 
 function onReady(app) {
 	var Events = Events;

@@ -23,7 +23,7 @@ function onReady(app) {
 	var win = qtk.WindowNormal.create({app:app, w:vp.w, h:vp.h});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 	
-	var imageURL = "/demos/assets/theme/default/images/x2/check-button-checked.png";
+	var imageURL = "/demos/assets/theme/default/images/@density/check-button-checked.png";
 	var pages = qtk.Pages.create();
 	pages.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(pages);

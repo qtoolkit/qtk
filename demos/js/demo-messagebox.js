@@ -67,7 +67,7 @@ function addShowInput(win, inputTips, value, inputType, w) {
 
 
 function addShowChoice(win, multiple, w, h) {
-	var iconURL = multiple ? null : '/demos/assets/icons/x2/favor.normal.png';
+	var iconURL = multiple ? null : '/demos/assets/icons/@density/favor.normal.png';
 	var data = [
 			{text:"First", iconURL:iconURL},
 			{text:"Second", iconURL:iconURL},

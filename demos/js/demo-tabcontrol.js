@@ -28,18 +28,18 @@ function onReady(app) {
 	tabControl.layoutParam = qtk.SimpleLayouterParam.create({x:"50%", y:"4%", w:"45%", h:"45%"});
 	tabControl.set({value:1});
 	win.addChild(tabControl);
-	addPage(tabControl, "Home", "/demos/assets/icons/x2/home.normal.png", 
-			"/demos/assets/icons/x2/home.current.png", false);
-	addPage(tabControl, "Favor", "/demos/assets/icons/x2/favor.normal.png", 
-			"/demos/assets/icons/x2/favor.current.png", false);
+	addPage(tabControl, "Home", "/demos/assets/icons/@density/home.normal.png", 
+			"/demos/assets/icons/@density/home.current.png", false);
+	addPage(tabControl, "Favor", "/demos/assets/icons/@density/favor.normal.png", 
+			"/demos/assets/icons/@density/favor.current.png", false);
 
 	var tabControl = qtk.TabControl.create();
 	tabControl.layoutParam = qtk.SimpleLayouterParam.create({x:"4%", y:"50%", w:"45%", h:"45%"});
 	win.addChild(tabControl);
-	addPage(tabControl, "Home", "/demos/assets/icons/x2/home.normal.png", 
-			"/demos/assets/icons/x2/home.current.png", false).tabButton.orientation = qtk.Orientation.V;
-	addPage(tabControl, "Favor", "/demos/assets/icons/x2/favor.normal.png", 
-			"/demos/assets/icons/x2/favor.current.png", false).tabButton.orientation = qtk.Orientation.V;
+	addPage(tabControl, "Home", "/demos/assets/icons/@density/home.normal.png", 
+			"/demos/assets/icons/@density/home.current.png", false).tabButton.orientation = qtk.Orientation.V;
+	addPage(tabControl, "Favor", "/demos/assets/icons/@density/favor.normal.png", 
+			"/demos/assets/icons/@density/favor.current.png", false).tabButton.orientation = qtk.Orientation.V;
 	tabControl.set({value:0, buttonGroupHeight : 50});
 	
 	var tabControl = qtk.TabControl.create();

@@ -45,7 +45,7 @@ function onReady(app) {
 	menuBar.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP});
 	win.addChild(menuBar);
 	
-	menuBar.addLogo("/demos/assets/icons/x2/apple.png", null);	
+	menuBar.addLogo("/demos/assets/icons/@density/apple.png", null);	
 	menuBar.addItem("File", onInitFileMenu);	
 	menuBar.addItem("Edit", onInitEditMenu);
 	menuBar.addItem("View", onInitViewMenu);
