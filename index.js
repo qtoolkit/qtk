@@ -175,6 +175,9 @@ var qtk =
 	exports.Services = Services;
 	var key_event_1 = __webpack_require__(21);
 	exports.KeyEvent = key_event_1.KeyEvent;
+	var graphics_1 = __webpack_require__(24);
+	exports.RoundType = graphics_1.RoundType;
+	exports.Graphics = graphics_1.Graphics;
 	var linear_layouter_1 = __webpack_require__(112);
 	exports.LinearLayouter = linear_layouter_1.LinearLayouter;
 	exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
@@ -193,6 +196,8 @@ var qtk =
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 	var TWEEN = __webpack_require__(22);
 	exports.TWEEN = TWEEN;
+	var recyclable_creator_1 = __webpack_require__(80);
+	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
 
 
 /***/ },

@@ -55,6 +55,7 @@ import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
 import * as Services from  "./services";
 import {KeyEvent} from "./key-event";
+import {RoundType, Graphics} from "./graphics";
 import {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
 import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
 import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
@@ -64,6 +65,7 @@ import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
 import TWEEN = require("tween.js");
+import {RecyclableCreator} from "./recyclable-creator";
 
 export {
 	Assets,
@@ -72,6 +74,8 @@ export {
 	Align,
 	AlignV,
 	AlignH,
+	RoundType,
+	Graphics,
 	Orientation,
 	Direction,
 	ViewPort,
@@ -82,6 +86,7 @@ export {
 	MatrixStack,
 	deviceInfo,
 	Application,
+	RecyclableCreator,
 	inputEventAdapter,
 	ImageTile,
 	ImageDrawType,
