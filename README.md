@@ -23,9 +23,20 @@ QTK主要特色如下：
 
 [Demos](https://qtoolkit.github.io/demos/index.html)
 
+### 编译
+```
+npm run build 
+```
 
+### 单元测试
+```
+npm run test 
+```
 
+### 运行Demos
 
-
+```
+npm run start
+```
 
 
