@@ -569,7 +569,7 @@ export class ScrollView extends Widget {
 			}
 		}
 
-		return Rect.create(this.leftPadding, this.topPadding, w, h);
+		return this.layoutRect.init(this.leftPadding, this.topPadding, w, h);
 	}
 
 	protected onInit() {
@@ -578,9 +578,8 @@ export class ScrollView extends Widget {
 		this._scrollBarOpacity = this.dragToScroll ? 1 : 0;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-
+	protected onReset() {
+		super.onReset();
 		this._ox = 0;
 		this._oy = 0;
 		this._cw = 0;
@@ -606,8 +605,6 @@ export class ScrollView extends Widget {
 		});
 	
 		this._scrollEvent = Events.ScrollEvent.create();
-
-		return this;
 	}
 
 	protected _ox : number;
@@ -646,7 +643,7 @@ export class ScrollView extends Widget {
 	public static TYPE = "scroll-view";
 	private static recycleBin = new RecyclableCreator<ScrollView>(function() {return new ScrollView()});
 	public static create(options?:any) : ScrollView{
-		return <ScrollView>ScrollView.recycleBin.create().reset(ScrollView.TYPE).set(options);
+		return <ScrollView>ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
 	}
 };
 

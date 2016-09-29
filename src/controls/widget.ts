@@ -1539,7 +1539,12 @@ export class Widget extends Emitter {
 		}
 	}
 
-	public reset(type:string) : Widget {
+	protected onReset() {
+	}
+
+	protected onCreated() {
+	}
+	public reset(type:string, options:any) : Widget {
 		this._x  = 0;
 		this._y  = 0;
 		this._z  = 0;
@@ -1593,6 +1598,10 @@ export class Widget extends Emitter {
 		this.onkeyup = null;
 		this._behaviors = {};
 		this.removeAllListeners();
+
+		this.onReset();
+		this.set(options);
+		this.onCreated();
 
 		return this;
 	}
@@ -1689,7 +1698,7 @@ export class Widget extends Emitter {
 	public static create(app:IApplication, options:any) : Widget {
 		var widget = new Widget("dummy");
 
-		widget.reset("dummy");
+		widget.reset("dummy", null);
 		widget.app = app;
 
 		return widget;

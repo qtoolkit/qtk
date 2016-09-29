@@ -96,17 +96,14 @@ export class Label extends Widget {
 		this.relayoutText();
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this.padding = 5;
-
-		return this;
 	}
 
 	public static TYPE = "label";
 	private static recycleBin = new RecyclableCreator<Label>(function() {return new Label()});
 	public static create(options?:any) : Label {
-		return <Label>Label.recycleBin.create().reset(Label.TYPE).set(options);
+		return <Label>Label.recycleBin.create().reset(Label.TYPE, options);
 	}
 };
 

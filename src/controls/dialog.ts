@@ -25,7 +25,7 @@ export class Dialog extends Window {
 	public static TYPE = "dialog";
 	private static recycleBin = new RecyclableCreator<Dialog>(function() {return new Dialog()});
 	public static create(options?:any) : Dialog {
-		return <Dialog>Dialog.recycleBin.create().reset(Dialog.TYPE).set(options);
+		return <Dialog>Dialog.recycleBin.create().reset(Dialog.TYPE, options);
 	}
 };
 

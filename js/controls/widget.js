@@ -1438,7 +1438,11 @@ var Widget = (function (_super) {
             this.notifyChange();
         }
     };
-    Widget.prototype.reset = function (type) {
+    Widget.prototype.onReset = function () {
+    };
+    Widget.prototype.onCreated = function () {
+    };
+    Widget.prototype.reset = function (type, options) {
         this._x = 0;
         this._y = 0;
         this._z = 0;
@@ -1493,6 +1497,9 @@ var Widget = (function (_super) {
         this.onkeyup = null;
         this._behaviors = {};
         this.removeAllListeners();
+        this.onReset();
+        this.set(options);
+        this.onCreated();
         return this;
     };
     Widget.prototype.fromJson = function (json) {
@@ -1578,7 +1585,7 @@ var Widget = (function (_super) {
     };
     Widget.create = function (app, options) {
         var widget = new Widget("dummy");
-        widget.reset("dummy");
+        widget.reset("dummy", null);
         widget.app = app;
         return widget;
     };

@@ -54,14 +54,10 @@ export class Color extends Widget {
 		return this;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-
+	public onReset() {
 		this._style = Style.create();
 		this._style.fontSize = 16;
 		this._style.textColor = "Black";
-
-		return this;
 	}
 
 	public getStyle() : Style {
@@ -93,7 +89,7 @@ export class ColorTile extends Color {
 	public static TYPE = "color-tile";
 	private static recycleBin = new RecyclableCreator<ColorTile>(function() {return new ColorTile()});
 	public static create(options?:any) : ColorTile {
-		return <ColorTile>ColorTile.recycleBin.create().reset(ColorTile.TYPE).set(options);
+		return <ColorTile>ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
 	}
 };
 
@@ -215,7 +211,7 @@ export class ColorLine extends Color {
 	public static TYPE = "color-tile";
 	private static recycleBin = new RecyclableCreator<ColorLine>(function() {return new ColorLine()});
 	public static create(options?:any) : ColorLine {
-		return <ColorLine>ColorLine.recycleBin.create().reset(ColorLine.TYPE).set(options);
+		return <ColorLine>ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
 	}
 };
 

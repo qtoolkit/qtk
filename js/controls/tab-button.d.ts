@@ -24,9 +24,9 @@ export declare class TabButton extends RadioButton {
     protected drawImage(ctx: any, style: Style): Widget;
     protected drawText(ctx: any, style: Style): Widget;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     static TYPE: string;
     private static re;
-    static create(): TabButton;
+    static create(options?: any): TabButton;
 }

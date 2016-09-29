@@ -12,7 +12,7 @@ export declare class Color extends Widget {
     lineWidth: number;
     value: string;
     setStyle(state: WidgetState, style: Style): Widget;
-    reset(type: string): Widget;
+    onReset(): void;
     getStyle(): Style;
 }
 export declare class ColorTile extends Color {

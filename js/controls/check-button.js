@@ -94,7 +94,7 @@ var CheckButton = (function (_super) {
         _super.prototype.dispatchClick.call(this, evt);
     };
     CheckButton.create = function (options) {
-        return CheckButton.recycleBin.create().reset(CheckButton.TYPE).set(options);
+        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
     };
     CheckButton.TYPE = "check-button";
     CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });

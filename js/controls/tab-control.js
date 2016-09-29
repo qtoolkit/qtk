@@ -129,15 +129,13 @@ var TabControl = (function (_super) {
         }
         return rect_1.Rect.rect.init(0, 0, this.w, this.h);
     };
-    TabControl.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    TabControl.prototype.onReset = function () {
         this._value = 0;
         this._buttonGroupHeight = 30;
         this._pages = pages_1.Pages.create();
         this.addChild(this._pages, true);
         this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
         this.addChild(this._buttonGroup, true);
-        return this;
     };
     TabControl.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -145,7 +143,7 @@ var TabControl = (function (_super) {
         this._buttonGroup = null;
     };
     TabControl.create = function (options) {
-        return TabControl.r.create().reset(TabControl.TYPE).set(options);
+        return TabControl.r.create().reset(TabControl.TYPE, options);
     };
     TabControl.TYPE = "tab-control";
     TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });

@@ -168,8 +168,7 @@ export class TabButton extends RadioButton {
 		super(TabButton.TYPE);
 	}
 	
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this.padding = 2;
 		this._tabPage = null;
 		this._closeButton = null;
@@ -177,8 +176,6 @@ export class TabButton extends RadioButton {
 		this._currentIcon = null;
 		this._closeButtonAtLeft = false;
 		this._orientation = Orientation.H;
-
-		return this;
 	}
 
 	public dispose() {
@@ -191,8 +188,8 @@ export class TabButton extends RadioButton {
 
 	public static TYPE = "tab-button";
 	private static re = new RecyclableCreator<TabButton>(function() {return new TabButton()});
-	public static create() : TabButton {
-		return <TabButton>TabButton.re.create().reset(TabButton.TYPE);
+	public static create(options?:any) : TabButton {
+		return <TabButton>TabButton.re.create().reset(TabButton.TYPE, options);
 	}
 };
 

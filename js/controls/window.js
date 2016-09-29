@@ -28,13 +28,11 @@ var Window = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Window.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Window.prototype.onReset = function () {
         this._isWindow = true;
         this._grabbed = false;
         this.hasOwnCanvas = true;
         this._pointerPosition = point_1.Point.create(0, 0);
-        return this;
     };
     Object.defineProperty(Window.prototype, "pointerPosition", {
         get: function () {

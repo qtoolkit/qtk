@@ -87,13 +87,11 @@ var TabButtonGroup = (function (_super) {
         }
         return this;
     };
-    TabButtonGroup.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    TabButtonGroup.prototype.onReset = function () {
         this.autoExpand = true;
-        return this;
     };
     TabButtonGroup.create = function (options) {
-        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE).set(options);
+        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
     };
     TabButtonGroup.TYPE = "tab-button-group";
     TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });

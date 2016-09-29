@@ -79,7 +79,7 @@ var ListItem = (function (_super) {
         return rect_1.Rect.rect.init(x, y, w, h);
     };
     ListItem.create = function (options) {
-        return ListItem.recycleBin.create().reset(ListItem.TYPE).set(options);
+        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
     };
     ListItem.TYPE = "list-item";
     ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
@@ -131,7 +131,7 @@ var ListItemCheckable = (function (_super) {
         configurable: true
     });
     ListItemCheckable.create = function (options) {
-        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE).set(options);
+        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
     };
     ListItemCheckable.TYPE = "list-item.checkable";
     ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });

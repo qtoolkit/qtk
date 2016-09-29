@@ -77,20 +77,19 @@ export class ListView extends ScrollView {
 		super(ListView.TYPE);
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
+
 		this._itemSpacing = 0;
 		this._itemHeight = 30;
 		this.scrollerOptions.scrollingX = false;
 		this._childrenLayouter = ListLayouter.create({height:this.itemHeight, spacing:0});
-		
-		return this;
 	}
 
 	public static TYPE = "list-view";
 	private static recycleBinListView = new RecyclableCreator<ListView>(function() {return new ListView()});
 	public static create(options?:any) : ListView{
-		return <ListView>ListView.recycleBinListView.create().reset(ListView.TYPE).set(options);
+		return <ListView>ListView.recycleBinListView.create().reset(ListView.TYPE, options);
 	}
 };
 

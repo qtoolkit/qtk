@@ -2,6 +2,7 @@
 import {Edit} from "../controls/edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
+import {WidgetFactory} from "../controls/widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
 export class TitleEdit extends TitleValue {
@@ -65,7 +66,8 @@ export class TitleEdit extends TitleValue {
 	public static TYPE = "title-edit";
 	private static recycleBin = new RecyclableCreator<TitleEdit>(function() {return new TitleEdit()});
 	public static create(options?:any) : TitleEdit {
-		return <TitleEdit>TitleEdit.recycleBin.create().reset(TitleEdit.TYPE).set(options);
+		return <TitleEdit>TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
 	}
 };
 
+WidgetFactory.register(TitleEdit.TYPE, TitleEdit.create);

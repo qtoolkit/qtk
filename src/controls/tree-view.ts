@@ -141,12 +141,10 @@ export class TreeView extends ListView {
 		this.type = TreeView.TYPE;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this._rootData = TreeItemData.create("root", null, null);
 		this.scrollerOptions.scrollingX = true;
-		
-		return this;
 	}
 
 	public dispose() {
@@ -157,7 +155,7 @@ export class TreeView extends ListView {
 	public static TYPE = "tree-view";
 	private static recycleBinTreeView = new RecyclableCreator<TreeView>(function() {return new TreeView()});
 	public static create(options?:any) : TreeView {
-		return <TreeView>TreeView.recycleBinTreeView.create().reset(TreeView.TYPE).set(options);
+		return <TreeView>TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
 	}
 };
 

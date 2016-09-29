@@ -116,7 +116,8 @@ export class SimpleLayouterParam {
 
 	static create(opts:any) {
 		var options = opts || {};
-		return new SimpleLayouterParam(options.x||'0px', options.y||'0px', options.w||'100%', options.h||'100%');
+		return new SimpleLayouterParam(options.x||'0px', options.y||'center', 
+									   options.w||'100%', options.h||'100%');
 	}
 };
 

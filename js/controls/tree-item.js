@@ -226,17 +226,15 @@ var TreeItem = (function (_super) {
         this.parentItem = null;
         this._childrenItems = null;
     };
-    TreeItem.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    TreeItem.prototype.onReset = function () {
         this._level = 0;
         this._data = null;
         this._indention = 30;
         this._parentItem = null;
         this._childrenItems = [];
-        return this;
     };
     TreeItem.create = function (options) {
-        return TreeItem.recycleBin.create().reset(TreeItem.TYPE).set(options);
+        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
     };
     TreeItem.TYPE = "tree-item";
     TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });

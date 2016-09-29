@@ -498,7 +498,7 @@ var RichTextEdit = (function (_super) {
         return this._selectDragStart || (document.activeElement === this._textArea);
     };
     RichTextEdit.create = function (options) {
-        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE).set(options);
+        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
     };
     RichTextEdit.TYPE = "rich-text-edit";
     RichTextEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichTextEdit(); });

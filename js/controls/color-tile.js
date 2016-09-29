@@ -62,12 +62,10 @@ var Color = (function (_super) {
         this._style = style;
         return this;
     };
-    Color.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Color.prototype.onReset = function () {
         this._style = style_1.Style.create();
         this._style.fontSize = 16;
         this._style.textColor = "Black";
-        return this;
     };
     Color.prototype.getStyle = function () {
         return this._style;
@@ -102,7 +100,7 @@ var ColorTile = (function (_super) {
         configurable: true
     });
     ColorTile.create = function (options) {
-        return ColorTile.recycleBin.create().reset(ColorTile.TYPE).set(options);
+        return ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
     };
     ColorTile.TYPE = "color-tile";
     ColorTile.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorTile(); });
@@ -232,7 +230,7 @@ var ColorLine = (function (_super) {
         return this;
     };
     ColorLine.create = function (options) {
-        return ColorLine.recycleBin.create().reset(ColorLine.TYPE).set(options);
+        return ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
     };
     ColorLine.TYPE = "color-tile";
     ColorLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorLine(); });

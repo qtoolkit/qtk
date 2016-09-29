@@ -88,11 +88,8 @@ export class TabButtonGroup extends Widget {
 		return this;
 	}
 	
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this.autoExpand = true;
-
-		return this;
 	}
 
 	constructor() {
@@ -102,7 +99,7 @@ export class TabButtonGroup extends Widget {
 	public static TYPE = "tab-button-group";
 	private static r = new RecyclableCreator<TabButtonGroup>(function() {return new TabButtonGroup()});
 	public static create(options?:any) : TabButtonGroup {
-		return <TabButtonGroup>TabButtonGroup.r.create().reset(TabButtonGroup.TYPE).set(options);
+		return <TabButtonGroup>TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
 	}
 };
 

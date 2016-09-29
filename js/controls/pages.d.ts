@@ -8,9 +8,9 @@ export declare class Pages extends Widget {
     relayoutChildren(): Rect;
     protected drawChildren(ctx: any): Widget;
     protected findEventTargetChild(x: number, y: number, ctx: MatrixStack): Widget;
-    reset(type: string): Widget;
+    protected onReset(): void;
     constructor();
     static TYPE: string;
     private static recycleBin;
-    static create(): Pages;
+    static create(options?: any): Pages;
 }

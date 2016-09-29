@@ -83,7 +83,7 @@ export class ListItem extends Widget {
 	public static TYPE = "list-item";
 	private static recycleBin = new RecyclableCreator<ListItem>(function() {return new ListItem()});
 	public static create(options?:any) : ListItem {
-		return <ListItem>ListItem.recycleBin.create().reset(ListItem.TYPE).set(options);
+		return <ListItem>ListItem.recycleBin.create().reset(ListItem.TYPE, options);
 	}
 };
 
@@ -135,7 +135,7 @@ export class ListItemCheckable extends ListItem {
 	public static TYPE = "list-item.checkable";
 	private static rBin = new RecyclableCreator<ListItemCheckable>(function() {return new ListItemCheckable()});
 	public static create(options?:any) : ListItemCheckable {
-		return <ListItemCheckable>ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE).set(options);
+		return <ListItemCheckable>ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
 	}
 };
 

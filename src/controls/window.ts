@@ -28,14 +28,11 @@ export class Window extends Widget {
 		return this._hasOwnCanvas;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this._isWindow = true;
 		this._grabbed = false;
 		this.hasOwnCanvas = true;
 		this._pointerPosition = Point.create(0, 0);
-
-		return this;
 	}
 
 	public get pointerPosition() : Point {

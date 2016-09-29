@@ -210,21 +210,18 @@ export class TreeItem extends Widget {
 		this._childrenItems = null;
 	}
 	
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this._level = 0;
 		this._data = null;
 		this._indention = 30;
 		this._parentItem = null;
 		this._childrenItems = [];
-
-		return this;
 	}
 
 	public static TYPE = "tree-item";
 	private static recycleBin = new RecyclableCreator<TreeItem>(function() {return new TreeItem()});
 	public static create(options?:any) : TreeItem{
-		return <TreeItem>TreeItem.recycleBin.create().reset(TreeItem.TYPE).set(options);
+		return <TreeItem>TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
 	}
 };
 

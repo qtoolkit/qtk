@@ -12,7 +12,7 @@ export class Group extends Widget {
 	public static TYPE = "group";
 	private static recycleBin = new RecyclableCreator<Group>(function() {return new Group()});
 	public static create(options?:any) : Group {
-		return <Group>Group.recycleBin.create().reset(Group.TYPE).set(options);
+		return <Group>Group.recycleBin.create().reset(Group.TYPE, options);
 	}
 };
 

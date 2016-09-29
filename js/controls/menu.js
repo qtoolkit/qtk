@@ -179,8 +179,8 @@ var Menu = (function (_super) {
         });
         return item;
     };
-    Menu.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Menu.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this.hasOwnCanvas = true;
         this.styleType = "widget.transparent";
         this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
@@ -199,7 +199,6 @@ var Menu = (function (_super) {
         this.bottomPadding = 4;
         this.leftPadding = 2;
         this.rightPadding = 2;
-        return this;
     };
     Menu.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -208,7 +207,7 @@ var Menu = (function (_super) {
         this._openedMenu = null;
     };
     Menu.create = function (options) {
-        return Menu.r.create().reset(Menu.TYPE).set(options);
+        return Menu.r.create().reset(Menu.TYPE, options);
     };
     Menu.TYPE = "menu";
     Menu.r = new recyclable_creator_1.RecyclableCreator(function () { return new Menu(); });
@@ -328,8 +327,8 @@ var MenuItem = (function (_super) {
             }
         }
     };
-    MenuItem.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    MenuItem.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this._icon = null;
         this._iconURL = null;
         this.checkable = false;
@@ -337,7 +336,6 @@ var MenuItem = (function (_super) {
         this.onInitSubMenu = null;
         this.leftPadding = 2;
         this.rightPadding = 4;
-        return this;
     };
     MenuItem.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -347,8 +345,8 @@ var MenuItem = (function (_super) {
         this.shortcut = null;
         this.onInitSubMenu = null;
     };
-    MenuItem.create = function () {
-        return MenuItem.recycleBin.create().reset(MenuItem.TYPE);
+    MenuItem.create = function (options) {
+        return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
     };
     MenuItem.TYPE = "menu-item";
     MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });

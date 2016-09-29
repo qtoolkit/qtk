@@ -540,7 +540,7 @@ export class RichTextEdit extends RichText {
 	public static TYPE = "rich-text-edit";
 	private static rBin = new RecyclableCreator<RichTextEdit>(function() {return new RichTextEdit()});
 	public static create(options?:any) : RichTextEdit {
-		return <RichTextEdit>RichTextEdit.rBin.create().reset(RichTextEdit.TYPE).set(options);
+		return <RichTextEdit>RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
 	}
 };
 

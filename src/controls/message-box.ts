@@ -209,12 +209,10 @@ export class MessageBox extends Dialog {
 		this.initContent(content);
 	}
 
-	public reset(type:string) : Widget{
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this.padding = 1;
 		this.childrenLayouter = DockLayouter.create();
-
-		return this;
 	}
 
 	public dispose() {
@@ -428,7 +426,7 @@ export class MessageBox extends Dialog {
 	public static TYPE = "messagebox";
 	private static rBin = new RecyclableCreator<MessageBox>(function() {return new MessageBox()});
 	public static create(options?:any) : MessageBox {
-		return <MessageBox>MessageBox.rBin.create().reset(MessageBox.TYPE).set(options);
+		return <MessageBox>MessageBox.rBin.create().reset(MessageBox.TYPE, options);
 	}
 };
 

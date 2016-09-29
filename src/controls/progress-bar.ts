@@ -88,7 +88,7 @@ export class ProgressBar extends Widget {
 	public static TYPE = "progress-bar";
 	private static recycleBin = new RecyclableCreator<ProgressBar>(function() {return new ProgressBar()});
 	public static create(options?:any) : ProgressBar{
-		return <ProgressBar>ProgressBar.recycleBin.create().reset(ProgressBar.TYPE).set(options);
+		return <ProgressBar>ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
 	}
 };
 

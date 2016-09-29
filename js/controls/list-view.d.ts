@@ -12,7 +12,7 @@ export declare class ListView extends ScrollView {
     protected _itemHeight: number;
     protected _itemSpacing: number;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     static TYPE: string;
     private static recycleBinListView;
     static create(options?: any): ListView;

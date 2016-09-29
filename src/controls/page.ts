@@ -11,7 +11,7 @@ export class Page extends Widget {
 	public static TYPE = "page";
 	private static recycleBin = new RecyclableCreator<Page>(function() {return new Page()});
 	public static create(options?:any) : Page {
-		return <Page>Page.recycleBin.create().reset(Page.TYPE).set(options);
+		return <Page>Page.recycleBin.create().reset(Page.TYPE, options);
 	}
 };
 

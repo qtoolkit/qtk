@@ -15,7 +15,7 @@ export declare class MenuBar extends Widget {
     addItem(text: string, onInitSubMenu: Function, width?: number, position?: number): Widget;
     addTextButton(text: string, onClick: Function, width?: number, position?: number): Widget;
     addImageButton(normalIconURL: string, overIconURL: string, activeIconURL: string, disableIconURL: string, checkedIconURL: string, onClick: Function, position?: number): Widget;
-    reset(type: string): Widget;
+    protected onReset(): void;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): MenuBar;

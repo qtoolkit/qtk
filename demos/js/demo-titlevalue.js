@@ -9,7 +9,7 @@ function onReady(app) {
 	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
 	
 	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
-	listView.layoutParam = win.createChildLayoutParam({x:"center", y:"center", w:"80%", h:"90%"});
+	listView.layoutParam = win.createChildLayoutParam({x:"center", w:"80%", h:"90%"});
 	win.addChild(listView);
 
 	function filterTo100(value) {
@@ -21,6 +21,8 @@ function onReady(app) {
 		listView.addChild(item, true);
 		item.childrenLayouter = qtk.SimpleLayouter.create();
 		item.addChild(titleValue);
+
+		return titleValue;
 	}
 
 	addItem(qtk.TitleEdit.create({
@@ -30,12 +32,24 @@ function onReady(app) {
 				padding:5, 
 				title:"Age", 
 				titleW:"60", 
-				valueW:"60%", 
-				w:260, 
-				h:30,
-				layoutParam : qtk.SimpleLayouterParam.create({y:"center"})
+				valueW:"100", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 		}));
-
+	addItem(qtk.TitleComboBox.create({
+				value:"Red",
+				title:"Color", 
+				titleW:"60", 
+				valueW:"60%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"70%"})
+		})).addOption("Red").addOption("Green").addOption("Blue");;
+	
+	addItem(qtk.TitleComboBoxEditable.create({
+				value:"Red",
+				title:"Color", 
+				titleW:"60", 
+				valueW:"60%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"70%"})
+		})).addOption("Red").addOption("Green").addOption("Blue");;
 	listView.relayoutChildren();
 	win.target = listView;
 	win.open();

@@ -23,7 +23,7 @@ var RadioButton = (function (_super) {
         configurable: true
     });
     RadioButton.create = function (options) {
-        return RadioButton.r.create().reset(RadioButton.TYPE).set(options);
+        return RadioButton.r.create().reset(RadioButton.TYPE, options);
     };
     RadioButton.TYPE = "radio-button";
     RadioButton.r = new recyclable_creator_1.RecyclableCreator(function () { return new RadioButton(); });

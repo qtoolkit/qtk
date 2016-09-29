@@ -14,7 +14,7 @@ export declare class Label extends Widget {
     protected setProp(prop: string, newValue: any, notify: boolean): Widget;
     constructor(type?: string);
     protected onInit(): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): Label;

@@ -277,7 +277,9 @@ export declare class Widget extends Emitter {
     protected ePropChangeEvent: Events.PropChangeEvent;
     protected notifyChange(): void;
     setValue(value: boolean, notify: boolean, exclude: boolean): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
+    protected onCreated(): void;
+    reset(type: string, options: any): Widget;
     fromJson(json: any): Widget;
     toJson(json: any): any;
     static create(app: IApplication, options: any): Widget;

@@ -91,13 +91,11 @@ var Label = (function (_super) {
         _super.prototype.onInit.call(this);
         this.relayoutText();
     };
-    Label.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Label.prototype.onReset = function () {
         this.padding = 5;
-        return this;
     };
     Label.create = function (options) {
-        return Label.recycleBin.create().reset(Label.TYPE).set(options);
+        return Label.recycleBin.create().reset(Label.TYPE, options);
     };
     Label.TYPE = "label";
     Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });

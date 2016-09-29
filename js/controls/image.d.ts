@@ -11,7 +11,7 @@ export declare class Image extends Widget {
     drawType: ImageDrawType;
     value: string;
     setStyle(state: WidgetState, style: Style): Widget;
-    reset(type: string): Widget;
+    protected onReset(): void;
     getStyle(): Style;
     static TYPE: string;
     private static recycleBin;

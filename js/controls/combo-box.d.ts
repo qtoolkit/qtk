@@ -16,7 +16,7 @@ export declare class ComboBoxOption {
 export declare class ComboBoxItem extends ListItem {
     data: ComboBoxOption;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     readonly text: string;
     protected getStyleType(): string;
     protected drawText(ctx: any, style: Style): Widget;
@@ -37,7 +37,7 @@ export declare class ComboBoxBase extends Widget {
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;
     protected onItemSelected(data: ComboBoxOption): void;
     protected showPopup(): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
     constructor(type?: string);
 }
 export declare class ComboBox extends ComboBoxBase {
@@ -55,8 +55,8 @@ export declare class ComboBoxEditable extends ComboBoxBase {
     value: any;
     protected onItemSelected(data: ComboBoxOption): void;
     relayoutChildren(): Rect;
-    protected onInit(): void;
-    reset(type: string): Widget;
+    dispose(): void;
+    protected onReset(): void;
     constructor();
     static TYPE: string;
     private static recycleBin;

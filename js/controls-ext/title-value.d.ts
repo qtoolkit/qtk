@@ -14,7 +14,7 @@ export declare class TitleValue extends Widget {
     readonly valueWidget: Widget;
     value: any;
     protected createValueWidget(options?: any): Widget;
-    protected onInit(): void;
-    reset(type: string): Widget;
+    onInit(): void;
+    onReset(): void;
     dispose(): void;
 }

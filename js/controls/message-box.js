@@ -189,11 +189,10 @@ var MessageBox = (function (_super) {
         this.initButtons(buttonsOptions);
         this.initContent(content);
     };
-    MessageBox.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    MessageBox.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this.padding = 1;
         this.childrenLayouter = dock_layouter_1.DockLayouter.create();
-        return this;
     };
     MessageBox.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -358,7 +357,7 @@ var MessageBox = (function (_super) {
         messageBox.open();
     };
     MessageBox.create = function (options) {
-        return MessageBox.rBin.create().reset(MessageBox.TYPE).set(options);
+        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
     };
     MessageBox.TITLE_H = 25;
     MessageBox.BUTTONS_H = 40;

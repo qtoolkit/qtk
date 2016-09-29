@@ -62,6 +62,7 @@ import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 import {TitleEdit} from "./controls-ext/title-edit";
+import {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
@@ -151,6 +152,8 @@ export {
 	ThemeManager,
 	Events,
 	TitleEdit,
+	TitleComboBox,
+	TitleComboBoxEditable,
 	DockLayouter,
 	DockLayouterParam,
 	GridLayouter,

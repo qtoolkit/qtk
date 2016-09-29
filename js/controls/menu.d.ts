@@ -33,7 +33,7 @@ export declare class Menu extends Dialog {
     addItem(text: string, onClick: Function, iconURL?: string, shortcut?: string): Widget;
     addFolderItem(text: string, onInitSubMenu: Function): Widget;
     addItemExt(text: string, iconURL: string, shortcut?: string, onInitSubMenu?: Function): Widget;
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     static TYPE: string;
     private static r;
@@ -54,9 +54,9 @@ export declare class MenuItem extends Widget {
     openSubMenu(): void;
     closeMenu(): void;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     static TYPE: string;
     private static recycleBin;
-    static create(): MenuItem;
+    static create(options?: any): MenuItem;
 }

@@ -13,7 +13,7 @@ var WindowNormal = (function (_super) {
         _super.call(this, WindowNormal.TYPE);
     }
     WindowNormal.create = function (options) {
-        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE).set(options);
+        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
     };
     WindowNormal.TYPE = "window-normal";
     WindowNormal.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new WindowNormal(); });

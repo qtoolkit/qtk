@@ -109,7 +109,7 @@ export class RichText extends ScrollView {
 	public static TYPE = "rich-text";
 	private static reBin = new RecyclableCreator<RichText>(function() {return new RichText()});
 	public static create(options?:any) : RichText {
-		return <RichText>RichText.reBin.create().reset(RichText.TYPE).set(options);
+		return <RichText>RichText.reBin.create().reset(RichText.TYPE, options);
 	}
 };
 

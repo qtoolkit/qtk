@@ -55,19 +55,17 @@ var Image = (function (_super) {
         this._style = style;
         return this;
     };
-    Image.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Image.prototype.onReset = function () {
         this._style = style_1.Style.create();
         this._style.fontSize = 12;
         this._style.textColor = "Black";
         this.drawType = image_tile_1.ImageDrawType.DEFAULT;
-        return this;
     };
     Image.prototype.getStyle = function () {
         return this._style;
     };
     Image.create = function (options) {
-        return Image.recycleBin.create().reset(Image.TYPE).set(options);
+        return Image.recycleBin.create().reset(Image.TYPE, options);
     };
     Image.TYPE = "image";
     Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });

@@ -27,7 +27,7 @@ var TabPage = (function (_super) {
         this._tabButton = null;
     };
     TabPage.create = function (options) {
-        return TabPage.r.create().reset(TabPage.TYPE).set(options);
+        return TabPage.r.create().reset(TabPage.TYPE, options);
     };
     TabPage.TYPE = "page";
     TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });

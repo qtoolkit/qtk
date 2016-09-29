@@ -39,11 +39,9 @@ export class ComboBoxItem extends ListItem {
 		super(ComboBoxItem.TYPE);
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this.padding = 2;
-
-		return this;
 	}
 
 	public get text() : string {
@@ -94,7 +92,7 @@ export class ComboBoxItem extends ListItem {
 	public static TYPE = "combo-box-item";
 	private static r = new RecyclableCreator<ComboBoxItem>(function() {return new ComboBoxItem()});
 	public static create(options?:any) : ComboBoxItem {
-		return <ComboBoxItem>ComboBoxItem.r.create().reset(ComboBoxItem.TYPE).set(options);
+		return <ComboBoxItem>ComboBoxItem.r.create().reset(ComboBoxItem.TYPE, options);
 	}
 };
 
@@ -115,15 +113,17 @@ export class ComboBoxBase extends Widget {
 
 	public set value(value:any) {
 		var arr = this._options;
-		var n = arr.length;
 		this._current = null;
 		this._value = value;
 
-		for(var i = 0; i < n; i++) {
-			var iter = arr[i];
-			if(iter.value === value) {
-				this._current = iter;
-				break;
+		if(arr) {
+			var n = arr.length;
+			for(var i = 0; i < n; i++) {
+				var iter = arr[i];
+				if(iter.value === value) {
+					this._current = iter;
+					break;
+				}
 			}
 		}
 	}
@@ -146,7 +146,7 @@ export class ComboBoxBase extends Widget {
 		var item = new ComboBoxOption(text, value, imageURL, color);
 		this._options.push(item);
 
-		if(value === this._value) {
+		if(value === this._value || (value === undefined && text === this._value)) {
 			this._current = item;
 		}
 
@@ -230,14 +230,12 @@ export class ComboBoxBase extends Widget {
 		});
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this.padding = 2;
 		this._options = [];
 		this.itemHeight = 25;
 		this._current = null;
-
-		return this;
 	}
 
 	constructor(type?:string) {
@@ -270,7 +268,7 @@ export class ComboBox extends ComboBoxBase {
 	public static TYPE = "combo-box";
 	private static recycleBin = new RecyclableCreator<ComboBox>(function() {return new ComboBox()});
 	public static create(options?:any) : ComboBox {
-		return <ComboBox>ComboBox.recycleBin.create().reset(ComboBox.TYPE).set(options);
+		return <ComboBox>ComboBox.recycleBin.create().reset(ComboBox.TYPE, options);
 	}
 };
 
@@ -316,9 +314,16 @@ export class ComboBoxEditable extends ComboBoxBase {
 		return this.getLayoutRect();
 	}
 
-	protected onInit() {
-		super.onInit();
+	public dispose() {
+		this._edit = null;
+		this._button = null;
+		super.dispose();
+	}
+
+	protected onReset() {
+		super.onReset();
 		
+		this.padding = 0;
 		this._edit = Edit.create();
 		this.addChild(this._edit);
 		
@@ -331,15 +336,6 @@ export class ComboBoxEditable extends ComboBoxBase {
 		});
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-		this.padding = 0;
-		this._edit = null;
-		this._button = null;
-
-		return this;
-	}
-
 	constructor() {
 		super(ComboBoxEditable.TYPE);
 	}
@@ -348,7 +344,7 @@ export class ComboBoxEditable extends ComboBoxBase {
 	private static recycleBin = new RecyclableCreator<ComboBoxEditable>(function() {
 		return new ComboBoxEditable()});
 	public static create(options?:any) : ComboBoxEditable {
-		return <ComboBoxEditable>ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE).set(options);
+		return <ComboBoxEditable>ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE, options);
 	}
 };
 

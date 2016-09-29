@@ -88,7 +88,7 @@ var ProgressBar = (function (_super) {
         return this;
     };
     ProgressBar.create = function (options) {
-        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE).set(options);
+        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
     };
     ProgressBar.TYPE = "progress-bar";
     ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });

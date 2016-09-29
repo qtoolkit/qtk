@@ -44,7 +44,7 @@ export declare class TreeItem extends Widget {
     protected dispatchDblClick(evt: any): void;
     protected dispatchClick(evt: any): void;
     dispose(): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): TreeItem;

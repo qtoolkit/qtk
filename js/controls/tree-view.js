@@ -128,18 +128,17 @@ var TreeView = (function (_super) {
         this.children.length = 0;
         return this;
     };
-    TreeView.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    TreeView.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this._rootData = tree_item_data_1.TreeItemData.create("root", null, null);
         this.scrollerOptions.scrollingX = true;
-        return this;
     };
     TreeView.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
         this._rootData = null;
     };
     TreeView.create = function (options) {
-        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE).set(options);
+        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
     };
     TreeView.TYPE = "tree-view";
     TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });

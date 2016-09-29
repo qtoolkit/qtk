@@ -124,7 +124,7 @@ var Edit = (function (_super) {
         }
     };
     Edit.create = function (options) {
-        return Edit.r.create().reset(Edit.TYPE).set(options);
+        return Edit.r.create().reset(Edit.TYPE, options);
     };
     Edit.TYPE = "edit";
     Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });

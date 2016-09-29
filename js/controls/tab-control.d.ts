@@ -19,7 +19,7 @@ export declare class TabControl extends Widget {
     addPage(title: string, normalIconURL?: string, currentIconURL?: string, closable?: boolean, closeButtonAtLeft?: boolean): TabPage;
     relayoutChildren(): Rect;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     static TYPE: string;
     private static r;

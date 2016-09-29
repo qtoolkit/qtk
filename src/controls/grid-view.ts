@@ -122,19 +122,17 @@ export class GridView extends ScrollView {
 		super(GridView.TYPE);
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this._cols = 3;
 		this._rows = 3;
 		this._childrenLayouter = GridLayouter.create({cols:this.cols, rows:this.rows});
-		
-		return this;
 	}
 
 	public static TYPE = "grid-view";
 	private static recycleBinGridView = new RecyclableCreator<GridView>(function() {return new GridView()});
 	public static create(options?:any) : GridView {
-		return <GridView>GridView.recycleBinGridView.create().reset(GridView.TYPE).set(options);
+		return <GridView>GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
 	}
 };
 

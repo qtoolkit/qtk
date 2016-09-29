@@ -169,8 +169,7 @@ var TabButton = (function (_super) {
     TabButton.prototype.drawText = function (ctx, style) {
         return this;
     };
-    TabButton.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    TabButton.prototype.onReset = function () {
         this.padding = 2;
         this._tabPage = null;
         this._closeButton = null;
@@ -178,7 +177,6 @@ var TabButton = (function (_super) {
         this._currentIcon = null;
         this._closeButtonAtLeft = false;
         this._orientation = consts_1.Orientation.H;
-        return this;
     };
     TabButton.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -187,8 +185,8 @@ var TabButton = (function (_super) {
         this._normalIcon = null;
         this._currentIcon = null;
     };
-    TabButton.create = function () {
-        return TabButton.re.create().reset(TabButton.TYPE);
+    TabButton.create = function (options) {
+        return TabButton.re.create().reset(TabButton.TYPE, options);
     };
     TabButton.TYPE = "tab-button";
     TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });

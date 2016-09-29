@@ -88,7 +88,7 @@ export declare class ScrollView extends Widget {
     protected getLayoutHeight(): number;
     protected getLayoutRect(): Rect;
     protected onInit(): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
     protected _ox: number;
     protected _oy: number;
     protected _cw: number;

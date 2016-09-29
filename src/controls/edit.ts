@@ -134,7 +134,7 @@ export class Edit extends Label {
 	public static TYPE = "edit";
 	private static r = new RecyclableCreator<Edit>(function() {return new Edit()});
 	public static create(options?:any) : Edit {
-		return <Edit>Edit.r.create().reset(Edit.TYPE).set(options);
+		return <Edit>Edit.r.create().reset(Edit.TYPE, options);
 	}
 };
 

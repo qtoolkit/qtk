@@ -13,7 +13,7 @@ var Page = (function (_super) {
         _super.call(this, type || Page.TYPE);
     }
     Page.create = function (options) {
-        return Page.recycleBin.create().reset(Page.TYPE).set(options);
+        return Page.recycleBin.create().reset(Page.TYPE, options);
     };
     Page.TYPE = "page";
     Page.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Page(); });

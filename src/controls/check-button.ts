@@ -103,7 +103,7 @@ export class CheckButton extends Widget {
 	public static TYPE = "check-button";
 	private static recycleBin = new RecyclableCreator<CheckButton>(function() {return new CheckButton()});
 	public static create(options?:any) : CheckButton {
-		return <CheckButton>CheckButton.recycleBin.create().reset(CheckButton.TYPE).set(options);
+		return <CheckButton>CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
 	}
 };
 

@@ -92,7 +92,7 @@ var RichText = (function (_super) {
         _super.prototype.dispose.call(this);
     };
     RichText.create = function (options) {
-        return RichText.reBin.create().reset(RichText.TYPE).set(options);
+        return RichText.reBin.create().reset(RichText.TYPE, options);
     };
     RichText.TYPE = "rich-text";
     RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });

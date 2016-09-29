@@ -13,7 +13,7 @@ export class WindowNormal extends Window {
 	public static TYPE = "window-normal";
 	private static recycleBin = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
 	public static create(options?:any) : Window {
-		return <WindowNormal>WindowNormal.recycleBin.create().reset(WindowNormal.TYPE).set(options);
+		return <WindowNormal>WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
 	}
 };
 

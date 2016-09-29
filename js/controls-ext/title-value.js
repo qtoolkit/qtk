@@ -77,22 +77,20 @@ var TitleValue = (function (_super) {
     };
     TitleValue.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
-        var h = this.clientH;
-        var titleWidget = label_1.Label.create({ text: this._title });
-        titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: h });
+        this.titleWidget.text = this._title;
+        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
+        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
+    };
+    TitleValue.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
+        this.padding = 2;
+        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+        var titleWidget = label_1.Label.create();
         this.addChild(titleWidget);
         this._titleWidget = titleWidget;
         var valueWidget = this.createValueWidget();
-        if (valueWidget) {
-            valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: h });
-            this.addChild(valueWidget);
-            this._valueWidget = valueWidget;
-        }
-    };
-    TitleValue.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
-        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
-        return this;
+        this.addChild(valueWidget);
+        this._valueWidget = valueWidget;
     };
     TitleValue.prototype.dispose = function () {
         _super.prototype.dispose.call(this);

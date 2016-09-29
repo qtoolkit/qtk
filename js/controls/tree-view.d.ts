@@ -27,7 +27,7 @@ export declare class TreeView extends ListView {
     protected _multiSelectable: boolean;
     protected _rootData: TreeItemData;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     static TYPE: string;
     private static recycleBinTreeView;

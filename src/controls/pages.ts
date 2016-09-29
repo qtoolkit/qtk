@@ -55,10 +55,8 @@ export class Pages extends Widget {
 		return this.target;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this.value = 0;
-		return this;
 	}
 
 	constructor() {
@@ -67,8 +65,8 @@ export class Pages extends Widget {
 
 	public static TYPE = "pages";
 	private static recycleBin = new RecyclableCreator<Pages>(function() {return new Pages()});
-	public static create() : Pages {
-		return <Pages>Pages.recycleBin.create().reset(Pages.TYPE);
+	public static create(options?:any) : Pages {
+		return <Pages>Pages.recycleBin.create().reset(Pages.TYPE, options);
 	}
 };
 

@@ -87,7 +87,7 @@ var Switch = (function (_super) {
         _super.prototype.dispatchPointerUp.call(this, evt);
     };
     Switch.create = function (options) {
-        return Switch.recycleBin.create().reset(Switch.TYPE).set(options);
+        return Switch.recycleBin.create().reset(Switch.TYPE, options);
     };
     Switch.TYPE = "switch";
     Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });

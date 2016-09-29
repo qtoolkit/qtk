@@ -18,7 +18,7 @@ export declare class GridView extends ScrollView {
     protected _colWidth: number;
     protected _rowHeight: number;
     constructor();
-    reset(type: string): Widget;
+    protected onReset(): void;
     static TYPE: string;
     private static recycleBinGridView;
     static create(options?: any): GridView;

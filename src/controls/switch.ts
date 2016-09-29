@@ -95,7 +95,7 @@ export class Switch extends Widget {
 	public static TYPE = "switch";
 	private static recycleBin = new RecyclableCreator<Switch>(function() {return new Switch()});
 	public static create(options?:any) : Switch{
-		return <Switch>Switch.recycleBin.create().reset(Switch.TYPE).set(options);
+		return <Switch>Switch.recycleBin.create().reset(Switch.TYPE, options);
 	}
 };
 

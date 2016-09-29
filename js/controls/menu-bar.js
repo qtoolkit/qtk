@@ -102,14 +102,13 @@ var MenuBar = (function (_super) {
         this.addChild(item);
         return item;
     };
-    MenuBar.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    MenuBar.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this.itemWidth = 40;
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
-        return this;
     };
     MenuBar.create = function (options) {
-        return MenuBar.recycleBin.create().reset(MenuBar.TYPE).set(options);
+        return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
     };
     MenuBar.TYPE = "menu-bar";
     MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
@@ -189,7 +188,7 @@ var MenuBarItem = (function (_super) {
         _super.prototype.dispose.call(this);
     };
     MenuBarItem.create = function (options) {
-        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE).set(options);
+        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
     };
     MenuBarItem.TYPE = "menu-bar-item";
     MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });

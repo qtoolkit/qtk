@@ -129,7 +129,7 @@ var Slider = (function (_super) {
         return this;
     };
     Slider.create = function (options) {
-        return Slider.r.create().reset(Slider.TYPE).set(options);
+        return Slider.r.create().reset(Slider.TYPE, options);
     };
     Slider.TYPE = "slider";
     Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });

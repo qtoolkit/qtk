@@ -49,15 +49,11 @@ export class Image extends Widget {
 		return this;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-
+	protected onReset() {
 		this._style = Style.create();
 		this._style.fontSize = 12;
 		this._style.textColor = "Black";
 		this.drawType = ImageDrawType.DEFAULT;
-
-		return this;
 	}
 
 	public getStyle() : Style {
@@ -67,7 +63,7 @@ export class Image extends Widget {
 	public static TYPE = "image";
 	private static recycleBin = new RecyclableCreator<Image>(function() {return new Image()});
 	public static create(options?:any) : Image{
-		return <Image>Image.recycleBin.create().reset(Image.TYPE).set(options);
+		return <Image>Image.recycleBin.create().reset(Image.TYPE, options);
 	}
 };
 

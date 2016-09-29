@@ -65,28 +65,26 @@ export class TitleValue extends Widget {
 		return null;
 	}
 
-	protected onInit() {
+	public onInit() {
 		super.onInit();
-		var h = this.clientH; 
-		
-		var titleWidget = Label.create({text:this._title});
-		titleWidget.layoutParam = LinearLayouterParam.create({w:this._titleW, h:h});
+		this.titleWidget.text = this._title;
+		this.titleWidget.layoutParam = LinearLayouterParam.create({w:this._titleW, h:"100%"});
+		this.valueWidget.layoutParam = LinearLayouterParam.create({w:this._valueW, h:"100%"});
+	}
+
+	public onReset() {
+		super.onReset();
+
+		this.padding = 2;
+		this.childrenLayouter = LinearLayouter.createH({spacing:5});
+
+		var titleWidget = Label.create();
 		this.addChild(titleWidget);
 		this._titleWidget = titleWidget;
 
 		var valueWidget = this.createValueWidget();
-		if(valueWidget) {
-			valueWidget.layoutParam = LinearLayouterParam.create({w:this._valueW, h:h});
-			this.addChild(valueWidget);
-			this._valueWidget = valueWidget;
-		}
-	}
-
-	public reset(type:string) : Widget {
-		super.reset(type);
-		this.childrenLayouter = LinearLayouter.createH({spacing:5});
-
-		return this;
+		this.addChild(valueWidget);
+		this._valueWidget = valueWidget;
 	}
 	
 	public dispose(){

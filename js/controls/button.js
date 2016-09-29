@@ -13,7 +13,7 @@ var Button = (function (_super) {
         _super.call(this, Button.TYPE);
     }
     Button.create = function (options) {
-        return Button.recycleBin.create().reset(Button.TYPE).set(options);
+        return Button.recycleBin.create().reset(Button.TYPE, options);
     };
     Button.TYPE = "button";
     Button.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Button(); });

@@ -126,15 +126,14 @@ var GridView = (function (_super) {
         _super.prototype.onInit.call(this);
         this.relayoutChildren();
     };
-    GridView.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    GridView.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this._cols = 3;
         this._rows = 3;
         this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
-        return this;
     };
     GridView.create = function (options) {
-        return GridView.recycleBinGridView.create().reset(GridView.TYPE).set(options);
+        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
     };
     GridView.TYPE = "grid-view";
     GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });

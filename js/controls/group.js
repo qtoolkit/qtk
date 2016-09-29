@@ -13,7 +13,7 @@ var Group = (function (_super) {
         _super.call(this, Group.TYPE);
     }
     Group.create = function (options) {
-        return Group.recycleBin.create().reset(Group.TYPE).set(options);
+        return Group.recycleBin.create().reset(Group.TYPE, options);
     };
     Group.TYPE = "group";
     Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });

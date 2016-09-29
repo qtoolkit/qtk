@@ -33,7 +33,7 @@ export declare class MessageBox extends Dialog {
     protected initButtons(buttonsOptions: ButtonsOptions): this;
     protected initContent(data?: string): void;
     protected createChildren(titleOptions: TitleOptions, buttonsOptions: ButtonsOptions, content?: string): void;
-    reset(type: string): Widget;
+    protected onReset(): void;
     dispose(): void;
     open(): Widget;
     animateClose(): void;

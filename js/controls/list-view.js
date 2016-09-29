@@ -81,16 +81,15 @@ var ListView = (function (_super) {
         this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
         return r;
     };
-    ListView.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    ListView.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this._itemSpacing = 0;
         this._itemHeight = 30;
         this.scrollerOptions.scrollingX = false;
         this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
-        return this;
     };
     ListView.create = function (options) {
-        return ListView.recycleBinListView.create().reset(ListView.TYPE).set(options);
+        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
     };
     ListView.TYPE = "list-view";
     ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });

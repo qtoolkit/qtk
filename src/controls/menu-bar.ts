@@ -107,17 +107,16 @@ export class MenuBar extends Widget {
 		return item;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this.itemWidth = 40;
 		this.childrenLayouter = LinearLayouter.createH({spacing:1}); 
-		return this;
 	}
 
 	public static TYPE = "menu-bar";
 	private static recycleBin = new RecyclableCreator<MenuBar>(function() {return new MenuBar()});
 	public static create(options?:any) : MenuBar {
-		return <MenuBar>MenuBar.recycleBin.create().reset(MenuBar.TYPE).set(options);
+		return <MenuBar>MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
 	}
 };
 
@@ -209,7 +208,7 @@ export class MenuBarItem extends Widget {
 	public static TYPE = "menu-bar-item";
 	private static recycleBin = new RecyclableCreator<MenuBarItem>(function() {return new MenuBarItem()});
 	public static create(options?:any) : MenuBarItem {
-		return <MenuBarItem>MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE).set(options);
+		return <MenuBarItem>MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
 	}
 };
 

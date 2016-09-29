@@ -192,9 +192,8 @@ export class Menu extends Dialog {
 		return item;
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
-
+	protected onReset() {
+		super.onReset();
 		this.hasOwnCanvas = true;
 		this.styleType = "widget.transparent";
 		this.childrenLayouter = SimpleLayouter.create();
@@ -207,6 +206,7 @@ export class Menu extends Dialog {
 		listView.slideToScroll = false;
 		listView.bottomPadding = 4;	
 		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
+		
 		this.addChild(listView);
 		this.target = listView;
 		this._listView = listView;
@@ -215,8 +215,6 @@ export class Menu extends Dialog {
 		this.bottomPadding = 4;
 		this.leftPadding = 2;
 		this.rightPadding = 2;
-
-		return this;
 	}
 
 	public dispose() {
@@ -229,7 +227,7 @@ export class Menu extends Dialog {
 	public static TYPE = "menu";
 	private static r = new RecyclableCreator<Menu>(function() {return new Menu()});
 	public static create(options?:any) : Menu {
-		return <Menu>Menu.r.create().reset(Menu.TYPE).set(options);
+		return <Menu>Menu.r.create().reset(Menu.TYPE, options);
 	}
 };
 
@@ -358,8 +356,8 @@ export class MenuItem extends Widget {
 		super(MenuItem.TYPE);
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
+		super.onReset();
 		this._icon = null;
 		this._iconURL = null;
 		this.checkable = false;
@@ -367,8 +365,6 @@ export class MenuItem extends Widget {
 		this.onInitSubMenu = null;
 		this.leftPadding = 2;
 		this.rightPadding = 4;
-
-		return this;
 	}
 
 	public dispose() {
@@ -382,8 +378,8 @@ export class MenuItem extends Widget {
 
 	public static TYPE = "menu-item";
 	private static recycleBin = new RecyclableCreator<MenuItem>(function() {return new MenuItem()});
-	public static create() : MenuItem {
-		return <MenuItem>MenuItem.recycleBin.create().reset(MenuItem.TYPE);
+	public static create(options?:any) : MenuItem {
+		return <MenuItem>MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
 	}
 };
 

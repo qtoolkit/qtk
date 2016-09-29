@@ -21,7 +21,7 @@ var Dialog = (function (_super) {
         return this;
     };
     Dialog.create = function (options) {
-        return Dialog.recycleBin.create().reset(Dialog.TYPE).set(options);
+        return Dialog.recycleBin.create().reset(Dialog.TYPE, options);
     };
     Dialog.TYPE = "dialog";
     Dialog.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Dialog(); });

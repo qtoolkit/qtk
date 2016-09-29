@@ -59,13 +59,11 @@ var Pages = (function (_super) {
     Pages.prototype.findEventTargetChild = function (x, y, ctx) {
         return this.target;
     };
-    Pages.prototype.reset = function (type) {
-        _super.prototype.reset.call(this, type);
+    Pages.prototype.onReset = function () {
         this.value = 0;
-        return this;
     };
-    Pages.create = function () {
-        return Pages.recycleBin.create().reset(Pages.TYPE);
+    Pages.create = function (options) {
+        return Pages.recycleBin.create().reset(Pages.TYPE, options);
     };
     Pages.TYPE = "pages";
     Pages.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Pages(); });

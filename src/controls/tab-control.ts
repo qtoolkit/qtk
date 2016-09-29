@@ -133,8 +133,7 @@ export class TabControl extends Widget {
 		super(TabControl.TYPE);
 	}
 
-	public reset(type:string) : Widget {
-		super.reset(type);
+	protected onReset() {
 		this._value = 0;
 		this._buttonGroupHeight = 30;
 		this._pages = Pages.create();
@@ -142,8 +141,6 @@ export class TabControl extends Widget {
 
 		this._buttonGroup = TabButtonGroup.create();
 		this.addChild(this._buttonGroup, true);
-
-		return this;
 	}
 
 	public dispose() {
@@ -155,7 +152,7 @@ export class TabControl extends Widget {
 	public  static TYPE = "tab-control";
 	private static r = new RecyclableCreator<TabControl>(function() {return new TabControl()});
 	public static create(options?:any) : TabControl {
-		return <TabControl>TabControl.r.create().reset(TabControl.TYPE).set(options);
+		return <TabControl>TabControl.r.create().reset(TabControl.TYPE, options);
 	}
 };
 

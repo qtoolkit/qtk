@@ -557,16 +557,16 @@ var ScrollView = (function (_super) {
                 h -= this._scrollBarStyle.size;
             }
         }
-        return rect_1.Rect.create(this.leftPadding, this.topPadding, w, h);
+        return this.layoutRect.init(this.leftPadding, this.topPadding, w, h);
     };
     ScrollView.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
         this.initScroller(this._scrollerOptions);
         this._scrollBarOpacity = this.dragToScroll ? 1 : 0;
     };
-    ScrollView.prototype.reset = function (type) {
+    ScrollView.prototype.onReset = function () {
         var _this = this;
-        _super.prototype.reset.call(this, type);
+        _super.prototype.onReset.call(this);
         this._ox = 0;
         this._oy = 0;
         this._cw = 0;
@@ -589,10 +589,9 @@ var ScrollView = (function (_super) {
             _this.onWheel(evt);
         });
         this._scrollEvent = Events.ScrollEvent.create();
-        return this;
     };
     ScrollView.create = function (options) {
-        return ScrollView.recycleBin.create().reset(ScrollView.TYPE).set(options);
+        return ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
     };
     ScrollView.TYPE = "scroll-view";
     ScrollView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ScrollView(); });

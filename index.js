@@ -199,6 +199,9 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var title_edit_1 = __webpack_require__(132);
 	exports.TitleEdit = title_edit_1.TitleEdit;
+	var title_combo_box_1 = __webpack_require__(134);
+	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
+	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 	var TWEEN = __webpack_require__(21);
 	exports.TWEEN = TWEEN;
@@ -2440,19 +2443,17 @@ var qtk =
 	        this._style = style;
 	        return this;
 	    };
-	    Image.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Image.prototype.onReset = function () {
 	        this._style = style_1.Style.create();
 	        this._style.fontSize = 12;
 	        this._style.textColor = "Black";
 	        this.drawType = image_tile_1.ImageDrawType.DEFAULT;
-	        return this;
 	    };
 	    Image.prototype.getStyle = function () {
 	        return this._style;
 	    };
 	    Image.create = function (options) {
-	        return Image.recycleBin.create().reset(Image.TYPE).set(options);
+	        return Image.recycleBin.create().reset(Image.TYPE, options);
 	    };
 	    Image.TYPE = "image";
 	    Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });
@@ -4832,7 +4833,11 @@ var qtk =
 	            this.notifyChange();
 	        }
 	    };
-	    Widget.prototype.reset = function (type) {
+	    Widget.prototype.onReset = function () {
+	    };
+	    Widget.prototype.onCreated = function () {
+	    };
+	    Widget.prototype.reset = function (type, options) {
 	        this._x = 0;
 	        this._y = 0;
 	        this._z = 0;
@@ -4887,6 +4892,9 @@ var qtk =
 	        this.onkeyup = null;
 	        this._behaviors = {};
 	        this.removeAllListeners();
+	        this.onReset();
+	        this.set(options);
+	        this.onCreated();
 	        return this;
 	    };
 	    Widget.prototype.fromJson = function (json) {
@@ -4972,7 +4980,7 @@ var qtk =
 	    };
 	    Widget.create = function (app, options) {
 	        var widget = new Widget("dummy");
-	        widget.reset("dummy");
+	        widget.reset("dummy", null);
 	        widget.app = app;
 	        return widget;
 	    };
@@ -16162,7 +16170,7 @@ var qtk =
 	        _super.call(this, Group.TYPE);
 	    }
 	    Group.create = function (options) {
-	        return Group.recycleBin.create().reset(Group.TYPE).set(options);
+	        return Group.recycleBin.create().reset(Group.TYPE, options);
 	    };
 	    Group.TYPE = "group";
 	    Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });
@@ -16303,7 +16311,7 @@ var qtk =
 	        }
 	    };
 	    Edit.create = function (options) {
-	        return Edit.r.create().reset(Edit.TYPE).set(options);
+	        return Edit.r.create().reset(Edit.TYPE, options);
 	    };
 	    Edit.TYPE = "edit";
 	    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
@@ -16411,13 +16419,11 @@ var qtk =
 	        _super.prototype.onInit.call(this);
 	        this.relayoutText();
 	    };
-	    Label.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Label.prototype.onReset = function () {
 	        this.padding = 5;
-	        return this;
 	    };
 	    Label.create = function (options) {
-	        return Label.recycleBin.create().reset(Label.TYPE).set(options);
+	        return Label.recycleBin.create().reset(Label.TYPE, options);
 	    };
 	    Label.TYPE = "label";
 	    Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
@@ -16654,7 +16660,7 @@ var qtk =
 	        _super.call(this, type || Page.TYPE);
 	    }
 	    Page.create = function (options) {
-	        return Page.recycleBin.create().reset(Page.TYPE).set(options);
+	        return Page.recycleBin.create().reset(Page.TYPE, options);
 	    };
 	    Page.TYPE = "page";
 	    Page.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Page(); });
@@ -16730,13 +16736,11 @@ var qtk =
 	    Pages.prototype.findEventTargetChild = function (x, y, ctx) {
 	        return this.target;
 	    };
-	    Pages.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Pages.prototype.onReset = function () {
 	        this.value = 0;
-	        return this;
 	    };
-	    Pages.create = function () {
-	        return Pages.recycleBin.create().reset(Pages.TYPE);
+	    Pages.create = function (options) {
+	        return Pages.recycleBin.create().reset(Pages.TYPE, options);
 	    };
 	    Pages.TYPE = "pages";
 	    Pages.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Pages(); });
@@ -16766,7 +16770,7 @@ var qtk =
 	        _super.call(this, Button.TYPE);
 	    }
 	    Button.create = function (options) {
-	        return Button.recycleBin.create().reset(Button.TYPE).set(options);
+	        return Button.recycleBin.create().reset(Button.TYPE, options);
 	    };
 	    Button.TYPE = "button";
 	    Button.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Button(); });
@@ -16810,7 +16814,7 @@ var qtk =
 	        this._tabButton = null;
 	    };
 	    TabPage.create = function (options) {
-	        return TabPage.r.create().reset(TabPage.TYPE).set(options);
+	        return TabPage.r.create().reset(TabPage.TYPE, options);
 	    };
 	    TabPage.TYPE = "page";
 	    TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });
@@ -16996,8 +17000,7 @@ var qtk =
 	    TabButton.prototype.drawText = function (ctx, style) {
 	        return this;
 	    };
-	    TabButton.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    TabButton.prototype.onReset = function () {
 	        this.padding = 2;
 	        this._tabPage = null;
 	        this._closeButton = null;
@@ -17005,7 +17008,6 @@ var qtk =
 	        this._currentIcon = null;
 	        this._closeButtonAtLeft = false;
 	        this._orientation = consts_1.Orientation.H;
-	        return this;
 	    };
 	    TabButton.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -17014,8 +17016,8 @@ var qtk =
 	        this._normalIcon = null;
 	        this._currentIcon = null;
 	    };
-	    TabButton.create = function () {
-	        return TabButton.re.create().reset(TabButton.TYPE);
+	    TabButton.create = function (options) {
+	        return TabButton.re.create().reset(TabButton.TYPE, options);
 	    };
 	    TabButton.TYPE = "tab-button";
 	    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
@@ -17126,7 +17128,7 @@ var qtk =
 	        configurable: true
 	    });
 	    RadioButton.create = function (options) {
-	        return RadioButton.r.create().reset(RadioButton.TYPE).set(options);
+	        return RadioButton.r.create().reset(RadioButton.TYPE, options);
 	    };
 	    RadioButton.TYPE = "radio-button";
 	    RadioButton.r = new recyclable_creator_1.RecyclableCreator(function () { return new RadioButton(); });
@@ -17237,7 +17239,7 @@ var qtk =
 	        _super.prototype.dispatchClick.call(this, evt);
 	    };
 	    CheckButton.create = function (options) {
-	        return CheckButton.recycleBin.create().reset(CheckButton.TYPE).set(options);
+	        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
 	    };
 	    CheckButton.TYPE = "check-button";
 	    CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });
@@ -17383,15 +17385,13 @@ var qtk =
 	        }
 	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
 	    };
-	    TabControl.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    TabControl.prototype.onReset = function () {
 	        this._value = 0;
 	        this._buttonGroupHeight = 30;
 	        this._pages = pages_1.Pages.create();
 	        this.addChild(this._pages, true);
 	        this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
 	        this.addChild(this._buttonGroup, true);
-	        return this;
 	    };
 	    TabControl.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -17399,7 +17399,7 @@ var qtk =
 	        this._buttonGroup = null;
 	    };
 	    TabControl.create = function (options) {
-	        return TabControl.r.create().reset(TabControl.TYPE).set(options);
+	        return TabControl.r.create().reset(TabControl.TYPE, options);
 	    };
 	    TabControl.TYPE = "tab-control";
 	    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
@@ -17503,13 +17503,11 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    TabButtonGroup.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    TabButtonGroup.prototype.onReset = function () {
 	        this.autoExpand = true;
-	        return this;
 	    };
 	    TabButtonGroup.create = function (options) {
-	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE).set(options);
+	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
 	    };
 	    TabButtonGroup.TYPE = "tab-button-group";
 	    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
@@ -17715,11 +17713,10 @@ var qtk =
 	        this.initButtons(buttonsOptions);
 	        this.initContent(content);
 	    };
-	    MessageBox.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    MessageBox.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.padding = 1;
 	        this.childrenLayouter = dock_layouter_1.DockLayouter.create();
-	        return this;
 	    };
 	    MessageBox.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -17884,7 +17881,7 @@ var qtk =
 	        messageBox.open();
 	    };
 	    MessageBox.create = function (options) {
-	        return MessageBox.rBin.create().reset(MessageBox.TYPE).set(options);
+	        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
 	    };
 	    MessageBox.TITLE_H = 25;
 	    MessageBox.BUTTONS_H = 40;
@@ -17925,7 +17922,7 @@ var qtk =
 	        return this;
 	    };
 	    Dialog.create = function (options) {
-	        return Dialog.recycleBin.create().reset(Dialog.TYPE).set(options);
+	        return Dialog.recycleBin.create().reset(Dialog.TYPE, options);
 	    };
 	    Dialog.TYPE = "dialog";
 	    Dialog.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Dialog(); });
@@ -17970,13 +17967,11 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Window.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Window.prototype.onReset = function () {
 	        this._isWindow = true;
 	        this._grabbed = false;
 	        this.hasOwnCanvas = true;
 	        this._pointerPosition = point_1.Point.create(0, 0);
-	        return this;
 	    };
 	    Object.defineProperty(Window.prototype, "pointerPosition", {
 	        get: function () {
@@ -18145,16 +18140,15 @@ var qtk =
 	        this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
 	        return r;
 	    };
-	    ListView.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    ListView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this._itemSpacing = 0;
 	        this._itemHeight = 30;
 	        this.scrollerOptions.scrollingX = false;
 	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
-	        return this;
 	    };
 	    ListView.create = function (options) {
-	        return ListView.recycleBinListView.create().reset(ListView.TYPE).set(options);
+	        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
 	    };
 	    ListView.TYPE = "list-view";
 	    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
@@ -18728,16 +18722,16 @@ var qtk =
 	                h -= this._scrollBarStyle.size;
 	            }
 	        }
-	        return rect_1.Rect.create(this.leftPadding, this.topPadding, w, h);
+	        return this.layoutRect.init(this.leftPadding, this.topPadding, w, h);
 	    };
 	    ScrollView.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
 	        this.initScroller(this._scrollerOptions);
 	        this._scrollBarOpacity = this.dragToScroll ? 1 : 0;
 	    };
-	    ScrollView.prototype.reset = function (type) {
+	    ScrollView.prototype.onReset = function () {
 	        var _this = this;
-	        _super.prototype.reset.call(this, type);
+	        _super.prototype.onReset.call(this);
 	        this._ox = 0;
 	        this._oy = 0;
 	        this._cw = 0;
@@ -18760,10 +18754,9 @@ var qtk =
 	            _this.onWheel(evt);
 	        });
 	        this._scrollEvent = Events.ScrollEvent.create();
-	        return this;
 	    };
 	    ScrollView.create = function (options) {
-	        return ScrollView.recycleBin.create().reset(ScrollView.TYPE).set(options);
+	        return ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
 	    };
 	    ScrollView.TYPE = "scroll-view";
 	    ScrollView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ScrollView(); });
@@ -20406,7 +20399,7 @@ var qtk =
 	        return this;
 	    };
 	    ProgressBar.create = function (options) {
-	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE).set(options);
+	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
 	    };
 	    ProgressBar.TYPE = "progress-bar";
 	    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
@@ -20920,7 +20913,7 @@ var qtk =
 	        return rect_1.Rect.rect.init(x, y, w, h);
 	    };
 	    ListItem.create = function (options) {
-	        return ListItem.recycleBin.create().reset(ListItem.TYPE).set(options);
+	        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
 	    };
 	    ListItem.TYPE = "list-item";
 	    ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
@@ -20972,7 +20965,7 @@ var qtk =
 	        configurable: true
 	    });
 	    ListItemCheckable.create = function (options) {
-	        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE).set(options);
+	        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
 	    };
 	    ListItemCheckable.TYPE = "list-item.checkable";
 	    ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });
@@ -21558,7 +21551,7 @@ var qtk =
 	    }
 	    SimpleLayouterParam.create = function (opts) {
 	        var options = opts || {};
-	        return new SimpleLayouterParam(options.x || '0px', options.y || '0px', options.w || '100%', options.h || '100%');
+	        return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
 	    };
 	    return SimpleLayouterParam;
 	}());
@@ -21664,7 +21657,7 @@ var qtk =
 	        _super.prototype.dispose.call(this);
 	    };
 	    RichText.create = function (options) {
-	        return RichText.reBin.create().reset(RichText.TYPE).set(options);
+	        return RichText.reBin.create().reset(RichText.TYPE, options);
 	    };
 	    RichText.TYPE = "rich-text";
 	    RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });
@@ -22179,7 +22172,7 @@ var qtk =
 	        return this._selectDragStart || (document.activeElement === this._textArea);
 	    };
 	    RichTextEdit.create = function (options) {
-	        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE).set(options);
+	        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
 	    };
 	    RichTextEdit.TYPE = "rich-text-edit";
 	    RichTextEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichTextEdit(); });
@@ -22325,7 +22318,7 @@ var qtk =
 	        return this;
 	    };
 	    Slider.create = function (options) {
-	        return Slider.r.create().reset(Slider.TYPE).set(options);
+	        return Slider.r.create().reset(Slider.TYPE, options);
 	    };
 	    Slider.TYPE = "slider";
 	    Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });
@@ -22429,7 +22422,7 @@ var qtk =
 	        _super.prototype.dispatchPointerUp.call(this, evt);
 	    };
 	    Switch.create = function (options) {
-	        return Switch.recycleBin.create().reset(Switch.TYPE).set(options);
+	        return Switch.recycleBin.create().reset(Switch.TYPE, options);
 	    };
 	    Switch.TYPE = "switch";
 	    Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });
@@ -22481,10 +22474,9 @@ var qtk =
 	    function ComboBoxItem() {
 	        _super.call(this, ComboBoxItem.TYPE);
 	    }
-	    ComboBoxItem.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    ComboBoxItem.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.padding = 2;
-	        return this;
 	    };
 	    Object.defineProperty(ComboBoxItem.prototype, "text", {
 	        get: function () {
@@ -22531,7 +22523,7 @@ var qtk =
 	        return this;
 	    };
 	    ComboBoxItem.create = function (options) {
-	        return ComboBoxItem.r.create().reset(ComboBoxItem.TYPE).set(options);
+	        return ComboBoxItem.r.create().reset(ComboBoxItem.TYPE, options);
 	    };
 	    ComboBoxItem.TYPE = "combo-box-item";
 	    ComboBoxItem.r = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBoxItem(); });
@@ -22560,14 +22552,16 @@ var qtk =
 	        },
 	        set: function (value) {
 	            var arr = this._options;
-	            var n = arr.length;
 	            this._current = null;
 	            this._value = value;
-	            for (var i = 0; i < n; i++) {
-	                var iter = arr[i];
-	                if (iter.value === value) {
-	                    this._current = iter;
-	                    break;
+	            if (arr) {
+	                var n = arr.length;
+	                for (var i = 0; i < n; i++) {
+	                    var iter = arr[i];
+	                    if (iter.value === value) {
+	                        this._current = iter;
+	                        break;
+	                    }
 	                }
 	            }
 	        },
@@ -22588,7 +22582,7 @@ var qtk =
 	    ComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
 	        var item = new ComboBoxOption(text, value, imageURL, color);
 	        this._options.push(item);
-	        if (value === this._value) {
+	        if (value === this._value || (value === undefined && text === this._value)) {
 	            this._current = item;
 	        }
 	        return this;
@@ -22662,13 +22656,12 @@ var qtk =
 	            }
 	        });
 	    };
-	    ComboBoxBase.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    ComboBoxBase.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.padding = 2;
 	        this._options = [];
 	        this.itemHeight = 25;
 	        this._current = null;
-	        return this;
 	    };
 	    return ComboBoxBase;
 	}(widget_1.Widget));
@@ -22697,7 +22690,7 @@ var qtk =
 	        }
 	    };
 	    ComboBox.create = function (options) {
-	        return ComboBox.recycleBin.create().reset(ComboBox.TYPE).set(options);
+	        return ComboBox.recycleBin.create().reset(ComboBox.TYPE, options);
 	    };
 	    ComboBox.TYPE = "combo-box";
 	    ComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBox(); });
@@ -22746,36 +22739,29 @@ var qtk =
 	        }
 	        return this.getLayoutRect();
 	    };
-	    ComboBoxEditable.prototype.onInit = function () {
+	    ComboBoxEditable.prototype.dispose = function () {
+	        this._edit = null;
+	        this._button = null;
+	        _super.prototype.dispose.call(this);
+	    };
+	    ComboBoxEditable.prototype.onReset = function () {
 	        var _this = this;
-	        _super.prototype.onInit.call(this);
-	        this.styleType = ComboBox.TYPE + ".editable";
-	        var h = this.clientH;
-	        var w = this.clientW;
-	        var edit = edit_1.Edit.create();
-	        this._edit = edit;
-	        this.addChild(edit);
-	        var button = button_1.Button.create({ styleType: "combo-box.button" });
-	        this._button = button;
-	        this.addChild(button);
-	        button.on(Events.CLICK, function (evt) {
+	        _super.prototype.onReset.call(this);
+	        this.padding = 0;
+	        this._edit = edit_1.Edit.create();
+	        this.addChild(this._edit);
+	        this._button = button_1.Button.create({ styleType: "combo-box.button" });
+	        this.addChild(this._button);
+	        this._button.on(Events.CLICK, function (evt) {
 	            if (!_this._isPopupOpened) {
 	                _this.showPopup();
 	            }
 	        });
 	    };
-	    ComboBoxEditable.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
-	        this._options = [];
-	        this.padding = 0;
-	        this._edit = null;
-	        this._button = null;
-	        return this;
-	    };
 	    ComboBoxEditable.create = function (options) {
-	        return ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE).set(options);
+	        return ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE, options);
 	    };
-	    ComboBoxEditable.TYPE = "combo-box";
+	    ComboBoxEditable.TYPE = "combo-box.editable";
 	    ComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () {
 	        return new ComboBoxEditable();
 	    });
@@ -22971,8 +22957,8 @@ var qtk =
 	        });
 	        return item;
 	    };
-	    Menu.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Menu.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.hasOwnCanvas = true;
 	        this.styleType = "widget.transparent";
 	        this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
@@ -22991,7 +22977,6 @@ var qtk =
 	        this.bottomPadding = 4;
 	        this.leftPadding = 2;
 	        this.rightPadding = 2;
-	        return this;
 	    };
 	    Menu.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -23000,7 +22985,7 @@ var qtk =
 	        this._openedMenu = null;
 	    };
 	    Menu.create = function (options) {
-	        return Menu.r.create().reset(Menu.TYPE).set(options);
+	        return Menu.r.create().reset(Menu.TYPE, options);
 	    };
 	    Menu.TYPE = "menu";
 	    Menu.r = new recyclable_creator_1.RecyclableCreator(function () { return new Menu(); });
@@ -23120,8 +23105,8 @@ var qtk =
 	            }
 	        }
 	    };
-	    MenuItem.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    MenuItem.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this._icon = null;
 	        this._iconURL = null;
 	        this.checkable = false;
@@ -23129,7 +23114,6 @@ var qtk =
 	        this.onInitSubMenu = null;
 	        this.leftPadding = 2;
 	        this.rightPadding = 4;
-	        return this;
 	    };
 	    MenuItem.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -23139,8 +23123,8 @@ var qtk =
 	        this.shortcut = null;
 	        this.onInitSubMenu = null;
 	    };
-	    MenuItem.create = function () {
-	        return MenuItem.recycleBin.create().reset(MenuItem.TYPE);
+	    MenuItem.create = function (options) {
+	        return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
 	    };
 	    MenuItem.TYPE = "menu-item";
 	    MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });
@@ -23260,14 +23244,13 @@ var qtk =
 	        this.addChild(item);
 	        return item;
 	    };
-	    MenuBar.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    MenuBar.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.itemWidth = 40;
 	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
-	        return this;
 	    };
 	    MenuBar.create = function (options) {
-	        return MenuBar.recycleBin.create().reset(MenuBar.TYPE).set(options);
+	        return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
 	    };
 	    MenuBar.TYPE = "menu-bar";
 	    MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
@@ -23347,7 +23330,7 @@ var qtk =
 	        _super.prototype.dispose.call(this);
 	    };
 	    MenuBarItem.create = function (options) {
-	        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE).set(options);
+	        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
 	    };
 	    MenuBarItem.TYPE = "menu-bar-item";
 	    MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });
@@ -23427,12 +23410,10 @@ var qtk =
 	        this._style = style;
 	        return this;
 	    };
-	    Color.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    Color.prototype.onReset = function () {
 	        this._style = style_1.Style.create();
 	        this._style.fontSize = 16;
 	        this._style.textColor = "Black";
-	        return this;
 	    };
 	    Color.prototype.getStyle = function () {
 	        return this._style;
@@ -23467,7 +23448,7 @@ var qtk =
 	        configurable: true
 	    });
 	    ColorTile.create = function (options) {
-	        return ColorTile.recycleBin.create().reset(ColorTile.TYPE).set(options);
+	        return ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
 	    };
 	    ColorTile.TYPE = "color-tile";
 	    ColorTile.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorTile(); });
@@ -23597,7 +23578,7 @@ var qtk =
 	        return this;
 	    };
 	    ColorLine.create = function (options) {
-	        return ColorLine.recycleBin.create().reset(ColorLine.TYPE).set(options);
+	        return ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
 	    };
 	    ColorLine.TYPE = "color-tile";
 	    ColorLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorLine(); });
@@ -23840,17 +23821,15 @@ var qtk =
 	        this.parentItem = null;
 	        this._childrenItems = null;
 	    };
-	    TreeItem.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    TreeItem.prototype.onReset = function () {
 	        this._level = 0;
 	        this._data = null;
 	        this._indention = 30;
 	        this._parentItem = null;
 	        this._childrenItems = [];
-	        return this;
 	    };
 	    TreeItem.create = function (options) {
-	        return TreeItem.recycleBin.create().reset(TreeItem.TYPE).set(options);
+	        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
 	    };
 	    TreeItem.TYPE = "tree-item";
 	    TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });
@@ -23995,18 +23974,17 @@ var qtk =
 	        this.children.length = 0;
 	        return this;
 	    };
-	    TreeView.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    TreeView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this._rootData = tree_item_data_1.TreeItemData.create("root", null, null);
 	        this.scrollerOptions.scrollingX = true;
-	        return this;
 	    };
 	    TreeView.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
 	        this._rootData = null;
 	    };
 	    TreeView.create = function (options) {
-	        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE).set(options);
+	        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
 	    };
 	    TreeView.TYPE = "tree-view";
 	    TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });
@@ -24238,15 +24216,14 @@ var qtk =
 	        _super.prototype.onInit.call(this);
 	        this.relayoutChildren();
 	    };
-	    GridView.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
+	    GridView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this._cols = 3;
 	        this._rows = 3;
 	        this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
-	        return this;
 	    };
 	    GridView.create = function (options) {
-	        return GridView.recycleBinGridView.create().reset(GridView.TYPE).set(options);
+	        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
 	    };
 	    GridView.TYPE = "grid-view";
 	    GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
@@ -24276,7 +24253,7 @@ var qtk =
 	        _super.call(this, WindowNormal.TYPE);
 	    }
 	    WindowNormal.create = function (options) {
-	        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE).set(options);
+	        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
 	    };
 	    WindowNormal.TYPE = "window-normal";
 	    WindowNormal.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new WindowNormal(); });
@@ -24731,6 +24708,7 @@ var qtk =
 	};
 	var edit_1 = __webpack_require__(81);
 	var title_value_1 = __webpack_require__(133);
+	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleEdit = (function (_super) {
 	    __extends(TitleEdit, _super);
@@ -24790,7 +24768,7 @@ var qtk =
 	        return edit_1.Edit.create(opts);
 	    };
 	    TitleEdit.create = function (options) {
-	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE).set(options);
+	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
 	    };
 	    TitleEdit.TYPE = "title-edit";
 	    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
@@ -24798,6 +24776,7 @@ var qtk =
 	}(title_value_1.TitleValue));
 	exports.TitleEdit = TitleEdit;
 	;
+	widget_factory_1.WidgetFactory.register(TitleEdit.TYPE, TitleEdit.create);
 
 
 /***/ },
@@ -24883,22 +24862,20 @@ var qtk =
 	    };
 	    TitleValue.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
-	        var h = this.clientH;
-	        var titleWidget = label_1.Label.create({ text: this._title });
-	        titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: h });
+	        this.titleWidget.text = this._title;
+	        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
+	        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
+	    };
+	    TitleValue.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this.padding = 2;
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+	        var titleWidget = label_1.Label.create();
 	        this.addChild(titleWidget);
 	        this._titleWidget = titleWidget;
 	        var valueWidget = this.createValueWidget();
-	        if (valueWidget) {
-	            valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: h });
-	            this.addChild(valueWidget);
-	            this._valueWidget = valueWidget;
-	        }
-	    };
-	    TitleValue.prototype.reset = function (type) {
-	        _super.prototype.reset.call(this, type);
-	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
-	        return this;
+	        this.addChild(valueWidget);
+	        this._valueWidget = valueWidget;
 	    };
 	    TitleValue.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -24909,6 +24886,100 @@ var qtk =
 	}(widget_1.Widget));
 	exports.TitleValue = TitleValue;
 	;
+
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var title_value_1 = __webpack_require__(133);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var combo_box_1 = __webpack_require__(119);
+	var TitleComboBoxBase = (function (_super) {
+	    __extends(TitleComboBoxBase, _super);
+	    function TitleComboBoxBase(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(TitleComboBoxBase.prototype, "itemHeight", {
+	        get: function () {
+	            var comboBox = this._valueWidget;
+	            return comboBox.itemHeight;
+	        },
+	        set: function (value) {
+	            var comboBox = this._valueWidget;
+	            comboBox.itemHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleComboBoxBase.prototype, "value", {
+	        get: function () {
+	            var comboBox = this._valueWidget;
+	            return comboBox.value;
+	        },
+	        set: function (value) {
+	            var comboBox = this._valueWidget;
+	            comboBox.value = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleComboBoxBase.prototype.resetOptions = function () {
+	        var comboBox = this._valueWidget;
+	        comboBox.resetOptions();
+	        return this;
+	    };
+	    TitleComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
+	        var comboBox = this._valueWidget;
+	        comboBox.addOption(text, value, imageURL, color);
+	        return this;
+	    };
+	    return TitleComboBoxBase;
+	}(title_value_1.TitleValue));
+	exports.TitleComboBoxBase = TitleComboBoxBase;
+	var TitleComboBox = (function (_super) {
+	    __extends(TitleComboBox, _super);
+	    function TitleComboBox(type) {
+	        _super.call(this, type || TitleComboBox.TYPE);
+	    }
+	    TitleComboBox.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBox.create(options);
+	    };
+	    TitleComboBox.create = function (options) {
+	        return TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
+	    };
+	    TitleComboBox.TYPE = "title-combo-box";
+	    TitleComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBox(); });
+	    return TitleComboBox;
+	}(TitleComboBoxBase));
+	exports.TitleComboBox = TitleComboBox;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
+	var TitleComboBoxEditable = (function (_super) {
+	    __extends(TitleComboBoxEditable, _super);
+	    function TitleComboBoxEditable(type) {
+	        _super.call(this, type || TitleComboBoxEditable.TYPE);
+	    }
+	    TitleComboBoxEditable.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBoxEditable.create(options);
+	    };
+	    TitleComboBoxEditable.create = function (options) {
+	        return TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
+	    };
+	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
+	    TitleComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBoxEditable(); });
+	    return TitleComboBoxEditable;
+	}(TitleComboBoxBase));
+	exports.TitleComboBoxEditable = TitleComboBoxEditable;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);
 
 
 /***/ }

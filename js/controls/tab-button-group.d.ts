@@ -6,7 +6,7 @@ export declare class TabButtonGroup extends Widget {
     autoExpand: boolean;
     relayoutChildren(): Rect;
     protected drawChildren(ctx: any): Widget;
-    reset(type: string): Widget;
+    protected onReset(): void;
     constructor();
     static TYPE: string;
     private static r;

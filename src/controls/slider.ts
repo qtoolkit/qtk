@@ -136,7 +136,7 @@ export class Slider extends ProgressBar {
 	public static TYPE = "slider";
 	private static r = new RecyclableCreator<Slider>(function() {return new Slider()});
 	public static create(options?:any) : Slider {
-		return <Slider>Slider.r.create().reset(Slider.TYPE).set(options);
+		return <Slider>Slider.r.create().reset(Slider.TYPE, options);
 	}
 };
 
