@@ -3,7 +3,6 @@ import { TitleValue } from "./title-value";
 export declare class TitleComboBoxBase extends TitleValue {
     constructor(type: string);
     itemHeight: number;
-    value: any;
     resetOptions(): Widget;
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;
 }

@@ -21,16 +21,6 @@ export class TitleComboBoxBase extends TitleValue {
 		comboBox.itemHeight = value;
 	}
 
-	public set value(value:any) {
-		var comboBox = <ComboBox>this._valueWidget;
-		comboBox.value = value;
-	}
-
-	public get value() : any {
-		var comboBox = <ComboBox>this._valueWidget;
-		return comboBox.value;
-	}
-
 	public resetOptions() : Widget {
 		var comboBox = <ComboBox>this._valueWidget;
 		comboBox.resetOptions();

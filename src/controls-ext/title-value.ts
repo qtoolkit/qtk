@@ -11,7 +11,6 @@ export class TitleValue extends Widget {
 	protected _valueW : string;
 	protected _titleWidget : Widget;
 	protected _valueWidget : Widget;
-	protected _valueWidgetCreator : Function;
 
 	constructor(type?:string) {
 		super(type);

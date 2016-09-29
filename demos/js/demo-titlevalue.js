@@ -8,7 +8,7 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
 	
-	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
+	var listView = ListView.create({dragToScroll:true, slideToScroll:false, itemHeight:40});
 	listView.layoutParam = win.createChildLayoutParam({x:"center", w:"80%", h:"90%"});
 	win.addChild(listView);
 
@@ -17,7 +17,7 @@ function onReady(app) {
 	}
 
 	function addItem(titleValue) {
-		var item = ListItem.create();
+		var item = ListItem.create({styleType:"widget.tansparent"});
 		listView.addChild(item, true);
 		item.childrenLayouter = qtk.SimpleLayouter.create();
 		item.addChild(titleValue);
@@ -29,7 +29,6 @@ function onReady(app) {
 				inputType:"number",
 				inputTips:"Age",
 				inputFilter:filterTo100,
-				padding:5, 
 				title:"Age", 
 				titleW:"60", 
 				valueW:"100", 
@@ -50,6 +49,15 @@ function onReady(app) {
 				valueW:"60%", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"70%"})
 		})).addOption("Red").addOption("Green").addOption("Blue");;
+	
+	addItem(qtk.TitleSlider.create({
+				value : 0.1,
+				title:"Opacity", 
+				titleW:"60", 
+				valueW:"80%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		}));
+
 	listView.relayoutChildren();
 	win.target = listView;
 	win.open();

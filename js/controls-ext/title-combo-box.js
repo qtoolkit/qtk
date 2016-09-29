@@ -25,18 +25,6 @@ var TitleComboBoxBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TitleComboBoxBase.prototype, "value", {
-        get: function () {
-            var comboBox = this._valueWidget;
-            return comboBox.value;
-        },
-        set: function (value) {
-            var comboBox = this._valueWidget;
-            comboBox.value = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     TitleComboBoxBase.prototype.resetOptions = function () {
         var comboBox = this._valueWidget;
         comboBox.resetOptions();

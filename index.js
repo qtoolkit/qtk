@@ -199,7 +199,9 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var title_edit_1 = __webpack_require__(132);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_combo_box_1 = __webpack_require__(134);
+	var title_slider_1 = __webpack_require__(134);
+	exports.TitleSlider = title_slider_1.TitleSlider;
+	var title_combo_box_1 = __webpack_require__(135);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -24898,6 +24900,40 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var slider_1 = __webpack_require__(117);
+	var title_value_1 = __webpack_require__(133);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleSlider = (function (_super) {
+	    __extends(TitleSlider, _super);
+	    function TitleSlider(type) {
+	        _super.call(this, type || TitleSlider.TYPE);
+	    }
+	    TitleSlider.prototype.createValueWidget = function (options) {
+	        return slider_1.Slider.create(options);
+	    };
+	    TitleSlider.create = function (options) {
+	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
+	    };
+	    TitleSlider.TYPE = "title-slider";
+	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
+	    return TitleSlider;
+	}(title_value_1.TitleValue));
+	exports.TitleSlider = TitleSlider;
+	;
+	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var title_value_1 = __webpack_require__(133);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
@@ -24915,18 +24951,6 @@ var qtk =
 	        set: function (value) {
 	            var comboBox = this._valueWidget;
 	            comboBox.itemHeight = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleComboBoxBase.prototype, "value", {
-	        get: function () {
-	            var comboBox = this._valueWidget;
-	            return comboBox.value;
-	        },
-	        set: function (value) {
-	            var comboBox = this._valueWidget;
-	            comboBox.value = value;
 	        },
 	        enumerable: true,
 	        configurable: true
