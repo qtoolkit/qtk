@@ -199,9 +199,11 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var title_edit_1 = __webpack_require__(132);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_slider_1 = __webpack_require__(134);
+	var title_text_area_1 = __webpack_require__(134);
+	exports.TitleTextArea = title_text_area_1.TitleTextArea;
+	var title_slider_1 = __webpack_require__(135);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(135);
+	var title_combo_box_1 = __webpack_require__(136);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -4602,7 +4604,7 @@ var qtk =
 	            return this._text;
 	        },
 	        set: function (value) {
-	            this.setProp("text", value, true);
+	            this.setProp("text", value ? value.toString() : "", true);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -24900,6 +24902,58 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var edit_1 = __webpack_require__(81);
+	var title_value_1 = __webpack_require__(133);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleTextArea = (function (_super) {
+	    __extends(TitleTextArea, _super);
+	    function TitleTextArea(type) {
+	        _super.call(this, type || TitleTextArea.TYPE);
+	    }
+	    Object.defineProperty(TitleTextArea.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleTextArea.prototype.createValueWidget = function (options) {
+	        var opts = options || {};
+	        if (this._inputTips) {
+	            opts.inputTips = this._inputTips;
+	        }
+	        opts.multiLines = true;
+	        return edit_1.Edit.create(opts);
+	    };
+	    TitleTextArea.create = function (options) {
+	        return TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+	    };
+	    TitleTextArea.TYPE = "title-text-area";
+	    TitleTextArea.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleTextArea(); });
+	    return TitleTextArea;
+	}(title_value_1.TitleValue));
+	exports.TitleTextArea = TitleTextArea;
+	;
+	widget_factory_1.WidgetFactory.register(TitleTextArea.TYPE, TitleTextArea.create);
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var slider_1 = __webpack_require__(117);
 	var title_value_1 = __webpack_require__(133);
 	var widget_factory_1 = __webpack_require__(77);
@@ -24925,7 +24979,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

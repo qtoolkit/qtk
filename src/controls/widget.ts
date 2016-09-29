@@ -1287,7 +1287,7 @@ export class Widget extends Emitter {
 		return this._text;
 	}
 	public set text(value) {
-		this.setProp("text", value, true);
+		this.setProp("text", value?value.toString() : "", true);
 	}
 
 

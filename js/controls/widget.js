@@ -1205,7 +1205,7 @@ var Widget = (function (_super) {
             return this._text;
         },
         set: function (value) {
-            this.setProp("text", value, true);
+            this.setProp("text", value ? value.toString() : "", true);
         },
         enumerable: true,
         configurable: true

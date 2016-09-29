@@ -16,8 +16,11 @@ function onReady(app) {
 		return Math.min(100, parseInt(value)).toString();
 	}
 
-	function addItem(titleValue) {
+	function addItem(titleValue, h) {
 		var item = ListItem.create({styleType:"widget.tansparent"});
+		if(h) {
+			item.layoutParam = qtk.ListLayouterParam.create({h:h});
+		}
 		listView.addChild(item, true);
 		item.childrenLayouter = qtk.SimpleLayouter.create();
 		item.addChild(titleValue);
@@ -58,6 +61,13 @@ function onReady(app) {
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 		}));
 
+	addItem(qtk.TitleTextArea.create({
+				inputTips : "Desc",
+				title:"Desc", 
+				titleW:"60", 
+				valueW:"80%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		}), 200);
 	listView.relayoutChildren();
 	win.target = listView;
 	win.open();
