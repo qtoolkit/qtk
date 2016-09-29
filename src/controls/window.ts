@@ -96,6 +96,7 @@ export class Window extends Widget {
 
 		this.init();
 		this.dispatchEvent({type:Events.OPEN});
+		this.relayoutChildren();
 
 		return this;
 	}

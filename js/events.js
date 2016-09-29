@@ -31,6 +31,7 @@ exports.SHOW = "show";
 exports.HIDE = "hide";
 exports.MOVE = "move";
 exports.MOVING = "moving";
+exports.CHOOSE = "choose";
 exports.OPEN = "open";
 exports.INIT = "init";
 exports.FOCUS = "focus";

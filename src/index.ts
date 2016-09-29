@@ -62,7 +62,9 @@ import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 import {TitleEdit} from "./controls-ext/title-edit";
+import {TitleChoosableEdit} from "./controls-ext/title-choosable-edit";
 import {TitleTextArea} from "./controls-ext/title-text-area";
+import {ChoosableEdit} from "./controls-ext/choosable-edit";
 import {TitleSlider} from "./controls-ext/title-slider";
 import {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
 
@@ -154,9 +156,11 @@ export {
 	ThemeManager,
 	Events,
 	TitleEdit,
+	TitleChoosableEdit,
 	TitleSlider,
 	TitleComboBox,
 	TitleTextArea,
+	ChoosableEdit,
 	TitleComboBoxEditable,
 	DockLayouter,
 	DockLayouterParam,

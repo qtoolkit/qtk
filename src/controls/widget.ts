@@ -626,7 +626,6 @@ export class Widget extends Emitter {
 		else{
 			this._childrenLayouter = layouter;
 		}
-		this.relayoutChildren();
 	}
 
 	public get childrenLayouter() : Layouter{
@@ -638,9 +637,6 @@ export class Widget extends Emitter {
 	 */
 	public set layoutParam(param:any) {
 		this._layoutParam = param;
-		if(this.parent) {
-			this.parent.relayoutChildren();
-		}
 	}
 
 	public get layoutParam() : any {

@@ -28,6 +28,15 @@ function onReady(app) {
 		return titleValue;
 	}
 
+	addItem(qtk.TitleChoosableEdit.create({
+				inputTips:"URL",
+				title:"URL", 
+				titleW:"60", 
+				valueW:"100%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		})).onChoose = function() {
+			this.value = "choose";	
+		}
 	addItem(qtk.TitleEdit.create({
 				inputType:"number",
 				inputTips:"Age",
@@ -68,7 +77,6 @@ function onReady(app) {
 				valueW:"80%", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 		}), 200);
-	listView.relayoutChildren();
 	win.target = listView;
 	win.open();
 }

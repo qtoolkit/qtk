@@ -199,11 +199,15 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var title_edit_1 = __webpack_require__(132);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_text_area_1 = __webpack_require__(134);
+	var title_choosable_edit_1 = __webpack_require__(134);
+	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
+	var title_text_area_1 = __webpack_require__(136);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var title_slider_1 = __webpack_require__(135);
+	var choosable_edit_1 = __webpack_require__(135);
+	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
+	var title_slider_1 = __webpack_require__(137);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(136);
+	var title_combo_box_1 = __webpack_require__(138);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -1398,6 +1402,7 @@ var qtk =
 	exports.HIDE = "hide";
 	exports.MOVE = "move";
 	exports.MOVING = "moving";
+	exports.CHOOSE = "choose";
 	exports.OPEN = "open";
 	exports.INIT = "init";
 	exports.FOCUS = "focus";
@@ -3948,7 +3953,6 @@ var qtk =
 	            else {
 	                this._childrenLayouter = layouter;
 	            }
-	            this.relayoutChildren();
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -3962,9 +3966,6 @@ var qtk =
 	         */
 	        set: function (param) {
 	            this._layoutParam = param;
-	            if (this.parent) {
-	                this.parent.relayoutChildren();
-	            }
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -18037,6 +18038,7 @@ var qtk =
 	        }
 	        this.init();
 	        this.dispatchEvent({ type: Events.OPEN });
+	        this.relayoutChildren();
 	        return this;
 	    };
 	    Window.prototype.close = function () {
@@ -24902,6 +24904,163 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var title_value_1 = __webpack_require__(133);
+	var choosable_edit_1 = __webpack_require__(135);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleChoosableEdit = (function (_super) {
+	    __extends(TitleChoosableEdit, _super);
+	    function TitleChoosableEdit(type) {
+	        _super.call(this, type || TitleChoosableEdit.TYPE);
+	    }
+	    Object.defineProperty(TitleChoosableEdit.prototype, "onChoose", {
+	        get: function () {
+	            var edit = this._valueWidget;
+	            return edit.onChoose;
+	        },
+	        set: function (value) {
+	            var edit = this._valueWidget;
+	            edit.onChoose = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleChoosableEdit.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleChoosableEdit.prototype.createValueWidget = function (options) {
+	        return choosable_edit_1.ChoosableEdit.create();
+	    };
+	    TitleChoosableEdit.create = function (options) {
+	        return TitleChoosableEdit.recycleBin.create().reset(TitleChoosableEdit.TYPE, options);
+	    };
+	    TitleChoosableEdit.TYPE = "title-choosable-edit";
+	    TitleChoosableEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleChoosableEdit(); });
+	    return TitleChoosableEdit;
+	}(title_value_1.TitleValue));
+	exports.TitleChoosableEdit = TitleChoosableEdit;
+	;
+	widget_factory_1.WidgetFactory.register(TitleChoosableEdit.TYPE, TitleChoosableEdit.create);
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var edit_1 = __webpack_require__(81);
+	var button_1 = __webpack_require__(87);
+	var widget_1 = __webpack_require__(16);
+	var Events = __webpack_require__(7);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var ChoosableEdit = (function (_super) {
+	    __extends(ChoosableEdit, _super);
+	    function ChoosableEdit() {
+	        _super.call(this, ChoosableEdit.TYPE);
+	    }
+	    Object.defineProperty(ChoosableEdit.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._edit) {
+	                this._edit.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ChoosableEdit.prototype, "value", {
+	        get: function () {
+	            return this._edit ? this._edit.text : this._value;
+	        },
+	        set: function (value) {
+	            this._value = value;
+	            if (this._edit) {
+	                this._edit.text = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ChoosableEdit.prototype.relayoutChildren = function () {
+	        this.requestRedraw();
+	        if (this._edit && this._button) {
+	            var x = this.leftPadding;
+	            var y = this.topPadding;
+	            var h = this.clientH;
+	            var w = this.clientW - this.h - 6;
+	            this._edit.moveResizeTo(x, y, w, h, 0);
+	            w = this.h;
+	            x = this.w - w - 4;
+	            this._button.moveResizeTo(x, y, w, h, 0);
+	        }
+	        return this.getLayoutRect();
+	    };
+	    ChoosableEdit.prototype.dispose = function () {
+	        this._edit = null;
+	        this._button = null;
+	        _super.prototype.dispose.call(this);
+	    };
+	    ChoosableEdit.prototype.onReset = function () {
+	        var _this = this;
+	        _super.prototype.onReset.call(this);
+	        this.padding = 0;
+	        this.onChoose = null;
+	        this._edit = edit_1.Edit.create();
+	        this.addChild(this._edit);
+	        this._edit.on(Events.CHANGE, function (evt) {
+	            _this.dispatchEvent(evt);
+	        });
+	        this._button = button_1.Button.create({ text: "..." });
+	        this.addChild(this._button);
+	        this._button.on(Events.CLICK, function (evt) {
+	            if (_this.onChoose) {
+	                _this.onChoose();
+	            }
+	        });
+	    };
+	    ChoosableEdit.create = function (options) {
+	        return ChoosableEdit.rBin.create().reset(ChoosableEdit.TYPE, options);
+	    };
+	    ChoosableEdit.TYPE = "choosable.edit";
+	    ChoosableEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
+	        return new ChoosableEdit();
+	    });
+	    return ChoosableEdit;
+	}(widget_1.Widget));
+	exports.ChoosableEdit = ChoosableEdit;
+	;
+	widget_factory_1.WidgetFactory.register(ChoosableEdit.TYPE, ChoosableEdit.create);
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var edit_1 = __webpack_require__(81);
 	var title_value_1 = __webpack_require__(133);
 	var widget_factory_1 = __webpack_require__(77);
@@ -24945,7 +25104,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24979,7 +25138,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

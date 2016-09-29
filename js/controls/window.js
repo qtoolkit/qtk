@@ -94,6 +94,7 @@ var Window = (function (_super) {
         }
         this.init();
         this.dispatchEvent({ type: Events.OPEN });
+        this.relayoutChildren();
         return this;
     };
     Window.prototype.close = function () {

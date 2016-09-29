@@ -549,7 +549,6 @@ var Widget = (function (_super) {
             else {
                 this._childrenLayouter = layouter;
             }
-            this.relayoutChildren();
         },
         enumerable: true,
         configurable: true
@@ -563,9 +562,6 @@ var Widget = (function (_super) {
          */
         set: function (param) {
             this._layoutParam = param;
-            if (this.parent) {
-                this.parent.relayoutChildren();
-            }
         },
         enumerable: true,
         configurable: true

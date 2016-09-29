@@ -27,6 +27,7 @@ export const SHOW = "show"
 export const HIDE = "hide"
 export const MOVE = "move";
 export const MOVING = "moving";
+export const CHOOSE = "choose";
 export const OPEN = "open"
 export const INIT = "init"
 export const FOCUS = "focus"
