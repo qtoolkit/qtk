@@ -197,17 +197,19 @@ var qtk =
 	var simple_layouter_1 = __webpack_require__(114);
 	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
-	var title_edit_1 = __webpack_require__(132);
+	var title_content_1 = __webpack_require__(132);
+	exports.TitleContent = title_content_1.TitleContent;
+	var title_edit_1 = __webpack_require__(133);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(134);
+	var title_choosable_edit_1 = __webpack_require__(135);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(136);
+	var title_text_area_1 = __webpack_require__(137);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(135);
+	var choosable_edit_1 = __webpack_require__(136);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(137);
+	var title_slider_1 = __webpack_require__(138);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(138);
+	var title_combo_box_1 = __webpack_require__(139);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -24712,8 +24714,153 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var widget_1 = __webpack_require__(16);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleContent = (function (_super) {
+	    __extends(TitleContent, _super);
+	    function TitleContent() {
+	        _super.call(this, TitleContent.TYPE);
+	    }
+	    Object.defineProperty(TitleContent.prototype, "titleHeight", {
+	        get: function () {
+	            return this._titleHeight;
+	        },
+	        set: function (value) {
+	            this._titleHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleContent.prototype, "movable", {
+	        get: function () {
+	            return this._movable;
+	        },
+	        set: function (value) {
+	            this._movable = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleContent.prototype, "collapsed", {
+	        get: function () {
+	            return this._collapsed;
+	        },
+	        set: function (value) {
+	            if (this._inited) {
+	                if (!this._collapsed) {
+	                    this._saveH = this.h;
+	                }
+	                this._collapsed = value;
+	                this.relayoutChildren();
+	            }
+	            else {
+	                this._collapsed = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleContent.prototype, "titleWidget", {
+	        get: function () {
+	            return this._titleWidget;
+	        },
+	        set: function (value) {
+	            if (this._titleWidget) {
+	                this.removeChild(this._titleWidget);
+	            }
+	            if (value) {
+	                this.addChild(value);
+	            }
+	            this._titleWidget = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleContent.prototype, "contentWidget", {
+	        get: function () {
+	            return this._contentWidget;
+	        },
+	        set: function (value) {
+	            if (this._contentWidget) {
+	                this.removeChild(this._contentWidget);
+	            }
+	            if (value) {
+	                this.addChild(value);
+	            }
+	            this._contentWidget = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleContent.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._saveH = 0;
+	        this._movable = false;
+	        this._titleHeight = 30;
+	        this._collapsed = false;
+	        this._titleWidget = null;
+	        this._contentWidget = null;
+	    };
+	    TitleContent.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        this._saveH = this.h;
+	        if (this._movable) {
+	            this._titleWidget.useBehavior("movable", { moveParent: true });
+	        }
+	    };
+	    TitleContent.prototype.relayoutChildren = function () {
+	        if (!this._saveH) {
+	            this._saveH = this.h;
+	        }
+	        this.h = this._collapsed ? (this.titleHeight + this.topPadding + this.bottomPadding) : this._saveH;
+	        this.requestRedraw();
+	        var r = this.getLayoutRect();
+	        var titleWidget = this._titleWidget;
+	        var contentWidget = this._contentWidget;
+	        var h = this.titleHeight;
+	        if (titleWidget) {
+	            titleWidget.moveResizeTo(r.x, r.y, r.w, h);
+	            titleWidget.relayoutChildren();
+	        }
+	        if (contentWidget) {
+	            if (this._collapsed) {
+	                contentWidget.visible = false;
+	            }
+	            else {
+	                var y = r.y + h;
+	                h = r.h - h;
+	                contentWidget.visible = true;
+	                contentWidget.moveResizeTo(r.x, y, r.w, h);
+	                contentWidget.relayoutChildren();
+	            }
+	        }
+	        return r;
+	    };
+	    TitleContent.create = function (options) {
+	        return TitleContent.recycleBin.create().reset(TitleContent.TYPE, options);
+	    };
+	    TitleContent.TYPE = "title-content";
+	    TitleContent.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
+	    return TitleContent;
+	}(widget_1.Widget));
+	exports.TitleContent = TitleContent;
+	;
+	widget_factory_1.WidgetFactory.register(TitleContent.TYPE, TitleContent.create);
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(133);
+	var title_value_1 = __webpack_require__(134);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleEdit = (function (_super) {
@@ -24786,7 +24933,7 @@ var qtk =
 
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24895,7 +25042,7 @@ var qtk =
 
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24904,8 +25051,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(133);
-	var choosable_edit_1 = __webpack_require__(135);
+	var title_value_1 = __webpack_require__(134);
+	var choosable_edit_1 = __webpack_require__(136);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleChoosableEdit = (function (_super) {
@@ -24954,7 +25101,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25052,7 +25199,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25062,7 +25209,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(133);
+	var title_value_1 = __webpack_require__(134);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleTextArea = (function (_super) {
@@ -25104,7 +25251,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25114,7 +25261,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var slider_1 = __webpack_require__(117);
-	var title_value_1 = __webpack_require__(133);
+	var title_value_1 = __webpack_require__(134);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleSlider = (function (_super) {
@@ -25138,7 +25285,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25147,7 +25294,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(133);
+	var title_value_1 = __webpack_require__(134);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var combo_box_1 = __webpack_require__(119);

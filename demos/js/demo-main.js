@@ -30,6 +30,7 @@ function onReady(app) {
 		{title:"Dialog", data:"dialog"},
 		{title:"Movable", data:"movable"},
 		{title:"Title Value", data:"titlevalue"},
+		{title:"Title Content", data:"titlecontent"},
 		{title:"Drag & Drop", data:"dnd"},
 		{title:"TreeView", data:"treeview"},
 		{title:"RichText", data:"richtext"},
