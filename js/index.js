@@ -57,6 +57,7 @@ var switch_1 = require("./controls/switch");
 exports.Switch = switch_1.Switch;
 var combo_box_1 = require("./controls/combo-box");
 exports.ComboBox = combo_box_1.ComboBox;
+exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
 var check_button_1 = require("./controls/check-button");
 exports.CheckButton = check_button_1.CheckButton;
 var menu_1 = require("./controls/menu");

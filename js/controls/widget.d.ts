@@ -134,6 +134,10 @@ export declare class Widget extends Emitter {
      */
     getLocaleText(): string;
     /**
+     * 获取前景图片区域。
+     */
+    protected getFgImageRect(style: Style): Rect;
+    /**
      * 绘制前景图片，子控件根据需要重载。
      */
     protected drawImage(ctx: any, style: Style): Widget;

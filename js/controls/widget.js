@@ -13,6 +13,7 @@ var TWEEN = require("tween.js");
 var emitter_1 = require("../emitter");
 var utils_1 = require("../utils");
 var Events = require("../events");
+var image_tile_1 = require("../image-tile");
 var matrix_stack_1 = require("../matrix-stack");
 var graphics_1 = require("../graphics");
 var dirty_rect_context_1 = require("../dirty-rect-context");
@@ -643,20 +644,26 @@ var Widget = (function (_super) {
         return this.text;
     };
     /**
+     * 获取前景图片区域。
+     */
+    Widget.prototype.getFgImageRect = function (style) {
+        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
+    };
+    /**
      * 绘制前景图片，子控件根据需要重载。
      */
     Widget.prototype.drawImage = function (ctx, style) {
+        if (style.foreGroundImage) {
+            var r = this.getFgImageRect(style);
+            style.foreGroundImage.draw(ctx, image_tile_1.ImageDrawType.ICON, r.x, r.y, r.w, r.h);
+        }
         return this;
     };
     /**
      * 获取文本显示区域。
      */
     Widget.prototype.getTextRect = function (style) {
-        var x = this.leftPadding;
-        var y = this.topPadding;
-        var w = this.w - x - this.rightPadding;
-        var h = this.h - y - this.bottomPadding;
-        return rect_1.Rect.rect.init(x, y, w, h);
+        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
     };
     Widget.prototype.drawText = function (ctx, style) {
         var text = this.getLocaleText();

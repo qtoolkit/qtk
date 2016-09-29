@@ -22,7 +22,7 @@ import { RichTextEdit } from "./controls/rich-text-edit";
 import { Label } from "./controls/label";
 import { Slider } from "./controls/slider";
 import { Switch } from "./controls/switch";
-import { ComboBox } from "./controls/combo-box";
+import { ComboBox, ComboBoxEditable } from "./controls/combo-box";
 import { CheckButton } from "./controls/check-button";
 import { Menu, MenuItem } from "./controls/menu";
 import { MenuBar, MenuBarItem } from "./controls/menu-bar";
@@ -64,4 +64,4 @@ import { SimpleLayouter, SimpleLayouterParam } from "./layouters/simple-layouter
 import { TitleEdit } from "./controls-ext/title-edit";
 import TWEEN = require("tween.js");
 import { RecyclableCreator } from "./recyclable-creator";
-export { Assets, Point, Rect, Align, AlignV, AlignH, RoundType, Graphics, Orientation, Direction, ViewPort, MainLoop, Matrix, TWEEN, KeyEvent, MatrixStack, deviceInfo, Application, RecyclableCreator, inputEventAdapter, ImageTile, ImageDrawType, Style, Canvas, Draggable, Droppable, Resizable, Movable, Emitter, Widget, WidgetState, WidgetMode, HitTestResult, Slider, Switch, ComboBox, Button, TabPage, TabControl, TabButton, TabButtonGroup, RichText, RichTextEdit, MessageBox, ButtonsOptions, TitleOptions, ButtonOption, Page, Pages, Label, Edit, RadioButton, CheckButton, ColorTile, ColorLine, ProgressBar, ProgressBarType, ScrollView, ScrollBarStyle, ScrollerOptions, ScrollerBarVisibility, Image, Group, Dialog, GridView, TreeItem, TreeView, TreeItemData, ListView, ListItem, ListItemStyle, Menu, MenuItem, MenuBar, MenuBarItem, WindowNormal, Services, WidgetFactory, ThemeManager, Events, TitleEdit, DockLayouter, DockLayouterParam, GridLayouter, GridLayouterParam, ListLayouter, ListLayouterParam, LinearLayouter, LinearLayouterParam, SimpleLayouter, SimpleLayouterParam };
+export { Assets, Point, Rect, Align, AlignV, AlignH, RoundType, Graphics, Orientation, Direction, ViewPort, MainLoop, Matrix, TWEEN, KeyEvent, MatrixStack, deviceInfo, Application, RecyclableCreator, inputEventAdapter, ImageTile, ImageDrawType, Style, Canvas, Draggable, Droppable, Resizable, Movable, Emitter, Widget, WidgetState, WidgetMode, HitTestResult, Slider, Switch, ComboBox, ComboBoxEditable, Button, TabPage, TabControl, TabButton, TabButtonGroup, RichText, RichTextEdit, MessageBox, ButtonsOptions, TitleOptions, ButtonOption, Page, Pages, Label, Edit, RadioButton, CheckButton, ColorTile, ColorLine, ProgressBar, ProgressBarType, ScrollView, ScrollBarStyle, ScrollerOptions, ScrollerBarVisibility, Image, Group, Dialog, GridView, TreeItem, TreeView, TreeItemData, ListView, ListItem, ListItemStyle, Menu, MenuItem, MenuBar, MenuBarItem, WindowNormal, Services, WidgetFactory, ThemeManager, Events, TitleEdit, DockLayouter, DockLayouterParam, GridLayouter, GridLayouterParam, ListLayouter, ListLayouterParam, LinearLayouter, LinearLayouterParam, SimpleLayouter, SimpleLayouterParam };

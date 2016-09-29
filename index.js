@@ -104,6 +104,7 @@ var qtk =
 	exports.Switch = switch_1.Switch;
 	var combo_box_1 = __webpack_require__(119);
 	exports.ComboBox = combo_box_1.ComboBox;
+	exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
 	var check_button_1 = __webpack_require__(92);
 	exports.CheckButton = check_button_1.CheckButton;
 	var menu_1 = __webpack_require__(120);
@@ -3406,6 +3407,7 @@ var qtk =
 	var emitter_1 = __webpack_require__(8);
 	var utils_1 = __webpack_require__(22);
 	var Events = __webpack_require__(7);
+	var image_tile_1 = __webpack_require__(15);
 	var matrix_stack_1 = __webpack_require__(12);
 	var graphics_1 = __webpack_require__(23);
 	var dirty_rect_context_1 = __webpack_require__(74);
@@ -4036,20 +4038,26 @@ var qtk =
 	        return this.text;
 	    };
 	    /**
+	     * 获取前景图片区域。
+	     */
+	    Widget.prototype.getFgImageRect = function (style) {
+	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
+	    };
+	    /**
 	     * 绘制前景图片，子控件根据需要重载。
 	     */
 	    Widget.prototype.drawImage = function (ctx, style) {
+	        if (style.foreGroundImage) {
+	            var r = this.getFgImageRect(style);
+	            style.foreGroundImage.draw(ctx, image_tile_1.ImageDrawType.ICON, r.x, r.y, r.w, r.h);
+	        }
 	        return this;
 	    };
 	    /**
 	     * 获取文本显示区域。
 	     */
 	    Widget.prototype.getTextRect = function (style) {
-	        var x = this.leftPadding;
-	        var y = this.topPadding;
-	        var w = this.w - x - this.rightPadding;
-	        var h = this.h - y - this.bottomPadding;
-	        return rect_1.Rect.rect.init(x, y, w, h);
+	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	    };
 	    Widget.prototype.drawText = function (ctx, style) {
 	        var text = this.getLocaleText();
@@ -22444,6 +22452,8 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
+	var edit_1 = __webpack_require__(81);
+	var button_1 = __webpack_require__(87);
 	var widget_1 = __webpack_require__(16);
 	var dialog_1 = __webpack_require__(96);
 	var graphics_1 = __webpack_require__(23);
@@ -22529,12 +22539,12 @@ var qtk =
 	}(list_item_1.ListItem));
 	exports.ComboBoxItem = ComboBoxItem;
 	;
-	var ComboBox = (function (_super) {
-	    __extends(ComboBox, _super);
-	    function ComboBox() {
-	        _super.call(this, ComboBox.TYPE);
+	var ComboBoxBase = (function (_super) {
+	    __extends(ComboBoxBase, _super);
+	    function ComboBoxBase(type) {
+	        _super.call(this, type);
 	    }
-	    Object.defineProperty(ComboBox.prototype, "itemHeight", {
+	    Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
 	        get: function () {
 	            return this._itemHeight || 25;
 	        },
@@ -22544,14 +22554,7 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(ComboBox.prototype, "text", {
-	        get: function () {
-	            return this._current ? this._current.text : "";
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ComboBox.prototype, "value", {
+	    Object.defineProperty(ComboBoxBase.prototype, "value", {
 	        get: function () {
 	            return this._current ? this._current.value : null;
 	        },
@@ -22571,11 +22574,18 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    ComboBox.prototype.resetOptions = function () {
+	    ComboBoxBase.prototype.resetOptions = function () {
 	        this._options = [];
 	        return this;
 	    };
-	    ComboBox.prototype.addOption = function (text, value, imageURL, color) {
+	    Object.defineProperty(ComboBoxBase.prototype, "optionsCount", {
+	        get: function () {
+	            return this._options.length;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
 	        var item = new ComboBoxOption(text, value, imageURL, color);
 	        this._options.push(item);
 	        if (value === this._value) {
@@ -22583,33 +22593,14 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    ComboBox.prototype.drawImage = function (ctx, style) {
-	        if (style.foreGroundImage) {
-	            var x = this.w - this.h;
-	            var y = this.topPadding;
-	            var w = this.h - this.topPadding - this.bottomPadding;
-	            var h = w;
-	            style.foreGroundImage.draw(ctx, image_tile_1.ImageDrawType.AUTO, x, y, w, h);
-	        }
-	        return this;
-	    };
-	    ComboBox.prototype.dispatchClick = function (evt) {
-	        _super.prototype.dispatchClick.call(this, evt);
-	        if (!this._isPopupOpened) {
-	            this.showPopup();
-	        }
-	    };
-	    ComboBox.prototype.onItemSelected = function (data) {
+	    ComboBoxBase.prototype.onItemSelected = function (data) {
 	        if (data) {
-	            this._current = data;
 	            this.requestRedraw();
-	            var e = Events.ChangeEvent.create();
-	            e.init(Events.CHANGE, { oldValue: null, newValue: data.value });
-	            this.dispatchEvent(e);
-	            e.dispose();
+	            this._current = data;
+	            this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: null, newValue: data.value }));
 	        }
 	    };
-	    ComboBox.prototype.showPopup = function () {
+	    ComboBoxBase.prototype.showPopup = function () {
 	        var _this = this;
 	        var vp = this.app.getViewPort();
 	        var p = this.toViewPoint(point_1.Point.point.init(0, 0));
@@ -22671,11 +22662,39 @@ var qtk =
 	            }
 	        });
 	    };
-	    ComboBox.prototype.reset = function (type) {
+	    ComboBoxBase.prototype.reset = function (type) {
 	        _super.prototype.reset.call(this, type);
+	        this.padding = 2;
 	        this._options = [];
-	        this.padding = 6;
+	        this.itemHeight = 25;
+	        this._current = null;
 	        return this;
+	    };
+	    return ComboBoxBase;
+	}(widget_1.Widget));
+	exports.ComboBoxBase = ComboBoxBase;
+	;
+	var ComboBox = (function (_super) {
+	    __extends(ComboBox, _super);
+	    function ComboBox() {
+	        _super.call(this, ComboBox.TYPE);
+	    }
+	    Object.defineProperty(ComboBox.prototype, "text", {
+	        get: function () {
+	            return this._current ? this._current.text : "";
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ComboBox.prototype.getFgImageRect = function (style) {
+	        var h = this.clientH;
+	        return rect_1.Rect.rect.init(this.w - this.h, this.topPadding, h, h);
+	    };
+	    ComboBox.prototype.dispatchClick = function (evt) {
+	        _super.prototype.dispatchClick.call(this, evt);
+	        if (!this._isPopupOpened) {
+	            this.showPopup();
+	        }
 	    };
 	    ComboBox.create = function (options) {
 	        return ComboBox.recycleBin.create().reset(ComboBox.TYPE).set(options);
@@ -22683,10 +22702,88 @@ var qtk =
 	    ComboBox.TYPE = "combo-box";
 	    ComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBox(); });
 	    return ComboBox;
-	}(widget_1.Widget));
+	}(ComboBoxBase));
 	exports.ComboBox = ComboBox;
 	;
 	widget_factory_1.WidgetFactory.register(ComboBox.TYPE, ComboBox.create);
+	var ComboBoxEditable = (function (_super) {
+	    __extends(ComboBoxEditable, _super);
+	    function ComboBoxEditable() {
+	        _super.call(this, ComboBoxEditable.TYPE);
+	    }
+	    Object.defineProperty(ComboBoxEditable.prototype, "value", {
+	        get: function () {
+	            return this._edit ? this._edit.text : this._value;
+	        },
+	        set: function (value) {
+	            this._value = value;
+	            if (this._edit) {
+	                this._edit.text = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ComboBoxEditable.prototype.onItemSelected = function (data) {
+	        if (data) {
+	            _super.prototype.onItemSelected.call(this, data);
+	            if (this._edit) {
+	                this._edit.text = data.text || data.value;
+	            }
+	        }
+	    };
+	    ComboBoxEditable.prototype.relayoutChildren = function () {
+	        this.requestRedraw();
+	        if (this._edit && this._button) {
+	            var x = this.leftPadding;
+	            var y = this.topPadding;
+	            var w = this.clientW - this.h;
+	            var h = this.clientH;
+	            this._edit.moveResizeTo(x, y, w, h, 0);
+	            x = this.w - this.h;
+	            w = this.h - this.rightPadding;
+	            this._button.moveResizeTo(x, y, w, h, 0);
+	        }
+	        return this.getLayoutRect();
+	    };
+	    ComboBoxEditable.prototype.onInit = function () {
+	        var _this = this;
+	        _super.prototype.onInit.call(this);
+	        this.styleType = ComboBox.TYPE + ".editable";
+	        var h = this.clientH;
+	        var w = this.clientW;
+	        var edit = edit_1.Edit.create();
+	        this._edit = edit;
+	        this.addChild(edit);
+	        var button = button_1.Button.create({ styleType: "combo-box.button" });
+	        this._button = button;
+	        this.addChild(button);
+	        button.on(Events.CLICK, function (evt) {
+	            if (!_this._isPopupOpened) {
+	                _this.showPopup();
+	            }
+	        });
+	    };
+	    ComboBoxEditable.prototype.reset = function (type) {
+	        _super.prototype.reset.call(this, type);
+	        this._options = [];
+	        this.padding = 0;
+	        this._edit = null;
+	        this._button = null;
+	        return this;
+	    };
+	    ComboBoxEditable.create = function (options) {
+	        return ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE).set(options);
+	    };
+	    ComboBoxEditable.TYPE = "combo-box";
+	    ComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () {
+	        return new ComboBoxEditable();
+	    });
+	    return ComboBoxEditable;
+	}(ComboBoxBase));
+	exports.ComboBoxEditable = ComboBoxEditable;
+	;
+	widget_factory_1.WidgetFactory.register(ComboBoxEditable.TYPE, ComboBoxEditable.create);
 
 
 /***/ },

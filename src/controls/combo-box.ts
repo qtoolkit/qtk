@@ -2,6 +2,8 @@
 import {Rect} from "../rect";
 import {Style} from "../style";
 import {Point} from "../point";
+import {Edit} from "./edit";
+import {Button} from "./button";
 import {Widget} from "./widget";
 import {Dialog} from "./dialog";
 import {Graphics} from "../graphics";
@@ -96,12 +98,12 @@ export class ComboBoxItem extends ListItem {
 	}
 };
 
-export class ComboBox extends Widget {
+export class ComboBoxBase extends Widget {
 	protected _value : any;
+	protected _itemHeight : number;
 	protected _current : ComboBoxOption;
 	protected _isPopupOpened : boolean;
 	protected _options : Array<ComboBoxOption>;
-	protected _itemHeight : number;
 
 	public get itemHeight() : number {
 		return this._itemHeight || 25;
@@ -109,10 +111,6 @@ export class ComboBox extends Widget {
 
 	public set itemHeight(value:number) {
 		this._itemHeight = value;
-	}
-
-	public get text() {
-		return this._current ? this._current.text : "";
 	}
 
 	public set value(value:any) {
@@ -140,6 +138,10 @@ export class ComboBox extends Widget {
 		return this;
 	}
 
+	public get optionsCount() : number {
+		return this._options.length;
+	}
+
 	public addOption(text:string, value?:any, imageURL?:string, color?:string) : Widget {
 		var item = new ComboBoxOption(text, value, imageURL, color);
 		this._options.push(item);
@@ -151,34 +153,11 @@ export class ComboBox extends Widget {
 		return this;
 	}
 
-	protected drawImage(ctx:any, style:Style) : Widget {
-		if(style.foreGroundImage) {
-			var x = this.w - this.h;
-			var y = this.topPadding;
-			var w = this.h - this.topPadding - this.bottomPadding;
-			var h = w;
-
-			style.foreGroundImage.draw(ctx, ImageDrawType.AUTO, x, y, w, h);
-		}
-
-		return this;
-	}
-	
-	protected dispatchClick(evt:any) {
-		super.dispatchClick(evt);
-		if(!this._isPopupOpened) {
-			this.showPopup();
-		}
-	}
-
 	protected onItemSelected(data:ComboBoxOption) {
 		if(data) {
-			this._current = data;
 			this.requestRedraw();
-			var e = Events.ChangeEvent.create();
-			e.init(Events.CHANGE, {oldValue:null, newValue:data.value});
-			this.dispatchEvent(e);
-			e.dispose();
+			this._current = data;
+			this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {oldValue:null, newValue:data.value}));
 		}
 	}
 
@@ -253,10 +232,35 @@ export class ComboBox extends Widget {
 
 	public reset(type:string) : Widget {
 		super.reset(type);
+		this.padding = 2;
 		this._options = [];
-		this.padding = 6;
+		this.itemHeight = 25;
+		this._current = null;
 
 		return this;
+	}
+
+	constructor(type?:string) {
+		super(type);
+	}
+};
+
+export class ComboBox extends ComboBoxBase {
+	public get text() {
+		return this._current ? this._current.text : "";
+	}
+
+	protected getFgImageRect(style:Style) : Rect {
+		var h = this.clientH;
+
+		return Rect.rect.init(this.w - this.h, this.topPadding, h, h);
+	}
+	
+	protected dispatchClick(evt:any) {
+		super.dispatchClick(evt);
+		if(!this._isPopupOpened) {
+			this.showPopup();
+		}
 	}
 
 	constructor() {
@@ -271,4 +275,82 @@ export class ComboBox extends Widget {
 };
 
 WidgetFactory.register(ComboBox.TYPE, ComboBox.create);
+
+export class ComboBoxEditable extends ComboBoxBase {
+	protected _edit : Edit;
+	protected _button : Button;
+
+	public set value(value:any) {
+		this._value = value;
+		if(this._edit) {
+			this._edit.text = value;
+		}
+	}
+
+	public get value() : any {
+		return this._edit ? this._edit.text : this._value;
+	}
+
+	protected onItemSelected(data:ComboBoxOption) {
+		if(data) {
+			super.onItemSelected(data);
+			if(this._edit) {
+				this._edit.text = data.text || data.value;
+			}
+		}
+	}
+
+	public relayoutChildren() : Rect {
+		this.requestRedraw();
+		if(this._edit && this._button) {
+			var x = this.leftPadding;
+			var y = this.topPadding;
+			var w = this.clientW - this.h;
+			var h = this.clientH;
+			this._edit.moveResizeTo(x, y, w, h, 0);
+			x = this.w - this.h;
+			w = this.h - this.rightPadding;
+			this._button.moveResizeTo(x, y, w, h, 0);
+		}
+
+		return this.getLayoutRect();
+	}
+
+	protected onInit() {
+		super.onInit();
+		
+		this._edit = Edit.create();
+		this.addChild(this._edit);
+		
+		this._button = Button.create({styleType:"combo-box.button"});
+		this.addChild(this._button);
+		this._button.on(Events.CLICK, evt => {
+			if(!this._isPopupOpened) {
+				this.showPopup();
+			}
+		});
+	}
+
+	public reset(type:string) : Widget {
+		super.reset(type);
+		this.padding = 0;
+		this._edit = null;
+		this._button = null;
+
+		return this;
+	}
+
+	constructor() {
+		super(ComboBoxEditable.TYPE);
+	}
+
+	public static TYPE = "combo-box.editable";
+	private static recycleBin = new RecyclableCreator<ComboBoxEditable>(function() {
+		return new ComboBoxEditable()});
+	public static create(options?:any) : ComboBoxEditable {
+		return <ComboBoxEditable>ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE).set(options);
+	}
+};
+
+WidgetFactory.register(ComboBoxEditable.TYPE, ComboBoxEditable.create);
 

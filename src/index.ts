@@ -22,7 +22,7 @@ import {RichTextEdit} from "./controls/rich-text-edit";
 import {Label} from "./controls/label";
 import {Slider} from "./controls/slider";
 import {Switch} from "./controls/switch";
-import {ComboBox} from "./controls/combo-box";
+import {ComboBox, ComboBoxEditable} from "./controls/combo-box";
 import {CheckButton} from "./controls/check-button";
 import {Menu, MenuItem} from "./controls/menu";
 import {MenuBar, MenuBarItem} from "./controls/menu-bar";
@@ -105,6 +105,7 @@ export {
 	Slider,
 	Switch,
 	ComboBox,
+	ComboBoxEditable,
 	Button,
 	TabPage,
 	TabControl,

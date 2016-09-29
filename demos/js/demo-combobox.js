@@ -6,6 +6,7 @@ var AlignV = qtk.AlignV;
 var AlignH = qtk.AlignH;
 var Events = qtk.Events;
 var ComboBox = qtk.ComboBox;
+var ComboBoxEditable = qtk.ComboBoxEditable;
 var Direction = qtk.Direction;
 var Orientation = qtk.Orientation;
 var RadioButton = qtk.RadioButton;
@@ -30,7 +31,7 @@ function onReady(app) {
 	comboBox.addOption("item1", 3, imageURL + "close.normal.png");
 	win.addChild(comboBox);
 
-	var comboBox = ComboBox.create({value:1});
+	var comboBox = ComboBoxEditable.create({value:1});
 	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"100px", w:"50%", h:"30px"});
 	comboBox.addOption("red", 1, null, "red");
 	comboBox.addOption("green", 2, null, "green");

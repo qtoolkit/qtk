@@ -274,6 +274,12 @@
 			"foreGroundImage" : "images/@density/combo-box.png"
 		}
 	},
+	"combo-box.button": {
+		"extends": "button",
+		"common" : {
+			"foreGroundImage" : "images/@density/combo-box.png"
+		}
+	},
 	"combo-box-item": {
 		"extends": "list-item",
 		"common" : {

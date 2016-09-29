@@ -10,7 +10,7 @@ import TWEEN = require("tween.js");
 import {Emitter} from "../emitter";
 import {stableSort} from "../utils";
 import Events = require("../events");
-import {ImageTile} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../image-tile";
 import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
@@ -733,9 +733,20 @@ export class Widget extends Emitter {
 	}
 
 	/**
+	 * 获取前景图片区域。
+	 */
+	protected getFgImageRect(style:Style) : Rect {
+		return Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
+	}
+
+	/**
 	 * 绘制前景图片，子控件根据需要重载。
 	 */
 	protected drawImage(ctx:any, style:Style) : Widget {
+		if(style.foreGroundImage) {
+			var r = this.getFgImageRect(style);
+			style.foreGroundImage.draw(ctx, ImageDrawType.ICON, r.x, r.y, r.w, r.h);
+		}
 		return this;
 	}
 
@@ -743,12 +754,7 @@ export class Widget extends Emitter {
 	 * 获取文本显示区域。
 	 */
 	protected getTextRect(style:Style) : Rect {
-		var x = this.leftPadding;
-		var y = this.topPadding;
-		var w = this.w - x - this.rightPadding;
-		var h = this.h - y - this.bottomPadding;
-
-		return Rect.rect.init(x, y, w, h);
+		return Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	}
 
 	protected drawText(ctx:any, style:Style) : Widget {
