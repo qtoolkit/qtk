@@ -28,6 +28,7 @@ function onReady(app) {
 		{title:"Pages", data:"pages"},
 		{title:"Switch", data:"switch"},
 		{title:"Dialog", data:"dialog"},
+		{title:"Accordion", data:"accordion"},
 		{title:"Movable", data:"movable"},
 		{title:"Title Value", data:"titlevalue"},
 		{title:"Title Content", data:"titlecontent"},

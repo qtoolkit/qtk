@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var widget_1 = require("./widget");
+var Events = require("../events");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var TitleContent = (function (_super) {
@@ -12,6 +13,10 @@ var TitleContent = (function (_super) {
     function TitleContent() {
         _super.call(this, TitleContent.TYPE);
     }
+    TitleContent.prototype.moveResizeTo = function (x, y, w, h, duration) {
+        this._saveH = h;
+        return _super.prototype.moveResizeTo.call(this, x, y, w, h, duration);
+    };
     Object.defineProperty(TitleContent.prototype, "titleHeight", {
         get: function () {
             return this._titleHeight;
@@ -43,6 +48,12 @@ var TitleContent = (function (_super) {
                 }
                 this._collapsed = value;
                 this.relayoutChildren();
+                if (value) {
+                    this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
+                }
+                else {
+                    this.dispatchEvent(Events.createAnyEvent(Events.EXPAND));
+                }
             }
             else {
                 this._collapsed = value;

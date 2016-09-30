@@ -40,6 +40,8 @@ export const TICK = "tick";
 export const PRETICK = "pretick";
 export const POSTTICK = "posttick";
 export const LOAD = "load";
+export const EXPAND = "expand";
+export const COLLAPSE = "collapse";
 export const BEFORE_DRAW = "before-draw";
 export const AFTER_DRAW = "after-draw";
 export const BEFORE_APPLY_TRANSFORM = "before-apply-transform";
@@ -96,6 +98,27 @@ export class Event {
 	}
 
 	public dispose() {
+	}
+};
+
+export class AnyEvent extends Event {
+	/**
+	 * 消息具体的信息。
+	 */
+	public payload : any;
+
+	public init(type:string, payload?:any) : any {
+		super.init(type);
+
+		this.payload = payload;
+
+		return this;
+	}
+
+	public static create(type:string, payload?:any) : AnyEvent {
+		var e = new AnyEvent();
+
+		return e.init(type, payload);
 	}
 };
 
@@ -425,3 +448,6 @@ export class ScrollEvent extends Event {
 	}
 };
 
+export function createAnyEvent(type:string, payload?:any) : AnyEvent {
+	return AnyEvent.create(type, payload);
+}

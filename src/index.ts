@@ -61,6 +61,7 @@ import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
 import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
+import {Accordion} from "./controls/accordion";
 import {TitleContent} from "./controls/title-content";
 import {TitleEdit} from "./controls-ext/title-edit";
 import {TitleChoosableEdit} from "./controls-ext/title-choosable-edit";
@@ -87,6 +88,7 @@ export {
 	Direction,
 	ViewPort,
 	MainLoop,
+	Accordion,
 	Matrix,
 	TWEEN,
 	KeyEvent,

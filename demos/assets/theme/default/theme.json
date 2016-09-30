@@ -442,6 +442,35 @@
 			"textAlign" : "left"
 		}
 	},
+	"accordion": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 0,
+			"lineColor" : "#9D9D9D",
+			"backGroundColor" : null
+		}
+	},
+	"accordion-title": {
+		"extends": "label",
+		"common" : {
+			"roundRadius" : 0,
+			"textAlign" : "left"
+		}
+	},
+	"accordion-title.expanded": {
+		"extends": "accordion-title",
+		"common" : {
+			"foreGroundImage":"images/@density/expand.png",
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		}
+	},
+	"accordion-title.collapsed": {
+		"extends": "accordion-title",
+		"common" : {
+			"foreGroundImage":"images/@density/collapse.png",
+			"backGroundColor" : ["#E6E6E6","#DDDDDD","#D9D9D9", "#D3D3D3", "#D1D1D1"]
+		}
+	},
 	"messagebox.content": {
 		"extends": "label",
 		"common" : {

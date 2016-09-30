@@ -39,6 +39,8 @@ export declare const TICK: string;
 export declare const PRETICK: string;
 export declare const POSTTICK: string;
 export declare const LOAD: string;
+export declare const EXPAND: string;
+export declare const COLLAPSE: string;
 export declare const BEFORE_DRAW: string;
 export declare const AFTER_DRAW: string;
 export declare const BEFORE_APPLY_TRANSFORM: string;
@@ -64,6 +66,14 @@ export declare class Event {
     type: string;
     target: any;
     dispose(): void;
+}
+export declare class AnyEvent extends Event {
+    /**
+     * 消息具体的信息。
+     */
+    payload: any;
+    init(type: string, payload?: any): any;
+    static create(type: string, payload?: any): AnyEvent;
 }
 export declare class InputEvent extends Event {
     /**
@@ -209,3 +219,4 @@ export declare class ScrollEvent extends Event {
     reset(type: string, widget: any, offsetX: number, offsetY: number): any;
     static create(): ScrollEvent;
 }
+export declare function createAnyEvent(type: string, payload?: any): AnyEvent;

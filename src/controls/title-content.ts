@@ -13,6 +13,11 @@ export class TitleContent extends Widget {
 	protected _titleWidget : Widget;
 	protected _contentWidget : Widget;
 
+	public moveResizeTo(x:number, y:number, w:number, h:number, duration?:number) : TWEEN.Tween {
+		this._saveH = h;
+		return super.moveResizeTo(x, y, w, h, duration);
+	}
+
 	public set titleHeight(value:number) {
 		this._titleHeight = value;
 	}
@@ -34,6 +39,11 @@ export class TitleContent extends Widget {
 			}
 			this._collapsed = value;
 			this.relayoutChildren();
+			if(value) {
+				this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
+			}else{
+				this.dispatchEvent(Events.createAnyEvent(Events.EXPAND));
+			}
 		}else{
 			this._collapsed = value;
 		}

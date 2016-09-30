@@ -197,19 +197,21 @@ var qtk =
 	var simple_layouter_1 = __webpack_require__(114);
 	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
-	var title_content_1 = __webpack_require__(132);
+	var accordion_1 = __webpack_require__(132);
+	exports.Accordion = accordion_1.Accordion;
+	var title_content_1 = __webpack_require__(133);
 	exports.TitleContent = title_content_1.TitleContent;
-	var title_edit_1 = __webpack_require__(133);
+	var title_edit_1 = __webpack_require__(134);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(135);
+	var title_choosable_edit_1 = __webpack_require__(136);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(137);
+	var title_text_area_1 = __webpack_require__(138);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(136);
+	var choosable_edit_1 = __webpack_require__(137);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(138);
+	var title_slider_1 = __webpack_require__(139);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(139);
+	var title_combo_box_1 = __webpack_require__(140);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -1417,6 +1419,8 @@ var qtk =
 	exports.PRETICK = "pretick";
 	exports.POSTTICK = "posttick";
 	exports.LOAD = "load";
+	exports.EXPAND = "expand";
+	exports.COLLAPSE = "collapse";
 	exports.BEFORE_DRAW = "before-draw";
 	exports.AFTER_DRAW = "after-draw";
 	exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
@@ -1475,6 +1479,24 @@ var qtk =
 	    return Event;
 	}());
 	exports.Event = Event;
+	;
+	var AnyEvent = (function (_super) {
+	    __extends(AnyEvent, _super);
+	    function AnyEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyEvent.prototype.init = function (type, payload) {
+	        _super.prototype.init.call(this, type);
+	        this.payload = payload;
+	        return this;
+	    };
+	    AnyEvent.create = function (type, payload) {
+	        var e = new AnyEvent();
+	        return e.init(type, payload);
+	    };
+	    return AnyEvent;
+	}(Event));
+	exports.AnyEvent = AnyEvent;
 	;
 	var InputEvent = (function (_super) {
 	    __extends(InputEvent, _super);
@@ -1725,6 +1747,10 @@ var qtk =
 	}(Event));
 	exports.ScrollEvent = ScrollEvent;
 	;
+	function createAnyEvent(type, payload) {
+	    return AnyEvent.create(type, payload);
+	}
+	exports.createAnyEvent = createAnyEvent;
 
 
 /***/ },
@@ -24714,7 +24740,157 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var rect_1 = __webpack_require__(2);
+	var point_1 = __webpack_require__(1);
 	var widget_1 = __webpack_require__(16);
+	var title_content_1 = __webpack_require__(133);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var AccordionTitle = (function (_super) {
+	    __extends(AccordionTitle, _super);
+	    function AccordionTitle() {
+	        _super.call(this, AccordionTitle.TYPE);
+	    }
+	    Object.defineProperty(AccordionTitle.prototype, "collapsed", {
+	        get: function () {
+	            var titleContent = this.parent;
+	            return titleContent.collapsed;
+	        },
+	        set: function (value) {
+	            var titleContent = this.parent;
+	            titleContent.collapsed = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    AccordionTitle.prototype.trigger = function () {
+	        var titleContent = this.parent;
+	        titleContent.collapsed = !titleContent.collapsed;
+	        if (this.onClickTrigger) {
+	            this.onClickTrigger(titleContent.collapsed);
+	        }
+	    };
+	    AccordionTitle.prototype.getFgImageRect = function (style) {
+	        var w = this.clientH;
+	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, w, w);
+	    };
+	    AccordionTitle.prototype.getTextRect = function (style) {
+	        var w = this.clientH;
+	        return rect_1.Rect.rect.init(this.leftPadding + w, this.topPadding, this.clientW - w, this.clientH);
+	    };
+	    AccordionTitle.prototype.getStyleType = function () {
+	        return this._styleType || this.collapsed ? "accordion-title.collapsed" : "accordion-title.expanded";
+	    };
+	    AccordionTitle.prototype.dispatchDblClick = function (evt) {
+	        _super.prototype.dispatchDblClick.call(this, evt);
+	        if (!this._enable || !this._sensitive) {
+	            return;
+	        }
+	        this.trigger();
+	    };
+	    AccordionTitle.prototype.dispatchClick = function (evt) {
+	        _super.prototype.dispatchClick.call(this, evt);
+	        if (!this._enable || !this._sensitive) {
+	            return;
+	        }
+	        var p = this.toLocalPoint(point_1.Point.point.copy(evt));
+	        if (p.x < this.h) {
+	            this.trigger();
+	        }
+	    };
+	    AccordionTitle.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this.onClickTrigger = null;
+	    };
+	    AccordionTitle.create = function (options) {
+	        return AccordionTitle.recycleBin.create().reset(AccordionTitle.TYPE, options);
+	    };
+	    AccordionTitle.TYPE = "accordion-title";
+	    AccordionTitle.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new AccordionTitle(); });
+	    return AccordionTitle;
+	}(widget_1.Widget));
+	exports.AccordionTitle = AccordionTitle;
+	;
+	var Accordion = (function (_super) {
+	    __extends(Accordion, _super);
+	    function Accordion() {
+	        _super.call(this, Accordion.TYPE);
+	    }
+	    Object.defineProperty(Accordion.prototype, "titleHeight", {
+	        get: function () {
+	            return this._titleHeight;
+	        },
+	        set: function (value) {
+	            this._titleHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Accordion.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._titleHeight = 30;
+	    };
+	    Accordion.prototype.setActivePanel = function (titleContent, collapsed) {
+	        this.children.forEach(function (child) {
+	            child.collapsed = titleContent === child ? collapsed : true;
+	        });
+	        this.relayoutChildren();
+	    };
+	    Accordion.prototype.relayoutChildren = function () {
+	        var r = this.getLayoutRect();
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var w = this.clientW;
+	        var n = this.children.length;
+	        var collapseH = this.titleHeight;
+	        var expandH = this.titleHeight + this.clientH - n * this.titleHeight;
+	        this.children.forEach(function (child) {
+	            var h = child.collapsed ? collapseH : expandH;
+	            child.moveResizeTo(x, y, w, h, 0);
+	            child.relayoutChildren();
+	            y += h;
+	        });
+	        return r;
+	    };
+	    Accordion.prototype.addPanel = function (title, contentWidget) {
+	        var me = this;
+	        var titleWidget = AccordionTitle.create({ text: title });
+	        var titleContent = title_content_1.TitleContent.create({
+	            titleHeight: this.titleHeight,
+	            titleWidget: titleWidget,
+	            contentWidget: contentWidget,
+	            collapsed: true
+	        });
+	        titleWidget.onClickTrigger = function (collapsed) {
+	            me.setActivePanel(titleContent, collapsed);
+	        };
+	        this.addChild(titleContent);
+	        return titleContent;
+	    };
+	    Accordion.create = function (options) {
+	        return Accordion.recycleBin.create().reset(Accordion.TYPE, options);
+	    };
+	    Accordion.TYPE = "accordion";
+	    Accordion.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Accordion(); });
+	    return Accordion;
+	}(widget_1.Widget));
+	exports.Accordion = Accordion;
+	;
+	widget_factory_1.WidgetFactory.register(Accordion.TYPE, Accordion.create);
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(16);
+	var Events = __webpack_require__(7);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleContent = (function (_super) {
@@ -24722,6 +24898,10 @@ var qtk =
 	    function TitleContent() {
 	        _super.call(this, TitleContent.TYPE);
 	    }
+	    TitleContent.prototype.moveResizeTo = function (x, y, w, h, duration) {
+	        this._saveH = h;
+	        return _super.prototype.moveResizeTo.call(this, x, y, w, h, duration);
+	    };
 	    Object.defineProperty(TitleContent.prototype, "titleHeight", {
 	        get: function () {
 	            return this._titleHeight;
@@ -24753,6 +24933,12 @@ var qtk =
 	                }
 	                this._collapsed = value;
 	                this.relayoutChildren();
+	                if (value) {
+	                    this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
+	                }
+	                else {
+	                    this.dispatchEvent(Events.createAnyEvent(Events.EXPAND));
+	                }
 	            }
 	            else {
 	                this._collapsed = value;
@@ -24850,7 +25036,7 @@ var qtk =
 
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24860,7 +25046,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(134);
+	var title_value_1 = __webpack_require__(135);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleEdit = (function (_super) {
@@ -24933,7 +25119,7 @@ var qtk =
 
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25042,7 +25228,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25051,8 +25237,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(134);
-	var choosable_edit_1 = __webpack_require__(136);
+	var title_value_1 = __webpack_require__(135);
+	var choosable_edit_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleChoosableEdit = (function (_super) {
@@ -25101,7 +25287,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25199,7 +25385,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25209,7 +25395,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(134);
+	var title_value_1 = __webpack_require__(135);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleTextArea = (function (_super) {
@@ -25251,7 +25437,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25261,7 +25447,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var slider_1 = __webpack_require__(117);
-	var title_value_1 = __webpack_require__(134);
+	var title_value_1 = __webpack_require__(135);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleSlider = (function (_super) {
@@ -25285,7 +25471,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25294,7 +25480,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(134);
+	var title_value_1 = __webpack_require__(135);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var combo_box_1 = __webpack_require__(119);

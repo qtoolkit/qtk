@@ -7,6 +7,7 @@ export declare class TitleContent extends Widget {
     protected _titleHeight: number;
     protected _titleWidget: Widget;
     protected _contentWidget: Widget;
+    moveResizeTo(x: number, y: number, w: number, h: number, duration?: number): TWEEN.Tween;
     titleHeight: number;
     movable: boolean;
     collapsed: boolean;

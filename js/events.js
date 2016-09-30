@@ -44,6 +44,8 @@ exports.TICK = "tick";
 exports.PRETICK = "pretick";
 exports.POSTTICK = "posttick";
 exports.LOAD = "load";
+exports.EXPAND = "expand";
+exports.COLLAPSE = "collapse";
 exports.BEFORE_DRAW = "before-draw";
 exports.AFTER_DRAW = "after-draw";
 exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
@@ -102,6 +104,24 @@ var Event = (function () {
     return Event;
 }());
 exports.Event = Event;
+;
+var AnyEvent = (function (_super) {
+    __extends(AnyEvent, _super);
+    function AnyEvent() {
+        _super.apply(this, arguments);
+    }
+    AnyEvent.prototype.init = function (type, payload) {
+        _super.prototype.init.call(this, type);
+        this.payload = payload;
+        return this;
+    };
+    AnyEvent.create = function (type, payload) {
+        var e = new AnyEvent();
+        return e.init(type, payload);
+    };
+    return AnyEvent;
+}(Event));
+exports.AnyEvent = AnyEvent;
 ;
 var InputEvent = (function (_super) {
     __extends(InputEvent, _super);
@@ -352,3 +372,7 @@ var ScrollEvent = (function (_super) {
 }(Event));
 exports.ScrollEvent = ScrollEvent;
 ;
+function createAnyEvent(type, payload) {
+    return AnyEvent.create(type, payload);
+}
+exports.createAnyEvent = createAnyEvent;
