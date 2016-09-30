@@ -4,77 +4,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var rect_1 = require("../rect");
-var point_1 = require("../point");
 var widget_1 = require("./widget");
-var title_content_1 = require("./title-content");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
-var AccordionTitle = (function (_super) {
-    __extends(AccordionTitle, _super);
-    function AccordionTitle() {
-        _super.call(this, AccordionTitle.TYPE);
-    }
-    Object.defineProperty(AccordionTitle.prototype, "collapsed", {
-        get: function () {
-            var titleContent = this.parent;
-            return titleContent.collapsed;
-        },
-        set: function (value) {
-            var titleContent = this.parent;
-            titleContent.collapsed = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AccordionTitle.prototype.trigger = function () {
-        var titleContent = this.parent;
-        titleContent.collapsed = !titleContent.collapsed;
-        if (this.onClickTrigger) {
-            this.onClickTrigger(titleContent.collapsed);
-        }
-    };
-    AccordionTitle.prototype.getFgImageRect = function (style) {
-        var w = this.clientH;
-        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, w, w);
-    };
-    AccordionTitle.prototype.getTextRect = function (style) {
-        var w = this.clientH;
-        return rect_1.Rect.rect.init(this.leftPadding + w, this.topPadding, this.clientW - w, this.clientH);
-    };
-    AccordionTitle.prototype.getStyleType = function () {
-        return this._styleType || this.collapsed ? "accordion-title.collapsed" : "accordion-title.expanded";
-    };
-    AccordionTitle.prototype.dispatchDblClick = function (evt) {
-        _super.prototype.dispatchDblClick.call(this, evt);
-        if (!this._enable || !this._sensitive) {
-            return;
-        }
-        this.trigger();
-    };
-    AccordionTitle.prototype.dispatchClick = function (evt) {
-        _super.prototype.dispatchClick.call(this, evt);
-        if (!this._enable || !this._sensitive) {
-            return;
-        }
-        var p = this.toLocalPoint(point_1.Point.point.copy(evt));
-        if (p.x < this.h) {
-            this.trigger();
-        }
-    };
-    AccordionTitle.prototype.dispose = function () {
-        _super.prototype.dispose.call(this);
-        this.onClickTrigger = null;
-    };
-    AccordionTitle.create = function (options) {
-        return AccordionTitle.recycleBin.create().reset(AccordionTitle.TYPE, options);
-    };
-    AccordionTitle.TYPE = "accordion-title";
-    AccordionTitle.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new AccordionTitle(); });
-    return AccordionTitle;
-}(widget_1.Widget));
-exports.AccordionTitle = AccordionTitle;
-;
+var title_content_1 = require("./title-content");
+var collapsable_title_1 = require("./collapsable-title");
+/**
+ * 手风琴控件。它有多个页面，在每一时刻只展开一个。
+ */
 var Accordion = (function (_super) {
     __extends(Accordion, _super);
     function Accordion() {
@@ -84,21 +21,65 @@ var Accordion = (function (_super) {
         get: function () {
             return this._titleHeight;
         },
+        /**
+         * titleHeight 标题控件的高度。
+         */
         set: function (value) {
             this._titleHeight = value;
         },
         enumerable: true,
         configurable: true
     });
+    /**
+     * 增加一个页面。
+     * @param title 标题文本。
+     * @param contentHeight 内容控件。
+     * @returns 返回新增加的TitleContent。
+     */
+    Accordion.prototype.addPage = function (title, contentWidget) {
+        var me = this;
+        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
+        var titleContent = title_content_1.TitleContent.create({
+            collapsed: true,
+            titleWidget: titleWidget,
+            contentWidget: contentWidget,
+            titleHeight: this.titleHeight
+        });
+        titleWidget.onClickTrigger = function (collapsed) {
+            me.setActivePage(titleContent, collapsed, 300);
+        };
+        this.addChild(titleContent);
+        return titleContent;
+    };
+    /**
+     * 展开或折叠指定的页面。
+     * @param titleContent 要展开或折叠的页面。
+     * @param collapsed 展开或折叠。
+     * @param duration 动画的时间。
+     * @returns 返回当前控件。
+     */
+    Accordion.prototype.setActivePage = function (titleContent, collapsed, duration) {
+        var _this = this;
+        this.children.forEach(function (child) {
+            if (titleContent === child) {
+                child.triggerCollapsed(duration, function (evt) {
+                    _this.relayoutChildren();
+                });
+            }
+            else {
+                if (!child.collapsed) {
+                    child.triggerCollapsed(duration, function (evt) {
+                        _this.relayoutChildren();
+                    });
+                }
+            }
+        });
+        this.relayoutChildren();
+        return this;
+    };
     Accordion.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
         this._titleHeight = 30;
-    };
-    Accordion.prototype.setActivePanel = function (titleContent, collapsed) {
-        this.children.forEach(function (child) {
-            child.collapsed = titleContent === child ? collapsed : true;
-        });
-        this.relayoutChildren();
     };
     Accordion.prototype.relayoutChildren = function () {
         var r = this.getLayoutRect();
@@ -106,30 +87,16 @@ var Accordion = (function (_super) {
         var y = this.topPadding;
         var w = this.clientW;
         var n = this.children.length;
-        var collapseH = this.titleHeight;
-        var expandH = this.titleHeight + this.clientH - n * this.titleHeight;
+        var titleHeight = this.titleHeight;
+        var contentHeight = this.clientH - n * this.titleHeight;
         this.children.forEach(function (child) {
-            var h = child.collapsed ? collapseH : expandH;
-            child.moveResizeTo(x, y, w, h, 0);
+            child.titleHeight = titleHeight;
+            child.contentHeight = contentHeight;
+            child.moveResizeTo(x, y, w, child.h, 0);
             child.relayoutChildren();
-            y += h;
+            y += child.h;
         });
         return r;
-    };
-    Accordion.prototype.addPanel = function (title, contentWidget) {
-        var me = this;
-        var titleWidget = AccordionTitle.create({ text: title });
-        var titleContent = title_content_1.TitleContent.create({
-            titleHeight: this.titleHeight,
-            titleWidget: titleWidget,
-            contentWidget: contentWidget,
-            collapsed: true
-        });
-        titleWidget.onClickTrigger = function (collapsed) {
-            me.setActivePanel(titleContent, collapsed);
-        };
-        this.addChild(titleContent);
-        return titleContent;
     };
     Accordion.create = function (options) {
         return Accordion.recycleBin.create().reset(Accordion.TYPE, options);

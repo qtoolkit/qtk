@@ -450,6 +450,14 @@
 			"backGroundColor" : null
 		}
 	},
+	"property-sheets": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 0,
+			"lineColor" : "#9D9D9D",
+			"backGroundColor" : null
+		}
+	},
 	"accordion-title": {
 		"extends": "label",
 		"common" : {

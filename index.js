@@ -199,19 +199,21 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var accordion_1 = __webpack_require__(132);
 	exports.Accordion = accordion_1.Accordion;
+	var property_sheets_1 = __webpack_require__(135);
+	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var title_content_1 = __webpack_require__(133);
 	exports.TitleContent = title_content_1.TitleContent;
-	var title_edit_1 = __webpack_require__(134);
+	var title_edit_1 = __webpack_require__(136);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(136);
+	var title_choosable_edit_1 = __webpack_require__(138);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(138);
+	var title_text_area_1 = __webpack_require__(140);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(137);
+	var choosable_edit_1 = __webpack_require__(139);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(139);
+	var title_slider_1 = __webpack_require__(141);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(140);
+	var title_combo_box_1 = __webpack_require__(142);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -24740,77 +24742,14 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
 	var widget_1 = __webpack_require__(16);
-	var title_content_1 = __webpack_require__(133);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
-	var AccordionTitle = (function (_super) {
-	    __extends(AccordionTitle, _super);
-	    function AccordionTitle() {
-	        _super.call(this, AccordionTitle.TYPE);
-	    }
-	    Object.defineProperty(AccordionTitle.prototype, "collapsed", {
-	        get: function () {
-	            var titleContent = this.parent;
-	            return titleContent.collapsed;
-	        },
-	        set: function (value) {
-	            var titleContent = this.parent;
-	            titleContent.collapsed = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    AccordionTitle.prototype.trigger = function () {
-	        var titleContent = this.parent;
-	        titleContent.collapsed = !titleContent.collapsed;
-	        if (this.onClickTrigger) {
-	            this.onClickTrigger(titleContent.collapsed);
-	        }
-	    };
-	    AccordionTitle.prototype.getFgImageRect = function (style) {
-	        var w = this.clientH;
-	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, w, w);
-	    };
-	    AccordionTitle.prototype.getTextRect = function (style) {
-	        var w = this.clientH;
-	        return rect_1.Rect.rect.init(this.leftPadding + w, this.topPadding, this.clientW - w, this.clientH);
-	    };
-	    AccordionTitle.prototype.getStyleType = function () {
-	        return this._styleType || this.collapsed ? "accordion-title.collapsed" : "accordion-title.expanded";
-	    };
-	    AccordionTitle.prototype.dispatchDblClick = function (evt) {
-	        _super.prototype.dispatchDblClick.call(this, evt);
-	        if (!this._enable || !this._sensitive) {
-	            return;
-	        }
-	        this.trigger();
-	    };
-	    AccordionTitle.prototype.dispatchClick = function (evt) {
-	        _super.prototype.dispatchClick.call(this, evt);
-	        if (!this._enable || !this._sensitive) {
-	            return;
-	        }
-	        var p = this.toLocalPoint(point_1.Point.point.copy(evt));
-	        if (p.x < this.h) {
-	            this.trigger();
-	        }
-	    };
-	    AccordionTitle.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this.onClickTrigger = null;
-	    };
-	    AccordionTitle.create = function (options) {
-	        return AccordionTitle.recycleBin.create().reset(AccordionTitle.TYPE, options);
-	    };
-	    AccordionTitle.TYPE = "accordion-title";
-	    AccordionTitle.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new AccordionTitle(); });
-	    return AccordionTitle;
-	}(widget_1.Widget));
-	exports.AccordionTitle = AccordionTitle;
-	;
+	var title_content_1 = __webpack_require__(133);
+	var collapsable_title_1 = __webpack_require__(134);
+	/**
+	 * 手风琴控件。它有多个页面，在每一时刻只展开一个。
+	 */
 	var Accordion = (function (_super) {
 	    __extends(Accordion, _super);
 	    function Accordion() {
@@ -24820,21 +24759,65 @@ var qtk =
 	        get: function () {
 	            return this._titleHeight;
 	        },
+	        /**
+	         * titleHeight 标题控件的高度。
+	         */
 	        set: function (value) {
 	            this._titleHeight = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * 增加一个页面。
+	     * @param title 标题文本。
+	     * @param contentHeight 内容控件。
+	     * @returns 返回新增加的TitleContent。
+	     */
+	    Accordion.prototype.addPage = function (title, contentWidget) {
+	        var me = this;
+	        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
+	        var titleContent = title_content_1.TitleContent.create({
+	            collapsed: true,
+	            titleWidget: titleWidget,
+	            contentWidget: contentWidget,
+	            titleHeight: this.titleHeight
+	        });
+	        titleWidget.onClickTrigger = function (collapsed) {
+	            me.setActivePage(titleContent, collapsed, 300);
+	        };
+	        this.addChild(titleContent);
+	        return titleContent;
+	    };
+	    /**
+	     * 展开或折叠指定的页面。
+	     * @param titleContent 要展开或折叠的页面。
+	     * @param collapsed 展开或折叠。
+	     * @param duration 动画的时间。
+	     * @returns 返回当前控件。
+	     */
+	    Accordion.prototype.setActivePage = function (titleContent, collapsed, duration) {
+	        var _this = this;
+	        this.children.forEach(function (child) {
+	            if (titleContent === child) {
+	                child.triggerCollapsed(duration, function (evt) {
+	                    _this.relayoutChildren();
+	                });
+	            }
+	            else {
+	                if (!child.collapsed) {
+	                    child.triggerCollapsed(duration, function (evt) {
+	                        _this.relayoutChildren();
+	                    });
+	                }
+	            }
+	        });
+	        this.relayoutChildren();
+	        return this;
+	    };
 	    Accordion.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this._titleHeight = 30;
-	    };
-	    Accordion.prototype.setActivePanel = function (titleContent, collapsed) {
-	        this.children.forEach(function (child) {
-	            child.collapsed = titleContent === child ? collapsed : true;
-	        });
-	        this.relayoutChildren();
 	    };
 	    Accordion.prototype.relayoutChildren = function () {
 	        var r = this.getLayoutRect();
@@ -24842,30 +24825,16 @@ var qtk =
 	        var y = this.topPadding;
 	        var w = this.clientW;
 	        var n = this.children.length;
-	        var collapseH = this.titleHeight;
-	        var expandH = this.titleHeight + this.clientH - n * this.titleHeight;
+	        var titleHeight = this.titleHeight;
+	        var contentHeight = this.clientH - n * this.titleHeight;
 	        this.children.forEach(function (child) {
-	            var h = child.collapsed ? collapseH : expandH;
-	            child.moveResizeTo(x, y, w, h, 0);
+	            child.titleHeight = titleHeight;
+	            child.contentHeight = contentHeight;
+	            child.moveResizeTo(x, y, w, child.h, 0);
 	            child.relayoutChildren();
-	            y += h;
+	            y += child.h;
 	        });
 	        return r;
-	    };
-	    Accordion.prototype.addPanel = function (title, contentWidget) {
-	        var me = this;
-	        var titleWidget = AccordionTitle.create({ text: title });
-	        var titleContent = title_content_1.TitleContent.create({
-	            titleHeight: this.titleHeight,
-	            titleWidget: titleWidget,
-	            contentWidget: contentWidget,
-	            collapsed: true
-	        });
-	        titleWidget.onClickTrigger = function (collapsed) {
-	            me.setActivePanel(titleContent, collapsed);
-	        };
-	        this.addChild(titleContent);
-	        return titleContent;
 	    };
 	    Accordion.create = function (options) {
 	        return Accordion.recycleBin.create().reset(Accordion.TYPE, options);
@@ -24893,21 +24862,36 @@ var qtk =
 	var Events = __webpack_require__(7);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
+	/**
+	 * 一个用来显示标题和内容的控件。通常用于Accordion和PropertySheets的子控件。
+	 */
 	var TitleContent = (function (_super) {
 	    __extends(TitleContent, _super);
 	    function TitleContent() {
 	        _super.call(this, TitleContent.TYPE);
 	    }
-	    TitleContent.prototype.moveResizeTo = function (x, y, w, h, duration) {
-	        this._saveH = h;
-	        return _super.prototype.moveResizeTo.call(this, x, y, w, h, duration);
-	    };
 	    Object.defineProperty(TitleContent.prototype, "titleHeight", {
 	        get: function () {
 	            return this._titleHeight;
 	        },
+	        /**
+	         * titleHeight 标题控件的高度。
+	         */
 	        set: function (value) {
 	            this._titleHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleContent.prototype, "contentHeight", {
+	        get: function () {
+	            return this._contentHeight;
+	        },
+	        /**
+	         * titleHeight 内容控件的高度。
+	         */
+	        set: function (value) {
+	            this._contentHeight = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -24916,28 +24900,69 @@ var qtk =
 	        get: function () {
 	            return this._movable;
 	        },
+	        /**
+	         * movable 决定是否能通过拖动标题控件来拖动整个TitleContent控件。
+	         */
 	        set: function (value) {
 	            this._movable = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * 折叠或展开控件。
+	     * @param duration 动画时间(可选)。
+	     * @param onStep 动画执行期间单步的回调函数(可选)。
+	     * @returns 返回控件本身。
+	     */
+	    TitleContent.prototype.triggerCollapsed = function (duration, onStep) {
+	        var _this = this;
+	        var value = !this._collapsed;
+	        if (this._inited) {
+	            if (duration > 0) {
+	                var minH = this.topPadding + this.bottomPadding + this.titleHeight;
+	                var maxH = minH + this.contentHeight;
+	                var h = value ? minH : maxH;
+	                this._collapsed = false;
+	                this.relayoutChildren();
+	                this._animating = true;
+	                this.h = value ? maxH : minH;
+	                this.resizeTo(this.w, h, duration).onComplete(function (evt) {
+	                    _this.collapsed = value;
+	                    _this._animating = false;
+	                }).onUpdate(function () {
+	                    if (onStep) {
+	                        onStep();
+	                    }
+	                });
+	            }
+	            else {
+	                this.collapsed = value;
+	            }
+	        }
+	        else {
+	            this._collapsed = value;
+	        }
+	        return this;
+	    };
 	    Object.defineProperty(TitleContent.prototype, "collapsed", {
 	        get: function () {
 	            return this._collapsed;
 	        },
+	        /**
+	         * collapsed 控件当前折叠或展开的状态。
+	         */
 	        set: function (value) {
 	            if (this._inited) {
-	                if (!this._collapsed) {
-	                    this._saveH = this.h;
-	                }
-	                this._collapsed = value;
-	                this.relayoutChildren();
-	                if (value) {
-	                    this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
-	                }
-	                else {
-	                    this.dispatchEvent(Events.createAnyEvent(Events.EXPAND));
+	                if (this._collapsed !== value) {
+	                    this._collapsed = value;
+	                    this.relayoutChildren();
+	                    if (value) {
+	                        this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
+	                    }
+	                    else {
+	                        this.dispatchEvent(Events.createAnyEvent(Events.EXPAND));
+	                    }
 	                }
 	            }
 	            else {
@@ -24948,6 +24973,9 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(TitleContent.prototype, "titleWidget", {
+	        /**
+	         * 标题控件。
+	         */
 	        get: function () {
 	            return this._titleWidget;
 	        },
@@ -24957,6 +24985,9 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
+	                if (!this._titleHeight) {
+	                    this._titleHeight = value.h;
+	                }
 	            }
 	            this._titleWidget = value;
 	        },
@@ -24964,6 +24995,9 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(TitleContent.prototype, "contentWidget", {
+	        /**
+	         * 内容控件。
+	         */
 	        get: function () {
 	            return this._contentWidget;
 	        },
@@ -24973,40 +25007,57 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
+	                if (!this._contentHeight) {
+	                    this._contentHeight = value.h;
+	                }
 	            }
 	            this._contentWidget = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    TitleContent.prototype.drawChildren = function (ctx) {
+	        ctx.save();
+	        ctx.beginPath();
+	        ctx.rect(0, 0, this.w, this.h);
+	        ctx.clip();
+	        _super.prototype.drawChildren.call(this, ctx);
+	        ctx.restore();
+	        return this;
+	    };
 	    TitleContent.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this._saveH = 0;
 	        this._movable = false;
 	        this._titleHeight = 30;
 	        this._collapsed = false;
 	        this._titleWidget = null;
 	        this._contentWidget = null;
+	        this._contentHeight = 0;
 	    };
 	    TitleContent.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
-	        this._saveH = this.h;
 	        if (this._movable) {
 	            this._titleWidget.useBehavior("movable", { moveParent: true });
 	        }
 	    };
 	    TitleContent.prototype.relayoutChildren = function () {
-	        if (!this._saveH) {
-	            this._saveH = this.h;
-	        }
-	        this.h = this._collapsed ? (this.titleHeight + this.topPadding + this.bottomPadding) : this._saveH;
 	        this.requestRedraw();
+	        if (this._animating) {
+	            return this.getLayoutRect();
+	        }
+	        if (this._contentHeight < 1) {
+	            this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+	        }
+	        var h = this.titleHeight + this.topPadding + this.bottomPadding;
+	        if (!this._collapsed) {
+	            h += this.contentHeight;
+	        }
+	        this.h = h;
 	        var r = this.getLayoutRect();
 	        var titleWidget = this._titleWidget;
 	        var contentWidget = this._contentWidget;
-	        var h = this.titleHeight;
 	        if (titleWidget) {
-	            titleWidget.moveResizeTo(r.x, r.y, r.w, h);
+	            titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleHeight);
 	            titleWidget.relayoutChildren();
 	        }
 	        if (contentWidget) {
@@ -25014,20 +25065,19 @@ var qtk =
 	                contentWidget.visible = false;
 	            }
 	            else {
-	                var y = r.y + h;
-	                h = r.h - h;
+	                var y = r.y + this.titleHeight;
 	                contentWidget.visible = true;
-	                contentWidget.moveResizeTo(r.x, y, r.w, h);
+	                contentWidget.moveResizeTo(r.x, y, r.w, this.contentHeight);
 	                contentWidget.relayoutChildren();
 	            }
 	        }
 	        return r;
 	    };
 	    TitleContent.create = function (options) {
-	        return TitleContent.recycleBin.create().reset(TitleContent.TYPE, options);
+	        return TitleContent.rBin.create().reset(TitleContent.TYPE, options);
 	    };
 	    TitleContent.TYPE = "title-content";
-	    TitleContent.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
+	    TitleContent.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
 	    return TitleContent;
 	}(widget_1.Widget));
 	exports.TitleContent = TitleContent;
@@ -25045,8 +25095,179 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var rect_1 = __webpack_require__(2);
+	var point_1 = __webpack_require__(1);
+	var widget_1 = __webpack_require__(16);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var CollapsableTitle = (function (_super) {
+	    __extends(CollapsableTitle, _super);
+	    function CollapsableTitle() {
+	        _super.call(this, CollapsableTitle.TYPE);
+	    }
+	    Object.defineProperty(CollapsableTitle.prototype, "collapsed", {
+	        get: function () {
+	            var titleContent = this.parent;
+	            return titleContent.collapsed;
+	        },
+	        set: function (value) {
+	            var titleContent = this.parent;
+	            titleContent.collapsed = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    CollapsableTitle.prototype.trigger = function () {
+	        var titleContent = this.parent;
+	        var collapsed = !titleContent.collapsed;
+	        if (this.onClickTrigger) {
+	            this.onClickTrigger(collapsed);
+	        }
+	    };
+	    CollapsableTitle.prototype.getFgImageRect = function (style) {
+	        var w = this.clientH;
+	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, w, w);
+	    };
+	    CollapsableTitle.prototype.getTextRect = function (style) {
+	        var w = this.clientH;
+	        return rect_1.Rect.rect.init(this.leftPadding + w, this.topPadding, this.clientW - w, this.clientH);
+	    };
+	    CollapsableTitle.prototype.getStyleType = function () {
+	        return this._styleType || this.collapsed ? "accordion-title.collapsed" : "accordion-title.expanded";
+	    };
+	    CollapsableTitle.prototype.dispatchDblClick = function (evt) {
+	        _super.prototype.dispatchDblClick.call(this, evt);
+	        if (!this._enable || !this._sensitive) {
+	            return;
+	        }
+	        this.trigger();
+	    };
+	    CollapsableTitle.prototype.dispatchClick = function (evt) {
+	        _super.prototype.dispatchClick.call(this, evt);
+	        if (!this._enable || !this._sensitive) {
+	            return;
+	        }
+	        var p = this.toLocalPoint(point_1.Point.point.copy(evt));
+	        if (p.x < this.h) {
+	            this.trigger();
+	        }
+	    };
+	    CollapsableTitle.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this.onClickTrigger = null;
+	    };
+	    CollapsableTitle.create = function (options) {
+	        return CollapsableTitle.rBin.create().reset(CollapsableTitle.TYPE, options);
+	    };
+	    CollapsableTitle.TYPE = "collapsable-title";
+	    CollapsableTitle.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new CollapsableTitle(); });
+	    return CollapsableTitle;
+	}(widget_1.Widget));
+	exports.CollapsableTitle = CollapsableTitle;
+	;
+
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var scroll_view_1 = __webpack_require__(99);
+	var widget_factory_1 = __webpack_require__(77);
+	var title_content_1 = __webpack_require__(133);
+	var collapsable_title_1 = __webpack_require__(134);
+	var recyclable_creator_1 = __webpack_require__(79);
+	/**
+	 * 管理多个页面，每个页面可以展开或折叠。
+	 */
+	var PropertySheets = (function (_super) {
+	    __extends(PropertySheets, _super);
+	    function PropertySheets() {
+	        _super.call(this, PropertySheets.TYPE);
+	    }
+	    Object.defineProperty(PropertySheets.prototype, "titleHeight", {
+	        get: function () {
+	            return this._titleHeight;
+	        },
+	        /**
+	         * titleHeight 标题控件的高度。
+	         */
+	        set: function (value) {
+	            this._titleHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 增加一个页面。
+	     * @param title 标题文本。
+	     * @param contentHeight 内容控件。
+	     * @returns 返回新增加的TitleContent。
+	     */
+	    PropertySheets.prototype.addPage = function (title, contentWidget) {
+	        var me = this;
+	        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
+	        var titleContent = title_content_1.TitleContent.create({
+	            collapsed: true,
+	            titleWidget: titleWidget,
+	            contentWidget: contentWidget,
+	            titleHeight: this.titleHeight
+	        });
+	        titleWidget.onClickTrigger = function (collapsed) {
+	            titleContent.triggerCollapsed();
+	            me.relayoutChildren();
+	        };
+	        this.addChild(titleContent);
+	        return titleContent;
+	    };
+	    PropertySheets.prototype.relayoutChildren = function () {
+	        var r = this.getLayoutRect();
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var w = this.clientW;
+	        this.children.forEach(function (child) {
+	            child.moveResizeTo(x, y, w, 0, 0);
+	            child.relayoutChildren();
+	            y += child.h;
+	        });
+	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentHeight = y + this.bottomPadding + 10;
+	        return r;
+	    };
+	    PropertySheets.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._titleHeight = 30;
+	        this.dragToScroll = true;
+	        this.slideToScroll = true;
+	    };
+	    PropertySheets.create = function (options) {
+	        return PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+	    };
+	    PropertySheets.TYPE = "property-sheets";
+	    PropertySheets.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertySheets(); });
+	    return PropertySheets;
+	}(scroll_view_1.ScrollView));
+	exports.PropertySheets = PropertySheets;
+	;
+	widget_factory_1.WidgetFactory.register(PropertySheets.TYPE, PropertySheets.create);
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(135);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleEdit = (function (_super) {
@@ -25119,7 +25340,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25228,7 +25449,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25237,8 +25458,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(135);
-	var choosable_edit_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(137);
+	var choosable_edit_1 = __webpack_require__(139);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleChoosableEdit = (function (_super) {
@@ -25287,7 +25508,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25385,7 +25606,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25395,7 +25616,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(135);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleTextArea = (function (_super) {
@@ -25437,7 +25658,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25447,7 +25668,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var slider_1 = __webpack_require__(117);
-	var title_value_1 = __webpack_require__(135);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleSlider = (function (_super) {
@@ -25471,7 +25692,7 @@ var qtk =
 
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25480,7 +25701,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(135);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var combo_box_1 = __webpack_require__(119);

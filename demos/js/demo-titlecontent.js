@@ -22,7 +22,7 @@ function onReady(app) {
 	titleContent.titleWidget = Label.create({text:"draggable && collapsable", styleType:"dialog.title-bg"});
 	titleContent.contentWidget = Image.create({value:imageURL});
 	titleContent.titleWidget.on(Events.CLICK, function(evt) {
-		titleContent.collapsed = !titleContent.collapsed;
+		titleContent.triggerCollapsed(200);
 	});
 
 	win.open();
