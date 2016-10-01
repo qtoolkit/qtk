@@ -17,7 +17,7 @@ export declare class PropertyPage extends Widget {
     addComboBoxEditable(title: string, value?: string): TitleComboBoxEditable;
     addSlider(title: string, value?: string): TitleSlider;
     addTextArea(title: string, value?: string, h?: number): TitleTextArea;
-    find(title: string): Widget;
+    findByTitle(title: string): Widget;
     protected onReset(): void;
     constructor();
     static TYPE: string;

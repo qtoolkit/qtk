@@ -10,10 +10,13 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 import {LinearLayouterParam, LinearLayouter} from '../layouters/linear-layouter';
 
+/**
+ * 属性编辑页，包装了各种TitleValue。
+ */
 export class PropertyPage extends Widget {
+	protected _itemH : number;
 	protected _titleW : string;
 	protected _valueW : string;
-	protected _itemH : number;
 
 	public set itemH(value:number) {
 		this._itemH = value;
@@ -132,7 +135,7 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 
-	public find(title:string) : Widget {
+	public findByTitle(title:string) : Widget {
 		return this.findChildByName(title);
 	}
 

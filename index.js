@@ -25318,7 +25318,7 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
-	    PropertyPage.prototype.find = function (title) {
+	    PropertyPage.prototype.findByTitle = function (title) {
 	        return this.findChildByName(title);
 	    };
 	    PropertyPage.prototype.onReset = function () {
