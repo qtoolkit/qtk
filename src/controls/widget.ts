@@ -131,10 +131,10 @@ export class Widget extends Emitter {
 			p.x += iter.x;
 			p.y += iter.y;
 			if(iter.offsetX) {
-				p.x - iter.offsetX;
+				p.x -= iter.offsetX;
 			}
 			if(iter.offsetY) {
-				p.y - iter.offsetY;
+				p.y -= iter.offsetY;
 			}
 
 			iter = iter.parent;
@@ -578,13 +578,13 @@ export class Widget extends Emitter {
 	public relayoutChildren() : Rect {
 		this.requestRedraw();
 
-		if(this.childrenLayouter) {
+		if(this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
 			var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
 
 			return this.layoutRect.copy(ret);
 		}
 
-		return null;
+		return this.getLayoutRect();
 	}
 
 	/**

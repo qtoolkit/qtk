@@ -24,7 +24,7 @@ export declare class ComboBoxItem extends ListItem {
     private static r;
     static create(options?: any): ComboBoxItem;
 }
-export declare class ComboBoxBase extends Widget {
+export declare abstract class ComboBoxBase extends Widget {
     protected _value: any;
     protected _itemHeight: number;
     protected _current: ComboBoxOption;

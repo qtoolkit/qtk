@@ -116,3 +116,9 @@ function aRemove(arr, obj) {
     return false;
 }
 exports.aRemove = aRemove;
+Array.prototype.stableSort = function (comp) {
+    stableSort(this, comp);
+};
+Array.prototype.remove = function (obj) {
+    return aRemove(this, obj);
+};

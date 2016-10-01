@@ -45,6 +45,7 @@ export declare class TitleContent extends Widget {
     protected drawChildren(ctx: any): Widget;
     protected onReset(): void;
     onInit(): void;
+    protected reComputeH(): void;
     relayoutChildren(): Rect;
     constructor();
     static TYPE: string;

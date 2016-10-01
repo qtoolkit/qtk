@@ -84,6 +84,7 @@ var TitleContent = (function (_super) {
             }
             else {
                 this.collapsed = value;
+                this.relayoutChildren();
             }
         }
         else {
@@ -102,7 +103,6 @@ var TitleContent = (function (_super) {
             if (this._inited) {
                 if (this._collapsed !== value) {
                     this._collapsed = value;
-                    this.relayoutChildren();
                     if (value) {
                         this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
                     }
@@ -114,6 +114,7 @@ var TitleContent = (function (_super) {
             else {
                 this._collapsed = value;
             }
+            this.reComputeH();
         },
         enumerable: true,
         configurable: true
@@ -186,6 +187,10 @@ var TitleContent = (function (_super) {
             this._titleWidget.useBehavior("movable", { moveParent: true });
         }
     };
+    TitleContent.prototype.reComputeH = function () {
+        var contentHeight = (!this._collapsed ? this.contentHeight : 0);
+        this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+    };
     TitleContent.prototype.relayoutChildren = function () {
         this.requestRedraw();
         if (this._animating) {
@@ -194,11 +199,7 @@ var TitleContent = (function (_super) {
         if (this._contentHeight < 1) {
             this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
         }
-        var h = this.titleHeight + this.topPadding + this.bottomPadding;
-        if (!this._collapsed) {
-            h += this.contentHeight;
-        }
-        this.h = h;
+        this.reComputeH();
         var r = this.getLayoutRect();
         var titleWidget = this._titleWidget;
         var contentWidget = this._contentWidget;

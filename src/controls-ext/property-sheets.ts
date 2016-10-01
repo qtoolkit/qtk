@@ -1,11 +1,12 @@
 
 import {Rect} from "../rect";
-import {Widget} from "./widget";
-import {ScrollView} from "./scroll-view";
-import {WidgetFactory} from "./widget-factory";
-import {TitleContent} from "./title-content";
-import {CollapsableTitle} from "./collapsable-title";
+import {Widget} from "../controls/widget";
+import {ScrollView} from "../controls/scroll-view";
+import {WidgetFactory} from "../controls/widget-factory";
+import {TitleContent} from "../controls/title-content";
 import {RecyclableCreator} from "../recyclable-creator";
+import {CollapsableTitle} from "../controls/collapsable-title";
+import {Layouter, LayouterFactory} from '../layouters/layouter';
 
 /**
  * 管理多个页面，每个页面可以展开或折叠。
@@ -21,6 +22,13 @@ export class PropertySheets extends ScrollView{
 	}
 	public get titleHeight() : number {
 		return this._titleHeight;
+	}
+
+	public set childrenLayouter(layouter:Layouter) {
+		console.log("set childrenLayouter not work for me.");
+	}
+	public get childrenLayouter() : Layouter{
+		return this._childrenLayouter;
 	}
 
 	/**
@@ -41,7 +49,7 @@ export class PropertySheets extends ScrollView{
 		});	
 
 		titleWidget.onClickTrigger = function(collapsed) {
-			titleContent.triggerCollapsed();
+			titleContent.collapsed = !titleContent.collapsed;
 			me.relayoutChildren();
 		}
 		this.addChild(titleContent);
@@ -49,11 +57,23 @@ export class PropertySheets extends ScrollView{
 		return titleContent;
 	}
 
+	private computeDesireContentHeight() : number {
+		var h = 0;
+		this.children.forEach((child:TitleContent) => {
+			if(child.visible) {
+				h += child.h;
+			}
+		});
+
+		return h;
+	}
+
 	public relayoutChildren() : Rect {
+		this.contentHeight = this.computeDesireContentHeight();
 		var r = this.getLayoutRect();
-		var x = this.leftPadding;
-		var y = this.topPadding;
-		var w = this.clientW;
+		var w = r.w;
+		var x = r.x;
+		var y = r.y;
 
 		this.children.forEach((child:TitleContent) => {
 			child.moveResizeTo(x, y, w, 0, 0); 
@@ -72,12 +92,12 @@ export class PropertySheets extends ScrollView{
 		this._titleHeight = 30;
 		this.dragToScroll = true;
 		this.slideToScroll = true;
+		this.scrollerOptions.scrollingX = false;
 	}
 
 	constructor() {
 		super(PropertySheets.TYPE);
 	}
-
 
 	public static TYPE = "property-sheets";
 	private static rBin = new RecyclableCreator<PropertySheets>(function() {return new PropertySheets()});

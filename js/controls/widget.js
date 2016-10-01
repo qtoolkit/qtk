@@ -121,10 +121,10 @@ var Widget = (function (_super) {
             p.x += iter.x;
             p.y += iter.y;
             if (iter.offsetX) {
-                p.x - iter.offsetX;
+                p.x -= iter.offsetX;
             }
             if (iter.offsetY) {
-                p.y - iter.offsetY;
+                p.y -= iter.offsetY;
             }
             iter = iter.parent;
         }
@@ -506,11 +506,11 @@ var Widget = (function (_super) {
      */
     Widget.prototype.relayoutChildren = function () {
         this.requestRedraw();
-        if (this.childrenLayouter) {
+        if (this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
             var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
             return this.layoutRect.copy(ret);
         }
-        return null;
+        return this.getLayoutRect();
     };
     /**
      * 请求重新布局当前控件。

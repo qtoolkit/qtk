@@ -50,9 +50,9 @@ export class LinearLayouter extends Layouter {
 			var bp =  b.layoutParam || defParam;
 			return ap.position - bp.position;
 		});
-		arr.forEach(child => {
+		arr.forEach((child:Widget, index:number) => {
 			if(r.w > 0 &&  r.h > 0) {
-				this.layoutChild(child, r);
+				this.layoutChild(child, r, index);
 			}
 		});
 		
@@ -61,9 +61,9 @@ export class LinearLayouter extends Layouter {
 
 			return !param.position;
 		});
-		arr.forEach(child => {
+		arr.forEach((child:Widget, index:number) => {
 			if(r.w > 0 &&  r.h > 0) {
-				this.layoutChild(child, r);
+				this.layoutChild(child, r, index);
 			}
 		});
 
@@ -77,9 +77,9 @@ export class LinearLayouter extends Layouter {
 			var bp =  b.layoutParam || defParam;
 			return bp.position - ap.position;
 		});
-		arr.forEach(child => {
+		arr.forEach((child:Widget, index:number) => {
 			if(r.w > 0 &&  r.h > 0) {
-				this.layoutChild(child, r);
+				this.layoutChild(child, r, index);
 			}
 		});
 
@@ -88,7 +88,7 @@ export class LinearLayouter extends Layouter {
 		return rect;
 	}
 
-	public layoutChild(child:Widget, r:Rect) {
+	public layoutChild(child:Widget, r:Rect, index:number) {
 		var x = 0;
 		var y = 0;
 		var w = 0;
@@ -98,7 +98,13 @@ export class LinearLayouter extends Layouter {
 
 		var position = param.position;
 		if(param && param.type.indexOf("linear") >= 0 && child.visible) {
-			var spacing = param.spacing || this.spacing;
+			var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
+			
+			if(this.orientation === Orientation.V) {
+				r.h -= spacing;
+			}else{
+				r.w -= spacing;
+			}
 			h = Math.min(r.h, param.h ? Layouter.evalValue(param.h, r.h) : child.h);
 			w = Math.min(r.w, param.w ? Layouter.evalValue(param.w, r.w) : child.w);
 	
@@ -125,7 +131,7 @@ export class LinearLayouter extends Layouter {
 				}else{
 					y = r.y + r.h - spacingH;
 				}
-				r.h -= spacingH;
+				r.h -= h;
 			}else{
 				switch(param.align) {
 					case Align.TOP: {
@@ -148,7 +154,7 @@ export class LinearLayouter extends Layouter {
 				}else{
 					x = r.x + r.w - spacingW;
 				}
-				r.w -= spacingW;
+				r.w -= w;
 			}
 
 			child.moveResizeTo(x, y, w, h);

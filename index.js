@@ -199,21 +199,23 @@ var qtk =
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
 	var accordion_1 = __webpack_require__(132);
 	exports.Accordion = accordion_1.Accordion;
-	var property_sheets_1 = __webpack_require__(135);
+	var property_page_1 = __webpack_require__(135);
+	exports.PropertyPage = property_page_1.PropertyPage;
+	var property_sheets_1 = __webpack_require__(143);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var title_content_1 = __webpack_require__(133);
 	exports.TitleContent = title_content_1.TitleContent;
 	var title_edit_1 = __webpack_require__(136);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(138);
+	var title_choosable_edit_1 = __webpack_require__(141);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(140);
+	var title_text_area_1 = __webpack_require__(139);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(139);
+	var choosable_edit_1 = __webpack_require__(142);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(141);
+	var title_slider_1 = __webpack_require__(138);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(142);
+	var title_combo_box_1 = __webpack_require__(140);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
@@ -3555,10 +3557,10 @@ var qtk =
 	            p.x += iter.x;
 	            p.y += iter.y;
 	            if (iter.offsetX) {
-	                p.x - iter.offsetX;
+	                p.x -= iter.offsetX;
 	            }
 	            if (iter.offsetY) {
-	                p.y - iter.offsetY;
+	                p.y -= iter.offsetY;
 	            }
 	            iter = iter.parent;
 	        }
@@ -3940,11 +3942,11 @@ var qtk =
 	     */
 	    Widget.prototype.relayoutChildren = function () {
 	        this.requestRedraw();
-	        if (this.childrenLayouter) {
+	        if (this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
 	            var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
 	            return this.layoutRect.copy(ret);
 	        }
-	        return null;
+	        return this.getLayoutRect();
 	    };
 	    /**
 	     * 请求重新布局当前控件。
@@ -6793,6 +6795,12 @@ var qtk =
 	    return false;
 	}
 	exports.aRemove = aRemove;
+	Array.prototype.stableSort = function (comp) {
+	    stableSort(this, comp);
+	};
+	Array.prototype.remove = function (obj) {
+	    return aRemove(this, obj);
+	};
 
 
 /***/ },
@@ -21187,18 +21195,18 @@ var qtk =
 	            var bp = b.layoutParam || defParam;
 	            return ap.position - bp.position;
 	        });
-	        arr.forEach(function (child) {
+	        arr.forEach(function (child, index) {
 	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r);
+	                _this.layoutChild(child, r, index);
 	            }
 	        });
 	        arr = children.filter(function (child) {
 	            var param = child.layoutParam || defParam;
 	            return !param.position;
 	        });
-	        arr.forEach(function (child) {
+	        arr.forEach(function (child, index) {
 	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r);
+	                _this.layoutChild(child, r, index);
 	            }
 	        });
 	        arr = children.filter(function (child) {
@@ -21210,15 +21218,15 @@ var qtk =
 	            var bp = b.layoutParam || defParam;
 	            return bp.position - ap.position;
 	        });
-	        arr.forEach(function (child) {
+	        arr.forEach(function (child, index) {
 	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r);
+	                _this.layoutChild(child, r, index);
 	            }
 	        });
 	        r.dispose();
 	        return rect;
 	    };
-	    LinearLayouter.prototype.layoutChild = function (child, r) {
+	    LinearLayouter.prototype.layoutChild = function (child, r, index) {
 	        var x = 0;
 	        var y = 0;
 	        var w = 0;
@@ -21227,7 +21235,13 @@ var qtk =
 	        var param = child.layoutParam || defParam;
 	        var position = param.position;
 	        if (param && param.type.indexOf("linear") >= 0 && child.visible) {
-	            var spacing = param.spacing || this.spacing;
+	            var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
+	            if (this.orientation === consts_1.Orientation.V) {
+	                r.h -= spacing;
+	            }
+	            else {
+	                r.w -= spacing;
+	            }
 	            h = Math.min(r.h, param.h ? layouter_1.Layouter.evalValue(param.h, r.h) : child.h);
 	            w = Math.min(r.w, param.w ? layouter_1.Layouter.evalValue(param.w, r.w) : child.w);
 	            if (this.orientation === consts_1.Orientation.V) {
@@ -21253,7 +21267,7 @@ var qtk =
 	                else {
 	                    y = r.y + r.h - spacingH;
 	                }
-	                r.h -= spacingH;
+	                r.h -= h;
 	            }
 	            else {
 	                switch (param.align) {
@@ -21278,7 +21292,7 @@ var qtk =
 	                else {
 	                    x = r.x + r.w - spacingW;
 	                }
-	                r.w -= spacingW;
+	                r.w -= w;
 	            }
 	            child.moveResizeTo(x, y, w, h);
 	            child.relayoutChildren();
@@ -24938,6 +24952,7 @@ var qtk =
 	            }
 	            else {
 	                this.collapsed = value;
+	                this.relayoutChildren();
 	            }
 	        }
 	        else {
@@ -24956,7 +24971,6 @@ var qtk =
 	            if (this._inited) {
 	                if (this._collapsed !== value) {
 	                    this._collapsed = value;
-	                    this.relayoutChildren();
 	                    if (value) {
 	                        this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
 	                    }
@@ -24968,6 +24982,7 @@ var qtk =
 	            else {
 	                this._collapsed = value;
 	            }
+	            this.reComputeH();
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -25040,6 +25055,10 @@ var qtk =
 	            this._titleWidget.useBehavior("movable", { moveParent: true });
 	        }
 	    };
+	    TitleContent.prototype.reComputeH = function () {
+	        var contentHeight = (!this._collapsed ? this.contentHeight : 0);
+	        this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+	    };
 	    TitleContent.prototype.relayoutChildren = function () {
 	        this.requestRedraw();
 	        if (this._animating) {
@@ -25048,11 +25067,7 @@ var qtk =
 	        if (this._contentHeight < 1) {
 	            this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
 	        }
-	        var h = this.titleHeight + this.topPadding + this.bottomPadding;
-	        if (!this._collapsed) {
-	            h += this.contentHeight;
-	        }
-	        this.h = h;
+	        this.reComputeH();
 	        var r = this.getLayoutRect();
 	        var titleWidget = this._titleWidget;
 	        var contentWidget = this._contentWidget;
@@ -25176,84 +25191,153 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(99);
+	var title_edit_1 = __webpack_require__(136);
+	var widget_1 = __webpack_require__(16);
+	var title_slider_1 = __webpack_require__(138);
+	var title_text_area_1 = __webpack_require__(139);
+	var title_combo_box_1 = __webpack_require__(140);
+	var title_choosable_edit_1 = __webpack_require__(141);
 	var widget_factory_1 = __webpack_require__(77);
-	var title_content_1 = __webpack_require__(133);
-	var collapsable_title_1 = __webpack_require__(134);
 	var recyclable_creator_1 = __webpack_require__(79);
-	/**
-	 * 管理多个页面，每个页面可以展开或折叠。
-	 */
-	var PropertySheets = (function (_super) {
-	    __extends(PropertySheets, _super);
-	    function PropertySheets() {
-	        _super.call(this, PropertySheets.TYPE);
+	var linear_layouter_1 = __webpack_require__(112);
+	var PropertyPage = (function (_super) {
+	    __extends(PropertyPage, _super);
+	    function PropertyPage() {
+	        _super.call(this, PropertyPage.TYPE);
 	    }
-	    Object.defineProperty(PropertySheets.prototype, "titleHeight", {
+	    Object.defineProperty(PropertyPage.prototype, "itemH", {
 	        get: function () {
-	            return this._titleHeight;
+	            return this._itemH;
 	        },
-	        /**
-	         * titleHeight 标题控件的高度。
-	         */
 	        set: function (value) {
-	            this._titleHeight = value;
+	            this._itemH = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /**
-	     * 增加一个页面。
-	     * @param title 标题文本。
-	     * @param contentHeight 内容控件。
-	     * @returns 返回新增加的TitleContent。
-	     */
-	    PropertySheets.prototype.addPage = function (title, contentWidget) {
-	        var me = this;
-	        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
-	        var titleContent = title_content_1.TitleContent.create({
-	            collapsed: true,
-	            titleWidget: titleWidget,
-	            contentWidget: contentWidget,
-	            titleHeight: this.titleHeight
+	    Object.defineProperty(PropertyPage.prototype, "titleW", {
+	        get: function () {
+	            return this._titleW;
+	        },
+	        set: function (value) {
+	            this._titleW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(PropertyPage.prototype, "valueW", {
+	        get: function () {
+	            return this._valueW;
+	        },
+	        set: function (value) {
+	            this._valueW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    PropertyPage.prototype.addEdit = function (title, value, inputTips, inputType, inputFilter) {
+	        var itemH = this.itemH;
+	        var valueW = inputType === "number" ? "50%" : this.valueW;
+	        var widget = title_edit_1.TitleEdit.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            valueW: valueW,
+	            titleW: this.titleW,
+	            inputType: inputType,
+	            inputTips: inputTips,
+	            inputFilter: inputFilter,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
 	        });
-	        titleWidget.onClickTrigger = function (collapsed) {
-	            titleContent.triggerCollapsed();
-	            me.relayoutChildren();
-	        };
-	        this.addChild(titleContent);
-	        return titleContent;
+	        this.addChild(widget, true);
+	        return widget;
 	    };
-	    PropertySheets.prototype.relayoutChildren = function () {
-	        var r = this.getLayoutRect();
-	        var x = this.leftPadding;
-	        var y = this.topPadding;
-	        var w = this.clientW;
-	        this.children.forEach(function (child) {
-	            child.moveResizeTo(x, y, w, 0, 0);
-	            child.relayoutChildren();
-	            y += child.h;
+	    PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
+	        var itemH = this.itemH;
+	        var widget = title_choosable_edit_1.TitleChoosableEdit.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            inputTips: inputTips,
+	            titleW: this.titleW,
+	            valueW: this.valueW,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
 	        });
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = y + this.bottomPadding + 10;
-	        return r;
+	        this.addChild(widget, true);
+	        return widget;
 	    };
-	    PropertySheets.prototype.onReset = function () {
+	    PropertyPage.prototype.addComboBox = function (title, value) {
+	        var itemH = this.itemH;
+	        var widget = title_combo_box_1.TitleComboBox.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            titleW: this.titleW,
+	            valueW: this.valueW,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+	        });
+	        this.addChild(widget, true);
+	        return widget;
+	    };
+	    PropertyPage.prototype.addComboBoxEditable = function (title, value) {
+	        var itemH = this.itemH;
+	        var widget = title_combo_box_1.TitleComboBoxEditable.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            titleW: this.titleW,
+	            valueW: this.valueW,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+	        });
+	        this.addChild(widget, true);
+	        return widget;
+	    };
+	    PropertyPage.prototype.addSlider = function (title, value) {
+	        var itemH = this.itemH;
+	        var widget = title_slider_1.TitleSlider.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            titleW: this.titleW,
+	            valueW: this.valueW,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+	        });
+	        this.addChild(widget, true);
+	        return widget;
+	    };
+	    PropertyPage.prototype.addTextArea = function (title, value, h) {
+	        var itemH = h || (this.itemH * 4);
+	        var widget = title_text_area_1.TitleTextArea.create({
+	            name: title,
+	            title: title,
+	            value: value,
+	            titleW: this.titleW,
+	            valueW: this.valueW,
+	            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+	        });
+	        this.addChild(widget, true);
+	        return widget;
+	    };
+	    PropertyPage.prototype.find = function (title) {
+	        return this.findChildByName(title);
+	    };
+	    PropertyPage.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this._titleHeight = 30;
-	        this.dragToScroll = true;
-	        this.slideToScroll = true;
+	        this.itemH = 30;
+	        this.titleW = "60px";
+	        this.valueW = "100%";
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createV({ spacing: 5 });
 	    };
-	    PropertySheets.create = function (options) {
-	        return PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+	    PropertyPage.create = function (options) {
+	        return PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
 	    };
-	    PropertySheets.TYPE = "property-sheets";
-	    PropertySheets.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertySheets(); });
-	    return PropertySheets;
-	}(scroll_view_1.ScrollView));
-	exports.PropertySheets = PropertySheets;
+	    PropertyPage.TYPE = "property-page";
+	    PropertyPage.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyPage(); });
+	    return PropertyPage;
+	}(widget_1.Widget));
+	exports.PropertyPage = PropertyPage;
 	;
-	widget_factory_1.WidgetFactory.register(PropertySheets.TYPE, PropertySheets.create);
+	widget_factory_1.WidgetFactory.register(PropertyPage.TYPE, PropertyPage.create);
 
 
 /***/ },
@@ -25458,8 +25542,176 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var slider_1 = __webpack_require__(117);
 	var title_value_1 = __webpack_require__(137);
-	var choosable_edit_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleSlider = (function (_super) {
+	    __extends(TitleSlider, _super);
+	    function TitleSlider(type) {
+	        _super.call(this, type || TitleSlider.TYPE);
+	    }
+	    TitleSlider.prototype.createValueWidget = function (options) {
+	        return slider_1.Slider.create(options);
+	    };
+	    TitleSlider.create = function (options) {
+	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
+	    };
+	    TitleSlider.TYPE = "title-slider";
+	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
+	    return TitleSlider;
+	}(title_value_1.TitleValue));
+	exports.TitleSlider = TitleSlider;
+	;
+	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var edit_1 = __webpack_require__(81);
+	var title_value_1 = __webpack_require__(137);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var TitleTextArea = (function (_super) {
+	    __extends(TitleTextArea, _super);
+	    function TitleTextArea(type) {
+	        _super.call(this, type || TitleTextArea.TYPE);
+	    }
+	    Object.defineProperty(TitleTextArea.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleTextArea.prototype.createValueWidget = function (options) {
+	        var opts = options || {};
+	        if (this._inputTips) {
+	            opts.inputTips = this._inputTips;
+	        }
+	        opts.multiLines = true;
+	        return edit_1.Edit.create(opts);
+	    };
+	    TitleTextArea.create = function (options) {
+	        return TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+	    };
+	    TitleTextArea.TYPE = "title-text-area";
+	    TitleTextArea.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleTextArea(); });
+	    return TitleTextArea;
+	}(title_value_1.TitleValue));
+	exports.TitleTextArea = TitleTextArea;
+	;
+	widget_factory_1.WidgetFactory.register(TitleTextArea.TYPE, TitleTextArea.create);
+
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var title_value_1 = __webpack_require__(137);
+	var widget_factory_1 = __webpack_require__(77);
+	var recyclable_creator_1 = __webpack_require__(79);
+	var combo_box_1 = __webpack_require__(119);
+	var TitleComboBoxBase = (function (_super) {
+	    __extends(TitleComboBoxBase, _super);
+	    function TitleComboBoxBase(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(TitleComboBoxBase.prototype, "itemHeight", {
+	        get: function () {
+	            var comboBox = this._valueWidget;
+	            return comboBox.itemHeight;
+	        },
+	        set: function (value) {
+	            var comboBox = this._valueWidget;
+	            comboBox.itemHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleComboBoxBase.prototype.resetOptions = function () {
+	        var comboBox = this._valueWidget;
+	        comboBox.resetOptions();
+	        return this;
+	    };
+	    TitleComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
+	        var comboBox = this._valueWidget;
+	        comboBox.addOption(text, value, imageURL, color);
+	        return this;
+	    };
+	    return TitleComboBoxBase;
+	}(title_value_1.TitleValue));
+	exports.TitleComboBoxBase = TitleComboBoxBase;
+	var TitleComboBox = (function (_super) {
+	    __extends(TitleComboBox, _super);
+	    function TitleComboBox(type) {
+	        _super.call(this, type || TitleComboBox.TYPE);
+	    }
+	    TitleComboBox.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBox.create(options);
+	    };
+	    TitleComboBox.create = function (options) {
+	        return TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
+	    };
+	    TitleComboBox.TYPE = "title-combo-box";
+	    TitleComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBox(); });
+	    return TitleComboBox;
+	}(TitleComboBoxBase));
+	exports.TitleComboBox = TitleComboBox;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
+	var TitleComboBoxEditable = (function (_super) {
+	    __extends(TitleComboBoxEditable, _super);
+	    function TitleComboBoxEditable(type) {
+	        _super.call(this, type || TitleComboBoxEditable.TYPE);
+	    }
+	    TitleComboBoxEditable.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBoxEditable.create(options);
+	    };
+	    TitleComboBoxEditable.create = function (options) {
+	        return TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
+	    };
+	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
+	    TitleComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBoxEditable(); });
+	    return TitleComboBoxEditable;
+	}(TitleComboBoxBase));
+	exports.TitleComboBoxEditable = TitleComboBoxEditable;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var title_value_1 = __webpack_require__(137);
+	var choosable_edit_1 = __webpack_require__(142);
 	var widget_factory_1 = __webpack_require__(77);
 	var recyclable_creator_1 = __webpack_require__(79);
 	var TitleChoosableEdit = (function (_super) {
@@ -25508,7 +25760,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25606,7 +25858,7 @@ var qtk =
 
 
 /***/ },
-/* 140 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25615,162 +25867,105 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(137);
+	var scroll_view_1 = __webpack_require__(99);
 	var widget_factory_1 = __webpack_require__(77);
+	var title_content_1 = __webpack_require__(133);
 	var recyclable_creator_1 = __webpack_require__(79);
-	var TitleTextArea = (function (_super) {
-	    __extends(TitleTextArea, _super);
-	    function TitleTextArea(type) {
-	        _super.call(this, type || TitleTextArea.TYPE);
+	var collapsable_title_1 = __webpack_require__(134);
+	/**
+	 * 管理多个页面，每个页面可以展开或折叠。
+	 */
+	var PropertySheets = (function (_super) {
+	    __extends(PropertySheets, _super);
+	    function PropertySheets() {
+	        _super.call(this, PropertySheets.TYPE);
 	    }
-	    Object.defineProperty(TitleTextArea.prototype, "inputTips", {
+	    Object.defineProperty(PropertySheets.prototype, "titleHeight", {
 	        get: function () {
-	            return this._inputTips;
+	            return this._titleHeight;
 	        },
+	        /**
+	         * titleHeight 标题控件的高度。
+	         */
 	        set: function (value) {
-	            this._inputTips = value;
-	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputTips: value });
+	            this._titleHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(PropertySheets.prototype, "childrenLayouter", {
+	        get: function () {
+	            return this._childrenLayouter;
+	        },
+	        set: function (layouter) {
+	            console.log("set childrenLayouter not work for me.");
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 增加一个页面。
+	     * @param title 标题文本。
+	     * @param contentHeight 内容控件。
+	     * @returns 返回新增加的TitleContent。
+	     */
+	    PropertySheets.prototype.addPage = function (title, contentWidget) {
+	        var me = this;
+	        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
+	        var titleContent = title_content_1.TitleContent.create({
+	            collapsed: true,
+	            titleWidget: titleWidget,
+	            contentWidget: contentWidget,
+	            titleHeight: this.titleHeight
+	        });
+	        titleWidget.onClickTrigger = function (collapsed) {
+	            titleContent.collapsed = !titleContent.collapsed;
+	            me.relayoutChildren();
+	        };
+	        this.addChild(titleContent);
+	        return titleContent;
+	    };
+	    PropertySheets.prototype.computeDesireContentHeight = function () {
+	        var h = 0;
+	        this.children.forEach(function (child) {
+	            if (child.visible) {
+	                h += child.h;
 	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TitleTextArea.prototype.createValueWidget = function (options) {
-	        var opts = options || {};
-	        if (this._inputTips) {
-	            opts.inputTips = this._inputTips;
-	        }
-	        opts.multiLines = true;
-	        return edit_1.Edit.create(opts);
+	        });
+	        return h;
 	    };
-	    TitleTextArea.create = function (options) {
-	        return TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+	    PropertySheets.prototype.relayoutChildren = function () {
+	        this.contentHeight = this.computeDesireContentHeight();
+	        var r = this.getLayoutRect();
+	        var w = r.w;
+	        var x = r.x;
+	        var y = r.y;
+	        this.children.forEach(function (child) {
+	            child.moveResizeTo(x, y, w, 0, 0);
+	            child.relayoutChildren();
+	            y += child.h;
+	        });
+	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentHeight = y + this.bottomPadding + 10;
+	        return r;
 	    };
-	    TitleTextArea.TYPE = "title-text-area";
-	    TitleTextArea.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleTextArea(); });
-	    return TitleTextArea;
-	}(title_value_1.TitleValue));
-	exports.TitleTextArea = TitleTextArea;
+	    PropertySheets.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._titleHeight = 30;
+	        this.dragToScroll = true;
+	        this.slideToScroll = true;
+	        this.scrollerOptions.scrollingX = false;
+	    };
+	    PropertySheets.create = function (options) {
+	        return PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+	    };
+	    PropertySheets.TYPE = "property-sheets";
+	    PropertySheets.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertySheets(); });
+	    return PropertySheets;
+	}(scroll_view_1.ScrollView));
+	exports.PropertySheets = PropertySheets;
 	;
-	widget_factory_1.WidgetFactory.register(TitleTextArea.TYPE, TitleTextArea.create);
-
-
-/***/ },
-/* 141 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var slider_1 = __webpack_require__(117);
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var TitleSlider = (function (_super) {
-	    __extends(TitleSlider, _super);
-	    function TitleSlider(type) {
-	        _super.call(this, type || TitleSlider.TYPE);
-	    }
-	    TitleSlider.prototype.createValueWidget = function (options) {
-	        return slider_1.Slider.create(options);
-	    };
-	    TitleSlider.create = function (options) {
-	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
-	    };
-	    TitleSlider.TYPE = "title-slider";
-	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
-	    return TitleSlider;
-	}(title_value_1.TitleValue));
-	exports.TitleSlider = TitleSlider;
-	;
-	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
-
-
-/***/ },
-/* 142 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var combo_box_1 = __webpack_require__(119);
-	var TitleComboBoxBase = (function (_super) {
-	    __extends(TitleComboBoxBase, _super);
-	    function TitleComboBoxBase(type) {
-	        _super.call(this, type);
-	    }
-	    Object.defineProperty(TitleComboBoxBase.prototype, "itemHeight", {
-	        get: function () {
-	            var comboBox = this._valueWidget;
-	            return comboBox.itemHeight;
-	        },
-	        set: function (value) {
-	            var comboBox = this._valueWidget;
-	            comboBox.itemHeight = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TitleComboBoxBase.prototype.resetOptions = function () {
-	        var comboBox = this._valueWidget;
-	        comboBox.resetOptions();
-	        return this;
-	    };
-	    TitleComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
-	        var comboBox = this._valueWidget;
-	        comboBox.addOption(text, value, imageURL, color);
-	        return this;
-	    };
-	    return TitleComboBoxBase;
-	}(title_value_1.TitleValue));
-	exports.TitleComboBoxBase = TitleComboBoxBase;
-	var TitleComboBox = (function (_super) {
-	    __extends(TitleComboBox, _super);
-	    function TitleComboBox(type) {
-	        _super.call(this, type || TitleComboBox.TYPE);
-	    }
-	    TitleComboBox.prototype.createValueWidget = function (options) {
-	        return combo_box_1.ComboBox.create(options);
-	    };
-	    TitleComboBox.create = function (options) {
-	        return TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
-	    };
-	    TitleComboBox.TYPE = "title-combo-box";
-	    TitleComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBox(); });
-	    return TitleComboBox;
-	}(TitleComboBoxBase));
-	exports.TitleComboBox = TitleComboBox;
-	;
-	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
-	var TitleComboBoxEditable = (function (_super) {
-	    __extends(TitleComboBoxEditable, _super);
-	    function TitleComboBoxEditable(type) {
-	        _super.call(this, type || TitleComboBoxEditable.TYPE);
-	    }
-	    TitleComboBoxEditable.prototype.createValueWidget = function (options) {
-	        return combo_box_1.ComboBoxEditable.create(options);
-	    };
-	    TitleComboBoxEditable.create = function (options) {
-	        return TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
-	    };
-	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
-	    TitleComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBoxEditable(); });
-	    return TitleComboBoxEditable;
-	}(TitleComboBoxBase));
-	exports.TitleComboBoxEditable = TitleComboBoxEditable;
-	;
-	widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);
+	widget_factory_1.WidgetFactory.register(PropertySheets.TYPE, PropertySheets.create);
 
 
 /***/ }

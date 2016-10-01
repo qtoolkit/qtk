@@ -78,6 +78,7 @@ export class TitleContent extends Widget {
 				});
 			}else{
 				this.collapsed = value;
+				this.relayoutChildren();
 			}
 		}else{
 			this._collapsed = value;
@@ -93,7 +94,6 @@ export class TitleContent extends Widget {
 		if(this._inited) {
 			if(this._collapsed !== value) {
 				this._collapsed = value;
-				this.relayoutChildren();
 
 				if(value) {
 					this.dispatchEvent(Events.createAnyEvent(Events.COLLAPSE));
@@ -104,6 +104,8 @@ export class TitleContent extends Widget {
 		}else{
 			this._collapsed = value;
 		}
+		
+		this.reComputeH();
 	}
 
 	public get collapsed():boolean {
@@ -177,6 +179,11 @@ export class TitleContent extends Widget {
 		}
 	}
 
+	protected reComputeH() {
+		var contentHeight = (!this._collapsed ? this.contentHeight : 0);
+		this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+	}
+
 	public relayoutChildren() : Rect {
 		this.requestRedraw();
 		if(this._animating) {
@@ -187,12 +194,7 @@ export class TitleContent extends Widget {
 			this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
 		}
 
-		var h = this.titleHeight + this.topPadding + this.bottomPadding;
-		if(!this._collapsed) {
-			h += this.contentHeight;
-		}
-		
-		this.h = h;
+		this.reComputeH();
 		var r = this.getLayoutRect();
 		var titleWidget = this._titleWidget;
 		var contentWidget = this._contentWidget;

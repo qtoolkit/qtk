@@ -45,18 +45,18 @@ var LinearLayouter = (function (_super) {
             var bp = b.layoutParam || defParam;
             return ap.position - bp.position;
         });
-        arr.forEach(function (child) {
+        arr.forEach(function (child, index) {
             if (r.w > 0 && r.h > 0) {
-                _this.layoutChild(child, r);
+                _this.layoutChild(child, r, index);
             }
         });
         arr = children.filter(function (child) {
             var param = child.layoutParam || defParam;
             return !param.position;
         });
-        arr.forEach(function (child) {
+        arr.forEach(function (child, index) {
             if (r.w > 0 && r.h > 0) {
-                _this.layoutChild(child, r);
+                _this.layoutChild(child, r, index);
             }
         });
         arr = children.filter(function (child) {
@@ -68,15 +68,15 @@ var LinearLayouter = (function (_super) {
             var bp = b.layoutParam || defParam;
             return bp.position - ap.position;
         });
-        arr.forEach(function (child) {
+        arr.forEach(function (child, index) {
             if (r.w > 0 && r.h > 0) {
-                _this.layoutChild(child, r);
+                _this.layoutChild(child, r, index);
             }
         });
         r.dispose();
         return rect;
     };
-    LinearLayouter.prototype.layoutChild = function (child, r) {
+    LinearLayouter.prototype.layoutChild = function (child, r, index) {
         var x = 0;
         var y = 0;
         var w = 0;
@@ -85,7 +85,13 @@ var LinearLayouter = (function (_super) {
         var param = child.layoutParam || defParam;
         var position = param.position;
         if (param && param.type.indexOf("linear") >= 0 && child.visible) {
-            var spacing = param.spacing || this.spacing;
+            var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
+            if (this.orientation === consts_1.Orientation.V) {
+                r.h -= spacing;
+            }
+            else {
+                r.w -= spacing;
+            }
             h = Math.min(r.h, param.h ? layouter_1.Layouter.evalValue(param.h, r.h) : child.h);
             w = Math.min(r.w, param.w ? layouter_1.Layouter.evalValue(param.w, r.w) : child.w);
             if (this.orientation === consts_1.Orientation.V) {
@@ -111,7 +117,7 @@ var LinearLayouter = (function (_super) {
                 else {
                     y = r.y + r.h - spacingH;
                 }
-                r.h -= spacingH;
+                r.h -= h;
             }
             else {
                 switch (param.align) {
@@ -136,7 +142,7 @@ var LinearLayouter = (function (_super) {
                 else {
                     x = r.x + r.w - spacingW;
                 }
-                r.w -= spacingW;
+                r.w -= w;
             }
             child.moveResizeTo(x, y, w, h);
             child.relayoutChildren();

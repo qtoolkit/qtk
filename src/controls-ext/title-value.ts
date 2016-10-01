@@ -5,7 +5,7 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 
-export class TitleValue extends Widget {
+export abstract class TitleValue extends Widget {
 	protected _title : string;
 	protected _titleW : string;
 	protected _valueW : string;

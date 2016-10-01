@@ -96,7 +96,7 @@ export class ComboBoxItem extends ListItem {
 	}
 };
 
-export class ComboBoxBase extends Widget {
+export abstract class ComboBoxBase extends Widget {
 	protected _value : any;
 	protected _itemHeight : number;
 	protected _current : ComboBoxOption;

@@ -130,3 +130,18 @@ export function aRemove(arr:any, obj:any) : boolean {
 	return false;
 }
 
+declare global {
+	interface Array<T> {
+		stableSort(comp:Function);
+		remove(obj:any):boolean;
+	}
+}
+
+Array.prototype.stableSort = function(comp:Function) {
+	stableSort(this, comp);
+}
+
+Array.prototype.remove = function(obj:any) {
+	return aRemove(this, obj);
+}
+

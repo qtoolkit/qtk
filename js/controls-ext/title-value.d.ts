@@ -1,5 +1,5 @@
 import { Widget } from "../controls/widget";
-export declare class TitleValue extends Widget {
+export declare abstract class TitleValue extends Widget {
     protected _title: string;
     protected _titleW: string;
     protected _valueW: string;

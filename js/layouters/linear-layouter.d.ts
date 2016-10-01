@@ -20,7 +20,7 @@ export declare class LinearLayouter extends Layouter {
      */
     setOptions(options: any): any;
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
-    layoutChild(child: Widget, r: Rect): void;
+    layoutChild(child: Widget, r: Rect, index: number): void;
     createParam(options?: any): LinearLayouterParam;
     static createV(options: any): LinearLayouter;
     static createH(options?: any): LinearLayouter;
