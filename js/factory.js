@@ -9,11 +9,11 @@ var Factory = (function () {
     Factory.prototype.register = function (type, creator) {
         this.creators[type] = creator;
     };
-    Factory.prototype.create = function (type) {
+    Factory.prototype.create = function (type, options) {
         var obj = null;
         var creator = this.creators[type];
         if (creator) {
-            obj = creator();
+            obj = creator(options);
         }
         return obj;
     };

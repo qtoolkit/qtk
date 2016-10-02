@@ -16,8 +16,8 @@ var WidgetFactory = (function () {
     WidgetFactory.register = function (type, creator) {
         return WidgetFactory.factory.register(type, creator);
     };
-    WidgetFactory.create = function (type) {
-        return WidgetFactory.factory.create(type);
+    WidgetFactory.create = function (type, options) {
+        return WidgetFactory.factory.create(type, options);
     };
     WidgetFactory.factory = new factory_1.Factory();
     return WidgetFactory;

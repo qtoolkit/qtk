@@ -13,6 +13,9 @@ var title_choosable_edit_1 = require("./title-choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var linear_layouter_1 = require('../layouters/linear-layouter');
+/**
+ * 属性编辑页，包装了各种TitleValue。
+ */
 var PropertyPage = (function (_super) {
     __extends(PropertyPage, _super);
     function PropertyPage() {

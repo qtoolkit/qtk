@@ -14,7 +14,7 @@ import {TabPage} from "./controls/tab-page";
 import {TabButton} from "./controls/tab-button";
 import {TabControl} from "./controls/tab-control";
 import {ImageDrawType, ImageTile} from "./image-tile";
-import {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
+import {Direction, Align, AlignH, AlignV, Orientation, Services} from "./consts";
 import {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";
 import {TabButtonGroup} from "./controls/tab-button-group";
 import {RichText} from "./controls/rich-text";
@@ -53,7 +53,7 @@ import {ViewPort} from "./view-port";
 import * as deviceInfo from "./device-info";
 import inputEventAdapter = require("./input-event-adapter");
 import {Application} from "./application";
-import * as Services from  "./services";
+import {ServiceLocator} from  "./service-locator";
 import {KeyEvent} from "./key-event";
 import {RoundType, Graphics} from "./graphics";
 import {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
@@ -65,12 +65,19 @@ import {Accordion} from "./controls/accordion";
 import {PropertyPage} from "./controls-ext/property-page";
 import {PropertySheets} from "./controls-ext/property-sheets";
 import {TitleContent} from "./controls/title-content";
+import {TitleLabel} from "./controls-ext/title-label";
 import {TitleEdit} from "./controls-ext/title-edit";
 import {TitleChoosableEdit} from "./controls-ext/title-choosable-edit";
 import {TitleTextArea} from "./controls-ext/title-text-area";
 import {ChoosableEdit} from "./controls-ext/choosable-edit";
 import {TitleSlider} from "./controls-ext/title-slider";
 import {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
+
+import {ICommand} from "./mvvm/icommand";
+import {ViewModal} from "./mvvm/view-modal";
+import {IViewModal} from "./mvvm/iview-modal";
+import {IValueConverter} from "./mvvm/ivalue-converter";
+import {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
@@ -86,6 +93,7 @@ export {
 	AlignH,
 	RoundType,
 	Graphics,
+	Services,
 	Orientation,
 	Direction,
 	ViewPort,
@@ -158,11 +166,12 @@ export {
 	MenuBar,
 	MenuBarItem,
 	WindowNormal,
-	Services,
+	ServiceLocator,
 	WidgetFactory,
 	ThemeManager,
 	Events,
 	TitleEdit,
+	TitleLabel,
 	TitleContent,
 	TitleChoosableEdit,
 	TitleSlider,
@@ -179,5 +188,10 @@ export {
 	LinearLayouter,
 	LinearLayouterParam,
 	SimpleLayouter,
-	SimpleLayouterParam
+	SimpleLayouterParam,
+	IViewModal,
+	ViewModal,
+	IValueConverter,
+	ValidationResult,
+	IValidationRule
 };

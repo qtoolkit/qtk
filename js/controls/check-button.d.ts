@@ -2,6 +2,7 @@ import { Widget } from "./widget";
 import { Style } from "../style";
 export declare class CheckButton extends Widget {
     constructor(type?: string);
+    readonly inputable: boolean;
     value: boolean;
     protected getStyleType(): string;
     protected drawText(ctx: any, style: Style): Widget;

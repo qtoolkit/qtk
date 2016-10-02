@@ -1,8 +1,8 @@
 import { Emitter } from "./emitter";
 import { IViewPort } from "./iview-port";
 import { IMainLoop } from "./imain-loop";
-import { IThemeManager } from "./itheme-manager";
 import { IApplication } from "./iapplication";
+import { IThemeManager } from "./itheme-manager";
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
  *

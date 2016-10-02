@@ -58,3 +58,8 @@ export enum Align {
 	B = 3,
 	BOTTOM = 3
 };
+
+export class Services {
+	public static THEME_MANAGER = "qtk-theme-manager";
+};
+

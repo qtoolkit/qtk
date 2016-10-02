@@ -13,6 +13,13 @@ var CheckButton = (function (_super) {
     function CheckButton(type) {
         _super.call(this, type || CheckButton.TYPE);
     }
+    Object.defineProperty(CheckButton.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(CheckButton.prototype, "value", {
         get: function () {
             return this._value;

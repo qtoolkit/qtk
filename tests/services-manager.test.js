@@ -7,7 +7,7 @@ describe('ServicesManager', function() {
 	}
 
     it('test register and get', (done) => {
-        var servicesManager = new qtk.Services.Manager();
+        var servicesManager = new qtk.ServiceLocator();;
 		servicesManager.register(type, service);
 		var result = service === servicesManager.get(type);
 

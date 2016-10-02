@@ -10,6 +10,10 @@ export class CheckButton extends Widget {
 	constructor(type?:string) {
 		super(type || CheckButton.TYPE);
 	}
+	
+	public get inputable() {
+		return true;
+	}
 
 	public get value() : boolean {
 		return this._value;

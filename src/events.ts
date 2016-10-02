@@ -20,6 +20,7 @@ export const CHANGE = "change"
 export const PROGRESS = "progress"
 export const CHANGING = "changing"
 export const PROP_CHANGE = "prop-change"
+export const PROP_DELETE = "prop-delete"
 export const DISPOSE = "dispose"
 export const RUN = "run"
 export const QUIT = "quit"
@@ -291,7 +292,7 @@ export class ChangeEvent extends Event {
 	public init(type:string, detail:any) : any {
 		super.init(type);
 
-		this.value = detail.newValue;
+		this.value = detail.newValue || detail.value;
 		this.oldValue = detail.oldValue;
 		this.newValue = detail.newValue;
 
@@ -310,10 +311,12 @@ export class PropChangeEvent extends ChangeEvent {
 	 * 属性名。
 	 */
 	public prop : string;
+	public trigger : any;
 
 	public init(type:string, detail:any) : any {
 		super.init(type, detail);
 		this.prop = detail.prop;
+		this.trigger = detail.trigger;
 
 		return this;
 	}

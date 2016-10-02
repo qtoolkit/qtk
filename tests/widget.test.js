@@ -37,7 +37,7 @@ describe('Widget', function() {
 		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
-			var widget = qtk.Widget.create(app);
+			var widget = qtk.Button.create({app:app});
 			var attrs = {x:0, y:0, z:0};		
 			initWidget(widget);
 			widget.get(attrs);
@@ -73,8 +73,8 @@ describe('Widget', function() {
 		app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 		var vp = app.getViewPort();
 		app.on(qtk.Events.READY, function() {
-			var child = qtk.Widget.create(app);
-			var widget = qtk.Widget.create(app);
+			var child = qtk.Button.create({app:app});
+			var widget = qtk.Button.create({app:app});
 		
 			initWidget(child);
 			initWidget(widget);
@@ -94,21 +94,21 @@ describe('Widget', function() {
     });
     
     it('test moveTo', (done) => {
-		var widget = qtk.Widget.create();
+		var widget = qtk.Button.create();
 		widget.moveTo(10, 20);
 		var result = widget.x === 10 && widget.y === 20;
 		done(result ? null : new Error("widget moveTo."));
 	});
     
     it('test resizeTo', (done) => {
-		var widget = qtk.Widget.create();
+		var widget = qtk.Button.create();
 		widget.resizeTo(30, 40);
 		var result = widget.w === 30 && widget.h === 40;
 		done(result ? null : new Error("widget resizeTo."));
 	});
     
     it('test moveResizeTo', (done) => {
-		var widget = qtk.Widget.create();
+		var widget = qtk.Button.create();
 		widget.moveResizeTo(10, 20, 30, 40);
 		var result = widget.x === 10 && widget.y === 20 && widget.w === 30 && widget.h === 40;
 
@@ -116,7 +116,7 @@ describe('Widget', function() {
 	});
   	
   	it('test padding', (done) => {
-		var widget = qtk.Widget.create();
+		var widget = qtk.Button.create();
 		widget.padding = 4;
 		var result = widget.leftPadding === widget.padding && widget.topPadding === widget.padding
 			&& widget.bottomPadding === widget.padding;

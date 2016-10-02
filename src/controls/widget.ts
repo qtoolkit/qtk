@@ -10,15 +10,21 @@ import TWEEN = require("tween.js");
 import {Emitter} from "../emitter";
 import {stableSort} from "../utils";
 import Events = require("../events");
-import {ImageTile, ImageDrawType} from "../image-tile";
 import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {IThemeManager} from "../itheme-manager";
 import {RoundType, Graphics} from "../graphics";
 import {DirtyRectContext} from "../dirty-rect-context";
+import {ImageTile, ImageDrawType} from "../image-tile";
 import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
+
+import {ICommand} from "../mvvm/icommand";
+import {IValueConverter} from "../mvvm/ivalue-converter";
+import {IViewModal, BindingMode} from "../mvvm/iview-modal";
+import {BindingRuleParser} from "../mvvm/binding-rule-parser";
+import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
 
 /**
  * Widget是所有控件的基类。
@@ -1198,6 +1204,13 @@ export class Widget extends Emitter {
 		return this._visible;
 	}
 
+	/**
+	 * 用户是否可以通过本控件输入/选择数据。
+	 */
+	public get inputable() {
+		return false;
+	}
+
 	public setVisible(value) {
 		this.setProp("visible", value, true);
 		this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
@@ -1282,8 +1295,8 @@ export class Widget extends Emitter {
 	public get text() {
 		return this._text;
 	}
-	public set text(value) {
-		this.setProp("text", value?value.toString() : "", true);
+	public set text(value:any) {
+		this.setProp("text", (value || value === 0) ? value.toString() : "", true);
 	}
 
 
@@ -1594,6 +1607,8 @@ export class Widget extends Emitter {
 		this.onkeyup = null;
 		this._behaviors = {};
 		this.removeAllListeners();
+		this._viewModal = null;
+		this._dataBindingRule = null;
 
 		this.onReset();
 		this.set(options);
@@ -1690,17 +1705,137 @@ export class Widget extends Emitter {
 
 		return json;
 	}
-
-	public static create(app:IApplication, options:any) : Widget {
-		var widget = new Widget("dummy");
-
-		widget.reset("dummy", null);
-		widget.app = app;
-
-		return widget;
+	
+	protected onBindProp(prop:string, value:any) {
+		if(prop === "text") {
+			this.text = value;
+		} else if(prop === "value") {
+			this.value = value;
+		}
 	}
 
-	static ID = 10000;
+
+	protected _dataBindingRule : any;
+	protected _viewModal : IViewModal;
+	
+	public setDataBindingRule(dataBindingRule:any) : Widget {
+		this._dataBindingRule = BindingRuleParser.parse(dataBindingRule);
+
+		return this;
+	}
+
+	public bindData(viewModal:IViewModal) : Widget {
+		var dataBindingRule = this._dataBindingRule;
+		
+		if(dataBindingRule && viewModal) {
+			this._viewModal = viewModal;
+			var bindingMode = viewModal.getBindingMode();
+			
+			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
+				this.onBindData(viewModal, dataBindingRule);
+			}
+
+			if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
+				this.watchTargetChange(dataBindingRule);
+			}
+
+			if(bindingMode !== BindingMode.ONE_TIME && bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
+				viewModal.onChange(evt => {
+					this.onBindData(viewModal, dataBindingRule);
+				});
+			}
+		}
+
+		this._children.forEach((child:Widget) => {
+			child.bindData(viewModal);
+		});
+		
+		return this;
+	}
+	
+	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
+		for(var prop in dataBindingRule) {
+			var dataSource = dataBindingRule[prop];
+			var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
+			var value = dataSource.value || viewModal.getProp(dataSource.path);
+			
+			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
+				this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+			}
+		}
+	}
+
+	protected convertValue(viewModal:IViewModal, dataSource:any, value:any) : any {
+		var v = value;
+		if(dataSource.converters) {
+			dataSource.converters.forEach((name:string) => {
+				var c = viewModal.getValueConverter(name);
+				if(c) {
+					v = c.convert(v);
+				}
+			});
+		}
+		
+		return v;
+	}
+
+	protected convertBackValue(viewModal:IViewModal, dataSource:any, value:any) : any {
+		var v = value;
+		if(dataSource.converters) {
+			dataSource.converters.forEachR((name:string) => {
+				var c = viewModal.getValueConverter(name);
+				if(c) {
+					v = c.convertBack(v);
+				}
+			});
+		}
+		
+		return v;
+	}
+
+	protected getPropDefaultBindMode(prop:string) : BindingMode {
+		return (prop === "value" && this.inputable) ? BindingMode.TWO_WAY : BindingMode.ONE_WAY;
+	}
+
+	protected isValidValue(viewModal:IViewModal, dataSource:any, value:any) : boolean {
+		if(dataSource.validationRule) {
+			var validationRule = viewModal.getValidationRule(dataSource.validationRule);
+			if(validationRule) {
+				var result = validationRule.validate(value);
+				if(result.code) {
+					console.log("invalid value:" + result.message);
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	protected watchTargetValueChange(dataSource:any) {
+		var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
+		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
+			this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
+				var value = this.convertBackValue(this._viewModal, dataSource, evt.value);
+			
+				if(this.isValidValue(this._viewModal, dataSource, value)) {
+					this._viewModal.setProp(dataSource.path, value, this);
+				}
+			});
+		}
+	}
+
+	protected watchTargetChange(dataBindingRule) {
+		for(var prop in dataBindingRule) {
+			var bindingMode = this.getPropDefaultBindMode(prop);
+			if(bindingMode === BindingMode.TWO_WAY) {
+				var dataSource = dataBindingRule[prop];
+				this.watchTargetValueChange(dataSource);
+			}
+		}
+	}
+
+	private static ID = 10000;
 };
 
 export enum WidgetMode {

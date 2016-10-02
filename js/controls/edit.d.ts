@@ -8,6 +8,7 @@ export declare class Edit extends Label {
     protected _inputType: string;
     protected _inputTips: string;
     protected _inputFilter: Function;
+    readonly inputable: boolean;
     inputFilter: (value: string) => string;
     inputTips: string;
     inputType: string;

@@ -5,6 +5,7 @@ declare global  {
     interface Array<T> {
         stableSort(comp: Function): any;
         remove(obj: any): boolean;
+        forEachR(func: Function): any;
     }
 }
 export {};

@@ -15,6 +15,7 @@ import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
 import { Layouter } from '../layouters/layouter';
 import { Behavior } from "../behaviors/behavior";
+import { IViewModal, BindingMode } from "../mvvm/iview-modal";
 /**
  * Widget是所有控件的基类。
  */
@@ -184,6 +185,10 @@ export declare class Widget extends Emitter {
     selected: boolean;
     enable: boolean;
     visible: boolean;
+    /**
+     * 用户是否可以通过本控件输入/选择数据。
+     */
+    readonly inputable: boolean;
     setVisible(value: any): void;
     opacity: number;
     scaleX: number;
@@ -194,7 +199,7 @@ export declare class Widget extends Emitter {
     pivotX: number;
     pivotY: number;
     tips: string;
-    text: string;
+    text: any;
     name: string;
     type: string;
     readonly id: string;
@@ -282,8 +287,19 @@ export declare class Widget extends Emitter {
     reset(type: string, options: any): Widget;
     fromJson(json: any): Widget;
     toJson(json: any): any;
-    static create(app: IApplication, options: any): Widget;
-    static ID: number;
+    protected onBindProp(prop: string, value: any): void;
+    protected _dataBindingRule: any;
+    protected _viewModal: IViewModal;
+    setDataBindingRule(dataBindingRule: any): Widget;
+    bindData(viewModal: IViewModal): Widget;
+    protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
+    protected convertValue(viewModal: IViewModal, dataSource: any, value: any): any;
+    protected convertBackValue(viewModal: IViewModal, dataSource: any, value: any): any;
+    protected getPropDefaultBindMode(prop: string): BindingMode;
+    protected isValidValue(viewModal: IViewModal, dataSource: any, value: any): boolean;
+    protected watchTargetValueChange(dataSource: any): void;
+    protected watchTargetChange(dataBindingRule: any): void;
+    private static ID;
 }
 export declare enum WidgetMode {
     RUNTIME = 0,

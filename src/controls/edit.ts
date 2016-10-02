@@ -15,6 +15,10 @@ export class Edit extends Label {
 	protected _inputTips : string;
 	protected _inputFilter : Function;
 
+	public get inputable() {
+		return true;
+	}
+
 	public set inputFilter(value:(value:string) => string) {
 		this._inputFilter = value;
 	}
@@ -101,13 +105,19 @@ export class Edit extends Label {
 		});
 		
 		input.on(Events.CHANGING, evt => {
+			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
-			this.dispatchEvent(evt);
+			
+			e.init(Events.CHANGE, {value:this.text});;
+			this.dispatchEvent(e);
 		});
 		
 		input.on(Events.CHANGE, evt => {
+			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
-			this.dispatchEvent(evt);
+			
+			e.init(Events.CHANGE, {value:this.text});;
+			this.dispatchEvent(e);
 		});
 	}
 

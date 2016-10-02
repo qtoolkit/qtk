@@ -39,6 +39,10 @@ export class RichTextEdit extends RichText {
 	constructor() {
 		super(RichTextEdit.TYPE);
 	}
+	
+	public get inputable() {
+		return true;
+	}
 
 	public undo() {
 		this._doc.performUndo();

@@ -18,7 +18,7 @@ export class WidgetFactory {
 		return WidgetFactory.factory.register(type, creator);
 	}
 
-	public static create(type:string) : Widget {
-		return WidgetFactory.factory.create(type);
+	public static create(type:string, options?:any) : Widget {
+		return WidgetFactory.factory.create(type, options);
 	}
 }

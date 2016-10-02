@@ -40,6 +40,13 @@ var RichTextEdit = (function (_super) {
         this.cachedHeight = 0;
         this.nextCaretToggle = Date.now();
     }
+    Object.defineProperty(RichTextEdit.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     RichTextEdit.prototype.undo = function () {
         this._doc.performUndo();
     };

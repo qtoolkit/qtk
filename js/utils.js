@@ -116,6 +116,13 @@ function aRemove(arr, obj) {
     return false;
 }
 exports.aRemove = aRemove;
+Array.prototype.forEachR = function (func) {
+    var n = this.length - 1;
+    for (var i = this.length - 1; i >= 0; i--) {
+        var iter = this[i];
+        func(this[i], i);
+    }
+};
 Array.prototype.stableSort = function (comp) {
     stableSort(this, comp);
 };

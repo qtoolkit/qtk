@@ -4,7 +4,7 @@ describe('Resizable', function() {
 	var app = new qtk.Application.create("test");
 	app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 	var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
-	var widget = qtk.Widget.create();
+	var widget = qtk.Button.create();
 	widget.moveResizeTo(0, 0, 100, 100);
 	win.addChild(widget);
 	widget.useBehavior("resizable", {all:true, animateDuration:0});	

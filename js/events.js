@@ -24,6 +24,7 @@ exports.CHANGE = "change";
 exports.PROGRESS = "progress";
 exports.CHANGING = "changing";
 exports.PROP_CHANGE = "prop-change";
+exports.PROP_DELETE = "prop-delete";
 exports.DISPOSE = "dispose";
 exports.RUN = "run";
 exports.QUIT = "quit";
@@ -227,7 +228,7 @@ var ChangeEvent = (function (_super) {
     }
     ChangeEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
-        this.value = detail.newValue;
+        this.value = detail.newValue || detail.value;
         this.oldValue = detail.oldValue;
         this.newValue = detail.newValue;
         return this;
@@ -248,6 +249,7 @@ var PropChangeEvent = (function (_super) {
     PropChangeEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
         this.prop = detail.prop;
+        this.trigger = detail.trigger;
         return this;
     };
     PropChangeEvent.create = function () {

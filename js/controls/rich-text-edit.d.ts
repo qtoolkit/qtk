@@ -15,6 +15,7 @@ export declare class RichTextEdit extends RichText {
     protected _plainClipboard: any;
     protected _selectDragStart: any;
     constructor();
+    readonly inputable: boolean;
     undo(): void;
     redo(): void;
     selectAll(): void;

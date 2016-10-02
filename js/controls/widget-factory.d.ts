@@ -12,5 +12,5 @@ import { Widget } from "./widget";
 export declare class WidgetFactory {
     private static factory;
     static register(type: string, creator: Function): void;
-    static create(type: string): Widget;
+    static create(type: string, options?: any): Widget;
 }

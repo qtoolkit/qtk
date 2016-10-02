@@ -60,168 +60,175 @@ var qtk =
 	exports.MatrixStack = matrix_stack_1.MatrixStack;
 	var image_1 = __webpack_require__(13);
 	exports.Image = image_1.Image;
-	var group_1 = __webpack_require__(80);
+	var group_1 = __webpack_require__(82);
 	exports.Group = group_1.Group;
-	var edit_1 = __webpack_require__(81);
+	var edit_1 = __webpack_require__(83);
 	exports.Edit = edit_1.Edit;
-	var page_1 = __webpack_require__(85);
+	var page_1 = __webpack_require__(87);
 	exports.Page = page_1.Page;
-	var pages_1 = __webpack_require__(86);
+	var pages_1 = __webpack_require__(88);
 	exports.Pages = pages_1.Pages;
-	var button_1 = __webpack_require__(87);
+	var button_1 = __webpack_require__(89);
 	exports.Button = button_1.Button;
-	var tab_page_1 = __webpack_require__(88);
+	var tab_page_1 = __webpack_require__(90);
 	exports.TabPage = tab_page_1.TabPage;
-	var tab_button_1 = __webpack_require__(89);
+	var tab_button_1 = __webpack_require__(91);
 	exports.TabButton = tab_button_1.TabButton;
-	var tab_control_1 = __webpack_require__(93);
+	var tab_control_1 = __webpack_require__(95);
 	exports.TabControl = tab_control_1.TabControl;
 	var image_tile_1 = __webpack_require__(15);
 	exports.ImageDrawType = image_tile_1.ImageDrawType;
 	exports.ImageTile = image_tile_1.ImageTile;
-	var consts_1 = __webpack_require__(90);
+	var consts_1 = __webpack_require__(92);
 	exports.Direction = consts_1.Direction;
 	exports.Align = consts_1.Align;
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
-	var message_box_1 = __webpack_require__(95);
+	exports.Services = consts_1.Services;
+	var message_box_1 = __webpack_require__(97);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
 	exports.TitleOptions = message_box_1.TitleOptions;
 	exports.MessageBox = message_box_1.MessageBox;
-	var tab_button_group_1 = __webpack_require__(94);
+	var tab_button_group_1 = __webpack_require__(96);
 	exports.TabButtonGroup = tab_button_group_1.TabButtonGroup;
-	var rich_text_1 = __webpack_require__(115);
+	var rich_text_1 = __webpack_require__(117);
 	exports.RichText = rich_text_1.RichText;
-	var rich_text_edit_1 = __webpack_require__(116);
+	var rich_text_edit_1 = __webpack_require__(118);
 	exports.RichTextEdit = rich_text_edit_1.RichTextEdit;
-	var label_1 = __webpack_require__(82);
+	var label_1 = __webpack_require__(84);
 	exports.Label = label_1.Label;
-	var slider_1 = __webpack_require__(117);
+	var slider_1 = __webpack_require__(119);
 	exports.Slider = slider_1.Slider;
-	var switch_1 = __webpack_require__(118);
+	var switch_1 = __webpack_require__(120);
 	exports.Switch = switch_1.Switch;
-	var combo_box_1 = __webpack_require__(119);
+	var combo_box_1 = __webpack_require__(121);
 	exports.ComboBox = combo_box_1.ComboBox;
 	exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
-	var check_button_1 = __webpack_require__(92);
+	var check_button_1 = __webpack_require__(94);
 	exports.CheckButton = check_button_1.CheckButton;
-	var menu_1 = __webpack_require__(120);
+	var menu_1 = __webpack_require__(122);
 	exports.Menu = menu_1.Menu;
 	exports.MenuItem = menu_1.MenuItem;
-	var menu_bar_1 = __webpack_require__(121);
+	var menu_bar_1 = __webpack_require__(123);
 	exports.MenuBar = menu_bar_1.MenuBar;
 	exports.MenuBarItem = menu_bar_1.MenuBarItem;
-	var color_tile_1 = __webpack_require__(122);
+	var color_tile_1 = __webpack_require__(124);
 	exports.ColorTile = color_tile_1.ColorTile;
 	exports.ColorLine = color_tile_1.ColorLine;
-	var radio_button_1 = __webpack_require__(91);
+	var radio_button_1 = __webpack_require__(93);
 	exports.RadioButton = radio_button_1.RadioButton;
-	var progress_bar_1 = __webpack_require__(104);
+	var progress_bar_1 = __webpack_require__(106);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
 	exports.ProgressBar = progress_bar_1.ProgressBar;
-	var dialog_1 = __webpack_require__(96);
+	var dialog_1 = __webpack_require__(98);
 	exports.Dialog = dialog_1.Dialog;
-	var tree_item_1 = __webpack_require__(123);
+	var tree_item_1 = __webpack_require__(125);
 	exports.TreeItem = tree_item_1.TreeItem;
-	var tree_view_1 = __webpack_require__(124);
+	var tree_view_1 = __webpack_require__(126);
 	exports.TreeView = tree_view_1.TreeView;
-	var tree_item_data_1 = __webpack_require__(125);
+	var tree_item_data_1 = __webpack_require__(127);
 	exports.TreeItemData = tree_item_data_1.TreeItemData;
-	var list_item_1 = __webpack_require__(110);
+	var list_item_1 = __webpack_require__(112);
 	exports.ListItem = list_item_1.ListItem;
 	exports.ListItemStyle = list_item_1.ListItemStyle;
-	var grid_view_1 = __webpack_require__(126);
+	var grid_view_1 = __webpack_require__(128);
 	exports.GridView = grid_view_1.GridView;
-	var list_view_1 = __webpack_require__(98);
+	var list_view_1 = __webpack_require__(100);
 	exports.ListView = list_view_1.ListView;
-	var window_normal_1 = __webpack_require__(127);
+	var window_normal_1 = __webpack_require__(129);
 	exports.WindowNormal = window_normal_1.WindowNormal;
 	var widget_1 = __webpack_require__(16);
 	exports.Widget = widget_1.Widget;
 	exports.WidgetState = widget_1.WidgetState;
 	exports.WidgetMode = widget_1.WidgetMode;
 	exports.HitTestResult = widget_1.HitTestResult;
-	var scroll_view_1 = __webpack_require__(99);
+	var scroll_view_1 = __webpack_require__(101);
 	exports.ScrollerBarVisibility = scroll_view_1.ScrollerBarVisibility;
 	exports.ScrollBarStyle = scroll_view_1.ScrollBarStyle;
 	exports.ScrollView = scroll_view_1.ScrollView;
 	var style_1 = __webpack_require__(14);
 	exports.Style = style_1.Style;
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	exports.WidgetFactory = widget_factory_1.WidgetFactory;
-	var theme_manager_1 = __webpack_require__(108);
+	var theme_manager_1 = __webpack_require__(109);
 	exports.ThemeManager = theme_manager_1.ThemeManager;
 	var Events = __webpack_require__(7);
 	exports.Events = Events;
 	var canvas_1 = __webpack_require__(17);
 	exports.Canvas = canvas_1.Canvas;
-	var draggable_1 = __webpack_require__(128);
+	var draggable_1 = __webpack_require__(130);
 	exports.Draggable = draggable_1.Draggable;
-	var droppable_1 = __webpack_require__(129);
+	var droppable_1 = __webpack_require__(131);
 	exports.Droppable = droppable_1.Droppable;
-	var movable_1 = __webpack_require__(130);
+	var movable_1 = __webpack_require__(132);
 	exports.Movable = movable_1.Movable;
-	var resizable_1 = __webpack_require__(131);
+	var resizable_1 = __webpack_require__(133);
 	exports.Resizable = resizable_1.Resizable;
 	var emitter_1 = __webpack_require__(8);
 	exports.Emitter = emitter_1.Emitter;
-	var view_port_1 = __webpack_require__(107);
+	var view_port_1 = __webpack_require__(108);
 	exports.ViewPort = view_port_1.ViewPort;
-	var deviceInfo = __webpack_require__(109);
+	var deviceInfo = __webpack_require__(110);
 	exports.deviceInfo = deviceInfo;
 	var inputEventAdapter = __webpack_require__(19);
 	exports.inputEventAdapter = inputEventAdapter;
-	var application_1 = __webpack_require__(105);
+	var application_1 = __webpack_require__(107);
 	exports.Application = application_1.Application;
-	var Services = __webpack_require__(106);
-	exports.Services = Services;
+	var service_locator_1 = __webpack_require__(111);
+	exports.ServiceLocator = service_locator_1.ServiceLocator;
 	var key_event_1 = __webpack_require__(20);
 	exports.KeyEvent = key_event_1.KeyEvent;
 	var graphics_1 = __webpack_require__(23);
 	exports.RoundType = graphics_1.RoundType;
 	exports.Graphics = graphics_1.Graphics;
-	var linear_layouter_1 = __webpack_require__(112);
+	var linear_layouter_1 = __webpack_require__(114);
 	exports.LinearLayouter = linear_layouter_1.LinearLayouter;
 	exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
-	var dock_layouter_1 = __webpack_require__(111);
+	var dock_layouter_1 = __webpack_require__(113);
 	exports.DockLayouter = dock_layouter_1.DockLayouter;
 	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
-	var grid_layouter_1 = __webpack_require__(113);
+	var grid_layouter_1 = __webpack_require__(115);
 	exports.GridLayouter = grid_layouter_1.GridLayouter;
 	exports.GridLayouterParam = grid_layouter_1.GridLayouterParam;
-	var list_layouter_1 = __webpack_require__(103);
+	var list_layouter_1 = __webpack_require__(105);
 	exports.ListLayouter = list_layouter_1.ListLayouter;
 	exports.ListLayouterParam = list_layouter_1.ListLayouterParam;
-	var simple_layouter_1 = __webpack_require__(114);
+	var simple_layouter_1 = __webpack_require__(116);
 	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
-	var accordion_1 = __webpack_require__(132);
+	var accordion_1 = __webpack_require__(134);
 	exports.Accordion = accordion_1.Accordion;
-	var property_page_1 = __webpack_require__(135);
+	var property_page_1 = __webpack_require__(137);
 	exports.PropertyPage = property_page_1.PropertyPage;
-	var property_sheets_1 = __webpack_require__(143);
+	var property_sheets_1 = __webpack_require__(145);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
-	var title_content_1 = __webpack_require__(133);
+	var title_content_1 = __webpack_require__(135);
 	exports.TitleContent = title_content_1.TitleContent;
-	var title_edit_1 = __webpack_require__(136);
+	var title_label_1 = __webpack_require__(146);
+	exports.TitleLabel = title_label_1.TitleLabel;
+	var title_edit_1 = __webpack_require__(138);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(141);
+	var title_choosable_edit_1 = __webpack_require__(143);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(139);
+	var title_text_area_1 = __webpack_require__(141);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(142);
+	var choosable_edit_1 = __webpack_require__(144);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(138);
+	var title_slider_1 = __webpack_require__(140);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(140);
+	var title_combo_box_1 = __webpack_require__(142);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
+	var view_modal_1 = __webpack_require__(147);
+	exports.ViewModal = view_modal_1.ViewModal;
+	var ivalidation_rule_1 = __webpack_require__(148);
+	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 	var TWEEN = __webpack_require__(21);
 	exports.TWEEN = TWEEN;
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
 
 
@@ -1403,6 +1410,7 @@ var qtk =
 	exports.PROGRESS = "progress";
 	exports.CHANGING = "changing";
 	exports.PROP_CHANGE = "prop-change";
+	exports.PROP_DELETE = "prop-delete";
 	exports.DISPOSE = "dispose";
 	exports.RUN = "run";
 	exports.QUIT = "quit";
@@ -1606,7 +1614,7 @@ var qtk =
 	    }
 	    ChangeEvent.prototype.init = function (type, detail) {
 	        _super.prototype.init.call(this, type);
-	        this.value = detail.newValue;
+	        this.value = detail.newValue || detail.value;
 	        this.oldValue = detail.oldValue;
 	        this.newValue = detail.newValue;
 	        return this;
@@ -1627,6 +1635,7 @@ var qtk =
 	    PropChangeEvent.prototype.init = function (type, detail) {
 	        _super.prototype.init.call(this, type, detail);
 	        this.prop = detail.prop;
+	        this.trigger = detail.trigger;
 	        return this;
 	    };
 	    PropChangeEvent.create = function () {
@@ -2435,9 +2444,9 @@ var qtk =
 	};
 	var style_1 = __webpack_require__(14);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 图片控件。
 	 */
@@ -3449,12 +3458,14 @@ var qtk =
 	var emitter_1 = __webpack_require__(8);
 	var utils_1 = __webpack_require__(22);
 	var Events = __webpack_require__(7);
-	var image_tile_1 = __webpack_require__(15);
 	var matrix_stack_1 = __webpack_require__(12);
 	var graphics_1 = __webpack_require__(23);
 	var dirty_rect_context_1 = __webpack_require__(74);
+	var image_tile_1 = __webpack_require__(15);
 	var layouter_1 = __webpack_require__(75);
 	var behavior_1 = __webpack_require__(76);
+	var iview_modal_1 = __webpack_require__(77);
+	var binding_rule_parser_1 = __webpack_require__(78);
 	/**
 	 * Widget是所有控件的基类。
 	 */
@@ -4537,6 +4548,16 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(Widget.prototype, "inputable", {
+	        /**
+	         * 用户是否可以通过本控件输入/选择数据。
+	         */
+	        get: function () {
+	            return false;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Widget.prototype.setVisible = function (value) {
 	        this.setProp("visible", value, true);
 	        this.dispatchEvent({ type: value ? Events.SHOW : Events.HIDE });
@@ -4637,7 +4658,7 @@ var qtk =
 	            return this._text;
 	        },
 	        set: function (value) {
-	            this.setProp("text", value ? value.toString() : "", true);
+	            this.setProp("text", (value || value === 0) ? value.toString() : "", true);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -4929,6 +4950,8 @@ var qtk =
 	        this.onkeyup = null;
 	        this._behaviors = {};
 	        this.removeAllListeners();
+	        this._viewModal = null;
+	        this._dataBindingRule = null;
 	        this.onReset();
 	        this.set(options);
 	        this.onCreated();
@@ -5015,11 +5038,111 @@ var qtk =
 	        }
 	        return json;
 	    };
-	    Widget.create = function (app, options) {
-	        var widget = new Widget("dummy");
-	        widget.reset("dummy", null);
-	        widget.app = app;
-	        return widget;
+	    Widget.prototype.onBindProp = function (prop, value) {
+	        if (prop === "text") {
+	            this.text = value;
+	        }
+	        else if (prop === "value") {
+	            this.value = value;
+	        }
+	    };
+	    Widget.prototype.setDataBindingRule = function (dataBindingRule) {
+	        this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
+	        return this;
+	    };
+	    Widget.prototype.bindData = function (viewModal) {
+	        var _this = this;
+	        var dataBindingRule = this._dataBindingRule;
+	        if (dataBindingRule && viewModal) {
+	            this._viewModal = viewModal;
+	            var bindingMode = viewModal.getBindingMode();
+	            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+	                this.onBindData(viewModal, dataBindingRule);
+	            }
+	            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+	                this.watchTargetChange(dataBindingRule);
+	            }
+	            if (bindingMode !== iview_modal_1.BindingMode.ONE_TIME && bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+	                viewModal.onChange(function (evt) {
+	                    _this.onBindData(viewModal, dataBindingRule);
+	                });
+	            }
+	        }
+	        this._children.forEach(function (child) {
+	            child.bindData(viewModal);
+	        });
+	        return this;
+	    };
+	    Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
+	        for (var prop in dataBindingRule) {
+	            var dataSource = dataBindingRule[prop];
+	            var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
+	            var value = dataSource.value || viewModal.getProp(dataSource.path);
+	            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+	                this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+	            }
+	        }
+	    };
+	    Widget.prototype.convertValue = function (viewModal, dataSource, value) {
+	        var v = value;
+	        if (dataSource.converters) {
+	            dataSource.converters.forEach(function (name) {
+	                var c = viewModal.getValueConverter(name);
+	                if (c) {
+	                    v = c.convert(v);
+	                }
+	            });
+	        }
+	        return v;
+	    };
+	    Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
+	        var v = value;
+	        if (dataSource.converters) {
+	            dataSource.converters.forEachR(function (name) {
+	                var c = viewModal.getValueConverter(name);
+	                if (c) {
+	                    v = c.convertBack(v);
+	                }
+	            });
+	        }
+	        return v;
+	    };
+	    Widget.prototype.getPropDefaultBindMode = function (prop) {
+	        return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
+	    };
+	    Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
+	        if (dataSource.validationRule) {
+	            var validationRule = viewModal.getValidationRule(dataSource.validationRule);
+	            if (validationRule) {
+	                var result = validationRule.validate(value);
+	                if (result.code) {
+	                    console.log("invalid value:" + result.message);
+	                    return false;
+	                }
+	            }
+	        }
+	        return true;
+	    };
+	    Widget.prototype.watchTargetValueChange = function (dataSource) {
+	        var _this = this;
+	        var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
+	        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+	            this.on(Events.CHANGE, function (evt) {
+	                var value = _this.convertBackValue(_this._viewModal, dataSource, evt.value);
+	                if (_this.isValidValue(_this._viewModal, dataSource, value)) {
+	                    _this._viewModal.setProp(dataSource.path, value, _this);
+	                }
+	            });
+	        }
+	    };
+	    Widget.prototype.watchTargetChange = function (dataBindingRule) {
+	        for (var prop in dataBindingRule) {
+	            var bindingMode = this.getPropDefaultBindMode(prop);
+	            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY) {
+	                var dataSource = dataBindingRule[prop];
+	                this.watchTargetValueChange(dataSource);
+	            }
+	        }
 	    };
 	    Widget.ID = 10000;
 	    return Widget;
@@ -6795,6 +6918,13 @@ var qtk =
 	    return false;
 	}
 	exports.aRemove = aRemove;
+	Array.prototype.forEachR = function (func) {
+	    var n = this.length - 1;
+	    for (var i = this.length - 1; i >= 0; i--) {
+	        var iter = this[i];
+	        func(this[i], i);
+	    }
+	};
 	Array.prototype.stableSort = function (comp) {
 	    stableSort(this, comp);
 	};
@@ -16094,10 +16224,71 @@ var qtk =
 
 /***/ },
 /* 77 */
+/***/ function(module, exports) {
+
+	"use strict";
+	;
+	;
+	;
+	(function (BindingMode) {
+	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
+	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
+	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
+	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
+	})(exports.BindingMode || (exports.BindingMode = {}));
+	var BindingMode = exports.BindingMode;
+	;
+	(function (UpdateSourceTrigger) {
+	    UpdateSourceTrigger[UpdateSourceTrigger["DEFAULT"] = 0] = "DEFAULT";
+	    UpdateSourceTrigger[UpdateSourceTrigger["EXPLICIT"] = 1] = "EXPLICIT";
+	    UpdateSourceTrigger[UpdateSourceTrigger["LOSTFOCUS"] = 2] = "LOSTFOCUS";
+	    UpdateSourceTrigger[UpdateSourceTrigger["PROPERTYCHANGED"] = 3] = "PROPERTYCHANGED";
+	})(exports.UpdateSourceTrigger || (exports.UpdateSourceTrigger = {}));
+	var UpdateSourceTrigger = exports.UpdateSourceTrigger;
+	;
+
+
+/***/ },
+/* 78 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/**
+	 * 一个简陋的解析数据绑定规则的实现。
+	 */
+	var BindingRuleParser = (function () {
+	    function BindingRuleParser() {
+	    }
+	    BindingRuleParser.prototype.parse = function (rule) {
+	        if (typeof rule === "string") {
+	            return { value: { path: rule } };
+	        }
+	        for (var key in rule) {
+	            var dataSource = rule[key];
+	            if (typeof dataSource === "string") {
+	                rule[key] = { path: dataSource };
+	            }
+	        }
+	        return rule;
+	    };
+	    BindingRuleParser.parse = function (rule) {
+	        if (!rule) {
+	            return null;
+	        }
+	        return BindingRuleParser.defParser.parse(rule);
+	    };
+	    BindingRuleParser.defParser = new BindingRuleParser();
+	    return BindingRuleParser;
+	}());
+	exports.BindingRuleParser = BindingRuleParser;
+
+
+/***/ },
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var factory_1 = __webpack_require__(78);
+	var factory_1 = __webpack_require__(80);
 	/**
 	 * Widget工厂，注册控件的创建函数和根据控件的类型创建控件。
 	 * 主要用于根据UI编辑器生成的UI数据创建UI，每个控件都要向WidgetFactory注册。
@@ -16114,8 +16305,8 @@ var qtk =
 	    WidgetFactory.register = function (type, creator) {
 	        return WidgetFactory.factory.register(type, creator);
 	    };
-	    WidgetFactory.create = function (type) {
-	        return WidgetFactory.factory.create(type);
+	    WidgetFactory.create = function (type, options) {
+	        return WidgetFactory.factory.create(type, options);
 	    };
 	    WidgetFactory.factory = new factory_1.Factory();
 	    return WidgetFactory;
@@ -16124,7 +16315,7 @@ var qtk =
 
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -16138,11 +16329,11 @@ var qtk =
 	    Factory.prototype.register = function (type, creator) {
 	        this.creators[type] = creator;
 	    };
-	    Factory.prototype.create = function (type) {
+	    Factory.prototype.create = function (type, options) {
 	        var obj = null;
 	        var creator = this.creators[type];
 	        if (creator) {
-	            obj = creator();
+	            obj = creator(options);
 	        }
 	        return obj;
 	    };
@@ -16152,7 +16343,7 @@ var qtk =
 
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -16195,7 +16386,7 @@ var qtk =
 
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16205,8 +16396,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Group = (function (_super) {
 	    __extends(Group, _super);
 	    function Group() {
@@ -16225,7 +16416,7 @@ var qtk =
 
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16235,16 +16426,23 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var point_1 = __webpack_require__(1);
-	var label_1 = __webpack_require__(82);
+	var label_1 = __webpack_require__(84);
 	var Events = __webpack_require__(7);
-	var widget_factory_1 = __webpack_require__(77);
-	var html_edit_1 = __webpack_require__(83);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var html_edit_1 = __webpack_require__(85);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Edit = (function (_super) {
 	    __extends(Edit, _super);
 	    function Edit() {
 	        _super.call(this, Edit.TYPE);
 	    }
+	    Object.defineProperty(Edit.prototype, "inputable", {
+	        get: function () {
+	            return true;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Edit.prototype, "inputFilter", {
 	        set: function (value) {
 	            this._inputFilter = value;
@@ -16331,12 +16529,18 @@ var qtk =
 	            _this.dispatchEvent({ type: Events.BLUR });
 	        });
 	        input.on(Events.CHANGING, function (evt) {
+	            var e = _this.eChangeEvent;
 	            _this.text = _this.filterText(evt.value);
-	            _this.dispatchEvent(evt);
+	            e.init(Events.CHANGE, { value: _this.text });
+	            ;
+	            _this.dispatchEvent(e);
 	        });
 	        input.on(Events.CHANGE, function (evt) {
+	            var e = _this.eChangeEvent;
 	            _this.text = _this.filterText(evt.value);
-	            _this.dispatchEvent(evt);
+	            e.init(Events.CHANGE, { value: _this.text });
+	            ;
+	            _this.dispatchEvent(e);
 	        });
 	    };
 	    Edit.prototype.dispose = function () {
@@ -16366,7 +16570,7 @@ var qtk =
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16378,8 +16582,8 @@ var qtk =
 	var rect_1 = __webpack_require__(2);
 	var widget_1 = __webpack_require__(16);
 	var graphics_1 = __webpack_require__(23);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Label = (function (_super) {
 	    __extends(Label, _super);
 	    function Label(type) {
@@ -16478,7 +16682,7 @@ var qtk =
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16488,7 +16692,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(7);
-	var html_element_1 = __webpack_require__(84);
+	var html_element_1 = __webpack_require__(86);
 	var HtmlEdit = (function (_super) {
 	    __extends(HtmlEdit, _super);
 	    function HtmlEdit() {
@@ -16585,7 +16789,7 @@ var qtk =
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16685,7 +16889,7 @@ var qtk =
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16695,8 +16899,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Page = (function (_super) {
 	    __extends(Page, _super);
 	    function Page(type) {
@@ -16715,7 +16919,7 @@ var qtk =
 
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16725,8 +16929,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Pages = (function (_super) {
 	    __extends(Pages, _super);
 	    function Pages() {
@@ -16795,7 +16999,7 @@ var qtk =
 
 
 /***/ },
-/* 87 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16805,8 +17009,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Button = (function (_super) {
 	    __extends(Button, _super);
 	    function Button() {
@@ -16825,7 +17029,7 @@ var qtk =
 
 
 /***/ },
-/* 88 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16834,9 +17038,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var page_1 = __webpack_require__(85);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var page_1 = __webpack_require__(87);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TabPage = (function (_super) {
 	    __extends(TabPage, _super);
 	    function TabPage() {
@@ -16869,7 +17073,7 @@ var qtk =
 
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16879,13 +17083,13 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var button_1 = __webpack_require__(87);
+	var button_1 = __webpack_require__(89);
 	var graphics_1 = __webpack_require__(23);
-	var consts_1 = __webpack_require__(90);
-	var radio_button_1 = __webpack_require__(91);
-	var widget_factory_1 = __webpack_require__(77);
+	var consts_1 = __webpack_require__(92);
+	var radio_button_1 = __webpack_require__(93);
+	var widget_factory_1 = __webpack_require__(79);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TabButton = (function (_super) {
 	    __extends(TabButton, _super);
 	    function TabButton() {
@@ -17072,7 +17276,7 @@ var qtk =
 
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -17140,10 +17344,18 @@ var qtk =
 	})(exports.Align || (exports.Align = {}));
 	var Align = exports.Align;
 	;
+	var Services = (function () {
+	    function Services() {
+	    }
+	    Services.THEME_MANAGER = "qtk-theme-manager";
+	    return Services;
+	}());
+	exports.Services = Services;
+	;
 
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17152,9 +17364,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var check_button_1 = __webpack_require__(92);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var check_button_1 = __webpack_require__(94);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var RadioButton = (function (_super) {
 	    __extends(RadioButton, _super);
 	    function RadioButton(type) {
@@ -17183,7 +17395,7 @@ var qtk =
 
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17193,14 +17405,21 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var CheckButton = (function (_super) {
 	    __extends(CheckButton, _super);
 	    function CheckButton(type) {
 	        _super.call(this, type || CheckButton.TYPE);
 	    }
+	    Object.defineProperty(CheckButton.prototype, "inputable", {
+	        get: function () {
+	            return true;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(CheckButton.prototype, "value", {
 	        get: function () {
 	            return this._value;
@@ -17294,7 +17513,7 @@ var qtk =
 
 
 /***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17304,14 +17523,14 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
-	var pages_1 = __webpack_require__(86);
+	var pages_1 = __webpack_require__(88);
 	var widget_1 = __webpack_require__(16);
-	var tab_page_1 = __webpack_require__(88);
+	var tab_page_1 = __webpack_require__(90);
 	var Events = __webpack_require__(7);
-	var tab_button_1 = __webpack_require__(89);
-	var tab_button_group_1 = __webpack_require__(94);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var tab_button_1 = __webpack_require__(91);
+	var tab_button_group_1 = __webpack_require__(96);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TabControl = (function (_super) {
 	    __extends(TabControl, _super);
 	    function TabControl() {
@@ -17454,7 +17673,7 @@ var qtk =
 
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17465,8 +17684,8 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TabButtonGroup = (function (_super) {
 	    __extends(TabButtonGroup, _super);
 	    function TabButtonGroup() {
@@ -17562,7 +17781,7 @@ var qtk =
 
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17571,25 +17790,25 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var group_1 = __webpack_require__(80);
-	var dialog_1 = __webpack_require__(96);
-	var label_1 = __webpack_require__(82);
-	var edit_1 = __webpack_require__(81);
-	var button_1 = __webpack_require__(87);
+	var group_1 = __webpack_require__(82);
+	var dialog_1 = __webpack_require__(98);
+	var label_1 = __webpack_require__(84);
+	var edit_1 = __webpack_require__(83);
+	var button_1 = __webpack_require__(89);
 	var Events = __webpack_require__(7);
 	var graphics_1 = __webpack_require__(23);
-	var list_view_1 = __webpack_require__(98);
-	var progress_bar_1 = __webpack_require__(104);
-	var application_1 = __webpack_require__(105);
+	var list_view_1 = __webpack_require__(100);
+	var progress_bar_1 = __webpack_require__(106);
+	var application_1 = __webpack_require__(107);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var consts_1 = __webpack_require__(90);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var list_item_1 = __webpack_require__(110);
-	var dock_layouter_1 = __webpack_require__(111);
-	var linear_layouter_1 = __webpack_require__(112);
-	var grid_layouter_1 = __webpack_require__(113);
-	var simple_layouter_1 = __webpack_require__(114);
+	var widget_factory_1 = __webpack_require__(79);
+	var consts_1 = __webpack_require__(92);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var list_item_1 = __webpack_require__(112);
+	var dock_layouter_1 = __webpack_require__(113);
+	var linear_layouter_1 = __webpack_require__(114);
+	var grid_layouter_1 = __webpack_require__(115);
+	var simple_layouter_1 = __webpack_require__(116);
 	var TitleOptions = (function () {
 	    function TitleOptions(text, iconStyleType, hasCloseButton) {
 	        this.h = 0;
@@ -17939,7 +18158,7 @@ var qtk =
 
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17948,9 +18167,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var window_1 = __webpack_require__(97);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var window_1 = __webpack_require__(99);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Dialog = (function (_super) {
 	    __extends(Dialog, _super);
 	    function Dialog(type) {
@@ -17977,7 +18196,7 @@ var qtk =
 
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18098,7 +18317,7 @@ var qtk =
 
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18107,10 +18326,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(99);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var list_layouter_1 = __webpack_require__(103);
+	var scroll_view_1 = __webpack_require__(101);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var list_layouter_1 = __webpack_require__(105);
 	var ListView = (function (_super) {
 	    __extends(ListView, _super);
 	    function ListView() {
@@ -18204,7 +18423,7 @@ var qtk =
 
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/globals/scroller/index.d.ts"/>
@@ -18217,12 +18436,12 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var scroller_1 = __webpack_require__(100);
+	var scroller_1 = __webpack_require__(102);
 	var TWEEN = __webpack_require__(21);
 	var Events = __webpack_require__(7);
 	var graphics_1 = __webpack_require__(23);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var widget_1 = __webpack_require__(16);
 	/**
 	 * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
@@ -18837,13 +19056,13 @@ var qtk =
 
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(101), __webpack_require__(102)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(103), __webpack_require__(104)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports === 'object') {
 	        // CommonJS
 	        factory(exports, require('./lib/animate'), require('./lib/Scroller'));
@@ -18855,7 +19074,7 @@ var qtk =
 
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19092,7 +19311,7 @@ var qtk =
 
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19112,7 +19331,7 @@ var qtk =
 	(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(101)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(103)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module === 'object') {
 	        // CommonJS
 	        module.exports = factory(require('./animate'));
@@ -20250,7 +20469,7 @@ var qtk =
 
 
 /***/ },
-/* 103 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20350,7 +20569,7 @@ var qtk =
 
 
 /***/ },
-/* 104 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20361,8 +20580,8 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(16);
 	var graphics_1 = __webpack_require__(23);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	(function (ProgressBarType) {
 	    ProgressBarType[ProgressBarType["V"] = 1] = "V";
 	    ProgressBarType[ProgressBarType["VERTICAL"] = 1] = "VERTICAL";
@@ -20455,7 +20674,7 @@ var qtk =
 
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20464,17 +20683,18 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(7);
 	var path = __webpack_require__(5);
 	var TWEEN = __webpack_require__(21);
 	var Assets = __webpack_require__(3);
-	var Services = __webpack_require__(106);
+	var Events = __webpack_require__(7);
+	var consts_1 = __webpack_require__(92);
 	var main_loop_1 = __webpack_require__(10);
 	var emitter_1 = __webpack_require__(8);
-	var view_port_1 = __webpack_require__(107);
+	var view_port_1 = __webpack_require__(108);
 	var image_tile_1 = __webpack_require__(15);
-	var theme_manager_1 = __webpack_require__(108);
-	var deviceInfo = __webpack_require__(109);
+	var theme_manager_1 = __webpack_require__(109);
+	var deviceInfo = __webpack_require__(110);
+	var service_locator_1 = __webpack_require__(111);
 	var inputEventAdapter = __webpack_require__(19);
 	/**
 	 * 代表整个应用程序，可以通过Application获取各种服务。
@@ -20486,7 +20706,7 @@ var qtk =
 	        _super.call(this);
 	        this.name = name;
 	        this._options = {};
-	        this.servicesManager = new Services.Manager();
+	        this.servicesManager = new service_locator_1.ServiceLocator();
 	    }
 	    Object.defineProperty(Application.prototype, "isReady", {
 	        get: function () {
@@ -20563,7 +20783,7 @@ var qtk =
 	                }
 	            });
 	        }
-	        this.registerService(Services.THEME_MANAGER, themeManager);
+	        this.registerService(consts_1.Services.THEME_MANAGER, themeManager);
 	        this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
 	        this._mainLoop = main_loop_1.MainLoop.create();
 	        deviceInfo.init(navigator.language, navigator.userAgent);
@@ -20588,7 +20808,7 @@ var qtk =
 	        return this;
 	    };
 	    Application.prototype.getThemeManager = function () {
-	        return this.getService(Services.THEME_MANAGER);
+	        return this.getService(consts_1.Services.THEME_MANAGER);
 	    };
 	    Object.defineProperty(Application.prototype, "viewPort", {
 	        get: function () {
@@ -20625,33 +20845,7 @@ var qtk =
 
 
 /***/ },
-/* 106 */
-/***/ function(module, exports) {
-
-	"use strict";
-	exports.THEME_MANAGER = "qtk-keyup";
-	/**
-	 * 管理各种服务。
-	 */
-	var Manager = (function () {
-	    function Manager() {
-	        this.services = {};
-	    }
-	    Manager.prototype.register = function (name, service) {
-	        this.services[name] = service;
-	        return this;
-	    };
-	    Manager.prototype.get = function (name) {
-	        return this.services[name];
-	    };
-	    return Manager;
-	}());
-	exports.Manager = Manager;
-	;
-
-
-/***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
@@ -20752,7 +20946,7 @@ var qtk =
 
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20843,7 +21037,7 @@ var qtk =
 
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports) {
 
 	/**
@@ -20873,7 +21067,32 @@ var qtk =
 
 
 /***/ },
-/* 110 */
+/* 111 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/**
+	 * 管理各种服务。
+	 */
+	var ServiceLocator = (function () {
+	    function ServiceLocator() {
+	        this.services = {};
+	    }
+	    ServiceLocator.prototype.register = function (name, service) {
+	        this.services[name] = service;
+	        return this;
+	    };
+	    ServiceLocator.prototype.get = function (name) {
+	        return this.services[name];
+	    };
+	    return ServiceLocator;
+	}());
+	exports.ServiceLocator = ServiceLocator;
+	;
+
+
+/***/ },
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20884,9 +21103,9 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var graphics_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var image_tile_1 = __webpack_require__(15);
 	(function (ListItemStyle) {
 	    ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
@@ -21021,7 +21240,7 @@ var qtk =
 
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21030,7 +21249,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(90);
+	var consts_1 = __webpack_require__(92);
 	var layouter_1 = __webpack_require__(75);
 	var TYPE = "dock";
 	/**
@@ -21145,7 +21364,7 @@ var qtk =
 
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21154,7 +21373,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(90);
+	var consts_1 = __webpack_require__(92);
 	var utils_1 = __webpack_require__(22);
 	var layouter_1 = __webpack_require__(75);
 	var TYPE_H = "linear-h";
@@ -21354,7 +21573,7 @@ var qtk =
 
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21492,7 +21711,7 @@ var qtk =
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21610,7 +21829,7 @@ var qtk =
 
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21619,9 +21838,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var scroll_view_1 = __webpack_require__(99);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var scroll_view_1 = __webpack_require__(101);
 	var carota = __webpack_require__(24);
 	var rect = carota.rect;
 	var createDoc = carota.document;
@@ -21719,7 +21938,7 @@ var qtk =
 
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21728,9 +21947,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rich_text_1 = __webpack_require__(115);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var rich_text_1 = __webpack_require__(117);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var carota = __webpack_require__(24);
 	var createDoc = carota.document;
 	var dom = carota.dom;
@@ -21764,6 +21983,13 @@ var qtk =
 	        this.cachedHeight = 0;
 	        this.nextCaretToggle = Date.now();
 	    }
+	    Object.defineProperty(RichTextEdit.prototype, "inputable", {
+	        get: function () {
+	            return true;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    RichTextEdit.prototype.undo = function () {
 	        this._doc.performUndo();
 	    };
@@ -22234,7 +22460,7 @@ var qtk =
 
 
 /***/ },
-/* 117 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22244,11 +22470,11 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(7);
-	var button_1 = __webpack_require__(87);
+	var button_1 = __webpack_require__(89);
 	var graphics_1 = __webpack_require__(23);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var progress_bar_1 = __webpack_require__(104);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var progress_bar_1 = __webpack_require__(106);
 	var Slider = (function (_super) {
 	    __extends(Slider, _super);
 	    function Slider(type) {
@@ -22380,7 +22606,7 @@ var qtk =
 
 
 /***/ },
-/* 118 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22392,8 +22618,8 @@ var qtk =
 	var widget_1 = __webpack_require__(16);
 	var TWEEN = __webpack_require__(21);
 	var graphics_1 = __webpack_require__(23);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var Switch = (function (_super) {
 	    __extends(Switch, _super);
 	    function Switch() {
@@ -22484,7 +22710,7 @@ var qtk =
 
 
 /***/ },
-/* 119 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22495,18 +22721,18 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var edit_1 = __webpack_require__(81);
-	var button_1 = __webpack_require__(87);
+	var edit_1 = __webpack_require__(83);
+	var button_1 = __webpack_require__(89);
 	var widget_1 = __webpack_require__(16);
-	var dialog_1 = __webpack_require__(96);
+	var dialog_1 = __webpack_require__(98);
 	var graphics_1 = __webpack_require__(23);
 	var Events = __webpack_require__(7);
-	var list_view_1 = __webpack_require__(98);
-	var list_item_1 = __webpack_require__(110);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var list_view_1 = __webpack_require__(100);
+	var list_item_1 = __webpack_require__(112);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var image_tile_1 = __webpack_require__(15);
-	var simple_layouter_1 = __webpack_require__(114);
+	var simple_layouter_1 = __webpack_require__(116);
 	var ComboBoxOption = (function () {
 	    function ComboBoxOption(text, value, imageURL, color) {
 	        this.text = text;
@@ -22586,6 +22812,13 @@ var qtk =
 	    function ComboBoxBase(type) {
 	        _super.call(this, type);
 	    }
+	    Object.defineProperty(ComboBoxBase.prototype, "inputable", {
+	        get: function () {
+	            return true;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
 	        get: function () {
 	            return this._itemHeight || 25;
@@ -22706,6 +22939,18 @@ var qtk =
 	            }
 	        });
 	    };
+	    ComboBoxBase.prototype.onBindProp = function (prop, value) {
+	        var _this = this;
+	        if (prop === "options") {
+	            this.resetOptions();
+	            value.forEach(function (opt) {
+	                _this.addOption(opt.text, opt.value, opt.imageURL, opt.color);
+	            });
+	        }
+	        else {
+	            return _super.prototype.onBindProp.call(this, prop, value);
+	        }
+	    };
 	    ComboBoxBase.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this.padding = 2;
@@ -22823,7 +23068,7 @@ var qtk =
 
 
 /***/ },
-/* 120 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22834,16 +23079,16 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var dialog_1 = __webpack_require__(96);
+	var dialog_1 = __webpack_require__(98);
 	var graphics_1 = __webpack_require__(23);
-	var list_view_1 = __webpack_require__(98);
+	var list_view_1 = __webpack_require__(100);
 	var Events = __webpack_require__(7);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var list_layouter_1 = __webpack_require__(103);
-	var simple_layouter_1 = __webpack_require__(114);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var list_layouter_1 = __webpack_require__(105);
+	var simple_layouter_1 = __webpack_require__(116);
 	var Menu = (function (_super) {
 	    __extends(Menu, _super);
 	    function Menu() {
@@ -23187,7 +23432,7 @@ var qtk =
 
 
 /***/ },
-/* 121 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23196,14 +23441,14 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var menu_1 = __webpack_require__(120);
+	var menu_1 = __webpack_require__(122);
 	var point_1 = __webpack_require__(1);
 	var Events = __webpack_require__(7);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var linear_layouter_1 = __webpack_require__(112);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var linear_layouter_1 = __webpack_require__(114);
 	var MenuBar = (function (_super) {
 	    __extends(MenuBar, _super);
 	    function MenuBar() {
@@ -23393,7 +23638,7 @@ var qtk =
 
 
 /***/ },
-/* 122 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23404,10 +23649,10 @@ var qtk =
 	};
 	var style_1 = __webpack_require__(14);
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var graphics_1 = __webpack_require__(23);
-	var consts_1 = __webpack_require__(90);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var consts_1 = __webpack_require__(92);
+	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 颜色控件。
 	 */
@@ -23640,7 +23885,7 @@ var qtk =
 
 
 /***/ },
-/* 123 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23651,10 +23896,10 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
-	var widget_factory_1 = __webpack_require__(77);
+	var widget_factory_1 = __webpack_require__(79);
 	var graphics_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var widget_1 = __webpack_require__(16);
 	/**
 	 * 树形视图中，显示的一个子项。
@@ -23891,7 +24136,7 @@ var qtk =
 
 
 /***/ },
-/* 124 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23900,11 +24145,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var tree_item_1 = __webpack_require__(123);
-	var list_view_1 = __webpack_require__(98);
-	var tree_item_data_1 = __webpack_require__(125);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var tree_item_1 = __webpack_require__(125);
+	var list_view_1 = __webpack_require__(100);
+	var tree_item_data_1 = __webpack_require__(127);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 树形视图。
 	 */
@@ -24046,7 +24291,7 @@ var qtk =
 
 
 /***/ },
-/* 125 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24135,7 +24380,7 @@ var qtk =
 
 
 /***/ },
-/* 126 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24144,10 +24389,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var grid_layouter_1 = __webpack_require__(113);
-	var scroll_view_1 = __webpack_require__(99);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var grid_layouter_1 = __webpack_require__(115);
+	var scroll_view_1 = __webpack_require__(101);
 	var GridView = (function (_super) {
 	    __extends(GridView, _super);
 	    function GridView() {
@@ -24285,7 +24530,7 @@ var qtk =
 
 
 /***/ },
-/* 127 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24294,9 +24539,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var window_1 = __webpack_require__(97);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var window_1 = __webpack_require__(99);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var WindowNormal = (function (_super) {
 	    __extends(WindowNormal, _super);
 	    function WindowNormal() {
@@ -24315,7 +24560,7 @@ var qtk =
 
 
 /***/ },
-/* 128 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24400,7 +24645,7 @@ var qtk =
 
 
 /***/ },
-/* 129 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24451,7 +24696,7 @@ var qtk =
 
 
 /***/ },
-/* 130 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24571,7 +24816,7 @@ var qtk =
 
 
 /***/ },
-/* 131 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24747,7 +24992,7 @@ var qtk =
 
 
 /***/ },
-/* 132 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24757,10 +25002,10 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var title_content_1 = __webpack_require__(133);
-	var collapsable_title_1 = __webpack_require__(134);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var title_content_1 = __webpack_require__(135);
+	var collapsable_title_1 = __webpack_require__(136);
 	/**
 	 * 手风琴控件。它有多个页面，在每一时刻只展开一个。
 	 */
@@ -24863,7 +25108,7 @@ var qtk =
 
 
 /***/ },
-/* 133 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24874,8 +25119,8 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(16);
 	var Events = __webpack_require__(7);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 一个用来显示标题和内容的控件。通常用于Accordion和PropertySheets的子控件。
 	 */
@@ -25101,7 +25346,7 @@ var qtk =
 
 
 /***/ },
-/* 134 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25113,7 +25358,7 @@ var qtk =
 	var rect_1 = __webpack_require__(2);
 	var point_1 = __webpack_require__(1);
 	var widget_1 = __webpack_require__(16);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var CollapsableTitle = (function (_super) {
 	    __extends(CollapsableTitle, _super);
 	    function CollapsableTitle() {
@@ -25182,7 +25427,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25191,15 +25436,18 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_edit_1 = __webpack_require__(136);
+	var title_edit_1 = __webpack_require__(138);
 	var widget_1 = __webpack_require__(16);
-	var title_slider_1 = __webpack_require__(138);
-	var title_text_area_1 = __webpack_require__(139);
-	var title_combo_box_1 = __webpack_require__(140);
-	var title_choosable_edit_1 = __webpack_require__(141);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var linear_layouter_1 = __webpack_require__(112);
+	var title_slider_1 = __webpack_require__(140);
+	var title_text_area_1 = __webpack_require__(141);
+	var title_combo_box_1 = __webpack_require__(142);
+	var title_choosable_edit_1 = __webpack_require__(143);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var linear_layouter_1 = __webpack_require__(114);
+	/**
+	 * 属性编辑页，包装了各种TitleValue。
+	 */
 	var PropertyPage = (function (_super) {
 	    __extends(PropertyPage, _super);
 	    function PropertyPage() {
@@ -25341,7 +25589,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25350,10 +25598,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var edit_1 = __webpack_require__(83);
+	var title_value_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleEdit = (function (_super) {
 	    __extends(TitleEdit, _super);
 	    function TitleEdit(type) {
@@ -25424,7 +25672,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25433,9 +25681,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var label_1 = __webpack_require__(82);
+	var label_1 = __webpack_require__(84);
 	var widget_1 = __webpack_require__(16);
-	var linear_layouter_1 = __webpack_require__(112);
+	var linear_layouter_1 = __webpack_require__(114);
 	var TitleValue = (function (_super) {
 	    __extends(TitleValue, _super);
 	    function TitleValue(type) {
@@ -25533,7 +25781,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25542,10 +25790,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var slider_1 = __webpack_require__(117);
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var slider_1 = __webpack_require__(119);
+	var title_value_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleSlider = (function (_super) {
 	    __extends(TitleSlider, _super);
 	    function TitleSlider(type) {
@@ -25567,7 +25815,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25576,10 +25824,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(81);
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var edit_1 = __webpack_require__(83);
+	var title_value_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleTextArea = (function (_super) {
 	    __extends(TitleTextArea, _super);
 	    function TitleTextArea(type) {
@@ -25619,7 +25867,7 @@ var qtk =
 
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25628,10 +25876,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(137);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var combo_box_1 = __webpack_require__(119);
+	var title_value_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var combo_box_1 = __webpack_require__(121);
 	var TitleComboBoxBase = (function (_super) {
 	    __extends(TitleComboBoxBase, _super);
 	    function TitleComboBoxBase(type) {
@@ -25701,7 +25949,7 @@ var qtk =
 
 
 /***/ },
-/* 141 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25710,10 +25958,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(137);
-	var choosable_edit_1 = __webpack_require__(142);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var title_value_1 = __webpack_require__(139);
+	var choosable_edit_1 = __webpack_require__(144);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleChoosableEdit = (function (_super) {
 	    __extends(TitleChoosableEdit, _super);
 	    function TitleChoosableEdit(type) {
@@ -25760,7 +26008,7 @@ var qtk =
 
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25769,12 +26017,12 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(81);
-	var button_1 = __webpack_require__(87);
+	var edit_1 = __webpack_require__(83);
+	var button_1 = __webpack_require__(89);
 	var widget_1 = __webpack_require__(16);
 	var Events = __webpack_require__(7);
-	var widget_factory_1 = __webpack_require__(77);
-	var recyclable_creator_1 = __webpack_require__(79);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
 	var ChoosableEdit = (function (_super) {
 	    __extends(ChoosableEdit, _super);
 	    function ChoosableEdit() {
@@ -25858,7 +26106,7 @@ var qtk =
 
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25867,11 +26115,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(99);
-	var widget_factory_1 = __webpack_require__(77);
-	var title_content_1 = __webpack_require__(133);
-	var recyclable_creator_1 = __webpack_require__(79);
-	var collapsable_title_1 = __webpack_require__(134);
+	var scroll_view_1 = __webpack_require__(101);
+	var widget_factory_1 = __webpack_require__(79);
+	var title_content_1 = __webpack_require__(135);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var collapsable_title_1 = __webpack_require__(136);
 	/**
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
@@ -25966,6 +26214,165 @@ var qtk =
 	exports.PropertySheets = PropertySheets;
 	;
 	widget_factory_1.WidgetFactory.register(PropertySheets.TYPE, PropertySheets.create);
+
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var label_1 = __webpack_require__(84);
+	var title_value_1 = __webpack_require__(139);
+	var widget_factory_1 = __webpack_require__(79);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var TitleLabel = (function (_super) {
+	    __extends(TitleLabel, _super);
+	    function TitleLabel(type) {
+	        _super.call(this, type || TitleLabel.TYPE);
+	    }
+	    TitleLabel.prototype.createValueWidget = function (options) {
+	        return label_1.Label.create(options);
+	    };
+	    TitleLabel.create = function (options) {
+	        return TitleLabel.recycleBin.create().reset(TitleLabel.TYPE, options);
+	    };
+	    TitleLabel.TYPE = "title-label";
+	    TitleLabel.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLabel(); });
+	    return TitleLabel;
+	}(title_value_1.TitleValue));
+	exports.TitleLabel = TitleLabel;
+	;
+	widget_factory_1.WidgetFactory.register(TitleLabel.TYPE, TitleLabel.create);
+
+
+/***/ },
+/* 147 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var emitter_1 = __webpack_require__(8);
+	var Events = __webpack_require__(7);
+	var iview_modal_1 = __webpack_require__(77);
+	var ViewModal = (function (_super) {
+	    __extends(ViewModal, _super);
+	    function ViewModal(data) {
+	        _super.call(this);
+	        this._commands = {};
+	        this._converters = {};
+	        this._data = data || {};
+	        this._validationRules = {};
+	        this._ePropChange = Events.PropChangeEvent.create();
+	    }
+	    ViewModal.prototype.getBindingMode = function () {
+	        return iview_modal_1.BindingMode.TWO_WAY;
+	    };
+	    ViewModal.prototype.onChange = function (callback) {
+	        this.on(Events.PROP_DELETE, callback);
+	        this.on(Events.PROP_CHANGE, callback);
+	    };
+	    ViewModal.prototype.offChange = function (callback) {
+	        this.off(Events.PROP_DELETE, callback);
+	        this.off(Events.PROP_CHANGE, callback);
+	    };
+	    ViewModal.prototype.notifyChange = function (type, path, value, trigger) {
+	        this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value, trigger: trigger }));
+	    };
+	    ViewModal.prototype.getProp = function (path) {
+	        return this._data[path];
+	    };
+	    ViewModal.prototype.delProp = function (path, trigger) {
+	        delete this._data[path];
+	        this.notifyChange(Events.PROP_DELETE, path, null, trigger);
+	        return this;
+	    };
+	    ViewModal.prototype.setProp = function (path, value, trigger) {
+	        this._data[path] = value;
+	        this.notifyChange(Events.PROP_CHANGE, path, value, trigger);
+	        return this;
+	    };
+	    ViewModal.prototype.getCommand = function (name) {
+	        return this._commands[name];
+	    };
+	    ViewModal.prototype.registerCommand = function (name, cmd) {
+	        this._commands[name] = cmd;
+	        return this;
+	    };
+	    ViewModal.prototype.unregisterCommand = function (name, cmd) {
+	        this._commands[name] = null;
+	        return this;
+	    };
+	    ViewModal.prototype.getValueConverter = function (name) {
+	        return this._converters[name];
+	    };
+	    ViewModal.prototype.registerValueConverter = function (name, converter) {
+	        this._converters[name] = converter;
+	        return this;
+	    };
+	    ViewModal.prototype.unregisterValueConverter = function (name, converter) {
+	        this._converters[name] = null;
+	        return this;
+	    };
+	    ViewModal.prototype.getValidationRule = function (name) {
+	        return this._validationRules[name];
+	    };
+	    ViewModal.prototype.registerValidationRule = function (name, validationRule) {
+	        this._validationRules[name] = validationRule;
+	        return this;
+	    };
+	    ViewModal.prototype.unregisterValidationRule = function (name, validationRule) {
+	        this._validationRules[name] = null;
+	        return this;
+	    };
+	    ViewModal.prototype.createCollectionViewModal = function (path) {
+	        return null;
+	    };
+	    ViewModal.create = function (data) {
+	        var viewModal = new ViewModal(data);
+	        return viewModal;
+	    };
+	    return ViewModal;
+	}(emitter_1.Emitter));
+	exports.ViewModal = ViewModal;
+	;
+
+
+/***/ },
+/* 148 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/**
+	 * 数据有效性检查的结果。
+	 */
+	var ValidationResult = (function () {
+	    function ValidationResult(code, message) {
+	        this.code = code;
+	        this.message = message;
+	    }
+	    /**
+	     * 创建函数。
+	     */
+	    ValidationResult.create = function (code, message) {
+	        return new ValidationResult(code, message);
+	    };
+	    /**
+	     * 数据有效时，可以共用的结果，不能在运行是修改。
+	     */
+	    ValidationResult.validResult = ValidationResult.create(0, "valid");
+	    return ValidationResult;
+	}());
+	exports.ValidationResult = ValidationResult;
+	;
 
 
 /***/ }

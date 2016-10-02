@@ -97,6 +97,13 @@ var ComboBoxBase = (function (_super) {
     function ComboBoxBase(type) {
         _super.call(this, type);
     }
+    Object.defineProperty(ComboBoxBase.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
         get: function () {
             return this._itemHeight || 25;
@@ -216,6 +223,18 @@ var ComboBoxBase = (function (_super) {
                 dialog.close();
             }
         });
+    };
+    ComboBoxBase.prototype.onBindProp = function (prop, value) {
+        var _this = this;
+        if (prop === "options") {
+            this.resetOptions();
+            value.forEach(function (opt) {
+                _this.addOption(opt.text, opt.value, opt.imageURL, opt.color);
+            });
+        }
+        else {
+            return _super.prototype.onBindProp.call(this, prop, value);
+        }
     };
     ComboBoxBase.prototype.onReset = function () {
         _super.prototype.onReset.call(this);

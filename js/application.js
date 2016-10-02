@@ -4,17 +4,18 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var Events = require("./events");
 var path = require("path");
 var TWEEN = require("tween.js");
 var Assets = require("./assets");
-var Services = require("./services");
+var Events = require("./events");
+var consts_1 = require("./consts");
 var main_loop_1 = require("./main-loop");
 var emitter_1 = require("./emitter");
 var view_port_1 = require("./view-port");
 var image_tile_1 = require("./image-tile");
 var theme_manager_1 = require("./theme-manager");
 var deviceInfo = require("./device-info");
+var service_locator_1 = require("./service-locator");
 var inputEventAdapter = require("./input-event-adapter");
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
@@ -26,7 +27,7 @@ var Application = (function (_super) {
         _super.call(this);
         this.name = name;
         this._options = {};
-        this.servicesManager = new Services.Manager();
+        this.servicesManager = new service_locator_1.ServiceLocator();
     }
     Object.defineProperty(Application.prototype, "isReady", {
         get: function () {
@@ -103,7 +104,7 @@ var Application = (function (_super) {
                 }
             });
         }
-        this.registerService(Services.THEME_MANAGER, themeManager);
+        this.registerService(consts_1.Services.THEME_MANAGER, themeManager);
         this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
         this._mainLoop = main_loop_1.MainLoop.create();
         deviceInfo.init(navigator.language, navigator.userAgent);
@@ -128,7 +129,7 @@ var Application = (function (_super) {
         return this;
     };
     Application.prototype.getThemeManager = function () {
-        return this.getService(Services.THEME_MANAGER);
+        return this.getService(consts_1.Services.THEME_MANAGER);
     };
     Object.defineProperty(Application.prototype, "viewPort", {
         get: function () {

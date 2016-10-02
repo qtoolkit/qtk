@@ -103,6 +103,10 @@ export abstract class ComboBoxBase extends Widget {
 	protected _isPopupOpened : boolean;
 	protected _options : Array<ComboBoxOption>;
 
+	public get inputable() {
+		return true;
+	}
+
 	public get itemHeight() : number {
 		return this._itemHeight || 25;
 	}
@@ -228,6 +232,17 @@ export abstract class ComboBoxBase extends Widget {
 				dialog.close();
 			}
 		});
+	}
+
+	protected onBindProp(prop:string, value:any) {
+		if(prop === "options") {
+			this.resetOptions();
+			value.forEach((opt:any) => {
+				this.addOption(opt.text, opt.value, opt.imageURL, opt.color);
+			});
+		}else{
+			return super.onBindProp(prop, value);
+		}
 	}
 
 	protected onReset() {

@@ -8,12 +8,12 @@ export class Factory<T> {
 		this.creators[type] = creator;
 	}
 
-	public create(type:string) : T {
+	public create(type:string, options?:any) : T {
 		var obj = null;
 		var creator = this.creators[type];
 
 		if(creator) {
-			obj = creator();
+			obj = creator(options);
 		}
 
 		return obj;

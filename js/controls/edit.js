@@ -15,6 +15,13 @@ var Edit = (function (_super) {
     function Edit() {
         _super.call(this, Edit.TYPE);
     }
+    Object.defineProperty(Edit.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Edit.prototype, "inputFilter", {
         set: function (value) {
             this._inputFilter = value;
@@ -101,12 +108,18 @@ var Edit = (function (_super) {
             _this.dispatchEvent({ type: Events.BLUR });
         });
         input.on(Events.CHANGING, function (evt) {
+            var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            _this.dispatchEvent(evt);
+            e.init(Events.CHANGE, { value: _this.text });
+            ;
+            _this.dispatchEvent(e);
         });
         input.on(Events.CHANGE, function (evt) {
+            var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            _this.dispatchEvent(evt);
+            e.init(Events.CHANGE, { value: _this.text });
+            ;
+            _this.dispatchEvent(e);
         });
     };
     Edit.prototype.dispose = function () {

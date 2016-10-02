@@ -30,6 +30,7 @@ export declare abstract class ComboBoxBase extends Widget {
     protected _current: ComboBoxOption;
     protected _isPopupOpened: boolean;
     protected _options: Array<ComboBoxOption>;
+    readonly inputable: boolean;
     itemHeight: number;
     value: any;
     resetOptions(): Widget;
@@ -37,6 +38,7 @@ export declare abstract class ComboBoxBase extends Widget {
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;
     protected onItemSelected(data: ComboBoxOption): void;
     protected showPopup(): void;
+    protected onBindProp(prop: string, value: any): void;
     protected onReset(): void;
     constructor(type?: string);
 }

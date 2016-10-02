@@ -13,12 +13,14 @@ var TWEEN = require("tween.js");
 var emitter_1 = require("../emitter");
 var utils_1 = require("../utils");
 var Events = require("../events");
-var image_tile_1 = require("../image-tile");
 var matrix_stack_1 = require("../matrix-stack");
 var graphics_1 = require("../graphics");
 var dirty_rect_context_1 = require("../dirty-rect-context");
+var image_tile_1 = require("../image-tile");
 var layouter_1 = require('../layouters/layouter');
 var behavior_1 = require("../behaviors/behavior");
+var iview_modal_1 = require("../mvvm/iview-modal");
+var binding_rule_parser_1 = require("../mvvm/binding-rule-parser");
 /**
  * Widget是所有控件的基类。
  */
@@ -1101,6 +1103,16 @@ var Widget = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Widget.prototype, "inputable", {
+        /**
+         * 用户是否可以通过本控件输入/选择数据。
+         */
+        get: function () {
+            return false;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Widget.prototype.setVisible = function (value) {
         this.setProp("visible", value, true);
         this.dispatchEvent({ type: value ? Events.SHOW : Events.HIDE });
@@ -1201,7 +1213,7 @@ var Widget = (function (_super) {
             return this._text;
         },
         set: function (value) {
-            this.setProp("text", value ? value.toString() : "", true);
+            this.setProp("text", (value || value === 0) ? value.toString() : "", true);
         },
         enumerable: true,
         configurable: true
@@ -1493,6 +1505,8 @@ var Widget = (function (_super) {
         this.onkeyup = null;
         this._behaviors = {};
         this.removeAllListeners();
+        this._viewModal = null;
+        this._dataBindingRule = null;
         this.onReset();
         this.set(options);
         this.onCreated();
@@ -1579,11 +1593,111 @@ var Widget = (function (_super) {
         }
         return json;
     };
-    Widget.create = function (app, options) {
-        var widget = new Widget("dummy");
-        widget.reset("dummy", null);
-        widget.app = app;
-        return widget;
+    Widget.prototype.onBindProp = function (prop, value) {
+        if (prop === "text") {
+            this.text = value;
+        }
+        else if (prop === "value") {
+            this.value = value;
+        }
+    };
+    Widget.prototype.setDataBindingRule = function (dataBindingRule) {
+        this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
+        return this;
+    };
+    Widget.prototype.bindData = function (viewModal) {
+        var _this = this;
+        var dataBindingRule = this._dataBindingRule;
+        if (dataBindingRule && viewModal) {
+            this._viewModal = viewModal;
+            var bindingMode = viewModal.getBindingMode();
+            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                this.onBindData(viewModal, dataBindingRule);
+            }
+            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                this.watchTargetChange(dataBindingRule);
+            }
+            if (bindingMode !== iview_modal_1.BindingMode.ONE_TIME && bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                viewModal.onChange(function (evt) {
+                    _this.onBindData(viewModal, dataBindingRule);
+                });
+            }
+        }
+        this._children.forEach(function (child) {
+            child.bindData(viewModal);
+        });
+        return this;
+    };
+    Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
+        for (var prop in dataBindingRule) {
+            var dataSource = dataBindingRule[prop];
+            var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
+            var value = dataSource.value || viewModal.getProp(dataSource.path);
+            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+            }
+        }
+    };
+    Widget.prototype.convertValue = function (viewModal, dataSource, value) {
+        var v = value;
+        if (dataSource.converters) {
+            dataSource.converters.forEach(function (name) {
+                var c = viewModal.getValueConverter(name);
+                if (c) {
+                    v = c.convert(v);
+                }
+            });
+        }
+        return v;
+    };
+    Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
+        var v = value;
+        if (dataSource.converters) {
+            dataSource.converters.forEachR(function (name) {
+                var c = viewModal.getValueConverter(name);
+                if (c) {
+                    v = c.convertBack(v);
+                }
+            });
+        }
+        return v;
+    };
+    Widget.prototype.getPropDefaultBindMode = function (prop) {
+        return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
+    };
+    Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
+        if (dataSource.validationRule) {
+            var validationRule = viewModal.getValidationRule(dataSource.validationRule);
+            if (validationRule) {
+                var result = validationRule.validate(value);
+                if (result.code) {
+                    console.log("invalid value:" + result.message);
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+    Widget.prototype.watchTargetValueChange = function (dataSource) {
+        var _this = this;
+        var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
+        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+            this.on(Events.CHANGE, function (evt) {
+                var value = _this.convertBackValue(_this._viewModal, dataSource, evt.value);
+                if (_this.isValidValue(_this._viewModal, dataSource, value)) {
+                    _this._viewModal.setProp(dataSource.path, value, _this);
+                }
+            });
+        }
+    };
+    Widget.prototype.watchTargetChange = function (dataBindingRule) {
+        for (var prop in dataBindingRule) {
+            var bindingMode = this.getPropDefaultBindMode(prop);
+            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY) {
+                var dataSource = dataBindingRule[prop];
+                this.watchTargetValueChange(dataSource);
+            }
+        }
     };
     Widget.ID = 10000;
     return Widget;

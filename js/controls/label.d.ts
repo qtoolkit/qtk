@@ -5,7 +5,7 @@ export declare class Label extends Widget {
     protected _multiLines: boolean;
     protected _textLines: Array<TextLine>;
     multiLines: boolean;
-    value: string;
+    value: any;
     setStyle(state: WidgetState, style: Style): Widget;
     protected drawTextSL(ctx: any, text: string, style: Style): Widget;
     protected drawTextML(ctx: any, style: Style): Widget;

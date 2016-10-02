@@ -4,5 +4,5 @@
 export declare class Factory<T> {
     private creators;
     register(type: string, creator: Function): void;
-    create(type: string): T;
+    create(type: string, options?: any): T;
 }

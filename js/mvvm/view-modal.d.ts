@@ -1,0 +1,31 @@
+import { Emitter } from "../emitter";
+import { ICommand } from "./icommand";
+import { IValueConverter } from "./ivalue-converter";
+import { IValidationRule } from "./ivalidation-rule";
+import { IViewModal, BindingMode, ICollectionViewModal } from "./iview-modal";
+export declare class ViewModal extends Emitter implements IViewModal {
+    private _data;
+    private _commands;
+    private _converters;
+    private _validationRules;
+    private _ePropChange;
+    constructor(data: any);
+    getBindingMode(): BindingMode;
+    onChange(callback: Function): void;
+    offChange(callback: Function): void;
+    protected notifyChange(type: string, path: string, value: any, trigger?: any): void;
+    getProp(path: string): any;
+    delProp(path: string, trigger: any): ViewModal;
+    setProp(path: string, value: any, trigger?: any): ViewModal;
+    getCommand(name: string): ICommand;
+    registerCommand(name: string, cmd: ICommand): ViewModal;
+    unregisterCommand(name: string, cmd: ICommand): ViewModal;
+    getValueConverter(name: string): IValueConverter;
+    registerValueConverter(name: string, converter: IValueConverter): ViewModal;
+    unregisterValueConverter(name: string, converter: IValueConverter): ViewModal;
+    getValidationRule(name: string): IValidationRule;
+    registerValidationRule(name: string, validationRule: IValidationRule): ViewModal;
+    unregisterValidationRule(name: string, validationRule: IValidationRule): ViewModal;
+    createCollectionViewModal(path: string): ICollectionViewModal;
+    static create(data: any): ViewModal;
+}

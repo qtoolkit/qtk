@@ -4,10 +4,13 @@ import { TitleSlider } from "./title-slider";
 import { TitleTextArea } from "./title-text-area";
 import { TitleComboBox, TitleComboBoxEditable } from "./title-combo-box";
 import { TitleChoosableEdit } from "./title-choosable-edit";
+/**
+ * 属性编辑页，包装了各种TitleValue。
+ */
 export declare class PropertyPage extends Widget {
+    protected _itemH: number;
     protected _titleW: string;
     protected _valueW: string;
-    protected _itemH: number;
     itemH: number;
     titleW: string;
     valueW: string;

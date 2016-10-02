@@ -1,18 +1,19 @@
-import Events = require("./events");
 import path = require("path");
 import TWEEN = require("tween.js");
 import Assets = require("./assets");
-import * as Services from  "./services";
+import Events = require("./events");
+import {Services} from "./consts";
 import {MainLoop} from "./main-loop";
 import {Emitter} from "./emitter";
 import {ViewPort} from "./view-port";
 import {IViewPort} from "./iview-port";
 import {ImageTile} from "./image-tile";
 import {IMainLoop} from "./imain-loop";
-import {IThemeManager} from "./itheme-manager";
 import {ThemeManager} from "./theme-manager";
 import {IApplication} from "./iapplication";
 import * as deviceInfo from "./device-info";
+import {IThemeManager} from "./itheme-manager";
+import {ServiceLocator} from  "./service-locator";
 import inputEventAdapter = require("./input-event-adapter");
 
 /**
@@ -25,13 +26,13 @@ export class Application extends Emitter implements IApplication {
 	private _isReady : boolean;
 	private _viewPort : IViewPort; 
 	private _mainLoop : MainLoop;
-	private servicesManager : Services.Manager;
+	private servicesManager : ServiceLocator;
 
 	constructor(name:string) {
 		super();
 		this.name = name;
 		this._options = {};
-		this.servicesManager = new Services.Manager();
+		this.servicesManager = new ServiceLocator();
 	}
 
 	public get isReady() : boolean {

@@ -3,18 +3,18 @@ exports.THEME_MANAGER = "qtk-keyup";
 /**
  * 管理各种服务。
  */
-var Manager = (function () {
-    function Manager() {
+var ServiceManager = (function () {
+    function ServiceManager() {
         this.services = {};
     }
-    Manager.prototype.register = function (name, service) {
+    ServiceManager.prototype.register = function (name, service) {
         this.services[name] = service;
         return this;
     };
-    Manager.prototype.get = function (name) {
+    ServiceManager.prototype.get = function (name) {
         return this.services[name];
     };
-    return Manager;
+    return ServiceManager;
 }());
-exports.Manager = Manager;
+exports.ServiceManager = ServiceManager;
 ;
