@@ -1,4 +1,5 @@
 
+var pointer = require('json-pointer');
 import {Emitter} from "../emitter";
 import Events = require("../events");
 import {ICommand} from "./icommand";
@@ -41,20 +42,28 @@ export class ViewModal extends Emitter implements IViewModal {
 		this.dispatchEvent(this._ePropChange.init(type, {prop:path, value:value, trigger:trigger}));
 	}
 
+	protected fixPath(path:string) : string {
+		if(path && path.charAt(0) !== '/') {
+			return '/' + path;
+		}else{
+			return path;
+		}
+	}
+
 	public getProp(path:string) : any {
-		return this._data[path];
+		return pointer.get(this._data, this.fixPath(path));
 	}
 
 	public delProp(path:string, trigger:any) : ViewModal {
-		delete this._data[path];
-		this.notifyChange(Events.PROP_DELETE, path, null, trigger);
+		pointer.remove(this._data, path);
+		this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
 
 		return this;
 	}
 	
 	public setProp(path:string, value:any, trigger?:any) : ViewModal {
-		this._data[path] = value;
-		this.notifyChange(Events.PROP_CHANGE, path, value, trigger);
+		pointer.set(this._data, path, value);
+		this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
 
 		return this;
 	}

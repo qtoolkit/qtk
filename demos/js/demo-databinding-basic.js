@@ -89,6 +89,13 @@ function onReady(app) {
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 	}), {value: {path:"gender", converters:["gender"]}});
 	
+	addItem(qtk.TitleLabel.create({
+		title:"Org Name(*)", 
+		titleW:"120", 
+		valueW:"100", 
+		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+	}), "/org/name");
+	
 	var summary = addItem(qtk.Label.create({text:"",
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 	}));
@@ -96,7 +103,10 @@ function onReady(app) {
 	var data = {
 		name:"QTK",
 		age:100,
-		gender:1
+		gender:1,
+		org : {
+			name:"QToolKit"
+		}
 	};
 
 	var viewModal = qtk.ViewModal.create(data);

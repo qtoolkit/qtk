@@ -11,7 +11,7 @@ export interface IBindingRuleParser {
 export class BindingRuleParser implements IBindingRuleParser {
 	parse(rule:any) : any {
 		if(typeof rule === "string") {
-			return {value: {path : rule}};
+			rule = {value: {path : rule}};
 		}
 		
 		for(var key in rule) {
@@ -19,6 +19,11 @@ export class BindingRuleParser implements IBindingRuleParser {
 
 			if(typeof dataSource === "string") {
 				rule[key] = {path:dataSource};
+			}
+
+			var path = dataSource.path;
+			if(path && path.charAt(0) !== '/') {
+				dataSource.path = '/' + dataSource.path;
 			}
 		}
 

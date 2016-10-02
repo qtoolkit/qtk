@@ -7,12 +7,16 @@ var BindingRuleParser = (function () {
     }
     BindingRuleParser.prototype.parse = function (rule) {
         if (typeof rule === "string") {
-            return { value: { path: rule } };
+            rule = { value: { path: rule } };
         }
         for (var key in rule) {
             var dataSource = rule[key];
             if (typeof dataSource === "string") {
                 rule[key] = { path: dataSource };
+            }
+            var path = dataSource.path;
+            if (path && path.charAt(0) !== '/') {
+                dataSource.path = '/' + dataSource.path;
             }
         }
         return rule;

@@ -14,6 +14,7 @@ export declare class ViewModal extends Emitter implements IViewModal {
     onChange(callback: Function): void;
     offChange(callback: Function): void;
     protected notifyChange(type: string, path: string, value: any, trigger?: any): void;
+    protected fixPath(path: string): string;
     getProp(path: string): any;
     delProp(path: string, trigger: any): ViewModal;
     setProp(path: string, value: any, trigger?: any): ViewModal;

@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var pointer = require('json-pointer');
 var emitter_1 = require("../emitter");
 var Events = require("../events");
 var iview_modal_1 = require("./iview-modal");
@@ -31,17 +32,25 @@ var ViewModal = (function (_super) {
     ViewModal.prototype.notifyChange = function (type, path, value, trigger) {
         this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value, trigger: trigger }));
     };
+    ViewModal.prototype.fixPath = function (path) {
+        if (path && path.charAt(0) !== '/') {
+            return '/' + path;
+        }
+        else {
+            return path;
+        }
+    };
     ViewModal.prototype.getProp = function (path) {
-        return this._data[path];
+        return pointer.get(this._data, this.fixPath(path));
     };
     ViewModal.prototype.delProp = function (path, trigger) {
-        delete this._data[path];
-        this.notifyChange(Events.PROP_DELETE, path, null, trigger);
+        pointer.remove(this._data, path);
+        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
         return this;
     };
     ViewModal.prototype.setProp = function (path, value, trigger) {
-        this._data[path] = value;
-        this.notifyChange(Events.PROP_CHANGE, path, value, trigger);
+        pointer.set(this._data, path, value);
+        this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
         return this;
     };
     ViewModal.prototype.getCommand = function (name) {
