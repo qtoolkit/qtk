@@ -12,10 +12,6 @@ import {RecyclableCreator} from "../recyclable-creator";
  */
 export class TitleContent extends Widget {
 	protected _animating : boolean;
-	protected _titleHeight : number;
-	protected _contentHeight : number;
-	
-	protected _movable : boolean;
 	protected _collapsed : boolean;
 	protected _titleWidget : Widget;
 	protected _contentWidget : Widget;
@@ -23,26 +19,29 @@ export class TitleContent extends Widget {
 	/**
 	 * titleHeight 标题控件的高度。
 	 */
+	protected _th : number;
 	public set titleHeight(value:number) {
-		this._titleHeight = value;
+		this._th = value;
 	}
 	public get titleHeight() : number {
-		return this._titleHeight;
+		return this._th;
 	}
 	
 	/**
 	 * titleHeight 内容控件的高度。
 	 */
+	protected _ch : number;
 	public set contentHeight(value:number) {
-		this._contentHeight = value;
+		this._ch = value;
 	}
 	public get contentHeight() : number {
-		return this._contentHeight;
+		return this._ch;
 	}
 
 	/**
 	 * movable 决定是否能通过拖动标题控件来拖动整个TitleContent控件。
 	 */
+	protected _movable : boolean;
 	public set movable(value:boolean) {
 		this._movable = value;
 	}
@@ -124,8 +123,8 @@ export class TitleContent extends Widget {
 		}
 		if(value) {
 			this.addChild(value);
-			if(!this._titleHeight) {
-				this._titleHeight = value.h;
+			if(!this.titleHeight) {
+				this.titleHeight = value.h;
 			}
 		}
 		this._titleWidget = value;
@@ -143,8 +142,8 @@ export class TitleContent extends Widget {
 		}
 		if(value) {
 			this.addChild(value);
-			if(!this._contentHeight) {
-				this._contentHeight = value.h;
+			if(!this.contentHeight) {
+				this.contentHeight = value.h;
 			}
 		}
 		this._contentWidget = value;
@@ -159,16 +158,6 @@ export class TitleContent extends Widget {
 		ctx.restore();
 
 		return this;
-	}
-
-	protected onReset() {
-		super.onReset();
-		this._movable = false;
-		this._titleHeight = 30;
-		this._collapsed = false;
-		this._titleWidget = null;
-		this._contentWidget = null;
-		this._contentHeight = 0;
 	}
 
 	public onInit() {
@@ -190,8 +179,8 @@ export class TitleContent extends Widget {
 			return this.getLayoutRect();
 		}
 
-		if(this._contentHeight < 1) {
-			this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+		if(this.contentHeight < 1) {
+			this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
 		}
 
 		this.reComputeH();
@@ -217,9 +206,24 @@ export class TitleContent extends Widget {
 
 		return r;
 	}
+	
+	protected onReset() {
+		super.onReset();
+		this._movable = false;
+		this._collapsed = false;
+		this._titleWidget = null;
+		this._contentWidget = null;
+	}
+
 
 	constructor() {
 		super(TitleContent.TYPE);
+	}
+
+	protected static defProps = Object.assign({}, Widget.defProps, {_movable:false, _th:30, _ch:0});
+
+	protected getDefProps() : any {
+		return TitleContent.defProps;
 	}
 
 	public static TYPE = "title-content";

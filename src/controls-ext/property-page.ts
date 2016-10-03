@@ -141,14 +141,16 @@ export class PropertyPage extends Widget {
 
 	protected onReset() {
 		super.onReset();
-		this.itemH = 30;
-		this.titleW = "60px";
-		this.valueW = "100%";
 		this.childrenLayouter = LinearLayouter.createV({spacing:5});
 	}
 
 	constructor() {
 		super(PropertyPage.TYPE);
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_itemH:30, _titleW:"60px", _valueW:"100%"});
+	protected getDefProps() : any {
+		return PropertyPage.defProps;
 	}
 
 	public static TYPE = "property-page";

@@ -1,25 +1,12 @@
 describe('TitleComboBox', function() {
 	this.timeout(3000);
-	var attrs = {
-		title:"name",
-		titleW:"30px",
-		valueW:"60%",
-		itemHeight:30,
-		value:"Red"
-	};
 
-    it('test attr', (done) => {
-    	var result = true;
-    	var widget = qtk.TitleComboBox.create(attrs);
-    	widget.addOption("Red");
-
-    	for(var key in attrs) {
-			if(attrs[key] !==  widget[key]) {
-				result = false;
-				break;
-			}
-		}
-
-        done(result ? null : new Error("test attr"));
+    it('test clone toJson', (done) => {
+    	var options = {w:200, h:30, title:"Name", itemHeight:32, titleW:45, valueW:56};
+		var widget = qtk.TitleComboBox.create(options);
+		widget.addOption("Red").addOption("Green");;
+		var result = testWidgetCloneJson(widget);
+        
+        done(result ? null : new Error("test clone toJson"));
     });
 })

@@ -139,14 +139,15 @@ var PropertyPage = (function (_super) {
     };
     PropertyPage.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.itemH = 30;
-        this.titleW = "60px";
-        this.valueW = "100%";
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createV({ spacing: 5 });
+    };
+    PropertyPage.prototype.getDefProps = function () {
+        return PropertyPage.defProps;
     };
     PropertyPage.create = function (options) {
         return PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
     };
+    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
     PropertyPage.TYPE = "property-page";
     PropertyPage.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyPage(); });
     return PropertyPage;

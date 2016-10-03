@@ -2,6 +2,9 @@ import { Rect } from "../rect";
 import { Style } from "../style";
 import { Widget } from "./widget";
 import { ProgressBar } from "./progress-bar";
+/**
+ * 滑块控件。拖动滑块可以改变它的值。
+ */
 export declare class Slider extends ProgressBar {
     protected dragger: Widget;
     constructor(type?: string);

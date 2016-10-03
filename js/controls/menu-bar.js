@@ -104,12 +104,15 @@ var MenuBar = (function (_super) {
     };
     MenuBar.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.itemWidth = 40;
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
+    };
+    MenuBar.prototype.getDefProps = function () {
+        return MenuBar.defProps;
     };
     MenuBar.create = function (options) {
         return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
     };
+    MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
     MenuBar.TYPE = "menu-bar";
     MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
     return MenuBar;
@@ -128,6 +131,11 @@ var MenuBarItem = (function (_super) {
         this._activeIcon = activeIconURL ? image_tile_1.ImageTile.create(activeIconURL, redraw) : null;
         this._disableIcon = disableIconURL ? image_tile_1.ImageTile.create(disableIconURL, redraw) : null;
         this._checkedIcon = checkedIconURL ? image_tile_1.ImageTile.create(checkedIconURL, redraw) : null;
+        this._normalIconURL = normalIconURL ? normalIconURL : null;
+        this._overIconURL = overIconURL ? overIconURL : null;
+        this._activeIconURL = activeIconURL ? activeIconURL : null;
+        this._disableIconURL = disableIconURL ? disableIconURL : null;
+        this._checkedIconURL = checkedIconURL ? checkedIconURL : null;
     };
     MenuBarItem.prototype.drawImage = function (ctx, style) {
         var icon = null;
@@ -187,9 +195,15 @@ var MenuBarItem = (function (_super) {
     MenuBarItem.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
     };
+    MenuBarItem.prototype.getDefProps = function () {
+        return MenuBarItem.defProps;
+    };
     MenuBarItem.create = function (options) {
         return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
     };
+    MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
+        _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
+    });
     MenuBarItem.TYPE = "menu-bar-item";
     MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });
     return MenuBarItem;

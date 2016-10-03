@@ -9,6 +9,9 @@ import Events = require("../events");
 import {WidgetFactory} from "../controls/widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 编辑器+选择按钮。
+ */
 export class ChoosableEdit extends Widget {
 	protected _edit : Edit;
 	protected _button : Button;

@@ -10,6 +10,9 @@ var scroll_view_1 = require("./scroll-view");
 var carota = require('carota');
 var rect = carota.rect;
 var createDoc = carota.document;
+/**
+ * 富文本显示控件。
+ */
 var RichText = (function (_super) {
     __extends(RichText, _super);
     function RichText(type) {

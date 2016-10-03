@@ -8,16 +8,22 @@ var widget_1 = require("./widget");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 进度条的类型有三种：水平，垂直和圆形。
+ */
 (function (ProgressBarType) {
-    ProgressBarType[ProgressBarType["V"] = 1] = "V";
-    ProgressBarType[ProgressBarType["VERTICAL"] = 1] = "VERTICAL";
-    ProgressBarType[ProgressBarType["H"] = 2] = "H";
-    ProgressBarType[ProgressBarType["HORIZONTAL"] = 2] = "HORIZONTAL";
+    ProgressBarType[ProgressBarType["H"] = 1] = "H";
+    ProgressBarType[ProgressBarType["HORIZONTAL"] = 1] = "HORIZONTAL";
+    ProgressBarType[ProgressBarType["V"] = 2] = "V";
+    ProgressBarType[ProgressBarType["VERTICAL"] = 2] = "VERTICAL";
     ProgressBarType[ProgressBarType["C"] = 3] = "C";
     ProgressBarType[ProgressBarType["CIRCLE"] = 3] = "CIRCLE";
 })(exports.ProgressBarType || (exports.ProgressBarType = {}));
 var ProgressBarType = exports.ProgressBarType;
 ;
+/**
+ * 进度条。value表示进度，取值在0到1之间。
+ */
 var ProgressBar = (function (_super) {
     __extends(ProgressBar, _super);
     function ProgressBar(type) {
@@ -87,9 +93,13 @@ var ProgressBar = (function (_super) {
         ctx.restore();
         return this;
     };
+    ProgressBar.prototype.getDefProps = function () {
+        return ProgressBar.defProps;
+    };
     ProgressBar.create = function (options) {
         return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
     };
+    ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
     ProgressBar.TYPE = "progress-bar";
     ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
     return ProgressBar;

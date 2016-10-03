@@ -1,3 +1,6 @@
+function fullURL(name) {
+	return "http://localhost:9876/base/www/" + name;
+}
 
 function equalJsonWidget(json, widget) {
 	for(var key in json) {

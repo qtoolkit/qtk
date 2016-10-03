@@ -2,6 +2,9 @@ import { Widget } from "./widget";
 import { RichText } from "./rich-text";
 import Events = require("../events");
 import { MatrixStack } from "../matrix-stack";
+/**
+ * 富文本编辑器。
+ */
 export declare class RichTextEdit extends RichText {
     protected _element: any;
     protected _textArea: any;

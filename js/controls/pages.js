@@ -7,6 +7,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
+ * value表示该活跃页面的索引。
+ */
 var Pages = (function (_super) {
     __extends(Pages, _super);
     function Pages() {
@@ -36,8 +40,6 @@ var Pages = (function (_super) {
             else {
                 return null;
             }
-        },
-        set: function (value) {
         },
         enumerable: true,
         configurable: true

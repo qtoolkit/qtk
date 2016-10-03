@@ -83,7 +83,6 @@ var TitleValue = (function (_super) {
     };
     TitleValue.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.padding = 2;
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
         var titleWidget = label_1.Label.create();
         this.addChild(titleWidget);
@@ -92,11 +91,16 @@ var TitleValue = (function (_super) {
         this.addChild(valueWidget);
         this._valueWidget = valueWidget;
     };
+    TitleValue.prototype.getDefProps = function () {
+        return TitleValue.defProps;
+    };
     TitleValue.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
         this._titleWidget = null;
         this._valueWidget = null;
     };
+    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+        _title: null, _titleW: 60, _valueW: 60 });
     return TitleValue;
 }(widget_1.Widget));
 exports.TitleValue = TitleValue;

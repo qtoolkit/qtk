@@ -38,10 +38,10 @@ var TabButtonGroup = (function (_super) {
     });
     Object.defineProperty(TabButtonGroup.prototype, "autoExpand", {
         get: function () {
-            return this._autoExpand;
+            return this._ae;
         },
         set: function (value) {
-            this._autoExpand = value;
+            this._ae = value;
             this.relayoutChildren();
         },
         enumerable: true,
@@ -53,7 +53,7 @@ var TabButtonGroup = (function (_super) {
         var w = 0;
         var h = this.h;
         var n = this.children.length;
-        var autoExpand = this._autoExpand;
+        var autoExpand = this._ae;
         if (n > 0) {
             var itemW = this.w / n;
             this.children.forEach(function (child) {
@@ -87,12 +87,13 @@ var TabButtonGroup = (function (_super) {
         }
         return this;
     };
-    TabButtonGroup.prototype.onReset = function () {
-        this.autoExpand = true;
+    TabButtonGroup.prototype.getDefProps = function () {
+        return TabButtonGroup.defProps;
     };
     TabButtonGroup.create = function (options) {
         return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
     };
+    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
     TabButtonGroup.TYPE = "tab-button-group";
     TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
     return TabButtonGroup;

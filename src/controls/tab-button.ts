@@ -12,41 +12,59 @@ import {WidgetFactory} from "./widget-factory";
 import {ImageDrawType, ImageTile} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 标签控件上的标签按钮。
+ */
 export class TabButton extends RadioButton {
-	protected _orientation : Orientation;
 	protected _normalIcon : ImageTile;
 	protected _currentIcon : ImageTile;
+	protected _normalIconURL : string;
+	protected _currentIconURL : string;
 	protected _tabPage : TabPage;
 	protected _closeButton : Widget;
-	protected _closeButtonAtLeft : boolean;
+	
+	protected _orn : Orientation;
+	protected _cbAtLeft : boolean;
 
 	public get closeButton() : Widget {
 		return this._closeButton;
 	}
 
 	public set closeButtonAtLeft(value:boolean) {
-		this._closeButtonAtLeft = value;
+		this._cbAtLeft = value;
 		this.relayoutChildren();
 	}
 	public get closeButtonAtLeft() : boolean {
-		return this._closeButtonAtLeft;
+		return this._cbAtLeft;
+	}
+	
+	public set orientation(value:Orientation) {
+		this._orn = value;
+	}
+	public get orientation() : Orientation{
+		return this._orn;
 	}
 
-	public relayoutChildren() : Rect {
-		if(this._closeButton) {
-			var x = this.leftPadding;
-			var y = this.topPadding;
-			var h = this.h - this.topPadding - this.bottomPadding;
-			var w = h;
-			if(!this.closeButtonAtLeft) {
-				x = this.w - this.rightPadding - w;
-			}
-			
-			this._closeButton.moveResizeTo(x, y, w, h);
+	public setIcons(normalIconURL:string, currentIconURL:string) {
+		if(normalIconURL) {
+			this._normalIcon = ImageTile.create(normalIconURL, evt => {
+				this.requestRedraw();
+			});
+		}else{
+			this._normalIcon = null;
 		}
+		this._normalIconURL = normalIconURL ? normalIconURL : null;
 
-		return Rect.rect.init(0, 0, this.w, this.h);
+		if(currentIconURL) {
+			this._currentIcon = ImageTile.create(currentIconURL, evt => {
+				this.requestRedraw();
+			});
+		}else{
+			this._currentIcon = null;
+		}
+		this._currentIconURL = currentIconURL ? currentIconURL : null;
 	}
+
 
 	public set closable(value:boolean) {
 		if(value && this._closeButton || !value && !this._closeButton) {
@@ -67,6 +85,22 @@ export class TabButton extends RadioButton {
 
 	public get closable() : boolean {
 		return !!this._closeButton;
+	}
+
+	public relayoutChildren() : Rect {
+		if(this._closeButton) {
+			var x = this.leftPadding;
+			var y = this.topPadding;
+			var h = this.h - this.topPadding - this.bottomPadding;
+			var w = h;
+			if(!this.closeButtonAtLeft) {
+				x = this.w - this.rightPadding - w;
+			}
+			
+			this._closeButton.moveResizeTo(x, y, w, h);
+		}
+
+		return Rect.rect.init(0, 0, this.w, this.h);
 	}
 
 	public get desireWidth() : number {
@@ -92,31 +126,6 @@ export class TabButton extends RadioButton {
 		return this._tabPage;
 	}
 
-	public set orientation(value:Orientation) {
-		this._orientation = value;
-	}
-	public get orientation() : Orientation{
-		return this._orientation;
-	}
-
-	public setIcons(normalIconURL:string, currentIconURL:string) {
-		if(normalIconURL) {
-			this._normalIcon = ImageTile.create(normalIconURL, evt => {
-				this.requestRedraw();
-			});
-		}else{
-			this._normalIcon = null;
-		}
-
-		if(currentIconURL) {
-			this._currentIcon = ImageTile.create(currentIconURL, evt => {
-				this.requestRedraw();
-			});
-		}else{
-			this._currentIcon = null;
-		}
-	}
-
 	protected getStyleType() : string {
 		var appendix = this.value ? "current" : "normal";
 		
@@ -132,7 +141,7 @@ export class TabButton extends RadioButton {
 			var x = this.leftPadding;
 			var y = this.topPadding;
 
-			if(this._orientation === Orientation.V) {
+			if(this._orn === Orientation.V) {
 				w = this.w - this.leftPadding - this.rightPadding;
 				h = this.h - this.bottomPadding - this.topPadding;
 				if(text) {
@@ -169,13 +178,10 @@ export class TabButton extends RadioButton {
 	}
 	
 	protected onReset() {
-		this.padding = 2;
 		this._tabPage = null;
 		this._closeButton = null;
 		this._normalIcon = null;
 		this._currentIcon = null;
-		this._closeButtonAtLeft = false;
-		this._orientation = Orientation.H;
 	}
 
 	public dispose() {
@@ -184,6 +190,12 @@ export class TabButton extends RadioButton {
 		this._closeButton = null;
 		this._normalIcon = null;
 		this._currentIcon = null;
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_lp:2, _tp:2, _rp:2, _bp:2,
+		_normalIconURL:null, _currentIconURL:null,closable:false, _cbAtLeft:false, _orn:Orientation.H});
+	protected getDefProps() : any {
+		return TabButton.defProps;
 	}
 
 	public static TYPE = "tab-button";

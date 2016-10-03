@@ -46,10 +46,10 @@ var TabControl = (function (_super) {
     });
     Object.defineProperty(TabControl.prototype, "buttonGroupAtTop", {
         get: function () {
-            return this._buttonGroupAtTop;
+            return this._bgAtTop;
         },
         set: function (value) {
-            this._buttonGroupAtTop = value;
+            this._bgAtTop = value;
             this.relayoutChildren();
         },
         enumerable: true,
@@ -57,10 +57,10 @@ var TabControl = (function (_super) {
     });
     Object.defineProperty(TabControl.prototype, "buttonGroupHeight", {
         get: function () {
-            return this._buttonGroupHeight;
+            return this._bgh;
         },
         set: function (value) {
-            this._buttonGroupHeight = value;
+            this._bgh = value;
             this.relayoutChildren();
         },
         enumerable: true,
@@ -103,12 +103,12 @@ var TabControl = (function (_super) {
     TabControl.prototype.relayoutChildren = function () {
         var x = this.leftPadding;
         var y = this.topPadding;
-        var buttonGroupHeight = this._buttonGroupHeight;
+        var buttonGroupHeight = this.buttonGroupHeight;
         var h = this.h - this.topPadding - this.bottomPadding;
         var w = this.w - this.leftPadding - this.rightPadding;
         var pages = this._pages;
         var buttonGroup = this._buttonGroup;
-        if (this._buttonGroupAtTop) {
+        if (this.buttonGroupAtTop) {
             if (buttonGroup) {
                 buttonGroup.moveResizeTo(x, y, w, buttonGroupHeight);
                 buttonGroup.relayoutChildren();
@@ -131,7 +131,6 @@ var TabControl = (function (_super) {
     };
     TabControl.prototype.onReset = function () {
         this._value = 0;
-        this._buttonGroupHeight = 30;
         this._pages = pages_1.Pages.create();
         this.addChild(this._pages, true);
         this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
@@ -142,9 +141,13 @@ var TabControl = (function (_super) {
         this._pages = null;
         this._buttonGroup = null;
     };
+    TabControl.prototype.getDefProps = function () {
+        return TabControl.defProps;
+    };
     TabControl.create = function (options) {
         return TabControl.r.create().reset(TabControl.TYPE, options);
     };
+    TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
     TabControl.TYPE = "tab-control";
     TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
     return TabControl;

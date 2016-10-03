@@ -9,6 +9,9 @@ var TWEEN = require("tween.js");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 开关控件。
+ */
 var Switch = (function (_super) {
     __extends(Switch, _super);
     function Switch() {

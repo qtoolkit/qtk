@@ -9,6 +9,9 @@ import {Graphics} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 开关控件。
+ */
 export class Switch extends Widget {
 	protected _offset : number;
 	protected _switching : boolean;	

@@ -23,6 +23,9 @@ var toggles = {
 	83: 'strikeout'
 };
 
+/**
+ * 富文本编辑器。
+ */
 export class RichTextEdit extends RichText {
 	protected _element = null;
 	protected _textArea = null;

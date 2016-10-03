@@ -10,7 +10,7 @@ import {ImageDrawType, ImageTile} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
 
 export class TabButtonGroup extends Widget {
-	protected _autoExpand : boolean;
+	protected _ae : boolean;
 	
 	public set value(value:number) {
 		var n = this.children.length;
@@ -37,11 +37,11 @@ export class TabButtonGroup extends Widget {
 	}
 
 	public set autoExpand(value:boolean) {
-		this._autoExpand = value;
+		this._ae = value;
 		this.relayoutChildren();
 	}
 	public get autoExpand() : boolean {
-		return this._autoExpand;
+		return this._ae;
 	}
 
 	public relayoutChildren() : Rect {
@@ -50,7 +50,7 @@ export class TabButtonGroup extends Widget {
 		var w = 0;
 		var h = this.h;
 		var n = this.children.length;
-		var autoExpand = this._autoExpand;
+		var autoExpand = this._ae;
 		
 		if(n > 0) {
 			var itemW = this.w/n;
@@ -88,14 +88,14 @@ export class TabButtonGroup extends Widget {
 		return this;
 	}
 	
-	protected onReset() {
-		this.autoExpand = true;
-	}
-
 	constructor() {
 		super(TabButtonGroup.TYPE);
 	}
 
+	protected static defProps = Object.assign({}, Widget.defProps, {_ae:true});
+	protected getDefProps() : any {
+		return TabButtonGroup.defProps;
+	}
 	public static TYPE = "tab-button-group";
 	private static r = new RecyclableCreator<TabButtonGroup>(function() {return new TabButtonGroup()});
 	public static create(options?:any) : TabButtonGroup {

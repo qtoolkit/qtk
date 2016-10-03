@@ -359,20 +359,19 @@ export class MenuItem extends Widget {
 	protected onReset() {
 		super.onReset();
 		this._icon = null;
-		this._iconURL = null;
-		this.checkable = false;
-		this.shortcut = null;
 		this.onInitSubMenu = null;
-		this.leftPadding = 2;
-		this.rightPadding = 4;
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_iconURL:null, 
+		checkable:false, shortcut:null, _lp:2, _rp:4
+	});
+	protected getDefProps() : any {
+		return MenuItem.defProps;
 	}
 
 	public dispose() {
 		super.dispose();
 		this._icon = null;
-		this._iconURL = null;
-		this.checkable = false;
-		this.shortcut = null;
 		this.onInitSubMenu = null;
 	}
 

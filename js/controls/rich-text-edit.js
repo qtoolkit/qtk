@@ -20,6 +20,9 @@ var toggles = {
     85: 'underline',
     83: 'strikeout'
 };
+/**
+ * 富文本编辑器。
+ */
 var RichTextEdit = (function (_super) {
     __extends(RichTextEdit, _super);
     function RichTextEdit() {

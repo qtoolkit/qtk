@@ -10,6 +10,9 @@ var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var progress_bar_1 = require("./progress-bar");
+/**
+ * 滑块控件。拖动滑块可以改变它的值。
+ */
 var Slider = (function (_super) {
     __extends(Slider, _super);
     function Slider(type) {

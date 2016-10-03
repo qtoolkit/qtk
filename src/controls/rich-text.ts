@@ -11,6 +11,9 @@ var carota = require('carota');
 var rect = carota.rect;
 var createDoc = carota.document;
 
+/**
+ * 富文本显示控件。
+ */
 export class RichText extends ScrollView {
 	protected _doc : any;
 	protected _data : any;

@@ -10,6 +10,9 @@ var widget_1 = require("../controls/widget");
 var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 编辑器+选择按钮。
+ */
 var ChoosableEdit = (function (_super) {
     __extends(ChoosableEdit, _super);
     function ChoosableEdit() {

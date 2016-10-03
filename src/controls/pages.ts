@@ -6,6 +6,10 @@ import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
+ * value表示该活跃页面的索引。
+ */
 export class Pages extends Widget {
 	public set value(value:number) {
 		var n = this.children.length-1;
@@ -22,8 +26,6 @@ export class Pages extends Widget {
 		return this;
 	}
 
-	public set target(value:Widget){
-	}
 	public get target() : Widget {
 		if(this.children.length) {
 			return this.children[this.value];

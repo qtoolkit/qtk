@@ -7,6 +7,9 @@ var __extends = (this && this.__extends) || function (d, b) {
 var check_button_1 = require("./check-button");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 单选按钮。同一个父控件中，只有一个单选按钮被勾选。被勾选时value为true，否则为false。
+ */
 var RadioButton = (function (_super) {
     __extends(RadioButton, _super);
     function RadioButton(type) {

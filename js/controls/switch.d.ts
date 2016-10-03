@@ -1,6 +1,9 @@
 import { Style } from "../style";
 import { Widget } from "./widget";
 import Events = require("../events");
+/**
+ * 开关控件。
+ */
 export declare class Switch extends Widget {
     protected _offset: number;
     protected _switching: boolean;

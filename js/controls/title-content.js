@@ -18,26 +18,20 @@ var TitleContent = (function (_super) {
     }
     Object.defineProperty(TitleContent.prototype, "titleHeight", {
         get: function () {
-            return this._titleHeight;
+            return this._th;
         },
-        /**
-         * titleHeight 标题控件的高度。
-         */
         set: function (value) {
-            this._titleHeight = value;
+            this._th = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(TitleContent.prototype, "contentHeight", {
         get: function () {
-            return this._contentHeight;
+            return this._ch;
         },
-        /**
-         * titleHeight 内容控件的高度。
-         */
         set: function (value) {
-            this._contentHeight = value;
+            this._ch = value;
         },
         enumerable: true,
         configurable: true
@@ -46,9 +40,6 @@ var TitleContent = (function (_super) {
         get: function () {
             return this._movable;
         },
-        /**
-         * movable 决定是否能通过拖动标题控件来拖动整个TitleContent控件。
-         */
         set: function (value) {
             this._movable = value;
         },
@@ -132,8 +123,8 @@ var TitleContent = (function (_super) {
             }
             if (value) {
                 this.addChild(value);
-                if (!this._titleHeight) {
-                    this._titleHeight = value.h;
+                if (!this.titleHeight) {
+                    this.titleHeight = value.h;
                 }
             }
             this._titleWidget = value;
@@ -154,8 +145,8 @@ var TitleContent = (function (_super) {
             }
             if (value) {
                 this.addChild(value);
-                if (!this._contentHeight) {
-                    this._contentHeight = value.h;
+                if (!this.contentHeight) {
+                    this.contentHeight = value.h;
                 }
             }
             this._contentWidget = value;
@@ -172,15 +163,6 @@ var TitleContent = (function (_super) {
         ctx.restore();
         return this;
     };
-    TitleContent.prototype.onReset = function () {
-        _super.prototype.onReset.call(this);
-        this._movable = false;
-        this._titleHeight = 30;
-        this._collapsed = false;
-        this._titleWidget = null;
-        this._contentWidget = null;
-        this._contentHeight = 0;
-    };
     TitleContent.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
         if (this._movable) {
@@ -196,8 +178,8 @@ var TitleContent = (function (_super) {
         if (this._animating) {
             return this.getLayoutRect();
         }
-        if (this._contentHeight < 1) {
-            this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+        if (this.contentHeight < 1) {
+            this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
         }
         this.reComputeH();
         var r = this.getLayoutRect();
@@ -220,9 +202,20 @@ var TitleContent = (function (_super) {
         }
         return r;
     };
+    TitleContent.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
+        this._movable = false;
+        this._collapsed = false;
+        this._titleWidget = null;
+        this._contentWidget = null;
+    };
+    TitleContent.prototype.getDefProps = function () {
+        return TitleContent.defProps;
+    };
     TitleContent.create = function (options) {
         return TitleContent.rBin.create().reset(TitleContent.TYPE, options);
     };
+    TitleContent.defProps = Object.assign({}, widget_1.Widget.defProps, { _movable: false, _th: 30, _ch: 0 });
     TitleContent.TYPE = "title-content";
     TitleContent.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
     return TitleContent;

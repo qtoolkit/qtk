@@ -75,7 +75,6 @@ export abstract class TitleValue extends Widget {
 	public onReset() {
 		super.onReset();
 
-		this.padding = 2;
 		this.childrenLayouter = LinearLayouter.createH({spacing:5});
 
 		var titleWidget = Label.create();
@@ -85,6 +84,13 @@ export abstract class TitleValue extends Widget {
 		var valueWidget = this.createValueWidget();
 		this.addChild(valueWidget);
 		this._valueWidget = valueWidget;
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_lp:2, _tp:2, _rp:2, _bp:2,
+		_title:null, _titleW:60, _valueW:60});
+
+	protected getDefProps() : any {
+		return TitleValue.defProps;
 	}
 	
 	public dispose(){

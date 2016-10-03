@@ -6,15 +6,21 @@ import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 进度条的类型有三种：水平，垂直和圆形。
+ */
 export enum ProgressBarType {
-	V = 1,
-	VERTICAL = 1,
-	H = 2,
-	HORIZONTAL = 2,
+	H = 1,
+	HORIZONTAL = 1,
+	V = 2,
+	VERTICAL = 2,
 	C = 3,
 	CIRCLE = 3
 };
 
+/**
+ * 进度条。value表示进度，取值在0到1之间。
+ */
 export class ProgressBar extends Widget {
 	public barType : ProgressBarType;
 	public textFormater = function(value:number) {
@@ -83,6 +89,11 @@ export class ProgressBar extends Widget {
 		ctx.restore();
 
 		return this;
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {barType:ProgressBarType.H});
+	protected getDefProps() : any {
+		return ProgressBar.defProps;
 	}
 	
 	public static TYPE = "progress-bar";

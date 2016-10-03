@@ -1,5 +1,8 @@
 import { Widget } from "./widget";
 import { ScrollView } from "./scroll-view";
+/**
+ * 富文本显示控件。
+ */
 export declare class RichText extends ScrollView {
     protected _doc: any;
     protected _data: any;

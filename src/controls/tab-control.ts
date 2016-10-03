@@ -13,9 +13,9 @@ import {RecyclableCreator} from "../recyclable-creator";
 export class TabControl extends Widget {
 	protected _pages : Pages;
 	protected _orientation : Orientation;
-	protected _buttonGroupAtTop : boolean;
+	protected _bgAtTop : boolean;
+	protected _bgh : number;
 	protected _buttonGroup : TabButtonGroup;
-	protected _buttonGroupHeight : number;
 
 	public set value(value:number) {
 		this._pages.value = value;
@@ -36,19 +36,19 @@ export class TabControl extends Widget {
 	}
 
 	public set buttonGroupAtTop(value:boolean) {
-		this._buttonGroupAtTop = value;
+		this._bgAtTop = value;
 		this.relayoutChildren();
 	}
 	public get buttonGroupAtTop() : boolean {
-		return this._buttonGroupAtTop;
+		return this._bgAtTop;
 	}
 	
 	public set buttonGroupHeight(value:number) {
-		this._buttonGroupHeight = value;
+		this._bgh = value;
 		this.relayoutChildren();
 	}
 	public get buttonGroupHeight() : number{
-		return this._buttonGroupHeight;
+		return this._bgh;
 	}
 
 	public removePage(tabPage:TabPage, destroy?:boolean) {
@@ -100,13 +100,13 @@ export class TabControl extends Widget {
 	public relayoutChildren() : Rect {
 		var x = this.leftPadding;
 		var y = this.topPadding;
-		var buttonGroupHeight = this._buttonGroupHeight;
+		var buttonGroupHeight = this.buttonGroupHeight;
 		var h = this.h - this.topPadding - this.bottomPadding;
 		var w = this.w - this.leftPadding - this.rightPadding;
 
 		var pages = this._pages;
 		var buttonGroup = this._buttonGroup;
-		if(this._buttonGroupAtTop) {
+		if(this.buttonGroupAtTop) {
 			if(buttonGroup) {
 				buttonGroup.moveResizeTo(x, y, w, buttonGroupHeight);
 				buttonGroup.relayoutChildren();
@@ -135,7 +135,6 @@ export class TabControl extends Widget {
 
 	protected onReset() {
 		this._value = 0;
-		this._buttonGroupHeight = 30;
 		this._pages = Pages.create();
 		this.addChild(this._pages, true);
 
@@ -147,6 +146,11 @@ export class TabControl extends Widget {
 		super.dispose();
 		this._pages = null;
 		this._buttonGroup = null;
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_bgh:30, _bgAtTop:false}); 
+	protected getDefProps() : any {
+		return TabControl.defProps;
 	}
 
 	public  static TYPE = "tab-control";

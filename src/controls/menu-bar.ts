@@ -109,8 +109,12 @@ export class MenuBar extends Widget {
 
 	protected onReset() {
 		super.onReset();
-		this.itemWidth = 40;
 		this.childrenLayouter = LinearLayouter.createH({spacing:1}); 
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_itemWidth:40});
+	protected getDefProps() : any {
+		return MenuBar.defProps;
 	}
 
 	public static TYPE = "menu-bar";
@@ -128,6 +132,12 @@ export class MenuBarItem extends Widget {
 	protected _disableIcon : ImageTile;
 	protected _checkedIcon : ImageTile;
 
+	protected _normalIconURL : string;
+	protected _overIconURL : string;
+	protected _activeIconURL : string;
+	protected _disableIconURL : string;
+	protected _checkedIconURL : string;
+
 	public setIcons(normalIconURL:string, overIconURL?:string, activeIconURL?:string,
 					disableIconURL?:string, checkedIconURL?:string) {
 		var redraw = this.requestRedraw.bind(this);
@@ -137,6 +147,12 @@ export class MenuBarItem extends Widget {
 		this._activeIcon = activeIconURL ? ImageTile.create(activeIconURL, redraw) : null;
 		this._disableIcon = disableIconURL ? ImageTile.create(disableIconURL, redraw) : null;
 		this._checkedIcon = checkedIconURL ? ImageTile.create(checkedIconURL, redraw) : null;
+	
+		this._normalIconURL = normalIconURL?normalIconURL:null;
+		this._overIconURL = overIconURL ? overIconURL : null;
+		this._activeIconURL = activeIconURL ? activeIconURL : null;
+		this._disableIconURL = disableIconURL ? disableIconURL : null;
+		this._checkedIconURL = checkedIconURL ? checkedIconURL : null;
 	}
 	
 	protected drawImage(ctx:any, style:Style) : Widget {
@@ -205,6 +221,12 @@ export class MenuBarItem extends Widget {
 		super.dispose();
 	}
 
+	protected static defProps = Object.assign({}, Widget.defProps, {
+		_normalIconURL:null, _overIconURL:null, _activeIconURL:null, _disableIconURL:null, _checkedIconURL:null	
+	});
+	protected getDefProps() : any {
+		return MenuBarItem.defProps;
+	}
 	public static TYPE = "menu-bar-item";
 	private static recycleBin = new RecyclableCreator<MenuBarItem>(function() {return new MenuBarItem()});
 	public static create(options?:any) : MenuBarItem {

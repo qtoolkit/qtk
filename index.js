@@ -17049,6 +17049,10 @@ var qtk =
 	var widget_1 = __webpack_require__(16);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
+	 * value表示该活跃页面的索引。
+	 */
 	var Pages = (function (_super) {
 	    __extends(Pages, _super);
 	    function Pages() {
@@ -17078,8 +17082,6 @@ var qtk =
 	            else {
 	                return null;
 	            }
-	        },
-	        set: function (value) {
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -17201,6 +17203,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(2);
+	var widget_1 = __webpack_require__(16);
 	var button_1 = __webpack_require__(89);
 	var graphics_1 = __webpack_require__(25);
 	var consts_1 = __webpack_require__(92);
@@ -17208,6 +17211,9 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(15);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 标签控件上的标签按钮。
+	 */
 	var TabButton = (function (_super) {
 	    __extends(TabButton, _super);
 	    function TabButton() {
@@ -17222,27 +17228,45 @@ var qtk =
 	    });
 	    Object.defineProperty(TabButton.prototype, "closeButtonAtLeft", {
 	        get: function () {
-	            return this._closeButtonAtLeft;
+	            return this._cbAtLeft;
 	        },
 	        set: function (value) {
-	            this._closeButtonAtLeft = value;
+	            this._cbAtLeft = value;
 	            this.relayoutChildren();
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    TabButton.prototype.relayoutChildren = function () {
-	        if (this._closeButton) {
-	            var x = this.leftPadding;
-	            var y = this.topPadding;
-	            var h = this.h - this.topPadding - this.bottomPadding;
-	            var w = h;
-	            if (!this.closeButtonAtLeft) {
-	                x = this.w - this.rightPadding - w;
-	            }
-	            this._closeButton.moveResizeTo(x, y, w, h);
+	    Object.defineProperty(TabButton.prototype, "orientation", {
+	        get: function () {
+	            return this._orn;
+	        },
+	        set: function (value) {
+	            this._orn = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
+	        var _this = this;
+	        if (normalIconURL) {
+	            this._normalIcon = image_tile_1.ImageTile.create(normalIconURL, function (evt) {
+	                _this.requestRedraw();
+	            });
 	        }
-	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
+	        else {
+	            this._normalIcon = null;
+	        }
+	        this._normalIconURL = normalIconURL ? normalIconURL : null;
+	        if (currentIconURL) {
+	            this._currentIcon = image_tile_1.ImageTile.create(currentIconURL, function (evt) {
+	                _this.requestRedraw();
+	            });
+	        }
+	        else {
+	            this._currentIcon = null;
+	        }
+	        this._currentIconURL = currentIconURL ? currentIconURL : null;
 	    };
 	    Object.defineProperty(TabButton.prototype, "closable", {
 	        get: function () {
@@ -17266,6 +17290,19 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    TabButton.prototype.relayoutChildren = function () {
+	        if (this._closeButton) {
+	            var x = this.leftPadding;
+	            var y = this.topPadding;
+	            var h = this.h - this.topPadding - this.bottomPadding;
+	            var w = h;
+	            if (!this.closeButtonAtLeft) {
+	                x = this.w - this.rightPadding - w;
+	            }
+	            this._closeButton.moveResizeTo(x, y, w, h);
+	        }
+	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
+	    };
 	    Object.defineProperty(TabButton.prototype, "desireWidth", {
 	        get: function () {
 	            var w = this.leftPadding + this.rightPadding;
@@ -17293,35 +17330,6 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(TabButton.prototype, "orientation", {
-	        get: function () {
-	            return this._orientation;
-	        },
-	        set: function (value) {
-	            this._orientation = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
-	        var _this = this;
-	        if (normalIconURL) {
-	            this._normalIcon = image_tile_1.ImageTile.create(normalIconURL, function (evt) {
-	                _this.requestRedraw();
-	            });
-	        }
-	        else {
-	            this._normalIcon = null;
-	        }
-	        if (currentIconURL) {
-	            this._currentIcon = image_tile_1.ImageTile.create(currentIconURL, function (evt) {
-	                _this.requestRedraw();
-	            });
-	        }
-	        else {
-	            this._currentIcon = null;
-	        }
-	    };
 	    TabButton.prototype.getStyleType = function () {
 	        var appendix = this.value ? "current" : "normal";
 	        return (this._styleType || this.type) + "." + appendix;
@@ -17334,7 +17342,7 @@ var qtk =
 	            var h = 0;
 	            var x = this.leftPadding;
 	            var y = this.topPadding;
-	            if (this._orientation === consts_1.Orientation.V) {
+	            if (this._orn === consts_1.Orientation.V) {
 	                w = this.w - this.leftPadding - this.rightPadding;
 	                h = this.h - this.bottomPadding - this.topPadding;
 	                if (text) {
@@ -17366,13 +17374,10 @@ var qtk =
 	        return this;
 	    };
 	    TabButton.prototype.onReset = function () {
-	        this.padding = 2;
 	        this._tabPage = null;
 	        this._closeButton = null;
 	        this._normalIcon = null;
 	        this._currentIcon = null;
-	        this._closeButtonAtLeft = false;
-	        this._orientation = consts_1.Orientation.H;
 	    };
 	    TabButton.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -17381,9 +17386,14 @@ var qtk =
 	        this._normalIcon = null;
 	        this._currentIcon = null;
 	    };
+	    TabButton.prototype.getDefProps = function () {
+	        return TabButton.defProps;
+	    };
 	    TabButton.create = function (options) {
 	        return TabButton.re.create().reset(TabButton.TYPE, options);
 	    };
+	    TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+	        _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
 	    TabButton.TYPE = "tab-button";
 	    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
 	    return TabButton;
@@ -17485,6 +17495,9 @@ var qtk =
 	var check_button_1 = __webpack_require__(94);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 单选按钮。同一个父控件中，只有一个单选按钮被勾选。被勾选时value为true，否则为false。
+	 */
 	var RadioButton = (function (_super) {
 	    __extends(RadioButton, _super);
 	    function RadioButton(type) {
@@ -17682,10 +17695,10 @@ var qtk =
 	    });
 	    Object.defineProperty(TabControl.prototype, "buttonGroupAtTop", {
 	        get: function () {
-	            return this._buttonGroupAtTop;
+	            return this._bgAtTop;
 	        },
 	        set: function (value) {
-	            this._buttonGroupAtTop = value;
+	            this._bgAtTop = value;
 	            this.relayoutChildren();
 	        },
 	        enumerable: true,
@@ -17693,10 +17706,10 @@ var qtk =
 	    });
 	    Object.defineProperty(TabControl.prototype, "buttonGroupHeight", {
 	        get: function () {
-	            return this._buttonGroupHeight;
+	            return this._bgh;
 	        },
 	        set: function (value) {
-	            this._buttonGroupHeight = value;
+	            this._bgh = value;
 	            this.relayoutChildren();
 	        },
 	        enumerable: true,
@@ -17739,12 +17752,12 @@ var qtk =
 	    TabControl.prototype.relayoutChildren = function () {
 	        var x = this.leftPadding;
 	        var y = this.topPadding;
-	        var buttonGroupHeight = this._buttonGroupHeight;
+	        var buttonGroupHeight = this.buttonGroupHeight;
 	        var h = this.h - this.topPadding - this.bottomPadding;
 	        var w = this.w - this.leftPadding - this.rightPadding;
 	        var pages = this._pages;
 	        var buttonGroup = this._buttonGroup;
-	        if (this._buttonGroupAtTop) {
+	        if (this.buttonGroupAtTop) {
 	            if (buttonGroup) {
 	                buttonGroup.moveResizeTo(x, y, w, buttonGroupHeight);
 	                buttonGroup.relayoutChildren();
@@ -17767,7 +17780,6 @@ var qtk =
 	    };
 	    TabControl.prototype.onReset = function () {
 	        this._value = 0;
-	        this._buttonGroupHeight = 30;
 	        this._pages = pages_1.Pages.create();
 	        this.addChild(this._pages, true);
 	        this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
@@ -17778,9 +17790,13 @@ var qtk =
 	        this._pages = null;
 	        this._buttonGroup = null;
 	    };
+	    TabControl.prototype.getDefProps = function () {
+	        return TabControl.defProps;
+	    };
 	    TabControl.create = function (options) {
 	        return TabControl.r.create().reset(TabControl.TYPE, options);
 	    };
+	    TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
 	    TabControl.TYPE = "tab-control";
 	    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
 	    return TabControl;
@@ -17834,10 +17850,10 @@ var qtk =
 	    });
 	    Object.defineProperty(TabButtonGroup.prototype, "autoExpand", {
 	        get: function () {
-	            return this._autoExpand;
+	            return this._ae;
 	        },
 	        set: function (value) {
-	            this._autoExpand = value;
+	            this._ae = value;
 	            this.relayoutChildren();
 	        },
 	        enumerable: true,
@@ -17849,7 +17865,7 @@ var qtk =
 	        var w = 0;
 	        var h = this.h;
 	        var n = this.children.length;
-	        var autoExpand = this._autoExpand;
+	        var autoExpand = this._ae;
 	        if (n > 0) {
 	            var itemW = this.w / n;
 	            this.children.forEach(function (child) {
@@ -17883,12 +17899,13 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    TabButtonGroup.prototype.onReset = function () {
-	        this.autoExpand = true;
+	    TabButtonGroup.prototype.getDefProps = function () {
+	        return TabButtonGroup.defProps;
 	    };
 	    TabButtonGroup.create = function (options) {
 	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
 	    };
+	    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
 	    TabButtonGroup.TYPE = "tab-button-group";
 	    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
 	    return TabButtonGroup;
@@ -20711,16 +20728,22 @@ var qtk =
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 进度条的类型有三种：水平，垂直和圆形。
+	 */
 	(function (ProgressBarType) {
-	    ProgressBarType[ProgressBarType["V"] = 1] = "V";
-	    ProgressBarType[ProgressBarType["VERTICAL"] = 1] = "VERTICAL";
-	    ProgressBarType[ProgressBarType["H"] = 2] = "H";
-	    ProgressBarType[ProgressBarType["HORIZONTAL"] = 2] = "HORIZONTAL";
+	    ProgressBarType[ProgressBarType["H"] = 1] = "H";
+	    ProgressBarType[ProgressBarType["HORIZONTAL"] = 1] = "HORIZONTAL";
+	    ProgressBarType[ProgressBarType["V"] = 2] = "V";
+	    ProgressBarType[ProgressBarType["VERTICAL"] = 2] = "VERTICAL";
 	    ProgressBarType[ProgressBarType["C"] = 3] = "C";
 	    ProgressBarType[ProgressBarType["CIRCLE"] = 3] = "CIRCLE";
 	})(exports.ProgressBarType || (exports.ProgressBarType = {}));
 	var ProgressBarType = exports.ProgressBarType;
 	;
+	/**
+	 * 进度条。value表示进度，取值在0到1之间。
+	 */
 	var ProgressBar = (function (_super) {
 	    __extends(ProgressBar, _super);
 	    function ProgressBar(type) {
@@ -20790,9 +20813,13 @@ var qtk =
 	        ctx.restore();
 	        return this;
 	    };
+	    ProgressBar.prototype.getDefProps = function () {
+	        return ProgressBar.defProps;
+	    };
 	    ProgressBar.create = function (options) {
 	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
 	    };
+	    ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
 	    ProgressBar.TYPE = "progress-bar";
 	    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
 	    return ProgressBar;
@@ -21985,6 +22012,9 @@ var qtk =
 	var carota = __webpack_require__(26);
 	var rect = carota.rect;
 	var createDoc = carota.document;
+	/**
+	 * 富文本显示控件。
+	 */
 	var RichText = (function (_super) {
 	    __extends(RichText, _super);
 	    function RichText(type) {
@@ -22104,6 +22134,9 @@ var qtk =
 	    85: 'underline',
 	    83: 'strikeout'
 	};
+	/**
+	 * 富文本编辑器。
+	 */
 	var RichTextEdit = (function (_super) {
 	    __extends(RichTextEdit, _super);
 	    function RichTextEdit() {
@@ -22616,6 +22649,9 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	var progress_bar_1 = __webpack_require__(106);
+	/**
+	 * 滑块控件。拖动滑块可以改变它的值。
+	 */
 	var Slider = (function (_super) {
 	    __extends(Slider, _super);
 	    function Slider(type) {
@@ -22761,6 +22797,9 @@ var qtk =
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 开关控件。
+	 */
 	var Switch = (function (_super) {
 	    __extends(Switch, _super);
 	    function Switch() {
@@ -23556,24 +23595,22 @@ var qtk =
 	    MenuItem.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this._icon = null;
-	        this._iconURL = null;
-	        this.checkable = false;
-	        this.shortcut = null;
 	        this.onInitSubMenu = null;
-	        this.leftPadding = 2;
-	        this.rightPadding = 4;
+	    };
+	    MenuItem.prototype.getDefProps = function () {
+	        return MenuItem.defProps;
 	    };
 	    MenuItem.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
 	        this._icon = null;
-	        this._iconURL = null;
-	        this.checkable = false;
-	        this.shortcut = null;
 	        this.onInitSubMenu = null;
 	    };
 	    MenuItem.create = function (options) {
 	        return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
 	    };
+	    MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
+	        checkable: false, shortcut: null, _lp: 2, _rp: 4
+	    });
 	    MenuItem.TYPE = "menu-item";
 	    MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });
 	    return MenuItem;
@@ -23694,12 +23731,15 @@ var qtk =
 	    };
 	    MenuBar.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this.itemWidth = 40;
 	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
+	    };
+	    MenuBar.prototype.getDefProps = function () {
+	        return MenuBar.defProps;
 	    };
 	    MenuBar.create = function (options) {
 	        return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
 	    };
+	    MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
 	    MenuBar.TYPE = "menu-bar";
 	    MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
 	    return MenuBar;
@@ -23718,6 +23758,11 @@ var qtk =
 	        this._activeIcon = activeIconURL ? image_tile_1.ImageTile.create(activeIconURL, redraw) : null;
 	        this._disableIcon = disableIconURL ? image_tile_1.ImageTile.create(disableIconURL, redraw) : null;
 	        this._checkedIcon = checkedIconURL ? image_tile_1.ImageTile.create(checkedIconURL, redraw) : null;
+	        this._normalIconURL = normalIconURL ? normalIconURL : null;
+	        this._overIconURL = overIconURL ? overIconURL : null;
+	        this._activeIconURL = activeIconURL ? activeIconURL : null;
+	        this._disableIconURL = disableIconURL ? disableIconURL : null;
+	        this._checkedIconURL = checkedIconURL ? checkedIconURL : null;
 	    };
 	    MenuBarItem.prototype.drawImage = function (ctx, style) {
 	        var icon = null;
@@ -23777,9 +23822,15 @@ var qtk =
 	    MenuBarItem.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
 	    };
+	    MenuBarItem.prototype.getDefProps = function () {
+	        return MenuBarItem.defProps;
+	    };
 	    MenuBarItem.create = function (options) {
 	        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
 	    };
+	    MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
+	        _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
+	    });
 	    MenuBarItem.TYPE = "menu-bar-item";
 	    MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });
 	    return MenuBarItem;
@@ -25315,26 +25366,20 @@ var qtk =
 	    }
 	    Object.defineProperty(TitleContent.prototype, "titleHeight", {
 	        get: function () {
-	            return this._titleHeight;
+	            return this._th;
 	        },
-	        /**
-	         * titleHeight 标题控件的高度。
-	         */
 	        set: function (value) {
-	            this._titleHeight = value;
+	            this._th = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(TitleContent.prototype, "contentHeight", {
 	        get: function () {
-	            return this._contentHeight;
+	            return this._ch;
 	        },
-	        /**
-	         * titleHeight 内容控件的高度。
-	         */
 	        set: function (value) {
-	            this._contentHeight = value;
+	            this._ch = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -25343,9 +25388,6 @@ var qtk =
 	        get: function () {
 	            return this._movable;
 	        },
-	        /**
-	         * movable 决定是否能通过拖动标题控件来拖动整个TitleContent控件。
-	         */
 	        set: function (value) {
 	            this._movable = value;
 	        },
@@ -25429,8 +25471,8 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
-	                if (!this._titleHeight) {
-	                    this._titleHeight = value.h;
+	                if (!this.titleHeight) {
+	                    this.titleHeight = value.h;
 	                }
 	            }
 	            this._titleWidget = value;
@@ -25451,8 +25493,8 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
-	                if (!this._contentHeight) {
-	                    this._contentHeight = value.h;
+	                if (!this.contentHeight) {
+	                    this.contentHeight = value.h;
 	                }
 	            }
 	            this._contentWidget = value;
@@ -25469,15 +25511,6 @@ var qtk =
 	        ctx.restore();
 	        return this;
 	    };
-	    TitleContent.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this._movable = false;
-	        this._titleHeight = 30;
-	        this._collapsed = false;
-	        this._titleWidget = null;
-	        this._contentWidget = null;
-	        this._contentHeight = 0;
-	    };
 	    TitleContent.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
 	        if (this._movable) {
@@ -25493,8 +25526,8 @@ var qtk =
 	        if (this._animating) {
 	            return this.getLayoutRect();
 	        }
-	        if (this._contentHeight < 1) {
-	            this._contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+	        if (this.contentHeight < 1) {
+	            this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
 	        }
 	        this.reComputeH();
 	        var r = this.getLayoutRect();
@@ -25517,9 +25550,20 @@ var qtk =
 	        }
 	        return r;
 	    };
+	    TitleContent.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._movable = false;
+	        this._collapsed = false;
+	        this._titleWidget = null;
+	        this._contentWidget = null;
+	    };
+	    TitleContent.prototype.getDefProps = function () {
+	        return TitleContent.defProps;
+	    };
 	    TitleContent.create = function (options) {
 	        return TitleContent.rBin.create().reset(TitleContent.TYPE, options);
 	    };
+	    TitleContent.defProps = Object.assign({}, widget_1.Widget.defProps, { _movable: false, _th: 30, _ch: 0 });
 	    TitleContent.TYPE = "title-content";
 	    TitleContent.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
 	    return TitleContent;
@@ -25760,14 +25804,15 @@ var qtk =
 	    };
 	    PropertyPage.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this.itemH = 30;
-	        this.titleW = "60px";
-	        this.valueW = "100%";
 	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createV({ spacing: 5 });
+	    };
+	    PropertyPage.prototype.getDefProps = function () {
+	        return PropertyPage.defProps;
 	    };
 	    PropertyPage.create = function (options) {
 	        return PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
 	    };
+	    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
 	    PropertyPage.TYPE = "property-page";
 	    PropertyPage.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyPage(); });
 	    return PropertyPage;
@@ -25949,7 +25994,6 @@ var qtk =
 	    };
 	    TitleValue.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this.padding = 2;
 	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
 	        var titleWidget = label_1.Label.create();
 	        this.addChild(titleWidget);
@@ -25958,11 +26002,16 @@ var qtk =
 	        this.addChild(valueWidget);
 	        this._valueWidget = valueWidget;
 	    };
+	    TitleValue.prototype.getDefProps = function () {
+	        return TitleValue.defProps;
+	    };
 	    TitleValue.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
 	        this._titleWidget = null;
 	        this._valueWidget = null;
 	    };
+	    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+	        _title: null, _titleW: 60, _valueW: 60 });
 	    return TitleValue;
 	}(widget_1.Widget));
 	exports.TitleValue = TitleValue;
@@ -26212,6 +26261,9 @@ var qtk =
 	var Events = __webpack_require__(7);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 编辑器+选择按钮。
+	 */
 	var ChoosableEdit = (function (_super) {
 	    __extends(ChoosableEdit, _super);
 	    function ChoosableEdit() {

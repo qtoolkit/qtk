@@ -15,5 +15,46 @@ export declare abstract class TitleValue extends Widget {
     protected createValueWidget(options?: any): Widget;
     onInit(): void;
     onReset(): void;
+    protected static defProps: {} & {
+        _x: number;
+        _y: number;
+        _z: number;
+        _w: number;
+        _h: number;
+        _state: number;
+        _value: number;
+        _enable: boolean;
+        _visible: boolean;
+        _selected: boolean;
+        _opacity: number;
+        _scaleX: number;
+        _scaleY: number;
+        _pivotX: number;
+        _pivotY: number;
+        _rotation: number;
+        _focusable: boolean;
+        _sensitive: boolean;
+        _tips: any;
+        _text: any;
+        _name: any;
+        _tag: any;
+        _hitTestResult: number;
+        _isWindow: boolean;
+        _mode: number;
+        _styleType: any;
+        _lp: number;
+        _tp: number;
+        _rp: number;
+        _bp: number;
+    } & {
+        _lp: number;
+        _tp: number;
+        _rp: number;
+        _bp: number;
+        _title: any;
+        _titleW: number;
+        _valueW: number;
+    };
+    protected getDefProps(): any;
     dispose(): void;
 }

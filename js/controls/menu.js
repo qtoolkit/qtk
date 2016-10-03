@@ -330,24 +330,22 @@ var MenuItem = (function (_super) {
     MenuItem.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
         this._icon = null;
-        this._iconURL = null;
-        this.checkable = false;
-        this.shortcut = null;
         this.onInitSubMenu = null;
-        this.leftPadding = 2;
-        this.rightPadding = 4;
+    };
+    MenuItem.prototype.getDefProps = function () {
+        return MenuItem.defProps;
     };
     MenuItem.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
         this._icon = null;
-        this._iconURL = null;
-        this.checkable = false;
-        this.shortcut = null;
         this.onInitSubMenu = null;
     };
     MenuItem.create = function (options) {
         return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
     };
+    MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
+        checkable: false, shortcut: null, _lp: 2, _rp: 4
+    });
     MenuItem.TYPE = "menu-item";
     MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });
     return MenuItem;

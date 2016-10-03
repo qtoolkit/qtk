@@ -10,6 +10,9 @@ import {ImageTile, ImageDrawType} from "../image-tile";
 import {RecyclableCreator} from "../recyclable-creator";
 import {ProgressBarType, ProgressBar} from "./progress-bar";
 
+/**
+ * 滑块控件。拖动滑块可以改变它的值。
+ */
 export class Slider extends ProgressBar {
 	protected dragger : Widget;
 	constructor(type?:string) {
