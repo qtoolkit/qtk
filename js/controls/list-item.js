@@ -78,9 +78,13 @@ var ListItem = (function (_super) {
         }
         return rect_1.Rect.rect.init(x, y, w, h);
     };
+    ListItem.prototype.getDefProps = function () {
+        return ListItem.defProps;
+    };
     ListItem.create = function (options) {
         return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
     };
+    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null });
     ListItem.TYPE = "list-item";
     ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
     return ListItem;

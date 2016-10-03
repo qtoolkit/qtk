@@ -10,6 +10,8 @@ export declare class Image extends Widget {
     image: ImageTile;
     drawType: ImageDrawType;
     value: string;
+    protected onToJson(json: any): void;
+    onFromJson(json: any): void;
     setStyle(state: WidgetState, style: Style): Widget;
     protected onReset(): void;
     getStyle(): Style;

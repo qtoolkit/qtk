@@ -6,12 +6,18 @@ import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 对话框。
+ */
 export class Dialog extends Window {
 	
 	constructor(type?:string) {
 		super(type||Dialog.TYPE);
 	}
 
+	/**
+	 * 将对话框移动到屏幕中间。
+	 */
 	public moveToCenter() : Widget {
 		if(this.app) {
 			var vp = this.app.getViewPort();

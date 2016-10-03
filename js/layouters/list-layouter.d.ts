@@ -1,6 +1,6 @@
 import { Rect } from '../rect';
 import { Widget } from '../controls/widget';
-import { Layouter } from './layouter';
+import { Layouter, LayouterParam } from './layouter';
 /**
  * 列表布局器。
  */
@@ -30,8 +30,7 @@ export declare class ListLayouter extends Layouter {
  * 如果父控件使用ListLayouter布局器，则子控件需要把layoutParam设置为ListLayouterParam。
  *
  */
-export declare class ListLayouterParam {
-    type: string;
+export declare class ListLayouterParam extends LayouterParam {
     /**
      * 列表项的高度。
      */

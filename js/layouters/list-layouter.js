@@ -78,9 +78,10 @@ layouter_1.LayouterFactory.register(TYPE, ListLayouter.create);
  * 如果父控件使用ListLayouter布局器，则子控件需要把layoutParam设置为ListLayouterParam。
  *
  */
-var ListLayouterParam = (function () {
+var ListLayouterParam = (function (_super) {
+    __extends(ListLayouterParam, _super);
     function ListLayouterParam(h, spacing) {
-        this.type = TYPE;
+        _super.call(this, TYPE);
         this.h = h || 0;
         this.spacing = spacing || 0;
     }
@@ -89,6 +90,7 @@ var ListLayouterParam = (function () {
         return new ListLayouterParam(options.h || options.height, options.spacing);
     };
     return ListLayouterParam;
-}());
+}(layouter_1.LayouterParam));
 exports.ListLayouterParam = ListLayouterParam;
 ;
+layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.create);

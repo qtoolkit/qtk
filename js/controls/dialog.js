@@ -7,11 +7,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 var window_1 = require("./window");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 对话框。
+ */
 var Dialog = (function (_super) {
     __extends(Dialog, _super);
     function Dialog(type) {
         _super.call(this, type || Dialog.TYPE);
     }
+    /**
+     * 将对话框移动到屏幕中间。
+     */
     Dialog.prototype.moveToCenter = function () {
         if (this.app) {
             var vp = this.app.getViewPort();

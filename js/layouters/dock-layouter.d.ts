@@ -1,7 +1,7 @@
 import { Rect } from '../rect';
 import { Direction } from '../consts';
 import { Widget } from '../controls/widget';
-import { Layouter } from './layouter';
+import { Layouter, LayouterParam } from './layouter';
 /**
  * Dock布局器。
  */
@@ -22,8 +22,7 @@ export declare class DockLayouter extends Layouter {
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-export declare class DockLayouterParam {
-    type: string;
+export declare class DockLayouterParam extends LayouterParam {
     size: string;
     position: Direction;
     constructor(position: Direction, size: string);

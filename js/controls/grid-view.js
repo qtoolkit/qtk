@@ -8,6 +8,9 @@ var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var grid_layouter_1 = require("../layouters/grid-layouter");
 var scroll_view_1 = require("./scroll-view");
+/**
+ * 网格视图。
+ */
 var GridView = (function (_super) {
     __extends(GridView, _super);
     function GridView() {
@@ -17,6 +20,9 @@ var GridView = (function (_super) {
         get: function () {
             return this._cols;
         },
+        /**
+         * 列数。列数和列宽设置其中之一即可。
+         */
         set: function (value) {
             this._cols = value;
             var layouter = this._childrenLayouter;
@@ -29,6 +35,9 @@ var GridView = (function (_super) {
         get: function () {
             return this._colWidth;
         },
+        /**
+         * 列宽。列数和列宽设置其中之一即可。
+         */
         set: function (value) {
             this._colWidth = value;
             var layouter = this._childrenLayouter;
@@ -41,6 +50,9 @@ var GridView = (function (_super) {
         get: function () {
             return this._rows;
         },
+        /**
+         * 行数。行数和行高设置其中之一即可。
+         */
         set: function (value) {
             this._rows = value;
             var layouter = this._childrenLayouter;
@@ -53,6 +65,9 @@ var GridView = (function (_super) {
         get: function () {
             return this._rowHeight;
         },
+        /**
+         * 行高。行数和行高设置其中之一即可。
+         */
         set: function (value) {
             this._rowHeight = value;
             var layouter = this._childrenLayouter;
@@ -61,6 +76,9 @@ var GridView = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * 每一网格周围的空白。
+     */
     GridView.prototype.setItemMargins = function (margins) {
         var layouter = this._childrenLayouter;
         layouter.leftMargin = margins.left || margins.all || 0;
@@ -72,8 +90,6 @@ var GridView = (function (_super) {
     Object.defineProperty(GridView.prototype, "childrenLayouter", {
         get: function () {
             return this._childrenLayouter;
-        },
-        set: function (layouter) {
         },
         enumerable: true,
         configurable: true
@@ -122,19 +138,24 @@ var GridView = (function (_super) {
             this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
         }
     };
+    GridView.prototype.onToJson = function (json) {
+        delete json.childrenLayouter;
+    };
     GridView.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
         this.relayoutChildren();
     };
     GridView.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this._cols = 3;
-        this._rows = 3;
         this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
+    };
+    GridView.prototype.getDefProps = function () {
+        return GridView.defProps;
     };
     GridView.create = function (options) {
         return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
     };
+    GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
     GridView.TYPE = "grid-view";
     GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
     return GridView;

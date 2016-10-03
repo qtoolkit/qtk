@@ -7,7 +7,13 @@ import {RecyclableCreator} from "../recyclable-creator";
 import {GridLayouter} from "../layouters/grid-layouter";
 import {ScrollView, ScrollerBarVisibility} from "./scroll-view";
 
+/**
+ * 网格视图。
+ */
 export class GridView extends ScrollView {
+	/**
+	 * 列数。列数和列宽设置其中之一即可。
+	 */
 	public set cols(value:number) {
 		this._cols = value;
 		var layouter = <GridLayouter>this._childrenLayouter;
@@ -17,6 +23,9 @@ export class GridView extends ScrollView {
 		return this._cols;
 	}
 	
+	/**
+	 * 列宽。列数和列宽设置其中之一即可。
+	 */
 	public set colWidth(value:number) {
 		this._colWidth = value;
 		var layouter = <GridLayouter>this._childrenLayouter;
@@ -26,6 +35,9 @@ export class GridView extends ScrollView {
 		return this._colWidth;
 	}
 	
+	/**
+	 * 行数。行数和行高设置其中之一即可。
+	 */
 	public set rows(value:number) {
 		this._rows = value;
 		var layouter = <GridLayouter>this._childrenLayouter;
@@ -35,6 +47,9 @@ export class GridView extends ScrollView {
 		return this._rows;
 	}
 	
+	/**
+	 * 行高。行数和行高设置其中之一即可。
+	 */
 	public set rowHeight(value:number) {
 		this._rowHeight = value;
 		var layouter = <GridLayouter>this._childrenLayouter;
@@ -44,6 +59,9 @@ export class GridView extends ScrollView {
 		return this._rowHeight;
 	}
 
+	/**
+	 * 每一网格周围的空白。
+	 */
 	public setItemMargins(margins:any) : Widget{
 		var layouter = <GridLayouter>this._childrenLayouter;
 
@@ -57,8 +75,6 @@ export class GridView extends ScrollView {
 
 	public get childrenLayouter() : Layouter{
 		return this._childrenLayouter;
-	}
-	public set childrenLayouter(layouter:Layouter) {
 	}
 	
 	protected doDrawChildren(ctx:any) : Widget {
@@ -108,6 +124,10 @@ export class GridView extends ScrollView {
 		}
 	}
 
+	protected onToJson(json:any) {
+		delete json.childrenLayouter;
+	}
+
 	protected onInit() {
 		super.onInit();
 		this.relayoutChildren();
@@ -124,9 +144,13 @@ export class GridView extends ScrollView {
 
 	protected onReset() {
 		super.onReset();
-		this._cols = 3;
-		this._rows = 3;
 		this._childrenLayouter = GridLayouter.create({cols:this.cols, rows:this.rows});
+	}
+	
+	protected static defProps = Object.assign({}, ScrollView.defProps, 
+											  {_cols:3, _rows:3, _rowHeight:0, _colWidth:0});
+	protected getDefProps() : any {
+		return GridView.defProps;
 	}
 
 	public static TYPE = "grid-view";

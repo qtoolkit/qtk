@@ -73,14 +73,10 @@ export class Accordion extends Widget {
 		return this;
 	}
 
-	protected onReset() {
-		super.onReset();
-		this._titleHeight = 30;
-	}
-
 	constructor() {
 		super(Accordion.TYPE);
 	}
+
 	public relayoutChildren() : Rect {
 		var r = this.getLayoutRect();
 		var x = this.leftPadding;
@@ -99,6 +95,11 @@ export class Accordion extends Widget {
 		});
 
 		return r;
+	}
+
+	protected static defProps = Object.assign({}, Widget.defProps, {_titleHeight:30});
+	protected getDefProps() : any {
+		return Accordion.defProps;
 	}
 
 	public static TYPE = "accordion";

@@ -1,7 +1,7 @@
 import {Rect} from '../rect';
 import {Direction} from '../consts';
 import {Widget} from '../controls/widget';
-import {Layouter, LayouterFactory} from './layouter';
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 
 const TYPE = "dock";
 
@@ -98,13 +98,13 @@ LayouterFactory.register(TYPE, DockLayouter.create);
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-export class DockLayouterParam {
-	public type : string;
+export class DockLayouterParam extends LayouterParam {
 	public size : string;
 	public position : Direction;
 
 	constructor(position:Direction, size:string) {
-		this.type = TYPE;
+		super(TYPE);
+
 		this.size = size;
 		this.position = position;
 	}
@@ -115,4 +115,6 @@ export class DockLayouterParam {
 		return new DockLayouterParam(options.position, options.size||"");
 	}
 };
+
+LayouterParamFactory.register(TYPE, DockLayouterParam.create);
 

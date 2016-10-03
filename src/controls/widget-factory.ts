@@ -21,4 +21,11 @@ export class WidgetFactory {
 	public static create(type:string, options?:any) : Widget {
 		return WidgetFactory.factory.create(type, options);
 	}
+	
+	public static createWithJson(json:any) : Widget {
+		var widget = WidgetFactory.create(json.type);
+		widget.fromJson(json);
+
+		return widget;
+	}
 }

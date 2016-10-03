@@ -25,5 +25,11 @@ describe('Radio Button', function() {
     	done(result ? null : new Error("radio button value"));
     });
     
+    it('test clone toJson', (done) => {
+    	var options = {w:200, h:30};
+		var result = testWidgetCloneJson(qtk.RadioButton.create(options));
+        
+        done(result ? null : new Error("test clone toJson"));
+    });
 });
   

@@ -8,6 +8,11 @@ import {TitleContent} from "./title-content";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
+ * 只能用于TitleContent的titleWidget。
+ *
+ */
 export class CollapsableTitle extends Widget {
 	public onClickTrigger : Function;
 
@@ -41,7 +46,7 @@ export class CollapsableTitle extends Widget {
 	}
 
 	protected getStyleType() : string {
-		return this._styleType || this.collapsed ? "accordion-title.collapsed":"accordion-title.expanded";
+		return this._styleType || this.collapsed ? "collapsable-title.collapsed":"collapsable-title.expanded";
 	}
 
 	protected dispatchDblClick(evt:any) {

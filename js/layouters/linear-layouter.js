@@ -35,7 +35,7 @@ var LinearLayouter = (function (_super) {
     LinearLayouter.prototype.layoutChildren = function (widget, children, rect) {
         var _this = this;
         var r = rect.clone();
-        var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+        var defParam = LinearLayouterParam.defParam;
         var arr = children.filter(function (child) {
             var param = child.layoutParam || defParam;
             return param.position > 0;
@@ -81,10 +81,10 @@ var LinearLayouter = (function (_super) {
         var y = 0;
         var w = 0;
         var h = 0;
-        var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+        var defParam = LinearLayouterParam.defParam;
         var param = child.layoutParam || defParam;
         var position = param.position;
-        if (param && param.type.indexOf("linear") >= 0 && child.visible) {
+        if (param && param.type === LinearLayouterParam.TYPE && child.visible) {
             var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
             if (this.orientation === consts_1.Orientation.V) {
                 r.h -= spacing;
@@ -149,7 +149,7 @@ var LinearLayouter = (function (_super) {
         }
     };
     LinearLayouter.prototype.createParam = function (options) {
-        return LinearLayouterParam.createWithType(this.type, options);
+        return LinearLayouterParam.create(options);
     };
     LinearLayouter.createV = function (options) {
         var layouter = new LinearLayouter();
@@ -179,9 +179,10 @@ layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-var LinearLayouterParam = (function () {
+var LinearLayouterParam = (function (_super) {
+    __extends(LinearLayouterParam, _super);
     function LinearLayouterParam(type, w, h, spacing, align, position) {
-        this.type = type || TYPE_V;
+        _super.call(this, type || LinearLayouterParam.TYPE);
         this.w = w || "100%";
         this.h = h || "100%";
         this.align = align;
@@ -190,14 +191,15 @@ var LinearLayouterParam = (function () {
     }
     LinearLayouterParam.createWithType = function (type, opts) {
         var options = opts || {};
-        return new LinearLayouterParam(type, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
+        return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
     };
     LinearLayouterParam.create = function (opts) {
-        return this.createWithType(TYPE_H, opts);
+        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
     };
-    LinearLayouterParam.defParamV = LinearLayouterParam.createWithType(TYPE_V, null);
-    LinearLayouterParam.defParamH = LinearLayouterParam.createWithType(TYPE_H, null);
+    LinearLayouterParam.TYPE = "linear";
+    LinearLayouterParam.defParam = LinearLayouterParam.create(null);
     return LinearLayouterParam;
-}());
+}(layouter_1.LayouterParam));
 exports.LinearLayouterParam = LinearLayouterParam;
 ;
+layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);

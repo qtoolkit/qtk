@@ -139,7 +139,7 @@ export class Style extends Emitter {
 		}
 
 		if(this._backGroundImageDrawType) {
-			json._backGroundImageDrawType = ImageDrawType[this._backGroundImageDrawType];
+			json.backGroundImageDrawType = ImageDrawType[this._backGroundImageDrawType];
 		}
 
 		if(this._foreGroundImage) {
@@ -147,7 +147,7 @@ export class Style extends Emitter {
 		}
 
 		if(this._foreGroundImageDrawType) {
-			json._foreGroundImageDrawType = ImageDrawType[this._foreGroundImageDrawType];
+			json.foreGroundImageDrawType = ImageDrawType[this._foreGroundImageDrawType];
 		}
 
 

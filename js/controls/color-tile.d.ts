@@ -11,6 +11,8 @@ export declare class Color extends Widget {
     lineColor: string;
     lineWidth: number;
     value: string;
+    protected onToJson(json: any): void;
+    onFromJson(json: any): void;
     setStyle(state: WidgetState, style: Style): Widget;
     onReset(): void;
     getStyle(): Style;

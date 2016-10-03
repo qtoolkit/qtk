@@ -58,6 +58,16 @@ var Color = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Color.prototype.onToJson = function (json) {
+        if (this._style) {
+            json.style = this._style.toJson();
+        }
+    };
+    Color.prototype.onFromJson = function (json) {
+        if (json.style) {
+            this._style = style_1.Style.create(json.style);
+        }
+    };
     Color.prototype.setStyle = function (state, style) {
         this._style = style;
         return this;

@@ -90,8 +90,10 @@ layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.create);
  * param.x = "-10px" 则 x = 790;
  *
  */
-var SimpleLayouterParam = (function () {
+var SimpleLayouterParam = (function (_super) {
+    __extends(SimpleLayouterParam, _super);
     function SimpleLayouterParam(x, y, w, h) {
+        _super.call(this, TYPE);
         this.x = x;
         this.y = y;
         this.w = w;
@@ -100,13 +102,13 @@ var SimpleLayouterParam = (function () {
         this.minH = -1;
         this.maxW = -1;
         this.maxH = -1;
-        this.type = TYPE;
     }
     SimpleLayouterParam.create = function (opts) {
         var options = opts || {};
         return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
     };
     return SimpleLayouterParam;
-}());
+}(layouter_1.LayouterParam));
 exports.SimpleLayouterParam = SimpleLayouterParam;
 ;
+layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);

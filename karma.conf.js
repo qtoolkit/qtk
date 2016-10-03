@@ -19,6 +19,7 @@ module.exports = function(config) {
       {pattern: 'www/theme/default/*', watched: true, included: false, served: true, nocache: false},
       {pattern: 'www/*', watched: true, included: false, served: true, nocache: false},
       'tests/context2d-mock.js',
+      'tests/utils.js',
       'tests/assert.js',
       'tests/*.test.js'
     ],

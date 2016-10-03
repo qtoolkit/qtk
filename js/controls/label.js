@@ -4,27 +4,47 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 文本控件。
+ */
 var Label = (function (_super) {
     __extends(Label, _super);
     function Label(type) {
         _super.call(this, type || Label.TYPE);
     }
-    Object.defineProperty(Label.prototype, "multiLines", {
+    /**
+     * 对文本进行重新排版。
+     */
+    Label.prototype.relayoutText = function () {
+        if (this._inited) {
+            var style = this.getStyle();
+            var text = this.getLocaleText();
+            this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
+        }
+        return this;
+    };
+    ;
+    Object.defineProperty(Label.prototype, "multiLineMode", {
+        /**
+         * 是否启用多行模式。
+         */
         get: function () {
-            return this._multiLines;
+            return this._mlm;
         },
         set: function (value) {
-            this.setProp("multiLines", value, true);
+            this.setProp("mlm", value, true);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Label.prototype, "value", {
+        /**
+         * Label的值即它的文本。
+         */
         get: function () {
             return this.text;
         },
@@ -41,27 +61,19 @@ var Label = (function (_super) {
     };
     Label.prototype.drawTextSL = function (ctx, text, style) {
         if (text && style.textColor) {
-            var x = this.leftPadding;
-            var y = this.topPadding;
-            var w = this.w - x - this.rightPadding;
-            var h = this.h - y - this.bottomPadding;
-            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
+            graphics_1.Graphics.drawTextSL(ctx, text, style, this.getTextRect(style));
         }
         return this;
     };
     Label.prototype.drawTextML = function (ctx, style) {
         if (style.textColor) {
-            var x = this.leftPadding;
-            var y = this.topPadding;
-            var w = this.w - x - this.rightPadding;
-            var h = this.h - y - this.bottomPadding;
-            graphics_1.Graphics.drawTextML(ctx, this._textLines, style, rect_1.Rect.rect.init(x, y, w, h));
+            graphics_1.Graphics.drawTextML(ctx, this._textLines, style, this.getTextRect(style));
         }
         return this;
     };
     Label.prototype.drawText = function (ctx, style) {
         if (this._textLines && this._textLines.length) {
-            if (this._multiLines) {
+            if (this._mlm) {
                 this.drawTextML(ctx, style);
             }
             else {
@@ -71,15 +83,6 @@ var Label = (function (_super) {
         }
         return this;
     };
-    Label.prototype.relayoutText = function () {
-        if (this._inited) {
-            var style = this.getStyle();
-            var text = this.getLocaleText();
-            this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
-        }
-        return this;
-    };
-    ;
     Label.prototype.setProp = function (prop, newValue, notify) {
         _super.prototype.setProp.call(this, prop, newValue, notify);
         if (prop === "w" || prop === "h" || prop === "value" || prop === "text") {
@@ -91,12 +94,13 @@ var Label = (function (_super) {
         _super.prototype.onInit.call(this);
         this.relayoutText();
     };
-    Label.prototype.onReset = function () {
-        this.padding = 5;
+    Label.prototype.getDefProps = function () {
+        return Label.defProps;
     };
     Label.create = function (options) {
         return Label.recycleBin.create().reset(Label.TYPE, options);
     };
+    Label.defProps = Object.assign({}, widget_1.Widget.defProps, { _mlm: true, _lp: 5, _tp: 5, _rp: 5, _bp: 5 });
     Label.TYPE = "label";
     Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
     return Label;

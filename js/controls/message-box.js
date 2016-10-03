@@ -154,7 +154,7 @@ var MessageBox = (function (_super) {
         this.addChild(content);
         if (data) {
             content.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-            var label = label_1.Label.create({ text: data, multiLines: true, padding: this._contentPadding });
+            var label = label_1.Label.create({ text: data, multiLineMode: true, padding: this._contentPadding });
             label.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" });
             content.addChild(label);
         }

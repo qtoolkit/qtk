@@ -13,4 +13,5 @@ export declare class WidgetFactory {
     private static factory;
     static register(type: string, creator: Function): void;
     static create(type: string, options?: any): Widget;
+    static createWithJson(json: any): Widget;
 }

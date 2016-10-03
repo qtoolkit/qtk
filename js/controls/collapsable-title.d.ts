@@ -1,6 +1,11 @@
 import { Rect } from "../rect";
 import { Style } from "../style";
 import { Widget } from "./widget";
+/**
+ * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
+ * 只能用于TitleContent的titleWidget。
+ *
+ */
 export declare class CollapsableTitle extends Widget {
     onClickTrigger: Function;
     protected collapsed: boolean;

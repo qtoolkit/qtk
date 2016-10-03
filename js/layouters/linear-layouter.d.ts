@@ -1,7 +1,7 @@
 import { Rect } from '../rect';
 import { Align, Orientation } from '../consts';
 import { Widget } from '../controls/widget';
-import { Layouter } from './layouter';
+import { Layouter, LayouterParam } from './layouter';
 /**
  * 线性布局器。可以设置为水平和垂直两个方向。
  */
@@ -35,8 +35,7 @@ export declare class LinearLayouter extends Layouter {
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-export declare class LinearLayouterParam {
-    type: string;
+export declare class LinearLayouterParam extends LayouterParam {
     /**
      * 控件的宽度。
      */
@@ -62,8 +61,8 @@ export declare class LinearLayouterParam {
      */
     position: number;
     constructor(type: string, w: string, h: string, spacing: number, align: Align, position: number);
-    static defParamV: LinearLayouterParam;
-    static defParamH: LinearLayouterParam;
+    static TYPE: string;
+    static defParam: LinearLayouterParam;
     static createWithType(type: string, opts: any): LinearLayouterParam;
     static create(opts: any): LinearLayouterParam;
 }

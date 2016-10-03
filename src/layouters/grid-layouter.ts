@@ -1,6 +1,6 @@
 import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
-import {Layouter, LayouterFactory} from './layouter';
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 
 const TYPE = "grid";
 
@@ -167,9 +167,7 @@ LayouterFactory.register(TYPE, GridLayouter.create);
  * 如果父控件使用GridLayouter布局器，则子控件需要把layoutParam设置为GridLayouterParam。
  * 
  */
-export class GridLayouterParam {
-	public type : string;
-	
+export class GridLayouterParam extends LayouterParam {
 	/**
 	 * 列序数。
 	 */
@@ -191,7 +189,8 @@ export class GridLayouterParam {
 	public spanRows : number;
 
 	constructor(row?:number, spanRows?:number, col?:number, spanCols?:number) {
-		this.type = TYPE;
+		super(TYPE);
+
 		this.row = row >= 0 ? row : -1;
 		this.col = col >= 0 ? col : -1;
 		this.spanRows = spanRows || 1;
@@ -204,3 +203,4 @@ export class GridLayouterParam {
 	}
 };
 
+LayouterParamFactory.register(TYPE, GridLayouterParam.create);

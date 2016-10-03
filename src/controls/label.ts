@@ -5,69 +5,16 @@ import {Graphics, TextLine} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 文本控件。
+ */
 export class Label extends Widget {
-	protected _multiLines : boolean;
+	protected _mlm : boolean;
 	protected _textLines : Array<TextLine>;
 
-	public get multiLines() : boolean {
-		return this._multiLines;
-	}
-
-	public set multiLines(value:boolean) {
-		this.setProp("multiLines", value, true);
-	}
-
-	public get value() {
-		return this.text;
-	}
-	public set value(value) {
-		this.text = value;
-	}
-	
-	public setStyle(state:WidgetState, style:Style):Widget{
-		super.setStyle(state, style);
-		this.relayoutText();
-
-		return this;
-	}
-
-	protected drawTextSL(ctx:any, text:string, style:Style) : Widget {
-		if(text && style.textColor) {
-			var x = this.leftPadding;
-			var y = this.topPadding;
-			var w = this.w - x - this.rightPadding;
-			var h = this.h - y - this.bottomPadding;
-			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(x, y, w, h));
-		}
-
-		return this;
-	}
-
-	protected drawTextML(ctx:any, style:Style) : Widget {
-		if(style.textColor) {
-			var x = this.leftPadding;
-			var y = this.topPadding;
-			var w = this.w - x - this.rightPadding;
-			var h = this.h - y - this.bottomPadding;
-			Graphics.drawTextML(ctx, this._textLines, style, Rect.rect.init(x, y, w, h));
-		}
-
-		return this;
-	}
-
-	protected drawText(ctx:any, style:Style) : Widget {
-		if(this._textLines && this._textLines.length) {
-			if(this._multiLines) {
-				this.drawTextML(ctx, style);
-			}else{
-				var text = this._textLines[0].text;
-				this.drawTextSL(ctx, text, style);
-			}
-		}
-
-		return this;
-	}
-
+	/**
+	 * 对文本进行重新排版。
+	 */
 	public relayoutText() : Widget {
 		if(this._inited) {
 			var style = this.getStyle();
@@ -77,6 +24,63 @@ export class Label extends Widget {
 
 		return this;
 	};
+
+	/**
+	 * 是否启用多行模式。
+	 */
+	public get multiLineMode() : boolean {
+		return this._mlm;
+	}
+
+	public set multiLineMode(value:boolean) {
+		this.setProp("mlm", value, true);
+	}
+
+	/**
+	 * Label的值即它的文本。
+	 */
+	public get value() {
+		return this.text;
+	}
+	public set value(value) {
+		this.text = value;
+	}
+
+	public setStyle(state:WidgetState, style:Style):Widget{
+		super.setStyle(state, style);
+		this.relayoutText();
+
+		return this;
+	}
+
+	protected drawTextSL(ctx:any, text:string, style:Style) : Widget {
+		if(text && style.textColor) {
+			Graphics.drawTextSL(ctx, text, style, this.getTextRect(style));
+		}
+
+		return this;
+	}
+
+	protected drawTextML(ctx:any, style:Style) : Widget {
+		if(style.textColor) {
+			Graphics.drawTextML(ctx, this._textLines, style, this.getTextRect(style));
+		}
+
+		return this;
+	}
+
+	protected drawText(ctx:any, style:Style) : Widget {
+		if(this._textLines && this._textLines.length) {
+			if(this._mlm) {
+				this.drawTextML(ctx, style);
+			}else{
+				var text = this._textLines[0].text;
+				this.drawTextSL(ctx, text, style);
+			}
+		}
+
+		return this;
+	}
 
 	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {
 		super.setProp(prop, newValue, notify);
@@ -96,8 +100,9 @@ export class Label extends Widget {
 		this.relayoutText();
 	}
 
-	protected onReset() {
-		this.padding = 5;
+	protected static defProps = Object.assign({}, Widget.defProps, {_mlm:true, _lp:5, _tp:5, _rp:5, _bp:5});
+	protected getDefProps() : any {
+		return Label.defProps;
 	}
 
 	public static TYPE = "label";

@@ -114,9 +114,10 @@ layouter_1.LayouterFactory.register(TYPE, GridLayouter.create);
  * 如果父控件使用GridLayouter布局器，则子控件需要把layoutParam设置为GridLayouterParam。
  *
  */
-var GridLayouterParam = (function () {
+var GridLayouterParam = (function (_super) {
+    __extends(GridLayouterParam, _super);
     function GridLayouterParam(row, spanRows, col, spanCols) {
-        this.type = TYPE;
+        _super.call(this, TYPE);
         this.row = row >= 0 ? row : -1;
         this.col = col >= 0 ? col : -1;
         this.spanRows = spanRows || 1;
@@ -127,6 +128,7 @@ var GridLayouterParam = (function () {
         return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
     };
     return GridLayouterParam;
-}());
+}(layouter_1.LayouterParam));
 exports.GridLayouterParam = GridLayouterParam;
 ;
+layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.create);

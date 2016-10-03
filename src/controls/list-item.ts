@@ -79,7 +79,12 @@ export class ListItem extends Widget {
 		}
 		return Rect.rect.init(x, y, w, h);
 	}
-
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_iconURL:null});
+	protected getDefProps() : any {
+		return ListItem.defProps;
+	}
+	
 	public static TYPE = "list-item";
 	private static recycleBin = new RecyclableCreator<ListItem>(function() {return new ListItem()});
 	public static create(options?:any) : ListItem {

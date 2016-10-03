@@ -106,10 +106,10 @@ var ComboBoxBase = (function (_super) {
     });
     Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
         get: function () {
-            return this._itemHeight || 25;
+            return this._ih;
         },
         set: function (value) {
-            this._itemHeight = value;
+            this._ih = value;
         },
         enumerable: true,
         configurable: true
@@ -238,11 +238,23 @@ var ComboBoxBase = (function (_super) {
     };
     ComboBoxBase.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.padding = 2;
         this._options = [];
-        this.itemHeight = 25;
         this._current = null;
     };
+    ComboBoxBase.prototype.onToJson = function (json) {
+        if (this._options) {
+            json.options = JSON.parse(JSON.stringify(this._options));
+        }
+    };
+    ComboBoxBase.prototype.onFromJson = function (json) {
+        if (json.options) {
+            this._options = JSON.parse(JSON.stringify(json.options));
+        }
+    };
+    ComboBoxBase.prototype.getDefProps = function () {
+        return ComboBoxBase.defProps;
+    };
+    ComboBoxBase.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 25, _lp: 2, _rp: 2 });
     return ComboBoxBase;
 }(widget_1.Widget));
 exports.ComboBoxBase = ComboBoxBase;
@@ -328,7 +340,7 @@ var ComboBoxEditable = (function (_super) {
         var _this = this;
         _super.prototype.onReset.call(this);
         this.padding = 0;
-        this._edit = edit_1.Edit.create();
+        this._edit = edit_1.Edit.create({ multiLineMode: false });
         this.addChild(this._edit);
         this._button = button_1.Button.create({ styleType: "combo-box.button" });
         this.addChild(this._button);

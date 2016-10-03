@@ -77,10 +77,6 @@ var Accordion = (function (_super) {
         this.relayoutChildren();
         return this;
     };
-    Accordion.prototype.onReset = function () {
-        _super.prototype.onReset.call(this);
-        this._titleHeight = 30;
-    };
     Accordion.prototype.relayoutChildren = function () {
         var r = this.getLayoutRect();
         var x = this.leftPadding;
@@ -98,9 +94,13 @@ var Accordion = (function (_super) {
         });
         return r;
     };
+    Accordion.prototype.getDefProps = function () {
+        return Accordion.defProps;
+    };
     Accordion.create = function (options) {
         return Accordion.recycleBin.create().reset(Accordion.TYPE, options);
     };
+    Accordion.defProps = Object.assign({}, widget_1.Widget.defProps, { _titleHeight: 30 });
     Accordion.TYPE = "accordion";
     Accordion.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Accordion(); });
     return Accordion;

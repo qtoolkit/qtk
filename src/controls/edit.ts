@@ -8,35 +8,47 @@ import {WidgetFactory} from "./widget-factory";
 import {HtmlEdit} from "../html/html-edit";
 import {RecyclableCreator} from "../recyclable-creator";
 
+/**
+ * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
+ */
 export class Edit extends Label {
+	protected _it : string;
+	protected _itp : string;
 	protected _input : HtmlEdit; 
 	protected _isEditing : boolean;
-	protected _inputType : string;
-	protected _inputTips : string;
 	protected _inputFilter : Function;
 
 	public get inputable() {
 		return true;
 	}
 
+	/**
+	 * 输入过滤器，对输入的文本进行转换。
+	 */
 	public set inputFilter(value:(value:string) => string) {
 		this._inputFilter = value;
 	}
 
+	/**
+	 * 输入提示。
+	 */
 	public set inputTips(value:string) {
-		this._inputTips = value;
+		this._it = value;
 	}
 
 	public get inputTips() : string {
-		return this._inputTips;
+		return this._it;
 	}
 
+	/**
+	 * 输入类型。
+	 */
 	public set inputType(value:string) {
-		this._inputType = value;
+		this._itp = value;
 	}
 
 	public get inputType() : string {
-		return this._inputType;
+		return this._itp;
 	}
 
 	public draw(ctx:any) {
@@ -56,8 +68,8 @@ export class Edit extends Label {
 	protected drawText(ctx:any, style:Style) : Widget {
 		if(this._textLines && this._textLines.length) {
 			super.drawText(ctx, style);
-		}else if(this._inputTips){
-			this.drawTextSL(ctx, this._inputTips, style);
+		}else if(this._it){
+			this.drawTextSL(ctx, this._it, style);
 		}
 
 		return this;
@@ -68,9 +80,9 @@ export class Edit extends Label {
 			return this._styleType;
 		}else {
 			if(this._text || this._isEditing) {
-				return this.multiLines ? "edit.ml" : "edit.sl";
+				return this.multiLineMode ? "edit.ml" : "edit.sl";
 			}else{
-				return this.multiLines ? "edit.ml.tips" : "edit.sl.tips";
+				return this.multiLineMode ? "edit.ml.tips" : "edit.sl.tips";
 			}
 		}
 	}
@@ -81,7 +93,7 @@ export class Edit extends Label {
 
 	protected showEditor() {
 		var style = this.getStyle();
-		this._input = this.multiLines ? HtmlEdit.textArea : HtmlEdit.input;
+		this._input = this.multiLineMode ? HtmlEdit.textArea : HtmlEdit.input;
 		
 		var input = this._input;
 		var p = this.toViewPoint(Point.point.init(0, 0));
@@ -127,10 +139,8 @@ export class Edit extends Label {
 
 	public dispose() {
 		super.dispose();
-		this._inputFilter = null;
-		this._inputType = null;
-		this._inputTips = null;
 		this._input = null;
+		this._inputFilter = null;
 	}
 
 	protected dispatchClick(evt:any) {
@@ -139,6 +149,11 @@ export class Edit extends Label {
 			this._isEditing = true;
 			this.showEditor();
 		}
+	}
+
+	protected static defProps = Object.assign({}, Label.defProps, {_it:null, _itp:null});
+	protected getDefProps() : any {
+		return Edit.defProps;
 	}
 
 	public static TYPE = "edit";

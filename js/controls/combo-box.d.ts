@@ -26,7 +26,7 @@ export declare class ComboBoxItem extends ListItem {
 }
 export declare abstract class ComboBoxBase extends Widget {
     protected _value: any;
-    protected _itemHeight: number;
+    protected _ih: number;
     protected _current: ComboBoxOption;
     protected _isPopupOpened: boolean;
     protected _options: Array<ComboBoxOption>;
@@ -40,6 +40,45 @@ export declare abstract class ComboBoxBase extends Widget {
     protected showPopup(): void;
     protected onBindProp(prop: string, value: any): void;
     protected onReset(): void;
+    protected onToJson(json: any): void;
+    onFromJson(json: any): void;
+    protected static defProps: {} & {
+        _x: number;
+        _y: number;
+        _z: number;
+        _w: number;
+        _h: number;
+        _state: number;
+        _value: number;
+        _enable: boolean;
+        _visible: boolean;
+        _selected: boolean;
+        _opacity: number;
+        _scaleX: number;
+        _scaleY: number;
+        _pivotX: number;
+        _pivotY: number;
+        _rotation: number;
+        _focusable: boolean;
+        _sensitive: boolean;
+        _tips: any;
+        _text: any;
+        _name: any;
+        _tag: any;
+        _hitTestResult: number;
+        _isWindow: boolean;
+        _mode: number;
+        _styleType: any;
+        _lp: number;
+        _tp: number;
+        _rp: number;
+        _bp: number;
+    } & {
+        _ih: number;
+        _lp: number;
+        _rp: number;
+    };
+    protected getDefProps(): any;
     constructor(type?: string);
 }
 export declare class ComboBox extends ComboBoxBase {

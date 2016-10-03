@@ -48,6 +48,18 @@ export class Color extends Widget {
 		return this.color;
 	}
 
+	protected onToJson(json:any) {
+		if(this._style) {
+			json.style = this._style.toJson();
+		}
+	}
+
+	public onFromJson(json:any){
+		if(json.style) {
+			this._style = Style.create(json.style);
+		}
+	}
+
 	public setStyle(state:WidgetState, style:Style):Widget{
 		this._style = style;
 

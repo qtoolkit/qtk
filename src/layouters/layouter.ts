@@ -1,4 +1,5 @@
 import {Rect} from "../rect";
+import {Factory} from "../factory";
 import {Widget} from "../controls/widget";
 
 /**
@@ -12,20 +13,6 @@ export class Layouter {
 		return "dummy";
 	}
 	
-	/**
-	 * 转换成JSON数据。
-	 */
-	public toJson() : any {
-		return {type: this.type};
-	}
-
-	/**
-	 * 从JSON数据创建。
-	 */
-	public fromJson(json:any) {
-		return;
-	}
-
 	/**
 	 * 设置参数。
 	 */
@@ -41,6 +28,40 @@ export class Layouter {
 	 */
 	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
 		return null;
+	}
+
+	public createParam(options?:any) : any {
+		return null;
+	}
+	/**
+	 * 从JSON数据创建。
+	 */
+	public fromJson(json:any) : Layouter {
+		for(var key in json) {
+			var value = json[key];
+			var type = typeof value;
+			if(type === "number" || type === "string") {
+				this[key] = value;
+			}
+		}
+
+		return this;
+	}
+
+	/**
+	 * 转换成JSON数据。
+	 */
+	public toJson() : any {
+		var json = {};
+		for(var key in this) {
+			var value = this[key];
+			var type = typeof value;
+			if(type === "number" || type === "string") {
+				json[key] = value;
+			}
+		}
+
+		return json;
 	}
 
 	public static evalValue(value:string, total:number) {
@@ -60,32 +81,86 @@ export class Layouter {
 		return v;
 	}
 
-	public createParam(options?:any) : any {
-		return null;
-	}
 }
 
 /**
  * Layouter的工厂。
  */
-export class LayouterFactory {
-	private static creators = {};
-	
+export class LayouterFactory extends Factory<Layouter> {
+	private static factory : Factory<Layouter> = new Factory<Layouter>();
+
 	public static register(type:string, creator:Function) {
-		LayouterFactory.creators[type] = creator;
+		return LayouterFactory.factory.register(type, creator);
 	}
 
-	public static create(type:string, options:any) : Layouter {
-		var create = LayouterFactory.creators[type];
-		if(create) {
-			return <Layouter>create(options);
-		}else{
-			return null;
-		}
+	public static create(type:string, options?:any) : Layouter {
+		return LayouterFactory.factory.create(type, options);
 	}
 
-	public static createFromJson(json:any) {
+	public static createWithJson(json:any) {
 		var layouter = <Layouter>LayouterFactory.create(json.type, null);
+
+		layouter.fromJson(json);
+
+		return layouter;
+	}
+}
+
+export class LayouterParam {
+	public type : string;
+
+	public constructor(type:string) {
+		this.type = type;
+	}
+
+	/**
+	 * 从JSON数据创建。
+	 */
+	public fromJson(json:any) : LayouterParam {
+		for(var key in json) {
+			var value = json[key];
+			var type = typeof value;
+			if(type === "number" || type === "string") {
+				this[key] = value;
+			}
+		}
+
+		return this;
+	}
+
+	/**
+	 * 转换成JSON数据。
+	 */
+	public toJson() : any {
+		var json = {};
+		for(var key in this) {
+			var value = this[key];
+			var type = typeof value;
+			if(type === "number" || type === "string") {
+				json[key] = value;
+			}
+		}
+
+		return json;
+	}
+};
+
+/**
+ * LayouterParam的工厂。
+ */
+export class LayouterParamFactory extends Factory<LayouterParam> {
+	private static factory : Factory<LayouterParam> = new Factory<LayouterParam>();
+
+	public static register(type:string, creator:Function) {
+		return LayouterParamFactory.factory.register(type, creator);
+	}
+
+	public static create(type:string, options?:any) : LayouterParam {
+		return LayouterParamFactory.factory.create(type, options);
+	}
+
+	public static createWithJson(json:any) {
+		var layouter = <LayouterParam>LayouterParamFactory.create(json.type, null);
 
 		layouter.fromJson(json);
 

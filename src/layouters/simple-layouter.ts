@@ -1,6 +1,6 @@
 import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
-import {Layouter, LayouterFactory} from './layouter';
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 
 const TYPE = "simple";
 
@@ -91,7 +91,7 @@ LayouterFactory.register(TYPE, SimpleLayouter.create);
  * param.x = "-10px" 则 x = 790;
  *
  */
-export class SimpleLayouterParam {
+export class SimpleLayouterParam extends LayouterParam {
 	public type : string;
 	public x : string;
 	public y : string;
@@ -103,6 +103,8 @@ export class SimpleLayouterParam {
 	public maxH : number;
 
 	constructor(x:string, y:string, w:string, h:string) {
+		super(TYPE);
+
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -111,7 +113,6 @@ export class SimpleLayouterParam {
 		this.minH = -1;
 		this.maxW = -1;
 		this.maxH = -1;
-		this.type = TYPE;
 	}
 
 	static create(opts:any) {
@@ -120,4 +121,6 @@ export class SimpleLayouterParam {
 									   options.w||'100%', options.h||'100%');
 	}
 };
+
+LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
 

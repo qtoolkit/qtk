@@ -14,13 +14,44 @@ var emitter_1 = require("../emitter");
 var utils_1 = require("../utils");
 var Events = require("../events");
 var matrix_stack_1 = require("../matrix-stack");
+var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
 var dirty_rect_context_1 = require("../dirty-rect-context");
 var image_tile_1 = require("../image-tile");
-var layouter_1 = require('../layouters/layouter');
 var behavior_1 = require("../behaviors/behavior");
+var layouter_1 = require('../layouters/layouter');
 var iview_modal_1 = require("../mvvm/iview-modal");
 var binding_rule_parser_1 = require("../mvvm/binding-rule-parser");
+(function (WidgetMode) {
+    WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
+    WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
+})(exports.WidgetMode || (exports.WidgetMode = {}));
+var WidgetMode = exports.WidgetMode;
+;
+(function (WidgetState) {
+    WidgetState[WidgetState["NORMAL"] = 0] = "NORMAL";
+    WidgetState[WidgetState["OVER"] = 1] = "OVER";
+    WidgetState[WidgetState["ACTIVE"] = 2] = "ACTIVE";
+    WidgetState[WidgetState["DISABLE"] = 3] = "DISABLE";
+    WidgetState[WidgetState["SELECTED"] = 4] = "SELECTED";
+})(exports.WidgetState || (exports.WidgetState = {}));
+var WidgetState = exports.WidgetState;
+;
+(function (HitTestResult) {
+    HitTestResult[HitTestResult["NONE"] = 0] = "NONE";
+    HitTestResult[HitTestResult["TL"] = 1] = "TL";
+    HitTestResult[HitTestResult["TM"] = 2] = "TM";
+    HitTestResult[HitTestResult["TR"] = 3] = "TR";
+    HitTestResult[HitTestResult["ML"] = 4] = "ML";
+    HitTestResult[HitTestResult["MM"] = 5] = "MM";
+    HitTestResult[HitTestResult["MR"] = 6] = "MR";
+    HitTestResult[HitTestResult["RL"] = 7] = "RL";
+    HitTestResult[HitTestResult["RM"] = 8] = "RM";
+    HitTestResult[HitTestResult["RR"] = 9] = "RR";
+})(exports.HitTestResult || (exports.HitTestResult = {}));
+var HitTestResult = exports.HitTestResult;
+;
+var states = ["normal", "over", "active", "disable", "selected"];
 /**
  * Widget是所有控件的基类。
  */
@@ -1340,7 +1371,7 @@ var Widget = (function (_super) {
     };
     Object.defineProperty(Widget.prototype, "leftPadding", {
         get: function () {
-            return this._leftPadding;
+            return this._lp;
         },
         set: function (value) {
             this.setProp("leftPadding", value, true);
@@ -1350,7 +1381,7 @@ var Widget = (function (_super) {
     });
     Object.defineProperty(Widget.prototype, "rightPadding", {
         get: function () {
-            return this._rightPadding;
+            return this._rp;
         },
         set: function (value) {
             this.setProp("rightPadding", value, true);
@@ -1360,7 +1391,7 @@ var Widget = (function (_super) {
     });
     Object.defineProperty(Widget.prototype, "topPadding", {
         get: function () {
-            return this._topPadding;
+            return this._tp;
         },
         set: function (value) {
             this.setProp("topPadding", value, true);
@@ -1370,7 +1401,7 @@ var Widget = (function (_super) {
     });
     Object.defineProperty(Widget.prototype, "bottomPadding", {
         get: function () {
-            return this._bottomPadding;
+            return this._bp;
         },
         set: function (value) {
             this.setProp("bottomPadding", value, true);
@@ -1380,13 +1411,13 @@ var Widget = (function (_super) {
     });
     Object.defineProperty(Widget.prototype, "padding", {
         get: function () {
-            return this._topPadding;
+            return this._tp;
         },
         set: function (value) {
-            this.setProp("leftPadding", value, true);
-            this.setProp("topPadding", value, true);
-            this.setProp("rightPadding", value, true);
-            this.setProp("bottomPadding", value, true);
+            this.setProp("lp", value, true);
+            this.setProp("tp", value, true);
+            this.setProp("rp", value, true);
+            this.setProp("bp", value, true);
         },
         enumerable: true,
         configurable: true
@@ -1450,51 +1481,28 @@ var Widget = (function (_super) {
     };
     Widget.prototype.onCreated = function () {
     };
+    Widget.prototype.getDefProps = function () {
+        return Widget.defProps;
+    };
     Widget.prototype.reset = function (type, options) {
-        this._x = 0;
-        this._y = 0;
-        this._z = 0;
-        this._w = 0;
-        this._h = 0;
-        this._state = WidgetState.NORMAL;
-        this._value = 0;
-        this._enable = true;
-        this._visible = true;
-        this._selected = false;
-        this._opacity = 1;
-        this._scaleX = 1;
-        this._scaleY = 1;
-        this._pivotX = 0.5;
-        this._pivotY = 0.5;
-        this._rotation = 0;
-        this._focusable = false;
-        this._sensitive = true;
-        this._tips = null;
-        this._text = null;
-        this._dirty = false;
-        this._name = type;
-        this._id = Date.now() + "." + Widget.ID++;
-        ;
-        this._tag = null;
+        var defProps = this.getDefProps();
+        for (var key in defProps) {
+            this[key] = defProps[key];
+        }
+        this._dirty = true;
         this._type = type;
-        this._userData = null;
-        this._target = null;
-        this._hitTestResult = HitTestResult.NONE;
-        this._isWindow = false;
-        this._parent = null;
         this._app = null;
         this._children = [];
-        this._themeManager = null;
-        this._mainLoop = null;
-        this._mode = WidgetMode.RUNTIME;
+        this._parent = null;
         this._canvas = null;
         this._styles = null;
-        this._styleType = null;
-        this._leftPadding = 0;
-        this._topPadding = 0;
-        this._rightPadding = 0;
-        this._bottomPadding = 0;
+        this._target = null;
+        this._mainLoop = null;
+        this._userData = null;
+        this._themeManager = null;
         this._lastOverWidget = null;
+        this._id = Date.now() + "." + Widget.ID++;
+        ;
         this.onclick = null;
         this.oncontextmenu = null;
         this.onpointerdown = null;
@@ -1504,7 +1512,6 @@ var Widget = (function (_super) {
         this.onkeydown = null;
         this.onkeyup = null;
         this._behaviors = {};
-        this.removeAllListeners();
         this._viewModal = null;
         this._dataBindingRule = null;
         this.onReset();
@@ -1512,35 +1519,14 @@ var Widget = (function (_super) {
         this.onCreated();
         return this;
     };
+    Widget.prototype.onFromJson = function (json) {
+    };
     Widget.prototype.fromJson = function (json) {
-        this._x = json.x;
-        this._y = json.y;
-        this._z = json.z;
-        this._w = json.w;
-        this._h = json.h;
-        this._state = json.state;
-        this._enable = json.enable;
-        this._visible = json.visible;
-        this._opacity = json.opacity;
-        this._scaleX = json.scaleX;
-        this._scaleY = json.scaleY;
-        this._pivotX = json.pivotX;
-        this._pivotY = json.pivotY;
-        this._rotation = json.rotation;
-        this._focusable = json.focusable;
-        this._sensitive = json.sensitive;
-        this._tips = json.tips;
-        this._text = json.text;
-        this._name = json.name;
-        this._id = json.id;
-        this._tag = json.tag;
-        this._type = json.type;
-        this._mode = json.mode;
-        this.value = json.value;
-        this._leftPadding = json.leftPadding;
-        this._rightPadding = json.rightPadding;
-        this._topPadding = json.topPadding;
-        this._bottomPadding = json.bottomPadding;
+        var _this = this;
+        var defProps = this.getDefProps();
+        for (var key in defProps) {
+            this[key] = json[key];
+        }
         var styles = json.styles;
         if (styles) {
             this._styles = {};
@@ -1549,40 +1535,42 @@ var Widget = (function (_super) {
                 json._styles[key] = style_1.Style.create(style);
             }
         }
+        var childrenLayouter = json.childrenLayouter;
+        if (childrenLayouter) {
+            this.childrenLayouter = layouter_1.LayouterFactory.create(childrenLayouter.type, childrenLayouter);
+        }
+        var layoutParam = json.layoutParam;
+        if (layoutParam) {
+            this.layoutParam = layouter_1.LayouterParamFactory.create(layoutParam.type, layoutParam);
+        }
+        this._children.length = 0;
+        if (json.children) {
+            json.children.forEach(function (childJson) {
+                var child = widget_factory_1.WidgetFactory.create(childJson.type);
+                child.fromJson(childJson);
+                _this._children.push(child);
+            });
+        }
+        this.onFromJson(json);
         return this;
     };
-    Widget.prototype.toJson = function (json) {
-        if (!json) {
-            json = {};
-        }
-        json.x = this._x;
-        json.y = this._y;
-        json.z = this._z;
-        json.w = this._w;
-        json.h = this._h;
-        json.state = this._state;
-        json.enable = this._enable;
-        json.visible = this._visible;
-        json.opacity = this._opacity;
-        json.scaleX = this._scaleX;
-        json.scaleY = this._scaleY;
-        json.pivotX = this._pivotX;
-        json.pivotY = this._pivotY;
-        json.rotation = this._rotation;
-        json.focusable = this._focusable;
-        json.sensitive = this._sensitive;
-        json.tips = this._tips;
-        json.text = this._text;
-        json.name = this._name;
-        json.id = this._id;
-        json.tag = this._tag;
+    Widget.prototype.clone = function () {
+        var json = this.toJson();
+        var widget = widget_factory_1.WidgetFactory.createWithJson(json);
+        return widget;
+    };
+    Widget.prototype.onToJson = function (json) {
+    };
+    Widget.prototype.toJson = function () {
+        var json = {};
         json.type = this._type;
-        json.mode = this._mode;
-        json.leftPadding = this._leftPadding;
-        json.rightPadding = this._rightPadding;
-        json.topPadding = this._topPadding;
-        json.bottomPadding = this._bottomPadding;
-        json.value = this.value;
+        var defProps = this.getDefProps();
+        for (var key in defProps) {
+            var value = this[key];
+            if (value !== defProps[key]) {
+                json[key] = value;
+            }
+        }
         var styles = this._styles;
         if (styles) {
             json.styles = {};
@@ -1591,8 +1579,22 @@ var Widget = (function (_super) {
                 json.styles[key] = style.toJson();
             }
         }
+        if (this.childrenLayouter) {
+            json.childrenLayouter = this.childrenLayouter.toJson();
+        }
+        if (this.layoutParam) {
+            json.layoutParam = this.layoutParam.toJson();
+        }
+        if (this.children.length) {
+            json.children = [];
+            this.children.forEach(function (child) {
+                json.children.push(child.toJson());
+            });
+        }
+        this.onToJson(json);
         return json;
     };
+    ////////////////////////////////////////////	
     Widget.prototype.onBindProp = function (prop, value) {
         if (prop === "text") {
             this.text = value;
@@ -1699,38 +1701,40 @@ var Widget = (function (_super) {
             }
         }
     };
+    Widget.defProps = {
+        _x: 0,
+        _y: 0,
+        _z: 0,
+        _w: 0,
+        _h: 0,
+        _state: 0,
+        _value: 0,
+        _enable: true,
+        _visible: true,
+        _selected: false,
+        _opacity: 1,
+        _scaleX: 1,
+        _scaleY: 1,
+        _pivotX: 0.5,
+        _pivotY: 0.5,
+        _rotation: 0,
+        _focusable: false,
+        _sensitive: true,
+        _tips: null,
+        _text: null,
+        _name: null,
+        _tag: null,
+        _hitTestResult: 0,
+        _isWindow: false,
+        _mode: 0,
+        _styleType: null,
+        _lp: 0,
+        _tp: 0,
+        _rp: 0,
+        _bp: 0
+    };
     Widget.ID = 10000;
     return Widget;
 }(emitter_1.Emitter));
 exports.Widget = Widget;
 ;
-(function (WidgetMode) {
-    WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
-    WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
-})(exports.WidgetMode || (exports.WidgetMode = {}));
-var WidgetMode = exports.WidgetMode;
-;
-(function (WidgetState) {
-    WidgetState[WidgetState["NORMAL"] = 0] = "NORMAL";
-    WidgetState[WidgetState["OVER"] = 1] = "OVER";
-    WidgetState[WidgetState["ACTIVE"] = 2] = "ACTIVE";
-    WidgetState[WidgetState["DISABLE"] = 3] = "DISABLE";
-    WidgetState[WidgetState["SELECTED"] = 4] = "SELECTED";
-})(exports.WidgetState || (exports.WidgetState = {}));
-var WidgetState = exports.WidgetState;
-;
-(function (HitTestResult) {
-    HitTestResult[HitTestResult["NONE"] = 0] = "NONE";
-    HitTestResult[HitTestResult["TL"] = 1] = "TL";
-    HitTestResult[HitTestResult["TM"] = 2] = "TM";
-    HitTestResult[HitTestResult["TR"] = 3] = "TR";
-    HitTestResult[HitTestResult["ML"] = 4] = "ML";
-    HitTestResult[HitTestResult["MM"] = 5] = "MM";
-    HitTestResult[HitTestResult["MR"] = 6] = "MR";
-    HitTestResult[HitTestResult["RL"] = 7] = "RL";
-    HitTestResult[HitTestResult["RM"] = 8] = "RM";
-    HitTestResult[HitTestResult["RR"] = 9] = "RR";
-})(exports.HitTestResult || (exports.HitTestResult = {}));
-var HitTestResult = exports.HitTestResult;
-;
-var states = ["normal", "over", "active", "disable", "selected"];

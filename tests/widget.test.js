@@ -122,5 +122,23 @@ describe('Widget', function() {
 			&& widget.bottomPadding === widget.padding;
 		done(result ? null : new Error("padding is wrong"))
   	});
+  	
+  	it('test clone/toJson', (done) => {
+		var widget = qtk.Button.create({w:400, h:300});
+		widget.childrenLayouter = qtk.LinearLayouter.createH({spacing:10});
+		widget.addChild(qtk.Button.create({text:"button", 
+			layoutParam : qtk.LinearLayouterParam.create({w:20, h:20})
+		}));
+
+		widget.addChild(qtk.Label.create({text:"hello"}));
+
+		var json = JSON.stringify(widget.toJson(), null, "\t");
+		var cloneWidget = widget.clone();
+		var cloneJson = JSON.stringify(cloneWidget.toJson(), null, "\t");
+
+		var result = json === cloneJson;
+
+		done(result ? null : new Error("clone wrong"))
+  	});
 });
   

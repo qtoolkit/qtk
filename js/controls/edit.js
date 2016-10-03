@@ -10,6 +10,9 @@ var Events = require("../events");
 var widget_factory_1 = require("./widget-factory");
 var html_edit_1 = require("../html/html-edit");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
+ */
 var Edit = (function (_super) {
     __extends(Edit, _super);
     function Edit() {
@@ -23,6 +26,9 @@ var Edit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Edit.prototype, "inputFilter", {
+        /**
+         * 输入过滤器，对输入的文本进行转换。
+         */
         set: function (value) {
             this._inputFilter = value;
         },
@@ -31,20 +37,26 @@ var Edit = (function (_super) {
     });
     Object.defineProperty(Edit.prototype, "inputTips", {
         get: function () {
-            return this._inputTips;
+            return this._it;
         },
+        /**
+         * 输入提示。
+         */
         set: function (value) {
-            this._inputTips = value;
+            this._it = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Edit.prototype, "inputType", {
         get: function () {
-            return this._inputType;
+            return this._itp;
         },
+        /**
+         * 输入类型。
+         */
         set: function (value) {
-            this._inputType = value;
+            this._itp = value;
         },
         enumerable: true,
         configurable: true
@@ -64,8 +76,8 @@ var Edit = (function (_super) {
         if (this._textLines && this._textLines.length) {
             _super.prototype.drawText.call(this, ctx, style);
         }
-        else if (this._inputTips) {
-            this.drawTextSL(ctx, this._inputTips, style);
+        else if (this._it) {
+            this.drawTextSL(ctx, this._it, style);
         }
         return this;
     };
@@ -75,10 +87,10 @@ var Edit = (function (_super) {
         }
         else {
             if (this._text || this._isEditing) {
-                return this.multiLines ? "edit.ml" : "edit.sl";
+                return this.multiLineMode ? "edit.ml" : "edit.sl";
             }
             else {
-                return this.multiLines ? "edit.ml.tips" : "edit.sl.tips";
+                return this.multiLineMode ? "edit.ml.tips" : "edit.sl.tips";
             }
         }
     };
@@ -88,7 +100,7 @@ var Edit = (function (_super) {
     Edit.prototype.showEditor = function () {
         var _this = this;
         var style = this.getStyle();
-        this._input = this.multiLines ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
+        this._input = this.multiLineMode ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
         var input = this._input;
         var p = this.toViewPoint(point_1.Point.point.init(0, 0));
         input.move(p.x, p.y);
@@ -124,10 +136,8 @@ var Edit = (function (_super) {
     };
     Edit.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
-        this._inputFilter = null;
-        this._inputType = null;
-        this._inputTips = null;
         this._input = null;
+        this._inputFilter = null;
     };
     Edit.prototype.dispatchClick = function (evt) {
         _super.prototype.dispatchClick.call(this, evt);
@@ -136,9 +146,13 @@ var Edit = (function (_super) {
             this.showEditor();
         }
     };
+    Edit.prototype.getDefProps = function () {
+        return Edit.defProps;
+    };
     Edit.create = function (options) {
         return Edit.r.create().reset(Edit.TYPE, options);
     };
+    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _it: null, _itp: null });
     Edit.TYPE = "edit";
     Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
     return Edit;

@@ -1,6 +1,6 @@
 import { Rect } from '../rect';
 import { Widget } from '../controls/widget';
-import { Layouter } from './layouter';
+import { Layouter, LayouterParam } from './layouter';
 /**
  * 简单的布局器。
  */
@@ -34,7 +34,7 @@ export declare class SimpleLayouter extends Layouter {
  * param.x = "-10px" 则 x = 790;
  *
  */
-export declare class SimpleLayouterParam {
+export declare class SimpleLayouterParam extends LayouterParam {
     type: string;
     x: string;
     y: string;

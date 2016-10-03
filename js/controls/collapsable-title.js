@@ -8,6 +8,11 @@ var rect_1 = require("../rect");
 var point_1 = require("../point");
 var widget_1 = require("./widget");
 var recyclable_creator_1 = require("../recyclable-creator");
+/**
+ * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
+ * 只能用于TitleContent的titleWidget。
+ *
+ */
 var CollapsableTitle = (function (_super) {
     __extends(CollapsableTitle, _super);
     function CollapsableTitle() {
@@ -41,7 +46,7 @@ var CollapsableTitle = (function (_super) {
         return rect_1.Rect.rect.init(this.leftPadding + w, this.topPadding, this.clientW - w, this.clientH);
     };
     CollapsableTitle.prototype.getStyleType = function () {
-        return this._styleType || this.collapsed ? "accordion-title.collapsed" : "accordion-title.expanded";
+        return this._styleType || this.collapsed ? "collapsable-title.collapsed" : "collapsable-title.expanded";
     };
     CollapsableTitle.prototype.dispatchDblClick = function (evt) {
         _super.prototype.dispatchDblClick.call(this, evt);

@@ -1,6 +1,6 @@
 import {Rect} from '../rect';
 import {Widget} from '../controls/widget';
-import {Layouter, LayouterFactory} from './layouter';
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 
 const TYPE = "list";
 
@@ -90,8 +90,7 @@ LayouterFactory.register(TYPE, ListLayouter.create);
  * 如果父控件使用ListLayouter布局器，则子控件需要把layoutParam设置为ListLayouterParam。
  * 
  */
-export class ListLayouterParam {
-	public type : string;
+export class ListLayouterParam extends LayouterParam {
 	/**
 	 * 列表项的高度。
 	 */
@@ -102,7 +101,8 @@ export class ListLayouterParam {
 	public spacing : number;
 
 	constructor(h:number, spacing:number) {
-		this.type = TYPE;
+		super(TYPE);
+
 		this.h = h || 0;
 		this.spacing = spacing || 0;
 	}
@@ -112,4 +112,6 @@ export class ListLayouterParam {
 		return new ListLayouterParam(options.h || options.height, options.spacing);
 	}
 };
+
+LayouterParamFactory.register(TYPE, ListLayouterParam.create);
 

@@ -1,4 +1,10 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var factory_1 = require("../factory");
 /**
  * 子控件布局算法。
  */
@@ -16,18 +22,6 @@ var Layouter = (function () {
         configurable: true
     });
     /**
-     * 转换成JSON数据。
-     */
-    Layouter.prototype.toJson = function () {
-        return { type: this.type };
-    };
-    /**
-     * 从JSON数据创建。
-     */
-    Layouter.prototype.fromJson = function (json) {
-        return;
-    };
-    /**
      * 设置参数。
      */
     Layouter.prototype.setOptions = function (options) {
@@ -42,6 +36,36 @@ var Layouter = (function () {
     Layouter.prototype.layoutChildren = function (widget, children, rect) {
         return null;
     };
+    Layouter.prototype.createParam = function (options) {
+        return null;
+    };
+    /**
+     * 从JSON数据创建。
+     */
+    Layouter.prototype.fromJson = function (json) {
+        for (var key in json) {
+            var value = json[key];
+            var type = typeof value;
+            if (type === "number" || type === "string") {
+                this[key] = value;
+            }
+        }
+        return this;
+    };
+    /**
+     * 转换成JSON数据。
+     */
+    Layouter.prototype.toJson = function () {
+        var json = {};
+        for (var key in this) {
+            var value = this[key];
+            var type = typeof value;
+            if (type === "number" || type === "string") {
+                json[key] = value;
+            }
+        }
+        return json;
+    };
     Layouter.evalValue = function (value, total) {
         var v = parseFloat(value);
         if (typeof value === "number") {
@@ -55,36 +79,87 @@ var Layouter = (function () {
         }
         return v;
     };
-    Layouter.prototype.createParam = function (options) {
-        return null;
-    };
     return Layouter;
 }());
 exports.Layouter = Layouter;
 /**
  * Layouter的工厂。
  */
-var LayouterFactory = (function () {
+var LayouterFactory = (function (_super) {
+    __extends(LayouterFactory, _super);
     function LayouterFactory() {
+        _super.apply(this, arguments);
     }
     LayouterFactory.register = function (type, creator) {
-        LayouterFactory.creators[type] = creator;
+        return LayouterFactory.factory.register(type, creator);
     };
     LayouterFactory.create = function (type, options) {
-        var create = LayouterFactory.creators[type];
-        if (create) {
-            return create(options);
-        }
-        else {
-            return null;
-        }
+        return LayouterFactory.factory.create(type, options);
     };
-    LayouterFactory.createFromJson = function (json) {
+    LayouterFactory.createWithJson = function (json) {
         var layouter = LayouterFactory.create(json.type, null);
         layouter.fromJson(json);
         return layouter;
     };
-    LayouterFactory.creators = {};
+    LayouterFactory.factory = new factory_1.Factory();
     return LayouterFactory;
-}());
+}(factory_1.Factory));
 exports.LayouterFactory = LayouterFactory;
+var LayouterParam = (function () {
+    function LayouterParam(type) {
+        this.type = type;
+    }
+    /**
+     * 从JSON数据创建。
+     */
+    LayouterParam.prototype.fromJson = function (json) {
+        for (var key in json) {
+            var value = json[key];
+            var type = typeof value;
+            if (type === "number" || type === "string") {
+                this[key] = value;
+            }
+        }
+        return this;
+    };
+    /**
+     * 转换成JSON数据。
+     */
+    LayouterParam.prototype.toJson = function () {
+        var json = {};
+        for (var key in this) {
+            var value = this[key];
+            var type = typeof value;
+            if (type === "number" || type === "string") {
+                json[key] = value;
+            }
+        }
+        return json;
+    };
+    return LayouterParam;
+}());
+exports.LayouterParam = LayouterParam;
+;
+/**
+ * LayouterParam的工厂。
+ */
+var LayouterParamFactory = (function (_super) {
+    __extends(LayouterParamFactory, _super);
+    function LayouterParamFactory() {
+        _super.apply(this, arguments);
+    }
+    LayouterParamFactory.register = function (type, creator) {
+        return LayouterParamFactory.factory.register(type, creator);
+    };
+    LayouterParamFactory.create = function (type, options) {
+        return LayouterParamFactory.factory.create(type, options);
+    };
+    LayouterParamFactory.createWithJson = function (json) {
+        var layouter = LayouterParamFactory.create(json.type, null);
+        layouter.fromJson(json);
+        return layouter;
+    };
+    LayouterParamFactory.factory = new factory_1.Factory();
+    return LayouterParamFactory;
+}(factory_1.Factory));
+exports.LayouterParamFactory = LayouterParamFactory;

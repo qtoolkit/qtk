@@ -591,7 +591,6 @@ export class ScrollView extends Widget {
 				penetrationAcceleration:0.08
 		};
 	
-		this.padding = 2;
 		this._scroller = null;
 		this._scrollBarStyle = new ScrollBarStyle();
 		this._touches = [{pageX:0, pageY:0, id:0}];
@@ -638,6 +637,11 @@ export class ScrollView extends Widget {
 
 	constructor(type?:string) {
 		super(type ? type : ScrollView.TYPE);
+	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_lp:2, _tp:2, _rp:2, _bp:2});
+	protected getDefProps() : any {
+		return ScrollView.defProps;
 	}
 
 	public static TYPE = "scroll-view";

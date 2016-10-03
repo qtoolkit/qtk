@@ -1,6 +1,6 @@
 import { Rect } from '../rect';
 import { Widget } from '../controls/widget';
-import { Layouter } from './layouter';
+import { Layouter, LayouterParam } from './layouter';
 /**
  * 网格布局器。
  */
@@ -54,8 +54,7 @@ export declare class GridLayouter extends Layouter {
  * 如果父控件使用GridLayouter布局器，则子控件需要把layoutParam设置为GridLayouterParam。
  *
  */
-export declare class GridLayouterParam {
-    type: string;
+export declare class GridLayouterParam extends LayouterParam {
     /**
      * 列序数。
      */

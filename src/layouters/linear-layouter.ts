@@ -3,7 +3,7 @@ import {Align, Orientation} from '../consts';
 import {Direction} from '../consts';
 import {stableSort} from "../utils";
 import {Widget} from '../controls/widget';
-import {Layouter, LayouterFactory} from './layouter';
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 
 const TYPE_H = "linear-h";
 const TYPE_V = "linear-v";
@@ -38,7 +38,7 @@ export class LinearLayouter extends Layouter {
 
 	public layoutChildren(widget:Widget, children:Array<Widget>, rect:Rect) : Rect {
 		var r = rect.clone();
-		var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+		var defParam = LinearLayouterParam.defParam;
 
 		var arr = children.filter(function(child) {
 			var param =  child.layoutParam || defParam;
@@ -93,11 +93,11 @@ export class LinearLayouter extends Layouter {
 		var y = 0;
 		var w = 0;
 		var h = 0;
-		var defParam = this.type === TYPE_H ? LinearLayouterParam.defParamH : LinearLayouterParam.defParamV;
+		var defParam = LinearLayouterParam.defParam;
 		var param = <LinearLayouterParam>child.layoutParam || defParam;
 
 		var position = param.position;
-		if(param && param.type.indexOf("linear") >= 0 && child.visible) {
+		if(param && param.type === LinearLayouterParam.TYPE && child.visible) {
 			var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
 			
 			if(this.orientation === Orientation.V) {
@@ -163,7 +163,7 @@ export class LinearLayouter extends Layouter {
 	}
 
 	public createParam(options?:any) {
-		return LinearLayouterParam.createWithType(this.type, options);
+		return LinearLayouterParam.create(options);
 	}
 
 	public static createV(options:any) : LinearLayouter {
@@ -196,8 +196,7 @@ LayouterFactory.register(TYPE_V, LinearLayouter.createV);
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-export class LinearLayouterParam {
-	public type : string;
+export class LinearLayouterParam extends LayouterParam {
 	/**
 	 * 控件的宽度。
 	 */
@@ -225,7 +224,7 @@ export class LinearLayouterParam {
 	public position : number;
 
 	constructor(type:string, w:string, h:string, spacing:number, align:Align, position:number) {
-		this.type = type || TYPE_V;
+		super(type||LinearLayouterParam.TYPE);
 		this.w = w || "100%";
 		this.h = h || "100%";
 		this.align = align;
@@ -233,17 +232,19 @@ export class LinearLayouterParam {
 		this.position = position;
 	}
 
-	public static defParamV = LinearLayouterParam.createWithType(TYPE_V, null);
-	public static defParamH = LinearLayouterParam.createWithType(TYPE_H, null);
+	public static TYPE = "linear";
+	public static defParam = LinearLayouterParam.create(null);
 	public static createWithType(type:string, opts:any) : LinearLayouterParam {
 		var options = opts || {};
-		return new LinearLayouterParam(type, options.w || options.width, options.h || options.height, 
-						 options.spacing||0, options.align||Align.C, 
-						 options.position === undefined ? 1 : options.position);
+		return new LinearLayouterParam(LinearLayouterParam.TYPE,
+				options.w || options.width, options.h || options.height, 
+				options.spacing||0, options.align||Align.C, 
+				options.position === undefined ? 1 : options.position);
 	}
 
 	public static create(opts:any) : LinearLayouterParam {
-		return this.createWithType(TYPE_H, opts);
+		return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
 	}
 };
 
+LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);

@@ -98,7 +98,7 @@ export class ComboBoxItem extends ListItem {
 
 export abstract class ComboBoxBase extends Widget {
 	protected _value : any;
-	protected _itemHeight : number;
+	protected _ih : number;
 	protected _current : ComboBoxOption;
 	protected _isPopupOpened : boolean;
 	protected _options : Array<ComboBoxOption>;
@@ -108,11 +108,11 @@ export abstract class ComboBoxBase extends Widget {
 	}
 
 	public get itemHeight() : number {
-		return this._itemHeight || 25;
+		return this._ih;
 	}
 
 	public set itemHeight(value:number) {
-		this._itemHeight = value;
+		this._ih = value;
 	}
 
 	public set value(value:any) {
@@ -247,12 +247,26 @@ export abstract class ComboBoxBase extends Widget {
 
 	protected onReset() {
 		super.onReset();
-		this.padding = 2;
 		this._options = [];
-		this.itemHeight = 25;
 		this._current = null;
 	}
+	
+	protected onToJson(json:any) {
+		if(this._options) {
+			json.options = JSON.parse(JSON.stringify(this._options));
+		}
+	}
 
+	public onFromJson(json:any){
+		if(json.options) {
+			this._options = JSON.parse(JSON.stringify(json.options));
+		}
+	}
+
+	protected static defProps = Object.assign({}, Widget.defProps, {_ih:25, _lp:2, _rp:2});
+	protected getDefProps() : any {
+		return ComboBoxBase.defProps;
+	}
 	constructor(type?:string) {
 		super(type);
 	}
@@ -339,7 +353,7 @@ export class ComboBoxEditable extends ComboBoxBase {
 		super.onReset();
 		
 		this.padding = 0;
-		this._edit = Edit.create();
+		this._edit = Edit.create({multiLineMode:false});
 		this.addChild(this._edit);
 		
 		this._button = Button.create({styleType:"combo-box.button"});

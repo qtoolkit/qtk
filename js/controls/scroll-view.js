@@ -577,7 +577,6 @@ var ScrollView = (function (_super) {
             decelerationRate: 0.95,
             penetrationAcceleration: 0.08
         };
-        this.padding = 2;
         this._scroller = null;
         this._scrollBarStyle = new ScrollBarStyle();
         this._touches = [{ pageX: 0, pageY: 0, id: 0 }];
@@ -590,9 +589,13 @@ var ScrollView = (function (_super) {
         });
         this._scrollEvent = Events.ScrollEvent.create();
     };
+    ScrollView.prototype.getDefProps = function () {
+        return ScrollView.defProps;
+    };
     ScrollView.create = function (options) {
         return ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
     };
+    ScrollView.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2 });
     ScrollView.TYPE = "scroll-view";
     ScrollView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ScrollView(); });
     return ScrollView;

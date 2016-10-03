@@ -19,6 +19,11 @@ var WidgetFactory = (function () {
     WidgetFactory.create = function (type, options) {
         return WidgetFactory.factory.create(type, options);
     };
+    WidgetFactory.createWithJson = function (json) {
+        var widget = WidgetFactory.create(json.type);
+        widget.fromJson(json);
+        return widget;
+    };
     WidgetFactory.factory = new factory_1.Factory();
     return WidgetFactory;
 }());

@@ -13,9 +13,32 @@ import { MatrixStack } from "../matrix-stack";
 import { IApplication } from "../iapplication";
 import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
-import { Layouter } from '../layouters/layouter';
 import { Behavior } from "../behaviors/behavior";
+import { Layouter } from '../layouters/layouter';
 import { IViewModal, BindingMode } from "../mvvm/iview-modal";
+export declare enum WidgetMode {
+    RUNTIME = 0,
+    DESIGN = 1,
+}
+export declare enum WidgetState {
+    NORMAL = 0,
+    OVER = 1,
+    ACTIVE = 2,
+    DISABLE = 3,
+    SELECTED = 4,
+}
+export declare enum HitTestResult {
+    NONE = 0,
+    TL = 1,
+    TM = 2,
+    TR = 3,
+    ML = 4,
+    MM = 5,
+    MR = 6,
+    RL = 7,
+    RM = 8,
+    RR = 9,
+}
 /**
  * Widget是所有控件的基类。
  */
@@ -262,10 +285,10 @@ export declare class Widget extends Emitter {
     protected _styleType: string;
     protected _lastOverWidget: Widget;
     protected _behaviors: any;
-    private _leftPadding;
-    private _rightPadding;
-    private _topPadding;
-    private _bottomPadding;
+    private _lp;
+    private _rp;
+    private _tp;
+    private _bp;
     onclick: Function;
     ondblclick: Function;
     oncontextmenu: Function;
@@ -284,9 +307,45 @@ export declare class Widget extends Emitter {
     setValue(value: boolean, notify: boolean, exclude: boolean): void;
     protected onReset(): void;
     protected onCreated(): void;
+    protected getDefProps(): any;
+    protected static defProps: {
+        _x: number;
+        _y: number;
+        _z: number;
+        _w: number;
+        _h: number;
+        _state: number;
+        _value: number;
+        _enable: boolean;
+        _visible: boolean;
+        _selected: boolean;
+        _opacity: number;
+        _scaleX: number;
+        _scaleY: number;
+        _pivotX: number;
+        _pivotY: number;
+        _rotation: number;
+        _focusable: boolean;
+        _sensitive: boolean;
+        _tips: any;
+        _text: any;
+        _name: any;
+        _tag: any;
+        _hitTestResult: number;
+        _isWindow: boolean;
+        _mode: number;
+        _styleType: any;
+        _lp: number;
+        _tp: number;
+        _rp: number;
+        _bp: number;
+    };
     reset(type: string, options: any): Widget;
+    protected onFromJson(json: any): void;
     fromJson(json: any): Widget;
-    toJson(json: any): any;
+    clone(): Widget;
+    protected onToJson(json: any): void;
+    toJson(): any;
     protected onBindProp(prop: string, value: any): void;
     protected _dataBindingRule: any;
     protected _viewModal: IViewModal;
@@ -300,27 +359,4 @@ export declare class Widget extends Emitter {
     protected watchTargetValueChange(dataSource: any): void;
     protected watchTargetChange(dataBindingRule: any): void;
     private static ID;
-}
-export declare enum WidgetMode {
-    RUNTIME = 0,
-    DESIGN = 1,
-}
-export declare enum WidgetState {
-    NORMAL = 0,
-    OVER = 1,
-    ACTIVE = 2,
-    DISABLE = 3,
-    SELECTED = 4,
-}
-export declare enum HitTestResult {
-    NONE = 0,
-    TL = 1,
-    TM = 2,
-    TR = 3,
-    ML = 4,
-    MM = 5,
-    MR = 6,
-    RL = 7,
-    RM = 8,
-    RR = 9,
 }

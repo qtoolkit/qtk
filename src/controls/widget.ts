@@ -13,18 +13,47 @@ import Events = require("../events");
 import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
+import {WidgetFactory} from "./widget-factory";
 import {IThemeManager} from "../itheme-manager";
 import {RoundType, Graphics} from "../graphics";
 import {DirtyRectContext} from "../dirty-rect-context";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {Layouter, LayouterFactory} from '../layouters/layouter';
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
+import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '../layouters/layouter';
 
 import {ICommand} from "../mvvm/icommand";
 import {IValueConverter} from "../mvvm/ivalue-converter";
 import {IViewModal, BindingMode} from "../mvvm/iview-modal";
 import {BindingRuleParser} from "../mvvm/binding-rule-parser";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
+
+export enum WidgetMode {
+	RUNTIME = 0,
+	DESIGN
+};
+	
+export enum WidgetState {
+	NORMAL = 0,
+	OVER,
+	ACTIVE,
+	DISABLE,
+	SELECTED
+};
+
+export enum HitTestResult {
+	NONE = 0,
+	TL = 1,
+	TM,
+	TR,
+	ML,
+	MM,
+	MR,
+	RL,
+	RM,
+	RR,
+};
+
+const states = ["normal", "over", "active", "disable", "selected"];
 
 /**
  * Widget是所有控件的基类。
@@ -44,6 +73,7 @@ export class Widget extends Emitter {
 				this[key] = props[key];
 			}
 		}
+
 		return this;
 	}
 
@@ -1387,21 +1417,21 @@ export class Widget extends Emitter {
 	}
 
 	public get leftPadding() {
-		return this._leftPadding;
+		return this._lp;
 	}
 	public set leftPadding(value) {
 		this.setProp("leftPadding", value, true);
 	}
 
 	public get rightPadding() {
-		return this._rightPadding;
+		return this._rp;
 	}
 	public set rightPadding(value) {
 		this.setProp("rightPadding", value, true);
 	}
 
 	public get topPadding() {
-		return this._topPadding;
+		return this._tp;
 	}
 	public set topPadding(value) {
 		this.setProp("topPadding", value, true);
@@ -1409,7 +1439,7 @@ export class Widget extends Emitter {
 
 
 	public get bottomPadding() {
-		return this._bottomPadding;
+		return this._bp;
 	}
 	public set bottomPadding(value) {
 		this.setProp("bottomPadding", value, true);
@@ -1417,13 +1447,13 @@ export class Widget extends Emitter {
 
 
 	public get padding() {
-		return this._topPadding;
+		return this._tp;
 	}
 	public set padding(value) {
-		this.setProp("leftPadding", value, true);
-		this.setProp("topPadding", value, true);
-		this.setProp("rightPadding", value, true);
-		this.setProp("bottomPadding", value, true);
+		this.setProp("lp", value, true);
+		this.setProp("tp", value, true);
+		this.setProp("rp", value, true);
+		this.setProp("bp", value, true);
 	}
 
 	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {
@@ -1502,10 +1532,10 @@ export class Widget extends Emitter {
 	protected _styleType : string;
 	protected _lastOverWidget : Widget;
 	protected _behaviors : any;
-	private _leftPadding : number;
-	private _rightPadding : number;
-	private _topPadding : number;
-	private _bottomPadding : number;
+	private _lp : number;
+	private _rp : number;
+	private _tp : number;
+	private _bp : number;
 	public onclick : Function;
 	public ondblclick : Function;
 	public oncontextmenu: Function;
@@ -1553,50 +1583,64 @@ export class Widget extends Emitter {
 
 	protected onCreated() {
 	}
+
+	protected getDefProps() : any {
+		return Widget.defProps;
+	}
+
+	protected static defProps = {
+			_x  : 0,
+			_y  : 0,
+			_z  : 0,
+			_w  : 0,
+			_h  : 0,
+			_state : 0,
+			_value  : 0,
+			_enable  : true,
+			_visible  : true,
+			_selected  : false,
+			_opacity   : 1,
+			_scaleX    : 1,
+			_scaleY    : 1,
+			_pivotX    : 0.5,
+			_pivotY    : 0.5,
+			_rotation  : 0,
+			_focusable  : false,
+			_sensitive  : true,
+			_tips : null,
+			_text : null,
+			_name : null,
+			_tag : null,
+			_hitTestResult : 0,
+			_isWindow  : false,
+			_mode : 0,
+			_styleType : null,
+			_lp : 0,
+			_tp : 0,
+			_rp : 0,
+			_bp : 0
+	};
+
 	public reset(type:string, options:any) : Widget {
-		this._x  = 0;
-		this._y  = 0;
-		this._z  = 0;
-		this._w  = 0;
-		this._h  = 0;
-		this._state = WidgetState.NORMAL;
-		this._value  = 0;
-		this._enable  = true;
-		this._visible  = true;
-		this._selected  = false;
-		this._opacity   = 1;
-		this._scaleX    = 1;
-		this._scaleY    = 1;
-		this._pivotX    = 0.5;
-		this._pivotY    = 0.5;
-		this._rotation  = 0;
-		this._focusable  = false;
-		this._sensitive  = true;
-		this._tips = null;
-		this._text = null;
-		this._dirty  = false;
-		this._name = type;
-		this._id = Date.now() +"." + Widget.ID++;;
-		this._tag = null;
+		var defProps = this.getDefProps();
+		for(var key in defProps) {
+			this[key] = defProps[key];
+		}
+	
+		this._dirty = true;
 		this._type = type;
-		this._userData = null;
-		this._target = null;
-		this._hitTestResult = HitTestResult.NONE;
-		this._isWindow  = false;
-		this._parent = null;
 		this._app = null;
 		this._children = [];
-		this._themeManager = null;
-		this._mainLoop = null;
-		this._mode = WidgetMode.RUNTIME;
+		this._parent = null;
 		this._canvas = null;
 		this._styles = null;
-		this._styleType = null;
-		this._leftPadding = 0;
-		this._topPadding = 0;
-		this._rightPadding = 0;
-		this._bottomPadding = 0;
+		this._target = null;
+		this._mainLoop = null;
+		this._userData = null;
+		this._themeManager = null;
 		this._lastOverWidget = null;
+		this._id = Date.now() +"." + Widget.ID++;;
+		
 		this.onclick = null;
 		this.oncontextmenu = null;
 		this.onpointerdown = null;
@@ -1606,7 +1650,6 @@ export class Widget extends Emitter {
 		this.onkeydown = null;
 		this.onkeyup = null;
 		this._behaviors = {};
-		this.removeAllListeners();
 		this._viewModal = null;
 		this._dataBindingRule = null;
 
@@ -1617,35 +1660,14 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	protected onFromJson(json:any) {
+	}
+
 	public fromJson(json:any) : Widget{
-		this._x = json.x;
-		this._y = json.y;
-		this._z = json.z;
-		this._w = json.w;
-		this._h = json.h;
-		this._state = json.state;
-		this._enable = json.enable;
-		this._visible = json.visible;
-		this._opacity = json.opacity;
-		this._scaleX = json.scaleX;
-		this._scaleY = json.scaleY;
-		this._pivotX = json.pivotX;
-		this._pivotY = json.pivotY;
-		this._rotation = json.rotation;
-		this._focusable = json.focusable;
-		this._sensitive = json.sensitive;
-		this._tips = json.tips;
-		this._text = json.text;
-		this._name = json.name;
-		this._id = json.id;
-		this._tag = json.tag;
-		this._type = json.type;
-		this._mode = json.mode;
-		this.value = json.value;
-		this._leftPadding = json.leftPadding;
-		this._rightPadding = json.rightPadding;
-		this._topPadding = json.topPadding;
-		this._bottomPadding = json.bottomPadding;
+		var defProps = this.getDefProps();
+		for(var key in defProps) {
+			this[key] = json[key];
+		}
 
 		var styles = json.styles;
 		if(styles) {
@@ -1655,44 +1677,52 @@ export class Widget extends Emitter {
 				json._styles[key] = Style.create(style);
 			}
 		}
-	
+
+		var childrenLayouter = json.childrenLayouter;
+		if(childrenLayouter) {
+			this.childrenLayouter = LayouterFactory.create(childrenLayouter.type, childrenLayouter);
+		}
+
+		var layoutParam = json.layoutParam;
+		if(layoutParam) {
+			this.layoutParam = LayouterParamFactory.create(layoutParam.type, layoutParam);
+		}
+
+		this._children.length = 0;
+		if(json.children) {
+			json.children.forEach((childJson:any) => {
+				var child = WidgetFactory.create(childJson.type);
+				child.fromJson(childJson);
+				this._children.push(child);
+			});
+		}
+
+		this.onFromJson(json);
+
 		return this;
 	}
 
-	public toJson(json:any) : any {
-		if(!json) {
-			json = {};
-		}
+	public clone() : Widget {
+		var json = this.toJson();
+		var widget = WidgetFactory.createWithJson(json);
+		
+		return widget;
+	}
 
-		json.x = this._x;
-		json.y = this._y;
-		json.z = this._z;
-		json.w = this._w;
-		json.h = this._h;
-		json.state = this._state;
-		json.enable = this._enable;
-		json.visible = this._visible;
-		json.opacity = this._opacity;
-		json.scaleX = this._scaleX;
-		json.scaleY = this._scaleY;
-		json.pivotX = this._pivotX;
-		json.pivotY = this._pivotY;
-		json.rotation = this._rotation;
-		json.focusable = this._focusable;
-		json.sensitive = this._sensitive;
-		json.tips = this._tips;
-		json.text = this._text;
-		json.name = this._name;
-		json.id = this._id;
-		json.tag = this._tag;
+	protected onToJson(json:any) {
+	}
+
+	public toJson() : any {
+		var json:any = {};
+	
 		json.type = this._type;
-		json.mode = this._mode;
-		json.leftPadding = this._leftPadding;
-		json.rightPadding = this._rightPadding;
-		json.topPadding = this._topPadding;
-		json.bottomPadding = this._bottomPadding;
-
-		json.value = this.value;
+		var defProps = this.getDefProps();
+		for(var key in defProps) {
+			var value = this[key];
+			if(value !== defProps[key]) {
+				json[key] = value;
+			}
+		}
 
 		var styles = this._styles;
 		if(styles) {
@@ -1703,9 +1733,27 @@ export class Widget extends Emitter {
 			}
 		}
 
+		if(this.childrenLayouter) {
+			json.childrenLayouter = this.childrenLayouter.toJson();
+		}
+
+		if(this.layoutParam) {
+			json.layoutParam = this.layoutParam.toJson();
+		}
+
+		if(this.children.length) {
+			json.children = [];
+			this.children.forEach((child:Widget) => {
+				json.children.push(child.toJson());
+			});
+		}
+
+		this.onToJson(json);
+
 		return json;
 	}
-	
+
+////////////////////////////////////////////	
 	protected onBindProp(prop:string, value:any) {
 		if(prop === "text") {
 			this.text = value;
@@ -1837,32 +1885,4 @@ export class Widget extends Emitter {
 
 	private static ID = 10000;
 };
-
-export enum WidgetMode {
-	RUNTIME,
-	DESIGN
-};
-	
-export enum WidgetState {
-	NORMAL = 0,
-	OVER,
-	ACTIVE,
-	DISABLE,
-	SELECTED
-};
-
-export enum HitTestResult {
-	NONE = 0,
-	TL = 1,
-	TM,
-	TR,
-	ML,
-	MM,
-	MR,
-	RL,
-	RM,
-	RR,
-};
-
-const states = ["normal", "over", "active", "disable", "selected"];
 

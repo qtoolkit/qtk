@@ -99,13 +99,13 @@ var Style = (function (_super) {
             json.backGroundImage = this._backGroundImage.toJson();
         }
         if (this._backGroundImageDrawType) {
-            json._backGroundImageDrawType = image_tile_1.ImageDrawType[this._backGroundImageDrawType];
+            json.backGroundImageDrawType = image_tile_1.ImageDrawType[this._backGroundImageDrawType];
         }
         if (this._foreGroundImage) {
             json.foreGroundImage = this._foreGroundImage.toJson();
         }
         if (this._foreGroundImageDrawType) {
-            json._foreGroundImageDrawType = image_tile_1.ImageDrawType[this._foreGroundImageDrawType];
+            json.foreGroundImageDrawType = image_tile_1.ImageDrawType[this._foreGroundImageDrawType];
         }
         if (this._fontFamily) {
             json.fontFamily = this._fontFamily;

@@ -50,7 +50,7 @@ function onReady(app) {
 	var mlEdit = Edit.create({inputTips:"Content"});
 	mlEdit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
 	mlEdit.childrenLayouter = SimpleLayouter.create();
-	mlEdit.multiLines = true;
+	mlEdit.multiLineMode = true;
 	win.addChild(mlEdit);
 
 	mlEdit.on(Events.CHANGING, function(evt) {

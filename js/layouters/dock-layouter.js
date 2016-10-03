@@ -102,9 +102,10 @@ layouter_1.LayouterFactory.register(TYPE, DockLayouter.create);
  * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
  *
  */
-var DockLayouterParam = (function () {
+var DockLayouterParam = (function (_super) {
+    __extends(DockLayouterParam, _super);
     function DockLayouterParam(position, size) {
-        this.type = TYPE;
+        _super.call(this, TYPE);
         this.size = size;
         this.position = position;
     }
@@ -113,6 +114,7 @@ var DockLayouterParam = (function () {
         return new DockLayouterParam(options.position, options.size || "");
     };
     return DockLayouterParam;
-}());
+}(layouter_1.LayouterParam));
 exports.DockLayouterParam = DockLayouterParam;
 ;
+layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.create);

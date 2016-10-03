@@ -167,7 +167,7 @@ export class MessageBox extends Dialog {
 		
 		if(data) {
 			content.childrenLayouter = SimpleLayouter.create();
-			var label = Label.create({text:data, multiLines:true, padding:this._contentPadding});
+			var label = Label.create({text:data, multiLineMode:true, padding:this._contentPadding});
 			label.layoutParam = SimpleLayouterParam.create({w:"100%", h:"100%"});
 			content.addChild(label);
 		}

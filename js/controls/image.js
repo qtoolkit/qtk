@@ -51,15 +51,27 @@ var Image = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Image.prototype.onToJson = function (json) {
+        if (this._style) {
+            json.style = this._style.toJson();
+        }
+    };
+    Image.prototype.onFromJson = function (json) {
+        if (json.style) {
+            this._style = style_1.Style.create(json.style);
+        }
+    };
     Image.prototype.setStyle = function (state, style) {
         this._style = style;
         return this;
     };
     Image.prototype.onReset = function () {
-        this._style = style_1.Style.create();
-        this._style.fontSize = 12;
-        this._style.textColor = "Black";
-        this.drawType = image_tile_1.ImageDrawType.DEFAULT;
+        _super.prototype.onReset.call(this);
+        var style = style_1.Style.create();
+        style.fontSize = 12;
+        style.textColor = "Black";
+        style.backGroundImageDrawType = image_tile_1.ImageDrawType.DEFAULT;
+        this._style = style;
     };
     Image.prototype.getStyle = function () {
         return this._style;

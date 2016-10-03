@@ -43,6 +43,17 @@ export class Image extends Widget {
 		return image ? image.src : null;
 	}
 
+	protected onToJson(json:any) {
+		if(this._style) {
+			json.style = this._style.toJson();
+		}
+	}
+
+	public onFromJson(json:any){
+		if(json.style) {
+			this._style = Style.create(json.style);
+		}
+	}
 	public setStyle(state:WidgetState, style:Style):Widget{
 		this._style = style;
 
@@ -50,10 +61,13 @@ export class Image extends Widget {
 	}
 
 	protected onReset() {
-		this._style = Style.create();
-		this._style.fontSize = 12;
-		this._style.textColor = "Black";
-		this.drawType = ImageDrawType.DEFAULT;
+		super.onReset();
+
+		var style = Style.create();
+		style.fontSize = 12;
+		style.textColor = "Black";
+		style.backGroundImageDrawType = ImageDrawType.DEFAULT;
+		this._style = style; 
 	}
 
 	public getStyle() : Style {

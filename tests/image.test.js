@@ -22,4 +22,11 @@ describe('Image', function() {
         var result = expected === str;
         done(result ? null : new Error("draw image error"));
     });
+    
+    it('test clone toJson', (done) => {
+    	var options = {w:200, h:30};
+		var result = testWidgetCloneJson(qtk.Image.create(options));
+        
+        done(result ? null : new Error("test clone toJson"));
+    });
 })
