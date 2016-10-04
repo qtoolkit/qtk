@@ -219,7 +219,9 @@ var qtk =
 	exports.ViewModal = view_modal_1.ViewModal;
 	var recyclable_creator_1 = __webpack_require__(81);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var ivalidation_rule_1 = __webpack_require__(150);
+	var collection_view_modal_1 = __webpack_require__(151);
+	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
+	var ivalidation_rule_1 = __webpack_require__(152);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 	var TWEEN = __webpack_require__(20);
@@ -4286,8 +4288,8 @@ var qtk =
 	var image_tile_1 = __webpack_require__(7);
 	var behavior_1 = __webpack_require__(77);
 	var layouter_1 = __webpack_require__(78);
-	var iview_modal_1 = __webpack_require__(79);
-	var binding_rule_parser_1 = __webpack_require__(80);
+	var binding_rule_parser_1 = __webpack_require__(79);
+	var iview_modal_1 = __webpack_require__(80);
 	(function (WidgetMode) {
 	    WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
 	    WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
@@ -5602,6 +5604,9 @@ var qtk =
 	                this._mainLoop = app.getMainLoop();
 	                this._themeManager = app.getThemeManager();
 	            }
+	            this.children.forEach(function (child) {
+	                child.app = app;
+	            });
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -5791,7 +5796,11 @@ var qtk =
 	        var _this = this;
 	        var defProps = this.getDefProps();
 	        for (var key in defProps) {
-	            this[key] = json[key];
+	            var value = json[key];
+	            if (value === undefined) {
+	                value = defProps[key];
+	            }
+	            this[key] = value;
 	        }
 	        var styles = json.styles;
 	        if (styles) {
@@ -5816,6 +5825,9 @@ var qtk =
 	                child.fromJson(childJson);
 	                _this._children.push(child);
 	            });
+	        }
+	        if (json._dataBindingRule) {
+	            this._dataBindingRule = json._dataBindingRule;
 	        }
 	        this.onFromJson(json);
 	        return this;
@@ -5857,11 +5869,35 @@ var qtk =
 	                json.children.push(child.toJson());
 	            });
 	        }
+	        if (this._dataBindingRule) {
+	            json._dataBindingRule = this._dataBindingRule;
+	        }
 	        this.onToJson(json);
 	        return json;
 	    };
+	    Object.defineProperty(Widget.prototype, "templateItem", {
+	        get: function () {
+	            return this._templateItem;
+	        },
+	        set: function (value) {
+	            this._templateItem = value;
+	            this._templateItemJson = value ? value.toJson() : null;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Widget.prototype.addChildWithTemplate = function (fastMode) {
+	        var child = null;
+	        var json = this._templateItemJson;
+	        if (json) {
+	            child = widget_factory_1.WidgetFactory.createWithJson(json);
+	            this.addChild(child, fastMode);
+	        }
+	        return child;
+	    };
 	    ////////////////////////////////////////////	
-	    Widget.prototype.onBindProp = function (prop, value) {
+	    //绑定单个属性，子控件可以重载本函数去支持其它属性。
+	    Widget.prototype.onBindProp = function (viewModal, prop, value) {
 	        if (prop === "text") {
 	            this.text = value;
 	        }
@@ -5869,6 +5905,9 @@ var qtk =
 	            this.value = value;
 	        }
 	    };
+	    /**
+	     * 设置数据绑定规则。
+	     */
 	    Widget.prototype.setDataBindingRule = function (dataBindingRule) {
 	        this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
 	        return this;
@@ -5891,18 +5930,48 @@ var qtk =
 	                });
 	            }
 	        }
-	        this._children.forEach(function (child) {
-	            child.bindData(viewModal);
-	        });
+	        this.bindChildren(viewModal);
 	        return this;
+	    };
+	    Widget.prototype.bindChildren = function (viewModal) {
+	        if (viewModal.isCollectionViewModal) {
+	            if (this._templateItemJson) {
+	                //对于集合viewModal，如果有模板项存在，则动态生成子控件。
+	                var json = this._templateItemJson;
+	                var collectionViewModal = viewModal;
+	                var n = collectionViewModal.total;
+	                this.removeAllChildren();
+	                for (var i = 0; i < n; i++) {
+	                    var itemViewModal = collectionViewModal.getItemViewModal(i);
+	                    var child = this.addChildWithTemplate(true);
+	                    child.bindData(itemViewModal);
+	                }
+	                this.relayoutChildren();
+	            }
+	            else {
+	                //对于集合viewModal，如果没有模板项存在，则绑定集合viewModal当前项到子控件。
+	                this._children.forEach(function (child) {
+	                    child.bindData(viewModal);
+	                });
+	            }
+	        }
+	        else {
+	            //对于非集合viewModal，按正常绑定子控件。
+	            this._children.forEach(function (child) {
+	                child.bindData(viewModal);
+	            });
+	        }
 	    };
 	    Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
 	        for (var prop in dataBindingRule) {
 	            var dataSource = dataBindingRule[prop];
 	            var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
-	            var value = dataSource.value || viewModal.getProp(dataSource.path);
+	            var value = dataSource.value;
+	            if (value === undefined && dataSource.path) {
+	                value = viewModal.getProp(dataSource.path);
+	            }
 	            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-	                this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+	                this.onBindProp(viewModal, prop, this.convertValue(viewModal, dataSource, value));
 	            }
 	        }
 	    };
@@ -16511,32 +16580,6 @@ var qtk =
 /***/ function(module, exports) {
 
 	"use strict";
-	;
-	;
-	;
-	(function (BindingMode) {
-	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
-	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
-	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
-	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
-	})(exports.BindingMode || (exports.BindingMode = {}));
-	var BindingMode = exports.BindingMode;
-	;
-	(function (UpdateSourceTrigger) {
-	    UpdateSourceTrigger[UpdateSourceTrigger["DEFAULT"] = 0] = "DEFAULT";
-	    UpdateSourceTrigger[UpdateSourceTrigger["EXPLICIT"] = 1] = "EXPLICIT";
-	    UpdateSourceTrigger[UpdateSourceTrigger["LOSTFOCUS"] = 2] = "LOSTFOCUS";
-	    UpdateSourceTrigger[UpdateSourceTrigger["PROPERTYCHANGED"] = 3] = "PROPERTYCHANGED";
-	})(exports.UpdateSourceTrigger || (exports.UpdateSourceTrigger = {}));
-	var UpdateSourceTrigger = exports.UpdateSourceTrigger;
-	;
-
-
-/***/ },
-/* 80 */
-/***/ function(module, exports) {
-
-	"use strict";
 	/**
 	 * 一个简陋的解析数据绑定规则的实现。
 	 */
@@ -16569,6 +16612,31 @@ var qtk =
 	    return BindingRuleParser;
 	}());
 	exports.BindingRuleParser = BindingRuleParser;
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports) {
+
+	"use strict";
+	;
+	;
+	(function (BindingMode) {
+	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
+	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
+	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
+	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
+	})(exports.BindingMode || (exports.BindingMode = {}));
+	var BindingMode = exports.BindingMode;
+	;
+	(function (UpdateSourceTrigger) {
+	    UpdateSourceTrigger[UpdateSourceTrigger["DEFAULT"] = 0] = "DEFAULT";
+	    UpdateSourceTrigger[UpdateSourceTrigger["EXPLICIT"] = 1] = "EXPLICIT";
+	    UpdateSourceTrigger[UpdateSourceTrigger["LOSTFOCUS"] = 2] = "LOSTFOCUS";
+	    UpdateSourceTrigger[UpdateSourceTrigger["PROPERTYCHANGED"] = 3] = "PROPERTYCHANGED";
+	})(exports.UpdateSourceTrigger || (exports.UpdateSourceTrigger = {}));
+	var UpdateSourceTrigger = exports.UpdateSourceTrigger;
+	;
 
 
 /***/ },
@@ -21468,7 +21536,7 @@ var qtk =
 	            }
 	        });
 	    };
-	    ComboBoxBase.prototype.onBindProp = function (prop, value) {
+	    ComboBoxBase.prototype.onBindProp = function (viewModal, prop, value) {
 	        var _this = this;
 	        if (prop === "options") {
 	            this.resetOptions();
@@ -21477,7 +21545,7 @@ var qtk =
 	            });
 	        }
 	        else {
-	            return _super.prototype.onBindProp.call(this, prop, value);
+	            return _super.prototype.onBindProp.call(this, viewModal, prop, value);
 	        }
 	    };
 	    ComboBoxBase.prototype.onReset = function () {
@@ -26505,97 +26573,18 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var pointer = __webpack_require__(148);
-	var emitter_1 = __webpack_require__(4);
-	var Events = __webpack_require__(6);
-	var iview_modal_1 = __webpack_require__(79);
+	var view_modal_default_1 = __webpack_require__(148);
 	var ViewModal = (function (_super) {
 	    __extends(ViewModal, _super);
-	    function ViewModal(data) {
-	        _super.call(this);
-	        this._commands = {};
-	        this._converters = {};
-	        this._data = data || {};
-	        this._validationRules = {};
-	        this._ePropChange = Events.PropChangeEvent.create();
+	    function ViewModal() {
+	        _super.apply(this, arguments);
 	    }
-	    ViewModal.prototype.getBindingMode = function () {
-	        return iview_modal_1.BindingMode.TWO_WAY;
-	    };
-	    ViewModal.prototype.onChange = function (callback) {
-	        this.on(Events.PROP_DELETE, callback);
-	        this.on(Events.PROP_CHANGE, callback);
-	    };
-	    ViewModal.prototype.offChange = function (callback) {
-	        this.off(Events.PROP_DELETE, callback);
-	        this.off(Events.PROP_CHANGE, callback);
-	    };
-	    ViewModal.prototype.notifyChange = function (type, path, value, trigger) {
-	        this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value, trigger: trigger }));
-	    };
-	    ViewModal.prototype.fixPath = function (path) {
-	        if (path && path.charAt(0) !== '/') {
-	            return '/' + path;
-	        }
-	        else {
-	            return path;
-	        }
-	    };
-	    ViewModal.prototype.getProp = function (path) {
-	        return pointer.get(this._data, this.fixPath(path));
-	    };
-	    ViewModal.prototype.delProp = function (path, trigger) {
-	        pointer.remove(this._data, path);
-	        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
-	        return this;
-	    };
-	    ViewModal.prototype.setProp = function (path, value, trigger) {
-	        pointer.set(this._data, path, value);
-	        this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
-	        return this;
-	    };
-	    ViewModal.prototype.getCommand = function (name) {
-	        return this._commands[name];
-	    };
-	    ViewModal.prototype.registerCommand = function (name, cmd) {
-	        this._commands[name] = cmd;
-	        return this;
-	    };
-	    ViewModal.prototype.unregisterCommand = function (name, cmd) {
-	        this._commands[name] = null;
-	        return this;
-	    };
-	    ViewModal.prototype.getValueConverter = function (name) {
-	        return this._converters[name];
-	    };
-	    ViewModal.prototype.registerValueConverter = function (name, converter) {
-	        this._converters[name] = converter;
-	        return this;
-	    };
-	    ViewModal.prototype.unregisterValueConverter = function (name, converter) {
-	        this._converters[name] = null;
-	        return this;
-	    };
-	    ViewModal.prototype.getValidationRule = function (name) {
-	        return this._validationRules[name];
-	    };
-	    ViewModal.prototype.registerValidationRule = function (name, validationRule) {
-	        this._validationRules[name] = validationRule;
-	        return this;
-	    };
-	    ViewModal.prototype.unregisterValidationRule = function (name, validationRule) {
-	        this._validationRules[name] = null;
-	        return this;
-	    };
-	    ViewModal.prototype.createCollectionViewModal = function (path) {
-	        return null;
-	    };
 	    ViewModal.create = function (data) {
 	        var viewModal = new ViewModal(data);
 	        return viewModal;
 	    };
 	    return ViewModal;
-	}(emitter_1.Emitter));
+	}(view_modal_default_1.ViewModalDefault));
 	exports.ViewModal = ViewModal;
 	;
 
@@ -26604,9 +26593,116 @@ var qtk =
 /* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var pointer = __webpack_require__(149);
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
+	var iview_modal_1 = __webpack_require__(80);
+	var ViewModalDefault = (function (_super) {
+	    __extends(ViewModalDefault, _super);
+	    function ViewModalDefault(data) {
+	        _super.call(this);
+	        this.isCollectionViewModal = false;
+	        this._commands = {};
+	        this._converters = {};
+	        this._data = data || {};
+	        this._validationRules = {};
+	        this._ePropChange = Events.PropChangeEvent.create();
+	    }
+	    ViewModalDefault.prototype.getBindingMode = function () {
+	        return iview_modal_1.BindingMode.TWO_WAY;
+	    };
+	    ViewModalDefault.prototype.onChange = function (callback) {
+	        this.on(Events.PROP_DELETE, callback);
+	        this.on(Events.PROP_CHANGE, callback);
+	    };
+	    ViewModalDefault.prototype.offChange = function (callback) {
+	        this.off(Events.PROP_DELETE, callback);
+	        this.off(Events.PROP_CHANGE, callback);
+	    };
+	    ViewModalDefault.prototype.notifyChange = function (type, path, value, trigger) {
+	        this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value, trigger: trigger }));
+	    };
+	    ViewModalDefault.prototype.fixPath = function (path) {
+	        if (path && path.charAt(0) !== '/') {
+	            return '/' + path;
+	        }
+	        else {
+	            return path;
+	        }
+	    };
+	    ViewModalDefault.prototype.getProp = function (path) {
+	        return pointer.get(this._data, this.fixPath(path));
+	    };
+	    ViewModalDefault.prototype.delProp = function (path, trigger) {
+	        pointer.remove(this._data, path);
+	        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
+	        return this;
+	    };
+	    ViewModalDefault.prototype.setProp = function (path, value, trigger) {
+	        pointer.set(this._data, path, value);
+	        this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
+	        return this;
+	    };
+	    ViewModalDefault.prototype.getCommand = function (name) {
+	        return this._commands[name];
+	    };
+	    ViewModalDefault.prototype.execCommand = function (name, args) {
+	        var ret = false;
+	        var cmd = this.getCommand(name);
+	        if (cmd && cmd.canExecute()) {
+	            ret = cmd.execute(args);
+	        }
+	        return ret;
+	    };
+	    ViewModalDefault.prototype.registerCommand = function (name, cmd) {
+	        this._commands[name] = cmd;
+	        return this;
+	    };
+	    ViewModalDefault.prototype.unregisterCommand = function (name, cmd) {
+	        this._commands[name] = null;
+	        return this;
+	    };
+	    ViewModalDefault.prototype.getValueConverter = function (name) {
+	        return this._converters[name];
+	    };
+	    ViewModalDefault.prototype.registerValueConverter = function (name, converter) {
+	        this._converters[name] = converter;
+	        return this;
+	    };
+	    ViewModalDefault.prototype.unregisterValueConverter = function (name, converter) {
+	        this._converters[name] = null;
+	        return this;
+	    };
+	    ViewModalDefault.prototype.getValidationRule = function (name) {
+	        return this._validationRules[name];
+	    };
+	    ViewModalDefault.prototype.registerValidationRule = function (name, validationRule) {
+	        this._validationRules[name] = validationRule;
+	        return this;
+	    };
+	    ViewModalDefault.prototype.unregisterValidationRule = function (name, validationRule) {
+	        this._validationRules[name] = null;
+	        return this;
+	    };
+	    return ViewModalDefault;
+	}(emitter_1.Emitter));
+	exports.ViewModalDefault = ViewModalDefault;
+	;
+
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var each = __webpack_require__(149);
+	var each = __webpack_require__(150);
 	module.exports = api;
 
 
@@ -26818,7 +26914,7 @@ var qtk =
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports) {
 
 	
@@ -26846,7 +26942,133 @@ var qtk =
 
 
 /***/ },
-/* 150 */
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var view_modal_default_1 = __webpack_require__(148);
+	var ItemViewModal = (function (_super) {
+	    __extends(ItemViewModal, _super);
+	    function ItemViewModal(collectionViewModal, index) {
+	        _super.call(this, collectionViewModal.collection[index]);
+	        this.isCollectionViewModal = false;
+	        this.index = index;
+	        this.collectionViewModal = collectionViewModal;
+	    }
+	    ItemViewModal.prototype.getCommand = function (name) {
+	        return this.collectionViewModal.getCommand(name);
+	    };
+	    ItemViewModal.prototype.execCommand = function (name, args) {
+	        if (args) {
+	            args.$index = this.index;
+	        }
+	        else {
+	            args = { $index: this.index };
+	        }
+	        return this.collectionViewModal.execCommand(name, args);
+	    };
+	    ItemViewModal.prototype.getValueConverter = function (name) {
+	        return this.collectionViewModal.getValueConverter(name);
+	    };
+	    ItemViewModal.prototype.getValidationRule = function (name) {
+	        return this.collectionViewModal.getValidationRule(name);
+	    };
+	    ItemViewModal.prototype.isCurrent = function () {
+	        return this.collectionViewModal.current === this.index;
+	    };
+	    ItemViewModal.create = function (collectionViewModal, index) {
+	        return new ItemViewModal(collectionViewModal, index);
+	    };
+	    return ItemViewModal;
+	}(view_modal_default_1.ViewModalDefault));
+	exports.ItemViewModal = ItemViewModal;
+	var CollectionViewModal = (function (_super) {
+	    __extends(CollectionViewModal, _super);
+	    function CollectionViewModal(data) {
+	        _super.call(this, data);
+	        this.isCollectionViewModal = true;
+	        this._collection = data;
+	        var n = data.length;
+	        var viewModalItems = [];
+	        for (var i = 0; i < n; i++) {
+	            viewModalItems.push(this.createItemViewModal(i));
+	        }
+	        this._current = 0;
+	        this._viewModalItems = viewModalItems;
+	    }
+	    CollectionViewModal.prototype.getProp = function (path) {
+	        return this.currentViewModal.getProp(path);
+	    };
+	    CollectionViewModal.prototype.delProp = function (path, trigger) {
+	        return this.currentViewModal.delProp(path, trigger);
+	    };
+	    CollectionViewModal.prototype.setProp = function (path, value, trigger) {
+	        this.currentViewModal.setProp(path, value, trigger);
+	        return this;
+	    };
+	    CollectionViewModal.prototype.addItem = function (data) {
+	        return this;
+	    };
+	    CollectionViewModal.prototype.removeItem = function (index) {
+	        return this;
+	    };
+	    Object.defineProperty(CollectionViewModal.prototype, "collection", {
+	        get: function () {
+	            return this._collection;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(CollectionViewModal.prototype, "currentViewModal", {
+	        get: function () {
+	            return this._viewModalItems[this._current];
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(CollectionViewModal.prototype, "total", {
+	        get: function () {
+	            return this._viewModalItems.length;
+	        },
+	        set: function (value) {
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(CollectionViewModal.prototype, "current", {
+	        get: function () {
+	            return this._current;
+	        },
+	        set: function (value) {
+	            this._current = Math.min(this._viewModalItems.length, Math.max(0, value));
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    CollectionViewModal.prototype.getItemViewModal = function (index) {
+	        var i = (index >= 0 && index < this._viewModalItems.length) ? index : this._current;
+	        return this._viewModalItems[i];
+	    };
+	    CollectionViewModal.prototype.createItemViewModal = function (index) {
+	        return ItemViewModal.create(this, index);
+	    };
+	    CollectionViewModal.create = function (data) {
+	        var viewModal = new CollectionViewModal(data);
+	        return viewModal;
+	    };
+	    return CollectionViewModal;
+	}(view_modal_default_1.ViewModalDefault));
+	exports.CollectionViewModal = CollectionViewModal;
+	;
+
+
+/***/ },
+/* 152 */
 /***/ function(module, exports) {
 
 	"use strict";

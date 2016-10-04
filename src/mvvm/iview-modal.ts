@@ -4,6 +4,8 @@ import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule} from "./ivalidation-rule";
 
 export interface IViewModal {
+	isCollectionViewModal : boolean;
+
 	getBindingMode() : BindingMode;
 
 	getProp(path:string) : any;
@@ -14,21 +16,18 @@ export interface IViewModal {
 	offChange(callback:Function);
 
 	getCommand(name:string) : ICommand;
+	execCommand(name:string, args:any) : boolean;
 	getValueConverter(name:string) : IValueConverter;
 	getValidationRule(name:string) : IValidationRule;
-
-	createCollectionViewModal(path:string) : ICollectionViewModal;
 };
 
 export interface ICollectionViewModal extends IViewModal {
-	createItemViewModal(index:number) : ICollectionItemViewModal;
-};
-
-export interface ICollectionItemViewModal extends IViewModal {
-	index : number;
-	collectionViewModal : ICollectionViewModal;
-
-	isCurrent() : boolean;
+	total : number;
+	current : number;
+	getItemViewModal(index:number) : IViewModal;
+	
+	addItem(data:any) : ICollectionViewModal;
+	removeItem(index:number) : ICollectionViewModal;
 };
 
 export enum BindingMode {

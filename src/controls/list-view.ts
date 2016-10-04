@@ -69,7 +69,7 @@ export class ListView extends ScrollView {
 
 		return r;
 	}
-
+	
 	protected _itemHeight : number;
 	protected _itemSpacing : number;
 

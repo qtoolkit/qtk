@@ -23,9 +23,9 @@ import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '..
 
 import {ICommand} from "../mvvm/icommand";
 import {IValueConverter} from "../mvvm/ivalue-converter";
-import {IViewModal, BindingMode} from "../mvvm/iview-modal";
 import {BindingRuleParser} from "../mvvm/binding-rule-parser";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
+import {IViewModal, ICollectionViewModal, BindingMode} from "../mvvm/iview-modal";
 
 export enum WidgetMode {
 	RUNTIME = 0,
@@ -1392,6 +1392,10 @@ export class Widget extends Emitter {
 			this._mainLoop = app.getMainLoop();
 			this._themeManager = app.getThemeManager();
 		}
+
+		this.children.forEach((child:Widget) => {
+			child.app = app;
+		});
 	}
 
 	public get win() : Window {
@@ -1666,7 +1670,11 @@ export class Widget extends Emitter {
 	public fromJson(json:any) : Widget{
 		var defProps = this.getDefProps();
 		for(var key in defProps) {
-			this[key] = json[key];
+			var value = json[key];
+			if(value === undefined) {
+				value = defProps[key];
+			}
+			this[key] = value; 
 		}
 
 		var styles = json.styles;
@@ -1695,6 +1703,10 @@ export class Widget extends Emitter {
 				child.fromJson(childJson);
 				this._children.push(child);
 			});
+		}
+
+		if(json._dataBindingRule) {
+			this._dataBindingRule = json._dataBindingRule;
 		}
 
 		this.onFromJson(json);
@@ -1748,13 +1760,42 @@ export class Widget extends Emitter {
 			});
 		}
 
+		if(this._dataBindingRule) {
+			json._dataBindingRule = this._dataBindingRule;
+		}
+
 		this.onToJson(json);
 
 		return json;
 	}
 
 ////////////////////////////////////////////	
-	protected onBindProp(prop:string, value:any) {
+	protected _templateItem : Widget;
+	protected _templateItemJson : Widget;
+
+	public set templateItem(value:Widget) {
+		this._templateItem = value;
+		this._templateItemJson = value ? value.toJson() : null;
+	}
+
+	public get templateItem() : Widget {
+		return this._templateItem;
+	}
+
+	public addChildWithTemplate(fastMode?:boolean) : Widget {
+		var child = null;
+		var json = this._templateItemJson;
+		if(json) {
+			child = WidgetFactory.createWithJson(json);
+			this.addChild(child, fastMode);
+		}
+
+		return child;
+	}
+
+////////////////////////////////////////////	
+	//绑定单个属性，子控件可以重载本函数去支持其它属性。
+	protected onBindProp(viewModal:IViewModal, prop:string, value:any) {
 		if(prop === "text") {
 			this.text = value;
 		} else if(prop === "value") {
@@ -1762,10 +1803,12 @@ export class Widget extends Emitter {
 		}
 	}
 
-
 	protected _dataBindingRule : any;
 	protected _viewModal : IViewModal;
-	
+
+	/**
+	 * 设置数据绑定规则。
+	 */
 	public setDataBindingRule(dataBindingRule:any) : Widget {
 		this._dataBindingRule = BindingRuleParser.parse(dataBindingRule);
 
@@ -1794,21 +1837,52 @@ export class Widget extends Emitter {
 			}
 		}
 
-		this._children.forEach((child:Widget) => {
-			child.bindData(viewModal);
-		});
-		
+		this.bindChildren(viewModal);
+
 		return this;
 	}
+	
+	protected bindChildren(viewModal:IViewModal) {
+		if(viewModal.isCollectionViewModal) {
+			if(this._templateItemJson) {	
+				//对于集合viewModal，如果有模板项存在，则动态生成子控件。
+				var json = this._templateItemJson;
+				var collectionViewModal = <ICollectionViewModal>viewModal;
+				var n = collectionViewModal.total;
+
+				this.removeAllChildren();
+				for(var i = 0; i < n; i++) {
+					var itemViewModal = collectionViewModal.getItemViewModal(i);
+					var child = this.addChildWithTemplate(true);
+					child.bindData(itemViewModal);
+				}
+				this.relayoutChildren();
+			}else{
+				//对于集合viewModal，如果没有模板项存在，则绑定集合viewModal当前项到子控件。
+				this._children.forEach((child:Widget) => {
+					child.bindData(viewModal);
+				});
+			}
+		}else{
+			//对于非集合viewModal，按正常绑定子控件。
+			this._children.forEach((child:Widget) => {
+				child.bindData(viewModal);
+			});
+		}
+	}
+
 	
 	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
 		for(var prop in dataBindingRule) {
 			var dataSource = dataBindingRule[prop];
 			var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
-			var value = dataSource.value || viewModal.getProp(dataSource.path);
+			var value = dataSource.value;
+			if(value === undefined && dataSource.path) {
+				value = viewModal.getProp(dataSource.path);
+			}
 			
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-				this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+				this.onBindProp(viewModal, prop, this.convertValue(viewModal, dataSource, value));
 			}
 		}
 	}

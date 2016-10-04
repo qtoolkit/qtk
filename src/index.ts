@@ -77,6 +77,7 @@ export {ViewModal} from "./mvvm/view-modal";
 export {IViewModal} from "./mvvm/iview-modal";
 export {RecyclableCreator} from "./recyclable-creator";
 export {IValueConverter} from "./mvvm/ivalue-converter";
+export {CollectionViewModal} from "./mvvm/collection-view-modal";
 export {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>

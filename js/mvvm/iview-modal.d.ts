@@ -2,6 +2,7 @@ import { ICommand } from "./icommand";
 import { IValueConverter } from "./ivalue-converter";
 import { IValidationRule } from "./ivalidation-rule";
 export interface IViewModal {
+    isCollectionViewModal: boolean;
     getBindingMode(): BindingMode;
     getProp(path: string): any;
     delProp(path: string, trigger: any): IViewModal;
@@ -9,17 +10,16 @@ export interface IViewModal {
     onChange(callback: Function): any;
     offChange(callback: Function): any;
     getCommand(name: string): ICommand;
+    execCommand(name: string, args: any): boolean;
     getValueConverter(name: string): IValueConverter;
     getValidationRule(name: string): IValidationRule;
-    createCollectionViewModal(path: string): ICollectionViewModal;
 }
 export interface ICollectionViewModal extends IViewModal {
-    createItemViewModal(index: number): ICollectionItemViewModal;
-}
-export interface ICollectionItemViewModal extends IViewModal {
-    index: number;
-    collectionViewModal: ICollectionViewModal;
-    isCurrent(): boolean;
+    total: number;
+    current: number;
+    getItemViewModal(index: number): IViewModal;
+    addItem(data: any): ICollectionViewModal;
+    removeItem(index: number): ICollectionViewModal;
 }
 export declare enum BindingMode {
     TWO_WAY = 0,

@@ -16,6 +16,8 @@ import {RecyclableCreator} from "../recyclable-creator";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
+import {IViewModal, BindingMode} from "../mvvm/iview-modal";
+
 export class ComboBoxOption {
 	public value : any;
 	public text : string;
@@ -234,14 +236,14 @@ export abstract class ComboBoxBase extends Widget {
 		});
 	}
 
-	protected onBindProp(prop:string, value:any) {
+	protected onBindProp(viewModal:IViewModal, prop:string, value:any) {
 		if(prop === "options") {
 			this.resetOptions();
 			value.forEach((opt:any) => {
 				this.addOption(opt.text, opt.value, opt.imageURL, opt.color);
 			});
 		}else{
-			return super.onBindProp(prop, value);
+			return super.onBindProp(viewModal, prop, value);
 		}
 	}
 

@@ -20,8 +20,8 @@ var dirty_rect_context_1 = require("../dirty-rect-context");
 var image_tile_1 = require("../image-tile");
 var behavior_1 = require("../behaviors/behavior");
 var layouter_1 = require('../layouters/layouter');
-var iview_modal_1 = require("../mvvm/iview-modal");
 var binding_rule_parser_1 = require("../mvvm/binding-rule-parser");
+var iview_modal_1 = require("../mvvm/iview-modal");
 (function (WidgetMode) {
     WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
     WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
@@ -1336,6 +1336,9 @@ var Widget = (function (_super) {
                 this._mainLoop = app.getMainLoop();
                 this._themeManager = app.getThemeManager();
             }
+            this.children.forEach(function (child) {
+                child.app = app;
+            });
         },
         enumerable: true,
         configurable: true
@@ -1525,7 +1528,11 @@ var Widget = (function (_super) {
         var _this = this;
         var defProps = this.getDefProps();
         for (var key in defProps) {
-            this[key] = json[key];
+            var value = json[key];
+            if (value === undefined) {
+                value = defProps[key];
+            }
+            this[key] = value;
         }
         var styles = json.styles;
         if (styles) {
@@ -1550,6 +1557,9 @@ var Widget = (function (_super) {
                 child.fromJson(childJson);
                 _this._children.push(child);
             });
+        }
+        if (json._dataBindingRule) {
+            this._dataBindingRule = json._dataBindingRule;
         }
         this.onFromJson(json);
         return this;
@@ -1591,11 +1601,35 @@ var Widget = (function (_super) {
                 json.children.push(child.toJson());
             });
         }
+        if (this._dataBindingRule) {
+            json._dataBindingRule = this._dataBindingRule;
+        }
         this.onToJson(json);
         return json;
     };
+    Object.defineProperty(Widget.prototype, "templateItem", {
+        get: function () {
+            return this._templateItem;
+        },
+        set: function (value) {
+            this._templateItem = value;
+            this._templateItemJson = value ? value.toJson() : null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Widget.prototype.addChildWithTemplate = function (fastMode) {
+        var child = null;
+        var json = this._templateItemJson;
+        if (json) {
+            child = widget_factory_1.WidgetFactory.createWithJson(json);
+            this.addChild(child, fastMode);
+        }
+        return child;
+    };
     ////////////////////////////////////////////	
-    Widget.prototype.onBindProp = function (prop, value) {
+    //绑定单个属性，子控件可以重载本函数去支持其它属性。
+    Widget.prototype.onBindProp = function (viewModal, prop, value) {
         if (prop === "text") {
             this.text = value;
         }
@@ -1603,6 +1637,9 @@ var Widget = (function (_super) {
             this.value = value;
         }
     };
+    /**
+     * 设置数据绑定规则。
+     */
     Widget.prototype.setDataBindingRule = function (dataBindingRule) {
         this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
         return this;
@@ -1625,18 +1662,48 @@ var Widget = (function (_super) {
                 });
             }
         }
-        this._children.forEach(function (child) {
-            child.bindData(viewModal);
-        });
+        this.bindChildren(viewModal);
         return this;
+    };
+    Widget.prototype.bindChildren = function (viewModal) {
+        if (viewModal.isCollectionViewModal) {
+            if (this._templateItemJson) {
+                //对于集合viewModal，如果有模板项存在，则动态生成子控件。
+                var json = this._templateItemJson;
+                var collectionViewModal = viewModal;
+                var n = collectionViewModal.total;
+                this.removeAllChildren();
+                for (var i = 0; i < n; i++) {
+                    var itemViewModal = collectionViewModal.getItemViewModal(i);
+                    var child = this.addChildWithTemplate(true);
+                    child.bindData(itemViewModal);
+                }
+                this.relayoutChildren();
+            }
+            else {
+                //对于集合viewModal，如果没有模板项存在，则绑定集合viewModal当前项到子控件。
+                this._children.forEach(function (child) {
+                    child.bindData(viewModal);
+                });
+            }
+        }
+        else {
+            //对于非集合viewModal，按正常绑定子控件。
+            this._children.forEach(function (child) {
+                child.bindData(viewModal);
+            });
+        }
     };
     Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
         for (var prop in dataBindingRule) {
             var dataSource = dataBindingRule[prop];
             var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
-            var value = dataSource.value || viewModal.getProp(dataSource.path);
+            var value = dataSource.value;
+            if (value === undefined && dataSource.path) {
+                value = viewModal.getProp(dataSource.path);
+            }
             if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+                this.onBindProp(viewModal, prop, this.convertValue(viewModal, dataSource, value));
             }
         }
     };

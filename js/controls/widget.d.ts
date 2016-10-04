@@ -346,11 +346,19 @@ export declare class Widget extends Emitter {
     clone(): Widget;
     protected onToJson(json: any): void;
     toJson(): any;
-    protected onBindProp(prop: string, value: any): void;
+    protected _templateItem: Widget;
+    protected _templateItemJson: Widget;
+    templateItem: Widget;
+    addChildWithTemplate(fastMode?: boolean): Widget;
+    protected onBindProp(viewModal: IViewModal, prop: string, value: any): void;
     protected _dataBindingRule: any;
     protected _viewModal: IViewModal;
+    /**
+     * 设置数据绑定规则。
+     */
     setDataBindingRule(dataBindingRule: any): Widget;
     bindData(viewModal: IViewModal): Widget;
+    protected bindChildren(viewModal: IViewModal): void;
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
     protected convertValue(viewModal: IViewModal, dataSource: any, value: any): any;
     protected convertBackValue(viewModal: IViewModal, dataSource: any, value: any): any;

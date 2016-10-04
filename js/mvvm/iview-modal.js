@@ -1,7 +1,6 @@
 "use strict";
 ;
 ;
-;
 (function (BindingMode) {
     BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
     BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";

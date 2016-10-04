@@ -224,7 +224,7 @@ var ComboBoxBase = (function (_super) {
             }
         });
     };
-    ComboBoxBase.prototype.onBindProp = function (prop, value) {
+    ComboBoxBase.prototype.onBindProp = function (viewModal, prop, value) {
         var _this = this;
         if (prop === "options") {
             this.resetOptions();
@@ -233,7 +233,7 @@ var ComboBoxBase = (function (_super) {
             });
         }
         else {
-            return _super.prototype.onBindProp.call(this, prop, value);
+            return _super.prototype.onBindProp.call(this, viewModal, prop, value);
         }
     };
     ComboBoxBase.prototype.onReset = function () {
