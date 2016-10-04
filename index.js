@@ -46,234 +46,194 @@ var qtk =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var point_1 = __webpack_require__(1);
-	exports.Point = point_1.Point;
-	var rect_1 = __webpack_require__(2);
+	var rect_1 = __webpack_require__(1);
 	exports.Rect = rect_1.Rect;
-	var Assets = __webpack_require__(3);
-	exports.Assets = Assets;
-	var main_loop_1 = __webpack_require__(10);
-	exports.MainLoop = main_loop_1.MainLoop;
-	var matrix_1 = __webpack_require__(11);
+	var point_1 = __webpack_require__(2);
+	exports.Point = point_1.Point;
+	var style_1 = __webpack_require__(3);
+	exports.Style = style_1.Style;
+	var matrix_1 = __webpack_require__(12);
 	exports.Matrix = matrix_1.Matrix;
-	var matrix_stack_1 = __webpack_require__(12);
-	exports.MatrixStack = matrix_stack_1.MatrixStack;
-	var image_1 = __webpack_require__(13);
-	exports.Image = image_1.Image;
-	var group_1 = __webpack_require__(82);
-	exports.Group = group_1.Group;
-	var edit_1 = __webpack_require__(83);
+	var canvas_1 = __webpack_require__(13);
+	exports.Canvas = canvas_1.Canvas;
+	var edit_1 = __webpack_require__(17);
 	exports.Edit = edit_1.Edit;
-	var page_1 = __webpack_require__(87);
+	var label_1 = __webpack_require__(18);
+	exports.Label = label_1.Label;
+	var emitter_1 = __webpack_require__(4);
+	exports.Emitter = emitter_1.Emitter;
+	var page_1 = __webpack_require__(84);
 	exports.Page = page_1.Page;
-	var pages_1 = __webpack_require__(88);
+	var key_event_1 = __webpack_require__(16);
+	exports.KeyEvent = key_event_1.KeyEvent;
+	var view_port_1 = __webpack_require__(85);
+	exports.ViewPort = view_port_1.ViewPort;
+	var pages_1 = __webpack_require__(86);
 	exports.Pages = pages_1.Pages;
-	var button_1 = __webpack_require__(89);
+	var main_loop_1 = __webpack_require__(87);
+	exports.MainLoop = main_loop_1.MainLoop;
+	var image_1 = __webpack_require__(88);
+	exports.Image = image_1.Image;
+	var group_1 = __webpack_require__(89);
+	exports.Group = group_1.Group;
+	var dialog_1 = __webpack_require__(90);
+	exports.Dialog = dialog_1.Dialog;
+	var button_1 = __webpack_require__(92);
 	exports.Button = button_1.Button;
-	var tab_page_1 = __webpack_require__(90);
+	var slider_1 = __webpack_require__(93);
+	exports.Slider = slider_1.Slider;
+	var switch_1 = __webpack_require__(95);
+	exports.Switch = switch_1.Switch;
+	var matrix_stack_1 = __webpack_require__(22);
+	exports.MatrixStack = matrix_stack_1.MatrixStack;
+	var tab_page_1 = __webpack_require__(96);
 	exports.TabPage = tab_page_1.TabPage;
-	var tab_button_1 = __webpack_require__(91);
+	var rich_text_1 = __webpack_require__(97);
+	exports.RichText = rich_text_1.RichText;
+	var tab_button_1 = __webpack_require__(102);
 	exports.TabButton = tab_button_1.TabButton;
-	var tab_control_1 = __webpack_require__(95);
+	var tab_control_1 = __webpack_require__(106);
 	exports.TabControl = tab_control_1.TabControl;
-	var image_tile_1 = __webpack_require__(15);
+	var image_tile_1 = __webpack_require__(7);
 	exports.ImageDrawType = image_tile_1.ImageDrawType;
 	exports.ImageTile = image_tile_1.ImageTile;
-	var consts_1 = __webpack_require__(92);
+	var rich_text_edit_1 = __webpack_require__(108);
+	exports.RichTextEdit = rich_text_edit_1.RichTextEdit;
+	var tab_button_group_1 = __webpack_require__(107);
+	exports.TabButtonGroup = tab_button_group_1.TabButtonGroup;
+	var combo_box_1 = __webpack_require__(109);
+	exports.ComboBox = combo_box_1.ComboBox;
+	exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
+	var grid_view_1 = __webpack_require__(114);
+	exports.GridView = grid_view_1.GridView;
+	var list_view_1 = __webpack_require__(110);
+	exports.ListView = list_view_1.ListView;
+	var tree_item_1 = __webpack_require__(116);
+	exports.TreeItem = tree_item_1.TreeItem;
+	var tree_view_1 = __webpack_require__(117);
+	exports.TreeView = tree_view_1.TreeView;
+	var application_1 = __webpack_require__(119);
+	exports.Application = application_1.Application;
+	var movable_1 = __webpack_require__(123);
+	exports.Movable = movable_1.Movable;
+	var theme_manager_1 = __webpack_require__(120);
+	exports.ThemeManager = theme_manager_1.ThemeManager;
+	var draggable_1 = __webpack_require__(124);
+	exports.Draggable = draggable_1.Draggable;
+	var droppable_1 = __webpack_require__(125);
+	exports.Droppable = droppable_1.Droppable;
+	var resizable_1 = __webpack_require__(126);
+	exports.Resizable = resizable_1.Resizable;
+	var menu_1 = __webpack_require__(127);
+	exports.Menu = menu_1.Menu;
+	exports.MenuItem = menu_1.MenuItem;
+	var radio_button_1 = __webpack_require__(104);
+	exports.RadioButton = radio_button_1.RadioButton;
+	var tree_item_data_1 = __webpack_require__(118);
+	exports.TreeItemData = tree_item_data_1.TreeItemData;
+	var check_button_1 = __webpack_require__(105);
+	exports.CheckButton = check_button_1.CheckButton;
+	var window_normal_1 = __webpack_require__(128);
+	exports.WindowNormal = window_normal_1.WindowNormal;
+	var widget_factory_1 = __webpack_require__(23);
+	exports.WidgetFactory = widget_factory_1.WidgetFactory;
+	var menu_bar_1 = __webpack_require__(129);
+	exports.MenuBar = menu_bar_1.MenuBar;
+	exports.MenuBarItem = menu_bar_1.MenuBarItem;
+	var color_tile_1 = __webpack_require__(131);
+	exports.ColorTile = color_tile_1.ColorTile;
+	exports.ColorLine = color_tile_1.ColorLine;
+	var list_item_1 = __webpack_require__(112);
+	exports.ListItem = list_item_1.ListItem;
+	exports.ListItemStyle = list_item_1.ListItemStyle;
+	var graphics_1 = __webpack_require__(25);
+	exports.RoundType = graphics_1.RoundType;
+	exports.Graphics = graphics_1.Graphics;
+	var accordion_1 = __webpack_require__(132);
+	exports.Accordion = accordion_1.Accordion;
+	var service_locator_1 = __webpack_require__(122);
+	exports.ServiceLocator = service_locator_1.ServiceLocator;
+	var title_content_1 = __webpack_require__(133);
+	exports.TitleContent = title_content_1.TitleContent;
+	var title_label_1 = __webpack_require__(135);
+	exports.TitleLabel = title_label_1.TitleLabel;
+	var title_edit_1 = __webpack_require__(137);
+	exports.TitleEdit = title_edit_1.TitleEdit;
+	var title_slider_1 = __webpack_require__(138);
+	exports.TitleSlider = title_slider_1.TitleSlider;
+	var property_page_1 = __webpack_require__(139);
+	exports.PropertyPage = property_page_1.PropertyPage;
+	var choosable_edit_1 = __webpack_require__(143);
+	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
+	var title_text_area_1 = __webpack_require__(140);
+	exports.TitleTextArea = title_text_area_1.TitleTextArea;
+	var property_sheets_1 = __webpack_require__(144);
+	exports.PropertySheets = property_sheets_1.PropertySheets;
+	var progress_bar_1 = __webpack_require__(94);
+	exports.ProgressBarType = progress_bar_1.ProgressBarType;
+	exports.ProgressBar = progress_bar_1.ProgressBar;
+	var title_choosable_edit_1 = __webpack_require__(142);
+	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
+	var dock_layouter_1 = __webpack_require__(145);
+	exports.DockLayouter = dock_layouter_1.DockLayouter;
+	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
+	var grid_layouter_1 = __webpack_require__(115);
+	exports.GridLayouter = grid_layouter_1.GridLayouter;
+	exports.GridLayouterParam = grid_layouter_1.GridLayouterParam;
+	var list_layouter_1 = __webpack_require__(111);
+	exports.ListLayouter = list_layouter_1.ListLayouter;
+	exports.ListLayouterParam = list_layouter_1.ListLayouterParam;
+	var simple_layouter_1 = __webpack_require__(113);
+	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
+	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
+	var linear_layouter_1 = __webpack_require__(130);
+	exports.LinearLayouter = linear_layouter_1.LinearLayouter;
+	exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
+	var widget_1 = __webpack_require__(19);
+	exports.Widget = widget_1.Widget;
+	exports.WidgetState = widget_1.WidgetState;
+	exports.WidgetMode = widget_1.WidgetMode;
+	exports.HitTestResult = widget_1.HitTestResult;
+	var consts_1 = __webpack_require__(103);
 	exports.Direction = consts_1.Direction;
 	exports.Align = consts_1.Align;
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
 	exports.Services = consts_1.Services;
-	var message_box_1 = __webpack_require__(97);
+	var title_combo_box_1 = __webpack_require__(141);
+	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
+	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
+	var message_box_1 = __webpack_require__(146);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
 	exports.TitleOptions = message_box_1.TitleOptions;
 	exports.MessageBox = message_box_1.MessageBox;
-	var tab_button_group_1 = __webpack_require__(96);
-	exports.TabButtonGroup = tab_button_group_1.TabButtonGroup;
-	var rich_text_1 = __webpack_require__(117);
-	exports.RichText = rich_text_1.RichText;
-	var rich_text_edit_1 = __webpack_require__(118);
-	exports.RichTextEdit = rich_text_edit_1.RichTextEdit;
-	var label_1 = __webpack_require__(84);
-	exports.Label = label_1.Label;
-	var slider_1 = __webpack_require__(119);
-	exports.Slider = slider_1.Slider;
-	var switch_1 = __webpack_require__(120);
-	exports.Switch = switch_1.Switch;
-	var combo_box_1 = __webpack_require__(121);
-	exports.ComboBox = combo_box_1.ComboBox;
-	exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
-	var check_button_1 = __webpack_require__(94);
-	exports.CheckButton = check_button_1.CheckButton;
-	var menu_1 = __webpack_require__(122);
-	exports.Menu = menu_1.Menu;
-	exports.MenuItem = menu_1.MenuItem;
-	var menu_bar_1 = __webpack_require__(123);
-	exports.MenuBar = menu_bar_1.MenuBar;
-	exports.MenuBarItem = menu_bar_1.MenuBarItem;
-	var color_tile_1 = __webpack_require__(124);
-	exports.ColorTile = color_tile_1.ColorTile;
-	exports.ColorLine = color_tile_1.ColorLine;
-	var radio_button_1 = __webpack_require__(93);
-	exports.RadioButton = radio_button_1.RadioButton;
-	var progress_bar_1 = __webpack_require__(106);
-	exports.ProgressBarType = progress_bar_1.ProgressBarType;
-	exports.ProgressBar = progress_bar_1.ProgressBar;
-	var dialog_1 = __webpack_require__(98);
-	exports.Dialog = dialog_1.Dialog;
-	var tree_item_1 = __webpack_require__(125);
-	exports.TreeItem = tree_item_1.TreeItem;
-	var tree_view_1 = __webpack_require__(126);
-	exports.TreeView = tree_view_1.TreeView;
-	var tree_item_data_1 = __webpack_require__(127);
-	exports.TreeItemData = tree_item_data_1.TreeItemData;
-	var list_item_1 = __webpack_require__(112);
-	exports.ListItem = list_item_1.ListItem;
-	exports.ListItemStyle = list_item_1.ListItemStyle;
-	var grid_view_1 = __webpack_require__(128);
-	exports.GridView = grid_view_1.GridView;
-	var list_view_1 = __webpack_require__(100);
-	exports.ListView = list_view_1.ListView;
-	var window_normal_1 = __webpack_require__(129);
-	exports.WindowNormal = window_normal_1.WindowNormal;
-	var widget_1 = __webpack_require__(16);
-	exports.Widget = widget_1.Widget;
-	exports.WidgetState = widget_1.WidgetState;
-	exports.WidgetMode = widget_1.WidgetMode;
-	exports.HitTestResult = widget_1.HitTestResult;
-	var scroll_view_1 = __webpack_require__(101);
+	var scroll_view_1 = __webpack_require__(98);
 	exports.ScrollerBarVisibility = scroll_view_1.ScrollerBarVisibility;
 	exports.ScrollBarStyle = scroll_view_1.ScrollBarStyle;
 	exports.ScrollView = scroll_view_1.ScrollView;
-	var style_1 = __webpack_require__(14);
-	exports.Style = style_1.Style;
-	var widget_factory_1 = __webpack_require__(23);
-	exports.WidgetFactory = widget_factory_1.WidgetFactory;
-	var theme_manager_1 = __webpack_require__(109);
-	exports.ThemeManager = theme_manager_1.ThemeManager;
-	var Events = __webpack_require__(7);
-	exports.Events = Events;
-	var canvas_1 = __webpack_require__(17);
-	exports.Canvas = canvas_1.Canvas;
-	var draggable_1 = __webpack_require__(130);
-	exports.Draggable = draggable_1.Draggable;
-	var droppable_1 = __webpack_require__(131);
-	exports.Droppable = droppable_1.Droppable;
-	var movable_1 = __webpack_require__(132);
-	exports.Movable = movable_1.Movable;
-	var resizable_1 = __webpack_require__(133);
-	exports.Resizable = resizable_1.Resizable;
-	var emitter_1 = __webpack_require__(8);
-	exports.Emitter = emitter_1.Emitter;
-	var view_port_1 = __webpack_require__(108);
-	exports.ViewPort = view_port_1.ViewPort;
-	var deviceInfo = __webpack_require__(110);
-	exports.deviceInfo = deviceInfo;
-	var inputEventAdapter = __webpack_require__(19);
-	exports.inputEventAdapter = inputEventAdapter;
-	var application_1 = __webpack_require__(107);
-	exports.Application = application_1.Application;
-	var service_locator_1 = __webpack_require__(111);
-	exports.ServiceLocator = service_locator_1.ServiceLocator;
-	var key_event_1 = __webpack_require__(20);
-	exports.KeyEvent = key_event_1.KeyEvent;
-	var graphics_1 = __webpack_require__(25);
-	exports.RoundType = graphics_1.RoundType;
-	exports.Graphics = graphics_1.Graphics;
-	var linear_layouter_1 = __webpack_require__(114);
-	exports.LinearLayouter = linear_layouter_1.LinearLayouter;
-	exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
-	var dock_layouter_1 = __webpack_require__(113);
-	exports.DockLayouter = dock_layouter_1.DockLayouter;
-	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
-	var grid_layouter_1 = __webpack_require__(115);
-	exports.GridLayouter = grid_layouter_1.GridLayouter;
-	exports.GridLayouterParam = grid_layouter_1.GridLayouterParam;
-	var list_layouter_1 = __webpack_require__(105);
-	exports.ListLayouter = list_layouter_1.ListLayouter;
-	exports.ListLayouterParam = list_layouter_1.ListLayouterParam;
-	var simple_layouter_1 = __webpack_require__(116);
-	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
-	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
-	var accordion_1 = __webpack_require__(134);
-	exports.Accordion = accordion_1.Accordion;
-	var property_page_1 = __webpack_require__(137);
-	exports.PropertyPage = property_page_1.PropertyPage;
-	var property_sheets_1 = __webpack_require__(145);
-	exports.PropertySheets = property_sheets_1.PropertySheets;
-	var title_content_1 = __webpack_require__(135);
-	exports.TitleContent = title_content_1.TitleContent;
-	var title_label_1 = __webpack_require__(146);
-	exports.TitleLabel = title_label_1.TitleLabel;
-	var title_edit_1 = __webpack_require__(138);
-	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_choosable_edit_1 = __webpack_require__(143);
-	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var title_text_area_1 = __webpack_require__(141);
-	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var choosable_edit_1 = __webpack_require__(144);
-	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_slider_1 = __webpack_require__(140);
-	exports.TitleSlider = title_slider_1.TitleSlider;
-	var title_combo_box_1 = __webpack_require__(142);
-	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
-	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
+	var device_info_1 = __webpack_require__(121);
+	exports.DeviceInfo = device_info_1.DeviceInfo;
 	var view_modal_1 = __webpack_require__(147);
 	exports.ViewModal = view_modal_1.ViewModal;
+	var recyclable_creator_1 = __webpack_require__(81);
+	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
 	var ivalidation_rule_1 = __webpack_require__(150);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
-	var TWEEN = __webpack_require__(21);
+	var TWEEN = __webpack_require__(20);
 	exports.TWEEN = TWEEN;
-	var recyclable_creator_1 = __webpack_require__(81);
-	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
+	var Events = __webpack_require__(6);
+	exports.Events = Events;
+	var Assets = __webpack_require__(11);
+	exports.Assets = Assets;
+	var inputEventAdapter = __webpack_require__(15);
+	exports.inputEventAdapter = inputEventAdapter;
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var Point = (function () {
-	    function Point(x, y) {
-	        this.x = x;
-	        this.y = y;
-	    }
-	    Point.prototype.dispose = function () {
-	    };
-	    Point.prototype.init = function (x, y) {
-	        this.x = x;
-	        this.y = y;
-	        return this;
-	    };
-	    Point.prototype.copy = function (p) {
-	        this.x = p.x;
-	        this.y = p.y;
-	        return this;
-	    };
-	    Point.prototype.isInRect = function (r) {
-	        return this.isIn(r.x, r.y, r.w, r.h);
-	    };
-	    Point.prototype.isIn = function (x, y, w, h) {
-	        var xx = this.x;
-	        var yy = this.y;
-	        return xx >= x && xx <= (x + w) && yy >= y && yy <= (y + h);
-	    };
-	    Point.create = function (x, y) {
-	        return new Point(x, y);
-	    };
-	    Point.point = Point.create(0, 0);
-	    return Point;
-	}());
-	exports.Point = Point;
-	;
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -320,1456 +280,49 @@ var qtk =
 
 
 /***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var Point = (function () {
+	    function Point(x, y) {
+	        this.x = x;
+	        this.y = y;
+	    }
+	    Point.prototype.dispose = function () {
+	    };
+	    Point.prototype.init = function (x, y) {
+	        this.x = x;
+	        this.y = y;
+	        return this;
+	    };
+	    Point.prototype.copy = function (p) {
+	        this.x = p.x;
+	        this.y = p.y;
+	        return this;
+	    };
+	    Point.prototype.isInRect = function (r) {
+	        return this.isIn(r.x, r.y, r.w, r.h);
+	    };
+	    Point.prototype.isIn = function (x, y, w, h) {
+	        var xx = this.x;
+	        var yy = this.y;
+	        return xx >= x && xx <= (x + w) && yy >= y && yy <= (y + h);
+	    };
+	    Point.create = function (x, y) {
+	        return new Point(x, y);
+	    };
+	    Point.point = Point.create(0, 0);
+	    return Point;
+	}());
+	exports.Point = Point;
+	;
+
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../typings/globals/node/index.d.ts"/>
-	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
-	/// <reference path="../typings/globals/whatwg-fetch/index.d.ts"/>
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	__webpack_require__(4);
-	var path = __webpack_require__(5);
-	var Events = __webpack_require__(7);
-	var emitter_1 = __webpack_require__(8);
-	exports.AUDIO = "audio";
-	exports.IMAGE = "image";
-	exports.BLOB = "blob";
-	exports.JSON = "json";
-	exports.TEXT = "text";
-	;
-	var assetsCache = {};
-	function load(url, type) {
-	    var item = assetsCache[url];
-	    if (!item) {
-	        item = fetch(url).then(function ok(response) {
-	            if (response.status !== 200) {
-	                return Promise.reject(null);
-	            }
-	            if (type === exports.JSON) {
-	                return response.json();
-	            }
-	            else if (type === exports.BLOB) {
-	                return response.blob();
-	            }
-	            else {
-	                return response.text();
-	            }
-	        }, function fail(err) {
-	            return null;
-	        });
-	        assetsCache[url] = item;
-	    }
-	    return item;
-	}
-	/**
-	 * Load JSON Data and Cache It.
-	 * @param url URL Of JSON.
-	 * @returns Promise
-	 */
-	function loadJSON(url) {
-	    return load(url, exports.JSON);
-	}
-	exports.loadJSON = loadJSON;
-	/**
-	 * Load Text Data and Cache It.
-	 * @param url URL Of Text.
-	 * @returns Promise
-	 */
-	function loadText(url) {
-	    return load(url, exports.TEXT);
-	}
-	exports.loadText = loadText;
-	/**
-	 * Load Blob Data and Cache It.
-	 * @param url URL Of Blob.
-	 * @returns Promise
-	 */
-	function loadBlob(url) {
-	    return load(url, exports.BLOB);
-	}
-	exports.loadBlob = loadBlob;
-	/**
-	 * Load Image and Cache It.
-	 * @param url URL Of Image.
-	 * @returns Promise
-	 */
-	function loadImage(url) {
-	    var item = assetsCache[url];
-	    if (!item) {
-	        item = new Promise(function (resolve, reject) {
-	            var image = new Image();
-	            image.onload = function () {
-	                resolve(image);
-	            };
-	            image.onerror = function (err) {
-	                reject(err);
-	            };
-	            image.src = url;
-	        });
-	    }
-	    assetsCache[url] = item;
-	    return item;
-	}
-	exports.loadImage = loadImage;
-	/**
-	 * Load Script
-	 * @param url URL Of Script.
-	 * @returns Promise
-	 */
-	function loadScript(url) {
-	    var item = new Promise(function (resolve, reject) {
-	        var node = document.head ? document.head : document.body;
-	        var script = document.createElement("script");
-	        script.onload = function () {
-	            resolve(script);
-	        };
-	        script.onerror = function (err) {
-	            reject(err);
-	        };
-	        script.src = url;
-	        node.appendChild(script);
-	    });
-	    return item;
-	}
-	exports.loadScript = loadScript;
-	/**
-	 * Load Audio and Cache It.
-	 * @param url URL Of Audio.
-	 * @returns Promise
-	 */
-	function loadAudio(url) {
-	    var item = assetsCache[url];
-	    if (!item) {
-	        item = new Promise(function (resolve, reject) {
-	            var audio = new Audio();
-	            audio.onload = function () {
-	                resolve(audio);
-	            };
-	            audio.onerror = function (err) {
-	                reject(err);
-	            };
-	            audio.src = url;
-	        });
-	    }
-	    assetsCache[url] = item;
-	    return item;
-	}
-	exports.loadAudio = loadAudio;
-	/**
-	 * Clear asset cache
-	 * @param url URL Of asset.
-	 */
-	function clear(url) {
-	    delete assetsCache[url];
-	}
-	exports.clear = clear;
-	/**
-	 * Present one asset.
-	 */
-	var Item = (function () {
-	    function Item() {
-	    }
-	    return Item;
-	}());
-	exports.Item = Item;
-	;
-	/**
-	 * Assets group to preload
-	 * Example:
-	 * ```
-	 *  var items = [
-	 *    {type:qtk.Assets.TEXT, src:"http://localhost:9876/base/www/test.txt"},
-	 *    {type:qtk.Assets.JSON, src:"http://localhost:9876/base/www/test.json"},
-	 *    {type:qtk.Assets.IMAGE, src:"http://localhost:9876/base/www/test.jpg"},
-	 *    {type:qtk.Assets.BLOB, src:"http://localhost:9876/base/www/test.blob"}
-	 * ];
-	 * var assets = new qtk.Assets.Group(items);
-	 * assets.onProgress(function(info) {
-	 *   console.log(info.loaded + "/" + info.total);
-	 * });
-	 * ```
-	 */
-	var Group = (function (_super) {
-	    __extends(Group, _super);
-	    function Group(items) {
-	        _super.call(this);
-	        this.event = {
-	            total: 0,
-	            loaded: 0,
-	            type: Events.PROGRESS
-	        };
-	        var i = 0;
-	        var n = items.length;
-	        this.loaded = 0;
-	        this.total = items.length;
-	        this.event.total = this.total;
-	        items.forEach(this.loadOne.bind(this));
-	    }
-	    /**
-	     * Register of a progress callback function
-	     */
-	    Group.prototype.onProgress = function (callback) {
-	        this.on(Events.PROGRESS, callback);
-	    };
-	    Group.prototype.addLoaded = function () {
-	        this.loaded++;
-	        this.event.loaded = this.loaded;
-	        this.dispatchEvent(this.event);
-	    };
-	    Group.prototype.loadOne = function (item) {
-	        var src = item.src;
-	        var type = item.type;
-	        var addLoaded = this.addLoaded.bind(this);
-	        var name = path.extname(src).toLowerCase();
-	        if (type === exports.JSON || (!type && name === 'json')) {
-	            loadJSON(src).then(addLoaded, addLoaded);
-	        }
-	        else if (type === exports.IMAGE || (!type && (name === "jpg" || name === "png" || name === "svg"))) {
-	            loadImage(src).then(addLoaded, addLoaded);
-	        }
-	        else if (type === exports.BLOB) {
-	            loadBlob(src).then(addLoaded, addLoaded);
-	        }
-	        else {
-	            loadText(src).then(addLoaded, addLoaded);
-	        }
-	    };
-	    return Group;
-	}(emitter_1.Emitter));
-	exports.Group = Group;
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	(function(self) {
-	  'use strict';
-
-	  if (self.fetch) {
-	    return
-	  }
-
-	  var support = {
-	    searchParams: 'URLSearchParams' in self,
-	    iterable: 'Symbol' in self && 'iterator' in Symbol,
-	    blob: 'FileReader' in self && 'Blob' in self && (function() {
-	      try {
-	        new Blob()
-	        return true
-	      } catch(e) {
-	        return false
-	      }
-	    })(),
-	    formData: 'FormData' in self,
-	    arrayBuffer: 'ArrayBuffer' in self
-	  }
-
-	  function normalizeName(name) {
-	    if (typeof name !== 'string') {
-	      name = String(name)
-	    }
-	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-	      throw new TypeError('Invalid character in header field name')
-	    }
-	    return name.toLowerCase()
-	  }
-
-	  function normalizeValue(value) {
-	    if (typeof value !== 'string') {
-	      value = String(value)
-	    }
-	    return value
-	  }
-
-	  // Build a destructive iterator for the value list
-	  function iteratorFor(items) {
-	    var iterator = {
-	      next: function() {
-	        var value = items.shift()
-	        return {done: value === undefined, value: value}
-	      }
-	    }
-
-	    if (support.iterable) {
-	      iterator[Symbol.iterator] = function() {
-	        return iterator
-	      }
-	    }
-
-	    return iterator
-	  }
-
-	  function Headers(headers) {
-	    this.map = {}
-
-	    if (headers instanceof Headers) {
-	      headers.forEach(function(value, name) {
-	        this.append(name, value)
-	      }, this)
-
-	    } else if (headers) {
-	      Object.getOwnPropertyNames(headers).forEach(function(name) {
-	        this.append(name, headers[name])
-	      }, this)
-	    }
-	  }
-
-	  Headers.prototype.append = function(name, value) {
-	    name = normalizeName(name)
-	    value = normalizeValue(value)
-	    var list = this.map[name]
-	    if (!list) {
-	      list = []
-	      this.map[name] = list
-	    }
-	    list.push(value)
-	  }
-
-	  Headers.prototype['delete'] = function(name) {
-	    delete this.map[normalizeName(name)]
-	  }
-
-	  Headers.prototype.get = function(name) {
-	    var values = this.map[normalizeName(name)]
-	    return values ? values[0] : null
-	  }
-
-	  Headers.prototype.getAll = function(name) {
-	    return this.map[normalizeName(name)] || []
-	  }
-
-	  Headers.prototype.has = function(name) {
-	    return this.map.hasOwnProperty(normalizeName(name))
-	  }
-
-	  Headers.prototype.set = function(name, value) {
-	    this.map[normalizeName(name)] = [normalizeValue(value)]
-	  }
-
-	  Headers.prototype.forEach = function(callback, thisArg) {
-	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
-	      this.map[name].forEach(function(value) {
-	        callback.call(thisArg, value, name, this)
-	      }, this)
-	    }, this)
-	  }
-
-	  Headers.prototype.keys = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push(name) })
-	    return iteratorFor(items)
-	  }
-
-	  Headers.prototype.values = function() {
-	    var items = []
-	    this.forEach(function(value) { items.push(value) })
-	    return iteratorFor(items)
-	  }
-
-	  Headers.prototype.entries = function() {
-	    var items = []
-	    this.forEach(function(value, name) { items.push([name, value]) })
-	    return iteratorFor(items)
-	  }
-
-	  if (support.iterable) {
-	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
-	  }
-
-	  function consumed(body) {
-	    if (body.bodyUsed) {
-	      return Promise.reject(new TypeError('Already read'))
-	    }
-	    body.bodyUsed = true
-	  }
-
-	  function fileReaderReady(reader) {
-	    return new Promise(function(resolve, reject) {
-	      reader.onload = function() {
-	        resolve(reader.result)
-	      }
-	      reader.onerror = function() {
-	        reject(reader.error)
-	      }
-	    })
-	  }
-
-	  function readBlobAsArrayBuffer(blob) {
-	    var reader = new FileReader()
-	    reader.readAsArrayBuffer(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  function readBlobAsText(blob) {
-	    var reader = new FileReader()
-	    reader.readAsText(blob)
-	    return fileReaderReady(reader)
-	  }
-
-	  function Body() {
-	    this.bodyUsed = false
-
-	    this._initBody = function(body) {
-	      this._bodyInit = body
-	      if (typeof body === 'string') {
-	        this._bodyText = body
-	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
-	        this._bodyBlob = body
-	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-	        this._bodyFormData = body
-	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	        this._bodyText = body.toString()
-	      } else if (!body) {
-	        this._bodyText = ''
-	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
-	        // Only support ArrayBuffers for POST method.
-	        // Receiving ArrayBuffers happens via Blobs, instead.
-	      } else {
-	        throw new Error('unsupported BodyInit type')
-	      }
-
-	      if (!this.headers.get('content-type')) {
-	        if (typeof body === 'string') {
-	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
-	        } else if (this._bodyBlob && this._bodyBlob.type) {
-	          this.headers.set('content-type', this._bodyBlob.type)
-	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
-	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
-	        }
-	      }
-	    }
-
-	    if (support.blob) {
-	      this.blob = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return Promise.resolve(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as blob')
-	        } else {
-	          return Promise.resolve(new Blob([this._bodyText]))
-	        }
-	      }
-
-	      this.arrayBuffer = function() {
-	        return this.blob().then(readBlobAsArrayBuffer)
-	      }
-
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return readBlobAsText(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as text')
-	        } else {
-	          return Promise.resolve(this._bodyText)
-	        }
-	      }
-	    } else {
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        return rejected ? rejected : Promise.resolve(this._bodyText)
-	      }
-	    }
-
-	    if (support.formData) {
-	      this.formData = function() {
-	        return this.text().then(decode)
-	      }
-	    }
-
-	    this.json = function() {
-	      return this.text().then(JSON.parse)
-	    }
-
-	    return this
-	  }
-
-	  // HTTP methods whose capitalization should be normalized
-	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
-
-	  function normalizeMethod(method) {
-	    var upcased = method.toUpperCase()
-	    return (methods.indexOf(upcased) > -1) ? upcased : method
-	  }
-
-	  function Request(input, options) {
-	    options = options || {}
-	    var body = options.body
-	    if (Request.prototype.isPrototypeOf(input)) {
-	      if (input.bodyUsed) {
-	        throw new TypeError('Already read')
-	      }
-	      this.url = input.url
-	      this.credentials = input.credentials
-	      if (!options.headers) {
-	        this.headers = new Headers(input.headers)
-	      }
-	      this.method = input.method
-	      this.mode = input.mode
-	      if (!body) {
-	        body = input._bodyInit
-	        input.bodyUsed = true
-	      }
-	    } else {
-	      this.url = input
-	    }
-
-	    this.credentials = options.credentials || this.credentials || 'omit'
-	    if (options.headers || !this.headers) {
-	      this.headers = new Headers(options.headers)
-	    }
-	    this.method = normalizeMethod(options.method || this.method || 'GET')
-	    this.mode = options.mode || this.mode || null
-	    this.referrer = null
-
-	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
-	      throw new TypeError('Body not allowed for GET or HEAD requests')
-	    }
-	    this._initBody(body)
-	  }
-
-	  Request.prototype.clone = function() {
-	    return new Request(this)
-	  }
-
-	  function decode(body) {
-	    var form = new FormData()
-	    body.trim().split('&').forEach(function(bytes) {
-	      if (bytes) {
-	        var split = bytes.split('=')
-	        var name = split.shift().replace(/\+/g, ' ')
-	        var value = split.join('=').replace(/\+/g, ' ')
-	        form.append(decodeURIComponent(name), decodeURIComponent(value))
-	      }
-	    })
-	    return form
-	  }
-
-	  function headers(xhr) {
-	    var head = new Headers()
-	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
-	    pairs.forEach(function(header) {
-	      var split = header.trim().split(':')
-	      var key = split.shift().trim()
-	      var value = split.join(':').trim()
-	      head.append(key, value)
-	    })
-	    return head
-	  }
-
-	  Body.call(Request.prototype)
-
-	  function Response(bodyInit, options) {
-	    if (!options) {
-	      options = {}
-	    }
-
-	    this.type = 'default'
-	    this.status = options.status
-	    this.ok = this.status >= 200 && this.status < 300
-	    this.statusText = options.statusText
-	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
-	    this.url = options.url || ''
-	    this._initBody(bodyInit)
-	  }
-
-	  Body.call(Response.prototype)
-
-	  Response.prototype.clone = function() {
-	    return new Response(this._bodyInit, {
-	      status: this.status,
-	      statusText: this.statusText,
-	      headers: new Headers(this.headers),
-	      url: this.url
-	    })
-	  }
-
-	  Response.error = function() {
-	    var response = new Response(null, {status: 0, statusText: ''})
-	    response.type = 'error'
-	    return response
-	  }
-
-	  var redirectStatuses = [301, 302, 303, 307, 308]
-
-	  Response.redirect = function(url, status) {
-	    if (redirectStatuses.indexOf(status) === -1) {
-	      throw new RangeError('Invalid status code')
-	    }
-
-	    return new Response(null, {status: status, headers: {location: url}})
-	  }
-
-	  self.Headers = Headers
-	  self.Request = Request
-	  self.Response = Response
-
-	  self.fetch = function(input, init) {
-	    return new Promise(function(resolve, reject) {
-	      var request
-	      if (Request.prototype.isPrototypeOf(input) && !init) {
-	        request = input
-	      } else {
-	        request = new Request(input, init)
-	      }
-
-	      var xhr = new XMLHttpRequest()
-
-	      function responseURL() {
-	        if ('responseURL' in xhr) {
-	          return xhr.responseURL
-	        }
-
-	        // Avoid security warnings on getResponseHeader when not allowed by CORS
-	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-	          return xhr.getResponseHeader('X-Request-URL')
-	        }
-
-	        return
-	      }
-
-	      xhr.onload = function() {
-	        var options = {
-	          status: xhr.status,
-	          statusText: xhr.statusText,
-	          headers: headers(xhr),
-	          url: responseURL()
-	        }
-	        var body = 'response' in xhr ? xhr.response : xhr.responseText
-	        resolve(new Response(body, options))
-	      }
-
-	      xhr.onerror = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-
-	      xhr.ontimeout = function() {
-	        reject(new TypeError('Network request failed'))
-	      }
-
-	      xhr.open(request.method, request.url, true)
-
-	      if (request.credentials === 'include') {
-	        xhr.withCredentials = true
-	      }
-
-	      if ('responseType' in xhr && support.blob) {
-	        xhr.responseType = 'blob'
-	      }
-
-	      request.headers.forEach(function(value, name) {
-	        xhr.setRequestHeader(name, value)
-	      })
-
-	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
-	    })
-	  }
-	  self.fetch.polyfill = true
-	})(typeof self !== 'undefined' ? self : this);
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// resolves . and .. elements in a path array with directory names there
-	// must be no slashes, empty elements, or device names (c:\) in the array
-	// (so also no leading and trailing slashes - it does not distinguish
-	// relative and absolute paths)
-	function normalizeArray(parts, allowAboveRoot) {
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = parts.length - 1; i >= 0; i--) {
-	    var last = parts[i];
-	    if (last === '.') {
-	      parts.splice(i, 1);
-	    } else if (last === '..') {
-	      parts.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      parts.splice(i, 1);
-	      up--;
-	    }
-	  }
-
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (allowAboveRoot) {
-	    for (; up--; up) {
-	      parts.unshift('..');
-	    }
-	  }
-
-	  return parts;
-	}
-
-	// Split a filename into [root, dir, basename, ext], unix version
-	// 'root' is just a slash, or nothing.
-	var splitPathRe =
-	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-	var splitPath = function(filename) {
-	  return splitPathRe.exec(filename).slice(1);
-	};
-
-	// path.resolve([from ...], to)
-	// posix version
-	exports.resolve = function() {
-	  var resolvedPath = '',
-	      resolvedAbsolute = false;
-
-	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-	    var path = (i >= 0) ? arguments[i] : process.cwd();
-
-	    // Skip empty and invalid entries
-	    if (typeof path !== 'string') {
-	      throw new TypeError('Arguments to path.resolve must be strings');
-	    } else if (!path) {
-	      continue;
-	    }
-
-	    resolvedPath = path + '/' + resolvedPath;
-	    resolvedAbsolute = path.charAt(0) === '/';
-	  }
-
-	  // At this point the path should be resolved to a full absolute path, but
-	  // handle relative paths to be safe (might happen when process.cwd() fails)
-
-	  // Normalize the path
-	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-	    return !!p;
-	  }), !resolvedAbsolute).join('/');
-
-	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-	};
-
-	// path.normalize(path)
-	// posix version
-	exports.normalize = function(path) {
-	  var isAbsolute = exports.isAbsolute(path),
-	      trailingSlash = substr(path, -1) === '/';
-
-	  // Normalize the path
-	  path = normalizeArray(filter(path.split('/'), function(p) {
-	    return !!p;
-	  }), !isAbsolute).join('/');
-
-	  if (!path && !isAbsolute) {
-	    path = '.';
-	  }
-	  if (path && trailingSlash) {
-	    path += '/';
-	  }
-
-	  return (isAbsolute ? '/' : '') + path;
-	};
-
-	// posix version
-	exports.isAbsolute = function(path) {
-	  return path.charAt(0) === '/';
-	};
-
-	// posix version
-	exports.join = function() {
-	  var paths = Array.prototype.slice.call(arguments, 0);
-	  return exports.normalize(filter(paths, function(p, index) {
-	    if (typeof p !== 'string') {
-	      throw new TypeError('Arguments to path.join must be strings');
-	    }
-	    return p;
-	  }).join('/'));
-	};
-
-
-	// path.relative(from, to)
-	// posix version
-	exports.relative = function(from, to) {
-	  from = exports.resolve(from).substr(1);
-	  to = exports.resolve(to).substr(1);
-
-	  function trim(arr) {
-	    var start = 0;
-	    for (; start < arr.length; start++) {
-	      if (arr[start] !== '') break;
-	    }
-
-	    var end = arr.length - 1;
-	    for (; end >= 0; end--) {
-	      if (arr[end] !== '') break;
-	    }
-
-	    if (start > end) return [];
-	    return arr.slice(start, end - start + 1);
-	  }
-
-	  var fromParts = trim(from.split('/'));
-	  var toParts = trim(to.split('/'));
-
-	  var length = Math.min(fromParts.length, toParts.length);
-	  var samePartsLength = length;
-	  for (var i = 0; i < length; i++) {
-	    if (fromParts[i] !== toParts[i]) {
-	      samePartsLength = i;
-	      break;
-	    }
-	  }
-
-	  var outputParts = [];
-	  for (var i = samePartsLength; i < fromParts.length; i++) {
-	    outputParts.push('..');
-	  }
-
-	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-	  return outputParts.join('/');
-	};
-
-	exports.sep = '/';
-	exports.delimiter = ':';
-
-	exports.dirname = function(path) {
-	  var result = splitPath(path),
-	      root = result[0],
-	      dir = result[1];
-
-	  if (!root && !dir) {
-	    // No dirname whatsoever
-	    return '.';
-	  }
-
-	  if (dir) {
-	    // It has a dirname, strip trailing slash
-	    dir = dir.substr(0, dir.length - 1);
-	  }
-
-	  return root + dir;
-	};
-
-
-	exports.basename = function(path, ext) {
-	  var f = splitPath(path)[2];
-	  // TODO: make this comparison case-insensitive on windows?
-	  if (ext && f.substr(-1 * ext.length) === ext) {
-	    f = f.substr(0, f.length - ext.length);
-	  }
-	  return f;
-	};
-
-
-	exports.extname = function(path) {
-	  return splitPath(path)[3];
-	};
-
-	function filter (xs, f) {
-	    if (xs.filter) return xs.filter(f);
-	    var res = [];
-	    for (var i = 0; i < xs.length; i++) {
-	        if (f(xs[i], i, xs)) res.push(xs[i]);
-	    }
-	    return res;
-	}
-
-	// String.prototype.substr - negative index don't work in IE8
-	var substr = 'ab'.substr(-1) === 'b'
-	    ? function (str, start, len) { return str.substr(start, len) }
-	    : function (str, start, len) {
-	        if (start < 0) start = str.length + start;
-	        return str.substr(start, len);
-	    }
-	;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function () {
-	            throw new Error('setTimeout is not defined');
-	        }
-	    }
-	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function () {
-	            throw new Error('clearTimeout is not defined');
-	        }
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	/**
-	 * 常见事件名称的定义。
-	 */
-	exports.WHEEL = "qtk-wheel";
-	exports.KEYUP = "qtk-keyup";
-	exports.KEYDOWN = "qtk-keydown";
-	exports.CONTEXT_MENU = "qtk-context-menu";
-	exports.POINTER_DOWN = "qtk-pointer-down";
-	exports.POINTER_MOVE = "qtk-pointer-move";
-	exports.POINTER_UP = "qtk-pointer-up";
-	exports.POINTER_OUT = "qtk-pointer-out";
-	exports.POINTER_OVER = "qtk-pointer-over";
-	exports.POINTER_ENTER = "qtk-pointer-enter";
-	exports.POINTER_LEAVE = "qtk-pointer-leave";
-	exports.CLICK = "qtk-click";
-	exports.DBLCLICK = "qtk-dblclick";
-	exports.CHANGE = "change";
-	exports.PROGRESS = "progress";
-	exports.CHANGING = "changing";
-	exports.PROP_CHANGE = "prop-change";
-	exports.PROP_DELETE = "prop-delete";
-	exports.DISPOSE = "dispose";
-	exports.RUN = "run";
-	exports.QUIT = "quit";
-	exports.SHOW = "show";
-	exports.HIDE = "hide";
-	exports.MOVE = "move";
-	exports.MOVING = "moving";
-	exports.CHOOSE = "choose";
-	exports.OPEN = "open";
-	exports.INIT = "init";
-	exports.FOCUS = "focus";
-	exports.BLUR = "blur";
-	exports.DEINIT = "deinit";
-	exports.CLOSE = "close";
-	exports.RESIZE = "resize";
-	exports.READY = "ready";
-	exports.TICK = "tick";
-	exports.PRETICK = "pretick";
-	exports.POSTTICK = "posttick";
-	exports.LOAD = "load";
-	exports.EXPAND = "expand";
-	exports.COLLAPSE = "collapse";
-	exports.BEFORE_DRAW = "before-draw";
-	exports.AFTER_DRAW = "after-draw";
-	exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
-	exports.AFTER_APPLY_TRANSFORM = "after-apply-transform";
-	exports.SCROLL = "scroll";
-	exports.SCROLL_DONE = "scroll-done";
-	exports.DRAG = "drag";
-	exports.DROP = "drop";
-	exports.DRAGEND = "dragend";
-	exports.DRAGENTER = "dragenter";
-	exports.DRAGEXIT = "dragexit";
-	exports.DRAGLEAVE = "dragleave";
-	exports.DRAGOVER = "dragover";
-	exports.DRAGSTART = "dragstart";
-	var Event = (function () {
-	    function Event() {
-	    }
-	    Event.prototype.init = function (type, detail) {
-	        this._type = type;
-	        this._target = null;
-	        this._propagationStopped = false;
-	        return this;
-	    };
-	    Object.defineProperty(Event.prototype, "propagationStopped", {
-	        get: function () {
-	            return this._propagationStopped;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Event.prototype.stopPropagation = function () {
-	        this._propagationStopped = true;
-	    };
-	    Object.defineProperty(Event.prototype, "type", {
-	        get: function () {
-	            return this._type;
-	        },
-	        set: function (value) {
-	            this._type = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Event.prototype, "target", {
-	        get: function () {
-	            return this._target;
-	        },
-	        set: function (value) {
-	            this._target = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Event.prototype.dispose = function () {
-	    };
-	    return Event;
-	}());
-	exports.Event = Event;
-	;
-	var AnyEvent = (function (_super) {
-	    __extends(AnyEvent, _super);
-	    function AnyEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    AnyEvent.prototype.init = function (type, payload) {
-	        _super.prototype.init.call(this, type);
-	        this.payload = payload;
-	        return this;
-	    };
-	    AnyEvent.create = function (type, payload) {
-	        var e = new AnyEvent();
-	        return e.init(type, payload);
-	    };
-	    return AnyEvent;
-	}(Event));
-	exports.AnyEvent = AnyEvent;
-	;
-	var InputEvent = (function (_super) {
-	    __extends(InputEvent, _super);
-	    function InputEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    InputEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type);
-	        this.altKey = detail.altKey;
-	        this.ctrlKey = detail.ctrlKey;
-	        this.shiftKey = detail.shiftKey;
-	        this.commandKey = detail.commandKey;
-	        return this;
-	    };
-	    return InputEvent;
-	}(Event));
-	exports.InputEvent = InputEvent;
-	;
-	var PointerEvent = (function (_super) {
-	    __extends(PointerEvent, _super);
-	    function PointerEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    PointerEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type, detail);
-	        this.id = detail.id;
-	        this.x = detail.x;
-	        this.y = detail.y;
-	        this.timeStamp = detail.timeStamp;
-	        this.pointerDown = detail.pointerDown;
-	        this.pointerDownX = detail.pointerDownX;
-	        this.pointerDownY = detail.pointerDownY;
-	        this.pointerDownTime = detail.pointerDownTime;
-	        return this;
-	    };
-	    PointerEvent.create = function (type, detail) {
-	        var e = new PointerEvent();
-	        return e.init(type, detail);
-	    };
-	    return PointerEvent;
-	}(InputEvent));
-	exports.PointerEvent = PointerEvent;
-	var WheelEvent = (function (_super) {
-	    __extends(WheelEvent, _super);
-	    function WheelEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    WheelEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type, detail);
-	        this.delta = detail.delta;
-	        this.timeStamp = detail.timeStamp;
-	        return this;
-	    };
-	    WheelEvent.create = function (detail) {
-	        var e = new WheelEvent();
-	        return e.init(exports.WHEEL, detail);
-	    };
-	    return WheelEvent;
-	}(InputEvent));
-	exports.WheelEvent = WheelEvent;
-	var KeyEvent = (function (_super) {
-	    __extends(KeyEvent, _super);
-	    function KeyEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    KeyEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type, detail);
-	        this.keyCode = detail.keyCode;
-	        this.timeStamp = detail.timeStamp;
-	        return this;
-	    };
-	    KeyEvent.create = function (type, detail) {
-	        var e = new KeyEvent();
-	        return e.init(type, detail);
-	    };
-	    return KeyEvent;
-	}(InputEvent));
-	exports.KeyEvent = KeyEvent;
-	var TickEvent = (function (_super) {
-	    __extends(TickEvent, _super);
-	    function TickEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    TickEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type);
-	        this.fps = detail.fps;
-	        this.time = detail.time;
-	        this.deltaTime = detail.deltaTime;
-	        return this;
-	    };
-	    TickEvent.create = function (type) {
-	        var e = new TickEvent();
-	        return e.init(type, {});
-	    };
-	    return TickEvent;
-	}(Event));
-	exports.TickEvent = TickEvent;
-	;
-	var ChangeEvent = (function (_super) {
-	    __extends(ChangeEvent, _super);
-	    function ChangeEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    ChangeEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type);
-	        this.value = detail.newValue || detail.value;
-	        this.oldValue = detail.oldValue;
-	        this.newValue = detail.newValue;
-	        return this;
-	    };
-	    ChangeEvent.create = function () {
-	        var e = new ChangeEvent();
-	        return e;
-	    };
-	    return ChangeEvent;
-	}(Event));
-	exports.ChangeEvent = ChangeEvent;
-	;
-	var PropChangeEvent = (function (_super) {
-	    __extends(PropChangeEvent, _super);
-	    function PropChangeEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    PropChangeEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type, detail);
-	        this.prop = detail.prop;
-	        this.trigger = detail.trigger;
-	        return this;
-	    };
-	    PropChangeEvent.create = function () {
-	        var e = new PropChangeEvent();
-	        return e;
-	    };
-	    return PropChangeEvent;
-	}(ChangeEvent));
-	exports.PropChangeEvent = PropChangeEvent;
-	;
-	var DataTransfer = (function () {
-	    function DataTransfer() {
-	        this.data = {};
-	        this.dragImage = null;
-	        this.dropEffect = "move";
-	    }
-	    DataTransfer.prototype.clearData = function (format) {
-	        if (format) {
-	            delete this.data[format];
-	        }
-	        else {
-	            this.data = {};
-	        }
-	    };
-	    DataTransfer.prototype.getData = function (format) {
-	        return this.data[format];
-	    };
-	    DataTransfer.prototype.setData = function (format, data) {
-	        this.data[format] = data;
-	    };
-	    DataTransfer.prototype.setDragImage = function (dragImage) {
-	        this.dragImage = dragImage;
-	    };
-	    return DataTransfer;
-	}());
-	exports.DataTransfer = DataTransfer;
-	;
-	var DragEvent = (function (_super) {
-	    __extends(DragEvent, _super);
-	    function DragEvent() {
-	        _super.call(this);
-	        this.dataTransfer = new DataTransfer();
-	    }
-	    DragEvent.prototype.init = function (type, detail) {
-	        _super.prototype.init.call(this, type, detail);
-	        return this;
-	    };
-	    Object.defineProperty(DragEvent, "isDragging", {
-	        get: function () {
-	            return DragEvent._isDragging;
-	        },
-	        set: function (isDragging) {
-	            DragEvent._isDragging = isDragging;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    DragEvent.get = function (type) {
-	        var e = DragEvent.event;
-	        return e.init(type);
-	    };
-	    DragEvent._isDragging = false;
-	    DragEvent.event = new DragEvent();
-	    return DragEvent;
-	}(Event));
-	exports.DragEvent = DragEvent;
-	;
-	var DrawEvent = (function (_super) {
-	    __extends(DrawEvent, _super);
-	    function DrawEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    DrawEvent.prototype.reset = function (type, ctx, widget) {
-	        _super.prototype.init.call(this, type);
-	        this.ctx = ctx;
-	        this.widget = widget;
-	        return this;
-	    };
-	    DrawEvent.get = function () {
-	        return DrawEvent.event;
-	    };
-	    DrawEvent.event = new DrawEvent();
-	    return DrawEvent;
-	}(Event));
-	exports.DrawEvent = DrawEvent;
-	;
-	var ApplyTransformEvent = (function (_super) {
-	    __extends(ApplyTransformEvent, _super);
-	    function ApplyTransformEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    ApplyTransformEvent.prototype.reset = function (type, ctx, widget) {
-	        _super.prototype.init.call(this, type);
-	        this.ctx = ctx;
-	        this.widget = widget;
-	        return this;
-	    };
-	    ApplyTransformEvent.get = function () {
-	        return ApplyTransformEvent.event;
-	    };
-	    ApplyTransformEvent.event = new ApplyTransformEvent();
-	    return ApplyTransformEvent;
-	}(Event));
-	exports.ApplyTransformEvent = ApplyTransformEvent;
-	;
-	var ScrollEvent = (function (_super) {
-	    __extends(ScrollEvent, _super);
-	    function ScrollEvent() {
-	        _super.apply(this, arguments);
-	    }
-	    ScrollEvent.prototype.reset = function (type, widget, offsetX, offsetY) {
-	        _super.prototype.init.call(this, type);
-	        this.widget = widget;
-	        this.offsetX = offsetX;
-	        this.offsetY = offsetY;
-	        return this;
-	    };
-	    ScrollEvent.create = function () {
-	        return new ScrollEvent();
-	    };
-	    return ScrollEvent;
-	}(Event));
-	exports.ScrollEvent = ScrollEvent;
-	;
-	function createAnyEvent(type, payload) {
-	    return AnyEvent.create(type, payload);
-	}
-	exports.createAnyEvent = createAnyEvent;
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 	"use strict";
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -1777,769 +330,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var EventEmitter = __webpack_require__(9);
-	var EmitterImpl = (function (_super) {
-	    __extends(EmitterImpl, _super);
-	    function EmitterImpl() {
-	        _super.call(this);
-	    }
-	    return EmitterImpl;
-	}(EventEmitter));
-	function toCaptureEventName(name) {
-	    return name + ".capture";
-	}
-	/**
-	 * 事件分发器。
-	 */
-	var Emitter = (function () {
-	    function Emitter() {
-	        this.emitter = new EmitterImpl();
-	    }
-	    /***
-	     * 注册事件处理函数。
-	     * @param type 事件的名称。
-	     * @param callback 回调函数。
-	     * @param useCapture 是否注册为capture阶段的处理函数。
-	     */
-	    Emitter.prototype.on = function (type, callback, useCapture) {
-	        this.addEventListener(type, callback, useCapture);
-	    };
-	    /***
-	     * 注册事件处理函数(只执行一次)。
-	     * @param type 事件的名称。
-	     * @param callback 回调函数。
-	     * @param useCapture 是否注册为capture阶段的处理函数。
-	     */
-	    Emitter.prototype.once = function (type, callback) {
-	        this.emitter.once(type, callback, this);
-	    };
-	    /***
-	     * 注消事件处理函数。
-	     * @param type 事件的名称。
-	     * @param callback 回调函数。
-	     * @param useCapture 是否注消capture阶段的处理函数。
-	     */
-	    Emitter.prototype.off = function (type, callback, useCapture) {
-	        this.removeEventListener(type, callback, useCapture);
-	    };
-	    /***
-	     * 注册事件处理函数。
-	     * @param type 事件的名称。
-	     * @param callback 回调函数。
-	     * @param useCapture 是否注册为capture阶段的处理函数。
-	     */
-	    Emitter.prototype.addEventListener = function (type, callback, useCapture) {
-	        if (useCapture) {
-	            this.emitter.addListener(toCaptureEventName(type), callback, this);
-	        }
-	        else {
-	            this.emitter.addListener(type, callback, this);
-	        }
-	    };
-	    /***
-	     * 注消事件处理函数。
-	     * @param type 事件的名称。
-	     * @param callback 回调函数。
-	     * @param useCapture 是否注消capture阶段的处理函数。
-	     */
-	    Emitter.prototype.removeEventListener = function (type, callback, useCapture) {
-	        if (useCapture) {
-	            this.emitter.removeListener(toCaptureEventName(type), callback, this);
-	        }
-	        else {
-	            this.emitter.removeListener(type, callback, this);
-	        }
-	    };
-	    /***
-	     * 分发异步事件。
-	     * @param evt 事件。
-	     * @param useCapture 是否触发capture阶段的处理函数。
-	     */
-	    Emitter.prototype.dispatchEventAsync = function (evt, useCapture) {
-	        var _this = this;
-	        setTimeout(function (e) {
-	            _this.dispatchEvent(evt, useCapture);
-	        }, 0);
-	    };
-	    /***
-	     * 分发事件。
-	     * @param evt 事件。
-	     * @param useCapture 是否触发capture阶段的处理函数。
-	     */
-	    Emitter.prototype.dispatchEvent = function (evt, useCapture) {
-	        if (evt.propagationStopped) {
-	            console.log("evt.propagationStopped = true;");
-	            return;
-	        }
-	        var emitter = this.emitter;
-	        if (useCapture) {
-	            emitter.emit(toCaptureEventName(evt.type), evt);
-	        }
-	        else {
-	            emitter.emit(evt.type, evt);
-	        }
-	    };
-	    Emitter.prototype.removeAllListeners = function (event) {
-	        this.emitter.removeAllListeners(event);
-	    };
-	    return Emitter;
-	}());
-	exports.Emitter = Emitter;
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var has = Object.prototype.hasOwnProperty;
-
-	//
-	// We store our EE objects in a plain object whose properties are event names.
-	// If `Object.create(null)` is not supported we prefix the event names with a
-	// `~` to make sure that the built-in object properties are not overridden or
-	// used as an attack vector.
-	// We also assume that `Object.create(null)` is available when the event name
-	// is an ES6 Symbol.
-	//
-	var prefix = typeof Object.create !== 'function' ? '~' : false;
-
-	/**
-	 * Representation of a single EventEmitter function.
-	 *
-	 * @param {Function} fn Event handler to be called.
-	 * @param {Mixed} context Context for function execution.
-	 * @param {Boolean} [once=false] Only emit once
-	 * @api private
-	 */
-	function EE(fn, context, once) {
-	  this.fn = fn;
-	  this.context = context;
-	  this.once = once || false;
-	}
-
-	/**
-	 * Minimal EventEmitter interface that is molded against the Node.js
-	 * EventEmitter interface.
-	 *
-	 * @constructor
-	 * @api public
-	 */
-	function EventEmitter() { /* Nothing to set */ }
-
-	/**
-	 * Hold the assigned EventEmitters by name.
-	 *
-	 * @type {Object}
-	 * @private
-	 */
-	EventEmitter.prototype._events = undefined;
-
-	/**
-	 * Return an array listing the events for which the emitter has registered
-	 * listeners.
-	 *
-	 * @returns {Array}
-	 * @api public
-	 */
-	EventEmitter.prototype.eventNames = function eventNames() {
-	  var events = this._events
-	    , names = []
-	    , name;
-
-	  if (!events) return names;
-
-	  for (name in events) {
-	    if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
-	  }
-
-	  if (Object.getOwnPropertySymbols) {
-	    return names.concat(Object.getOwnPropertySymbols(events));
-	  }
-
-	  return names;
-	};
-
-	/**
-	 * Return a list of assigned event listeners.
-	 *
-	 * @param {String} event The events that should be listed.
-	 * @param {Boolean} exists We only need to know if there are listeners.
-	 * @returns {Array|Boolean}
-	 * @api public
-	 */
-	EventEmitter.prototype.listeners = function listeners(event, exists) {
-	  var evt = prefix ? prefix + event : event
-	    , available = this._events && this._events[evt];
-
-	  if (exists) return !!available;
-	  if (!available) return [];
-	  if (available.fn) return [available.fn];
-
-	  for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
-	    ee[i] = available[i].fn;
-	  }
-
-	  return ee;
-	};
-
-	/**
-	 * Emit an event to all registered event listeners.
-	 *
-	 * @param {String} event The name of the event.
-	 * @returns {Boolean} Indication if we've emitted an event.
-	 * @api public
-	 */
-	EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
-	  var evt = prefix ? prefix + event : event;
-
-	  if (!this._events || !this._events[evt]) return false;
-
-	  var listeners = this._events[evt]
-	    , len = arguments.length
-	    , args
-	    , i;
-
-	  if ('function' === typeof listeners.fn) {
-	    if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
-
-	    switch (len) {
-	      case 1: return listeners.fn.call(listeners.context), true;
-	      case 2: return listeners.fn.call(listeners.context, a1), true;
-	      case 3: return listeners.fn.call(listeners.context, a1, a2), true;
-	      case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
-	      case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
-	      case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
-	    }
-
-	    for (i = 1, args = new Array(len -1); i < len; i++) {
-	      args[i - 1] = arguments[i];
-	    }
-
-	    listeners.fn.apply(listeners.context, args);
-	  } else {
-	    var length = listeners.length
-	      , j;
-
-	    for (i = 0; i < length; i++) {
-	      if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
-
-	      switch (len) {
-	        case 1: listeners[i].fn.call(listeners[i].context); break;
-	        case 2: listeners[i].fn.call(listeners[i].context, a1); break;
-	        case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
-	        default:
-	          if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
-	            args[j - 1] = arguments[j];
-	          }
-
-	          listeners[i].fn.apply(listeners[i].context, args);
-	      }
-	    }
-	  }
-
-	  return true;
-	};
-
-	/**
-	 * Register a new EventListener for the given event.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {Function} fn Callback function.
-	 * @param {Mixed} [context=this] The context of the function.
-	 * @api public
-	 */
-	EventEmitter.prototype.on = function on(event, fn, context) {
-	  var listener = new EE(fn, context || this)
-	    , evt = prefix ? prefix + event : event;
-
-	  if (!this._events) this._events = prefix ? {} : Object.create(null);
-	  if (!this._events[evt]) this._events[evt] = listener;
-	  else {
-	    if (!this._events[evt].fn) this._events[evt].push(listener);
-	    else this._events[evt] = [
-	      this._events[evt], listener
-	    ];
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Add an EventListener that's only called once.
-	 *
-	 * @param {String} event Name of the event.
-	 * @param {Function} fn Callback function.
-	 * @param {Mixed} [context=this] The context of the function.
-	 * @api public
-	 */
-	EventEmitter.prototype.once = function once(event, fn, context) {
-	  var listener = new EE(fn, context || this, true)
-	    , evt = prefix ? prefix + event : event;
-
-	  if (!this._events) this._events = prefix ? {} : Object.create(null);
-	  if (!this._events[evt]) this._events[evt] = listener;
-	  else {
-	    if (!this._events[evt].fn) this._events[evt].push(listener);
-	    else this._events[evt] = [
-	      this._events[evt], listener
-	    ];
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Remove event listeners.
-	 *
-	 * @param {String} event The event we want to remove.
-	 * @param {Function} fn The listener that we need to find.
-	 * @param {Mixed} context Only remove listeners matching this context.
-	 * @param {Boolean} once Only remove once listeners.
-	 * @api public
-	 */
-	EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
-	  var evt = prefix ? prefix + event : event;
-
-	  if (!this._events || !this._events[evt]) return this;
-
-	  var listeners = this._events[evt]
-	    , events = [];
-
-	  if (fn) {
-	    if (listeners.fn) {
-	      if (
-	           listeners.fn !== fn
-	        || (once && !listeners.once)
-	        || (context && listeners.context !== context)
-	      ) {
-	        events.push(listeners);
-	      }
-	    } else {
-	      for (var i = 0, length = listeners.length; i < length; i++) {
-	        if (
-	             listeners[i].fn !== fn
-	          || (once && !listeners[i].once)
-	          || (context && listeners[i].context !== context)
-	        ) {
-	          events.push(listeners[i]);
-	        }
-	      }
-	    }
-	  }
-
-	  //
-	  // Reset the array, or remove it completely if we have no more listeners.
-	  //
-	  if (events.length) {
-	    this._events[evt] = events.length === 1 ? events[0] : events;
-	  } else {
-	    delete this._events[evt];
-	  }
-
-	  return this;
-	};
-
-	/**
-	 * Remove all listeners or only the listeners for the specified event.
-	 *
-	 * @param {String} event The event want to remove all listeners for.
-	 * @api public
-	 */
-	EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
-	  if (!this._events) return this;
-
-	  if (event) delete this._events[prefix ? prefix + event : event];
-	  else this._events = prefix ? {} : Object.create(null);
-
-	  return this;
-	};
-
-	//
-	// Alias methods names because people roll like that.
-	//
-	EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
-	EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-
-	//
-	// This function doesn't apply anymore.
-	//
-	EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
-	  return this;
-	};
-
-	//
-	// Expose the prefix.
-	//
-	EventEmitter.prefixed = prefix;
-
-	//
-	// Expose the module.
-	//
-	if (true) {
-	  module.exports = EventEmitter;
-	}
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Events = __webpack_require__(7);
-	var emitter_1 = __webpack_require__(8);
-	/**
-	 * 负责渲染UI的主循环。为了省电，只有在调用requestRedraw之后，才会触发下一次渲染循环。
-	 * 每个渲染循环分为三个阶段：
-	 *
-	 * *.predraw 绘制前做一些工作，通常用于动画改变对象的属性。
-	 *
-	 * *.draw 绘制阶段。
-	 *
-	 * *.postdraw 绘制后一些收尾工作，如果绘制阶段只是生成命令队列，可以在此阶段提交。
-	 *
-	 */
-	var MainLoop = (function (_super) {
-	    __extends(MainLoop, _super);
-	    function MainLoop() {
-	        _super.call(this);
-	        this.pendingRedraw = 0;
-	        this.predrawEvent = Events.TickEvent.create(Events.PRETICK);
-	        this.drawEvent = Events.TickEvent.create(Events.TICK);
-	        this.postdrawEvent = Events.TickEvent.create(Events.POSTTICK);
-	    }
-	    MainLoop.prototype.requestRedraw = function () {
-	        var _this = this;
-	        if (!this.pendingRedraw++) {
-	            requestAnimationFrame(function (evt) {
-	                _this.exec();
-	            });
-	        }
-	    };
-	    MainLoop.prototype.exec = function () {
-	        var fps = 0;
-	        var time = Date.now();
-	        var deltaTime = performance.now();
-	        var detail = { fps: fps, time: time, deltaTime: deltaTime };
-	        this.drawEvent.init(Events.PRETICK, detail);
-	        this.predrawEvent.init(Events.TICK, detail);
-	        this.postdrawEvent.init(Events.POSTTICK, detail);
-	        this.pendingRedraw = 0;
-	        this.dispatchEvent(this.predrawEvent);
-	        this.dispatchEvent(this.drawEvent);
-	        this.dispatchEvent(this.postdrawEvent);
-	    };
-	    MainLoop.create = function () {
-	        return new MainLoop();
-	    };
-	    return MainLoop;
-	}(emitter_1.Emitter));
-	exports.MainLoop = MainLoop;
-
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var point_1 = __webpack_require__(1);
-	/**
-	 * 2维矩阵变换
-	 */
-	var Matrix = (function () {
-	    function Matrix() {
-	        this.data = new Float32Array(6);
-	        this.identity();
-	    }
-	    Matrix.prototype.identity = function () {
-	        var data = this.data;
-	        data[0] = 1;
-	        data[1] = 0;
-	        data[2] = 0;
-	        data[3] = 1;
-	        data[4] = 0;
-	        data[5] = 0;
-	        return this;
-	    };
-	    Matrix.prototype.clone = function () {
-	        var other = new Matrix();
-	        var data = other.data;
-	        var src = this.data;
-	        data[0] = src[0];
-	        data[1] = src[1];
-	        data[2] = src[2];
-	        data[3] = src[3];
-	        data[4] = src[4];
-	        data[5] = src[5];
-	        return other;
-	    };
-	    Matrix.prototype.set = function (a, b, c, d, tx, ty) {
-	        var data = this.data;
-	        data[0] = a;
-	        data[1] = b;
-	        data[2] = c;
-	        data[3] = d;
-	        data[4] = tx;
-	        data[5] = ty;
-	        return this;
-	    };
-	    Matrix.prototype.rotate = function (rad) {
-	        var a = this.data;
-	        var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], s = Math.sin(rad), c = Math.cos(rad);
-	        a[0] = a0 * c + a2 * s;
-	        a[1] = a1 * c + a3 * s;
-	        a[2] = a0 * -s + a2 * c;
-	        a[3] = a1 * -s + a3 * c;
-	        return this;
-	    };
-	    Matrix.prototype.scale = function (sx, sy) {
-	        var a = this.data;
-	        a[0] *= sx;
-	        a[1] *= sx;
-	        a[2] *= sy;
-	        a[3] *= sy;
-	        return this;
-	    };
-	    Matrix.prototype.translate = function (dx, dy) {
-	        var a = this.data;
-	        var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
-	        a[4] = a0 * dx + a2 * dy + a4;
-	        a[5] = a1 * dx + a3 * dy + a5;
-	        return this;
-	    };
-	    ;
-	    Matrix.prototype.transformPoint = function (x, y, out) {
-	        var p = out || point_1.Point.create();
-	        var a = this.data;
-	        p.x = a[0] * x + a[2] * y + a[4];
-	        p.y = a[1] * x + a[3] * y + a[5];
-	        return p;
-	    };
-	    ;
-	    Matrix.prototype.equal = function (other) {
-	        var a = this.data;
-	        var b = other.data;
-	        return a[0] === b[0]
-	            && a[1] === b[1]
-	            && a[2] === b[2]
-	            && a[3] === b[3]
-	            && a[4] === b[4]
-	            && a[5] === b[5];
-	    };
-	    Matrix.prototype.invert = function () {
-	        var a = this.data;
-	        var aa = a[0], ab = a[1], ac = a[2], ad = a[3], atx = a[4], aty = a[5];
-	        var det = aa * ad - ab * ac;
-	        if (!det) {
-	            return null;
-	        }
-	        det = 1.0 / det;
-	        var newMatrix = Matrix.create();
-	        var out = newMatrix.data;
-	        out[0] = ad * det;
-	        out[1] = -ab * det;
-	        out[2] = -ac * det;
-	        out[3] = aa * det;
-	        out[4] = (ac * aty - ad * atx) * det;
-	        out[5] = (ab * atx - aa * aty) * det;
-	        return newMatrix;
-	    };
-	    ;
-	    Matrix.prototype.toString = function () {
-	        var ret = Array.prototype.map.call(this.data, function (iter) {
-	            return iter.toFixed(2);
-	        });
-	        return JSON.stringify(ret);
-	    };
-	    Matrix.prototype.dispose = function () {
-	        this.identity();
-	        Matrix.cache.push(this);
-	    };
-	    Matrix.create = function () {
-	        if (Matrix.cache.length) {
-	            return Matrix.cache.pop();
-	        }
-	        return new Matrix();
-	    };
-	    Matrix.cache = [];
-	    return Matrix;
-	}());
-	exports.Matrix = Matrix;
-	;
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var matrix_1 = __webpack_require__(11);
-	var MatrixStack = (function () {
-	    function MatrixStack() {
-	        this.stack = [];
-	        this.matrix = new matrix_1.Matrix();
-	    }
-	    MatrixStack.prototype.save = function () {
-	        this.stack.push(this.matrix.clone());
-	        return this;
-	    };
-	    MatrixStack.prototype.restore = function () {
-	        if (this.stack.length) {
-	            this.matrix = this.stack.pop();
-	        }
-	        return this;
-	    };
-	    MatrixStack.prototype.identity = function () {
-	        this.matrix.identity();
-	        return this;
-	    };
-	    MatrixStack.prototype.set = function (a, b, c, d, tx, ty) {
-	        this.matrix.set(a, b, c, d, tx, ty);
-	        return this;
-	    };
-	    MatrixStack.prototype.rotate = function (rad) {
-	        this.matrix.rotate(rad);
-	        return this;
-	    };
-	    MatrixStack.prototype.scale = function (sx, sy) {
-	        this.matrix.scale(sx, sy);
-	        return this;
-	    };
-	    MatrixStack.prototype.translate = function (dx, dy) {
-	        this.matrix.translate(dx, dy);
-	    };
-	    MatrixStack.prototype.transformPoint = function (x, y, out) {
-	        return this.matrix.transformPoint(x, y, out);
-	    };
-	    MatrixStack.prototype.invert = function () {
-	        return this.matrix.invert();
-	    };
-	    MatrixStack.prototype.matrixToString = function () {
-	        return this.matrix.toString();
-	    };
-	    MatrixStack.create = function () {
-	        return new MatrixStack();
-	    };
-	    return MatrixStack;
-	}());
-	exports.MatrixStack = MatrixStack;
-	;
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var style_1 = __webpack_require__(14);
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 图片控件。
-	 */
-	var Image = (function (_super) {
-	    __extends(Image, _super);
-	    function Image() {
-	        _super.call(this, Image.TYPE);
-	    }
-	    Object.defineProperty(Image.prototype, "image", {
-	        get: function () {
-	            return this._style.backGroundImage;
-	        },
-	        set: function (image) {
-	            this._style.backGroundImage = image;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Image.prototype, "drawType", {
-	        get: function () {
-	            return this._style.backGroundImageDrawType;
-	        },
-	        set: function (drawType) {
-	            this._style.backGroundImageDrawType = drawType;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Image.prototype, "value", {
-	        get: function () {
-	            var image = this._style.backGroundImage;
-	            return image ? image.src : null;
-	        },
-	        set: function (url) {
-	            var _this = this;
-	            this._style.backGroundImage = image_tile_1.ImageTile.create(url, function (evt) {
-	                _this.requestRedraw();
-	            });
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Image.prototype.onToJson = function (json) {
-	        if (this._style) {
-	            json.style = this._style.toJson();
-	        }
-	    };
-	    Image.prototype.onFromJson = function (json) {
-	        if (json.style) {
-	            this._style = style_1.Style.create(json.style);
-	        }
-	    };
-	    Image.prototype.setStyle = function (state, style) {
-	        this._style = style;
-	        return this;
-	    };
-	    Image.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        var style = style_1.Style.create();
-	        style.fontSize = 12;
-	        style.textColor = "Black";
-	        style.backGroundImageDrawType = image_tile_1.ImageDrawType.DEFAULT;
-	        this._style = style;
-	    };
-	    Image.prototype.getStyle = function () {
-	        return this._style;
-	    };
-	    Image.create = function (options) {
-	        return Image.recycleBin.create().reset(Image.TYPE, options);
-	    };
-	    Image.TYPE = "image";
-	    Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });
-	    return Image;
-	}(widget_1.Widget));
-	exports.Image = Image;
-	;
-	widget_factory_1.WidgetFactory.register(Image.TYPE, Image.create);
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var emitter_1 = __webpack_require__(8);
-	var Events = __webpack_require__(7);
-	var image_tile_1 = __webpack_require__(15);
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
+	var image_tile_1 = __webpack_require__(7);
 	/**
 	 * Style用来控制Widget的外观效果，如背景和字体等等。
 	 */
@@ -3035,7 +828,809 @@ var qtk =
 
 
 /***/ },
-/* 15 */
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var EventEmitter = __webpack_require__(5);
+	var EmitterImpl = (function (_super) {
+	    __extends(EmitterImpl, _super);
+	    function EmitterImpl() {
+	        _super.call(this);
+	    }
+	    return EmitterImpl;
+	}(EventEmitter));
+	function toCaptureEventName(name) {
+	    return name + ".capture";
+	}
+	/**
+	 * 事件分发器。
+	 */
+	var Emitter = (function () {
+	    function Emitter() {
+	        this.emitter = new EmitterImpl();
+	    }
+	    /***
+	     * 注册事件处理函数。
+	     * @param type 事件的名称。
+	     * @param callback 回调函数。
+	     * @param useCapture 是否注册为capture阶段的处理函数。
+	     */
+	    Emitter.prototype.on = function (type, callback, useCapture) {
+	        this.addEventListener(type, callback, useCapture);
+	    };
+	    /***
+	     * 注册事件处理函数(只执行一次)。
+	     * @param type 事件的名称。
+	     * @param callback 回调函数。
+	     * @param useCapture 是否注册为capture阶段的处理函数。
+	     */
+	    Emitter.prototype.once = function (type, callback) {
+	        this.emitter.once(type, callback, this);
+	    };
+	    /***
+	     * 注消事件处理函数。
+	     * @param type 事件的名称。
+	     * @param callback 回调函数。
+	     * @param useCapture 是否注消capture阶段的处理函数。
+	     */
+	    Emitter.prototype.off = function (type, callback, useCapture) {
+	        this.removeEventListener(type, callback, useCapture);
+	    };
+	    /***
+	     * 注册事件处理函数。
+	     * @param type 事件的名称。
+	     * @param callback 回调函数。
+	     * @param useCapture 是否注册为capture阶段的处理函数。
+	     */
+	    Emitter.prototype.addEventListener = function (type, callback, useCapture) {
+	        if (useCapture) {
+	            this.emitter.addListener(toCaptureEventName(type), callback, this);
+	        }
+	        else {
+	            this.emitter.addListener(type, callback, this);
+	        }
+	    };
+	    /***
+	     * 注消事件处理函数。
+	     * @param type 事件的名称。
+	     * @param callback 回调函数。
+	     * @param useCapture 是否注消capture阶段的处理函数。
+	     */
+	    Emitter.prototype.removeEventListener = function (type, callback, useCapture) {
+	        if (useCapture) {
+	            this.emitter.removeListener(toCaptureEventName(type), callback, this);
+	        }
+	        else {
+	            this.emitter.removeListener(type, callback, this);
+	        }
+	    };
+	    /***
+	     * 分发异步事件。
+	     * @param evt 事件。
+	     * @param useCapture 是否触发capture阶段的处理函数。
+	     */
+	    Emitter.prototype.dispatchEventAsync = function (evt, useCapture) {
+	        var _this = this;
+	        setTimeout(function (e) {
+	            _this.dispatchEvent(evt, useCapture);
+	        }, 0);
+	    };
+	    /***
+	     * 分发事件。
+	     * @param evt 事件。
+	     * @param useCapture 是否触发capture阶段的处理函数。
+	     */
+	    Emitter.prototype.dispatchEvent = function (evt, useCapture) {
+	        if (evt.propagationStopped) {
+	            console.log("evt.propagationStopped = true;");
+	            return;
+	        }
+	        var emitter = this.emitter;
+	        if (useCapture) {
+	            emitter.emit(toCaptureEventName(evt.type), evt);
+	        }
+	        else {
+	            emitter.emit(evt.type, evt);
+	        }
+	    };
+	    Emitter.prototype.removeAllListeners = function (event) {
+	        this.emitter.removeAllListeners(event);
+	    };
+	    return Emitter;
+	}());
+	exports.Emitter = Emitter;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var has = Object.prototype.hasOwnProperty;
+
+	//
+	// We store our EE objects in a plain object whose properties are event names.
+	// If `Object.create(null)` is not supported we prefix the event names with a
+	// `~` to make sure that the built-in object properties are not overridden or
+	// used as an attack vector.
+	// We also assume that `Object.create(null)` is available when the event name
+	// is an ES6 Symbol.
+	//
+	var prefix = typeof Object.create !== 'function' ? '~' : false;
+
+	/**
+	 * Representation of a single EventEmitter function.
+	 *
+	 * @param {Function} fn Event handler to be called.
+	 * @param {Mixed} context Context for function execution.
+	 * @param {Boolean} [once=false] Only emit once
+	 * @api private
+	 */
+	function EE(fn, context, once) {
+	  this.fn = fn;
+	  this.context = context;
+	  this.once = once || false;
+	}
+
+	/**
+	 * Minimal EventEmitter interface that is molded against the Node.js
+	 * EventEmitter interface.
+	 *
+	 * @constructor
+	 * @api public
+	 */
+	function EventEmitter() { /* Nothing to set */ }
+
+	/**
+	 * Hold the assigned EventEmitters by name.
+	 *
+	 * @type {Object}
+	 * @private
+	 */
+	EventEmitter.prototype._events = undefined;
+
+	/**
+	 * Return an array listing the events for which the emitter has registered
+	 * listeners.
+	 *
+	 * @returns {Array}
+	 * @api public
+	 */
+	EventEmitter.prototype.eventNames = function eventNames() {
+	  var events = this._events
+	    , names = []
+	    , name;
+
+	  if (!events) return names;
+
+	  for (name in events) {
+	    if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
+	  }
+
+	  if (Object.getOwnPropertySymbols) {
+	    return names.concat(Object.getOwnPropertySymbols(events));
+	  }
+
+	  return names;
+	};
+
+	/**
+	 * Return a list of assigned event listeners.
+	 *
+	 * @param {String} event The events that should be listed.
+	 * @param {Boolean} exists We only need to know if there are listeners.
+	 * @returns {Array|Boolean}
+	 * @api public
+	 */
+	EventEmitter.prototype.listeners = function listeners(event, exists) {
+	  var evt = prefix ? prefix + event : event
+	    , available = this._events && this._events[evt];
+
+	  if (exists) return !!available;
+	  if (!available) return [];
+	  if (available.fn) return [available.fn];
+
+	  for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
+	    ee[i] = available[i].fn;
+	  }
+
+	  return ee;
+	};
+
+	/**
+	 * Emit an event to all registered event listeners.
+	 *
+	 * @param {String} event The name of the event.
+	 * @returns {Boolean} Indication if we've emitted an event.
+	 * @api public
+	 */
+	EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
+	  var evt = prefix ? prefix + event : event;
+
+	  if (!this._events || !this._events[evt]) return false;
+
+	  var listeners = this._events[evt]
+	    , len = arguments.length
+	    , args
+	    , i;
+
+	  if ('function' === typeof listeners.fn) {
+	    if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
+
+	    switch (len) {
+	      case 1: return listeners.fn.call(listeners.context), true;
+	      case 2: return listeners.fn.call(listeners.context, a1), true;
+	      case 3: return listeners.fn.call(listeners.context, a1, a2), true;
+	      case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
+	      case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
+	      case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
+	    }
+
+	    for (i = 1, args = new Array(len -1); i < len; i++) {
+	      args[i - 1] = arguments[i];
+	    }
+
+	    listeners.fn.apply(listeners.context, args);
+	  } else {
+	    var length = listeners.length
+	      , j;
+
+	    for (i = 0; i < length; i++) {
+	      if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
+
+	      switch (len) {
+	        case 1: listeners[i].fn.call(listeners[i].context); break;
+	        case 2: listeners[i].fn.call(listeners[i].context, a1); break;
+	        case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
+	        default:
+	          if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
+	            args[j - 1] = arguments[j];
+	          }
+
+	          listeners[i].fn.apply(listeners[i].context, args);
+	      }
+	    }
+	  }
+
+	  return true;
+	};
+
+	/**
+	 * Register a new EventListener for the given event.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Function} fn Callback function.
+	 * @param {Mixed} [context=this] The context of the function.
+	 * @api public
+	 */
+	EventEmitter.prototype.on = function on(event, fn, context) {
+	  var listener = new EE(fn, context || this)
+	    , evt = prefix ? prefix + event : event;
+
+	  if (!this._events) this._events = prefix ? {} : Object.create(null);
+	  if (!this._events[evt]) this._events[evt] = listener;
+	  else {
+	    if (!this._events[evt].fn) this._events[evt].push(listener);
+	    else this._events[evt] = [
+	      this._events[evt], listener
+	    ];
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Add an EventListener that's only called once.
+	 *
+	 * @param {String} event Name of the event.
+	 * @param {Function} fn Callback function.
+	 * @param {Mixed} [context=this] The context of the function.
+	 * @api public
+	 */
+	EventEmitter.prototype.once = function once(event, fn, context) {
+	  var listener = new EE(fn, context || this, true)
+	    , evt = prefix ? prefix + event : event;
+
+	  if (!this._events) this._events = prefix ? {} : Object.create(null);
+	  if (!this._events[evt]) this._events[evt] = listener;
+	  else {
+	    if (!this._events[evt].fn) this._events[evt].push(listener);
+	    else this._events[evt] = [
+	      this._events[evt], listener
+	    ];
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Remove event listeners.
+	 *
+	 * @param {String} event The event we want to remove.
+	 * @param {Function} fn The listener that we need to find.
+	 * @param {Mixed} context Only remove listeners matching this context.
+	 * @param {Boolean} once Only remove once listeners.
+	 * @api public
+	 */
+	EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
+	  var evt = prefix ? prefix + event : event;
+
+	  if (!this._events || !this._events[evt]) return this;
+
+	  var listeners = this._events[evt]
+	    , events = [];
+
+	  if (fn) {
+	    if (listeners.fn) {
+	      if (
+	           listeners.fn !== fn
+	        || (once && !listeners.once)
+	        || (context && listeners.context !== context)
+	      ) {
+	        events.push(listeners);
+	      }
+	    } else {
+	      for (var i = 0, length = listeners.length; i < length; i++) {
+	        if (
+	             listeners[i].fn !== fn
+	          || (once && !listeners[i].once)
+	          || (context && listeners[i].context !== context)
+	        ) {
+	          events.push(listeners[i]);
+	        }
+	      }
+	    }
+	  }
+
+	  //
+	  // Reset the array, or remove it completely if we have no more listeners.
+	  //
+	  if (events.length) {
+	    this._events[evt] = events.length === 1 ? events[0] : events;
+	  } else {
+	    delete this._events[evt];
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Remove all listeners or only the listeners for the specified event.
+	 *
+	 * @param {String} event The event want to remove all listeners for.
+	 * @api public
+	 */
+	EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
+	  if (!this._events) return this;
+
+	  if (event) delete this._events[prefix ? prefix + event : event];
+	  else this._events = prefix ? {} : Object.create(null);
+
+	  return this;
+	};
+
+	//
+	// Alias methods names because people roll like that.
+	//
+	EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+	EventEmitter.prototype.addListener = EventEmitter.prototype.on;
+
+	//
+	// This function doesn't apply anymore.
+	//
+	EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
+	  return this;
+	};
+
+	//
+	// Expose the prefix.
+	//
+	EventEmitter.prefixed = prefix;
+
+	//
+	// Expose the module.
+	//
+	if (true) {
+	  module.exports = EventEmitter;
+	}
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * 常见事件名称的定义。
+	 */
+	exports.WHEEL = "qtk-wheel";
+	exports.KEYUP = "qtk-keyup";
+	exports.KEYDOWN = "qtk-keydown";
+	exports.CONTEXT_MENU = "qtk-context-menu";
+	exports.POINTER_DOWN = "qtk-pointer-down";
+	exports.POINTER_MOVE = "qtk-pointer-move";
+	exports.POINTER_UP = "qtk-pointer-up";
+	exports.POINTER_OUT = "qtk-pointer-out";
+	exports.POINTER_OVER = "qtk-pointer-over";
+	exports.POINTER_ENTER = "qtk-pointer-enter";
+	exports.POINTER_LEAVE = "qtk-pointer-leave";
+	exports.CLICK = "qtk-click";
+	exports.DBLCLICK = "qtk-dblclick";
+	exports.CHANGE = "change";
+	exports.PROGRESS = "progress";
+	exports.CHANGING = "changing";
+	exports.PROP_CHANGE = "prop-change";
+	exports.PROP_DELETE = "prop-delete";
+	exports.DISPOSE = "dispose";
+	exports.RUN = "run";
+	exports.QUIT = "quit";
+	exports.SHOW = "show";
+	exports.HIDE = "hide";
+	exports.MOVE = "move";
+	exports.MOVING = "moving";
+	exports.CHOOSE = "choose";
+	exports.OPEN = "open";
+	exports.INIT = "init";
+	exports.FOCUS = "focus";
+	exports.BLUR = "blur";
+	exports.DEINIT = "deinit";
+	exports.CLOSE = "close";
+	exports.RESIZE = "resize";
+	exports.READY = "ready";
+	exports.TICK = "tick";
+	exports.PRETICK = "pretick";
+	exports.POSTTICK = "posttick";
+	exports.LOAD = "load";
+	exports.EXPAND = "expand";
+	exports.COLLAPSE = "collapse";
+	exports.BEFORE_DRAW = "before-draw";
+	exports.AFTER_DRAW = "after-draw";
+	exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
+	exports.AFTER_APPLY_TRANSFORM = "after-apply-transform";
+	exports.SCROLL = "scroll";
+	exports.SCROLL_DONE = "scroll-done";
+	exports.DRAG = "drag";
+	exports.DROP = "drop";
+	exports.DRAGEND = "dragend";
+	exports.DRAGENTER = "dragenter";
+	exports.DRAGEXIT = "dragexit";
+	exports.DRAGLEAVE = "dragleave";
+	exports.DRAGOVER = "dragover";
+	exports.DRAGSTART = "dragstart";
+	var Event = (function () {
+	    function Event() {
+	    }
+	    Event.prototype.init = function (type, detail) {
+	        this._type = type;
+	        this._target = null;
+	        this._propagationStopped = false;
+	        return this;
+	    };
+	    Object.defineProperty(Event.prototype, "propagationStopped", {
+	        get: function () {
+	            return this._propagationStopped;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Event.prototype.stopPropagation = function () {
+	        this._propagationStopped = true;
+	    };
+	    Object.defineProperty(Event.prototype, "type", {
+	        get: function () {
+	            return this._type;
+	        },
+	        set: function (value) {
+	            this._type = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Event.prototype, "target", {
+	        get: function () {
+	            return this._target;
+	        },
+	        set: function (value) {
+	            this._target = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Event.prototype.dispose = function () {
+	    };
+	    return Event;
+	}());
+	exports.Event = Event;
+	;
+	var AnyEvent = (function (_super) {
+	    __extends(AnyEvent, _super);
+	    function AnyEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyEvent.prototype.init = function (type, payload) {
+	        _super.prototype.init.call(this, type);
+	        this.payload = payload;
+	        return this;
+	    };
+	    AnyEvent.create = function (type, payload) {
+	        var e = new AnyEvent();
+	        return e.init(type, payload);
+	    };
+	    return AnyEvent;
+	}(Event));
+	exports.AnyEvent = AnyEvent;
+	;
+	var InputEvent = (function (_super) {
+	    __extends(InputEvent, _super);
+	    function InputEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    InputEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type);
+	        this.altKey = detail.altKey;
+	        this.ctrlKey = detail.ctrlKey;
+	        this.shiftKey = detail.shiftKey;
+	        this.commandKey = detail.commandKey;
+	        return this;
+	    };
+	    return InputEvent;
+	}(Event));
+	exports.InputEvent = InputEvent;
+	;
+	var PointerEvent = (function (_super) {
+	    __extends(PointerEvent, _super);
+	    function PointerEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    PointerEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type, detail);
+	        this.id = detail.id;
+	        this.x = detail.x;
+	        this.y = detail.y;
+	        this.timeStamp = detail.timeStamp;
+	        this.pointerDown = detail.pointerDown;
+	        this.pointerDownX = detail.pointerDownX;
+	        this.pointerDownY = detail.pointerDownY;
+	        this.pointerDownTime = detail.pointerDownTime;
+	        return this;
+	    };
+	    PointerEvent.create = function (type, detail) {
+	        var e = new PointerEvent();
+	        return e.init(type, detail);
+	    };
+	    return PointerEvent;
+	}(InputEvent));
+	exports.PointerEvent = PointerEvent;
+	var WheelEvent = (function (_super) {
+	    __extends(WheelEvent, _super);
+	    function WheelEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    WheelEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type, detail);
+	        this.delta = detail.delta;
+	        this.timeStamp = detail.timeStamp;
+	        return this;
+	    };
+	    WheelEvent.create = function (detail) {
+	        var e = new WheelEvent();
+	        return e.init(exports.WHEEL, detail);
+	    };
+	    return WheelEvent;
+	}(InputEvent));
+	exports.WheelEvent = WheelEvent;
+	var KeyEvent = (function (_super) {
+	    __extends(KeyEvent, _super);
+	    function KeyEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    KeyEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type, detail);
+	        this.keyCode = detail.keyCode;
+	        this.timeStamp = detail.timeStamp;
+	        return this;
+	    };
+	    KeyEvent.create = function (type, detail) {
+	        var e = new KeyEvent();
+	        return e.init(type, detail);
+	    };
+	    return KeyEvent;
+	}(InputEvent));
+	exports.KeyEvent = KeyEvent;
+	var TickEvent = (function (_super) {
+	    __extends(TickEvent, _super);
+	    function TickEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    TickEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type);
+	        this.fps = detail.fps;
+	        this.time = detail.time;
+	        this.deltaTime = detail.deltaTime;
+	        return this;
+	    };
+	    TickEvent.create = function (type) {
+	        var e = new TickEvent();
+	        return e.init(type, {});
+	    };
+	    return TickEvent;
+	}(Event));
+	exports.TickEvent = TickEvent;
+	;
+	var ChangeEvent = (function (_super) {
+	    __extends(ChangeEvent, _super);
+	    function ChangeEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    ChangeEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type);
+	        this.value = detail.newValue || detail.value;
+	        this.oldValue = detail.oldValue;
+	        this.newValue = detail.newValue;
+	        return this;
+	    };
+	    ChangeEvent.create = function () {
+	        var e = new ChangeEvent();
+	        return e;
+	    };
+	    return ChangeEvent;
+	}(Event));
+	exports.ChangeEvent = ChangeEvent;
+	;
+	var PropChangeEvent = (function (_super) {
+	    __extends(PropChangeEvent, _super);
+	    function PropChangeEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    PropChangeEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type, detail);
+	        this.prop = detail.prop;
+	        this.trigger = detail.trigger;
+	        return this;
+	    };
+	    PropChangeEvent.create = function () {
+	        var e = new PropChangeEvent();
+	        return e;
+	    };
+	    return PropChangeEvent;
+	}(ChangeEvent));
+	exports.PropChangeEvent = PropChangeEvent;
+	;
+	var DataTransfer = (function () {
+	    function DataTransfer() {
+	        this.data = {};
+	        this.dragImage = null;
+	        this.dropEffect = "move";
+	    }
+	    DataTransfer.prototype.clearData = function (format) {
+	        if (format) {
+	            delete this.data[format];
+	        }
+	        else {
+	            this.data = {};
+	        }
+	    };
+	    DataTransfer.prototype.getData = function (format) {
+	        return this.data[format];
+	    };
+	    DataTransfer.prototype.setData = function (format, data) {
+	        this.data[format] = data;
+	    };
+	    DataTransfer.prototype.setDragImage = function (dragImage) {
+	        this.dragImage = dragImage;
+	    };
+	    return DataTransfer;
+	}());
+	exports.DataTransfer = DataTransfer;
+	;
+	var DragEvent = (function (_super) {
+	    __extends(DragEvent, _super);
+	    function DragEvent() {
+	        _super.call(this);
+	        this.dataTransfer = new DataTransfer();
+	    }
+	    DragEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type, detail);
+	        return this;
+	    };
+	    Object.defineProperty(DragEvent, "isDragging", {
+	        get: function () {
+	            return DragEvent._isDragging;
+	        },
+	        set: function (isDragging) {
+	            DragEvent._isDragging = isDragging;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    DragEvent.get = function (type) {
+	        var e = DragEvent.event;
+	        return e.init(type);
+	    };
+	    DragEvent._isDragging = false;
+	    DragEvent.event = new DragEvent();
+	    return DragEvent;
+	}(Event));
+	exports.DragEvent = DragEvent;
+	;
+	var DrawEvent = (function (_super) {
+	    __extends(DrawEvent, _super);
+	    function DrawEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    DrawEvent.prototype.reset = function (type, ctx, widget) {
+	        _super.prototype.init.call(this, type);
+	        this.ctx = ctx;
+	        this.widget = widget;
+	        return this;
+	    };
+	    DrawEvent.get = function () {
+	        return DrawEvent.event;
+	    };
+	    DrawEvent.event = new DrawEvent();
+	    return DrawEvent;
+	}(Event));
+	exports.DrawEvent = DrawEvent;
+	;
+	var ApplyTransformEvent = (function (_super) {
+	    __extends(ApplyTransformEvent, _super);
+	    function ApplyTransformEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    ApplyTransformEvent.prototype.reset = function (type, ctx, widget) {
+	        _super.prototype.init.call(this, type);
+	        this.ctx = ctx;
+	        this.widget = widget;
+	        return this;
+	    };
+	    ApplyTransformEvent.get = function () {
+	        return ApplyTransformEvent.event;
+	    };
+	    ApplyTransformEvent.event = new ApplyTransformEvent();
+	    return ApplyTransformEvent;
+	}(Event));
+	exports.ApplyTransformEvent = ApplyTransformEvent;
+	;
+	var ScrollEvent = (function (_super) {
+	    __extends(ScrollEvent, _super);
+	    function ScrollEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    ScrollEvent.prototype.reset = function (type, widget, offsetX, offsetY) {
+	        _super.prototype.init.call(this, type);
+	        this.widget = widget;
+	        this.offsetX = offsetX;
+	        this.offsetY = offsetY;
+	        return this;
+	    };
+	    ScrollEvent.create = function () {
+	        return new ScrollEvent();
+	    };
+	    return ScrollEvent;
+	}(Event));
+	exports.ScrollEvent = ScrollEvent;
+	;
+	function createAnyEvent(type, payload) {
+	    return AnyEvent.create(type, payload);
+	}
+	exports.createAnyEvent = createAnyEvent;
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/node/index.d.ts"/>
@@ -3046,11 +1641,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	__webpack_require__(4);
-	var path = __webpack_require__(5);
-	var emitter_1 = __webpack_require__(8);
-	var Assets = __webpack_require__(3);
-	var Events = __webpack_require__(7);
+	__webpack_require__(8);
+	var path = __webpack_require__(9);
+	var emitter_1 = __webpack_require__(4);
+	var Assets = __webpack_require__(11);
+	var Events = __webpack_require__(6);
 	(function (ImageDrawType) {
 	    /**
 	     * 画在填满指定的矩形区域。
@@ -3452,7 +2047,2221 @@ var qtk =
 
 
 /***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	(function(self) {
+	  'use strict';
+
+	  if (self.fetch) {
+	    return
+	  }
+
+	  var support = {
+	    searchParams: 'URLSearchParams' in self,
+	    iterable: 'Symbol' in self && 'iterator' in Symbol,
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob()
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+
+	  function normalizeName(name) {
+	    if (typeof name !== 'string') {
+	      name = String(name)
+	    }
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	      throw new TypeError('Invalid character in header field name')
+	    }
+	    return name.toLowerCase()
+	  }
+
+	  function normalizeValue(value) {
+	    if (typeof value !== 'string') {
+	      value = String(value)
+	    }
+	    return value
+	  }
+
+	  // Build a destructive iterator for the value list
+	  function iteratorFor(items) {
+	    var iterator = {
+	      next: function() {
+	        var value = items.shift()
+	        return {done: value === undefined, value: value}
+	      }
+	    }
+
+	    if (support.iterable) {
+	      iterator[Symbol.iterator] = function() {
+	        return iterator
+	      }
+	    }
+
+	    return iterator
+	  }
+
+	  function Headers(headers) {
+	    this.map = {}
+
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(value, name) {
+	        this.append(name, value)
+	      }, this)
+
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        this.append(name, headers[name])
+	      }, this)
+	    }
+	  }
+
+	  Headers.prototype.append = function(name, value) {
+	    name = normalizeName(name)
+	    value = normalizeValue(value)
+	    var list = this.map[name]
+	    if (!list) {
+	      list = []
+	      this.map[name] = list
+	    }
+	    list.push(value)
+	  }
+
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[normalizeName(name)]
+	  }
+
+	  Headers.prototype.get = function(name) {
+	    var values = this.map[normalizeName(name)]
+	    return values ? values[0] : null
+	  }
+
+	  Headers.prototype.getAll = function(name) {
+	    return this.map[normalizeName(name)] || []
+	  }
+
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(normalizeName(name))
+	  }
+
+	  Headers.prototype.set = function(name, value) {
+	    this.map[normalizeName(name)] = [normalizeValue(value)]
+	  }
+
+	  Headers.prototype.forEach = function(callback, thisArg) {
+	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+	      this.map[name].forEach(function(value) {
+	        callback.call(thisArg, value, name, this)
+	      }, this)
+	    }, this)
+	  }
+
+	  Headers.prototype.keys = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push(name) })
+	    return iteratorFor(items)
+	  }
+
+	  Headers.prototype.values = function() {
+	    var items = []
+	    this.forEach(function(value) { items.push(value) })
+	    return iteratorFor(items)
+	  }
+
+	  Headers.prototype.entries = function() {
+	    var items = []
+	    this.forEach(function(value, name) { items.push([name, value]) })
+	    return iteratorFor(items)
+	  }
+
+	  if (support.iterable) {
+	    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+	  }
+
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    reader.readAsArrayBuffer(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    reader.readAsText(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function Body() {
+	    this.bodyUsed = false
+
+	    this._initBody = function(body) {
+	      this._bodyInit = body
+	      if (typeof body === 'string') {
+	        this._bodyText = body
+	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	        this._bodyBlob = body
+	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	        this._bodyFormData = body
+	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	        this._bodyText = body.toString()
+	      } else if (!body) {
+	        this._bodyText = ''
+	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+	        // Only support ArrayBuffers for POST method.
+	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else {
+	        throw new Error('unsupported BodyInit type')
+	      }
+
+	      if (!this.headers.get('content-type')) {
+	        if (typeof body === 'string') {
+	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+	        } else if (this._bodyBlob && this._bodyBlob.type) {
+	          this.headers.set('content-type', this._bodyBlob.type)
+	        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+	          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+	        }
+	      }
+	    }
+
+	    if (support.blob) {
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+
+	      this.arrayBuffer = function() {
+	        return this.blob().then(readBlobAsArrayBuffer)
+	      }
+
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return readBlobAsText(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as text')
+	        } else {
+	          return Promise.resolve(this._bodyText)
+	        }
+	      }
+	    } else {
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	      }
+	    }
+
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+
+	    return this
+	  }
+
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+
+	  function Request(input, options) {
+	    options = options || {}
+	    var body = options.body
+	    if (Request.prototype.isPrototypeOf(input)) {
+	      if (input.bodyUsed) {
+	        throw new TypeError('Already read')
+	      }
+	      this.url = input.url
+	      this.credentials = input.credentials
+	      if (!options.headers) {
+	        this.headers = new Headers(input.headers)
+	      }
+	      this.method = input.method
+	      this.mode = input.mode
+	      if (!body) {
+	        body = input._bodyInit
+	        input.bodyUsed = true
+	      }
+	    } else {
+	      this.url = input
+	    }
+
+	    this.credentials = options.credentials || this.credentials || 'omit'
+	    if (options.headers || !this.headers) {
+	      this.headers = new Headers(options.headers)
+	    }
+	    this.method = normalizeMethod(options.method || this.method || 'GET')
+	    this.mode = options.mode || this.mode || null
+	    this.referrer = null
+
+	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(body)
+	  }
+
+	  Request.prototype.clone = function() {
+	    return new Request(this)
+	  }
+
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+
+	  function headers(xhr) {
+	    var head = new Headers()
+	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
+	    pairs.forEach(function(header) {
+	      var split = header.trim().split(':')
+	      var key = split.shift().trim()
+	      var value = split.join(':').trim()
+	      head.append(key, value)
+	    })
+	    return head
+	  }
+
+	  Body.call(Request.prototype)
+
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+
+	    this.type = 'default'
+	    this.status = options.status
+	    this.ok = this.status >= 200 && this.status < 300
+	    this.statusText = options.statusText
+	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.url = options.url || ''
+	    this._initBody(bodyInit)
+	  }
+
+	  Body.call(Response.prototype)
+
+	  Response.prototype.clone = function() {
+	    return new Response(this._bodyInit, {
+	      status: this.status,
+	      statusText: this.statusText,
+	      headers: new Headers(this.headers),
+	      url: this.url
+	    })
+	  }
+
+	  Response.error = function() {
+	    var response = new Response(null, {status: 0, statusText: ''})
+	    response.type = 'error'
+	    return response
+	  }
+
+	  var redirectStatuses = [301, 302, 303, 307, 308]
+
+	  Response.redirect = function(url, status) {
+	    if (redirectStatuses.indexOf(status) === -1) {
+	      throw new RangeError('Invalid status code')
+	    }
+
+	    return new Response(null, {status: status, headers: {location: url}})
+	  }
+
+	  self.Headers = Headers
+	  self.Request = Request
+	  self.Response = Response
+
+	  self.fetch = function(input, init) {
+	    return new Promise(function(resolve, reject) {
+	      var request
+	      if (Request.prototype.isPrototypeOf(input) && !init) {
+	        request = input
+	      } else {
+	        request = new Request(input, init)
+	      }
+
+	      var xhr = new XMLHttpRequest()
+
+	      function responseURL() {
+	        if ('responseURL' in xhr) {
+	          return xhr.responseURL
+	        }
+
+	        // Avoid security warnings on getResponseHeader when not allowed by CORS
+	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+	          return xhr.getResponseHeader('X-Request-URL')
+	        }
+
+	        return
+	      }
+
+	      xhr.onload = function() {
+	        var options = {
+	          status: xhr.status,
+	          statusText: xhr.statusText,
+	          headers: headers(xhr),
+	          url: responseURL()
+	        }
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText
+	        resolve(new Response(body, options))
+	      }
+
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.ontimeout = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.open(request.method, request.url, true)
+
+	      if (request.credentials === 'include') {
+	        xhr.withCredentials = true
+	      }
+
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+
+	      request.headers.forEach(function(value, name) {
+	        xhr.setRequestHeader(name, value)
+	      })
+
+	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+	    })
+	  }
+	  self.fetch.polyfill = true
+	})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// resolves . and .. elements in a path array with directory names there
+	// must be no slashes, empty elements, or device names (c:\) in the array
+	// (so also no leading and trailing slashes - it does not distinguish
+	// relative and absolute paths)
+	function normalizeArray(parts, allowAboveRoot) {
+	  // if the path tries to go above the root, `up` ends up > 0
+	  var up = 0;
+	  for (var i = parts.length - 1; i >= 0; i--) {
+	    var last = parts[i];
+	    if (last === '.') {
+	      parts.splice(i, 1);
+	    } else if (last === '..') {
+	      parts.splice(i, 1);
+	      up++;
+	    } else if (up) {
+	      parts.splice(i, 1);
+	      up--;
+	    }
+	  }
+
+	  // if the path is allowed to go above the root, restore leading ..s
+	  if (allowAboveRoot) {
+	    for (; up--; up) {
+	      parts.unshift('..');
+	    }
+	  }
+
+	  return parts;
+	}
+
+	// Split a filename into [root, dir, basename, ext], unix version
+	// 'root' is just a slash, or nothing.
+	var splitPathRe =
+	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+	var splitPath = function(filename) {
+	  return splitPathRe.exec(filename).slice(1);
+	};
+
+	// path.resolve([from ...], to)
+	// posix version
+	exports.resolve = function() {
+	  var resolvedPath = '',
+	      resolvedAbsolute = false;
+
+	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+	    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+	    // Skip empty and invalid entries
+	    if (typeof path !== 'string') {
+	      throw new TypeError('Arguments to path.resolve must be strings');
+	    } else if (!path) {
+	      continue;
+	    }
+
+	    resolvedPath = path + '/' + resolvedPath;
+	    resolvedAbsolute = path.charAt(0) === '/';
+	  }
+
+	  // At this point the path should be resolved to a full absolute path, but
+	  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+	  // Normalize the path
+	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+	    return !!p;
+	  }), !resolvedAbsolute).join('/');
+
+	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+	};
+
+	// path.normalize(path)
+	// posix version
+	exports.normalize = function(path) {
+	  var isAbsolute = exports.isAbsolute(path),
+	      trailingSlash = substr(path, -1) === '/';
+
+	  // Normalize the path
+	  path = normalizeArray(filter(path.split('/'), function(p) {
+	    return !!p;
+	  }), !isAbsolute).join('/');
+
+	  if (!path && !isAbsolute) {
+	    path = '.';
+	  }
+	  if (path && trailingSlash) {
+	    path += '/';
+	  }
+
+	  return (isAbsolute ? '/' : '') + path;
+	};
+
+	// posix version
+	exports.isAbsolute = function(path) {
+	  return path.charAt(0) === '/';
+	};
+
+	// posix version
+	exports.join = function() {
+	  var paths = Array.prototype.slice.call(arguments, 0);
+	  return exports.normalize(filter(paths, function(p, index) {
+	    if (typeof p !== 'string') {
+	      throw new TypeError('Arguments to path.join must be strings');
+	    }
+	    return p;
+	  }).join('/'));
+	};
+
+
+	// path.relative(from, to)
+	// posix version
+	exports.relative = function(from, to) {
+	  from = exports.resolve(from).substr(1);
+	  to = exports.resolve(to).substr(1);
+
+	  function trim(arr) {
+	    var start = 0;
+	    for (; start < arr.length; start++) {
+	      if (arr[start] !== '') break;
+	    }
+
+	    var end = arr.length - 1;
+	    for (; end >= 0; end--) {
+	      if (arr[end] !== '') break;
+	    }
+
+	    if (start > end) return [];
+	    return arr.slice(start, end - start + 1);
+	  }
+
+	  var fromParts = trim(from.split('/'));
+	  var toParts = trim(to.split('/'));
+
+	  var length = Math.min(fromParts.length, toParts.length);
+	  var samePartsLength = length;
+	  for (var i = 0; i < length; i++) {
+	    if (fromParts[i] !== toParts[i]) {
+	      samePartsLength = i;
+	      break;
+	    }
+	  }
+
+	  var outputParts = [];
+	  for (var i = samePartsLength; i < fromParts.length; i++) {
+	    outputParts.push('..');
+	  }
+
+	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+	  return outputParts.join('/');
+	};
+
+	exports.sep = '/';
+	exports.delimiter = ':';
+
+	exports.dirname = function(path) {
+	  var result = splitPath(path),
+	      root = result[0],
+	      dir = result[1];
+
+	  if (!root && !dir) {
+	    // No dirname whatsoever
+	    return '.';
+	  }
+
+	  if (dir) {
+	    // It has a dirname, strip trailing slash
+	    dir = dir.substr(0, dir.length - 1);
+	  }
+
+	  return root + dir;
+	};
+
+
+	exports.basename = function(path, ext) {
+	  var f = splitPath(path)[2];
+	  // TODO: make this comparison case-insensitive on windows?
+	  if (ext && f.substr(-1 * ext.length) === ext) {
+	    f = f.substr(0, f.length - ext.length);
+	  }
+	  return f;
+	};
+
+
+	exports.extname = function(path) {
+	  return splitPath(path)[3];
+	};
+
+	function filter (xs, f) {
+	    if (xs.filter) return xs.filter(f);
+	    var res = [];
+	    for (var i = 0; i < xs.length; i++) {
+	        if (f(xs[i], i, xs)) res.push(xs[i]);
+	    }
+	    return res;
+	}
+
+	// String.prototype.substr - negative index don't work in IE8
+	var substr = 'ab'.substr(-1) === 'b'
+	    ? function (str, start, len) { return str.substr(start, len) }
+	    : function (str, start, len) {
+	        if (start < 0) start = str.length + start;
+	        return str.substr(start, len);
+	    }
+	;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	    try {
+	        cachedSetTimeout = setTimeout;
+	    } catch (e) {
+	        cachedSetTimeout = function () {
+	            throw new Error('setTimeout is not defined');
+	        }
+	    }
+	    try {
+	        cachedClearTimeout = clearTimeout;
+	    } catch (e) {
+	        cachedClearTimeout = function () {
+	            throw new Error('clearTimeout is not defined');
+	        }
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = runTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    runClearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        runTimeout(drainQueue);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../typings/globals/node/index.d.ts"/>
+	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+	/// <reference path="../typings/globals/whatwg-fetch/index.d.ts"/>
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	__webpack_require__(8);
+	var path = __webpack_require__(9);
+	var Events = __webpack_require__(6);
+	var emitter_1 = __webpack_require__(4);
+	exports.AUDIO = "audio";
+	exports.IMAGE = "image";
+	exports.BLOB = "blob";
+	exports.JSON = "json";
+	exports.TEXT = "text";
+	;
+	var assetsCache = {};
+	function load(url, type) {
+	    var item = assetsCache[url];
+	    if (!item) {
+	        item = fetch(url).then(function ok(response) {
+	            if (response.status !== 200) {
+	                return Promise.reject(null);
+	            }
+	            if (type === exports.JSON) {
+	                return response.json();
+	            }
+	            else if (type === exports.BLOB) {
+	                return response.blob();
+	            }
+	            else {
+	                return response.text();
+	            }
+	        }, function fail(err) {
+	            return null;
+	        });
+	        assetsCache[url] = item;
+	    }
+	    return item;
+	}
+	/**
+	 * Load JSON Data and Cache It.
+	 * @param url URL Of JSON.
+	 * @returns Promise
+	 */
+	function loadJSON(url) {
+	    return load(url, exports.JSON);
+	}
+	exports.loadJSON = loadJSON;
+	/**
+	 * Load Text Data and Cache It.
+	 * @param url URL Of Text.
+	 * @returns Promise
+	 */
+	function loadText(url) {
+	    return load(url, exports.TEXT);
+	}
+	exports.loadText = loadText;
+	/**
+	 * Load Blob Data and Cache It.
+	 * @param url URL Of Blob.
+	 * @returns Promise
+	 */
+	function loadBlob(url) {
+	    return load(url, exports.BLOB);
+	}
+	exports.loadBlob = loadBlob;
+	/**
+	 * Load Image and Cache It.
+	 * @param url URL Of Image.
+	 * @returns Promise
+	 */
+	function loadImage(url) {
+	    var item = assetsCache[url];
+	    if (!item) {
+	        item = new Promise(function (resolve, reject) {
+	            var image = new Image();
+	            image.onload = function () {
+	                resolve(image);
+	            };
+	            image.onerror = function (err) {
+	                reject(err);
+	            };
+	            image.src = url;
+	        });
+	    }
+	    assetsCache[url] = item;
+	    return item;
+	}
+	exports.loadImage = loadImage;
+	/**
+	 * Load Script
+	 * @param url URL Of Script.
+	 * @returns Promise
+	 */
+	function loadScript(url) {
+	    var item = new Promise(function (resolve, reject) {
+	        var node = document.head ? document.head : document.body;
+	        var script = document.createElement("script");
+	        script.onload = function () {
+	            resolve(script);
+	        };
+	        script.onerror = function (err) {
+	            reject(err);
+	        };
+	        script.src = url;
+	        node.appendChild(script);
+	    });
+	    return item;
+	}
+	exports.loadScript = loadScript;
+	/**
+	 * Load Audio and Cache It.
+	 * @param url URL Of Audio.
+	 * @returns Promise
+	 */
+	function loadAudio(url) {
+	    var item = assetsCache[url];
+	    if (!item) {
+	        item = new Promise(function (resolve, reject) {
+	            var audio = new Audio();
+	            audio.onload = function () {
+	                resolve(audio);
+	            };
+	            audio.onerror = function (err) {
+	                reject(err);
+	            };
+	            audio.src = url;
+	        });
+	    }
+	    assetsCache[url] = item;
+	    return item;
+	}
+	exports.loadAudio = loadAudio;
+	/**
+	 * Clear asset cache
+	 * @param url URL Of asset.
+	 */
+	function clear(url) {
+	    delete assetsCache[url];
+	}
+	exports.clear = clear;
+	/**
+	 * Present one asset.
+	 */
+	var Item = (function () {
+	    function Item() {
+	    }
+	    return Item;
+	}());
+	exports.Item = Item;
+	;
+	/**
+	 * Assets group to preload
+	 * Example:
+	 * ```
+	 *  var items = [
+	 *    {type:qtk.Assets.TEXT, src:"http://localhost:9876/base/www/test.txt"},
+	 *    {type:qtk.Assets.JSON, src:"http://localhost:9876/base/www/test.json"},
+	 *    {type:qtk.Assets.IMAGE, src:"http://localhost:9876/base/www/test.jpg"},
+	 *    {type:qtk.Assets.BLOB, src:"http://localhost:9876/base/www/test.blob"}
+	 * ];
+	 * var assets = new qtk.Assets.Group(items);
+	 * assets.onProgress(function(info) {
+	 *   console.log(info.loaded + "/" + info.total);
+	 * });
+	 * ```
+	 */
+	var Group = (function (_super) {
+	    __extends(Group, _super);
+	    function Group(items) {
+	        _super.call(this);
+	        this.event = {
+	            total: 0,
+	            loaded: 0,
+	            type: Events.PROGRESS
+	        };
+	        var i = 0;
+	        var n = items.length;
+	        this.loaded = 0;
+	        this.total = items.length;
+	        this.event.total = this.total;
+	        items.forEach(this.loadOne.bind(this));
+	    }
+	    /**
+	     * Register of a progress callback function
+	     */
+	    Group.prototype.onProgress = function (callback) {
+	        this.on(Events.PROGRESS, callback);
+	    };
+	    Group.prototype.addLoaded = function () {
+	        this.loaded++;
+	        this.event.loaded = this.loaded;
+	        this.dispatchEvent(this.event);
+	    };
+	    Group.prototype.loadOne = function (item) {
+	        var src = item.src;
+	        var type = item.type;
+	        var addLoaded = this.addLoaded.bind(this);
+	        var name = path.extname(src).toLowerCase();
+	        if (type === exports.JSON || (!type && name === 'json')) {
+	            loadJSON(src).then(addLoaded, addLoaded);
+	        }
+	        else if (type === exports.IMAGE || (!type && (name === "jpg" || name === "png" || name === "svg"))) {
+	            loadImage(src).then(addLoaded, addLoaded);
+	        }
+	        else if (type === exports.BLOB) {
+	            loadBlob(src).then(addLoaded, addLoaded);
+	        }
+	        else {
+	            loadText(src).then(addLoaded, addLoaded);
+	        }
+	    };
+	    return Group;
+	}(emitter_1.Emitter));
+	exports.Group = Group;
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var point_1 = __webpack_require__(2);
+	/**
+	 * 2维矩阵变换
+	 */
+	var Matrix = (function () {
+	    function Matrix() {
+	        this.data = new Float32Array(6);
+	        this.identity();
+	    }
+	    Matrix.prototype.identity = function () {
+	        var data = this.data;
+	        data[0] = 1;
+	        data[1] = 0;
+	        data[2] = 0;
+	        data[3] = 1;
+	        data[4] = 0;
+	        data[5] = 0;
+	        return this;
+	    };
+	    Matrix.prototype.clone = function () {
+	        var other = new Matrix();
+	        var data = other.data;
+	        var src = this.data;
+	        data[0] = src[0];
+	        data[1] = src[1];
+	        data[2] = src[2];
+	        data[3] = src[3];
+	        data[4] = src[4];
+	        data[5] = src[5];
+	        return other;
+	    };
+	    Matrix.prototype.set = function (a, b, c, d, tx, ty) {
+	        var data = this.data;
+	        data[0] = a;
+	        data[1] = b;
+	        data[2] = c;
+	        data[3] = d;
+	        data[4] = tx;
+	        data[5] = ty;
+	        return this;
+	    };
+	    Matrix.prototype.rotate = function (rad) {
+	        var a = this.data;
+	        var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], s = Math.sin(rad), c = Math.cos(rad);
+	        a[0] = a0 * c + a2 * s;
+	        a[1] = a1 * c + a3 * s;
+	        a[2] = a0 * -s + a2 * c;
+	        a[3] = a1 * -s + a3 * c;
+	        return this;
+	    };
+	    Matrix.prototype.scale = function (sx, sy) {
+	        var a = this.data;
+	        a[0] *= sx;
+	        a[1] *= sx;
+	        a[2] *= sy;
+	        a[3] *= sy;
+	        return this;
+	    };
+	    Matrix.prototype.translate = function (dx, dy) {
+	        var a = this.data;
+	        var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3], a4 = a[4], a5 = a[5];
+	        a[4] = a0 * dx + a2 * dy + a4;
+	        a[5] = a1 * dx + a3 * dy + a5;
+	        return this;
+	    };
+	    ;
+	    Matrix.prototype.transformPoint = function (x, y, out) {
+	        var p = out || point_1.Point.create();
+	        var a = this.data;
+	        p.x = a[0] * x + a[2] * y + a[4];
+	        p.y = a[1] * x + a[3] * y + a[5];
+	        return p;
+	    };
+	    ;
+	    Matrix.prototype.equal = function (other) {
+	        var a = this.data;
+	        var b = other.data;
+	        return a[0] === b[0]
+	            && a[1] === b[1]
+	            && a[2] === b[2]
+	            && a[3] === b[3]
+	            && a[4] === b[4]
+	            && a[5] === b[5];
+	    };
+	    Matrix.prototype.invert = function () {
+	        var a = this.data;
+	        var aa = a[0], ab = a[1], ac = a[2], ad = a[3], atx = a[4], aty = a[5];
+	        var det = aa * ad - ab * ac;
+	        if (!det) {
+	            return null;
+	        }
+	        det = 1.0 / det;
+	        var newMatrix = Matrix.create();
+	        var out = newMatrix.data;
+	        out[0] = ad * det;
+	        out[1] = -ab * det;
+	        out[2] = -ac * det;
+	        out[3] = aa * det;
+	        out[4] = (ac * aty - ad * atx) * det;
+	        out[5] = (ab * atx - aa * aty) * det;
+	        return newMatrix;
+	    };
+	    ;
+	    Matrix.prototype.toString = function () {
+	        var ret = Array.prototype.map.call(this.data, function (iter) {
+	            return iter.toFixed(2);
+	        });
+	        return JSON.stringify(ret);
+	    };
+	    Matrix.prototype.dispose = function () {
+	        this.identity();
+	        Matrix.cache.push(this);
+	    };
+	    Matrix.create = function () {
+	        if (Matrix.cache.length) {
+	            return Matrix.cache.pop();
+	        }
+	        return new Matrix();
+	    };
+	    Matrix.cache = [];
+	    return Matrix;
+	}());
+	exports.Matrix = Matrix;
+	;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
+	var event_detail_1 = __webpack_require__(14);
+	var inputEventAdapter = __webpack_require__(15);
+	/**
+	 * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
+	 *
+	 * 1.对指针事件坐标的转换，让绝对坐标变成相对与Canvas左上角的坐标。
+	 *
+	 * 2.支持高清屏。为了避免在高清屏上图片模糊，让Canvas的宽高乘以devicePixelRatio, Canvas的style.width/style.height仍然用实际的宽高，getContext时预先将矩阵乘以devicePixelRatio，从而让使用者无需关心当前屏幕的类型。
+	 *
+	 */
+	var Canvas = (function (_super) {
+	    __extends(Canvas, _super);
+	    function Canvas(x, y, w, h, devicePixelRatio, offline) {
+	        _super.call(this);
+	        this._id = "canvas";
+	        this._x = x || 0;
+	        this._y = y || 0;
+	        this._w = w || 0;
+	        this._h = h || 0;
+	        this._offline = offline || false;
+	        this._devicePixelRatio = devicePixelRatio || 1;
+	        var me = this;
+	        this.onPointerEvent = function (evt) {
+	            me.transformXY(evt.detail);
+	            var e = Events.PointerEvent.create(evt.type, evt.detail);
+	            me.dispatchEvent(e);
+	            e.dispose();
+	        };
+	        this.onKeyEvent = function (evt) {
+	            var e = Events.KeyEvent.create(evt.type, evt.detail);
+	            me.dispatchEvent(e);
+	            e.dispose();
+	        };
+	        this.onWheelEvent = function (evt) {
+	            var e = Events.WheelEvent.create(evt.detail);
+	            me.dispatchEvent(e);
+	            e.dispose();
+	        };
+	    }
+	    Canvas.prototype.transformXY = function (detail) {
+	        detail.x -= this.x;
+	        detail.y -= this.y;
+	        detail.pointerDownX -= this.x;
+	        detail.pointerDownY -= this.y;
+	    };
+	    Object.defineProperty(Canvas.prototype, "id", {
+	        get: function () {
+	            return this._id;
+	        },
+	        set: function (value) {
+	            this._id = value;
+	            if (this.canvas) {
+	                this.canvas.id = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "x", {
+	        get: function () {
+	            return this._x;
+	        },
+	        set: function (value) {
+	            this._x = value;
+	            this.moveCanvas(this.canvas);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "y", {
+	        get: function () {
+	            return this._y;
+	        },
+	        set: function (value) {
+	            this._y = value;
+	            this.moveCanvas(this.canvas);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "w", {
+	        get: function () {
+	            return this._w;
+	        },
+	        set: function (value) {
+	            this._w = value;
+	            this.resizeCanvas(this.canvas);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "h", {
+	        get: function () {
+	            return this._h;
+	        },
+	        set: function (value) {
+	            this._h = value;
+	            this.resizeCanvas(this.canvas);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "width", {
+	        get: function () {
+	            return this._w;
+	        },
+	        set: function (value) {
+	            this.w = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Canvas.prototype, "height", {
+	        get: function () {
+	            return this._h;
+	        },
+	        set: function (value) {
+	            this.h = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Canvas.prototype.grabKey = function () {
+	        inputEventAdapter.grabKey(this.canvas);
+	    };
+	    Canvas.prototype.ungrabKey = function () {
+	        inputEventAdapter.ungrabKey(this.canvas);
+	    };
+	    Canvas.prototype.grab = function () {
+	        inputEventAdapter.grab(this.canvas);
+	    };
+	    Canvas.prototype.ungrab = function () {
+	        inputEventAdapter.ungrab(this.canvas);
+	    };
+	    Canvas.prototype.moveCanvas = function (canvas) {
+	        if (canvas) {
+	            var x = this._x;
+	            var y = this._y;
+	            canvas.style.position = "absolute";
+	            canvas.style.left = x + "px";
+	            canvas.style.top = y + "px";
+	        }
+	    };
+	    Canvas.prototype.resizeCanvas = function (canvas) {
+	        if (canvas) {
+	            var w = this._w;
+	            var h = this._h;
+	            canvas.width = w * this._devicePixelRatio;
+	            canvas.style.width = w + "px";
+	            canvas.height = h * this._devicePixelRatio;
+	            canvas.style.height = h + "px";
+	        }
+	    };
+	    Object.defineProperty(Canvas.prototype, "z", {
+	        set: function (value) {
+	            this._z = value;
+	            this.canvas.style.zIndex = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Canvas.prototype.dispose = function () {
+	        var canvas = this.canvas;
+	        if (!this._offline) {
+	            document.body.removeChild(canvas);
+	        }
+	        canvas.removeEventListener(Events.POINTER_DOWN, this.onPointerEvent);
+	        canvas.removeEventListener(Events.POINTER_MOVE, this.onPointerEvent);
+	        canvas.removeEventListener(Events.POINTER_UP, this.onPointerEvent);
+	        canvas.removeEventListener(Events.CLICK, this.onPointerEvent);
+	        canvas.removeEventListener(Events.WHEEL, this.onWheelEvent);
+	        canvas.removeEventListener(Events.KEYDOWN, this.onKeyEvent);
+	        canvas.removeEventListener(Events.KEYUP, this.onKeyEvent);
+	    };
+	    Canvas.prototype.createCanvas = function () {
+	        var canvas = document.createElement("canvas");
+	        canvas.id = this._id;
+	        this.moveCanvas(canvas);
+	        this.resizeCanvas(canvas);
+	        if (!this._offline) {
+	            document.body.appendChild(canvas);
+	        }
+	        var me = this;
+	        canvas.addEventListener(Events.POINTER_DOWN, this.onPointerEvent);
+	        canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
+	        canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
+	        canvas.addEventListener(Events.CLICK, this.onPointerEvent);
+	        canvas.addEventListener(Events.DBLCLICK, this.onPointerEvent);
+	        canvas.addEventListener(Events.WHEEL, this.onWheelEvent);
+	        canvas.addEventListener(Events.KEYDOWN, this.onKeyEvent);
+	        canvas.addEventListener(Events.KEYUP, this.onKeyEvent);
+	        canvas.oncontextmenu = function (evt) {
+	            evt.preventDefault();
+	            var detail = event_detail_1.PointerEventDetail.create(evt.which, evt.pageX, evt.pageY, evt.altKey, evt.ctrlKey, evt.shiftKey, false);
+	            me.onPointerEvent({ type: Events.CONTEXT_MENU, detail: detail });
+	            detail.dispose();
+	        };
+	        return canvas;
+	    };
+	    Canvas.prototype.ensureCanvas = function () {
+	        if (!this.canvas) {
+	            this.canvas = this.createCanvas();
+	        }
+	    };
+	    Canvas.prototype.getContext = function (type) {
+	        if (!this.canvas) {
+	            this.canvas = this.createCanvas();
+	        }
+	        var ctx = this.canvas.getContext("2d");
+	        ctx.setTransform(1, 0, 0, 1, 0, 0);
+	        ctx.scale(this._devicePixelRatio, this._devicePixelRatio);
+	        return ctx;
+	    };
+	    Canvas.create = function (x, y, w, h, devicePixelRatio, offline) {
+	        return new Canvas(x, y, w, h, devicePixelRatio, offline);
+	    };
+	    return Canvas;
+	}(emitter_1.Emitter));
+	exports.Canvas = Canvas;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	/**
+	 * 输入事件的详细信息。
+	 */
+	var InputEventDetail = (function () {
+	    function InputEventDetail(altKey, ctrlKey, shiftKey, commandKey) {
+	        this.altKey = altKey;
+	        this.ctrlKey = ctrlKey;
+	        this.shiftKey = shiftKey;
+	        this.commandKey = commandKey;
+	    }
+	    return InputEventDetail;
+	}());
+	exports.InputEventDetail = InputEventDetail;
+	;
+	/**
+	 * 指针事件的详细信息。
+	 */
+	var PointerEventDetail = (function (_super) {
+	    __extends(PointerEventDetail, _super);
+	    function PointerEventDetail(id, x, y, altKey, ctrlKey, shiftKey, commandKey) {
+	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
+	        this.id = id;
+	        this.x = x;
+	        this.y = y;
+	        this.pointerDown = false;
+	        this.pointerDownX = 0;
+	        this.pointerDownY = 0;
+	        this.pointerDownTime = 0;
+	    }
+	    /**
+	     * 设置指针按下的状态。
+	     */
+	    PointerEventDetail.prototype.setPointerDown = function (pointerDown, x, y, t) {
+	        this.pointerDownX = x;
+	        this.pointerDownY = y;
+	        this.pointerDownTime = t;
+	        this.pointerDown = pointerDown;
+	    };
+	    PointerEventDetail.prototype.dispose = function () {
+	    };
+	    PointerEventDetail.create = function (id, x, y, altKey, ctrlKey, shiftKey, commandKey) {
+	        var detail = new PointerEventDetail(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
+	        return detail;
+	    };
+	    return PointerEventDetail;
+	}(InputEventDetail));
+	exports.PointerEventDetail = PointerEventDetail;
+	;
+	/**
+	 * 按键事件的详细信息。
+	 */
+	var KeyEventDetail = (function (_super) {
+	    __extends(KeyEventDetail, _super);
+	    function KeyEventDetail(keyCode, altKey, ctrlKey, shiftKey, commandKey) {
+	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
+	        this.keyCode = keyCode;
+	    }
+	    KeyEventDetail.prototype.dispose = function () {
+	    };
+	    KeyEventDetail.create = function (keyCode, altKey, ctrlKey, shiftKey, commandKey) {
+	        var detail = new KeyEventDetail(keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	        return detail;
+	    };
+	    return KeyEventDetail;
+	}(InputEventDetail));
+	exports.KeyEventDetail = KeyEventDetail;
+	;
+	/**
+	 * 滚轮事件的详细信息。
+	 */
+	var WheelEventDetail = (function (_super) {
+	    __extends(WheelEventDetail, _super);
+	    function WheelEventDetail(delta, altKey, ctrlKey, shiftKey, commandKey) {
+	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
+	        this.delta = delta;
+	    }
+	    WheelEventDetail.prototype.dispose = function () {
+	    };
+	    WheelEventDetail.create = function (delta, altKey, ctrlKey, shiftKey, commandKey) {
+	        var detail = new WheelEventDetail(delta, altKey, ctrlKey, shiftKey, commandKey);
+	        return detail;
+	    };
+	    return WheelEventDetail;
+	}(InputEventDetail));
+	exports.WheelEventDetail = WheelEventDetail;
+	;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var Events = __webpack_require__(6);
+	var key_event_1 = __webpack_require__(16);
+	var emitter_1 = __webpack_require__(4);
+	var event_detail_1 = __webpack_require__(14);
+	var grabs = [];
+	var keyGrabs = [];
+	var lastDetail;
+	var ctrlKey = false;
+	var altKey = false;
+	var shiftKey = false;
+	var commandKey = false;
+	var pointerDeviceType;
+	var pointerDown = false;
+	var pointerDownX = 0;
+	var pointerDownY = 0;
+	var pointerDownTime = 0;
+	var globalInputEmitter = new emitter_1.Emitter();
+	function dispatchEvent(target, type, detail) {
+	    var realTarget = target;
+	    if (grabs.length) {
+	        realTarget = grabs[grabs.length - 1];
+	    }
+	    else if (keyGrabs.length) {
+	        if ((type === Events.KEYDOWN || type === Events.KEYUP) && target.tagName === "BODY") {
+	            realTarget = keyGrabs[keyGrabs.length - 1];
+	        }
+	    }
+	    var event = new CustomEvent(type, { detail: detail });
+	    globalInputEmitter.dispatchEvent(event);
+	    realTarget.dispatchEvent(event);
+	}
+	function getPointerDetail(e) {
+	    if (e) {
+	        var id = e.identifier || 0;
+	        var x = Math.max(e.pageX || 0, e.x || e.clientX);
+	        var y = Math.max(e.pageY || 0, e.y || e.clientY);
+	        lastDetail = event_detail_1.PointerEventDetail.create(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
+	        lastDetail.timeStamp = e.timeStamp;
+	    }
+	    return lastDetail;
+	}
+	function dispatchPointerEvent(type, target, detail) {
+	    if (type === Events.POINTER_DOWN) {
+	        pointerDown = true;
+	        pointerDownX = detail.x;
+	        pointerDownY = detail.y;
+	        pointerDownTime = Date.now();
+	    }
+	    else if (type === Events.POINTER_UP) {
+	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+	        var dx = Math.abs(detail.x - pointerDownX);
+	        var dy = Math.abs(detail.y - pointerDownY);
+	        var isClick = dx < 5 && dy < 5;
+	        pointerDown = false;
+	        if (isClick) {
+	            dispatchEvent(target, Events.CLICK, detail);
+	        }
+	    }
+	    else {
+	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+	    }
+	    dispatchEvent(target, type, detail);
+	    detail.dispose();
+	}
+	function onMouseDown(evt) {
+	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
+	}
+	function onMouseMove(evt) {
+	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
+	}
+	function onMouseUp(evt) {
+	    dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
+	}
+	function onDblClick(evt) {
+	    dispatchPointerEvent(Events.DBLCLICK, evt.target, getPointerDetail(evt));
+	}
+	function onMouseOut(evt) {
+	    dispatchPointerEvent(Events.POINTER_OUT, evt.target, getPointerDetail(evt));
+	}
+	function onMouseOver(evt) {
+	    dispatchPointerEvent(Events.POINTER_OVER, evt.target, getPointerDetail(evt));
+	}
+	function getTouchPoints(evt) {
+	    var touches = evt.touches || evt.changedTouches || evt.touchList;
+	    var ret = touches.map(function (touch) {
+	        return getPointerDetail(touch);
+	    });
+	    if (ret.length < 1) {
+	        ret.push(getPointerDetail(null));
+	    }
+	    return ret;
+	}
+	function onTouchStart(evt) {
+	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, detail);
+	}
+	function onTouchMove(evt) {
+	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, detail);
+	}
+	function onTouchEnd(evt) {
+	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	    dispatchPointerEvent(Events.POINTER_UP, evt.target, detail);
+	}
+	function onPointerDown(evt) {
+	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
+	}
+	function onPointerMove(evt) {
+	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
+	}
+	function onPointerUp(evt) {
+	    dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
+	}
+	function onWheel(evt) {
+	    var delta = evt.wheelDelta || evt.detail * -8;
+	    var detail = event_detail_1.WheelEventDetail.create(delta, altKey, ctrlKey, shiftKey, commandKey);
+	    detail.timeStamp = evt.timeStamp;
+	    dispatchEvent(evt.target, Events.WHEEL, detail);
+	    detail.dispose();
+	}
+	function updateKeysStatus(keyCode, value) {
+	    switch (keyCode) {
+	        case key_event_1.KeyEvent.VK_CONTROL: {
+	            ctrlKey = value;
+	            break;
+	        }
+	        case key_event_1.KeyEvent.VK_ALT: {
+	            altKey = value;
+	            break;
+	        }
+	        case key_event_1.KeyEvent.VK_SHIFT: {
+	            shiftKey = value;
+	            break;
+	        }
+	        case key_event_1.KeyEvent.VK_META: {
+	            commandKey = value;
+	            break;
+	        }
+	    }
+	}
+	function onKeyDown(evt) {
+	    updateKeysStatus(evt.keyCode, true);
+	    var detail = event_detail_1.KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	    detail.timeStamp = evt.timeStamp;
+	    dispatchEvent(evt.target, Events.KEYDOWN, detail);
+	    detail.dispose();
+	}
+	function onKeyUp(evt) {
+	    updateKeysStatus(evt.keyCode, false);
+	    var detail = event_detail_1.KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	    detail.timeStamp = evt.timeStamp;
+	    dispatchEvent(evt.target, Events.KEYUP, detail);
+	    detail.dispose();
+	}
+	function dispatchKeyEvent(target, keyCode) {
+	    var detail = event_detail_1.KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);
+	    dispatchEvent(target, Events.KEYDOWN, detail);
+	    dispatchEvent(target, Events.KEYUP, detail);
+	    detail.dispose();
+	}
+	/**
+	 * 初始化。
+	 *
+	 * InputEventAdapter如其名所示，是对输入事件的适配，为上层提供统一的接口。主要功能有：
+	 *
+	 * 1.把鼠标事件、触屏事件和指针事件统一成qtk-pointer事件。
+	 *
+	 * 2.把DOMMouseScroll和mousewheel事件统一成qtk-wheel事件。
+	 *
+	 * 3.把keydown/keyup事件转换成qtk-keydown/qtk-keyup事件。
+	 *
+	 * 4.把tizen和phonegap的按键事件转换成标准的key事件。
+	 *
+	 * 5.实现grab/ungrab功能。事件优先发给最后grab的target。
+	 *
+	 * @param doc document对象。
+	 * @param win window对象。
+	 * @param pointerSupported 当前系统是否支持pointer事件。
+	 * @param msPointerSupported 当前系统是否支持ms pointer事件。
+	 * @param touchSupported 当前系统是否支持触屏事件。
+	 *
+	 */
+	function init(doc, win, pointerSupported, msPointerSupported, touchSupported) {
+	    doc.addEventListener('tizenhwkey', function (evt) {
+	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_TIZEN_HW);
+	    });
+	    doc.addEventListener("backbutton", function (evt) {
+	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_BACK);
+	    });
+	    doc.addEventListener("menubutton", function (evt) {
+	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_MENU);
+	    });
+	    doc.addEventListener("searchbutton", function (evt) {
+	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_SEARCH);
+	    });
+	    if (pointerSupported) {
+	        pointerDeviceType = "pointer";
+	        doc.addEventListener('pointerdown', onPointerDown);
+	        doc.addEventListener('pointermove', onPointerMove);
+	        doc.addEventListener('pointerup', onPointerUp);
+	        doc.addEventListener('mousewheel', onWheel);
+	    }
+	    else if (msPointerSupported) {
+	        pointerDeviceType = "pointer";
+	        doc.addEventListener('MSPointerDown', onPointerDown);
+	        doc.addEventListener('MSPointerMove', onPointerMove);
+	        doc.addEventListener('MSPointerUp', onPointerUp);
+	        doc.addEventListener('mousewheel', onWheel);
+	    }
+	    else if (touchSupported) {
+	        pointerDeviceType = "touch";
+	        doc.addEventListener('touchstart', onTouchStart);
+	        doc.addEventListener('touchmove', onTouchMove);
+	        doc.addEventListener('touchend', onTouchEnd);
+	    }
+	    else {
+	        pointerDeviceType = "mouse";
+	        doc.addEventListener('mousedown', onMouseDown);
+	        doc.addEventListener('mousemove', onMouseMove);
+	        doc.addEventListener('mouseup', onMouseUp);
+	        doc.addEventListener('mouseout', onMouseOut);
+	        doc.addEventListener('mouseover', onMouseOver);
+	        doc.addEventListener('dblclick', onDblClick);
+	    }
+	    doc.addEventListener('mousewheel', onWheel);
+	    doc.addEventListener('DOMMouseScroll', onWheel);
+	    doc.addEventListener('keyup', onKeyUp);
+	    doc.addEventListener('keydown', onKeyDown);
+	}
+	exports.init = init;
+	/**
+	 * grab输入事件。输入事件后发送给最后grab的target。
+	 */
+	function grab(target) {
+	    grabs.push(target);
+	}
+	exports.grab = grab;
+	/**
+	 * ungrab移出最后grab的target。
+	 */
+	function ungrab(target) {
+	    return grabs.pop();
+	}
+	exports.ungrab = ungrab;
+	/**
+	 * grab输入事件。输入事件后发送给最后grab的target。
+	 */
+	function grabKey(target) {
+	    keyGrabs.push(target);
+	}
+	exports.grabKey = grabKey;
+	/**
+	 * ungrab移出最后grab的target。
+	 */
+	function ungrabKey(target) {
+	    return keyGrabs.pop();
+	}
+	exports.ungrabKey = ungrabKey;
+	/**
+	 * 注册全局的Input事件。
+	 */
+	function on(type, callback) {
+	    globalInputEmitter.on(type, callback);
+	}
+	exports.on = on;
+	/**
+	 * 注销全局的Input事件。
+	 */
+	function off(type, callback) {
+	    globalInputEmitter.off(type, callback);
+	}
+	exports.off = off;
+
+
+/***/ },
 /* 16 */
+/***/ function(module, exports) {
+
+	"use strict";
+	exports.KeyEvent = {
+	    VK_CANCEL: 3,
+	    VK_HELP: 6,
+	    VK_BACK_SPACE: 8,
+	    VK_TAB: 9,
+	    VK_CLEAR: 12,
+	    VK_RETURN: 13,
+	    VK_ENTER: 14,
+	    VK_SHIFT: 16,
+	    VK_CONTROL: 17,
+	    VK_ALT: 18,
+	    VK_PAUSE: 19,
+	    VK_CAPS_LOCK: 20,
+	    VK_ESCAPE: 27,
+	    VK_SPACE: 32,
+	    VK_PAGE_UP: 33,
+	    VK_PAGE_DOWN: 34,
+	    VK_END: 35,
+	    VK_HOME: 36,
+	    VK_LEFT: 37,
+	    VK_UP: 38,
+	    VK_RIGHT: 39,
+	    VK_DOWN: 40,
+	    VK_PRINTSCREEN: 44,
+	    VK_INSERT: 45,
+	    VK_DELETE: 46,
+	    VK_0: 48,
+	    VK_1: 49,
+	    VK_2: 50,
+	    VK_3: 51,
+	    VK_4: 52,
+	    VK_5: 53,
+	    VK_6: 54,
+	    VK_7: 55,
+	    VK_8: 56,
+	    VK_9: 57,
+	    VK_SEMICOLON: 59,
+	    VK_EQUALS: 61,
+	    VK_A: 65,
+	    VK_B: 66,
+	    VK_C: 67,
+	    VK_D: 68,
+	    VK_E: 69,
+	    VK_F: 70,
+	    VK_G: 71,
+	    VK_H: 72,
+	    VK_I: 73,
+	    VK_J: 74,
+	    VK_K: 75,
+	    VK_L: 76,
+	    VK_M: 77,
+	    VK_N: 78,
+	    VK_O: 79,
+	    VK_P: 80,
+	    VK_Q: 81,
+	    VK_R: 82,
+	    VK_S: 83,
+	    VK_T: 84,
+	    VK_U: 85,
+	    VK_V: 86,
+	    VK_W: 87,
+	    VK_X: 88,
+	    VK_Y: 89,
+	    VK_Z: 90,
+	    VK_CONTEXT_MENU: 93,
+	    VK_NUMPAD0: 96,
+	    VK_NUMPAD1: 97,
+	    VK_NUMPAD2: 98,
+	    VK_NUMPAD3: 99,
+	    VK_NUMPAD4: 100,
+	    VK_NUMPAD5: 101,
+	    VK_NUMPAD6: 102,
+	    VK_NUMPAD7: 103,
+	    VK_NUMPAD8: 104,
+	    VK_NUMPAD9: 105,
+	    VK_MULTIPLY: 106,
+	    VK_ADD: 107,
+	    VK_SEPARATOR: 108,
+	    VK_SUBTRACT: 109,
+	    VK_DECIMAL: 110,
+	    VK_DIVIDE: 111,
+	    VK_F1: 112,
+	    VK_F2: 113,
+	    VK_F3: 114,
+	    VK_F4: 115,
+	    VK_F5: 116,
+	    VK_F6: 117,
+	    VK_F7: 118,
+	    VK_F8: 119,
+	    VK_F9: 120,
+	    VK_F10: 121,
+	    VK_F11: 122,
+	    VK_F12: 123,
+	    VK_F13: 124,
+	    VK_F14: 125,
+	    VK_F15: 126,
+	    VK_F16: 127,
+	    VK_F17: 128,
+	    VK_F18: 129,
+	    VK_F19: 130,
+	    VK_F20: 131,
+	    VK_F21: 132,
+	    VK_F22: 133,
+	    VK_F23: 134,
+	    VK_F24: 135,
+	    VK_BACK: 136,
+	    VK_MENU: 137,
+	    VK_SEARCH: 138,
+	    VK_TIZEN_HW: 139,
+	    VK_NUM_LOCK: 144,
+	    VK_SCROLL_LOCK: 145,
+	    VK_COMMA: 188,
+	    VK_PERIOD: 190,
+	    VK_SLASH: 191,
+	    VK_BACK_QUOTE: 192,
+	    VK_OPEN_BRACKET: 219,
+	    VK_BACK_SLASH: 220,
+	    VK_CLOSE_BRACKET: 221,
+	    VK_QUOTE: 222,
+	    VK_META: 224
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var point_1 = __webpack_require__(2);
+	var label_1 = __webpack_require__(18);
+	var Events = __webpack_require__(6);
+	var widget_factory_1 = __webpack_require__(23);
+	var html_edit_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
+	 */
+	var Edit = (function (_super) {
+	    __extends(Edit, _super);
+	    function Edit() {
+	        _super.call(this, Edit.TYPE);
+	    }
+	    Object.defineProperty(Edit.prototype, "inputable", {
+	        get: function () {
+	            return true;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Edit.prototype, "inputFilter", {
+	        /**
+	         * 输入过滤器，对输入的文本进行转换。
+	         */
+	        set: function (value) {
+	            this._inputFilter = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Edit.prototype, "inputTips", {
+	        get: function () {
+	            return this._it;
+	        },
+	        /**
+	         * 输入提示。
+	         */
+	        set: function (value) {
+	            this._it = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Edit.prototype, "inputType", {
+	        get: function () {
+	            return this._itp;
+	        },
+	        /**
+	         * 输入类型。
+	         */
+	        set: function (value) {
+	            this._itp = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Edit.prototype.draw = function (ctx) {
+	        if (!this._isEditing) {
+	            _super.prototype.draw.call(this, ctx);
+	        }
+	    };
+	    Edit.prototype.relayoutText = function () {
+	        if (!this._isEditing) {
+	            _super.prototype.relayoutText.call(this);
+	        }
+	        return this;
+	    };
+	    Edit.prototype.drawText = function (ctx, style) {
+	        if (this._textLines && this._textLines.length) {
+	            _super.prototype.drawText.call(this, ctx, style);
+	        }
+	        else if (this._it) {
+	            this.drawTextSL(ctx, this._it, style);
+	        }
+	        return this;
+	    };
+	    Edit.prototype.getStyleType = function () {
+	        if (this._styleType) {
+	            return this._styleType;
+	        }
+	        else {
+	            if (this._text || this._isEditing) {
+	                return this.multiLineMode ? "edit.ml" : "edit.sl";
+	            }
+	            else {
+	                return this.multiLineMode ? "edit.ml.tips" : "edit.sl.tips";
+	            }
+	        }
+	    };
+	    Edit.prototype.filterText = function (value) {
+	        return this._inputFilter ? this._inputFilter(value) : value;
+	    };
+	    Edit.prototype.showEditor = function () {
+	        var _this = this;
+	        var style = this.getStyle();
+	        this._input = this.multiLineMode ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
+	        var input = this._input;
+	        var p = this.toViewPoint(point_1.Point.point.init(0, 0));
+	        input.move(p.x, p.y);
+	        input.text = this.text || "";
+	        input.resize(this.w, this.h);
+	        input.fontSize = style.fontSize;
+	        input.inputType = this.inputType;
+	        input.textColor = style.textColor;
+	        input.fontFamily = style.fontFamily;
+	        input.show();
+	        input.z = this.win.z + 1;
+	        this.dispatchEvent({ type: Events.FOCUS });
+	        input.on(Events.HIDE, function (evt) {
+	            _this._isEditing = false;
+	            _this.relayoutText();
+	            _this._input = null;
+	            _this.dispatchEvent({ type: Events.BLUR });
+	        });
+	        input.on(Events.CHANGING, function (evt) {
+	            var e = _this.eChangeEvent;
+	            _this.text = _this.filterText(evt.value);
+	            e.init(Events.CHANGE, { value: _this.text });
+	            ;
+	            _this.dispatchEvent(e);
+	        });
+	        input.on(Events.CHANGE, function (evt) {
+	            var e = _this.eChangeEvent;
+	            _this.text = _this.filterText(evt.value);
+	            e.init(Events.CHANGE, { value: _this.text });
+	            ;
+	            _this.dispatchEvent(e);
+	        });
+	    };
+	    Edit.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._input = null;
+	        this._inputFilter = null;
+	    };
+	    Edit.prototype.dispatchClick = function (evt) {
+	        _super.prototype.dispatchClick.call(this, evt);
+	        if (!this._isEditing) {
+	            this._isEditing = true;
+	            this.showEditor();
+	        }
+	    };
+	    Edit.prototype.getDefProps = function () {
+	        return Edit.defProps;
+	    };
+	    Edit.create = function (options) {
+	        return Edit.r.create().reset(Edit.TYPE, options);
+	    };
+	    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _it: null, _itp: null });
+	    Edit.TYPE = "edit";
+	    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
+	    return Edit;
+	}(label_1.Label));
+	exports.Edit = Edit;
+	;
+	widget_factory_1.WidgetFactory.register(Edit.TYPE, Edit.create);
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	var graphics_1 = __webpack_require__(25);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 文本控件。
+	 */
+	var Label = (function (_super) {
+	    __extends(Label, _super);
+	    function Label(type) {
+	        _super.call(this, type || Label.TYPE);
+	    }
+	    /**
+	     * 对文本进行重新排版。
+	     */
+	    Label.prototype.relayoutText = function () {
+	        if (this._inited) {
+	            var style = this.getStyle();
+	            var text = this.getLocaleText();
+	            this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
+	        }
+	        return this;
+	    };
+	    ;
+	    Object.defineProperty(Label.prototype, "multiLineMode", {
+	        /**
+	         * 是否启用多行模式。
+	         */
+	        get: function () {
+	            return this._mlm;
+	        },
+	        set: function (value) {
+	            this.setProp("mlm", value, true);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Label.prototype, "value", {
+	        /**
+	         * Label的值即它的文本。
+	         */
+	        get: function () {
+	            return this.text;
+	        },
+	        set: function (value) {
+	            this.text = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Label.prototype.setStyle = function (state, style) {
+	        _super.prototype.setStyle.call(this, state, style);
+	        this.relayoutText();
+	        return this;
+	    };
+	    Label.prototype.drawTextSL = function (ctx, text, style) {
+	        if (text && style.textColor) {
+	            graphics_1.Graphics.drawTextSL(ctx, text, style, this.getTextRect(style));
+	        }
+	        return this;
+	    };
+	    Label.prototype.drawTextML = function (ctx, style) {
+	        if (style.textColor) {
+	            graphics_1.Graphics.drawTextML(ctx, this._textLines, style, this.getTextRect(style));
+	        }
+	        return this;
+	    };
+	    Label.prototype.drawText = function (ctx, style) {
+	        if (this._textLines && this._textLines.length) {
+	            if (this._mlm) {
+	                this.drawTextML(ctx, style);
+	            }
+	            else {
+	                var text = this._textLines[0].text;
+	                this.drawTextSL(ctx, text, style);
+	            }
+	        }
+	        return this;
+	    };
+	    Label.prototype.setProp = function (prop, newValue, notify) {
+	        _super.prototype.setProp.call(this, prop, newValue, notify);
+	        if (prop === "w" || prop === "h" || prop === "value" || prop === "text") {
+	            this.relayoutText();
+	        }
+	        return this;
+	    };
+	    Label.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        this.relayoutText();
+	    };
+	    Label.prototype.getDefProps = function () {
+	        return Label.defProps;
+	    };
+	    Label.create = function (options) {
+	        return Label.recycleBin.create().reset(Label.TYPE, options);
+	    };
+	    Label.defProps = Object.assign({}, widget_1.Widget.defProps, { _mlm: true, _lp: 5, _tp: 5, _rp: 5, _bp: 5 });
+	    Label.TYPE = "label";
+	    Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
+	    return Label;
+	}(widget_1.Widget));
+	exports.Label = Label;
+	;
+	widget_factory_1.WidgetFactory.register(Label.TYPE, Label.create);
+
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/globals/tween.js/index.d.ts"/>
@@ -3463,18 +4272,18 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var style_1 = __webpack_require__(14);
-	var canvas_1 = __webpack_require__(17);
-	var TWEEN = __webpack_require__(21);
-	var emitter_1 = __webpack_require__(8);
-	var utils_1 = __webpack_require__(22);
-	var Events = __webpack_require__(7);
-	var matrix_stack_1 = __webpack_require__(12);
+	var rect_1 = __webpack_require__(1);
+	var style_1 = __webpack_require__(3);
+	var canvas_1 = __webpack_require__(13);
+	var TWEEN = __webpack_require__(20);
+	var emitter_1 = __webpack_require__(4);
+	var utils_1 = __webpack_require__(21);
+	var Events = __webpack_require__(6);
+	var matrix_stack_1 = __webpack_require__(22);
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
 	var dirty_rect_context_1 = __webpack_require__(76);
-	var image_tile_1 = __webpack_require__(15);
+	var image_tile_1 = __webpack_require__(7);
 	var behavior_1 = __webpack_require__(77);
 	var layouter_1 = __webpack_require__(78);
 	var iview_modal_1 = __webpack_require__(79);
@@ -5198,745 +6007,7 @@ var qtk =
 
 
 /***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var emitter_1 = __webpack_require__(8);
-	var Events = __webpack_require__(7);
-	var event_detail_1 = __webpack_require__(18);
-	var inputEventAdapter = __webpack_require__(19);
-	/**
-	 * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
-	 *
-	 * 1.对指针事件坐标的转换，让绝对坐标变成相对与Canvas左上角的坐标。
-	 *
-	 * 2.支持高清屏。为了避免在高清屏上图片模糊，让Canvas的宽高乘以devicePixelRatio, Canvas的style.width/style.height仍然用实际的宽高，getContext时预先将矩阵乘以devicePixelRatio，从而让使用者无需关心当前屏幕的类型。
-	 *
-	 */
-	var Canvas = (function (_super) {
-	    __extends(Canvas, _super);
-	    function Canvas(x, y, w, h, devicePixelRatio, offline) {
-	        _super.call(this);
-	        this._id = "canvas";
-	        this._x = x || 0;
-	        this._y = y || 0;
-	        this._w = w || 0;
-	        this._h = h || 0;
-	        this._offline = offline || false;
-	        this._devicePixelRatio = devicePixelRatio || 1;
-	        var me = this;
-	        this.onPointerEvent = function (evt) {
-	            me.transformXY(evt.detail);
-	            var e = Events.PointerEvent.create(evt.type, evt.detail);
-	            me.dispatchEvent(e);
-	            e.dispose();
-	        };
-	        this.onKeyEvent = function (evt) {
-	            var e = Events.KeyEvent.create(evt.type, evt.detail);
-	            me.dispatchEvent(e);
-	            e.dispose();
-	        };
-	        this.onWheelEvent = function (evt) {
-	            var e = Events.WheelEvent.create(evt.detail);
-	            me.dispatchEvent(e);
-	            e.dispose();
-	        };
-	    }
-	    Canvas.prototype.transformXY = function (detail) {
-	        detail.x -= this.x;
-	        detail.y -= this.y;
-	        detail.pointerDownX -= this.x;
-	        detail.pointerDownY -= this.y;
-	    };
-	    Object.defineProperty(Canvas.prototype, "id", {
-	        get: function () {
-	            return this._id;
-	        },
-	        set: function (value) {
-	            this._id = value;
-	            if (this.canvas) {
-	                this.canvas.id = value;
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "x", {
-	        get: function () {
-	            return this._x;
-	        },
-	        set: function (value) {
-	            this._x = value;
-	            this.moveCanvas(this.canvas);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "y", {
-	        get: function () {
-	            return this._y;
-	        },
-	        set: function (value) {
-	            this._y = value;
-	            this.moveCanvas(this.canvas);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "w", {
-	        get: function () {
-	            return this._w;
-	        },
-	        set: function (value) {
-	            this._w = value;
-	            this.resizeCanvas(this.canvas);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "h", {
-	        get: function () {
-	            return this._h;
-	        },
-	        set: function (value) {
-	            this._h = value;
-	            this.resizeCanvas(this.canvas);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "width", {
-	        get: function () {
-	            return this._w;
-	        },
-	        set: function (value) {
-	            this.w = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Canvas.prototype, "height", {
-	        get: function () {
-	            return this._h;
-	        },
-	        set: function (value) {
-	            this.h = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Canvas.prototype.grabKey = function () {
-	        inputEventAdapter.grabKey(this.canvas);
-	    };
-	    Canvas.prototype.ungrabKey = function () {
-	        inputEventAdapter.ungrabKey(this.canvas);
-	    };
-	    Canvas.prototype.grab = function () {
-	        inputEventAdapter.grab(this.canvas);
-	    };
-	    Canvas.prototype.ungrab = function () {
-	        inputEventAdapter.ungrab(this.canvas);
-	    };
-	    Canvas.prototype.moveCanvas = function (canvas) {
-	        if (canvas) {
-	            var x = this._x;
-	            var y = this._y;
-	            canvas.style.position = "absolute";
-	            canvas.style.left = x + "px";
-	            canvas.style.top = y + "px";
-	        }
-	    };
-	    Canvas.prototype.resizeCanvas = function (canvas) {
-	        if (canvas) {
-	            var w = this._w;
-	            var h = this._h;
-	            canvas.width = w * this._devicePixelRatio;
-	            canvas.style.width = w + "px";
-	            canvas.height = h * this._devicePixelRatio;
-	            canvas.style.height = h + "px";
-	        }
-	    };
-	    Object.defineProperty(Canvas.prototype, "z", {
-	        set: function (value) {
-	            this._z = value;
-	            this.canvas.style.zIndex = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Canvas.prototype.dispose = function () {
-	        var canvas = this.canvas;
-	        if (!this._offline) {
-	            document.body.removeChild(canvas);
-	        }
-	        canvas.removeEventListener(Events.POINTER_DOWN, this.onPointerEvent);
-	        canvas.removeEventListener(Events.POINTER_MOVE, this.onPointerEvent);
-	        canvas.removeEventListener(Events.POINTER_UP, this.onPointerEvent);
-	        canvas.removeEventListener(Events.CLICK, this.onPointerEvent);
-	        canvas.removeEventListener(Events.WHEEL, this.onWheelEvent);
-	        canvas.removeEventListener(Events.KEYDOWN, this.onKeyEvent);
-	        canvas.removeEventListener(Events.KEYUP, this.onKeyEvent);
-	    };
-	    Canvas.prototype.createCanvas = function () {
-	        var canvas = document.createElement("canvas");
-	        canvas.id = this._id;
-	        this.moveCanvas(canvas);
-	        this.resizeCanvas(canvas);
-	        if (!this._offline) {
-	            document.body.appendChild(canvas);
-	        }
-	        var me = this;
-	        canvas.addEventListener(Events.POINTER_DOWN, this.onPointerEvent);
-	        canvas.addEventListener(Events.POINTER_MOVE, this.onPointerEvent);
-	        canvas.addEventListener(Events.POINTER_UP, this.onPointerEvent);
-	        canvas.addEventListener(Events.CLICK, this.onPointerEvent);
-	        canvas.addEventListener(Events.DBLCLICK, this.onPointerEvent);
-	        canvas.addEventListener(Events.WHEEL, this.onWheelEvent);
-	        canvas.addEventListener(Events.KEYDOWN, this.onKeyEvent);
-	        canvas.addEventListener(Events.KEYUP, this.onKeyEvent);
-	        canvas.oncontextmenu = function (evt) {
-	            evt.preventDefault();
-	            var detail = event_detail_1.PointerEventDetail.create(evt.which, evt.pageX, evt.pageY, evt.altKey, evt.ctrlKey, evt.shiftKey, false);
-	            me.onPointerEvent({ type: Events.CONTEXT_MENU, detail: detail });
-	            detail.dispose();
-	        };
-	        return canvas;
-	    };
-	    Canvas.prototype.ensureCanvas = function () {
-	        if (!this.canvas) {
-	            this.canvas = this.createCanvas();
-	        }
-	    };
-	    Canvas.prototype.getContext = function (type) {
-	        if (!this.canvas) {
-	            this.canvas = this.createCanvas();
-	        }
-	        var ctx = this.canvas.getContext("2d");
-	        ctx.setTransform(1, 0, 0, 1, 0, 0);
-	        ctx.scale(this._devicePixelRatio, this._devicePixelRatio);
-	        return ctx;
-	    };
-	    Canvas.create = function (x, y, w, h, devicePixelRatio, offline) {
-	        return new Canvas(x, y, w, h, devicePixelRatio, offline);
-	    };
-	    return Canvas;
-	}(emitter_1.Emitter));
-	exports.Canvas = Canvas;
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	/**
-	 * 输入事件的详细信息。
-	 */
-	var InputEventDetail = (function () {
-	    function InputEventDetail(altKey, ctrlKey, shiftKey, commandKey) {
-	        this.altKey = altKey;
-	        this.ctrlKey = ctrlKey;
-	        this.shiftKey = shiftKey;
-	        this.commandKey = commandKey;
-	    }
-	    return InputEventDetail;
-	}());
-	exports.InputEventDetail = InputEventDetail;
-	;
-	/**
-	 * 指针事件的详细信息。
-	 */
-	var PointerEventDetail = (function (_super) {
-	    __extends(PointerEventDetail, _super);
-	    function PointerEventDetail(id, x, y, altKey, ctrlKey, shiftKey, commandKey) {
-	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-	        this.id = id;
-	        this.x = x;
-	        this.y = y;
-	        this.pointerDown = false;
-	        this.pointerDownX = 0;
-	        this.pointerDownY = 0;
-	        this.pointerDownTime = 0;
-	    }
-	    /**
-	     * 设置指针按下的状态。
-	     */
-	    PointerEventDetail.prototype.setPointerDown = function (pointerDown, x, y, t) {
-	        this.pointerDownX = x;
-	        this.pointerDownY = y;
-	        this.pointerDownTime = t;
-	        this.pointerDown = pointerDown;
-	    };
-	    PointerEventDetail.prototype.dispose = function () {
-	    };
-	    PointerEventDetail.create = function (id, x, y, altKey, ctrlKey, shiftKey, commandKey) {
-	        var detail = new PointerEventDetail(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
-	        return detail;
-	    };
-	    return PointerEventDetail;
-	}(InputEventDetail));
-	exports.PointerEventDetail = PointerEventDetail;
-	;
-	/**
-	 * 按键事件的详细信息。
-	 */
-	var KeyEventDetail = (function (_super) {
-	    __extends(KeyEventDetail, _super);
-	    function KeyEventDetail(keyCode, altKey, ctrlKey, shiftKey, commandKey) {
-	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-	        this.keyCode = keyCode;
-	    }
-	    KeyEventDetail.prototype.dispose = function () {
-	    };
-	    KeyEventDetail.create = function (keyCode, altKey, ctrlKey, shiftKey, commandKey) {
-	        var detail = new KeyEventDetail(keyCode, altKey, ctrlKey, shiftKey, commandKey);
-	        return detail;
-	    };
-	    return KeyEventDetail;
-	}(InputEventDetail));
-	exports.KeyEventDetail = KeyEventDetail;
-	;
-	/**
-	 * 滚轮事件的详细信息。
-	 */
-	var WheelEventDetail = (function (_super) {
-	    __extends(WheelEventDetail, _super);
-	    function WheelEventDetail(delta, altKey, ctrlKey, shiftKey, commandKey) {
-	        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-	        this.delta = delta;
-	    }
-	    WheelEventDetail.prototype.dispose = function () {
-	    };
-	    WheelEventDetail.create = function (delta, altKey, ctrlKey, shiftKey, commandKey) {
-	        var detail = new WheelEventDetail(delta, altKey, ctrlKey, shiftKey, commandKey);
-	        return detail;
-	    };
-	    return WheelEventDetail;
-	}(InputEventDetail));
-	exports.WheelEventDetail = WheelEventDetail;
-	;
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Events = __webpack_require__(7);
-	var key_event_1 = __webpack_require__(20);
-	var emitter_1 = __webpack_require__(8);
-	var event_detail_1 = __webpack_require__(18);
-	var grabs = [];
-	var keyGrabs = [];
-	var lastDetail;
-	var ctrlKey = false;
-	var altKey = false;
-	var shiftKey = false;
-	var commandKey = false;
-	var pointerDeviceType;
-	var pointerDown = false;
-	var pointerDownX = 0;
-	var pointerDownY = 0;
-	var pointerDownTime = 0;
-	var globalInputEmitter = new emitter_1.Emitter();
-	function dispatchEvent(target, type, detail) {
-	    var realTarget = target;
-	    if (grabs.length) {
-	        realTarget = grabs[grabs.length - 1];
-	    }
-	    else if (keyGrabs.length) {
-	        if ((type === Events.KEYDOWN || type === Events.KEYUP) && target.tagName === "BODY") {
-	            realTarget = keyGrabs[keyGrabs.length - 1];
-	        }
-	    }
-	    var event = new CustomEvent(type, { detail: detail });
-	    globalInputEmitter.dispatchEvent(event);
-	    realTarget.dispatchEvent(event);
-	}
-	function getPointerDetail(e) {
-	    if (e) {
-	        var id = e.identifier || 0;
-	        var x = Math.max(e.pageX || 0, e.x || e.clientX);
-	        var y = Math.max(e.pageY || 0, e.y || e.clientY);
-	        lastDetail = event_detail_1.PointerEventDetail.create(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
-	        lastDetail.timeStamp = e.timeStamp;
-	    }
-	    return lastDetail;
-	}
-	function dispatchPointerEvent(type, target, detail) {
-	    if (type === Events.POINTER_DOWN) {
-	        pointerDown = true;
-	        pointerDownX = detail.x;
-	        pointerDownY = detail.y;
-	        pointerDownTime = Date.now();
-	    }
-	    else if (type === Events.POINTER_UP) {
-	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
-	        var dx = Math.abs(detail.x - pointerDownX);
-	        var dy = Math.abs(detail.y - pointerDownY);
-	        var isClick = dx < 5 && dy < 5;
-	        pointerDown = false;
-	        if (isClick) {
-	            dispatchEvent(target, Events.CLICK, detail);
-	        }
-	    }
-	    else {
-	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
-	    }
-	    dispatchEvent(target, type, detail);
-	    detail.dispose();
-	}
-	function onMouseDown(evt) {
-	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
-	}
-	function onMouseMove(evt) {
-	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
-	}
-	function onMouseUp(evt) {
-	    dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
-	}
-	function onDblClick(evt) {
-	    dispatchPointerEvent(Events.DBLCLICK, evt.target, getPointerDetail(evt));
-	}
-	function onMouseOut(evt) {
-	    dispatchPointerEvent(Events.POINTER_OUT, evt.target, getPointerDetail(evt));
-	}
-	function onMouseOver(evt) {
-	    dispatchPointerEvent(Events.POINTER_OVER, evt.target, getPointerDetail(evt));
-	}
-	function getTouchPoints(evt) {
-	    var touches = evt.touches || evt.changedTouches || evt.touchList;
-	    var ret = touches.map(function (touch) {
-	        return getPointerDetail(touch);
-	    });
-	    if (ret.length < 1) {
-	        ret.push(getPointerDetail(null));
-	    }
-	    return ret;
-	}
-	function onTouchStart(evt) {
-	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
-	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, detail);
-	}
-	function onTouchMove(evt) {
-	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
-	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, detail);
-	}
-	function onTouchEnd(evt) {
-	    var detail = getPointerDetail(getTouchPoints(evt)[0]);
-	    dispatchPointerEvent(Events.POINTER_UP, evt.target, detail);
-	}
-	function onPointerDown(evt) {
-	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
-	}
-	function onPointerMove(evt) {
-	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, getPointerDetail(evt));
-	}
-	function onPointerUp(evt) {
-	    dispatchPointerEvent(Events.POINTER_UP, evt.target, getPointerDetail(evt));
-	}
-	function onWheel(evt) {
-	    var delta = evt.wheelDelta || evt.detail * -8;
-	    var detail = event_detail_1.WheelEventDetail.create(delta, altKey, ctrlKey, shiftKey, commandKey);
-	    detail.timeStamp = evt.timeStamp;
-	    dispatchEvent(evt.target, Events.WHEEL, detail);
-	    detail.dispose();
-	}
-	function updateKeysStatus(keyCode, value) {
-	    switch (keyCode) {
-	        case key_event_1.KeyEvent.VK_CONTROL: {
-	            ctrlKey = value;
-	            break;
-	        }
-	        case key_event_1.KeyEvent.VK_ALT: {
-	            altKey = value;
-	            break;
-	        }
-	        case key_event_1.KeyEvent.VK_SHIFT: {
-	            shiftKey = value;
-	            break;
-	        }
-	        case key_event_1.KeyEvent.VK_META: {
-	            commandKey = value;
-	            break;
-	        }
-	    }
-	}
-	function onKeyDown(evt) {
-	    updateKeysStatus(evt.keyCode, true);
-	    var detail = event_detail_1.KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
-	    detail.timeStamp = evt.timeStamp;
-	    dispatchEvent(evt.target, Events.KEYDOWN, detail);
-	    detail.dispose();
-	}
-	function onKeyUp(evt) {
-	    updateKeysStatus(evt.keyCode, false);
-	    var detail = event_detail_1.KeyEventDetail.create(evt.keyCode, altKey, ctrlKey, shiftKey, commandKey);
-	    detail.timeStamp = evt.timeStamp;
-	    dispatchEvent(evt.target, Events.KEYUP, detail);
-	    detail.dispose();
-	}
-	function dispatchKeyEvent(target, keyCode) {
-	    var detail = event_detail_1.KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);
-	    dispatchEvent(target, Events.KEYDOWN, detail);
-	    dispatchEvent(target, Events.KEYUP, detail);
-	    detail.dispose();
-	}
-	/**
-	 * 初始化。
-	 *
-	 * InputEventAdapter如其名所示，是对输入事件的适配，为上层提供统一的接口。主要功能有：
-	 *
-	 * 1.把鼠标事件、触屏事件和指针事件统一成qtk-pointer事件。
-	 *
-	 * 2.把DOMMouseScroll和mousewheel事件统一成qtk-wheel事件。
-	 *
-	 * 3.把keydown/keyup事件转换成qtk-keydown/qtk-keyup事件。
-	 *
-	 * 4.把tizen和phonegap的按键事件转换成标准的key事件。
-	 *
-	 * 5.实现grab/ungrab功能。事件优先发给最后grab的target。
-	 *
-	 * @param doc document对象。
-	 * @param win window对象。
-	 * @param pointerSupported 当前系统是否支持pointer事件。
-	 * @param msPointerSupported 当前系统是否支持ms pointer事件。
-	 * @param touchSupported 当前系统是否支持触屏事件。
-	 *
-	 */
-	function init(doc, win, pointerSupported, msPointerSupported, touchSupported) {
-	    doc.addEventListener('tizenhwkey', function (evt) {
-	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_TIZEN_HW);
-	    });
-	    doc.addEventListener("backbutton", function (evt) {
-	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_BACK);
-	    });
-	    doc.addEventListener("menubutton", function (evt) {
-	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_MENU);
-	    });
-	    doc.addEventListener("searchbutton", function (evt) {
-	        dispatchKeyEvent(evt.target, key_event_1.KeyEvent.VK_SEARCH);
-	    });
-	    if (pointerSupported) {
-	        pointerDeviceType = "pointer";
-	        doc.addEventListener('pointerdown', onPointerDown);
-	        doc.addEventListener('pointermove', onPointerMove);
-	        doc.addEventListener('pointerup', onPointerUp);
-	        doc.addEventListener('mousewheel', onWheel);
-	    }
-	    else if (msPointerSupported) {
-	        pointerDeviceType = "pointer";
-	        doc.addEventListener('MSPointerDown', onPointerDown);
-	        doc.addEventListener('MSPointerMove', onPointerMove);
-	        doc.addEventListener('MSPointerUp', onPointerUp);
-	        doc.addEventListener('mousewheel', onWheel);
-	    }
-	    else if (touchSupported) {
-	        pointerDeviceType = "touch";
-	        doc.addEventListener('touchstart', onTouchStart);
-	        doc.addEventListener('touchmove', onTouchMove);
-	        doc.addEventListener('touchend', onTouchEnd);
-	    }
-	    else {
-	        pointerDeviceType = "mouse";
-	        doc.addEventListener('mousedown', onMouseDown);
-	        doc.addEventListener('mousemove', onMouseMove);
-	        doc.addEventListener('mouseup', onMouseUp);
-	        doc.addEventListener('mouseout', onMouseOut);
-	        doc.addEventListener('mouseover', onMouseOver);
-	        doc.addEventListener('dblclick', onDblClick);
-	    }
-	    doc.addEventListener('mousewheel', onWheel);
-	    doc.addEventListener('DOMMouseScroll', onWheel);
-	    doc.addEventListener('keyup', onKeyUp);
-	    doc.addEventListener('keydown', onKeyDown);
-	}
-	exports.init = init;
-	/**
-	 * grab输入事件。输入事件后发送给最后grab的target。
-	 */
-	function grab(target) {
-	    grabs.push(target);
-	}
-	exports.grab = grab;
-	/**
-	 * ungrab移出最后grab的target。
-	 */
-	function ungrab(target) {
-	    return grabs.pop();
-	}
-	exports.ungrab = ungrab;
-	/**
-	 * grab输入事件。输入事件后发送给最后grab的target。
-	 */
-	function grabKey(target) {
-	    keyGrabs.push(target);
-	}
-	exports.grabKey = grabKey;
-	/**
-	 * ungrab移出最后grab的target。
-	 */
-	function ungrabKey(target) {
-	    return keyGrabs.pop();
-	}
-	exports.ungrabKey = ungrabKey;
-	/**
-	 * 注册全局的Input事件。
-	 */
-	function on(type, callback) {
-	    globalInputEmitter.on(type, callback);
-	}
-	exports.on = on;
-	/**
-	 * 注销全局的Input事件。
-	 */
-	function off(type, callback) {
-	    globalInputEmitter.off(type, callback);
-	}
-	exports.off = off;
-
-
-/***/ },
 /* 20 */
-/***/ function(module, exports) {
-
-	"use strict";
-	exports.KeyEvent = {
-	    VK_CANCEL: 3,
-	    VK_HELP: 6,
-	    VK_BACK_SPACE: 8,
-	    VK_TAB: 9,
-	    VK_CLEAR: 12,
-	    VK_RETURN: 13,
-	    VK_ENTER: 14,
-	    VK_SHIFT: 16,
-	    VK_CONTROL: 17,
-	    VK_ALT: 18,
-	    VK_PAUSE: 19,
-	    VK_CAPS_LOCK: 20,
-	    VK_ESCAPE: 27,
-	    VK_SPACE: 32,
-	    VK_PAGE_UP: 33,
-	    VK_PAGE_DOWN: 34,
-	    VK_END: 35,
-	    VK_HOME: 36,
-	    VK_LEFT: 37,
-	    VK_UP: 38,
-	    VK_RIGHT: 39,
-	    VK_DOWN: 40,
-	    VK_PRINTSCREEN: 44,
-	    VK_INSERT: 45,
-	    VK_DELETE: 46,
-	    VK_0: 48,
-	    VK_1: 49,
-	    VK_2: 50,
-	    VK_3: 51,
-	    VK_4: 52,
-	    VK_5: 53,
-	    VK_6: 54,
-	    VK_7: 55,
-	    VK_8: 56,
-	    VK_9: 57,
-	    VK_SEMICOLON: 59,
-	    VK_EQUALS: 61,
-	    VK_A: 65,
-	    VK_B: 66,
-	    VK_C: 67,
-	    VK_D: 68,
-	    VK_E: 69,
-	    VK_F: 70,
-	    VK_G: 71,
-	    VK_H: 72,
-	    VK_I: 73,
-	    VK_J: 74,
-	    VK_K: 75,
-	    VK_L: 76,
-	    VK_M: 77,
-	    VK_N: 78,
-	    VK_O: 79,
-	    VK_P: 80,
-	    VK_Q: 81,
-	    VK_R: 82,
-	    VK_S: 83,
-	    VK_T: 84,
-	    VK_U: 85,
-	    VK_V: 86,
-	    VK_W: 87,
-	    VK_X: 88,
-	    VK_Y: 89,
-	    VK_Z: 90,
-	    VK_CONTEXT_MENU: 93,
-	    VK_NUMPAD0: 96,
-	    VK_NUMPAD1: 97,
-	    VK_NUMPAD2: 98,
-	    VK_NUMPAD3: 99,
-	    VK_NUMPAD4: 100,
-	    VK_NUMPAD5: 101,
-	    VK_NUMPAD6: 102,
-	    VK_NUMPAD7: 103,
-	    VK_NUMPAD8: 104,
-	    VK_NUMPAD9: 105,
-	    VK_MULTIPLY: 106,
-	    VK_ADD: 107,
-	    VK_SEPARATOR: 108,
-	    VK_SUBTRACT: 109,
-	    VK_DECIMAL: 110,
-	    VK_DIVIDE: 111,
-	    VK_F1: 112,
-	    VK_F2: 113,
-	    VK_F3: 114,
-	    VK_F4: 115,
-	    VK_F5: 116,
-	    VK_F6: 117,
-	    VK_F7: 118,
-	    VK_F8: 119,
-	    VK_F9: 120,
-	    VK_F10: 121,
-	    VK_F11: 122,
-	    VK_F12: 123,
-	    VK_F13: 124,
-	    VK_F14: 125,
-	    VK_F15: 126,
-	    VK_F16: 127,
-	    VK_F17: 128,
-	    VK_F18: 129,
-	    VK_F19: 130,
-	    VK_F20: 131,
-	    VK_F21: 132,
-	    VK_F22: 133,
-	    VK_F23: 134,
-	    VK_F24: 135,
-	    VK_BACK: 136,
-	    VK_MENU: 137,
-	    VK_SEARCH: 138,
-	    VK_TIZEN_HW: 139,
-	    VK_NUM_LOCK: 144,
-	    VK_SCROLL_LOCK: 145,
-	    VK_COMMA: 188,
-	    VK_PERIOD: 190,
-	    VK_SLASH: 191,
-	    VK_BACK_QUOTE: 192,
-	    VK_OPEN_BRACKET: 219,
-	    VK_BACK_SLASH: 220,
-	    VK_CLOSE_BRACKET: 221,
-	    VK_QUOTE: 222,
-	    VK_META: 224
-	};
-
-
-/***/ },
-/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -6810,10 +6881,10 @@ var qtk =
 
 	})(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	//! stable.js 0.1.5, https://github.com/Two-Screen/stable
@@ -6950,6 +7021,64 @@ var qtk =
 
 
 /***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var matrix_1 = __webpack_require__(12);
+	var MatrixStack = (function () {
+	    function MatrixStack() {
+	        this.stack = [];
+	        this.matrix = new matrix_1.Matrix();
+	    }
+	    MatrixStack.prototype.save = function () {
+	        this.stack.push(this.matrix.clone());
+	        return this;
+	    };
+	    MatrixStack.prototype.restore = function () {
+	        if (this.stack.length) {
+	            this.matrix = this.stack.pop();
+	        }
+	        return this;
+	    };
+	    MatrixStack.prototype.identity = function () {
+	        this.matrix.identity();
+	        return this;
+	    };
+	    MatrixStack.prototype.set = function (a, b, c, d, tx, ty) {
+	        this.matrix.set(a, b, c, d, tx, ty);
+	        return this;
+	    };
+	    MatrixStack.prototype.rotate = function (rad) {
+	        this.matrix.rotate(rad);
+	        return this;
+	    };
+	    MatrixStack.prototype.scale = function (sx, sy) {
+	        this.matrix.scale(sx, sy);
+	        return this;
+	    };
+	    MatrixStack.prototype.translate = function (dx, dy) {
+	        this.matrix.translate(dx, dy);
+	    };
+	    MatrixStack.prototype.transformPoint = function (x, y, out) {
+	        return this.matrix.transformPoint(x, y, out);
+	    };
+	    MatrixStack.prototype.invert = function () {
+	        return this.matrix.invert();
+	    };
+	    MatrixStack.prototype.matrixToString = function () {
+	        return this.matrix.toString();
+	    };
+	    MatrixStack.create = function () {
+	        return new MatrixStack();
+	    };
+	    return MatrixStack;
+	}());
+	exports.MatrixStack = MatrixStack;
+	;
+
+
+/***/ },
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -7018,7 +7147,7 @@ var qtk =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var style_1 = __webpack_require__(14);
+	var style_1 = __webpack_require__(3);
 	var carota = __webpack_require__(26);
 	var ut = __webpack_require__(47);
 	var tokenizer = ut.createTokenizerStream();
@@ -11037,7 +11166,7 @@ var qtk =
 	  module.exports = __webpack_require__(48);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
 /* 52 */
@@ -11995,7 +12124,7 @@ var qtk =
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
 /* 53 */
@@ -14006,7 +14135,7 @@ var qtk =
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
 /* 61 */
@@ -14490,7 +14619,7 @@ var qtk =
 	  state.ended = true;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
 /* 62 */
@@ -15605,7 +15734,7 @@ var qtk =
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(10)))
 
 /***/ },
 /* 70 */
@@ -15987,9 +16116,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var matrix_stack_1 = __webpack_require__(12);
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var matrix_stack_1 = __webpack_require__(22);
 	var DirtyRectContext = (function (_super) {
 	    __extends(DirtyRectContext, _super);
 	    function DirtyRectContext() {
@@ -16057,8 +16186,8 @@ var qtk =
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Events = __webpack_require__(7);
-	var inputEventAdapter = __webpack_require__(19);
+	var Events = __webpack_require__(6);
+	var inputEventAdapter = __webpack_require__(15);
 	/**
 	 * Behavior代表控件的一种行为特性，比如Resizable/Movable/Draggable/Droppable等。
 	 * 把这些行为特性抽象出来单独实现，一方面可以避免让Widget变得太复杂，另一方面可以最大限度的重用这些行为特性。
@@ -16495,322 +16624,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var Group = (function (_super) {
-	    __extends(Group, _super);
-	    function Group() {
-	        _super.call(this, Group.TYPE);
-	    }
-	    Group.create = function (options) {
-	        return Group.recycleBin.create().reset(Group.TYPE, options);
-	    };
-	    Group.TYPE = "group";
-	    Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });
-	    return Group;
-	}(widget_1.Widget));
-	exports.Group = Group;
-	;
-	widget_factory_1.WidgetFactory.register(Group.TYPE, Group.create);
-
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var point_1 = __webpack_require__(1);
-	var label_1 = __webpack_require__(84);
-	var Events = __webpack_require__(7);
-	var widget_factory_1 = __webpack_require__(23);
-	var html_edit_1 = __webpack_require__(85);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
-	 */
-	var Edit = (function (_super) {
-	    __extends(Edit, _super);
-	    function Edit() {
-	        _super.call(this, Edit.TYPE);
-	    }
-	    Object.defineProperty(Edit.prototype, "inputable", {
-	        get: function () {
-	            return true;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Edit.prototype, "inputFilter", {
-	        /**
-	         * 输入过滤器，对输入的文本进行转换。
-	         */
-	        set: function (value) {
-	            this._inputFilter = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Edit.prototype, "inputTips", {
-	        get: function () {
-	            return this._it;
-	        },
-	        /**
-	         * 输入提示。
-	         */
-	        set: function (value) {
-	            this._it = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Edit.prototype, "inputType", {
-	        get: function () {
-	            return this._itp;
-	        },
-	        /**
-	         * 输入类型。
-	         */
-	        set: function (value) {
-	            this._itp = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Edit.prototype.draw = function (ctx) {
-	        if (!this._isEditing) {
-	            _super.prototype.draw.call(this, ctx);
-	        }
-	    };
-	    Edit.prototype.relayoutText = function () {
-	        if (!this._isEditing) {
-	            _super.prototype.relayoutText.call(this);
-	        }
-	        return this;
-	    };
-	    Edit.prototype.drawText = function (ctx, style) {
-	        if (this._textLines && this._textLines.length) {
-	            _super.prototype.drawText.call(this, ctx, style);
-	        }
-	        else if (this._it) {
-	            this.drawTextSL(ctx, this._it, style);
-	        }
-	        return this;
-	    };
-	    Edit.prototype.getStyleType = function () {
-	        if (this._styleType) {
-	            return this._styleType;
-	        }
-	        else {
-	            if (this._text || this._isEditing) {
-	                return this.multiLineMode ? "edit.ml" : "edit.sl";
-	            }
-	            else {
-	                return this.multiLineMode ? "edit.ml.tips" : "edit.sl.tips";
-	            }
-	        }
-	    };
-	    Edit.prototype.filterText = function (value) {
-	        return this._inputFilter ? this._inputFilter(value) : value;
-	    };
-	    Edit.prototype.showEditor = function () {
-	        var _this = this;
-	        var style = this.getStyle();
-	        this._input = this.multiLineMode ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
-	        var input = this._input;
-	        var p = this.toViewPoint(point_1.Point.point.init(0, 0));
-	        input.move(p.x, p.y);
-	        input.text = this.text || "";
-	        input.resize(this.w, this.h);
-	        input.fontSize = style.fontSize;
-	        input.inputType = this.inputType;
-	        input.textColor = style.textColor;
-	        input.fontFamily = style.fontFamily;
-	        input.show();
-	        input.z = this.win.z + 1;
-	        this.dispatchEvent({ type: Events.FOCUS });
-	        input.on(Events.HIDE, function (evt) {
-	            _this._isEditing = false;
-	            _this.relayoutText();
-	            _this._input = null;
-	            _this.dispatchEvent({ type: Events.BLUR });
-	        });
-	        input.on(Events.CHANGING, function (evt) {
-	            var e = _this.eChangeEvent;
-	            _this.text = _this.filterText(evt.value);
-	            e.init(Events.CHANGE, { value: _this.text });
-	            ;
-	            _this.dispatchEvent(e);
-	        });
-	        input.on(Events.CHANGE, function (evt) {
-	            var e = _this.eChangeEvent;
-	            _this.text = _this.filterText(evt.value);
-	            e.init(Events.CHANGE, { value: _this.text });
-	            ;
-	            _this.dispatchEvent(e);
-	        });
-	    };
-	    Edit.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._input = null;
-	        this._inputFilter = null;
-	    };
-	    Edit.prototype.dispatchClick = function (evt) {
-	        _super.prototype.dispatchClick.call(this, evt);
-	        if (!this._isEditing) {
-	            this._isEditing = true;
-	            this.showEditor();
-	        }
-	    };
-	    Edit.prototype.getDefProps = function () {
-	        return Edit.defProps;
-	    };
-	    Edit.create = function (options) {
-	        return Edit.r.create().reset(Edit.TYPE, options);
-	    };
-	    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _it: null, _itp: null });
-	    Edit.TYPE = "edit";
-	    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
-	    return Edit;
-	}(label_1.Label));
-	exports.Edit = Edit;
-	;
-	widget_factory_1.WidgetFactory.register(Edit.TYPE, Edit.create);
-
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_1 = __webpack_require__(16);
-	var graphics_1 = __webpack_require__(25);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 文本控件。
-	 */
-	var Label = (function (_super) {
-	    __extends(Label, _super);
-	    function Label(type) {
-	        _super.call(this, type || Label.TYPE);
-	    }
-	    /**
-	     * 对文本进行重新排版。
-	     */
-	    Label.prototype.relayoutText = function () {
-	        if (this._inited) {
-	            var style = this.getStyle();
-	            var text = this.getLocaleText();
-	            this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
-	        }
-	        return this;
-	    };
-	    ;
-	    Object.defineProperty(Label.prototype, "multiLineMode", {
-	        /**
-	         * 是否启用多行模式。
-	         */
-	        get: function () {
-	            return this._mlm;
-	        },
-	        set: function (value) {
-	            this.setProp("mlm", value, true);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Label.prototype, "value", {
-	        /**
-	         * Label的值即它的文本。
-	         */
-	        get: function () {
-	            return this.text;
-	        },
-	        set: function (value) {
-	            this.text = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Label.prototype.setStyle = function (state, style) {
-	        _super.prototype.setStyle.call(this, state, style);
-	        this.relayoutText();
-	        return this;
-	    };
-	    Label.prototype.drawTextSL = function (ctx, text, style) {
-	        if (text && style.textColor) {
-	            graphics_1.Graphics.drawTextSL(ctx, text, style, this.getTextRect(style));
-	        }
-	        return this;
-	    };
-	    Label.prototype.drawTextML = function (ctx, style) {
-	        if (style.textColor) {
-	            graphics_1.Graphics.drawTextML(ctx, this._textLines, style, this.getTextRect(style));
-	        }
-	        return this;
-	    };
-	    Label.prototype.drawText = function (ctx, style) {
-	        if (this._textLines && this._textLines.length) {
-	            if (this._mlm) {
-	                this.drawTextML(ctx, style);
-	            }
-	            else {
-	                var text = this._textLines[0].text;
-	                this.drawTextSL(ctx, text, style);
-	            }
-	        }
-	        return this;
-	    };
-	    Label.prototype.setProp = function (prop, newValue, notify) {
-	        _super.prototype.setProp.call(this, prop, newValue, notify);
-	        if (prop === "w" || prop === "h" || prop === "value" || prop === "text") {
-	            this.relayoutText();
-	        }
-	        return this;
-	    };
-	    Label.prototype.onInit = function () {
-	        _super.prototype.onInit.call(this);
-	        this.relayoutText();
-	    };
-	    Label.prototype.getDefProps = function () {
-	        return Label.defProps;
-	    };
-	    Label.create = function (options) {
-	        return Label.recycleBin.create().reset(Label.TYPE, options);
-	    };
-	    Label.defProps = Object.assign({}, widget_1.Widget.defProps, { _mlm: true, _lp: 5, _tp: 5, _rp: 5, _bp: 5 });
-	    Label.TYPE = "label";
-	    Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
-	    return Label;
-	}(widget_1.Widget));
-	exports.Label = Label;
-	;
-	widget_factory_1.WidgetFactory.register(Label.TYPE, Label.create);
-
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Events = __webpack_require__(7);
-	var html_element_1 = __webpack_require__(86);
+	var Events = __webpack_require__(6);
+	var html_element_1 = __webpack_require__(83);
 	var HtmlEdit = (function (_super) {
 	    __extends(HtmlEdit, _super);
 	    function HtmlEdit() {
@@ -16907,7 +16722,7 @@ var qtk =
 
 
 /***/ },
-/* 86 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -16916,7 +16731,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(8);
+	var emitter_1 = __webpack_require__(4);
 	var HtmlElement = (function (_super) {
 	    __extends(HtmlElement, _super);
 	    function HtmlElement() {
@@ -17007,7 +16822,7 @@ var qtk =
 
 
 /***/ },
-/* 87 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17016,7 +16831,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	var Page = (function (_super) {
@@ -17037,7 +16852,108 @@ var qtk =
 
 
 /***/ },
-/* 88 */
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
+	/**
+	 * 表示屏幕大小和密度。
+	 */
+	var ViewPort = (function (_super) {
+	    __extends(ViewPort, _super);
+	    function ViewPort() {
+	        _super.call(this);
+	    }
+	    ViewPort.prototype.getScaleValues = function () {
+	        var scale = (1 / (this.density)).toString();
+	        var str = "initial-scale=SS, minimum-scale=SS, maximum-scale=SS, user-scalable=0";
+	        return "target-densitydpi=device-dpi, width=device-width, " + str.replace(/SS/g, scale);
+	    };
+	    ViewPort.prototype.updateHeadViewportMeta = function (value) {
+	        var meta = null;
+	        var head = document.getElementsByTagName('head')[0];
+	        var arr = document.getElementsByTagName('meta');
+	        for (var i = 0; i < arr.length; i++) {
+	            var iter = arr[i];
+	            if (iter.name === "viewport") {
+	                meta = iter;
+	                break;
+	            }
+	        }
+	        if (!meta) {
+	            meta = document.createElement('meta');
+	            head.appendChild(meta);
+	        }
+	        meta.name = 'viewport';
+	        meta.content = value;
+	    };
+	    ViewPort.prototype.init = function (width, height, density) {
+	        var _this = this;
+	        this._density = density || window.devicePixelRatio;
+	        this.updateHeadViewportMeta(this.getScaleValues());
+	        this._width = width || window.innerWidth;
+	        this._height = height || window.innerHeight;
+	        window.addEventListener(Events.RESIZE, function (evt) {
+	            _this._width = window.innerWidth;
+	            _this._height = window.innerHeight;
+	            _this.dispatchEvent({ type: "resize" });
+	        });
+	    };
+	    Object.defineProperty(ViewPort.prototype, "width", {
+	        get: function () {
+	            return this._width;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ViewPort.prototype, "height", {
+	        get: function () {
+	            return this._height;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ViewPort.prototype, "w", {
+	        get: function () {
+	            return this._width;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ViewPort.prototype, "h", {
+	        get: function () {
+	            return this._height;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ViewPort.prototype, "density", {
+	        get: function () {
+	            return this._density;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ViewPort.create = function (width, height, density) {
+	        var vp = new ViewPort();
+	        vp.init(width, height, density);
+	        return vp;
+	    };
+	    return ViewPort;
+	}(emitter_1.Emitter));
+	exports.ViewPort = ViewPort;
+
+
+/***/ },
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17046,7 +16962,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
@@ -17119,6 +17035,161 @@ var qtk =
 
 
 /***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var emitter_1 = __webpack_require__(4);
+	/**
+	 * 负责渲染UI的主循环。为了省电，只有在调用requestRedraw之后，才会触发下一次渲染循环。
+	 * 每个渲染循环分为三个阶段：
+	 *
+	 * *.predraw 绘制前做一些工作，通常用于动画改变对象的属性。
+	 *
+	 * *.draw 绘制阶段。
+	 *
+	 * *.postdraw 绘制后一些收尾工作，如果绘制阶段只是生成命令队列，可以在此阶段提交。
+	 *
+	 */
+	var MainLoop = (function (_super) {
+	    __extends(MainLoop, _super);
+	    function MainLoop() {
+	        _super.call(this);
+	        this.pendingRedraw = 0;
+	        this.predrawEvent = Events.TickEvent.create(Events.PRETICK);
+	        this.drawEvent = Events.TickEvent.create(Events.TICK);
+	        this.postdrawEvent = Events.TickEvent.create(Events.POSTTICK);
+	    }
+	    MainLoop.prototype.requestRedraw = function () {
+	        var _this = this;
+	        if (!this.pendingRedraw++) {
+	            requestAnimationFrame(function (evt) {
+	                _this.exec();
+	            });
+	        }
+	    };
+	    MainLoop.prototype.exec = function () {
+	        var fps = 0;
+	        var time = Date.now();
+	        var deltaTime = performance.now();
+	        var detail = { fps: fps, time: time, deltaTime: deltaTime };
+	        this.drawEvent.init(Events.PRETICK, detail);
+	        this.predrawEvent.init(Events.TICK, detail);
+	        this.postdrawEvent.init(Events.POSTTICK, detail);
+	        this.pendingRedraw = 0;
+	        this.dispatchEvent(this.predrawEvent);
+	        this.dispatchEvent(this.drawEvent);
+	        this.dispatchEvent(this.postdrawEvent);
+	    };
+	    MainLoop.create = function () {
+	        return new MainLoop();
+	    };
+	    return MainLoop;
+	}(emitter_1.Emitter));
+	exports.MainLoop = MainLoop;
+
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var style_1 = __webpack_require__(3);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 图片控件。
+	 */
+	var Image = (function (_super) {
+	    __extends(Image, _super);
+	    function Image() {
+	        _super.call(this, Image.TYPE);
+	    }
+	    Object.defineProperty(Image.prototype, "image", {
+	        get: function () {
+	            return this._style.backGroundImage;
+	        },
+	        set: function (image) {
+	            this._style.backGroundImage = image;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Image.prototype, "drawType", {
+	        get: function () {
+	            return this._style.backGroundImageDrawType;
+	        },
+	        set: function (drawType) {
+	            this._style.backGroundImageDrawType = drawType;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Image.prototype, "value", {
+	        get: function () {
+	            var image = this._style.backGroundImage;
+	            return image ? image.src : null;
+	        },
+	        set: function (url) {
+	            var _this = this;
+	            this._style.backGroundImage = image_tile_1.ImageTile.create(url, function (evt) {
+	                _this.requestRedraw();
+	            });
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Image.prototype.onToJson = function (json) {
+	        if (this._style) {
+	            json.style = this._style.toJson();
+	        }
+	    };
+	    Image.prototype.onFromJson = function (json) {
+	        if (json.style) {
+	            this._style = style_1.Style.create(json.style);
+	        }
+	    };
+	    Image.prototype.setStyle = function (state, style) {
+	        this._style = style;
+	        return this;
+	    };
+	    Image.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        var style = style_1.Style.create();
+	        style.fontSize = 12;
+	        style.textColor = "Black";
+	        style.backGroundImageDrawType = image_tile_1.ImageDrawType.DEFAULT;
+	        this._style = style;
+	    };
+	    Image.prototype.getStyle = function () {
+	        return this._style;
+	    };
+	    Image.create = function (options) {
+	        return Image.recycleBin.create().reset(Image.TYPE, options);
+	    };
+	    Image.TYPE = "image";
+	    Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });
+	    return Image;
+	}(widget_1.Widget));
+	exports.Image = Image;
+	;
+	widget_factory_1.WidgetFactory.register(Image.TYPE, Image.create);
+
+
+/***/ },
 /* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -17128,24 +17199,24 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var Button = (function (_super) {
-	    __extends(Button, _super);
-	    function Button() {
-	        _super.call(this, Button.TYPE);
+	var Group = (function (_super) {
+	    __extends(Group, _super);
+	    function Group() {
+	        _super.call(this, Group.TYPE);
 	    }
-	    Button.create = function (options) {
-	        return Button.recycleBin.create().reset(Button.TYPE, options);
+	    Group.create = function (options) {
+	        return Group.recycleBin.create().reset(Group.TYPE, options);
 	    };
-	    Button.TYPE = "button";
-	    Button.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Button(); });
-	    return Button;
+	    Group.TYPE = "group";
+	    Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });
+	    return Group;
 	}(widget_1.Widget));
-	exports.Button = Button;
+	exports.Group = Group;
 	;
-	widget_factory_1.WidgetFactory.register(Button.TYPE, Button.create);
+	widget_factory_1.WidgetFactory.register(Group.TYPE, Group.create);
 
 
 /***/ },
@@ -17158,1151 +17229,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var page_1 = __webpack_require__(87);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var TabPage = (function (_super) {
-	    __extends(TabPage, _super);
-	    function TabPage() {
-	        _super.call(this, TabPage.TYPE);
-	    }
-	    Object.defineProperty(TabPage.prototype, "tabButton", {
-	        get: function () {
-	            return this._tabButton;
-	        },
-	        set: function (value) {
-	            this._tabButton = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabPage.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._tabButton = null;
-	    };
-	    TabPage.create = function (options) {
-	        return TabPage.r.create().reset(TabPage.TYPE, options);
-	    };
-	    TabPage.TYPE = "page";
-	    TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });
-	    return TabPage;
-	}(page_1.Page));
-	exports.TabPage = TabPage;
-	;
-	widget_factory_1.WidgetFactory.register(TabPage.TYPE, TabPage.create);
-
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(16);
-	var button_1 = __webpack_require__(89);
-	var graphics_1 = __webpack_require__(25);
-	var consts_1 = __webpack_require__(92);
-	var radio_button_1 = __webpack_require__(93);
-	var widget_factory_1 = __webpack_require__(23);
-	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 标签控件上的标签按钮。
-	 */
-	var TabButton = (function (_super) {
-	    __extends(TabButton, _super);
-	    function TabButton() {
-	        _super.call(this, TabButton.TYPE);
-	    }
-	    Object.defineProperty(TabButton.prototype, "closeButton", {
-	        get: function () {
-	            return this._closeButton;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabButton.prototype, "closeButtonAtLeft", {
-	        get: function () {
-	            return this._cbAtLeft;
-	        },
-	        set: function (value) {
-	            this._cbAtLeft = value;
-	            this.relayoutChildren();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabButton.prototype, "orientation", {
-	        get: function () {
-	            return this._orn;
-	        },
-	        set: function (value) {
-	            this._orn = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
-	        var _this = this;
-	        if (normalIconURL) {
-	            this._normalIcon = image_tile_1.ImageTile.create(normalIconURL, function (evt) {
-	                _this.requestRedraw();
-	            });
-	        }
-	        else {
-	            this._normalIcon = null;
-	        }
-	        this._normalIconURL = normalIconURL ? normalIconURL : null;
-	        if (currentIconURL) {
-	            this._currentIcon = image_tile_1.ImageTile.create(currentIconURL, function (evt) {
-	                _this.requestRedraw();
-	            });
-	        }
-	        else {
-	            this._currentIcon = null;
-	        }
-	        this._currentIconURL = currentIconURL ? currentIconURL : null;
-	    };
-	    Object.defineProperty(TabButton.prototype, "closable", {
-	        get: function () {
-	            return !!this._closeButton;
-	        },
-	        set: function (value) {
-	            if (value && this._closeButton || !value && !this._closeButton) {
-	                return;
-	            }
-	            if (this._closeButton) {
-	                this.removeChild(this._closeButton);
-	                this._closeButton = null;
-	            }
-	            else {
-	                var closeButton = button_1.Button.create();
-	                closeButton.set({ styleType: "tab-button.close" });
-	                this.addChild(closeButton);
-	                this._closeButton = closeButton;
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabButton.prototype.relayoutChildren = function () {
-	        if (this._closeButton) {
-	            var x = this.leftPadding;
-	            var y = this.topPadding;
-	            var h = this.h - this.topPadding - this.bottomPadding;
-	            var w = h;
-	            if (!this.closeButtonAtLeft) {
-	                x = this.w - this.rightPadding - w;
-	            }
-	            this._closeButton.moveResizeTo(x, y, w, h);
-	        }
-	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
-	    };
-	    Object.defineProperty(TabButton.prototype, "desireWidth", {
-	        get: function () {
-	            var w = this.leftPadding + this.rightPadding;
-	            var text = this.text;
-	            var style = this.getStyle();
-	            if (this._currentIcon || this._normalIcon) {
-	                w += this.h;
-	            }
-	            if (text && style) {
-	                var font = style.font;
-	                w += graphics_1.Graphics.measureText(text, font) + style.fontSize;
-	            }
-	            return w;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabButton.prototype, "tabPage", {
-	        get: function () {
-	            return this._tabPage;
-	        },
-	        set: function (value) {
-	            this._tabPage = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabButton.prototype.getStyleType = function () {
-	        var appendix = this.value ? "current" : "normal";
-	        return (this._styleType || this.type) + "." + appendix;
-	    };
-	    TabButton.prototype.drawImage = function (ctx, style) {
-	        var text = this.getLocaleText();
-	        var icon = this.value ? this._currentIcon : this._normalIcon;
-	        if (icon) {
-	            var w = 0;
-	            var h = 0;
-	            var x = this.leftPadding;
-	            var y = this.topPadding;
-	            if (this._orn === consts_1.Orientation.V) {
-	                w = this.w - this.leftPadding - this.rightPadding;
-	                h = this.h - this.bottomPadding - this.topPadding;
-	                if (text) {
-	                    h -= style.fontSize;
-	                }
-	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	                if (text) {
-	                    y = this.h - this.bottomPadding - style.fontSize;
-	                    graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, y, w, style.fontSize));
-	                }
-	            }
-	            else {
-	                h = this.h - this.topPadding - this.bottomPadding;
-	                w = h;
-	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	                if (text) {
-	                    x += w + this.leftPadding;
-	                    w = this.w - x - this.rightPadding;
-	                    graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
-	                }
-	            }
-	        }
-	        else {
-	            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, 0, this.w, this.h));
-	        }
-	        return this;
-	    };
-	    TabButton.prototype.drawText = function (ctx, style) {
-	        return this;
-	    };
-	    TabButton.prototype.onReset = function () {
-	        this._tabPage = null;
-	        this._closeButton = null;
-	        this._normalIcon = null;
-	        this._currentIcon = null;
-	    };
-	    TabButton.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._tabPage = null;
-	        this._closeButton = null;
-	        this._normalIcon = null;
-	        this._currentIcon = null;
-	    };
-	    TabButton.prototype.getDefProps = function () {
-	        return TabButton.defProps;
-	    };
-	    TabButton.create = function (options) {
-	        return TabButton.re.create().reset(TabButton.TYPE, options);
-	    };
-	    TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-	        _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
-	    TabButton.TYPE = "tab-button";
-	    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
-	    return TabButton;
-	}(radio_button_1.RadioButton));
-	exports.TabButton = TabButton;
-	;
-	widget_factory_1.WidgetFactory.register(TabButton.TYPE, TabButton.create);
-
-
-/***/ },
-/* 92 */
-/***/ function(module, exports) {
-
-	"use strict";
-	(function (Orientation) {
-	    Orientation[Orientation["V"] = 1] = "V";
-	    Orientation[Orientation["VERTICAL"] = 1] = "VERTICAL";
-	    Orientation[Orientation["H"] = 2] = "H";
-	    Orientation[Orientation["HORIZONTAL"] = 2] = "HORIZONTAL";
-	})(exports.Orientation || (exports.Orientation = {}));
-	var Orientation = exports.Orientation;
-	;
-	(function (Direction) {
-	    Direction[Direction["W"] = 1] = "W";
-	    Direction[Direction["WEST"] = 1] = "WEST";
-	    Direction[Direction["E"] = 2] = "E";
-	    Direction[Direction["EAST"] = 2] = "EAST";
-	    Direction[Direction["N"] = 3] = "N";
-	    Direction[Direction["NORTH"] = 3] = "NORTH";
-	    Direction[Direction["S"] = 4] = "S";
-	    Direction[Direction["SOUTH"] = 4] = "SOUTH";
-	    Direction[Direction["L"] = 1] = "L";
-	    Direction[Direction["LEFT"] = 1] = "LEFT";
-	    Direction[Direction["R"] = 2] = "R";
-	    Direction[Direction["RIGHT"] = 2] = "RIGHT";
-	    Direction[Direction["T"] = 3] = "T";
-	    Direction[Direction["TOP"] = 3] = "TOP";
-	    Direction[Direction["B"] = 4] = "B";
-	    Direction[Direction["BOTTOM"] = 4] = "BOTTOM";
-	})(exports.Direction || (exports.Direction = {}));
-	var Direction = exports.Direction;
-	;
-	(function (AlignH) {
-	    AlignH[AlignH["L"] = 1] = "L";
-	    AlignH[AlignH["LEFT"] = 1] = "LEFT";
-	    AlignH[AlignH["C"] = 2] = "C";
-	    AlignH[AlignH["CENTER"] = 2] = "CENTER";
-	    AlignH[AlignH["R"] = 3] = "R";
-	    AlignH[AlignH["RIGHT"] = 3] = "RIGHT";
-	})(exports.AlignH || (exports.AlignH = {}));
-	var AlignH = exports.AlignH;
-	;
-	(function (AlignV) {
-	    AlignV[AlignV["T"] = 1] = "T";
-	    AlignV[AlignV["TOP"] = 1] = "TOP";
-	    AlignV[AlignV["M"] = 2] = "M";
-	    AlignV[AlignV["MIDDLE"] = 2] = "MIDDLE";
-	    AlignV[AlignV["B"] = 3] = "B";
-	    AlignV[AlignV["BOTTOM"] = 3] = "BOTTOM";
-	})(exports.AlignV || (exports.AlignV = {}));
-	var AlignV = exports.AlignV;
-	;
-	(function (Align) {
-	    Align[Align["L"] = 1] = "L";
-	    Align[Align["LEFT"] = 1] = "LEFT";
-	    Align[Align["C"] = 2] = "C";
-	    Align[Align["CENTER"] = 2] = "CENTER";
-	    Align[Align["R"] = 3] = "R";
-	    Align[Align["RIGHT"] = 3] = "RIGHT";
-	    Align[Align["T"] = 1] = "T";
-	    Align[Align["TOP"] = 1] = "TOP";
-	    Align[Align["M"] = 2] = "M";
-	    Align[Align["MIDDLE"] = 2] = "MIDDLE";
-	    Align[Align["B"] = 3] = "B";
-	    Align[Align["BOTTOM"] = 3] = "BOTTOM";
-	})(exports.Align || (exports.Align = {}));
-	var Align = exports.Align;
-	;
-	var Services = (function () {
-	    function Services() {
-	    }
-	    Services.THEME_MANAGER = "qtk-theme-manager";
-	    return Services;
-	}());
-	exports.Services = Services;
-	;
-
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var check_button_1 = __webpack_require__(94);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 单选按钮。同一个父控件中，只有一个单选按钮被勾选。被勾选时value为true，否则为false。
-	 */
-	var RadioButton = (function (_super) {
-	    __extends(RadioButton, _super);
-	    function RadioButton(type) {
-	        _super.call(this, type || RadioButton.TYPE);
-	    }
-	    Object.defineProperty(RadioButton.prototype, "value", {
-	        get: function () {
-	            return this._value;
-	        },
-	        set: function (value) {
-	            this.setValue(value, true, true);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    RadioButton.create = function (options) {
-	        return RadioButton.r.create().reset(RadioButton.TYPE, options);
-	    };
-	    RadioButton.TYPE = "radio-button";
-	    RadioButton.r = new recyclable_creator_1.RecyclableCreator(function () { return new RadioButton(); });
-	    return RadioButton;
-	}(check_button_1.CheckButton));
-	exports.RadioButton = RadioButton;
-	;
-	widget_factory_1.WidgetFactory.register(RadioButton.TYPE, RadioButton.create);
-
-
-/***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var CheckButton = (function (_super) {
-	    __extends(CheckButton, _super);
-	    function CheckButton(type) {
-	        _super.call(this, type || CheckButton.TYPE);
-	    }
-	    Object.defineProperty(CheckButton.prototype, "inputable", {
-	        get: function () {
-	            return true;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(CheckButton.prototype, "value", {
-	        get: function () {
-	            return this._value;
-	        },
-	        set: function (value) {
-	            this.setProp("value", value, true);
-	            this.notifyChange();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    CheckButton.prototype.getStyleType = function () {
-	        var appendix = this.value ? "checked" : "unchecked";
-	        return (this._styleType || this.type) + "." + appendix;
-	    };
-	    CheckButton.prototype.drawText = function (ctx, style) {
-	        var text = this.getLocaleText();
-	        if (text && style.textColor) {
-	            var x = this.w >> 1;
-	            var y = this.h >> 1;
-	            var img = style.foreGroundImage;
-	            ctx.font = style.font;
-	            ctx.textAlign = "center";
-	            ctx.textBaseline = "middle";
-	            ctx.fillStyle = style.textColor;
-	            if (img) {
-	                var textAlign = style.textAlign;
-	                switch (textAlign) {
-	                    case "right": {
-	                        x = this.h;
-	                        ctx.textAlign = "left";
-	                        break;
-	                    }
-	                    case "left": {
-	                        x = 0;
-	                        ctx.textAlign = "left";
-	                        break;
-	                    }
-	                    default: {
-	                        break;
-	                    }
-	                }
-	            }
-	            ctx.fillText(text, x, y);
-	        }
-	        return this;
-	    };
-	    CheckButton.prototype.drawImage = function (ctx, style) {
-	        var img = style.foreGroundImage;
-	        var text = this.text;
-	        if (img) {
-	            var x = 0;
-	            var y = 0;
-	            var w = this.w;
-	            var h = this.h;
-	            if (text && style.textColor) {
-	                var textAlign = style.textAlign;
-	                switch (textAlign) {
-	                    case "right": {
-	                        w = h;
-	                        break;
-	                    }
-	                    case "left": {
-	                        w = h;
-	                        x = this.w - w;
-	                        break;
-	                    }
-	                    default: {
-	                        break;
-	                    }
-	                }
-	            }
-	            img.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	        }
-	        return this;
-	    };
-	    CheckButton.prototype.dispatchClick = function (evt) {
-	        this.value = !this.value;
-	        _super.prototype.dispatchClick.call(this, evt);
-	    };
-	    CheckButton.create = function (options) {
-	        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
-	    };
-	    CheckButton.TYPE = "check-button";
-	    CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });
-	    return CheckButton;
-	}(widget_1.Widget));
-	exports.CheckButton = CheckButton;
-	;
-	widget_factory_1.WidgetFactory.register(CheckButton.TYPE, CheckButton.create);
-
-
-/***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var pages_1 = __webpack_require__(88);
-	var widget_1 = __webpack_require__(16);
-	var tab_page_1 = __webpack_require__(90);
-	var Events = __webpack_require__(7);
-	var tab_button_1 = __webpack_require__(91);
-	var tab_button_group_1 = __webpack_require__(96);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var TabControl = (function (_super) {
-	    __extends(TabControl, _super);
-	    function TabControl() {
-	        _super.call(this, TabControl.TYPE);
-	    }
-	    Object.defineProperty(TabControl.prototype, "value", {
-	        get: function () {
-	            return this._pages.value;
-	        },
-	        set: function (value) {
-	            this._pages.value = value;
-	            this.buttonGroup.value = value;
-	            this._value = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabControl.prototype, "pages", {
-	        get: function () {
-	            return this._pages;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabControl.prototype, "buttonGroup", {
-	        get: function () {
-	            return this._buttonGroup;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabControl.prototype, "buttonGroupAtTop", {
-	        get: function () {
-	            return this._bgAtTop;
-	        },
-	        set: function (value) {
-	            this._bgAtTop = value;
-	            this.relayoutChildren();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabControl.prototype, "buttonGroupHeight", {
-	        get: function () {
-	            return this._bgh;
-	        },
-	        set: function (value) {
-	            this._bgh = value;
-	            this.relayoutChildren();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabControl.prototype.removePage = function (tabPage, destroy) {
-	        if (tabPage) {
-	            var tabButton = tabPage.tabButton;
-	            this.pages.removeChild(tabPage, false, destroy);
-	            this.buttonGroup.removeChild(tabButton, false, destroy);
-	            this.value--;
-	        }
-	    };
-	    TabControl.prototype.addPage = function (title, normalIconURL, currentIconURL, closable, closeButtonAtLeft) {
-	        if (!this.pages.app) {
-	            this.pages.app = this.app;
-	        }
-	        if (!this.buttonGroup.app) {
-	            this.buttonGroup.app = this.app;
-	        }
-	        var tabButton = tab_button_1.TabButton.create();
-	        tabButton.setIcons(normalIconURL, currentIconURL);
-	        tabButton.set({ text: title, closable: closable, closeButtonAtLeft: closeButtonAtLeft });
-	        var tabPage = tab_page_1.TabPage.create();
-	        tabButton.tabPage = tabPage;
-	        tabPage.tabButton = tabButton;
-	        this.pages.addChild(tabPage);
-	        this.buttonGroup.addChild(tabButton);
-	        var tabControl = this;
-	        tabButton.on(Events.CLICK, function (evt) {
-	            tabControl.pages.setValueByPage(this.tabPage);
-	            if (closable && this.target && this.target === this.closeButton) {
-	                tabControl.removePage(this.tabPage);
-	            }
-	        });
-	        this.value = this._value;
-	        this.relayoutChildren();
-	        return tabPage;
-	    };
-	    TabControl.prototype.relayoutChildren = function () {
-	        var x = this.leftPadding;
-	        var y = this.topPadding;
-	        var buttonGroupHeight = this.buttonGroupHeight;
-	        var h = this.h - this.topPadding - this.bottomPadding;
-	        var w = this.w - this.leftPadding - this.rightPadding;
-	        var pages = this._pages;
-	        var buttonGroup = this._buttonGroup;
-	        if (this.buttonGroupAtTop) {
-	            if (buttonGroup) {
-	                buttonGroup.moveResizeTo(x, y, w, buttonGroupHeight);
-	                buttonGroup.relayoutChildren();
-	            }
-	            y += buttonGroupHeight;
-	            h -= buttonGroupHeight;
-	        }
-	        else {
-	            if (buttonGroup) {
-	                buttonGroup.moveResizeTo(x, this.h - buttonGroupHeight - this.bottomPadding, w, buttonGroupHeight);
-	                buttonGroup.relayoutChildren();
-	            }
-	            h -= buttonGroupHeight;
-	        }
-	        if (pages) {
-	            pages.moveResizeTo(x, y, w, h);
-	            pages.relayoutChildren();
-	        }
-	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
-	    };
-	    TabControl.prototype.onReset = function () {
-	        this._value = 0;
-	        this._pages = pages_1.Pages.create();
-	        this.addChild(this._pages, true);
-	        this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
-	        this.addChild(this._buttonGroup, true);
-	    };
-	    TabControl.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._pages = null;
-	        this._buttonGroup = null;
-	    };
-	    TabControl.prototype.getDefProps = function () {
-	        return TabControl.defProps;
-	    };
-	    TabControl.create = function (options) {
-	        return TabControl.r.create().reset(TabControl.TYPE, options);
-	    };
-	    TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
-	    TabControl.TYPE = "tab-control";
-	    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
-	    return TabControl;
-	}(widget_1.Widget));
-	exports.TabControl = TabControl;
-	;
-	widget_factory_1.WidgetFactory.register(TabControl.TYPE, TabControl.create);
-
-
-/***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var TabButtonGroup = (function (_super) {
-	    __extends(TabButtonGroup, _super);
-	    function TabButtonGroup() {
-	        _super.call(this, TabButtonGroup.TYPE);
-	    }
-	    Object.defineProperty(TabButtonGroup.prototype, "value", {
-	        get: function () {
-	            var arr = this.children;
-	            var n = arr.length;
-	            for (var i = 0; i < n; i++) {
-	                var iter = arr[i];
-	                if (iter.value) {
-	                    return i;
-	                }
-	            }
-	            return 0;
-	        },
-	        set: function (value) {
-	            var n = this.children.length;
-	            var index = Math.max(0, Math.min(value, n - 1));
-	            if (n > 0) {
-	                this.children[index].value = true;
-	            }
-	            this.requestRedraw();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabButtonGroup.prototype, "autoExpand", {
-	        get: function () {
-	            return this._ae;
-	        },
-	        set: function (value) {
-	            this._ae = value;
-	            this.relayoutChildren();
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TabButtonGroup.prototype.relayoutChildren = function () {
-	        var x = 0;
-	        var y = 0;
-	        var w = 0;
-	        var h = this.h;
-	        var n = this.children.length;
-	        var autoExpand = this._ae;
-	        if (n > 0) {
-	            var itemW = this.w / n;
-	            this.children.forEach(function (child) {
-	                if (autoExpand) {
-	                    w = itemW;
-	                }
-	                else {
-	                    w = child.desireWidth;
-	                }
-	                child.moveResizeTo(x, y, w, h);
-	                child.relayoutChildren();
-	                x += w;
-	            });
-	        }
-	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
-	    };
-	    TabButtonGroup.prototype.drawChildren = function (ctx) {
-	        var current = null;
-	        this._children.forEach(function (child) {
-	            if (child.visible) {
-	                if (child.value) {
-	                    current = child;
-	                }
-	                else {
-	                    child.draw(ctx);
-	                }
-	            }
-	        });
-	        if (current) {
-	            current.draw(ctx);
-	        }
-	        return this;
-	    };
-	    TabButtonGroup.prototype.getDefProps = function () {
-	        return TabButtonGroup.defProps;
-	    };
-	    TabButtonGroup.create = function (options) {
-	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
-	    };
-	    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
-	    TabButtonGroup.TYPE = "tab-button-group";
-	    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
-	    return TabButtonGroup;
-	}(widget_1.Widget));
-	exports.TabButtonGroup = TabButtonGroup;
-	;
-	widget_factory_1.WidgetFactory.register(TabButtonGroup.TYPE, TabButtonGroup.create);
-
-
-/***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var group_1 = __webpack_require__(82);
-	var dialog_1 = __webpack_require__(98);
-	var label_1 = __webpack_require__(84);
-	var edit_1 = __webpack_require__(83);
-	var button_1 = __webpack_require__(89);
-	var Events = __webpack_require__(7);
-	var graphics_1 = __webpack_require__(25);
-	var list_view_1 = __webpack_require__(100);
-	var progress_bar_1 = __webpack_require__(106);
-	var application_1 = __webpack_require__(107);
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var consts_1 = __webpack_require__(92);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var list_item_1 = __webpack_require__(112);
-	var dock_layouter_1 = __webpack_require__(113);
-	var linear_layouter_1 = __webpack_require__(114);
-	var grid_layouter_1 = __webpack_require__(115);
-	var simple_layouter_1 = __webpack_require__(116);
-	var TitleOptions = (function () {
-	    function TitleOptions(text, iconStyleType, hasCloseButton) {
-	        this.h = 0;
-	        this.text = text;
-	        this.draggable = true;
-	        this.iconStyleType = iconStyleType;
-	        this.hasCloseButton = hasCloseButton;
-	    }
-	    return TitleOptions;
-	}());
-	exports.TitleOptions = TitleOptions;
-	;
-	var ButtonOption = (function () {
-	    function ButtonOption() {
-	    }
-	    return ButtonOption;
-	}());
-	exports.ButtonOption = ButtonOption;
-	var ButtonsOptions = (function () {
-	    function ButtonsOptions() {
-	        this.buttons = [];
-	    }
-	    Object.defineProperty(ButtonsOptions.prototype, "buttonCount", {
-	        get: function () {
-	            return this.buttons.length;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    return ButtonsOptions;
-	}());
-	exports.ButtonsOptions = ButtonsOptions;
-	;
-	var MessageBox = (function (_super) {
-	    __extends(MessageBox, _super);
-	    function MessageBox(type) {
-	        _super.call(this, type || MessageBox.TYPE);
-	        this._contentPadding = 10;
-	    }
-	    Object.defineProperty(MessageBox.prototype, "title", {
-	        get: function () {
-	            return this._title;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(MessageBox.prototype, "content", {
-	        get: function () {
-	            return this._content;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(MessageBox.prototype, "buttons", {
-	        get: function () {
-	            return this._buttons;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    MessageBox.prototype.initTitle = function (titleOptions) {
-	        var w = this.w;
-	        var win = this;
-	        if (titleOptions) {
-	            var title = group_1.Group.create({ styleType: "dialog.title-bg" });
-	            var titleH = titleOptions.h || MessageBox.TITLE_H;
-	            title.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.TOP, size: titleH });
-	            title.childrenLayouter = linear_layouter_1.LinearLayouter.createH();
-	            this.addChild(title);
-	            if (titleOptions.draggable) {
-	                title.useBehavior("movable", { moveParent: true });
-	            }
-	            if (titleOptions.iconStyleType) {
-	                var icon = button_1.Button.create({ name: "icon", styleType: titleOptions.iconStyleType });
-	                icon.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 1, h: "100%", w: title.h });
-	                title.addChild(icon);
-	            }
-	            if (titleOptions.text) {
-	                var label = label_1.Label.create({ name: "text", text: titleOptions.text, styleType: "dialog.title-text" });
-	                label.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 2, h: "100%", w: w - titleH * 2 });
-	                title.addChild(label);
-	            }
-	            if (titleOptions.hasCloseButton) {
-	                var button = button_1.Button.create({ name: "close", styleType: "messagebox.button.close" });
-	                button.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: -1, h: "100%", w: titleH });
-	                title.addChild(button);
-	                button.on(Events.CLICK, function (evt) {
-	                    win.animateClose();
-	                });
-	            }
-	            this._title = title;
-	        }
-	    };
-	    MessageBox.prototype.initButtons = function (buttonsOptions) {
-	        var w = this.w;
-	        var win = this;
-	        if (buttonsOptions && buttonsOptions.buttons) {
-	            var buttons = group_1.Group.create();
-	            var n = buttonsOptions.buttons.length;
-	            var buttonsH = buttonsOptions.h || MessageBox.BUTTONS_H;
-	            var margin = n < 2 ? w / (4 * n) : w / (8 * n);
-	            buttons.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: buttonsH });
-	            buttons.childrenLayouter = grid_layouter_1.GridLayouter.create({
-	                topMargin: 5,
-	                bottomMargin: 5,
-	                leftMargin: margin,
-	                rightMargin: margin,
-	                rows: 1,
-	                cols: n
-	            });
-	            this.addChild(buttons);
-	            buttonsOptions.buttons.forEach(function (iter) {
-	                var b = button_1.Button.create({ text: iter.text, styleType: iter.styleType });
-	                b.on(Events.CLICK, function (evt) {
-	                    if (iter.onClick) {
-	                        iter.onClick();
-	                    }
-	                    win.animateClose();
-	                });
-	                buttons.addChild(b);
-	            });
-	            this._buttons = buttons;
-	        }
-	        return this;
-	    };
-	    MessageBox.prototype.initContent = function (data) {
-	        var content = group_1.Group.create();
-	        content.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: "100%" });
-	        this.addChild(content);
-	        if (data) {
-	            content.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	            var label = label_1.Label.create({ text: data, multiLineMode: true, padding: this._contentPadding });
-	            label.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" });
-	            content.addChild(label);
-	        }
-	        this._content = content;
-	    };
-	    MessageBox.prototype.createChildren = function (titleOptions, buttonsOptions, content) {
-	        var vp = this.app.getViewPort();
-	        var style = this._themeManager.get("messagebox.content", this.stateToString(widget_1.WidgetState.NORMAL));
-	        if (this.w <= 10) {
-	            var textW = graphics_1.Graphics.measureText(content, style.font);
-	            var padding = this.leftPadding + this.rightPadding + this._contentPadding * 2;
-	            var w = Math.min(vp.width, Math.max(60, textW + padding));
-	            if (buttonsOptions) {
-	                w = Math.max(w, buttonsOptions.buttonCount * 128);
-	            }
-	            this.w = w;
-	        }
-	        if (this.h < 10) {
-	            var lines = graphics_1.Graphics.layoutText(content, this.w, style.font);
-	            var n = lines ? lines.length : 0;
-	            var padding = this.topPadding + this.bottomPadding + this._contentPadding * 2;
-	            var h = n * style.fontSize * 1.5 + padding;
-	            if (titleOptions) {
-	                h += titleOptions.h || MessageBox.TITLE_H;
-	            }
-	            if (buttonsOptions) {
-	                h += buttonsOptions.h || MessageBox.BUTTONS_H;
-	            }
-	            this.h = h;
-	        }
-	        this.initTitle(titleOptions);
-	        this.initButtons(buttonsOptions);
-	        this.initContent(content);
-	    };
-	    MessageBox.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this.padding = 1;
-	        this.childrenLayouter = dock_layouter_1.DockLayouter.create();
-	    };
-	    MessageBox.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._title = null;
-	        this._content = null;
-	        this._buttons = null;
-	    };
-	    MessageBox.prototype.open = function () {
-	        _super.prototype.open.call(this);
-	        this.grab();
-	        this.moveToCenter();
-	        return this;
-	    };
-	    MessageBox.prototype.animateClose = function () {
-	        var _this = this;
-	        this.opacityTo(0, 300).onComplete(function (evt) {
-	            _this.close();
-	        });
-	    };
-	    MessageBox.showMessage = function (msg, onClose, w) {
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var rw = Math.min(vp.w, w || 0);
-	        var messageBox = MessageBox.create({ app: app, w: rw, h: 0 });
-	        var buttonsOption = new ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Close", onClick: null });
-	        var titleOptions = new TitleOptions("Infomation", "messagebox.info.icon", true);
-	        messageBox.createChildren(titleOptions, buttonsOption, msg);
-	        messageBox.on(Events.CLOSE, onClose);
-	        messageBox.open();
-	    };
-	    MessageBox.showConfirm = function (msg, onYes, onNo, w) {
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var rw = Math.min(vp.w, w || 0);
-	        var messageBox = MessageBox.create({ app: app, w: rw, h: 0 });
-	        var buttonsOption = new ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: onNo });
-	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Yes", onClick: onYes });
-	        var titleOptions = new TitleOptions("Question", "messagebox.question.icon", false);
-	        messageBox.createChildren(titleOptions, buttonsOption, msg);
-	        messageBox.open();
-	    };
-	    MessageBox.showToast = function (msg, duration, w) {
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var rw = Math.min(vp.w, w || 0);
-	        var messageBox = MessageBox.create({ app: app, styleType: "messagebox.toast", w: rw, h: 0 });
-	        messageBox.createChildren(null, null, msg);
-	        messageBox.on(Events.POINTER_UP, function (evt) {
-	            if (messageBox) {
-	                this.animateClose();
-	                messageBox = null;
-	            }
-	        });
-	        setTimeout(function (evt) {
-	            if (messageBox) {
-	                messageBox.animateClose();
-	                messageBox = null;
-	            }
-	        }, duration || 3000);
-	        messageBox.open();
-	    };
-	    MessageBox.showProgress = function (msg, taskStart, onDone, w) {
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var rw = Math.min(vp.w, w || 0) || 200;
-	        var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
-	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
-	        var buttonsOption = new ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Close", onClick: null });
-	        var titleOptions = new TitleOptions(msg, "messagebox.info.icon", false);
-	        messageBox.createChildren(titleOptions, buttonsOption, null);
-	        var group = messageBox.content;
-	        var progressBar = progress_bar_1.ProgressBar.create();
-	        group.padding = 10;
-	        group.topPadding = 20;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "20px" });
-	        var closeButton = messageBox.buttons.children[0];
-	        closeButton.enable = false;
-	        function onProgress(value) {
-	            progressBar.value = value;
-	            progressBar.requestRedraw();
-	            if (value >= 1) {
-	                onDone();
-	                closeButton.enable = true;
-	            }
-	        }
-	        group.addChild(progressBar);
-	        messageBox.open();
-	        taskStart(onProgress);
-	    };
-	    MessageBox.showInput = function (title, inputTips, value, isValueValid, onDone, inputType, w) {
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var rw = Math.min(vp.w, w || 0) || 200;
-	        var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
-	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
-	        var buttonsOption = new ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
-	        buttonsOption.buttons.push({ styleType: "button.ok", text: "OK", onClick: onOK });
-	        var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
-	        messageBox.createChildren(titleOptions, buttonsOption, null);
-	        var group = messageBox.content;
-	        var edit = edit_1.Edit.create({ inputTips: inputTips, value: value, inputType: inputType || "text" });
-	        group.padding = 10;
-	        group.topPadding = 15;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "25px" });
-	        function onOK() {
-	            onDone(edit.text);
-	        }
-	        edit.on(Events.CHANGING, function (evt) {
-	            okButton.enable = isValueValid(evt.value);
-	        });
-	        var okButton = messageBox.buttons.children[1];
-	        okButton.enable = isValueValid(value);
-	        group.addChild(edit);
-	        messageBox.open();
-	    };
-	    MessageBox.showChoice = function (title, data, multiple, onDone, w, h) {
-	        var itemHeight = 30;
-	        var app = application_1.Application.get();
-	        var vp = app.getViewPort();
-	        var contentHeight = Math.min(8, data.length) * itemHeight;
-	        var rw = Math.min(vp.w, w || 0) || 300;
-	        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
-	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
-	        var buttonsOption = new ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
-	        buttonsOption.buttons.push({ styleType: "button.ok", text: "OK", onClick: onOK });
-	        var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
-	        messageBox.createChildren(titleOptions, buttonsOption, null);
-	        var group = messageBox.content;
-	        var listView = list_view_1.ListView.create({ itemHeight: itemHeight, dragToScroll: true });
-	        group.padding = 5;
-	        group.topPadding = 5;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "100%" });
-	        data.forEach(function (iter) {
-	            var item = list_item_1.ListItemCheckable.create({
-	                multiCheckable: multiple,
-	                iconURL: iter.iconURL,
-	                text: iter.text,
-	                userData: iter,
-	                leftPadding: 2
-	            });
-	            listView.addChild(item, true);
-	        });
-	        listView.relayoutChildren();
-	        function onOK() {
-	            var ret = [];
-	            listView.children.forEach(function (iter) {
-	                if (iter.value) {
-	                    ret.push(iter.userData);
-	                }
-	            });
-	            onDone(ret);
-	        }
-	        group.addChild(listView);
-	        messageBox.open();
-	    };
-	    MessageBox.create = function (options) {
-	        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
-	    };
-	    MessageBox.TITLE_H = 25;
-	    MessageBox.BUTTONS_H = 40;
-	    MessageBox.MSG_FONT_SIZE = 12;
-	    MessageBox.TYPE = "messagebox";
-	    MessageBox.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new MessageBox(); });
-	    return MessageBox;
-	}(dialog_1.Dialog));
-	exports.MessageBox = MessageBox;
-	;
-	widget_factory_1.WidgetFactory.register(MessageBox.TYPE, MessageBox.create);
-
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var window_1 = __webpack_require__(99);
+	var window_1 = __webpack_require__(91);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
@@ -18337,7 +17264,7 @@ var qtk =
 
 
 /***/ },
-/* 99 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18346,9 +17273,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var point_1 = __webpack_require__(1);
-	var widget_1 = __webpack_require__(16);
-	var Events = __webpack_require__(7);
+	var point_1 = __webpack_require__(2);
+	var widget_1 = __webpack_require__(19);
+	var Events = __webpack_require__(6);
 	(function (WindowType) {
 	    WindowType[WindowType["NORMAL"] = 0] = "NORMAL";
 	    WindowType[WindowType["POPUP"] = 1] = "POPUP";
@@ -18458,7 +17385,7 @@ var qtk =
 
 
 /***/ },
-/* 100 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18467,104 +17394,555 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(101);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var list_layouter_1 = __webpack_require__(105);
-	var ListView = (function (_super) {
-	    __extends(ListView, _super);
-	    function ListView() {
-	        _super.call(this, ListView.TYPE);
+	var Button = (function (_super) {
+	    __extends(Button, _super);
+	    function Button() {
+	        _super.call(this, Button.TYPE);
 	    }
-	    Object.defineProperty(ListView.prototype, "itemSpacing", {
-	        get: function () {
-	            return this._itemSpacing;
-	        },
-	        set: function (value) {
-	            this._itemSpacing = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.spacing = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ListView.prototype, "itemHeight", {
-	        get: function () {
-	            return this._itemHeight;
-	        },
-	        set: function (value) {
-	            this._itemHeight = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.h = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ListView.prototype, "childrenLayouter", {
-	        get: function () {
-	            return this._childrenLayouter;
-	        },
-	        set: function (layouter) {
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ListView.prototype.doDrawChildren = function (ctx) {
-	        var top = this.offsetY;
-	        var bottom = top + this.h;
-	        this._children.forEach(function (child) {
-	            var visible = child.visible && child.y < bottom && (child.y + child.h) > top;
-	            if (visible) {
-	                child.draw(ctx);
-	            }
-	        });
-	        return this;
+	    Button.create = function (options) {
+	        return Button.recycleBin.create().reset(Button.TYPE, options);
 	    };
-	    Object.defineProperty(ListView.prototype, "desireHeight", {
-	        get: function () {
-	            var itemHeight = this.itemHeight;
-	            var h = this.topPadding + this.bottomPadding;
-	            this.children.forEach(function (child) {
-	                var param = child.layoutParam;
-	                if (param) {
-	                    h += param.h || itemHeight;
-	                }
-	                else {
-	                    h += child.h || itemHeight;
-	                }
-	            });
-	            return h;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ListView.prototype.relayoutChildren = function () {
-	        var r = _super.prototype.relayoutChildren.call(this);
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
-	        return r;
-	    };
-	    ListView.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this._itemSpacing = 0;
-	        this._itemHeight = 30;
-	        this.scrollerOptions.scrollingX = false;
-	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
-	    };
-	    ListView.create = function (options) {
-	        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
-	    };
-	    ListView.TYPE = "list-view";
-	    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
-	    return ListView;
-	}(scroll_view_1.ScrollView));
-	exports.ListView = ListView;
+	    Button.TYPE = "button";
+	    Button.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Button(); });
+	    return Button;
+	}(widget_1.Widget));
+	exports.Button = Button;
 	;
-	widget_factory_1.WidgetFactory.register(ListView.TYPE, ListView.create);
+	widget_factory_1.WidgetFactory.register(Button.TYPE, Button.create);
 
 
 /***/ },
-/* 101 */
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var button_1 = __webpack_require__(92);
+	var graphics_1 = __webpack_require__(25);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var progress_bar_1 = __webpack_require__(94);
+	/**
+	 * 滑块控件。拖动滑块可以改变它的值。
+	 */
+	var Slider = (function (_super) {
+	    __extends(Slider, _super);
+	    function Slider(type) {
+	        _super.call(this, type || Slider.TYPE);
+	    }
+	    Slider.prototype.onDraggerMoved = function (dragEnd) {
+	        var oldValue = this.value;
+	        if (this.barType === progress_bar_1.ProgressBarType.V) {
+	            var h = this.dragger.h;
+	            var y = this.h - this.dragger.y;
+	            if (y < 2 * h) {
+	                y -= h;
+	            }
+	            else if (y < (this.h - h)) {
+	                y -= h >> 1;
+	            }
+	            else {
+	            }
+	            this._value = y / this.h;
+	        }
+	        else {
+	            var w = this.dragger.w;
+	            var x = this.dragger.x;
+	            if (x < w) {
+	            }
+	            else if (x < (this.w - 2 * w)) {
+	                x += w >> 1;
+	            }
+	            else {
+	                x += w;
+	            }
+	            this._value = x / this.w;
+	        }
+	        if (dragEnd) {
+	            this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: oldValue });
+	        }
+	        else {
+	            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: oldValue });
+	        }
+	        this.dispatchEvent(this.eChangeEvent);
+	        this.requestRedraw();
+	    };
+	    Slider.prototype.relayoutChildren = function () {
+	        var dragger = this.dragger;
+	        if (dragger) {
+	            if (this.barType === progress_bar_1.ProgressBarType.V) {
+	                dragger.w = this.w;
+	                dragger.h = this.w;
+	                dragger.x = 0;
+	                dragger.y = (1 - this.value) * this.h;
+	                dragger.useBehavior("movable", { xMovable: false, yLimit: true, yMin: 0, yMax: this.h - this.w });
+	            }
+	            else {
+	                dragger.w = this.h;
+	                dragger.h = this.h;
+	                dragger.y = 0;
+	                dragger.x = this.value * this.w;
+	                dragger.useBehavior("movable", { yMovable: false, xLimit: true, xMin: 0, xMax: this.w - this.h });
+	            }
+	        }
+	        return null;
+	    };
+	    Slider.prototype.onInit = function () {
+	        var _this = this;
+	        _super.prototype.onInit.call(this);
+	        this.dragger = button_1.Button.create();
+	        this.addChild(this.dragger);
+	        this.dragger.styleType = "slider-dragger";
+	        this.dragger.on(Events.MOVING, function (evt) {
+	            _this.onDraggerMoved(false);
+	        });
+	        this.dragger.on(Events.MOVE, function (evt) {
+	            _this.onDraggerMoved(true);
+	        });
+	    };
+	    Slider.prototype.setProp = function (prop, newValue, notify) {
+	        _super.prototype.setProp.call(this, prop, newValue, notify);
+	        if (prop === "w" || prop === "h" || prop === "value") {
+	            this.relayoutChildren();
+	        }
+	        return this;
+	    };
+	    Slider.prototype.drawColorBackground = function (ctx, style) {
+	        var x1 = 0;
+	        var y1 = 0;
+	        var x2 = 0;
+	        var y2 = 0;
+	        if (this.barType === progress_bar_1.ProgressBarType.V) {
+	            x1 = x2 = this.w >> 1;
+	            y1 = 0;
+	            y2 = this.h;
+	        }
+	        else {
+	            y1 = y2 = this.h >> 1;
+	            x1 = 0;
+	            x2 = this.w;
+	        }
+	        graphics_1.Graphics.drawLine(ctx, style.backGroundColor, style.lineWidth, x1, y1, x2, y2);
+	        return this;
+	    };
+	    Slider.prototype.drawColorForeGround = function (ctx, style) {
+	        var x1 = 0;
+	        var y1 = 0;
+	        var x2 = 0;
+	        var y2 = 0;
+	        if (this.barType === progress_bar_1.ProgressBarType.V) {
+	            x1 = x2 = this.w >> 1;
+	            y1 = this.h;
+	            y2 = this.h * (1 - this.value);
+	        }
+	        else {
+	            y1 = y2 = this.h >> 1;
+	            x1 = 0;
+	            x2 = this.w * this.value;
+	        }
+	        graphics_1.Graphics.drawLine(ctx, style.foreGroundColor, style.lineWidth, x1, y1, x2, y2);
+	        return this;
+	    };
+	    Slider.create = function (options) {
+	        return Slider.r.create().reset(Slider.TYPE, options);
+	    };
+	    Slider.TYPE = "slider";
+	    Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });
+	    return Slider;
+	}(progress_bar_1.ProgressBar));
+	exports.Slider = Slider;
+	;
+	widget_factory_1.WidgetFactory.register(Slider.TYPE, Slider.create);
+
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	var graphics_1 = __webpack_require__(25);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 进度条的类型有三种：水平，垂直和圆形。
+	 */
+	(function (ProgressBarType) {
+	    ProgressBarType[ProgressBarType["H"] = 1] = "H";
+	    ProgressBarType[ProgressBarType["HORIZONTAL"] = 1] = "HORIZONTAL";
+	    ProgressBarType[ProgressBarType["V"] = 2] = "V";
+	    ProgressBarType[ProgressBarType["VERTICAL"] = 2] = "VERTICAL";
+	    ProgressBarType[ProgressBarType["C"] = 3] = "C";
+	    ProgressBarType[ProgressBarType["CIRCLE"] = 3] = "CIRCLE";
+	})(exports.ProgressBarType || (exports.ProgressBarType = {}));
+	var ProgressBarType = exports.ProgressBarType;
+	;
+	/**
+	 * 进度条。value表示进度，取值在0到1之间。
+	 */
+	var ProgressBar = (function (_super) {
+	    __extends(ProgressBar, _super);
+	    function ProgressBar(type) {
+	        _super.call(this, type || ProgressBar.TYPE);
+	        this.textFormater = function (value) {
+	            return Math.round((value * 100)) + "%";
+	        };
+	        this.barType = ProgressBarType.H;
+	    }
+	    Object.defineProperty(ProgressBar.prototype, "text", {
+	        get: function () {
+	            return this.textFormater(this._value);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ProgressBar.prototype, "value", {
+	        get: function () {
+	            return this._value;
+	        },
+	        set: function (value) {
+	            var v = Math.min(1, Math.max(0, value));
+	            this.setProp("value", v, true);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ProgressBar.prototype.drawColorForeGround = function (ctx, style) {
+	        graphics_1.Graphics.drawRoundRect(ctx, style.foreGroundColor, null, 0, 0, 0, this.w, this.h, style.roundRadius);
+	        return this;
+	    };
+	    ProgressBar.prototype.drawImage = function (ctx, style) {
+	        var img = style.foreGroundImage;
+	        var value = this.value;
+	        ctx.save();
+	        ctx.beginPath();
+	        switch (this.barType) {
+	            case ProgressBarType.V: {
+	                var h = this.h * value;
+	                var y = this.h - h;
+	                ctx.rect(0, y, this.w, h);
+	                break;
+	            }
+	            case ProgressBarType.C: {
+	                var cx = this.w >> 1;
+	                var cy = this.h >> 1;
+	                var angle = this.value * Math.PI * 2 - Math.PI / 2;
+	                ctx.moveTo(cx, cy);
+	                ctx.lineTo(cx, 0);
+	                ctx.arc(cx, cy, cy, -Math.PI / 2, angle, false);
+	                ctx.closePath();
+	                break;
+	            }
+	            default: {
+	                var w = this.w * value;
+	                ctx.rect(0, 0, w, this.h);
+	                break;
+	            }
+	        }
+	        ctx.clip();
+	        if (img) {
+	            img.draw(ctx, style.foreGroundImageDrawType, 0, 0, this.w, this.h);
+	        }
+	        else if (style.foreGroundColor) {
+	            this.drawColorForeGround(ctx, style);
+	        }
+	        ctx.restore();
+	        return this;
+	    };
+	    ProgressBar.prototype.getDefProps = function () {
+	        return ProgressBar.defProps;
+	    };
+	    ProgressBar.create = function (options) {
+	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
+	    };
+	    ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
+	    ProgressBar.TYPE = "progress-bar";
+	    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
+	    return ProgressBar;
+	}(widget_1.Widget));
+	exports.ProgressBar = ProgressBar;
+	;
+	widget_factory_1.WidgetFactory.register(ProgressBar.TYPE, ProgressBar.create);
+
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	var TWEEN = __webpack_require__(20);
+	var graphics_1 = __webpack_require__(25);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 开关控件。
+	 */
+	var Switch = (function (_super) {
+	    __extends(Switch, _super);
+	    function Switch() {
+	        _super.call(this, Switch.TYPE);
+	    }
+	    Object.defineProperty(Switch.prototype, "offset", {
+	        get: function () {
+	            if (this._switching) {
+	                return this._offset;
+	            }
+	            return this.value ? this.maxOffset : this.minOffset;
+	        },
+	        set: function (value) {
+	            this.requestRedraw();
+	            this._offset = Math.min(this.maxOffset, Math.max(value, this.minOffset));
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Switch.prototype, "minOffset", {
+	        get: function () {
+	            return this.h >> 1;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Switch.prototype, "maxOffset", {
+	        get: function () {
+	            return this.w - (this.h >> 1);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Switch.prototype.drawColorBackground = function (ctx, style) {
+	        var w = this.w;
+	        var h = this.h;
+	        var r = h >> 1;
+	        var offset = this.offset;
+	        var fillColor = null;
+	        var strokeColor = null;
+	        if (!this._switching) {
+	            fillColor = this.value ? style.backGroundColor : style.foreGroundColor;
+	            strokeColor = style.lineColor;
+	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, 0, 0, w, h, r);
+	        }
+	        else {
+	            strokeColor = style.lineColor;
+	            fillColor = style.backGroundColor;
+	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, 0, 0, w, h, r);
+	            w = this.w - (offset - r);
+	            fillColor = style.foreGroundColor;
+	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, offset - r, 0, w, h, r);
+	        }
+	        var y = r;
+	        var x = this.offset;
+	        graphics_1.Graphics.drawCircle(ctx, style.foreGroundColor, style.lineColor, style.lineWidth, x, y, r);
+	        return this;
+	    };
+	    Switch.prototype.dispatchPointerUp = function (evt) {
+	        var _this = this;
+	        var dx = evt.x - evt.pointerDownX;
+	        if (dx > 5 && this.value || dx < -5 && !this.value) {
+	            _super.prototype.dispatchPointerUp.call(this, evt);
+	            return;
+	        }
+	        var duration = 200;
+	        var tween = new TWEEN.Tween(this);
+	        var offset = this.value ? this.minOffset : this.maxOffset;
+	        this._switching = true;
+	        this.offset = this.value ? this.maxOffset : this.minOffset;
+	        tween.to({ offset: offset }, duration).start();
+	        tween.onComplete(function (evt) {
+	            _this.value = !_this.value;
+	            _this._switching = false;
+	        });
+	        _super.prototype.dispatchPointerUp.call(this, evt);
+	    };
+	    Switch.create = function (options) {
+	        return Switch.recycleBin.create().reset(Switch.TYPE, options);
+	    };
+	    Switch.TYPE = "switch";
+	    Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });
+	    return Switch;
+	}(widget_1.Widget));
+	exports.Switch = Switch;
+	;
+	widget_factory_1.WidgetFactory.register(Switch.TYPE, Switch.create);
+
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var page_1 = __webpack_require__(84);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var TabPage = (function (_super) {
+	    __extends(TabPage, _super);
+	    function TabPage() {
+	        _super.call(this, TabPage.TYPE);
+	    }
+	    Object.defineProperty(TabPage.prototype, "tabButton", {
+	        get: function () {
+	            return this._tabButton;
+	        },
+	        set: function (value) {
+	            this._tabButton = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabPage.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._tabButton = null;
+	    };
+	    TabPage.create = function (options) {
+	        return TabPage.r.create().reset(TabPage.TYPE, options);
+	    };
+	    TabPage.TYPE = "page";
+	    TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });
+	    return TabPage;
+	}(page_1.Page));
+	exports.TabPage = TabPage;
+	;
+	widget_factory_1.WidgetFactory.register(TabPage.TYPE, TabPage.create);
+
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var scroll_view_1 = __webpack_require__(98);
+	var carota = __webpack_require__(26);
+	var rect = carota.rect;
+	var createDoc = carota.document;
+	/**
+	 * 富文本显示控件。
+	 */
+	var RichText = (function (_super) {
+	    __extends(RichText, _super);
+	    function RichText(type) {
+	        _super.call(this, type || RichText.TYPE);
+	        this._verticalAlignment = 'top';
+	    }
+	    RichText.prototype.hasFocus = function () {
+	        return false;
+	    };
+	    Object.defineProperty(RichText.prototype, "data", {
+	        set: function (data) {
+	            this._data = data;
+	            if (this._doc) {
+	                this._doc.load(data);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    RichText.prototype.getVerticalOffset = function () {
+	        var h = this.h;
+	        var doc = this._doc;
+	        var docHeight = doc.frame.bounds().h;
+	        if (docHeight < h) {
+	            switch (this._verticalAlignment) {
+	                case 'middle':
+	                    return (h - docHeight) / 2;
+	                case 'bottom':
+	                    return h - docHeight;
+	            }
+	        }
+	        return 0;
+	    };
+	    RichText.prototype.doDrawChildren = function (ctx) {
+	        var doc = this._doc;
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var w = this.w - this.leftPadding - this.rightPadding;
+	        var h = this.h - this.topPadding - this.bottomPadding;
+	        if (this.isVScrollBarVisible()) {
+	            w -= this.scrollBarStyle.size;
+	        }
+	        if (doc.width() !== w) {
+	            doc.width(w);
+	        }
+	        ctx.save();
+	        ctx.translate(x, y);
+	        doc.draw(ctx, rect(0, this._oy, w, h));
+	        doc.drawSelection(ctx, this.hasFocus());
+	        ctx.restore();
+	        return this;
+	    };
+	    ;
+	    RichText.prototype.adjustSize = function () {
+	        var doc = this._doc;
+	        var w = this.w - this.leftPadding - this.rightPadding;
+	        var h = this.h - this.topPadding - this.bottomPadding;
+	        doc.width(w);
+	        var r = doc.frame.bounds();
+	        if (r.h > h) {
+	            w -= this.scrollBarStyle.size;
+	            doc.width(w);
+	        }
+	        var r = doc.frame.bounds();
+	        this.contentWidth = r.w;
+	        this.contentHeight = r.h;
+	    };
+	    RichText.prototype.onInit = function () {
+	        this.dragToScroll = true;
+	        this.scrollerOptions.scrollingX = false;
+	        _super.prototype.onInit.call(this);
+	        var doc = createDoc();
+	        doc.load(this._data);
+	        doc.toggleCaret();
+	        this._doc = doc;
+	        this.adjustSize();
+	    };
+	    RichText.prototype.dispose = function () {
+	        this._doc = null;
+	        _super.prototype.dispose.call(this);
+	    };
+	    RichText.create = function (options) {
+	        return RichText.reBin.create().reset(RichText.TYPE, options);
+	    };
+	    RichText.TYPE = "rich-text";
+	    RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });
+	    return RichText;
+	}(scroll_view_1.ScrollView));
+	exports.RichText = RichText;
+	;
+	widget_factory_1.WidgetFactory.register(RichText.TYPE, RichText.create);
+
+
+/***/ },
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/globals/scroller/index.d.ts"/>
@@ -18575,15 +17953,15 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var scroller_1 = __webpack_require__(102);
-	var TWEEN = __webpack_require__(21);
-	var Events = __webpack_require__(7);
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var scroller_1 = __webpack_require__(99);
+	var TWEEN = __webpack_require__(20);
+	var Events = __webpack_require__(6);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var widget_1 = __webpack_require__(16);
+	var widget_1 = __webpack_require__(19);
 	/**
 	 * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
 	 */
@@ -19200,13 +18578,13 @@ var qtk =
 
 
 /***/ },
-/* 102 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(103), __webpack_require__(104)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(100), __webpack_require__(101)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports === 'object') {
 	        // CommonJS
 	        factory(exports, require('./lib/animate'), require('./lib/Scroller'));
@@ -19218,7 +18596,7 @@ var qtk =
 
 
 /***/ },
-/* 103 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19455,7 +18833,7 @@ var qtk =
 
 
 /***/ },
-/* 104 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19475,7 +18853,7 @@ var qtk =
 	(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(103)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(100)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module === 'object') {
 	        // CommonJS
 	        module.exports = factory(require('./animate'));
@@ -20613,6 +19991,339 @@ var qtk =
 
 
 /***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var widget_1 = __webpack_require__(19);
+	var button_1 = __webpack_require__(92);
+	var graphics_1 = __webpack_require__(25);
+	var consts_1 = __webpack_require__(103);
+	var radio_button_1 = __webpack_require__(104);
+	var widget_factory_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 标签控件上的标签按钮。
+	 */
+	var TabButton = (function (_super) {
+	    __extends(TabButton, _super);
+	    function TabButton() {
+	        _super.call(this, TabButton.TYPE);
+	    }
+	    Object.defineProperty(TabButton.prototype, "closeButton", {
+	        get: function () {
+	            return this._closeButton;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabButton.prototype, "closeButtonAtLeft", {
+	        get: function () {
+	            return this._cbAtLeft;
+	        },
+	        set: function (value) {
+	            this._cbAtLeft = value;
+	            this.relayoutChildren();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabButton.prototype, "orientation", {
+	        get: function () {
+	            return this._orn;
+	        },
+	        set: function (value) {
+	            this._orn = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
+	        var _this = this;
+	        if (normalIconURL) {
+	            this._normalIcon = image_tile_1.ImageTile.create(normalIconURL, function (evt) {
+	                _this.requestRedraw();
+	            });
+	        }
+	        else {
+	            this._normalIcon = null;
+	        }
+	        this._normalIconURL = normalIconURL ? normalIconURL : null;
+	        if (currentIconURL) {
+	            this._currentIcon = image_tile_1.ImageTile.create(currentIconURL, function (evt) {
+	                _this.requestRedraw();
+	            });
+	        }
+	        else {
+	            this._currentIcon = null;
+	        }
+	        this._currentIconURL = currentIconURL ? currentIconURL : null;
+	    };
+	    Object.defineProperty(TabButton.prototype, "closable", {
+	        get: function () {
+	            return !!this._closeButton;
+	        },
+	        set: function (value) {
+	            if (value && this._closeButton || !value && !this._closeButton) {
+	                return;
+	            }
+	            if (this._closeButton) {
+	                this.removeChild(this._closeButton);
+	                this._closeButton = null;
+	            }
+	            else {
+	                var closeButton = button_1.Button.create();
+	                closeButton.set({ styleType: "tab-button.close" });
+	                this.addChild(closeButton);
+	                this._closeButton = closeButton;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabButton.prototype.relayoutChildren = function () {
+	        if (this._closeButton) {
+	            var x = this.leftPadding;
+	            var y = this.topPadding;
+	            var h = this.h - this.topPadding - this.bottomPadding;
+	            var w = h;
+	            if (!this.closeButtonAtLeft) {
+	                x = this.w - this.rightPadding - w;
+	            }
+	            this._closeButton.moveResizeTo(x, y, w, h);
+	        }
+	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
+	    };
+	    Object.defineProperty(TabButton.prototype, "desireWidth", {
+	        get: function () {
+	            var w = this.leftPadding + this.rightPadding;
+	            var text = this.text;
+	            var style = this.getStyle();
+	            if (this._currentIcon || this._normalIcon) {
+	                w += this.h;
+	            }
+	            if (text && style) {
+	                var font = style.font;
+	                w += graphics_1.Graphics.measureText(text, font) + style.fontSize;
+	            }
+	            return w;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabButton.prototype, "tabPage", {
+	        get: function () {
+	            return this._tabPage;
+	        },
+	        set: function (value) {
+	            this._tabPage = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabButton.prototype.getStyleType = function () {
+	        var appendix = this.value ? "current" : "normal";
+	        return (this._styleType || this.type) + "." + appendix;
+	    };
+	    TabButton.prototype.drawImage = function (ctx, style) {
+	        var text = this.getLocaleText();
+	        var icon = this.value ? this._currentIcon : this._normalIcon;
+	        if (icon) {
+	            var w = 0;
+	            var h = 0;
+	            var x = this.leftPadding;
+	            var y = this.topPadding;
+	            if (this._orn === consts_1.Orientation.V) {
+	                w = this.w - this.leftPadding - this.rightPadding;
+	                h = this.h - this.bottomPadding - this.topPadding;
+	                if (text) {
+	                    h -= style.fontSize;
+	                }
+	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
+	                if (text) {
+	                    y = this.h - this.bottomPadding - style.fontSize;
+	                    graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, y, w, style.fontSize));
+	                }
+	            }
+	            else {
+	                h = this.h - this.topPadding - this.bottomPadding;
+	                w = h;
+	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
+	                if (text) {
+	                    x += w + this.leftPadding;
+	                    w = this.w - x - this.rightPadding;
+	                    graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
+	                }
+	            }
+	        }
+	        else {
+	            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, 0, this.w, this.h));
+	        }
+	        return this;
+	    };
+	    TabButton.prototype.drawText = function (ctx, style) {
+	        return this;
+	    };
+	    TabButton.prototype.onReset = function () {
+	        this._tabPage = null;
+	        this._closeButton = null;
+	        this._normalIcon = null;
+	        this._currentIcon = null;
+	    };
+	    TabButton.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._tabPage = null;
+	        this._closeButton = null;
+	        this._normalIcon = null;
+	        this._currentIcon = null;
+	    };
+	    TabButton.prototype.getDefProps = function () {
+	        return TabButton.defProps;
+	    };
+	    TabButton.create = function (options) {
+	        return TabButton.re.create().reset(TabButton.TYPE, options);
+	    };
+	    TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+	        _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
+	    TabButton.TYPE = "tab-button";
+	    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
+	    return TabButton;
+	}(radio_button_1.RadioButton));
+	exports.TabButton = TabButton;
+	;
+	widget_factory_1.WidgetFactory.register(TabButton.TYPE, TabButton.create);
+
+
+/***/ },
+/* 103 */
+/***/ function(module, exports) {
+
+	"use strict";
+	(function (Orientation) {
+	    Orientation[Orientation["V"] = 1] = "V";
+	    Orientation[Orientation["VERTICAL"] = 1] = "VERTICAL";
+	    Orientation[Orientation["H"] = 2] = "H";
+	    Orientation[Orientation["HORIZONTAL"] = 2] = "HORIZONTAL";
+	})(exports.Orientation || (exports.Orientation = {}));
+	var Orientation = exports.Orientation;
+	;
+	(function (Direction) {
+	    Direction[Direction["W"] = 1] = "W";
+	    Direction[Direction["WEST"] = 1] = "WEST";
+	    Direction[Direction["E"] = 2] = "E";
+	    Direction[Direction["EAST"] = 2] = "EAST";
+	    Direction[Direction["N"] = 3] = "N";
+	    Direction[Direction["NORTH"] = 3] = "NORTH";
+	    Direction[Direction["S"] = 4] = "S";
+	    Direction[Direction["SOUTH"] = 4] = "SOUTH";
+	    Direction[Direction["L"] = 1] = "L";
+	    Direction[Direction["LEFT"] = 1] = "LEFT";
+	    Direction[Direction["R"] = 2] = "R";
+	    Direction[Direction["RIGHT"] = 2] = "RIGHT";
+	    Direction[Direction["T"] = 3] = "T";
+	    Direction[Direction["TOP"] = 3] = "TOP";
+	    Direction[Direction["B"] = 4] = "B";
+	    Direction[Direction["BOTTOM"] = 4] = "BOTTOM";
+	})(exports.Direction || (exports.Direction = {}));
+	var Direction = exports.Direction;
+	;
+	(function (AlignH) {
+	    AlignH[AlignH["L"] = 1] = "L";
+	    AlignH[AlignH["LEFT"] = 1] = "LEFT";
+	    AlignH[AlignH["C"] = 2] = "C";
+	    AlignH[AlignH["CENTER"] = 2] = "CENTER";
+	    AlignH[AlignH["R"] = 3] = "R";
+	    AlignH[AlignH["RIGHT"] = 3] = "RIGHT";
+	})(exports.AlignH || (exports.AlignH = {}));
+	var AlignH = exports.AlignH;
+	;
+	(function (AlignV) {
+	    AlignV[AlignV["T"] = 1] = "T";
+	    AlignV[AlignV["TOP"] = 1] = "TOP";
+	    AlignV[AlignV["M"] = 2] = "M";
+	    AlignV[AlignV["MIDDLE"] = 2] = "MIDDLE";
+	    AlignV[AlignV["B"] = 3] = "B";
+	    AlignV[AlignV["BOTTOM"] = 3] = "BOTTOM";
+	})(exports.AlignV || (exports.AlignV = {}));
+	var AlignV = exports.AlignV;
+	;
+	(function (Align) {
+	    Align[Align["L"] = 1] = "L";
+	    Align[Align["LEFT"] = 1] = "LEFT";
+	    Align[Align["C"] = 2] = "C";
+	    Align[Align["CENTER"] = 2] = "CENTER";
+	    Align[Align["R"] = 3] = "R";
+	    Align[Align["RIGHT"] = 3] = "RIGHT";
+	    Align[Align["T"] = 1] = "T";
+	    Align[Align["TOP"] = 1] = "TOP";
+	    Align[Align["M"] = 2] = "M";
+	    Align[Align["MIDDLE"] = 2] = "MIDDLE";
+	    Align[Align["B"] = 3] = "B";
+	    Align[Align["BOTTOM"] = 3] = "BOTTOM";
+	})(exports.Align || (exports.Align = {}));
+	var Align = exports.Align;
+	;
+	var Services = (function () {
+	    function Services() {
+	    }
+	    Services.THEME_MANAGER = "qtk-theme-manager";
+	    return Services;
+	}());
+	exports.Services = Services;
+	;
+
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var check_button_1 = __webpack_require__(105);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 单选按钮。同一个父控件中，只有一个单选按钮被勾选。被勾选时value为true，否则为false。
+	 */
+	var RadioButton = (function (_super) {
+	    __extends(RadioButton, _super);
+	    function RadioButton(type) {
+	        _super.call(this, type || RadioButton.TYPE);
+	    }
+	    Object.defineProperty(RadioButton.prototype, "value", {
+	        get: function () {
+	            return this._value;
+	        },
+	        set: function (value) {
+	            this.setValue(value, true, true);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    RadioButton.create = function (options) {
+	        return RadioButton.r.create().reset(RadioButton.TYPE, options);
+	    };
+	    RadioButton.TYPE = "radio-button";
+	    RadioButton.r = new recyclable_creator_1.RecyclableCreator(function () { return new RadioButton(); });
+	    return RadioButton;
+	}(check_button_1.CheckButton));
+	exports.RadioButton = RadioButton;
+	;
+	widget_factory_1.WidgetFactory.register(RadioButton.TYPE, RadioButton.create);
+
+
+/***/ },
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -20622,96 +20333,112 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var layouter_1 = __webpack_require__(78);
-	var TYPE = "list";
-	/**
-	 * 列表布局器。
-	 */
-	var ListLayouter = (function (_super) {
-	    __extends(ListLayouter, _super);
-	    function ListLayouter() {
-	        _super.call(this);
-	        this.rect = rect_1.Rect.create(0, 0, 0, 0);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var CheckButton = (function (_super) {
+	    __extends(CheckButton, _super);
+	    function CheckButton(type) {
+	        _super.call(this, type || CheckButton.TYPE);
 	    }
-	    Object.defineProperty(ListLayouter.prototype, "type", {
+	    Object.defineProperty(CheckButton.prototype, "inputable", {
 	        get: function () {
-	            return TYPE;
+	            return true;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /**
-	     * 设置参数。
-	     */
-	    ListLayouter.prototype.setOptions = function (options) {
-	        this.h = options.h || 80;
-	        this.spacing = options.spacing || 0;
+	    Object.defineProperty(CheckButton.prototype, "value", {
+	        get: function () {
+	            return this._value;
+	        },
+	        set: function (value) {
+	            this.setProp("value", value, true);
+	            this.notifyChange();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    CheckButton.prototype.getStyleType = function () {
+	        var appendix = this.value ? "checked" : "unchecked";
+	        return (this._styleType || this.type) + "." + appendix;
+	    };
+	    CheckButton.prototype.drawText = function (ctx, style) {
+	        var text = this.getLocaleText();
+	        if (text && style.textColor) {
+	            var x = this.w >> 1;
+	            var y = this.h >> 1;
+	            var img = style.foreGroundImage;
+	            ctx.font = style.font;
+	            ctx.textAlign = "center";
+	            ctx.textBaseline = "middle";
+	            ctx.fillStyle = style.textColor;
+	            if (img) {
+	                var textAlign = style.textAlign;
+	                switch (textAlign) {
+	                    case "right": {
+	                        x = this.h;
+	                        ctx.textAlign = "left";
+	                        break;
+	                    }
+	                    case "left": {
+	                        x = 0;
+	                        ctx.textAlign = "left";
+	                        break;
+	                    }
+	                    default: {
+	                        break;
+	                    }
+	                }
+	            }
+	            ctx.fillText(text, x, y);
+	        }
 	        return this;
 	    };
-	    ListLayouter.prototype.layoutChildren = function (widget, children, rect) {
-	        var x = rect.x;
-	        var y = rect.y;
-	        var w = rect.w;
-	        var h = this.h;
-	        var spacing = this.spacing;
-	        var arr = widget.children;
-	        for (var i = 0, n = arr.length; i < n; i++) {
-	            var child = arr[i];
-	            var param = child.layoutParam;
-	            if (!child.visible) {
-	                continue;
+	    CheckButton.prototype.drawImage = function (ctx, style) {
+	        var img = style.foreGroundImage;
+	        var text = this.text;
+	        if (img) {
+	            var x = 0;
+	            var y = 0;
+	            var w = this.w;
+	            var h = this.h;
+	            if (text && style.textColor) {
+	                var textAlign = style.textAlign;
+	                switch (textAlign) {
+	                    case "right": {
+	                        w = h;
+	                        break;
+	                    }
+	                    case "left": {
+	                        w = h;
+	                        x = this.w - w;
+	                        break;
+	                    }
+	                    default: {
+	                        break;
+	                    }
+	                }
 	            }
-	            if (param && param.type === TYPE) {
-	                h = param.h || this.h;
-	                spacing = param.spacing || this.spacing;
-	            }
-	            else {
-	                h = this.h;
-	                spacing = i ? this.spacing : 0;
-	            }
-	            y += spacing;
-	            child.moveResizeTo(x, y, w, h);
-	            child.relayoutChildren();
-	            y += h;
+	            img.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
 	        }
-	        this.rect.init(rect.x, rect.y, w, y);
-	        return this.rect;
+	        return this;
 	    };
-	    ListLayouter.prototype.createParam = function (options) {
-	        return ListLayouterParam.create(options);
+	    CheckButton.prototype.dispatchClick = function (evt) {
+	        this.value = !this.value;
+	        _super.prototype.dispatchClick.call(this, evt);
 	    };
-	    ListLayouter.create = function (options) {
-	        var layouter = new ListLayouter();
-	        return layouter.setOptions(options);
+	    CheckButton.create = function (options) {
+	        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
 	    };
-	    return ListLayouter;
-	}(layouter_1.Layouter));
-	exports.ListLayouter = ListLayouter;
+	    CheckButton.TYPE = "check-button";
+	    CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });
+	    return CheckButton;
+	}(widget_1.Widget));
+	exports.CheckButton = CheckButton;
 	;
-	layouter_1.LayouterFactory.register(TYPE, ListLayouter.create);
-	/**
-	 * 列表布局器的参数。
-	 *
-	 * 如果父控件使用ListLayouter布局器，则子控件需要把layoutParam设置为ListLayouterParam。
-	 *
-	 */
-	var ListLayouterParam = (function (_super) {
-	    __extends(ListLayouterParam, _super);
-	    function ListLayouterParam(h, spacing) {
-	        _super.call(this, TYPE);
-	        this.h = h || 0;
-	        this.spacing = spacing || 0;
-	    }
-	    ListLayouterParam.create = function (opt) {
-	        var options = opt || {};
-	        return new ListLayouterParam(options.h || options.height, options.spacing);
-	    };
-	    return ListLayouterParam;
-	}(layouter_1.LayouterParam));
-	exports.ListLayouterParam = ListLayouterParam;
-	;
-	layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.create);
+	widget_factory_1.WidgetFactory.register(CheckButton.TYPE, CheckButton.create);
 
 
 /***/ },
@@ -20724,109 +20451,157 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
-	var graphics_1 = __webpack_require__(25);
+	var rect_1 = __webpack_require__(1);
+	var pages_1 = __webpack_require__(86);
+	var widget_1 = __webpack_require__(19);
+	var tab_page_1 = __webpack_require__(96);
+	var Events = __webpack_require__(6);
+	var tab_button_1 = __webpack_require__(102);
+	var tab_button_group_1 = __webpack_require__(107);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 进度条的类型有三种：水平，垂直和圆形。
-	 */
-	(function (ProgressBarType) {
-	    ProgressBarType[ProgressBarType["H"] = 1] = "H";
-	    ProgressBarType[ProgressBarType["HORIZONTAL"] = 1] = "HORIZONTAL";
-	    ProgressBarType[ProgressBarType["V"] = 2] = "V";
-	    ProgressBarType[ProgressBarType["VERTICAL"] = 2] = "VERTICAL";
-	    ProgressBarType[ProgressBarType["C"] = 3] = "C";
-	    ProgressBarType[ProgressBarType["CIRCLE"] = 3] = "CIRCLE";
-	})(exports.ProgressBarType || (exports.ProgressBarType = {}));
-	var ProgressBarType = exports.ProgressBarType;
-	;
-	/**
-	 * 进度条。value表示进度，取值在0到1之间。
-	 */
-	var ProgressBar = (function (_super) {
-	    __extends(ProgressBar, _super);
-	    function ProgressBar(type) {
-	        _super.call(this, type || ProgressBar.TYPE);
-	        this.textFormater = function (value) {
-	            return Math.round((value * 100)) + "%";
-	        };
-	        this.barType = ProgressBarType.H;
+	var TabControl = (function (_super) {
+	    __extends(TabControl, _super);
+	    function TabControl() {
+	        _super.call(this, TabControl.TYPE);
 	    }
-	    Object.defineProperty(ProgressBar.prototype, "text", {
+	    Object.defineProperty(TabControl.prototype, "value", {
 	        get: function () {
-	            return this.textFormater(this._value);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ProgressBar.prototype, "value", {
-	        get: function () {
-	            return this._value;
+	            return this._pages.value;
 	        },
 	        set: function (value) {
-	            var v = Math.min(1, Math.max(0, value));
-	            this.setProp("value", v, true);
+	            this._pages.value = value;
+	            this.buttonGroup.value = value;
+	            this._value = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    ProgressBar.prototype.drawColorForeGround = function (ctx, style) {
-	        graphics_1.Graphics.drawRoundRect(ctx, style.foreGroundColor, null, 0, 0, 0, this.w, this.h, style.roundRadius);
-	        return this;
-	    };
-	    ProgressBar.prototype.drawImage = function (ctx, style) {
-	        var img = style.foreGroundImage;
-	        var value = this.value;
-	        ctx.save();
-	        ctx.beginPath();
-	        switch (this.barType) {
-	            case ProgressBarType.V: {
-	                var h = this.h * value;
-	                var y = this.h - h;
-	                ctx.rect(0, y, this.w, h);
-	                break;
-	            }
-	            case ProgressBarType.C: {
-	                var cx = this.w >> 1;
-	                var cy = this.h >> 1;
-	                var angle = this.value * Math.PI * 2 - Math.PI / 2;
-	                ctx.moveTo(cx, cy);
-	                ctx.lineTo(cx, 0);
-	                ctx.arc(cx, cy, cy, -Math.PI / 2, angle, false);
-	                ctx.closePath();
-	                break;
-	            }
-	            default: {
-	                var w = this.w * value;
-	                ctx.rect(0, 0, w, this.h);
-	                break;
-	            }
+	    Object.defineProperty(TabControl.prototype, "pages", {
+	        get: function () {
+	            return this._pages;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabControl.prototype, "buttonGroup", {
+	        get: function () {
+	            return this._buttonGroup;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabControl.prototype, "buttonGroupAtTop", {
+	        get: function () {
+	            return this._bgAtTop;
+	        },
+	        set: function (value) {
+	            this._bgAtTop = value;
+	            this.relayoutChildren();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabControl.prototype, "buttonGroupHeight", {
+	        get: function () {
+	            return this._bgh;
+	        },
+	        set: function (value) {
+	            this._bgh = value;
+	            this.relayoutChildren();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TabControl.prototype.removePage = function (tabPage, destroy) {
+	        if (tabPage) {
+	            var tabButton = tabPage.tabButton;
+	            this.pages.removeChild(tabPage, false, destroy);
+	            this.buttonGroup.removeChild(tabButton, false, destroy);
+	            this.value--;
 	        }
-	        ctx.clip();
-	        if (img) {
-	            img.draw(ctx, style.foreGroundImageDrawType, 0, 0, this.w, this.h);
+	    };
+	    TabControl.prototype.addPage = function (title, normalIconURL, currentIconURL, closable, closeButtonAtLeft) {
+	        if (!this.pages.app) {
+	            this.pages.app = this.app;
 	        }
-	        else if (style.foreGroundColor) {
-	            this.drawColorForeGround(ctx, style);
+	        if (!this.buttonGroup.app) {
+	            this.buttonGroup.app = this.app;
 	        }
-	        ctx.restore();
-	        return this;
+	        var tabButton = tab_button_1.TabButton.create();
+	        tabButton.setIcons(normalIconURL, currentIconURL);
+	        tabButton.set({ text: title, closable: closable, closeButtonAtLeft: closeButtonAtLeft });
+	        var tabPage = tab_page_1.TabPage.create();
+	        tabButton.tabPage = tabPage;
+	        tabPage.tabButton = tabButton;
+	        this.pages.addChild(tabPage);
+	        this.buttonGroup.addChild(tabButton);
+	        var tabControl = this;
+	        tabButton.on(Events.CLICK, function (evt) {
+	            tabControl.pages.setValueByPage(this.tabPage);
+	            if (closable && this.target && this.target === this.closeButton) {
+	                tabControl.removePage(this.tabPage);
+	            }
+	        });
+	        this.value = this._value;
+	        this.relayoutChildren();
+	        return tabPage;
 	    };
-	    ProgressBar.prototype.getDefProps = function () {
-	        return ProgressBar.defProps;
+	    TabControl.prototype.relayoutChildren = function () {
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var buttonGroupHeight = this.buttonGroupHeight;
+	        var h = this.h - this.topPadding - this.bottomPadding;
+	        var w = this.w - this.leftPadding - this.rightPadding;
+	        var pages = this._pages;
+	        var buttonGroup = this._buttonGroup;
+	        if (this.buttonGroupAtTop) {
+	            if (buttonGroup) {
+	                buttonGroup.moveResizeTo(x, y, w, buttonGroupHeight);
+	                buttonGroup.relayoutChildren();
+	            }
+	            y += buttonGroupHeight;
+	            h -= buttonGroupHeight;
+	        }
+	        else {
+	            if (buttonGroup) {
+	                buttonGroup.moveResizeTo(x, this.h - buttonGroupHeight - this.bottomPadding, w, buttonGroupHeight);
+	                buttonGroup.relayoutChildren();
+	            }
+	            h -= buttonGroupHeight;
+	        }
+	        if (pages) {
+	            pages.moveResizeTo(x, y, w, h);
+	            pages.relayoutChildren();
+	        }
+	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
 	    };
-	    ProgressBar.create = function (options) {
-	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
+	    TabControl.prototype.onReset = function () {
+	        this._value = 0;
+	        this._pages = pages_1.Pages.create();
+	        this.addChild(this._pages, true);
+	        this._buttonGroup = tab_button_group_1.TabButtonGroup.create();
+	        this.addChild(this._buttonGroup, true);
 	    };
-	    ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
-	    ProgressBar.TYPE = "progress-bar";
-	    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
-	    return ProgressBar;
+	    TabControl.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._pages = null;
+	        this._buttonGroup = null;
+	    };
+	    TabControl.prototype.getDefProps = function () {
+	        return TabControl.defProps;
+	    };
+	    TabControl.create = function (options) {
+	        return TabControl.r.create().reset(TabControl.TYPE, options);
+	    };
+	    TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
+	    TabControl.TYPE = "tab-control";
+	    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
+	    return TabControl;
 	}(widget_1.Widget));
-	exports.ProgressBar = ProgressBar;
+	exports.TabControl = TabControl;
 	;
-	widget_factory_1.WidgetFactory.register(ProgressBar.TYPE, ProgressBar.create);
+	widget_factory_1.WidgetFactory.register(TabControl.TYPE, TabControl.create);
 
 
 /***/ },
@@ -20839,1286 +20614,116 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var path = __webpack_require__(5);
-	var TWEEN = __webpack_require__(21);
-	var Assets = __webpack_require__(3);
-	var Events = __webpack_require__(7);
-	var consts_1 = __webpack_require__(92);
-	var main_loop_1 = __webpack_require__(10);
-	var emitter_1 = __webpack_require__(8);
-	var view_port_1 = __webpack_require__(108);
-	var image_tile_1 = __webpack_require__(15);
-	var theme_manager_1 = __webpack_require__(109);
-	var deviceInfo = __webpack_require__(110);
-	var service_locator_1 = __webpack_require__(111);
-	var inputEventAdapter = __webpack_require__(19);
-	/**
-	 * 代表整个应用程序，可以通过Application获取各种服务。
-	 *
-	 */
-	var Application = (function (_super) {
-	    __extends(Application, _super);
-	    function Application(name) {
-	        _super.call(this);
-	        this.name = name;
-	        this._options = {};
-	        this.servicesManager = new service_locator_1.ServiceLocator();
+	var rect_1 = __webpack_require__(1);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var TabButtonGroup = (function (_super) {
+	    __extends(TabButtonGroup, _super);
+	    function TabButtonGroup() {
+	        _super.call(this, TabButtonGroup.TYPE);
 	    }
-	    Object.defineProperty(Application.prototype, "isReady", {
+	    Object.defineProperty(TabButtonGroup.prototype, "value", {
 	        get: function () {
-	            return this._isReady;
+	            var arr = this.children;
+	            var n = arr.length;
+	            for (var i = 0; i < n; i++) {
+	                var iter = arr[i];
+	                if (iter.value) {
+	                    return i;
+	                }
+	            }
+	            return 0;
+	        },
+	        set: function (value) {
+	            var n = this.children.length;
+	            var index = Math.max(0, Math.min(value, n - 1));
+	            if (n > 0) {
+	                this.children[index].value = true;
+	            }
+	            this.requestRedraw();
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Application.prototype, "assets", {
+	    Object.defineProperty(TabButtonGroup.prototype, "autoExpand", {
 	        get: function () {
-	            return Assets;
+	            return this._ae;
+	        },
+	        set: function (value) {
+	            this._ae = value;
+	            this.relayoutChildren();
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Application.prototype, "mainLoop", {
-	        get: function () {
-	            return this._mainLoop;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Application.prototype.getMainLoop = function () {
-	        return this._mainLoop;
-	    };
-	    Object.defineProperty(Application.prototype, "options", {
-	        get: function () {
-	            return this._options;
-	        },
-	        set: function (options) {
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Application.prototype.initOptions = function (args) {
-	        var options = this._options;
-	        for (var key in args) {
-	            options[key] = args[key];
-	        }
-	        var str = window.location.search.substr(1);
-	        var arr = str.split('&');
-	        arr.forEach(function (iter) {
-	            var keyValue = iter.split("=");
-	            options[keyValue[0]] = keyValue[1];
-	        });
-	    };
-	    Application.prototype.run = function () {
-	        this.dispatchEvent({ type: Events.RUN });
-	        this._mainLoop.requestRedraw();
-	    };
-	    Application.prototype.init = function (args) {
-	        var _this = this;
-	        this.initOptions(args);
-	        var themeManager = new theme_manager_1.ThemeManager();
-	        var sysThemeDataURL = this._options.sysThemeDataURL;
-	        var appThemeDataURL = this._options.appThemeDataURL;
-	        if (sysThemeDataURL) {
-	            Assets.loadJSON(sysThemeDataURL).then(function (json) {
-	                var baseURL = path.dirname(sysThemeDataURL);
-	                themeManager.load(json, baseURL);
-	                return appThemeDataURL;
-	            }).then(function (url) {
-	                if (url) {
-	                    Assets.loadJSON(url).then(function (json) {
-	                        var baseURL = path.dirname(url);
-	                        themeManager.load(json, baseURL);
-	                        _this.dispatchEventAsync({ type: Events.READY });
-	                        _this._isReady = true;
-	                    });
+	    TabButtonGroup.prototype.relayoutChildren = function () {
+	        var x = 0;
+	        var y = 0;
+	        var w = 0;
+	        var h = this.h;
+	        var n = this.children.length;
+	        var autoExpand = this._ae;
+	        if (n > 0) {
+	            var itemW = this.w / n;
+	            this.children.forEach(function (child) {
+	                if (autoExpand) {
+	                    w = itemW;
 	                }
 	                else {
-	                    _this.dispatchEventAsync({ type: Events.READY });
-	                    _this._isReady = true;
+	                    w = child.desireWidth;
 	                }
+	                child.moveResizeTo(x, y, w, h);
+	                child.relayoutChildren();
+	                x += w;
 	            });
 	        }
-	        this.registerService(consts_1.Services.THEME_MANAGER, themeManager);
-	        this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
-	        this._mainLoop = main_loop_1.MainLoop.create();
-	        deviceInfo.init(navigator.language, navigator.userAgent);
-	        inputEventAdapter.init(document, window, deviceInfo.isPointerSupported, deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
-	        if (deviceInfo.isMacOS) {
-	            var density = this.viewPort.density;
-	            image_tile_1.ImageTile.init(density, 1 / density, function (img) {
-	                _this.mainLoop.requestRedraw();
-	            });
-	        }
-	        this._mainLoop.on(Events.PRETICK, function (evt) {
-	            var time = evt.deltaTime;
-	            TWEEN.update(time);
+	        return rect_1.Rect.rect.init(0, 0, this.w, this.h);
+	    };
+	    TabButtonGroup.prototype.drawChildren = function (ctx) {
+	        var current = null;
+	        this._children.forEach(function (child) {
+	            if (child.visible) {
+	                if (child.value) {
+	                    current = child;
+	                }
+	                else {
+	                    child.draw(ctx);
+	                }
+	            }
 	        });
+	        if (current) {
+	            current.draw(ctx);
+	        }
 	        return this;
 	    };
-	    Application.prototype.getService = function (name) {
-	        return this.servicesManager.get(name);
+	    TabButtonGroup.prototype.getDefProps = function () {
+	        return TabButtonGroup.defProps;
 	    };
-	    Application.prototype.registerService = function (name, service) {
-	        this.servicesManager.register(name, service);
-	        return this;
+	    TabButtonGroup.create = function (options) {
+	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
 	    };
-	    Application.prototype.getThemeManager = function () {
-	        return this.getService(consts_1.Services.THEME_MANAGER);
-	    };
-	    Object.defineProperty(Application.prototype, "viewPort", {
-	        get: function () {
-	            return this._viewPort;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Application.prototype.getViewPort = function () {
-	        return this._viewPort;
-	    };
-	    Application.prototype.onReady = function (func) {
-	        if (this._isReady) {
-	            func.call(this);
-	        }
-	        else {
-	            this.on(Events.READY, func);
-	        }
-	    };
-	    Application.get = function () {
-	        return Application.instance;
-	    };
-	    Application.create = function (name) {
-	        var app = new Application(name);
-	        if (!Application.instance) {
-	            Application.instance = app;
-	        }
-	        return app;
-	    };
-	    return Application;
-	}(emitter_1.Emitter));
-	exports.Application = Application;
+	    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
+	    TabButtonGroup.TYPE = "tab-button-group";
+	    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
+	    return TabButtonGroup;
+	}(widget_1.Widget));
+	exports.TabButtonGroup = TabButtonGroup;
 	;
+	widget_factory_1.WidgetFactory.register(TabButtonGroup.TYPE, TabButtonGroup.create);
 
 
 /***/ },
 /* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 	"use strict";
 	var __extends = (this && this.__extends) || function (d, b) {
 	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var emitter_1 = __webpack_require__(8);
-	var Events = __webpack_require__(7);
-	/**
-	 * 表示屏幕大小和密度。
-	 */
-	var ViewPort = (function (_super) {
-	    __extends(ViewPort, _super);
-	    function ViewPort() {
-	        _super.call(this);
-	    }
-	    ViewPort.prototype.getScaleValues = function () {
-	        var scale = (1 / (this.density)).toString();
-	        var str = "initial-scale=SS, minimum-scale=SS, maximum-scale=SS, user-scalable=0";
-	        return "target-densitydpi=device-dpi, width=device-width, " + str.replace(/SS/g, scale);
-	    };
-	    ViewPort.prototype.updateHeadViewportMeta = function (value) {
-	        var meta = null;
-	        var head = document.getElementsByTagName('head')[0];
-	        var arr = document.getElementsByTagName('meta');
-	        for (var i = 0; i < arr.length; i++) {
-	            var iter = arr[i];
-	            if (iter.name === "viewport") {
-	                meta = iter;
-	                break;
-	            }
-	        }
-	        if (!meta) {
-	            meta = document.createElement('meta');
-	            head.appendChild(meta);
-	        }
-	        meta.name = 'viewport';
-	        meta.content = value;
-	    };
-	    ViewPort.prototype.init = function (width, height, density) {
-	        var _this = this;
-	        this._density = density || window.devicePixelRatio;
-	        this.updateHeadViewportMeta(this.getScaleValues());
-	        this._width = width || window.innerWidth;
-	        this._height = height || window.innerHeight;
-	        window.addEventListener(Events.RESIZE, function (evt) {
-	            _this._width = window.innerWidth;
-	            _this._height = window.innerHeight;
-	            _this.dispatchEvent({ type: "resize" });
-	        });
-	    };
-	    Object.defineProperty(ViewPort.prototype, "width", {
-	        get: function () {
-	            return this._width;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ViewPort.prototype, "height", {
-	        get: function () {
-	            return this._height;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ViewPort.prototype, "w", {
-	        get: function () {
-	            return this._width;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ViewPort.prototype, "h", {
-	        get: function () {
-	            return this._height;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(ViewPort.prototype, "density", {
-	        get: function () {
-	            return this._density;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ViewPort.create = function (width, height, density) {
-	        var vp = new ViewPort();
-	        vp.init(width, height, density);
-	        return vp;
-	    };
-	    return ViewPort;
-	}(emitter_1.Emitter));
-	exports.ViewPort = ViewPort;
-
-
-/***/ },
-/* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var style_1 = __webpack_require__(14);
-	var utils_1 = __webpack_require__(22);
-	/**
-	 * 主题用来统一控制Widget的外观风格。
-	 */
-	var ThemeManager = (function () {
-	    function ThemeManager() {
-	        this.data = {};
-	    }
-	    /**
-	     * 设置指定名称和状态下控件的风格。
-	     */
-	    ThemeManager.prototype.set = function (name, state, style) {
-	        if (!this.data[name]) {
-	            this.data[name] = {};
-	        }
-	        this.data[name][state] = style;
-	        return this;
-	    };
-	    /**
-	     * 获取指定名称和状态下控件的风格。
-	     */
-	    ThemeManager.prototype.get = function (name, state) {
-	        var styles = this.data[name];
-	        return styles ? styles[state] : null;
-	    };
-	    /**
-	     * 初始化。
-	     */
-	    ThemeManager.prototype.load = function (data, baseURL) {
-	        var json = this.expand(data);
-	        for (var itemName in json) {
-	            var itemInfo = json[itemName];
-	            for (var stateName in itemInfo) {
-	                var styleInfo = itemInfo[stateName];
-	                this.set(itemName, stateName, style_1.Style.create(styleInfo, baseURL));
-	            }
-	        }
-	        return this;
-	    };
-	    ThemeManager.prototype.expandCommon = function (itemInfo, common) {
-	        for (var key in itemInfo) {
-	            var value = itemInfo[key];
-	            itemInfo[key] = utils_1.assign(value, common);
-	        }
-	        return itemInfo;
-	    };
-	    ThemeManager.prototype.expandExtends = function (extInfo, baseInfo) {
-	        var ret = {};
-	        for (var key in baseInfo) {
-	            ret[key] = utils_1.assign({}, baseInfo[key]);
-	        }
-	        for (var key in extInfo) {
-	            ret[key] = utils_1.assign(ret[key] || {}, extInfo[key]);
-	        }
-	        return ret;
-	    };
-	    ThemeManager.prototype.expand = function (json) {
-	        var ret = {};
-	        for (var itemName in json) {
-	            var itemInfo = json[itemName];
-	            var common = itemInfo["common"];
-	            var ext = itemInfo["extends"];
-	            delete itemInfo["common"];
-	            delete itemInfo["extends"];
-	            if (ext) {
-	                var baseInfo = JSON.parse(JSON.stringify(ret[ext]));
-	                if (common) {
-	                    this.expandCommon(baseInfo, common);
-	                }
-	                itemInfo = this.expandExtends(itemInfo, baseInfo);
-	            }
-	            else {
-	                if (common) {
-	                    this.expandCommon(itemInfo, common);
-	                }
-	            }
-	            ret[itemName] = itemInfo;
-	        }
-	        return ret;
-	    };
-	    return ThemeManager;
-	}());
-	exports.ThemeManager = ThemeManager;
-
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-	/**
-	 * 设备信息。可以获取语言，操作系统和浏览器等相关信息(单例对象，直接调用)。
-	 */
-	"use strict";
-	var userAgent;
-	function init(_locale, userAgent) {
-	    exports.locale = (_locale || navigator.language).toLowerCase();
-	    exports.language = exports.locale.split("-")[0];
-	    var ua = userAgent = userAgent || navigator.userAgent;
-	    exports.isWindowsPhone = ua.indexOf("Windows Phone") >= 0;
-	    exports.isAndroid = ua.indexOf("Android") >= 0;
-	    exports.isIPhone = ua.indexOf("iPhone;") >= 0;
-	    exports.isIPad = ua.indexOf("iPad;") >= 0;
-	    exports.isLinux = !exports.isAndroid && ua.indexOf("Linux;") >= 0;
-	    exports.isMacOS = !exports.isIPhone && !exports.isIPad && ua.indexOf("Macintosh;") >= 0;
-	    exports.isWindows = !exports.isWindowsPhone && ua.indexOf("Windows NT") >= 0;
-	    exports.isMobile = ua.indexOf("Mobile") >= 0;
-	    exports.isPointerSupported = window.navigator.pointerEnabled;
-	    exports.isMSPointerSupported = window.navigator.msPointerEnabled;
-	    var msTouchEnabled = !!window.navigator.msMaxTouchPoints;
-	    var generalTouchEnabled = "ontouchstart" in document.createElement("div");
-	    exports.isTouchSupported = !!msTouchEnabled || generalTouchEnabled;
-	}
-	exports.init = init;
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports) {
-
-	"use strict";
-	/**
-	 * 管理各种服务。
-	 */
-	var ServiceLocator = (function () {
-	    function ServiceLocator() {
-	        this.services = {};
-	    }
-	    ServiceLocator.prototype.register = function (name, service) {
-	        this.services[name] = service;
-	        return this;
-	    };
-	    ServiceLocator.prototype.get = function (name) {
-	        return this.services[name];
-	    };
-	    return ServiceLocator;
-	}());
-	exports.ServiceLocator = ServiceLocator;
-	;
-
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var widget_1 = __webpack_require__(16);
-	var widget_factory_1 = __webpack_require__(23);
-	var graphics_1 = __webpack_require__(25);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var image_tile_1 = __webpack_require__(15);
-	(function (ListItemStyle) {
-	    ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
-	    ListItemStyle[ListItemStyle["FIRST"] = 1] = "FIRST";
-	    ListItemStyle[ListItemStyle["LAST"] = 2] = "LAST";
-	})(exports.ListItemStyle || (exports.ListItemStyle = {}));
-	var ListItemStyle = exports.ListItemStyle;
-	;
-	var ListItem = (function (_super) {
-	    __extends(ListItem, _super);
-	    function ListItem(type) {
-	        _super.call(this, type || ListItem.TYPE);
-	    }
-	    Object.defineProperty(ListItem.prototype, "iconURL", {
-	        get: function () {
-	            return this._iconURL;
-	        },
-	        set: function (value) {
-	            var _this = this;
-	            if (value) {
-	                this._icon = image_tile_1.ImageTile.create(value, function (evt) {
-	                    _this.requestRedraw();
-	                });
-	            }
-	            else {
-	                this._icon = null;
-	            }
-	            this._iconURL = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ListItem.prototype.drawBackground = function (ctx, style) {
-	        if (style.backGroundImage) {
-	            style.backGroundImage.draw(ctx, style.backGroundImageDrawType, 0, 0, this.w, this.h);
-	        }
-	        else if (style.backGroundColor || (style.lineColor && style.lineWidth)) {
-	            graphics_1.Graphics.drawRect(ctx, style.backGroundColor, null, 0, 0, 0, this.w, this.h);
-	            if (this.listItemStyle === ListItemStyle.FIRST) {
-	                graphics_1.Graphics.drawLine(ctx, style.lineColor, style.lineWidth, 0, 0, this.w, 0);
-	            }
-	            graphics_1.Graphics.drawLine(ctx, style.lineColor, style.lineWidth, 0, this.h, this.w, this.h);
-	        }
-	        return this;
-	    };
-	    ListItem.prototype.drawImage = function (ctx, style) {
-	        var icon = this._icon;
-	        var y = this.topPadding;
-	        var x = this.leftPadding;
-	        var h = this.h - this.topPadding - this.bottomPadding;
-	        var w = h;
-	        if (icon) {
-	            icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	        }
-	        return this;
-	    };
-	    ListItem.prototype.getTextRect = function (style) {
-	        var x = this.leftPadding;
-	        if (this._icon) {
-	            x += this.h;
-	        }
-	        var y = this.topPadding;
-	        var w = this.w - x - this.rightPadding;
-	        var h = this.h - y - this.bottomPadding;
-	        if (style.foreGroundImage) {
-	            w -= this.h;
-	        }
-	        return rect_1.Rect.rect.init(x, y, w, h);
-	    };
-	    ListItem.prototype.getDefProps = function () {
-	        return ListItem.defProps;
-	    };
-	    ListItem.create = function (options) {
-	        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
-	    };
-	    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null });
-	    ListItem.TYPE = "list-item";
-	    ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
-	    return ListItem;
-	}(widget_1.Widget));
-	exports.ListItem = ListItem;
-	;
-	widget_factory_1.WidgetFactory.register(ListItem.TYPE, ListItem.create);
-	var ListItemCheckable = (function (_super) {
-	    __extends(ListItemCheckable, _super);
-	    function ListItemCheckable(type) {
-	        _super.call(this, type || ListItemCheckable.TYPE);
-	    }
-	    Object.defineProperty(ListItemCheckable.prototype, "multiCheckable", {
-	        get: function () {
-	            return this._multiCheckable;
-	        },
-	        set: function (value) {
-	            this._multiCheckable = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ListItemCheckable.prototype.drawImage = function (ctx, style) {
-	        if (this.value) {
-	            var icon = style.foreGroundImage;
-	            if (icon) {
-	                var h = this.h - this.topPadding - this.bottomPadding;
-	                var w = h;
-	                var y = this.topPadding;
-	                var x = this.w - this.rightPadding - w;
-	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	            }
-	        }
-	        return _super.prototype.drawImage.call(this, ctx, style);
-	    };
-	    ListItemCheckable.prototype.dispatchClick = function (evt) {
-	        this.value = !this.value;
-	        _super.prototype.dispatchClick.call(this, evt);
-	    };
-	    Object.defineProperty(ListItemCheckable.prototype, "value", {
-	        get: function () {
-	            return this._value;
-	        },
-	        set: function (value) {
-	            this.setValue(value, true, !this.multiCheckable);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    ListItemCheckable.create = function (options) {
-	        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
-	    };
-	    ListItemCheckable.TYPE = "list-item.checkable";
-	    ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });
-	    return ListItemCheckable;
-	}(ListItem));
-	exports.ListItemCheckable = ListItemCheckable;
-	;
-	widget_factory_1.WidgetFactory.register(ListItemCheckable.TYPE, ListItemCheckable.create);
-
-
-/***/ },
-/* 113 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var consts_1 = __webpack_require__(92);
-	var layouter_1 = __webpack_require__(78);
-	var TYPE = "dock";
-	/**
-	 * Dock布局器。
-	 */
-	var DockLayouter = (function (_super) {
-	    __extends(DockLayouter, _super);
-	    function DockLayouter() {
-	        _super.apply(this, arguments);
-	    }
-	    Object.defineProperty(DockLayouter.prototype, "type", {
-	        get: function () {
-	            return TYPE;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    DockLayouter.prototype.layoutChildren = function (widget, children, rect) {
-	        var _this = this;
-	        var r = rect.clone();
-	        var arr = widget.children.forEach(function (child) {
-	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r);
-	            }
-	        });
-	        r.dispose();
-	        return rect;
-	    };
-	    DockLayouter.prototype.layoutChild = function (child, r) {
-	        var x = 0;
-	        var y = 0;
-	        var w = 0;
-	        var h = 0;
-	        var param = child.layoutParam;
-	        if (param && param.type === TYPE && child.visible) {
-	            switch (param.position) {
-	                case consts_1.Direction.LEFT: {
-	                    x = r.x;
-	                    y = r.y;
-	                    h = r.h;
-	                    w = Math.min(r.w, param.size ? layouter_1.Layouter.evalValue(param.size, r.w) : child.w);
-	                    r.x += w;
-	                    r.w -= w;
-	                    break;
-	                }
-	                case consts_1.Direction.RIGHT: {
-	                    y = r.y;
-	                    h = r.h;
-	                    w = Math.min(r.w, param.size ? layouter_1.Layouter.evalValue(param.size, r.w) : child.w);
-	                    x = r.x + r.w - w;
-	                    r.w -= w;
-	                    break;
-	                }
-	                case consts_1.Direction.BOTTOM: {
-	                    x = r.x;
-	                    w = r.w;
-	                    h = Math.min(r.h, param.size ? layouter_1.Layouter.evalValue(param.size, r.h) : child.h);
-	                    y = r.y + r.h - h;
-	                    r.h -= h;
-	                    break;
-	                }
-	                default: {
-	                    x = r.x;
-	                    y = r.y;
-	                    w = r.w;
-	                    h = Math.min(r.h, param.size ? layouter_1.Layouter.evalValue(param.size, r.h) : child.h);
-	                    r.h -= h;
-	                    r.y += h;
-	                    break;
-	                }
-	            }
-	            child.moveResizeTo(x, y, w, h);
-	            child.relayoutChildren();
-	        }
-	    };
-	    DockLayouter.prototype.createParam = function (options) {
-	        return DockLayouterParam.create(options);
-	    };
-	    DockLayouter.create = function (options) {
-	        var layouter = new DockLayouter();
-	        return layouter.setOptions(options);
-	    };
-	    return DockLayouter;
-	}(layouter_1.Layouter));
-	exports.DockLayouter = DockLayouter;
-	;
-	layouter_1.LayouterFactory.register(TYPE, DockLayouter.create);
-	/**
-	 * Dock布局器的参数。
-	 *
-	 * 如果父控件使用DockLayouter布局器，则子控件需要把layoutParam设置为DockLayouterParam。
-	 *
-	 * 对于size参数：
-	 * *.如果以px结尾，则直接取它的值。
-	 * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
-	 *
-	 */
-	var DockLayouterParam = (function (_super) {
-	    __extends(DockLayouterParam, _super);
-	    function DockLayouterParam(position, size) {
-	        _super.call(this, TYPE);
-	        this.size = size;
-	        this.position = position;
-	    }
-	    DockLayouterParam.create = function (opts) {
-	        var options = opts || {};
-	        return new DockLayouterParam(options.position, options.size || "");
-	    };
-	    return DockLayouterParam;
-	}(layouter_1.LayouterParam));
-	exports.DockLayouterParam = DockLayouterParam;
-	;
-	layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.create);
-
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var consts_1 = __webpack_require__(92);
-	var utils_1 = __webpack_require__(22);
-	var layouter_1 = __webpack_require__(78);
-	var TYPE_H = "linear-h";
-	var TYPE_V = "linear-v";
-	/**
-	 * 线性布局器。可以设置为水平和垂直两个方向。
-	 */
-	var LinearLayouter = (function (_super) {
-	    __extends(LinearLayouter, _super);
-	    function LinearLayouter() {
-	        _super.apply(this, arguments);
-	    }
-	    Object.defineProperty(LinearLayouter.prototype, "type", {
-	        get: function () {
-	            return this.orientation === consts_1.Orientation.V ? TYPE_V : TYPE_H;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    /**
-	     * 设置参数。
-	     */
-	    LinearLayouter.prototype.setOptions = function (options) {
-	        this.spacing = options.spacing || 0;
-	        this.orientation = options.orientation || consts_1.Orientation.V;
-	        return this;
-	    };
-	    LinearLayouter.prototype.layoutChildren = function (widget, children, rect) {
-	        var _this = this;
-	        var r = rect.clone();
-	        var defParam = LinearLayouterParam.defParam;
-	        var arr = children.filter(function (child) {
-	            var param = child.layoutParam || defParam;
-	            return param.position > 0;
-	        });
-	        utils_1.stableSort(arr, function (a, b) {
-	            var ap = a.layoutParam || defParam;
-	            var bp = b.layoutParam || defParam;
-	            return ap.position - bp.position;
-	        });
-	        arr.forEach(function (child, index) {
-	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r, index);
-	            }
-	        });
-	        arr = children.filter(function (child) {
-	            var param = child.layoutParam || defParam;
-	            return !param.position;
-	        });
-	        arr.forEach(function (child, index) {
-	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r, index);
-	            }
-	        });
-	        arr = children.filter(function (child) {
-	            var param = child.layoutParam || defParam;
-	            return param.position < 0;
-	        });
-	        utils_1.stableSort(arr, function (a, b) {
-	            var ap = a.layoutParam || defParam;
-	            var bp = b.layoutParam || defParam;
-	            return bp.position - ap.position;
-	        });
-	        arr.forEach(function (child, index) {
-	            if (r.w > 0 && r.h > 0) {
-	                _this.layoutChild(child, r, index);
-	            }
-	        });
-	        r.dispose();
-	        return rect;
-	    };
-	    LinearLayouter.prototype.layoutChild = function (child, r, index) {
-	        var x = 0;
-	        var y = 0;
-	        var w = 0;
-	        var h = 0;
-	        var defParam = LinearLayouterParam.defParam;
-	        var param = child.layoutParam || defParam;
-	        var position = param.position;
-	        if (param && param.type === LinearLayouterParam.TYPE && child.visible) {
-	            var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
-	            if (this.orientation === consts_1.Orientation.V) {
-	                r.h -= spacing;
-	            }
-	            else {
-	                r.w -= spacing;
-	            }
-	            h = Math.min(r.h, param.h ? layouter_1.Layouter.evalValue(param.h, r.h) : child.h);
-	            w = Math.min(r.w, param.w ? layouter_1.Layouter.evalValue(param.w, r.w) : child.w);
-	            if (this.orientation === consts_1.Orientation.V) {
-	                switch (param.align) {
-	                    case consts_1.Align.LEFT: {
-	                        x = r.x;
-	                        break;
-	                    }
-	                    case consts_1.Align.RIGHT: {
-	                        x = r.x + r.w - w;
-	                        break;
-	                    }
-	                    default: {
-	                        x = r.x + ((r.w - w) >> 1);
-	                        break;
-	                    }
-	                }
-	                var spacingH = spacing + h;
-	                if (position >= 0) {
-	                    y = r.y + spacing;
-	                    r.y += spacingH;
-	                }
-	                else {
-	                    y = r.y + r.h - spacingH;
-	                }
-	                r.h -= h;
-	            }
-	            else {
-	                switch (param.align) {
-	                    case consts_1.Align.TOP: {
-	                        y = r.y;
-	                        break;
-	                    }
-	                    case consts_1.Align.BOTTOM: {
-	                        y = r.y + r.h - h;
-	                        break;
-	                    }
-	                    default: {
-	                        y = r.y + ((r.h - h) >> 1);
-	                        break;
-	                    }
-	                }
-	                var spacingW = spacing + w;
-	                if (position >= 0) {
-	                    x = r.x + spacing;
-	                    r.x += spacingW;
-	                }
-	                else {
-	                    x = r.x + r.w - spacingW;
-	                }
-	                r.w -= w;
-	            }
-	            child.moveResizeTo(x, y, w, h);
-	            child.relayoutChildren();
-	        }
-	    };
-	    LinearLayouter.prototype.createParam = function (options) {
-	        return LinearLayouterParam.create(options);
-	    };
-	    LinearLayouter.createV = function (options) {
-	        var layouter = new LinearLayouter();
-	        layouter.setOptions(options);
-	        layouter.orientation = consts_1.Orientation.V;
-	        return layouter;
-	    };
-	    LinearLayouter.createH = function (options) {
-	        var layouter = new LinearLayouter();
-	        layouter.setOptions(options || {});
-	        layouter.orientation = consts_1.Orientation.H;
-	        return layouter;
-	    };
-	    return LinearLayouter;
-	}(layouter_1.Layouter));
-	exports.LinearLayouter = LinearLayouter;
-	;
-	layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createH);
-	layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
-	/**
-	 * Linear布局器的参数。
-	 *
-	 * 如果父控件使用LinearLayouter布局器，则子控件需要把layoutParam设置为LinearLayouterParam。
-	 *
-	 * 对于w参数：
-	 * *.如果以px结尾，则直接取它的值。
-	 * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
-	 *
-	 */
-	var LinearLayouterParam = (function (_super) {
-	    __extends(LinearLayouterParam, _super);
-	    function LinearLayouterParam(type, w, h, spacing, align, position) {
-	        _super.call(this, type || LinearLayouterParam.TYPE);
-	        this.w = w || "100%";
-	        this.h = h || "100%";
-	        this.align = align;
-	        this.spacing = spacing;
-	        this.position = position;
-	    }
-	    LinearLayouterParam.createWithType = function (type, opts) {
-	        var options = opts || {};
-	        return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
-	    };
-	    LinearLayouterParam.create = function (opts) {
-	        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
-	    };
-	    LinearLayouterParam.TYPE = "linear";
-	    LinearLayouterParam.defParam = LinearLayouterParam.create(null);
-	    return LinearLayouterParam;
-	}(layouter_1.LayouterParam));
-	exports.LinearLayouterParam = LinearLayouterParam;
-	;
-	layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);
-
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var layouter_1 = __webpack_require__(78);
-	var TYPE = "grid";
-	/**
-	 * 网格布局器。
-	 */
-	var GridLayouter = (function (_super) {
-	    __extends(GridLayouter, _super);
-	    function GridLayouter() {
-	        _super.call(this);
-	        this.rect = rect_1.Rect.create(0, 0, 0, 0);
-	    }
-	    Object.defineProperty(GridLayouter.prototype, "type", {
-	        get: function () {
-	            return TYPE;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    /**
-	     * 设置参数。
-	     */
-	    GridLayouter.prototype.setOptions = function (options) {
-	        this.cols = options.cols || 0;
-	        this.rows = options.rows || 0;
-	        this.colWidth = options.colWidth || 0;
-	        this.rowHeight = options.rowHeight || 0;
-	        this.leftMargin = options.leftMargin || options.margin || 0;
-	        this.rightMargin = options.rightMargin || options.margin || 0;
-	        this.topMargin = options.topMargin || options.margin || 0;
-	        this.bottomMargin = options.bottomMargin || options.margin || 0;
-	        if (!this.cols && !this.colWidth) {
-	            this.cols = 3;
-	        }
-	        if (!this.rows && !this.rowHeight) {
-	            this.rows = 3;
-	        }
-	        return this;
-	    };
-	    GridLayouter.prototype.layoutChildren = function (widget, children, r) {
-	        var leftMargin = this.leftMargin;
-	        var rightMargin = this.rightMargin;
-	        var topMargin = this.topMargin;
-	        var bottomMargin = this.bottomMargin;
-	        var defParam = new GridLayouterParam(-1, 1, -1, 1);
-	        var row = 0;
-	        var col = 0;
-	        var spanCols = 0;
-	        var spanRows = 0;
-	        var arr = widget.children;
-	        var n = widget.children.length;
-	        var cols = this.cols;
-	        var rows = this.rows;
-	        if (!cols && !rows) {
-	            cols = Math.floor(r.w / this.colWidth);
-	        }
-	        var iw = cols > 0 ? r.w / cols : this.colWidth;
-	        var ih = rows > 0 ? r.h / rows : this.rowHeight;
-	        var ret = this.rect.copy(r);
-	        for (var i = 0; i < n; i++) {
-	            var child = arr[i];
-	            var param = child.layoutParam || defParam;
-	            if (!child.visible) {
-	                continue;
-	            }
-	            if (cols > 0) {
-	                col = i % cols;
-	                row = Math.floor(i / cols);
-	            }
-	            else if (rows > 0) {
-	                row = i % rows;
-	                col = Math.floor(i / rows);
-	            }
-	            if (param.col >= 0) {
-	                col = param.col;
-	            }
-	            if (param.row >= 0) {
-	                row = param.row;
-	            }
-	            spanRows = Math.max(param.spanRows, 1);
-	            spanCols = Math.max(param.spanCols, 1);
-	            var x = col * iw + leftMargin + r.x;
-	            var y = row * ih + topMargin + r.y;
-	            var w = iw * spanCols - leftMargin - rightMargin;
-	            var h = ih * spanRows - topMargin - bottomMargin;
-	            child.moveResizeTo(x, y, w, h);
-	            child.relayoutChildren();
-	            ret.w = Math.max(x + w - r.x, r.w);
-	            ret.h = Math.max(y + h - r.y, r.h);
-	        }
-	        return ret;
-	    };
-	    GridLayouter.prototype.createParam = function (options) {
-	        return GridLayouterParam.create(options);
-	    };
-	    GridLayouter.create = function (options) {
-	        var layouter = new GridLayouter();
-	        return layouter.setOptions(options);
-	    };
-	    return GridLayouter;
-	}(layouter_1.Layouter));
-	exports.GridLayouter = GridLayouter;
-	;
-	layouter_1.LayouterFactory.register(TYPE, GridLayouter.create);
-	/**
-	 * 网格布局器的参数。
-	 *
-	 * 如果父控件使用GridLayouter布局器，则子控件需要把layoutParam设置为GridLayouterParam。
-	 *
-	 */
-	var GridLayouterParam = (function (_super) {
-	    __extends(GridLayouterParam, _super);
-	    function GridLayouterParam(row, spanRows, col, spanCols) {
-	        _super.call(this, TYPE);
-	        this.row = row >= 0 ? row : -1;
-	        this.col = col >= 0 ? col : -1;
-	        this.spanRows = spanRows || 1;
-	        this.spanCols = spanCols || 1;
-	    }
-	    GridLayouterParam.create = function (opts) {
-	        var options = opts || {};
-	        return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
-	    };
-	    return GridLayouterParam;
-	}(layouter_1.LayouterParam));
-	exports.GridLayouterParam = GridLayouterParam;
-	;
-	layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.create);
-
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var layouter_1 = __webpack_require__(78);
-	var TYPE = "simple";
-	/**
-	 * 简单的布局器。
-	 */
-	var SimpleLayouter = (function (_super) {
-	    __extends(SimpleLayouter, _super);
-	    function SimpleLayouter() {
-	        _super.apply(this, arguments);
-	    }
-	    Object.defineProperty(SimpleLayouter.prototype, "type", {
-	        get: function () {
-	            return TYPE;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    SimpleLayouter.prototype.layoutChildren = function (widget, children, rect) {
-	        var arr = widget.children;
-	        for (var i = 0, n = arr.length; i < n; i++) {
-	            this.layoutChild(arr[i], rect);
-	        }
-	        return rect;
-	    };
-	    SimpleLayouter.prototype.layoutChild = function (child, r) {
-	        var pw = r.w;
-	        var ph = r.h;
-	        var param = child.layoutParam;
-	        if (param && param.type === TYPE && child.visible) {
-	            var w = layouter_1.Layouter.evalValue(param.w, pw);
-	            var h = layouter_1.Layouter.evalValue(param.h, ph);
-	            if (param.minW >= 0) {
-	                w = Math.max(w, param.minW);
-	            }
-	            if (param.minH >= 0) {
-	                h = Math.max(h, param.minH);
-	            }
-	            if (param.maxW >= 0) {
-	                w = Math.min(w, param.maxW);
-	            }
-	            if (param.maxH >= 0) {
-	                h = Math.min(h, param.maxH);
-	            }
-	            var f = param.x[0];
-	            var x = (f === "c" || f === "m") ? (pw - w) >> 1 : layouter_1.Layouter.evalValue(param.x, pw);
-	            f = param.y[0];
-	            var y = (f === "c" || f === "m") ? (ph - h) >> 1 : layouter_1.Layouter.evalValue(param.y, ph);
-	            child.moveResizeTo(r.x + x, r.y + y, w, h);
-	            child.relayoutChildren();
-	        }
-	    };
-	    SimpleLayouter.prototype.createParam = function (options) {
-	        return SimpleLayouterParam.create(options);
-	    };
-	    SimpleLayouter.create = function (options) {
-	        var layouter = new SimpleLayouter();
-	        return layouter.setOptions(options);
-	    };
-	    return SimpleLayouter;
-	}(layouter_1.Layouter));
-	exports.SimpleLayouter = SimpleLayouter;
-	;
-	layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.create);
-	/**
-	 * 简单的布局器的参数。
-	 *
-	 * 如果父控件使用SimpleLayouter布局器，则子控件需要把layoutParam设置为SimpleLayouterParam。
-	 *
-	 * 对于x/y/w/h参数：
-	 * *.如果以px结尾，则直接取它的值。
-	 * *.如果以%结尾，则表示父控件的宽度/高度的百分比。
-	 * *.如果以-开头，则表示父控件的宽度/高度的减去该值。
-	 *
-	 * x也可以为『center』，表示水平居中。
-	 * y也可以为『middle』，表示垂直居中。
-	 *
-	 * 示例：
-	 *
-	 * 父控件的宽度为800，高度为600:
-	 *
-	 * param.x = "10px"  则 x = 10;
-	 * param.x = "10%"   则 x = 80;
-	 * param.x = "-10%"  则 x = 720;
-	 * param.x = "-10px" 则 x = 790;
-	 *
-	 */
-	var SimpleLayouterParam = (function (_super) {
-	    __extends(SimpleLayouterParam, _super);
-	    function SimpleLayouterParam(x, y, w, h) {
-	        _super.call(this, TYPE);
-	        this.x = x;
-	        this.y = y;
-	        this.w = w;
-	        this.h = h;
-	        this.minW = -1;
-	        this.minH = -1;
-	        this.maxW = -1;
-	        this.maxH = -1;
-	    }
-	    SimpleLayouterParam.create = function (opts) {
-	        var options = opts || {};
-	        return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
-	    };
-	    return SimpleLayouterParam;
-	}(layouter_1.LayouterParam));
-	exports.SimpleLayouterParam = SimpleLayouterParam;
-	;
-	layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
-
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var scroll_view_1 = __webpack_require__(101);
-	var carota = __webpack_require__(26);
-	var rect = carota.rect;
-	var createDoc = carota.document;
-	/**
-	 * 富文本显示控件。
-	 */
-	var RichText = (function (_super) {
-	    __extends(RichText, _super);
-	    function RichText(type) {
-	        _super.call(this, type || RichText.TYPE);
-	        this._verticalAlignment = 'top';
-	    }
-	    RichText.prototype.hasFocus = function () {
-	        return false;
-	    };
-	    Object.defineProperty(RichText.prototype, "data", {
-	        set: function (data) {
-	            this._data = data;
-	            if (this._doc) {
-	                this._doc.load(data);
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    RichText.prototype.getVerticalOffset = function () {
-	        var h = this.h;
-	        var doc = this._doc;
-	        var docHeight = doc.frame.bounds().h;
-	        if (docHeight < h) {
-	            switch (this._verticalAlignment) {
-	                case 'middle':
-	                    return (h - docHeight) / 2;
-	                case 'bottom':
-	                    return h - docHeight;
-	            }
-	        }
-	        return 0;
-	    };
-	    RichText.prototype.doDrawChildren = function (ctx) {
-	        var doc = this._doc;
-	        var x = this.leftPadding;
-	        var y = this.topPadding;
-	        var w = this.w - this.leftPadding - this.rightPadding;
-	        var h = this.h - this.topPadding - this.bottomPadding;
-	        if (this.isVScrollBarVisible()) {
-	            w -= this.scrollBarStyle.size;
-	        }
-	        if (doc.width() !== w) {
-	            doc.width(w);
-	        }
-	        ctx.save();
-	        ctx.translate(x, y);
-	        doc.draw(ctx, rect(0, this._oy, w, h));
-	        doc.drawSelection(ctx, this.hasFocus());
-	        ctx.restore();
-	        return this;
-	    };
-	    ;
-	    RichText.prototype.adjustSize = function () {
-	        var doc = this._doc;
-	        var w = this.w - this.leftPadding - this.rightPadding;
-	        var h = this.h - this.topPadding - this.bottomPadding;
-	        doc.width(w);
-	        var r = doc.frame.bounds();
-	        if (r.h > h) {
-	            w -= this.scrollBarStyle.size;
-	            doc.width(w);
-	        }
-	        var r = doc.frame.bounds();
-	        this.contentWidth = r.w;
-	        this.contentHeight = r.h;
-	    };
-	    RichText.prototype.onInit = function () {
-	        this.dragToScroll = true;
-	        this.scrollerOptions.scrollingX = false;
-	        _super.prototype.onInit.call(this);
-	        var doc = createDoc();
-	        doc.load(this._data);
-	        doc.toggleCaret();
-	        this._doc = doc;
-	        this.adjustSize();
-	    };
-	    RichText.prototype.dispose = function () {
-	        this._doc = null;
-	        _super.prototype.dispose.call(this);
-	    };
-	    RichText.create = function (options) {
-	        return RichText.reBin.create().reset(RichText.TYPE, options);
-	    };
-	    RichText.TYPE = "rich-text";
-	    RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });
-	    return RichText;
-	}(scroll_view_1.ScrollView));
-	exports.RichText = RichText;
-	;
-	widget_factory_1.WidgetFactory.register(RichText.TYPE, RichText.create);
-
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rich_text_1 = __webpack_require__(117);
+	var rich_text_1 = __webpack_require__(97);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	var carota = __webpack_require__(26);
@@ -22634,7 +21239,7 @@ var qtk =
 
 
 /***/ },
-/* 119 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22643,276 +21248,20 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(7);
-	var button_1 = __webpack_require__(89);
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var edit_1 = __webpack_require__(17);
+	var button_1 = __webpack_require__(92);
+	var widget_1 = __webpack_require__(19);
+	var dialog_1 = __webpack_require__(90);
 	var graphics_1 = __webpack_require__(25);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var progress_bar_1 = __webpack_require__(106);
-	/**
-	 * 滑块控件。拖动滑块可以改变它的值。
-	 */
-	var Slider = (function (_super) {
-	    __extends(Slider, _super);
-	    function Slider(type) {
-	        _super.call(this, type || Slider.TYPE);
-	    }
-	    Slider.prototype.onDraggerMoved = function (dragEnd) {
-	        var oldValue = this.value;
-	        if (this.barType === progress_bar_1.ProgressBarType.V) {
-	            var h = this.dragger.h;
-	            var y = this.h - this.dragger.y;
-	            if (y < 2 * h) {
-	                y -= h;
-	            }
-	            else if (y < (this.h - h)) {
-	                y -= h >> 1;
-	            }
-	            else {
-	            }
-	            this._value = y / this.h;
-	        }
-	        else {
-	            var w = this.dragger.w;
-	            var x = this.dragger.x;
-	            if (x < w) {
-	            }
-	            else if (x < (this.w - 2 * w)) {
-	                x += w >> 1;
-	            }
-	            else {
-	                x += w;
-	            }
-	            this._value = x / this.w;
-	        }
-	        if (dragEnd) {
-	            this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: oldValue });
-	        }
-	        else {
-	            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: oldValue });
-	        }
-	        this.dispatchEvent(this.eChangeEvent);
-	        this.requestRedraw();
-	    };
-	    Slider.prototype.relayoutChildren = function () {
-	        var dragger = this.dragger;
-	        if (dragger) {
-	            if (this.barType === progress_bar_1.ProgressBarType.V) {
-	                dragger.w = this.w;
-	                dragger.h = this.w;
-	                dragger.x = 0;
-	                dragger.y = (1 - this.value) * this.h;
-	                dragger.useBehavior("movable", { xMovable: false, yLimit: true, yMin: 0, yMax: this.h - this.w });
-	            }
-	            else {
-	                dragger.w = this.h;
-	                dragger.h = this.h;
-	                dragger.y = 0;
-	                dragger.x = this.value * this.w;
-	                dragger.useBehavior("movable", { yMovable: false, xLimit: true, xMin: 0, xMax: this.w - this.h });
-	            }
-	        }
-	        return null;
-	    };
-	    Slider.prototype.onInit = function () {
-	        var _this = this;
-	        _super.prototype.onInit.call(this);
-	        this.dragger = button_1.Button.create();
-	        this.addChild(this.dragger);
-	        this.dragger.styleType = "slider-dragger";
-	        this.dragger.on(Events.MOVING, function (evt) {
-	            _this.onDraggerMoved(false);
-	        });
-	        this.dragger.on(Events.MOVE, function (evt) {
-	            _this.onDraggerMoved(true);
-	        });
-	    };
-	    Slider.prototype.setProp = function (prop, newValue, notify) {
-	        _super.prototype.setProp.call(this, prop, newValue, notify);
-	        if (prop === "w" || prop === "h" || prop === "value") {
-	            this.relayoutChildren();
-	        }
-	        return this;
-	    };
-	    Slider.prototype.drawColorBackground = function (ctx, style) {
-	        var x1 = 0;
-	        var y1 = 0;
-	        var x2 = 0;
-	        var y2 = 0;
-	        if (this.barType === progress_bar_1.ProgressBarType.V) {
-	            x1 = x2 = this.w >> 1;
-	            y1 = 0;
-	            y2 = this.h;
-	        }
-	        else {
-	            y1 = y2 = this.h >> 1;
-	            x1 = 0;
-	            x2 = this.w;
-	        }
-	        graphics_1.Graphics.drawLine(ctx, style.backGroundColor, style.lineWidth, x1, y1, x2, y2);
-	        return this;
-	    };
-	    Slider.prototype.drawColorForeGround = function (ctx, style) {
-	        var x1 = 0;
-	        var y1 = 0;
-	        var x2 = 0;
-	        var y2 = 0;
-	        if (this.barType === progress_bar_1.ProgressBarType.V) {
-	            x1 = x2 = this.w >> 1;
-	            y1 = this.h;
-	            y2 = this.h * (1 - this.value);
-	        }
-	        else {
-	            y1 = y2 = this.h >> 1;
-	            x1 = 0;
-	            x2 = this.w * this.value;
-	        }
-	        graphics_1.Graphics.drawLine(ctx, style.foreGroundColor, style.lineWidth, x1, y1, x2, y2);
-	        return this;
-	    };
-	    Slider.create = function (options) {
-	        return Slider.r.create().reset(Slider.TYPE, options);
-	    };
-	    Slider.TYPE = "slider";
-	    Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });
-	    return Slider;
-	}(progress_bar_1.ProgressBar));
-	exports.Slider = Slider;
-	;
-	widget_factory_1.WidgetFactory.register(Slider.TYPE, Slider.create);
-
-
-/***/ },
-/* 120 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_1 = __webpack_require__(16);
-	var TWEEN = __webpack_require__(21);
-	var graphics_1 = __webpack_require__(25);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 开关控件。
-	 */
-	var Switch = (function (_super) {
-	    __extends(Switch, _super);
-	    function Switch() {
-	        _super.call(this, Switch.TYPE);
-	    }
-	    Object.defineProperty(Switch.prototype, "offset", {
-	        get: function () {
-	            if (this._switching) {
-	                return this._offset;
-	            }
-	            return this.value ? this.maxOffset : this.minOffset;
-	        },
-	        set: function (value) {
-	            this.requestRedraw();
-	            this._offset = Math.min(this.maxOffset, Math.max(value, this.minOffset));
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Switch.prototype, "minOffset", {
-	        get: function () {
-	            return this.h >> 1;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(Switch.prototype, "maxOffset", {
-	        get: function () {
-	            return this.w - (this.h >> 1);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Switch.prototype.drawColorBackground = function (ctx, style) {
-	        var w = this.w;
-	        var h = this.h;
-	        var r = h >> 1;
-	        var offset = this.offset;
-	        var fillColor = null;
-	        var strokeColor = null;
-	        if (!this._switching) {
-	            fillColor = this.value ? style.backGroundColor : style.foreGroundColor;
-	            strokeColor = style.lineColor;
-	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, 0, 0, w, h, r);
-	        }
-	        else {
-	            strokeColor = style.lineColor;
-	            fillColor = style.backGroundColor;
-	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, 0, 0, w, h, r);
-	            w = this.w - (offset - r);
-	            fillColor = style.foreGroundColor;
-	            graphics_1.Graphics.drawRoundRect(ctx, fillColor, strokeColor, 1, offset - r, 0, w, h, r);
-	        }
-	        var y = r;
-	        var x = this.offset;
-	        graphics_1.Graphics.drawCircle(ctx, style.foreGroundColor, style.lineColor, style.lineWidth, x, y, r);
-	        return this;
-	    };
-	    Switch.prototype.dispatchPointerUp = function (evt) {
-	        var _this = this;
-	        var dx = evt.x - evt.pointerDownX;
-	        if (dx > 5 && this.value || dx < -5 && !this.value) {
-	            _super.prototype.dispatchPointerUp.call(this, evt);
-	            return;
-	        }
-	        var duration = 200;
-	        var tween = new TWEEN.Tween(this);
-	        var offset = this.value ? this.minOffset : this.maxOffset;
-	        this._switching = true;
-	        this.offset = this.value ? this.maxOffset : this.minOffset;
-	        tween.to({ offset: offset }, duration).start();
-	        tween.onComplete(function (evt) {
-	            _this.value = !_this.value;
-	            _this._switching = false;
-	        });
-	        _super.prototype.dispatchPointerUp.call(this, evt);
-	    };
-	    Switch.create = function (options) {
-	        return Switch.recycleBin.create().reset(Switch.TYPE, options);
-	    };
-	    Switch.TYPE = "switch";
-	    Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });
-	    return Switch;
-	}(widget_1.Widget));
-	exports.Switch = Switch;
-	;
-	widget_factory_1.WidgetFactory.register(Switch.TYPE, Switch.create);
-
-
-/***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var edit_1 = __webpack_require__(83);
-	var button_1 = __webpack_require__(89);
-	var widget_1 = __webpack_require__(16);
-	var dialog_1 = __webpack_require__(98);
-	var graphics_1 = __webpack_require__(25);
-	var Events = __webpack_require__(7);
-	var list_view_1 = __webpack_require__(100);
+	var Events = __webpack_require__(6);
+	var list_view_1 = __webpack_require__(110);
 	var list_item_1 = __webpack_require__(112);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var image_tile_1 = __webpack_require__(15);
-	var simple_layouter_1 = __webpack_require__(116);
+	var image_tile_1 = __webpack_require__(7);
+	var simple_layouter_1 = __webpack_require__(113);
 	var ComboBoxOption = (function () {
 	    function ComboBoxOption(text, value, imageURL, color) {
 	        this.text = text;
@@ -23260,7 +21609,7 @@ var qtk =
 
 
 /***/ },
-/* 122 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23269,18 +21618,2057 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var dialog_1 = __webpack_require__(98);
-	var graphics_1 = __webpack_require__(25);
-	var list_view_1 = __webpack_require__(100);
-	var Events = __webpack_require__(7);
-	var widget_1 = __webpack_require__(16);
+	var scroll_view_1 = __webpack_require__(98);
 	var widget_factory_1 = __webpack_require__(23);
-	var image_tile_1 = __webpack_require__(15);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var list_layouter_1 = __webpack_require__(105);
-	var simple_layouter_1 = __webpack_require__(116);
+	var list_layouter_1 = __webpack_require__(111);
+	var ListView = (function (_super) {
+	    __extends(ListView, _super);
+	    function ListView() {
+	        _super.call(this, ListView.TYPE);
+	    }
+	    Object.defineProperty(ListView.prototype, "itemSpacing", {
+	        get: function () {
+	            return this._itemSpacing;
+	        },
+	        set: function (value) {
+	            this._itemSpacing = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.spacing = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ListView.prototype, "itemHeight", {
+	        get: function () {
+	            return this._itemHeight;
+	        },
+	        set: function (value) {
+	            this._itemHeight = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.h = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ListView.prototype, "childrenLayouter", {
+	        get: function () {
+	            return this._childrenLayouter;
+	        },
+	        set: function (layouter) {
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ListView.prototype.doDrawChildren = function (ctx) {
+	        var top = this.offsetY;
+	        var bottom = top + this.h;
+	        this._children.forEach(function (child) {
+	            var visible = child.visible && child.y < bottom && (child.y + child.h) > top;
+	            if (visible) {
+	                child.draw(ctx);
+	            }
+	        });
+	        return this;
+	    };
+	    Object.defineProperty(ListView.prototype, "desireHeight", {
+	        get: function () {
+	            var itemHeight = this.itemHeight;
+	            var h = this.topPadding + this.bottomPadding;
+	            this.children.forEach(function (child) {
+	                var param = child.layoutParam;
+	                if (param) {
+	                    h += param.h || itemHeight;
+	                }
+	                else {
+	                    h += child.h || itemHeight;
+	                }
+	            });
+	            return h;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ListView.prototype.relayoutChildren = function () {
+	        var r = _super.prototype.relayoutChildren.call(this);
+	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
+	        return r;
+	    };
+	    ListView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._itemSpacing = 0;
+	        this._itemHeight = 30;
+	        this.scrollerOptions.scrollingX = false;
+	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
+	    };
+	    ListView.create = function (options) {
+	        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
+	    };
+	    ListView.TYPE = "list-view";
+	    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
+	    return ListView;
+	}(scroll_view_1.ScrollView));
+	exports.ListView = ListView;
+	;
+	widget_factory_1.WidgetFactory.register(ListView.TYPE, ListView.create);
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var layouter_1 = __webpack_require__(78);
+	var TYPE = "list";
+	/**
+	 * 列表布局器。
+	 */
+	var ListLayouter = (function (_super) {
+	    __extends(ListLayouter, _super);
+	    function ListLayouter() {
+	        _super.call(this);
+	        this.rect = rect_1.Rect.create(0, 0, 0, 0);
+	    }
+	    Object.defineProperty(ListLayouter.prototype, "type", {
+	        get: function () {
+	            return TYPE;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 设置参数。
+	     */
+	    ListLayouter.prototype.setOptions = function (options) {
+	        this.h = options.h || 80;
+	        this.spacing = options.spacing || 0;
+	        return this;
+	    };
+	    ListLayouter.prototype.layoutChildren = function (widget, children, rect) {
+	        var x = rect.x;
+	        var y = rect.y;
+	        var w = rect.w;
+	        var h = this.h;
+	        var spacing = this.spacing;
+	        var arr = widget.children;
+	        for (var i = 0, n = arr.length; i < n; i++) {
+	            var child = arr[i];
+	            var param = child.layoutParam;
+	            if (!child.visible) {
+	                continue;
+	            }
+	            if (param && param.type === TYPE) {
+	                h = param.h || this.h;
+	                spacing = param.spacing || this.spacing;
+	            }
+	            else {
+	                h = this.h;
+	                spacing = i ? this.spacing : 0;
+	            }
+	            y += spacing;
+	            child.moveResizeTo(x, y, w, h);
+	            child.relayoutChildren();
+	            y += h;
+	        }
+	        this.rect.init(rect.x, rect.y, w, y);
+	        return this.rect;
+	    };
+	    ListLayouter.prototype.createParam = function (options) {
+	        return ListLayouterParam.create(options);
+	    };
+	    ListLayouter.create = function (options) {
+	        var layouter = new ListLayouter();
+	        return layouter.setOptions(options);
+	    };
+	    return ListLayouter;
+	}(layouter_1.Layouter));
+	exports.ListLayouter = ListLayouter;
+	;
+	layouter_1.LayouterFactory.register(TYPE, ListLayouter.create);
+	/**
+	 * 列表布局器的参数。
+	 *
+	 * 如果父控件使用ListLayouter布局器，则子控件需要把layoutParam设置为ListLayouterParam。
+	 *
+	 */
+	var ListLayouterParam = (function (_super) {
+	    __extends(ListLayouterParam, _super);
+	    function ListLayouterParam(h, spacing) {
+	        _super.call(this, TYPE);
+	        this.h = h || 0;
+	        this.spacing = spacing || 0;
+	    }
+	    ListLayouterParam.create = function (opt) {
+	        var options = opt || {};
+	        return new ListLayouterParam(options.h || options.height, options.spacing);
+	    };
+	    return ListLayouterParam;
+	}(layouter_1.LayouterParam));
+	exports.ListLayouterParam = ListLayouterParam;
+	;
+	layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.create);
+
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var graphics_1 = __webpack_require__(25);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var image_tile_1 = __webpack_require__(7);
+	(function (ListItemStyle) {
+	    ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
+	    ListItemStyle[ListItemStyle["FIRST"] = 1] = "FIRST";
+	    ListItemStyle[ListItemStyle["LAST"] = 2] = "LAST";
+	})(exports.ListItemStyle || (exports.ListItemStyle = {}));
+	var ListItemStyle = exports.ListItemStyle;
+	;
+	var ListItem = (function (_super) {
+	    __extends(ListItem, _super);
+	    function ListItem(type) {
+	        _super.call(this, type || ListItem.TYPE);
+	    }
+	    Object.defineProperty(ListItem.prototype, "iconURL", {
+	        get: function () {
+	            return this._iconURL;
+	        },
+	        set: function (value) {
+	            var _this = this;
+	            if (value) {
+	                this._icon = image_tile_1.ImageTile.create(value, function (evt) {
+	                    _this.requestRedraw();
+	                });
+	            }
+	            else {
+	                this._icon = null;
+	            }
+	            this._iconURL = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ListItem.prototype.drawBackground = function (ctx, style) {
+	        if (style.backGroundImage) {
+	            style.backGroundImage.draw(ctx, style.backGroundImageDrawType, 0, 0, this.w, this.h);
+	        }
+	        else if (style.backGroundColor || (style.lineColor && style.lineWidth)) {
+	            graphics_1.Graphics.drawRect(ctx, style.backGroundColor, null, 0, 0, 0, this.w, this.h);
+	            if (this.listItemStyle === ListItemStyle.FIRST) {
+	                graphics_1.Graphics.drawLine(ctx, style.lineColor, style.lineWidth, 0, 0, this.w, 0);
+	            }
+	            graphics_1.Graphics.drawLine(ctx, style.lineColor, style.lineWidth, 0, this.h, this.w, this.h);
+	        }
+	        return this;
+	    };
+	    ListItem.prototype.drawImage = function (ctx, style) {
+	        var icon = this._icon;
+	        var y = this.topPadding;
+	        var x = this.leftPadding;
+	        var h = this.h - this.topPadding - this.bottomPadding;
+	        var w = h;
+	        if (icon) {
+	            icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
+	        }
+	        return this;
+	    };
+	    ListItem.prototype.getTextRect = function (style) {
+	        var x = this.leftPadding;
+	        if (this._icon) {
+	            x += this.h;
+	        }
+	        var y = this.topPadding;
+	        var w = this.w - x - this.rightPadding;
+	        var h = this.h - y - this.bottomPadding;
+	        if (style.foreGroundImage) {
+	            w -= this.h;
+	        }
+	        return rect_1.Rect.rect.init(x, y, w, h);
+	    };
+	    ListItem.prototype.getDefProps = function () {
+	        return ListItem.defProps;
+	    };
+	    ListItem.create = function (options) {
+	        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
+	    };
+	    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null });
+	    ListItem.TYPE = "list-item";
+	    ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
+	    return ListItem;
+	}(widget_1.Widget));
+	exports.ListItem = ListItem;
+	;
+	widget_factory_1.WidgetFactory.register(ListItem.TYPE, ListItem.create);
+	var ListItemCheckable = (function (_super) {
+	    __extends(ListItemCheckable, _super);
+	    function ListItemCheckable(type) {
+	        _super.call(this, type || ListItemCheckable.TYPE);
+	    }
+	    Object.defineProperty(ListItemCheckable.prototype, "multiCheckable", {
+	        get: function () {
+	            return this._multiCheckable;
+	        },
+	        set: function (value) {
+	            this._multiCheckable = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ListItemCheckable.prototype.drawImage = function (ctx, style) {
+	        if (this.value) {
+	            var icon = style.foreGroundImage;
+	            if (icon) {
+	                var h = this.h - this.topPadding - this.bottomPadding;
+	                var w = h;
+	                var y = this.topPadding;
+	                var x = this.w - this.rightPadding - w;
+	                icon.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
+	            }
+	        }
+	        return _super.prototype.drawImage.call(this, ctx, style);
+	    };
+	    ListItemCheckable.prototype.dispatchClick = function (evt) {
+	        this.value = !this.value;
+	        _super.prototype.dispatchClick.call(this, evt);
+	    };
+	    Object.defineProperty(ListItemCheckable.prototype, "value", {
+	        get: function () {
+	            return this._value;
+	        },
+	        set: function (value) {
+	            this.setValue(value, true, !this.multiCheckable);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ListItemCheckable.create = function (options) {
+	        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
+	    };
+	    ListItemCheckable.TYPE = "list-item.checkable";
+	    ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });
+	    return ListItemCheckable;
+	}(ListItem));
+	exports.ListItemCheckable = ListItemCheckable;
+	;
+	widget_factory_1.WidgetFactory.register(ListItemCheckable.TYPE, ListItemCheckable.create);
+
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var layouter_1 = __webpack_require__(78);
+	var TYPE = "simple";
+	/**
+	 * 简单的布局器。
+	 */
+	var SimpleLayouter = (function (_super) {
+	    __extends(SimpleLayouter, _super);
+	    function SimpleLayouter() {
+	        _super.apply(this, arguments);
+	    }
+	    Object.defineProperty(SimpleLayouter.prototype, "type", {
+	        get: function () {
+	            return TYPE;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    SimpleLayouter.prototype.layoutChildren = function (widget, children, rect) {
+	        var arr = widget.children;
+	        for (var i = 0, n = arr.length; i < n; i++) {
+	            this.layoutChild(arr[i], rect);
+	        }
+	        return rect;
+	    };
+	    SimpleLayouter.prototype.layoutChild = function (child, r) {
+	        var pw = r.w;
+	        var ph = r.h;
+	        var param = child.layoutParam;
+	        if (param && param.type === TYPE && child.visible) {
+	            var w = layouter_1.Layouter.evalValue(param.w, pw);
+	            var h = layouter_1.Layouter.evalValue(param.h, ph);
+	            if (param.minW >= 0) {
+	                w = Math.max(w, param.minW);
+	            }
+	            if (param.minH >= 0) {
+	                h = Math.max(h, param.minH);
+	            }
+	            if (param.maxW >= 0) {
+	                w = Math.min(w, param.maxW);
+	            }
+	            if (param.maxH >= 0) {
+	                h = Math.min(h, param.maxH);
+	            }
+	            var f = param.x[0];
+	            var x = (f === "c" || f === "m") ? (pw - w) >> 1 : layouter_1.Layouter.evalValue(param.x, pw);
+	            f = param.y[0];
+	            var y = (f === "c" || f === "m") ? (ph - h) >> 1 : layouter_1.Layouter.evalValue(param.y, ph);
+	            child.moveResizeTo(r.x + x, r.y + y, w, h);
+	            child.relayoutChildren();
+	        }
+	    };
+	    SimpleLayouter.prototype.createParam = function (options) {
+	        return SimpleLayouterParam.create(options);
+	    };
+	    SimpleLayouter.create = function (options) {
+	        var layouter = new SimpleLayouter();
+	        return layouter.setOptions(options);
+	    };
+	    return SimpleLayouter;
+	}(layouter_1.Layouter));
+	exports.SimpleLayouter = SimpleLayouter;
+	;
+	layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.create);
+	/**
+	 * 简单的布局器的参数。
+	 *
+	 * 如果父控件使用SimpleLayouter布局器，则子控件需要把layoutParam设置为SimpleLayouterParam。
+	 *
+	 * 对于x/y/w/h参数：
+	 * *.如果以px结尾，则直接取它的值。
+	 * *.如果以%结尾，则表示父控件的宽度/高度的百分比。
+	 * *.如果以-开头，则表示父控件的宽度/高度的减去该值。
+	 *
+	 * x也可以为『center』，表示水平居中。
+	 * y也可以为『middle』，表示垂直居中。
+	 *
+	 * 示例：
+	 *
+	 * 父控件的宽度为800，高度为600:
+	 *
+	 * param.x = "10px"  则 x = 10;
+	 * param.x = "10%"   则 x = 80;
+	 * param.x = "-10%"  则 x = 720;
+	 * param.x = "-10px" 则 x = 790;
+	 *
+	 */
+	var SimpleLayouterParam = (function (_super) {
+	    __extends(SimpleLayouterParam, _super);
+	    function SimpleLayouterParam(x, y, w, h) {
+	        _super.call(this, TYPE);
+	        this.x = x;
+	        this.y = y;
+	        this.w = w;
+	        this.h = h;
+	        this.minW = -1;
+	        this.minH = -1;
+	        this.maxW = -1;
+	        this.maxH = -1;
+	    }
+	    SimpleLayouterParam.create = function (opts) {
+	        var options = opts || {};
+	        return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
+	    };
+	    return SimpleLayouterParam;
+	}(layouter_1.LayouterParam));
+	exports.SimpleLayouterParam = SimpleLayouterParam;
+	;
+	layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
+
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var grid_layouter_1 = __webpack_require__(115);
+	var scroll_view_1 = __webpack_require__(98);
+	/**
+	 * 网格视图。
+	 */
+	var GridView = (function (_super) {
+	    __extends(GridView, _super);
+	    function GridView() {
+	        _super.call(this, GridView.TYPE);
+	    }
+	    Object.defineProperty(GridView.prototype, "cols", {
+	        get: function () {
+	            return this._cols;
+	        },
+	        /**
+	         * 列数。列数和列宽设置其中之一即可。
+	         */
+	        set: function (value) {
+	            this._cols = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.cols = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(GridView.prototype, "colWidth", {
+	        get: function () {
+	            return this._colWidth;
+	        },
+	        /**
+	         * 列宽。列数和列宽设置其中之一即可。
+	         */
+	        set: function (value) {
+	            this._colWidth = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.colWidth = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(GridView.prototype, "rows", {
+	        get: function () {
+	            return this._rows;
+	        },
+	        /**
+	         * 行数。行数和行高设置其中之一即可。
+	         */
+	        set: function (value) {
+	            this._rows = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.rows = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(GridView.prototype, "rowHeight", {
+	        get: function () {
+	            return this._rowHeight;
+	        },
+	        /**
+	         * 行高。行数和行高设置其中之一即可。
+	         */
+	        set: function (value) {
+	            this._rowHeight = value;
+	            var layouter = this._childrenLayouter;
+	            layouter.rowHeight = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 每一网格周围的空白。
+	     */
+	    GridView.prototype.setItemMargins = function (margins) {
+	        var layouter = this._childrenLayouter;
+	        layouter.leftMargin = margins.left || margins.all || 0;
+	        layouter.rightMargin = margins.right || margins.all || 0;
+	        layouter.topMargin = margins.top || margins.all || 0;
+	        layouter.bottomMargin = margins.bottom || margins.all || 0;
+	        return this;
+	    };
+	    Object.defineProperty(GridView.prototype, "childrenLayouter", {
+	        get: function () {
+	            return this._childrenLayouter;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    GridView.prototype.doDrawChildren = function (ctx) {
+	        var top = this.offsetY;
+	        var bottom = top + this.h;
+	        this._children.forEach(function (child) {
+	            var visible = child.visible && child.y < bottom && (child.y + child.h) > top;
+	            if (visible) {
+	                child.draw(ctx);
+	            }
+	        });
+	        return this;
+	    };
+	    GridView.prototype.relayoutChildren = function () {
+	        this.ensureOptions();
+	        var r = _super.prototype.relayoutChildren.call(this);
+	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentHeight = r.h + this.topPadding + this.bottomPadding;
+	        return r;
+	    };
+	    GridView.prototype.ensureOptions = function () {
+	        if (this.rows > 0 && this.cols > 0) {
+	            this.scrollerOptions.scrollingX = false;
+	            this.scrollerOptions.scrollingY = false;
+	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
+	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
+	        }
+	        else if (this.cols > 0) {
+	            this.scrollerOptions.scrollingX = false;
+	            this.scrollerOptions.scrollingY = true;
+	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
+	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
+	        }
+	        else if (this.rows > 0) {
+	            this.scrollerOptions.scrollingX = true;
+	            this.scrollerOptions.scrollingY = false;
+	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
+	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
+	        }
+	        else {
+	            this.scrollerOptions.scrollingX = false;
+	            this.scrollerOptions.scrollingY = true;
+	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
+	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
+	        }
+	    };
+	    GridView.prototype.onToJson = function (json) {
+	        delete json.childrenLayouter;
+	    };
+	    GridView.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        this.relayoutChildren();
+	    };
+	    GridView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
+	    };
+	    GridView.prototype.getDefProps = function () {
+	        return GridView.defProps;
+	    };
+	    GridView.create = function (options) {
+	        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
+	    };
+	    GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
+	    GridView.TYPE = "grid-view";
+	    GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
+	    return GridView;
+	}(scroll_view_1.ScrollView));
+	exports.GridView = GridView;
+	;
+	widget_factory_1.WidgetFactory.register(GridView.TYPE, GridView.create);
+
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var layouter_1 = __webpack_require__(78);
+	var TYPE = "grid";
+	/**
+	 * 网格布局器。
+	 */
+	var GridLayouter = (function (_super) {
+	    __extends(GridLayouter, _super);
+	    function GridLayouter() {
+	        _super.call(this);
+	        this.rect = rect_1.Rect.create(0, 0, 0, 0);
+	    }
+	    Object.defineProperty(GridLayouter.prototype, "type", {
+	        get: function () {
+	            return TYPE;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 设置参数。
+	     */
+	    GridLayouter.prototype.setOptions = function (options) {
+	        this.cols = options.cols || 0;
+	        this.rows = options.rows || 0;
+	        this.colWidth = options.colWidth || 0;
+	        this.rowHeight = options.rowHeight || 0;
+	        this.leftMargin = options.leftMargin || options.margin || 0;
+	        this.rightMargin = options.rightMargin || options.margin || 0;
+	        this.topMargin = options.topMargin || options.margin || 0;
+	        this.bottomMargin = options.bottomMargin || options.margin || 0;
+	        if (!this.cols && !this.colWidth) {
+	            this.cols = 3;
+	        }
+	        if (!this.rows && !this.rowHeight) {
+	            this.rows = 3;
+	        }
+	        return this;
+	    };
+	    GridLayouter.prototype.layoutChildren = function (widget, children, r) {
+	        var leftMargin = this.leftMargin;
+	        var rightMargin = this.rightMargin;
+	        var topMargin = this.topMargin;
+	        var bottomMargin = this.bottomMargin;
+	        var defParam = new GridLayouterParam(-1, 1, -1, 1);
+	        var row = 0;
+	        var col = 0;
+	        var spanCols = 0;
+	        var spanRows = 0;
+	        var arr = widget.children;
+	        var n = widget.children.length;
+	        var cols = this.cols;
+	        var rows = this.rows;
+	        if (!cols && !rows) {
+	            cols = Math.floor(r.w / this.colWidth);
+	        }
+	        var iw = cols > 0 ? r.w / cols : this.colWidth;
+	        var ih = rows > 0 ? r.h / rows : this.rowHeight;
+	        var ret = this.rect.copy(r);
+	        for (var i = 0; i < n; i++) {
+	            var child = arr[i];
+	            var param = child.layoutParam || defParam;
+	            if (!child.visible) {
+	                continue;
+	            }
+	            if (cols > 0) {
+	                col = i % cols;
+	                row = Math.floor(i / cols);
+	            }
+	            else if (rows > 0) {
+	                row = i % rows;
+	                col = Math.floor(i / rows);
+	            }
+	            if (param.col >= 0) {
+	                col = param.col;
+	            }
+	            if (param.row >= 0) {
+	                row = param.row;
+	            }
+	            spanRows = Math.max(param.spanRows, 1);
+	            spanCols = Math.max(param.spanCols, 1);
+	            var x = col * iw + leftMargin + r.x;
+	            var y = row * ih + topMargin + r.y;
+	            var w = iw * spanCols - leftMargin - rightMargin;
+	            var h = ih * spanRows - topMargin - bottomMargin;
+	            child.moveResizeTo(x, y, w, h);
+	            child.relayoutChildren();
+	            ret.w = Math.max(x + w - r.x, r.w);
+	            ret.h = Math.max(y + h - r.y, r.h);
+	        }
+	        return ret;
+	    };
+	    GridLayouter.prototype.createParam = function (options) {
+	        return GridLayouterParam.create(options);
+	    };
+	    GridLayouter.create = function (options) {
+	        var layouter = new GridLayouter();
+	        return layouter.setOptions(options);
+	    };
+	    return GridLayouter;
+	}(layouter_1.Layouter));
+	exports.GridLayouter = GridLayouter;
+	;
+	layouter_1.LayouterFactory.register(TYPE, GridLayouter.create);
+	/**
+	 * 网格布局器的参数。
+	 *
+	 * 如果父控件使用GridLayouter布局器，则子控件需要把layoutParam设置为GridLayouterParam。
+	 *
+	 */
+	var GridLayouterParam = (function (_super) {
+	    __extends(GridLayouterParam, _super);
+	    function GridLayouterParam(row, spanRows, col, spanCols) {
+	        _super.call(this, TYPE);
+	        this.row = row >= 0 ? row : -1;
+	        this.col = col >= 0 ? col : -1;
+	        this.spanRows = spanRows || 1;
+	        this.spanCols = spanCols || 1;
+	    }
+	    GridLayouterParam.create = function (opts) {
+	        var options = opts || {};
+	        return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
+	    };
+	    return GridLayouterParam;
+	}(layouter_1.LayouterParam));
+	exports.GridLayouterParam = GridLayouterParam;
+	;
+	layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.create);
+
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var widget_factory_1 = __webpack_require__(23);
+	var graphics_1 = __webpack_require__(25);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var widget_1 = __webpack_require__(19);
+	/**
+	 * 树形视图中，显示的一个子项。
+	 */
+	var TreeItem = (function (_super) {
+	    __extends(TreeItem, _super);
+	    function TreeItem() {
+	        _super.call(this, TreeItem.TYPE);
+	    }
+	    Object.defineProperty(TreeItem.prototype, "text", {
+	        /**
+	         * 显示的文本，从data中获取。
+	         */
+	        get: function () {
+	            return this._data.text;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "icon", {
+	        /**
+	         * 显示的图标，从data中获取。
+	         */
+	        get: function () {
+	            return this._data.icon;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "userData", {
+	        /**
+	         * 显示的图标，从data中获取。
+	         */
+	        get: function () {
+	            return this._data.userData;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "desireWidth", {
+	        get: function () {
+	            var text = this.data.text;
+	            var style = this.getStyle();
+	            var w = this._level * this._indention + this.h;
+	            if (text) {
+	                w += graphics_1.Graphics.measureText(text, style.font);
+	            }
+	            return w;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "visible", {
+	        /**
+	         * 可见性判断：要求父控件没有折叠。
+	         */
+	        get: function () {
+	            var item = this.parentItem;
+	            while (item !== null) {
+	                if (!item.expanded) {
+	                    return false;
+	                }
+	                item = item.parentItem;
+	            }
+	            return this._visible;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "parentItem", {
+	        get: function () {
+	            return this._parentItem;
+	        },
+	        set: function (parentItem) {
+	            this._parentItem = parentItem;
+	            if (parentItem) {
+	                parentItem._childrenItems.push(this);
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "childrenItems", {
+	        get: function () {
+	            return this._childrenItems;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "level", {
+	        get: function () {
+	            return this._level;
+	        },
+	        set: function (value) {
+	            this._level = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "selected", {
+	        get: function () {
+	            return this.data.selected;
+	        },
+	        set: function (value) {
+	            this.data.selected = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "isLeaf", {
+	        get: function () {
+	            var data = this._data;
+	            return !data.children || !data.children.length;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "data", {
+	        get: function () {
+	            return this._data;
+	        },
+	        set: function (value) {
+	            this._data = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "indention", {
+	        get: function () {
+	            return this._indention;
+	        },
+	        set: function (value) {
+	            this._indention = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeItem.prototype, "expanded", {
+	        get: function () {
+	            return this.data.expanded;
+	        },
+	        set: function (value) {
+	            this.data.expanded = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TreeItem.prototype.getStateForStyle = function () {
+	        return this.selected ? widget_1.WidgetState.SELECTED : this._state;
+	    };
+	    TreeItem.prototype.getStyleType = function () {
+	        if (this._styleType) {
+	            return this._styleType;
+	        }
+	        var appendix = this.isLeaf ? "leaf" : (this.expanded ? "expanded" : "collapsed");
+	        return (this.type) + "." + appendix;
+	    };
+	    TreeItem.prototype.drawImage = function (ctx, style) {
+	        var img = style.foreGroundImage;
+	        if (img) {
+	            var y = 0;
+	            var w = this.h;
+	            var h = this.h;
+	            var x = this._level * this._indention;
+	            img.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
+	        }
+	        return this;
+	    };
+	    TreeItem.prototype.drawText = function (ctx, style) {
+	        var text = this.data.text;
+	        if (text && style.textColor) {
+	            var y = 0;
+	            var h = this.h;
+	            var x = this._level * this._indention;
+	            if (style.foreGroundImage) {
+	                x += h;
+	            }
+	            var w = this.x + this.w - x;
+	            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
+	        }
+	        return this;
+	    };
+	    TreeItem.prototype.dispatchDblClick = function (evt) {
+	        _super.prototype.dispatchDblClick.call(this, evt);
+	        if (!this.isLeaf) {
+	            this.expanded = !this.expanded;
+	            this.parent.relayoutChildren();
+	        }
+	    };
+	    TreeItem.prototype.dispatchClick = function (evt) {
+	        if (!this.isLeaf) {
+	            var p = this.toLocalPoint(point_1.Point.point.copy(evt));
+	            var y = 0;
+	            var w = this.h;
+	            var h = this.h;
+	            var x = this._level * this._indention;
+	            if (p.isIn(x, y, w, h)) {
+	                this.expanded = !this.expanded;
+	                this.parent.relayoutChildren();
+	            }
+	        }
+	        var parent = this.parent;
+	        if (evt.ctrlKey && parent.multiSelectable) {
+	            parent.setItemSelected(this, !this.selected, false);
+	        }
+	        else {
+	            parent.setItemSelected(this, true, true);
+	        }
+	        _super.prototype.dispatchClick.call(this, evt);
+	    };
+	    TreeItem.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._data = null;
+	        this.parentItem = null;
+	        this._childrenItems = null;
+	    };
+	    TreeItem.prototype.onReset = function () {
+	        this._level = 0;
+	        this._data = null;
+	        this._indention = 30;
+	        this._parentItem = null;
+	        this._childrenItems = [];
+	    };
+	    TreeItem.create = function (options) {
+	        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
+	    };
+	    TreeItem.TYPE = "tree-item";
+	    TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });
+	    return TreeItem;
+	}(widget_1.Widget));
+	exports.TreeItem = TreeItem;
+	;
+	widget_factory_1.WidgetFactory.register(TreeItem.TYPE, TreeItem.create);
+
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var tree_item_1 = __webpack_require__(116);
+	var list_view_1 = __webpack_require__(110);
+	var tree_item_data_1 = __webpack_require__(118);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	/**
+	 * 树形视图。
+	 */
+	var TreeView = (function (_super) {
+	    __extends(TreeView, _super);
+	    function TreeView() {
+	        _super.call(this);
+	        this.type = TreeView.TYPE;
+	    }
+	    Object.defineProperty(TreeView.prototype, "multiSelectable", {
+	        get: function () {
+	            return this._multiSelectable;
+	        },
+	        set: function (value) {
+	            this._multiSelectable = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TreeView.prototype, "indention", {
+	        /**
+	         * 每一层缩减的距离。
+	         */
+	        get: function () {
+	            return this._indention || 30;
+	        },
+	        set: function (value) {
+	            this._indention = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 选中一个子项。
+	     */
+	    TreeView.prototype.setItemSelected = function (item, selected, exclude) {
+	        if (!this.multiSelectable || exclude) {
+	            this.children.forEach(function (child) {
+	                if (child === item) {
+	                    child.selected = selected;
+	                }
+	                else {
+	                    if (child.selected) {
+	                        child.selected = false;
+	                    }
+	                }
+	            });
+	        }
+	        else {
+	            item.selected = selected;
+	        }
+	        this.requestRedraw();
+	        return this;
+	    };
+	    TreeView.prototype.addItem = function (parentData, text, data, image) {
+	        parentData = parentData ? parentData : this._rootData;
+	        var itemData = parentData.addChild(text, image, data);
+	        this.reload();
+	        return itemData;
+	    };
+	    TreeView.prototype.removeAllItems = function () {
+	        this._rootData.children.length = 0;
+	        this.reload();
+	    };
+	    TreeView.prototype.removeItem = function (item, destroy) {
+	        var ret = item.parent.removeChild(item, destroy);
+	        this.reload();
+	        return ret;
+	    };
+	    TreeView.prototype.doLoad = function (data, parentItem, level) {
+	        var _this = this;
+	        var item = tree_item_1.TreeItem.create();
+	        var isLeaf = !data.children || !data.children.length;
+	        data.treeItem = item;
+	        item.set({ level: level, indention: this.indention, data: data, parentItem: parentItem });
+	        this.addChild(item, true);
+	        if (!isLeaf) {
+	            data.children.forEach(function (iter) {
+	                _this.doLoad(iter, item, level + 1);
+	            });
+	        }
+	    };
+	    TreeView.prototype.reload = function () {
+	        var _this = this;
+	        this.resetChilren();
+	        this._rootData.children.forEach(function (data) {
+	            _this.doLoad(data, null, 0);
+	        });
+	        this.relayoutChildren();
+	    };
+	    TreeView.prototype.loadData = function (data) {
+	        if (data.text === "%root%") {
+	            this._rootData = data;
+	        }
+	        else {
+	            this._rootData.children.length = 0;
+	            this._rootData.children.push(data);
+	        }
+	        this.reload();
+	        return this;
+	    };
+	    TreeView.prototype.getLayoutWidth = function () {
+	        var w = 0;
+	        this.children.forEach(function (child) {
+	            var desireWidth = child.desireWidth;
+	            if (desireWidth > w) {
+	                w = desireWidth;
+	            }
+	        });
+	        return Math.max(this.w, w + this.itemHeight * 2);
+	    };
+	    TreeView.prototype.resetChilren = function () {
+	        this.children.forEach(function (child) {
+	            child.deinit();
+	            child.dispose();
+	        });
+	        this.children.length = 0;
+	        return this;
+	    };
+	    TreeView.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._rootData = tree_item_data_1.TreeItemData.create("root", null, null);
+	        this.scrollerOptions.scrollingX = true;
+	    };
+	    TreeView.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._rootData = null;
+	    };
+	    TreeView.create = function (options) {
+	        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
+	    };
+	    TreeView.TYPE = "tree-view";
+	    TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });
+	    return TreeView;
+	}(list_view_1.ListView));
+	exports.TreeView = TreeView;
+	;
+	widget_factory_1.WidgetFactory.register(TreeView.TYPE, TreeView.create);
+
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var utils_1 = __webpack_require__(21);
+	var emitter_1 = __webpack_require__(4);
+	var image_tile_1 = __webpack_require__(7);
+	/**
+	 * TreeItem对应的数据信息。
+	 */
+	var TreeItemData = (function (_super) {
+	    __extends(TreeItemData, _super);
+	    function TreeItemData(text, iconURL, userData) {
+	        _super.call(this);
+	        this.userData = userData;
+	        this.text = text;
+	        if (iconURL) {
+	            this.icon = image_tile_1.ImageTile.create(iconURL, function (evt) {
+	            });
+	        }
+	        else {
+	            this.icon = null;
+	        }
+	        this.children = [];
+	        return;
+	    }
+	    /**
+	     * 从子节点数组中删除指定的子节点。
+	     * @param data 子节点。
+	     * @param destroy 是否销毁该子节点。
+	     * @returns 成功返回true失败返回false。
+	     */
+	    TreeItemData.prototype.removeChild = function (data, destroy) {
+	        if (utils_1.aRemove(this.children, data)) {
+	            data.parent = null;
+	            if (destroy) {
+	                data.dispose();
+	            }
+	            return true;
+	        }
+	        else {
+	            return false;
+	        }
+	    };
+	    /**
+	     * 增加一个子节点。
+	     * @param text 文本
+	     * @param icon 图标
+	     * @param data 数据
+	     * @returns 成功返回新增的子节点，失败返回null。
+	     */
+	    TreeItemData.prototype.addChild = function (text, icon, userData) {
+	        var itemData = TreeItemData.create(text, icon, userData);
+	        this.children.push(itemData);
+	        itemData.parent = this;
+	        return itemData;
+	    };
+	    TreeItemData.prototype.dispose = function () {
+	        this.userData = null;
+	        this.text = null;
+	        this.icon = null;
+	        this.parent = null;
+	        this.children.forEach(function (child) {
+	            child.dispose();
+	        });
+	        this.children = null;
+	    };
+	    TreeItemData.prototype.reset = function () {
+	        this.userData = null;
+	        this.text = null;
+	        this.icon = null;
+	        this.children = [];
+	        this.parent = null;
+	        return this;
+	    };
+	    TreeItemData.create = function (text, icon, userData) {
+	        return new TreeItemData(text, icon, userData);
+	    };
+	    return TreeItemData;
+	}(emitter_1.Emitter));
+	exports.TreeItemData = TreeItemData;
+
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var path = __webpack_require__(9);
+	var TWEEN = __webpack_require__(20);
+	var Assets = __webpack_require__(11);
+	var Events = __webpack_require__(6);
+	var consts_1 = __webpack_require__(103);
+	var main_loop_1 = __webpack_require__(87);
+	var emitter_1 = __webpack_require__(4);
+	var view_port_1 = __webpack_require__(85);
+	var image_tile_1 = __webpack_require__(7);
+	var theme_manager_1 = __webpack_require__(120);
+	var device_info_1 = __webpack_require__(121);
+	var service_locator_1 = __webpack_require__(122);
+	var inputEventAdapter = __webpack_require__(15);
+	/**
+	 * 代表整个应用程序，可以通过Application获取各种服务。
+	 *
+	 */
+	var Application = (function (_super) {
+	    __extends(Application, _super);
+	    function Application(name) {
+	        _super.call(this);
+	        this.name = name;
+	        this._options = {};
+	        this.servicesManager = new service_locator_1.ServiceLocator();
+	    }
+	    Object.defineProperty(Application.prototype, "isReady", {
+	        get: function () {
+	            return this._isReady;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Application.prototype, "assets", {
+	        get: function () {
+	            return Assets;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Application.prototype, "mainLoop", {
+	        get: function () {
+	            return this._mainLoop;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Application.prototype.getMainLoop = function () {
+	        return this._mainLoop;
+	    };
+	    Object.defineProperty(Application.prototype, "options", {
+	        get: function () {
+	            return this._options;
+	        },
+	        set: function (options) {
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Application.prototype.initOptions = function (args) {
+	        var options = this._options;
+	        for (var key in args) {
+	            options[key] = args[key];
+	        }
+	        var str = window.location.search.substr(1);
+	        var arr = str.split('&');
+	        arr.forEach(function (iter) {
+	            var keyValue = iter.split("=");
+	            options[keyValue[0]] = keyValue[1];
+	        });
+	    };
+	    Application.prototype.run = function () {
+	        this.dispatchEvent({ type: Events.RUN });
+	        this._mainLoop.requestRedraw();
+	    };
+	    Application.prototype.init = function (args) {
+	        var _this = this;
+	        this.initOptions(args);
+	        var themeManager = new theme_manager_1.ThemeManager();
+	        var sysThemeDataURL = this._options.sysThemeDataURL;
+	        var appThemeDataURL = this._options.appThemeDataURL;
+	        if (sysThemeDataURL) {
+	            Assets.loadJSON(sysThemeDataURL).then(function (json) {
+	                var baseURL = path.dirname(sysThemeDataURL);
+	                themeManager.load(json, baseURL);
+	                return appThemeDataURL;
+	            }).then(function (url) {
+	                if (url) {
+	                    Assets.loadJSON(url).then(function (json) {
+	                        var baseURL = path.dirname(url);
+	                        themeManager.load(json, baseURL);
+	                        _this.dispatchEventAsync({ type: Events.READY });
+	                        _this._isReady = true;
+	                    });
+	                }
+	                else {
+	                    _this.dispatchEventAsync({ type: Events.READY });
+	                    _this._isReady = true;
+	                }
+	            });
+	        }
+	        this.registerService(consts_1.Services.THEME_MANAGER, themeManager);
+	        this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
+	        this._mainLoop = main_loop_1.MainLoop.create();
+	        device_info_1.DeviceInfo.init(navigator.language, navigator.userAgent);
+	        inputEventAdapter.init(document, window, device_info_1.DeviceInfo.isPointerSupported, device_info_1.DeviceInfo.isMSPointerSupported, device_info_1.DeviceInfo.isTouchSupported);
+	        if (device_info_1.DeviceInfo.isMacOS) {
+	            var density = this.viewPort.density;
+	            image_tile_1.ImageTile.init(density, 1 / density, function (img) {
+	                _this.mainLoop.requestRedraw();
+	            });
+	        }
+	        this._mainLoop.on(Events.PRETICK, function (evt) {
+	            var time = evt.deltaTime;
+	            TWEEN.update(time);
+	        });
+	        return this;
+	    };
+	    Application.prototype.getService = function (name) {
+	        return this.servicesManager.get(name);
+	    };
+	    Application.prototype.registerService = function (name, service) {
+	        this.servicesManager.register(name, service);
+	        return this;
+	    };
+	    Application.prototype.getThemeManager = function () {
+	        return this.getService(consts_1.Services.THEME_MANAGER);
+	    };
+	    Object.defineProperty(Application.prototype, "viewPort", {
+	        get: function () {
+	            return this._viewPort;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Application.prototype.getViewPort = function () {
+	        return this._viewPort;
+	    };
+	    Application.prototype.onReady = function (func) {
+	        if (this._isReady) {
+	            func.call(this);
+	        }
+	        else {
+	            this.on(Events.READY, func);
+	        }
+	    };
+	    Application.get = function () {
+	        return Application.instance;
+	    };
+	    Application.create = function (name) {
+	        var app = new Application(name);
+	        if (!Application.instance) {
+	            Application.instance = app;
+	        }
+	        return app;
+	    };
+	    return Application;
+	}(emitter_1.Emitter));
+	exports.Application = Application;
+	;
+
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var style_1 = __webpack_require__(3);
+	var utils_1 = __webpack_require__(21);
+	/**
+	 * 主题用来统一控制Widget的外观风格。
+	 */
+	var ThemeManager = (function () {
+	    function ThemeManager() {
+	        this.data = {};
+	    }
+	    /**
+	     * 设置指定名称和状态下控件的风格。
+	     */
+	    ThemeManager.prototype.set = function (name, state, style) {
+	        if (!this.data[name]) {
+	            this.data[name] = {};
+	        }
+	        this.data[name][state] = style;
+	        return this;
+	    };
+	    /**
+	     * 获取指定名称和状态下控件的风格。
+	     */
+	    ThemeManager.prototype.get = function (name, state) {
+	        var styles = this.data[name];
+	        return styles ? styles[state] : null;
+	    };
+	    /**
+	     * 初始化。
+	     */
+	    ThemeManager.prototype.load = function (data, baseURL) {
+	        var json = this.expand(data);
+	        for (var itemName in json) {
+	            var itemInfo = json[itemName];
+	            for (var stateName in itemInfo) {
+	                var styleInfo = itemInfo[stateName];
+	                this.set(itemName, stateName, style_1.Style.create(styleInfo, baseURL));
+	            }
+	        }
+	        return this;
+	    };
+	    ThemeManager.prototype.expandCommon = function (itemInfo, common) {
+	        for (var key in itemInfo) {
+	            var value = itemInfo[key];
+	            itemInfo[key] = utils_1.assign(value, common);
+	        }
+	        return itemInfo;
+	    };
+	    ThemeManager.prototype.expandExtends = function (extInfo, baseInfo) {
+	        var ret = {};
+	        for (var key in baseInfo) {
+	            ret[key] = utils_1.assign({}, baseInfo[key]);
+	        }
+	        for (var key in extInfo) {
+	            ret[key] = utils_1.assign(ret[key] || {}, extInfo[key]);
+	        }
+	        return ret;
+	    };
+	    ThemeManager.prototype.expand = function (json) {
+	        var ret = {};
+	        for (var itemName in json) {
+	            var itemInfo = json[itemName];
+	            var common = itemInfo["common"];
+	            var ext = itemInfo["extends"];
+	            delete itemInfo["common"];
+	            delete itemInfo["extends"];
+	            if (ext) {
+	                var baseInfo = JSON.parse(JSON.stringify(ret[ext]));
+	                if (common) {
+	                    this.expandCommon(baseInfo, common);
+	                }
+	                itemInfo = this.expandExtends(itemInfo, baseInfo);
+	            }
+	            else {
+	                if (common) {
+	                    this.expandCommon(itemInfo, common);
+	                }
+	            }
+	            ret[itemName] = itemInfo;
+	        }
+	        return ret;
+	    };
+	    return ThemeManager;
+	}());
+	exports.ThemeManager = ThemeManager;
+
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+	/**
+	 * 设备信息。可以获取语言，操作系统和浏览器等相关信息(单例对象，直接调用)。
+	 */
+	"use strict";
+	var DeviceInfo = (function () {
+	    function DeviceInfo() {
+	    }
+	    DeviceInfo.init = function (_locale, userAgent) {
+	        DeviceInfo.locale = (_locale || navigator.language).toLowerCase();
+	        DeviceInfo.language = DeviceInfo.locale.split("-")[0];
+	        var ua = userAgent = userAgent || navigator.userAgent;
+	        DeviceInfo.isWindowsPhone = ua.indexOf("Windows Phone") >= 0;
+	        DeviceInfo.isAndroid = ua.indexOf("Android") >= 0;
+	        DeviceInfo.isIPhone = ua.indexOf("iPhone;") >= 0;
+	        DeviceInfo.isIPad = ua.indexOf("iPad;") >= 0;
+	        DeviceInfo.isLinux = !DeviceInfo.isAndroid && ua.indexOf("Linux;") >= 0;
+	        DeviceInfo.isMacOS = !DeviceInfo.isIPhone && !DeviceInfo.isIPad && ua.indexOf("Macintosh;") >= 0;
+	        DeviceInfo.isWindows = !DeviceInfo.isWindowsPhone && ua.indexOf("Windows NT") >= 0;
+	        DeviceInfo.isMobile = ua.indexOf("Mobile") >= 0;
+	        DeviceInfo.isPointerSupported = window.navigator.pointerEnabled;
+	        DeviceInfo.isMSPointerSupported = window.navigator.msPointerEnabled;
+	        var msTouchEnabled = !!window.navigator.msMaxTouchPoints;
+	        var generalTouchEnabled = "ontouchstart" in document.createElement("div");
+	        DeviceInfo.isTouchSupported = !!msTouchEnabled || generalTouchEnabled;
+	    };
+	    return DeviceInfo;
+	}());
+	exports.DeviceInfo = DeviceInfo;
+
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+	"use strict";
+	/**
+	 * 管理各种服务。
+	 */
+	var ServiceLocator = (function () {
+	    function ServiceLocator() {
+	        this.services = {};
+	    }
+	    ServiceLocator.prototype.register = function (name, service) {
+	        this.services[name] = service;
+	        return this;
+	    };
+	    ServiceLocator.prototype.get = function (name) {
+	        return this.services[name];
+	    };
+	    return ServiceLocator;
+	}());
+	exports.ServiceLocator = ServiceLocator;
+	;
+
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var key_event_1 = __webpack_require__(16);
+	var behavior_1 = __webpack_require__(77);
+	/**
+	 * Movable Behavior的初始化参数。
+	 */
+	var MovableOptions = (function () {
+	    function MovableOptions(opts) {
+	        var options = opts || {};
+	        this.xMin = options.xMin || 0;
+	        this.yMin = options.yMin || 0;
+	        this.xMax = options.xMax || 0;
+	        this.yMax = options.yMax || 0;
+	        this.xLimit = options.xLimit || false;
+	        this.yLimit = options.yLimit || false;
+	        this.xMovable = options.xMovable !== undefined ? options.xMovable : true;
+	        this.yMovable = options.yMovable !== undefined ? options.yMovable : true;
+	        this.moveParent = options.moveParent || false;
+	        this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
+	    }
+	    return MovableOptions;
+	}());
+	exports.MovableOptions = MovableOptions;
+	;
+	/**
+	 * 让Widget具有可以Movable的特性，按住鼠标可以拖动控件。
+	 *
+	 * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
+	 */
+	var Movable = (function (_super) {
+	    __extends(Movable, _super);
+	    function Movable(widget, options) {
+	        _super.call(this, Movable.TYPE, widget, options);
+	        this.moveEvent = { type: Events.MOVE };
+	        this.movingEvent = { type: Events.MOVING };
+	    }
+	    Movable.prototype.init = function (options) {
+	        this.options = new MovableOptions(options);
+	    };
+	    Movable.prototype.moveWidget = function (x, y, animate, end) {
+	        var options = this.options;
+	        var moveParent = options.moveParent;
+	        var duration = options.animateDuration;
+	        var widget = moveParent ? this.widget.parent : this.widget;
+	        if (!options.xMovable) {
+	            x = widget.x;
+	        }
+	        if (!options.yMovable) {
+	            y = widget.y;
+	        }
+	        if (options.xLimit) {
+	            x = Math.min(options.xMax, Math.max(options.xMin, x));
+	        }
+	        if (options.yLimit) {
+	            y = Math.min(options.yMax, Math.max(options.yMin, y));
+	        }
+	        widget.moveTo(x, y, animate ? 500 : 0);
+	        if (end) {
+	            widget.dispatchEvent(this.moveEvent);
+	        }
+	        else {
+	            widget.dispatchEvent(this.movingEvent);
+	        }
+	    };
+	    Movable.prototype.onCancelled = function () {
+	        this.widget.requestRedraw();
+	        this.moveWidget(this.x, this.y, true, true);
+	        document.body.style.cursor = "default";
+	    };
+	    Movable.prototype.onKeyDownGlobal = function (evt) {
+	        var keyCode = evt.detail.keyCode;
+	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
+	            this.dragging = false;
+	            this.onCancelled();
+	        }
+	    };
+	    Movable.prototype.onPointerDown = function (evt) {
+	        var moveParent = this.options.moveParent;
+	        var widget = moveParent ? this.widget.parent : this.widget;
+	        this.x = widget.x;
+	        this.y = widget.y;
+	        this.dragging = true;
+	        document.body.style.cursor = "move";
+	    };
+	    Movable.prototype.onPointerUp = function (evt) {
+	        document.body.style.cursor = "default";
+	        if (this.dragging) {
+	            this.dragging = false;
+	            var dx = evt.x - evt.pointerDownX;
+	            var dy = evt.y - evt.pointerDownY;
+	            this.moveWidget(this.x + dx, this.y + dy, false, true);
+	        }
+	    };
+	    Movable.prototype.onPointerMove = function (evt) {
+	        if (this.dragging) {
+	            var dx = evt.x - evt.pointerDownX;
+	            var dy = evt.y - evt.pointerDownY;
+	            this.moveWidget(this.x + dx, this.y + dy, false, false);
+	        }
+	    };
+	    ;
+	    Movable.TYPE = "movable";
+	    return Movable;
+	}(behavior_1.Behavior));
+	exports.Movable = Movable;
+	behavior_1.BehaviorFactory.register(Movable.TYPE, function (widget, options) {
+	    return new Movable(widget, options);
+	});
+
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var key_event_1 = __webpack_require__(16);
+	var behavior_1 = __webpack_require__(77);
+	/**
+	 * 让Widget具有拖放功能的拖动功能。
+	 *
+	 */
+	var Draggable = (function (_super) {
+	    __extends(Draggable, _super);
+	    function Draggable(widget, options) {
+	        _super.call(this, Draggable.TYPE, widget, options);
+	    }
+	    Draggable.prototype.init = function (options) {
+	        this.onDrawDragging = function (evt) {
+	            var ctx = evt.ctx;
+	            var win = evt.widget;
+	            var p = win.pointerPosition;
+	            var e = Events.DragEvent.get(Events.DRAGSTART);
+	            var image = e.dataTransfer.dragImage;
+	            if (image) {
+	                if (image.draw) {
+	                    image.draw(ctx, p.x, p.y);
+	                }
+	            }
+	            else {
+	                ctx.fillStyle = "green";
+	                ctx.fillRect(p.x, p.y, 10, 10);
+	            }
+	        };
+	    };
+	    Draggable.prototype.onCancelled = function () {
+	        var widget = this.widget;
+	        widget.win.requestRedraw();
+	        Events.DragEvent.isDragging = false;
+	        widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
+	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+	    };
+	    Draggable.prototype.onKeyDownGlobal = function (evt) {
+	        var keyCode = evt.detail.keyCode;
+	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
+	            this.dragging = false;
+	            this.onCancelled();
+	        }
+	    };
+	    Draggable.prototype.onPointerDown = function (evt) {
+	        this.widget.win.on(Events.AFTER_DRAW, this.onDrawDragging);
+	    };
+	    Draggable.prototype.onPointerUp = function (evt) {
+	        if (this.dragging) {
+	            this.dragging = false;
+	            Events.DragEvent.isDragging = false;
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+	            this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
+	        }
+	    };
+	    Draggable.prototype.onPointerMove = function (evt) {
+	        if (evt.pointerDown && !this.dragging) {
+	            this.dragging = true;
+	            Events.DragEvent.isDragging = true;
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART));
+	        }
+	        if (evt.pointerDown) {
+	            this.widget.win.requestRedraw();
+	        }
+	    };
+	    ;
+	    Draggable.TYPE = "draggable";
+	    return Draggable;
+	}(behavior_1.Behavior));
+	exports.Draggable = Draggable;
+	behavior_1.BehaviorFactory.register(Draggable.TYPE, function (widget, options) {
+	    return new Draggable(widget, options);
+	});
+
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var behavior_1 = __webpack_require__(77);
+	/**
+	 * 让Widget可作为拖放功能的Drop目标。
+	 *
+	 */
+	var Droppable = (function (_super) {
+	    __extends(Droppable, _super);
+	    function Droppable(widget, options) {
+	        _super.call(this, Droppable.TYPE, widget, options);
+	    }
+	    Droppable.prototype.onPointerEnter = function (evt) {
+	        if (Events.DragEvent.isDragging) {
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER));
+	        }
+	    };
+	    Droppable.prototype.onPointerLeave = function (evt) {
+	        if (Events.DragEvent.isDragging) {
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE));
+	        }
+	    };
+	    Droppable.prototype.onPointerUp = function (evt) {
+	        if (Events.DragEvent.isDragging) {
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP));
+	        }
+	    };
+	    Droppable.prototype.onPointerMove = function (evt) {
+	        if (Events.DragEvent.isDragging) {
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER));
+	        }
+	    };
+	    ;
+	    Droppable.TYPE = "droppable";
+	    return Droppable;
+	}(behavior_1.Behavior));
+	exports.Droppable = Droppable;
+	behavior_1.BehaviorFactory.register(Droppable.TYPE, function (widget, options) {
+	    return new Droppable(widget, options);
+	});
+
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var point_1 = __webpack_require__(2);
+	var key_event_1 = __webpack_require__(16);
+	var behavior_1 = __webpack_require__(77);
+	/**
+	 * Resizable Behavior的初始化参数。
+	 */
+	var ResizableOptions = (function () {
+	    function ResizableOptions(options) {
+	        this.north = options.north || options.all || false;
+	        this.south = options.south || options.all || false;
+	        this.west = options.west || options.all || false;
+	        this.east = options.east || options.all || false;
+	        this.northWest = options.northWest || options.all || false;
+	        this.northEast = options.northEast || options.all || false;
+	        this.southWest = options.southWest || options.all || false;
+	        this.southEast = options.southEast || options.all || false;
+	        this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
+	    }
+	    return ResizableOptions;
+	}());
+	exports.ResizableOptions = ResizableOptions;
+	;
+	/**
+	 * 让Widget具有可以Resizable的特性。
+	 * 当鼠标移动到Widget对应的位置，如四角和四边时，鼠标的指针会提示在此处按下鼠标可以resize Widget。
+	 *
+	 * Resize的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
+	 */
+	var Resizable = (function (_super) {
+	    __extends(Resizable, _super);
+	    function Resizable(widget, options) {
+	        _super.call(this, Resizable.TYPE, widget, options);
+	    }
+	    Resizable.prototype.init = function (options) {
+	        this.options = new ResizableOptions(options);
+	    };
+	    Resizable.prototype.onCancelled = function () {
+	        this.widget.requestRedraw();
+	        document.body.style.cursor = "default";
+	        this.widget.moveResizeTo(this.x, this.y, this.w, this.h, this.options.animateDuration);
+	    };
+	    Resizable.prototype.onKeyDownGlobal = function (evt) {
+	        var keyCode = evt.detail.keyCode;
+	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.resizing) {
+	            this.resizing = false;
+	            this.onCancelled();
+	        }
+	    };
+	    Resizable.prototype.onPointerDown = function (evt) {
+	        var result = this.testPointerPosition(evt);
+	        if (result) {
+	            this.x = this.widget.x;
+	            this.y = this.widget.y;
+	            this.w = this.widget.w;
+	            this.h = this.widget.h;
+	            this.resizing = true;
+	            this.pointerDownArea = result;
+	            document.body.style.cursor = result + "-resize";
+	        }
+	        else {
+	            document.body.style.cursor = "default";
+	        }
+	    };
+	    Resizable.prototype.onPointerUp = function (evt) {
+	        this.resizing = false;
+	        document.body.style.cursor = "default";
+	    };
+	    Resizable.prototype.testPointerPosition = function (evt) {
+	        var delta = 3;
+	        var w = this.widget.w;
+	        var h = this.widget.h;
+	        var p = this.widget.toLocalPoint(point_1.Point.point.init(evt.x, evt.y));
+	        var right = w - delta;
+	        var bottom = h - delta;
+	        var options = this.options;
+	        if (p.y >= 0 && p.y <= delta) {
+	            if (p.x >= 0 && p.x <= delta && options.northWest) {
+	                return "nw";
+	            }
+	            else if (p.x > delta && p.x < right && options.north) {
+	                return "n";
+	            }
+	            else if (p.x >= right && p.x <= w && options.northEast) {
+	                return "ne";
+	            }
+	        }
+	        else if (p.y > delta && p.y < bottom) {
+	            if (p.x >= 0 && p.x <= delta && options.west) {
+	                return "w";
+	            }
+	            else if (p.x >= right && p.x <= w && options.east) {
+	                return "e";
+	            }
+	        }
+	        else if (p.y >= bottom && p.y <= h && options.southWest) {
+	            if (p.x >= 0 && p.x <= delta) {
+	                return "sw";
+	            }
+	            else if (p.x > delta && p.x < right && options.south) {
+	                return "s";
+	            }
+	            else if (p.x >= right && p.x <= w && options.southEast) {
+	                return "se";
+	            }
+	        }
+	        return null;
+	    };
+	    Resizable.prototype.onPointerMove = function (evt) {
+	        if (this.resizing) {
+	            var widget = this.widget;
+	            var dx = evt.x - evt.pointerDownX;
+	            var dy = evt.y - evt.pointerDownY;
+	            switch (this.pointerDownArea) {
+	                case "n": {
+	                    widget.moveResizeTo(this.x, this.y + dy, this.w, this.h - dy);
+	                    break;
+	                }
+	                case "ne": {
+	                    widget.moveResizeTo(this.x, this.y + dy, this.w + dx, this.h - dy);
+	                    break;
+	                }
+	                case "nw": {
+	                    widget.moveResizeTo(this.x + dx, this.y + dy, this.w - dx, this.h - dy);
+	                    break;
+	                }
+	                case "w": {
+	                    widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h);
+	                    break;
+	                }
+	                case "e": {
+	                    widget.moveResizeTo(this.x, this.y, this.w + dx, this.h);
+	                    break;
+	                }
+	                case "s": {
+	                    widget.moveResizeTo(this.x, this.y, this.w, this.h + dy);
+	                    break;
+	                }
+	                case "se": {
+	                    widget.moveResizeTo(this.x, this.y, this.w + dx, this.h + dy);
+	                    break;
+	                }
+	                case "sw": {
+	                    widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h + dy);
+	                    break;
+	                }
+	            }
+	        }
+	        else {
+	            var result = this.testPointerPosition(evt);
+	            if (result) {
+	                document.body.style.cursor = result + "-resize";
+	            }
+	            else {
+	                document.body.style.cursor = "default";
+	            }
+	        }
+	    };
+	    Resizable.TYPE = "resizable";
+	    return Resizable;
+	}(behavior_1.Behavior));
+	exports.Resizable = Resizable;
+	behavior_1.BehaviorFactory.register(Resizable.TYPE, function (widget, options) {
+	    return new Resizable(widget, options);
+	});
+
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var dialog_1 = __webpack_require__(90);
+	var graphics_1 = __webpack_require__(25);
+	var list_view_1 = __webpack_require__(110);
+	var Events = __webpack_require__(6);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var list_layouter_1 = __webpack_require__(111);
+	var simple_layouter_1 = __webpack_require__(113);
 	var Menu = (function (_super) {
 	    __extends(Menu, _super);
 	    function Menu() {
@@ -23622,7 +24010,7 @@ var qtk =
 
 
 /***/ },
-/* 123 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23631,14 +24019,44 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var menu_1 = __webpack_require__(122);
-	var point_1 = __webpack_require__(1);
-	var Events = __webpack_require__(7);
-	var widget_1 = __webpack_require__(16);
+	var window_1 = __webpack_require__(91);
 	var widget_factory_1 = __webpack_require__(23);
-	var image_tile_1 = __webpack_require__(15);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var linear_layouter_1 = __webpack_require__(114);
+	var WindowNormal = (function (_super) {
+	    __extends(WindowNormal, _super);
+	    function WindowNormal() {
+	        _super.call(this, WindowNormal.TYPE);
+	    }
+	    WindowNormal.create = function (options) {
+	        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
+	    };
+	    WindowNormal.TYPE = "window-normal";
+	    WindowNormal.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new WindowNormal(); });
+	    return WindowNormal;
+	}(window_1.Window));
+	exports.WindowNormal = WindowNormal;
+	;
+	widget_factory_1.WidgetFactory.register(WindowNormal.TYPE, WindowNormal.create);
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var menu_1 = __webpack_require__(127);
+	var point_1 = __webpack_require__(2);
+	var Events = __webpack_require__(6);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var image_tile_1 = __webpack_require__(7);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var linear_layouter_1 = __webpack_require__(130);
 	var MenuBar = (function (_super) {
 	    __extends(MenuBar, _super);
 	    function MenuBar() {
@@ -23842,7 +24260,7 @@ var qtk =
 
 
 /***/ },
-/* 124 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23851,11 +24269,222 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var style_1 = __webpack_require__(14);
-	var widget_1 = __webpack_require__(16);
+	var consts_1 = __webpack_require__(103);
+	var utils_1 = __webpack_require__(21);
+	var layouter_1 = __webpack_require__(78);
+	var TYPE_H = "linear-h";
+	var TYPE_V = "linear-v";
+	/**
+	 * 线性布局器。可以设置为水平和垂直两个方向。
+	 */
+	var LinearLayouter = (function (_super) {
+	    __extends(LinearLayouter, _super);
+	    function LinearLayouter() {
+	        _super.apply(this, arguments);
+	    }
+	    Object.defineProperty(LinearLayouter.prototype, "type", {
+	        get: function () {
+	            return this.orientation === consts_1.Orientation.V ? TYPE_V : TYPE_H;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 设置参数。
+	     */
+	    LinearLayouter.prototype.setOptions = function (options) {
+	        this.spacing = options.spacing || 0;
+	        this.orientation = options.orientation || consts_1.Orientation.V;
+	        return this;
+	    };
+	    LinearLayouter.prototype.layoutChildren = function (widget, children, rect) {
+	        var _this = this;
+	        var r = rect.clone();
+	        var defParam = LinearLayouterParam.defParam;
+	        var arr = children.filter(function (child) {
+	            var param = child.layoutParam || defParam;
+	            return param.position > 0;
+	        });
+	        utils_1.stableSort(arr, function (a, b) {
+	            var ap = a.layoutParam || defParam;
+	            var bp = b.layoutParam || defParam;
+	            return ap.position - bp.position;
+	        });
+	        arr.forEach(function (child, index) {
+	            if (r.w > 0 && r.h > 0) {
+	                _this.layoutChild(child, r, index);
+	            }
+	        });
+	        arr = children.filter(function (child) {
+	            var param = child.layoutParam || defParam;
+	            return !param.position;
+	        });
+	        arr.forEach(function (child, index) {
+	            if (r.w > 0 && r.h > 0) {
+	                _this.layoutChild(child, r, index);
+	            }
+	        });
+	        arr = children.filter(function (child) {
+	            var param = child.layoutParam || defParam;
+	            return param.position < 0;
+	        });
+	        utils_1.stableSort(arr, function (a, b) {
+	            var ap = a.layoutParam || defParam;
+	            var bp = b.layoutParam || defParam;
+	            return bp.position - ap.position;
+	        });
+	        arr.forEach(function (child, index) {
+	            if (r.w > 0 && r.h > 0) {
+	                _this.layoutChild(child, r, index);
+	            }
+	        });
+	        r.dispose();
+	        return rect;
+	    };
+	    LinearLayouter.prototype.layoutChild = function (child, r, index) {
+	        var x = 0;
+	        var y = 0;
+	        var w = 0;
+	        var h = 0;
+	        var defParam = LinearLayouterParam.defParam;
+	        var param = child.layoutParam || defParam;
+	        var position = param.position;
+	        if (param && param.type === LinearLayouterParam.TYPE && child.visible) {
+	            var spacing = (index > 0 || !position) ? (param.spacing || this.spacing) : 0;
+	            if (this.orientation === consts_1.Orientation.V) {
+	                r.h -= spacing;
+	            }
+	            else {
+	                r.w -= spacing;
+	            }
+	            h = Math.min(r.h, param.h ? layouter_1.Layouter.evalValue(param.h, r.h) : child.h);
+	            w = Math.min(r.w, param.w ? layouter_1.Layouter.evalValue(param.w, r.w) : child.w);
+	            if (this.orientation === consts_1.Orientation.V) {
+	                switch (param.align) {
+	                    case consts_1.Align.LEFT: {
+	                        x = r.x;
+	                        break;
+	                    }
+	                    case consts_1.Align.RIGHT: {
+	                        x = r.x + r.w - w;
+	                        break;
+	                    }
+	                    default: {
+	                        x = r.x + ((r.w - w) >> 1);
+	                        break;
+	                    }
+	                }
+	                var spacingH = spacing + h;
+	                if (position >= 0) {
+	                    y = r.y + spacing;
+	                    r.y += spacingH;
+	                }
+	                else {
+	                    y = r.y + r.h - spacingH;
+	                }
+	                r.h -= h;
+	            }
+	            else {
+	                switch (param.align) {
+	                    case consts_1.Align.TOP: {
+	                        y = r.y;
+	                        break;
+	                    }
+	                    case consts_1.Align.BOTTOM: {
+	                        y = r.y + r.h - h;
+	                        break;
+	                    }
+	                    default: {
+	                        y = r.y + ((r.h - h) >> 1);
+	                        break;
+	                    }
+	                }
+	                var spacingW = spacing + w;
+	                if (position >= 0) {
+	                    x = r.x + spacing;
+	                    r.x += spacingW;
+	                }
+	                else {
+	                    x = r.x + r.w - spacingW;
+	                }
+	                r.w -= w;
+	            }
+	            child.moveResizeTo(x, y, w, h);
+	            child.relayoutChildren();
+	        }
+	    };
+	    LinearLayouter.prototype.createParam = function (options) {
+	        return LinearLayouterParam.create(options);
+	    };
+	    LinearLayouter.createV = function (options) {
+	        var layouter = new LinearLayouter();
+	        layouter.setOptions(options);
+	        layouter.orientation = consts_1.Orientation.V;
+	        return layouter;
+	    };
+	    LinearLayouter.createH = function (options) {
+	        var layouter = new LinearLayouter();
+	        layouter.setOptions(options || {});
+	        layouter.orientation = consts_1.Orientation.H;
+	        return layouter;
+	    };
+	    return LinearLayouter;
+	}(layouter_1.Layouter));
+	exports.LinearLayouter = LinearLayouter;
+	;
+	layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createH);
+	layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
+	/**
+	 * Linear布局器的参数。
+	 *
+	 * 如果父控件使用LinearLayouter布局器，则子控件需要把layoutParam设置为LinearLayouterParam。
+	 *
+	 * 对于w参数：
+	 * *.如果以px结尾，则直接取它的值。
+	 * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
+	 *
+	 */
+	var LinearLayouterParam = (function (_super) {
+	    __extends(LinearLayouterParam, _super);
+	    function LinearLayouterParam(type, w, h, spacing, align, position) {
+	        _super.call(this, type || LinearLayouterParam.TYPE);
+	        this.w = w || "100%";
+	        this.h = h || "100%";
+	        this.align = align;
+	        this.spacing = spacing;
+	        this.position = position;
+	    }
+	    LinearLayouterParam.createWithType = function (type, opts) {
+	        var options = opts || {};
+	        return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
+	    };
+	    LinearLayouterParam.create = function (opts) {
+	        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
+	    };
+	    LinearLayouterParam.TYPE = "linear";
+	    LinearLayouterParam.defParam = LinearLayouterParam.create(null);
+	    return LinearLayouterParam;
+	}(layouter_1.LayouterParam));
+	exports.LinearLayouterParam = LinearLayouterParam;
+	;
+	layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);
+
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var style_1 = __webpack_require__(3);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
-	var consts_1 = __webpack_require__(92);
+	var consts_1 = __webpack_require__(103);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 颜色控件。
@@ -24099,838 +24728,6 @@ var qtk =
 
 
 /***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var widget_factory_1 = __webpack_require__(23);
-	var graphics_1 = __webpack_require__(25);
-	var image_tile_1 = __webpack_require__(15);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var widget_1 = __webpack_require__(16);
-	/**
-	 * 树形视图中，显示的一个子项。
-	 */
-	var TreeItem = (function (_super) {
-	    __extends(TreeItem, _super);
-	    function TreeItem() {
-	        _super.call(this, TreeItem.TYPE);
-	    }
-	    Object.defineProperty(TreeItem.prototype, "text", {
-	        /**
-	         * 显示的文本，从data中获取。
-	         */
-	        get: function () {
-	            return this._data.text;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "icon", {
-	        /**
-	         * 显示的图标，从data中获取。
-	         */
-	        get: function () {
-	            return this._data.icon;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "userData", {
-	        /**
-	         * 显示的图标，从data中获取。
-	         */
-	        get: function () {
-	            return this._data.userData;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "desireWidth", {
-	        get: function () {
-	            var text = this.data.text;
-	            var style = this.getStyle();
-	            var w = this._level * this._indention + this.h;
-	            if (text) {
-	                w += graphics_1.Graphics.measureText(text, style.font);
-	            }
-	            return w;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "visible", {
-	        /**
-	         * 可见性判断：要求父控件没有折叠。
-	         */
-	        get: function () {
-	            var item = this.parentItem;
-	            while (item !== null) {
-	                if (!item.expanded) {
-	                    return false;
-	                }
-	                item = item.parentItem;
-	            }
-	            return this._visible;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "parentItem", {
-	        get: function () {
-	            return this._parentItem;
-	        },
-	        set: function (parentItem) {
-	            this._parentItem = parentItem;
-	            if (parentItem) {
-	                parentItem._childrenItems.push(this);
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "childrenItems", {
-	        get: function () {
-	            return this._childrenItems;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "level", {
-	        get: function () {
-	            return this._level;
-	        },
-	        set: function (value) {
-	            this._level = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "selected", {
-	        get: function () {
-	            return this.data.selected;
-	        },
-	        set: function (value) {
-	            this.data.selected = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "isLeaf", {
-	        get: function () {
-	            var data = this._data;
-	            return !data.children || !data.children.length;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "data", {
-	        get: function () {
-	            return this._data;
-	        },
-	        set: function (value) {
-	            this._data = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "indention", {
-	        get: function () {
-	            return this._indention;
-	        },
-	        set: function (value) {
-	            this._indention = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeItem.prototype, "expanded", {
-	        get: function () {
-	            return this.data.expanded;
-	        },
-	        set: function (value) {
-	            this.data.expanded = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TreeItem.prototype.getStateForStyle = function () {
-	        return this.selected ? widget_1.WidgetState.SELECTED : this._state;
-	    };
-	    TreeItem.prototype.getStyleType = function () {
-	        if (this._styleType) {
-	            return this._styleType;
-	        }
-	        var appendix = this.isLeaf ? "leaf" : (this.expanded ? "expanded" : "collapsed");
-	        return (this.type) + "." + appendix;
-	    };
-	    TreeItem.prototype.drawImage = function (ctx, style) {
-	        var img = style.foreGroundImage;
-	        if (img) {
-	            var y = 0;
-	            var w = this.h;
-	            var h = this.h;
-	            var x = this._level * this._indention;
-	            img.draw(ctx, image_tile_1.ImageDrawType.ICON, x, y, w, h);
-	        }
-	        return this;
-	    };
-	    TreeItem.prototype.drawText = function (ctx, style) {
-	        var text = this.data.text;
-	        if (text && style.textColor) {
-	            var y = 0;
-	            var h = this.h;
-	            var x = this._level * this._indention;
-	            if (style.foreGroundImage) {
-	                x += h;
-	            }
-	            var w = this.x + this.w - x;
-	            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
-	        }
-	        return this;
-	    };
-	    TreeItem.prototype.dispatchDblClick = function (evt) {
-	        _super.prototype.dispatchDblClick.call(this, evt);
-	        if (!this.isLeaf) {
-	            this.expanded = !this.expanded;
-	            this.parent.relayoutChildren();
-	        }
-	    };
-	    TreeItem.prototype.dispatchClick = function (evt) {
-	        if (!this.isLeaf) {
-	            var p = this.toLocalPoint(point_1.Point.point.copy(evt));
-	            var y = 0;
-	            var w = this.h;
-	            var h = this.h;
-	            var x = this._level * this._indention;
-	            if (p.isIn(x, y, w, h)) {
-	                this.expanded = !this.expanded;
-	                this.parent.relayoutChildren();
-	            }
-	        }
-	        var parent = this.parent;
-	        if (evt.ctrlKey && parent.multiSelectable) {
-	            parent.setItemSelected(this, !this.selected, false);
-	        }
-	        else {
-	            parent.setItemSelected(this, true, true);
-	        }
-	        _super.prototype.dispatchClick.call(this, evt);
-	    };
-	    TreeItem.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._data = null;
-	        this.parentItem = null;
-	        this._childrenItems = null;
-	    };
-	    TreeItem.prototype.onReset = function () {
-	        this._level = 0;
-	        this._data = null;
-	        this._indention = 30;
-	        this._parentItem = null;
-	        this._childrenItems = [];
-	    };
-	    TreeItem.create = function (options) {
-	        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
-	    };
-	    TreeItem.TYPE = "tree-item";
-	    TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });
-	    return TreeItem;
-	}(widget_1.Widget));
-	exports.TreeItem = TreeItem;
-	;
-	widget_factory_1.WidgetFactory.register(TreeItem.TYPE, TreeItem.create);
-
-
-/***/ },
-/* 126 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var tree_item_1 = __webpack_require__(125);
-	var list_view_1 = __webpack_require__(100);
-	var tree_item_data_1 = __webpack_require__(127);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	/**
-	 * 树形视图。
-	 */
-	var TreeView = (function (_super) {
-	    __extends(TreeView, _super);
-	    function TreeView() {
-	        _super.call(this);
-	        this.type = TreeView.TYPE;
-	    }
-	    Object.defineProperty(TreeView.prototype, "multiSelectable", {
-	        get: function () {
-	            return this._multiSelectable;
-	        },
-	        set: function (value) {
-	            this._multiSelectable = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TreeView.prototype, "indention", {
-	        /**
-	         * 每一层缩减的距离。
-	         */
-	        get: function () {
-	            return this._indention || 30;
-	        },
-	        set: function (value) {
-	            this._indention = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    /**
-	     * 选中一个子项。
-	     */
-	    TreeView.prototype.setItemSelected = function (item, selected, exclude) {
-	        if (!this.multiSelectable || exclude) {
-	            this.children.forEach(function (child) {
-	                if (child === item) {
-	                    child.selected = selected;
-	                }
-	                else {
-	                    if (child.selected) {
-	                        child.selected = false;
-	                    }
-	                }
-	            });
-	        }
-	        else {
-	            item.selected = selected;
-	        }
-	        this.requestRedraw();
-	        return this;
-	    };
-	    TreeView.prototype.addItem = function (parentData, text, data, image) {
-	        parentData = parentData ? parentData : this._rootData;
-	        var itemData = parentData.addChild(text, image, data);
-	        this.reload();
-	        return itemData;
-	    };
-	    TreeView.prototype.removeAllItems = function () {
-	        this._rootData.children.length = 0;
-	        this.reload();
-	    };
-	    TreeView.prototype.removeItem = function (item, destroy) {
-	        var ret = item.parent.removeChild(item, destroy);
-	        this.reload();
-	        return ret;
-	    };
-	    TreeView.prototype.doLoad = function (data, parentItem, level) {
-	        var _this = this;
-	        var item = tree_item_1.TreeItem.create();
-	        var isLeaf = !data.children || !data.children.length;
-	        data.treeItem = item;
-	        item.set({ level: level, indention: this.indention, data: data, parentItem: parentItem });
-	        this.addChild(item, true);
-	        if (!isLeaf) {
-	            data.children.forEach(function (iter) {
-	                _this.doLoad(iter, item, level + 1);
-	            });
-	        }
-	    };
-	    TreeView.prototype.reload = function () {
-	        var _this = this;
-	        this.resetChilren();
-	        this._rootData.children.forEach(function (data) {
-	            _this.doLoad(data, null, 0);
-	        });
-	        this.relayoutChildren();
-	    };
-	    TreeView.prototype.loadData = function (data) {
-	        if (data.text === "%root%") {
-	            this._rootData = data;
-	        }
-	        else {
-	            this._rootData.children.length = 0;
-	            this._rootData.children.push(data);
-	        }
-	        this.reload();
-	        return this;
-	    };
-	    TreeView.prototype.getLayoutWidth = function () {
-	        var w = 0;
-	        this.children.forEach(function (child) {
-	            var desireWidth = child.desireWidth;
-	            if (desireWidth > w) {
-	                w = desireWidth;
-	            }
-	        });
-	        return Math.max(this.w, w + this.itemHeight * 2);
-	    };
-	    TreeView.prototype.resetChilren = function () {
-	        this.children.forEach(function (child) {
-	            child.deinit();
-	            child.dispose();
-	        });
-	        this.children.length = 0;
-	        return this;
-	    };
-	    TreeView.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this._rootData = tree_item_data_1.TreeItemData.create("root", null, null);
-	        this.scrollerOptions.scrollingX = true;
-	    };
-	    TreeView.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._rootData = null;
-	    };
-	    TreeView.create = function (options) {
-	        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
-	    };
-	    TreeView.TYPE = "tree-view";
-	    TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });
-	    return TreeView;
-	}(list_view_1.ListView));
-	exports.TreeView = TreeView;
-	;
-	widget_factory_1.WidgetFactory.register(TreeView.TYPE, TreeView.create);
-
-
-/***/ },
-/* 127 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var utils_1 = __webpack_require__(22);
-	var emitter_1 = __webpack_require__(8);
-	var image_tile_1 = __webpack_require__(15);
-	/**
-	 * TreeItem对应的数据信息。
-	 */
-	var TreeItemData = (function (_super) {
-	    __extends(TreeItemData, _super);
-	    function TreeItemData(text, iconURL, userData) {
-	        _super.call(this);
-	        this.userData = userData;
-	        this.text = text;
-	        if (iconURL) {
-	            this.icon = image_tile_1.ImageTile.create(iconURL, function (evt) {
-	            });
-	        }
-	        else {
-	            this.icon = null;
-	        }
-	        this.children = [];
-	        return;
-	    }
-	    /**
-	     * 从子节点数组中删除指定的子节点。
-	     * @param data 子节点。
-	     * @param destroy 是否销毁该子节点。
-	     * @returns 成功返回true失败返回false。
-	     */
-	    TreeItemData.prototype.removeChild = function (data, destroy) {
-	        if (utils_1.aRemove(this.children, data)) {
-	            data.parent = null;
-	            if (destroy) {
-	                data.dispose();
-	            }
-	            return true;
-	        }
-	        else {
-	            return false;
-	        }
-	    };
-	    /**
-	     * 增加一个子节点。
-	     * @param text 文本
-	     * @param icon 图标
-	     * @param data 数据
-	     * @returns 成功返回新增的子节点，失败返回null。
-	     */
-	    TreeItemData.prototype.addChild = function (text, icon, userData) {
-	        var itemData = TreeItemData.create(text, icon, userData);
-	        this.children.push(itemData);
-	        itemData.parent = this;
-	        return itemData;
-	    };
-	    TreeItemData.prototype.dispose = function () {
-	        this.userData = null;
-	        this.text = null;
-	        this.icon = null;
-	        this.parent = null;
-	        this.children.forEach(function (child) {
-	            child.dispose();
-	        });
-	        this.children = null;
-	    };
-	    TreeItemData.prototype.reset = function () {
-	        this.userData = null;
-	        this.text = null;
-	        this.icon = null;
-	        this.children = [];
-	        this.parent = null;
-	        return this;
-	    };
-	    TreeItemData.create = function (text, icon, userData) {
-	        return new TreeItemData(text, icon, userData);
-	    };
-	    return TreeItemData;
-	}(emitter_1.Emitter));
-	exports.TreeItemData = TreeItemData;
-
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var grid_layouter_1 = __webpack_require__(115);
-	var scroll_view_1 = __webpack_require__(101);
-	/**
-	 * 网格视图。
-	 */
-	var GridView = (function (_super) {
-	    __extends(GridView, _super);
-	    function GridView() {
-	        _super.call(this, GridView.TYPE);
-	    }
-	    Object.defineProperty(GridView.prototype, "cols", {
-	        get: function () {
-	            return this._cols;
-	        },
-	        /**
-	         * 列数。列数和列宽设置其中之一即可。
-	         */
-	        set: function (value) {
-	            this._cols = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.cols = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(GridView.prototype, "colWidth", {
-	        get: function () {
-	            return this._colWidth;
-	        },
-	        /**
-	         * 列宽。列数和列宽设置其中之一即可。
-	         */
-	        set: function (value) {
-	            this._colWidth = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.colWidth = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(GridView.prototype, "rows", {
-	        get: function () {
-	            return this._rows;
-	        },
-	        /**
-	         * 行数。行数和行高设置其中之一即可。
-	         */
-	        set: function (value) {
-	            this._rows = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.rows = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(GridView.prototype, "rowHeight", {
-	        get: function () {
-	            return this._rowHeight;
-	        },
-	        /**
-	         * 行高。行数和行高设置其中之一即可。
-	         */
-	        set: function (value) {
-	            this._rowHeight = value;
-	            var layouter = this._childrenLayouter;
-	            layouter.rowHeight = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    /**
-	     * 每一网格周围的空白。
-	     */
-	    GridView.prototype.setItemMargins = function (margins) {
-	        var layouter = this._childrenLayouter;
-	        layouter.leftMargin = margins.left || margins.all || 0;
-	        layouter.rightMargin = margins.right || margins.all || 0;
-	        layouter.topMargin = margins.top || margins.all || 0;
-	        layouter.bottomMargin = margins.bottom || margins.all || 0;
-	        return this;
-	    };
-	    Object.defineProperty(GridView.prototype, "childrenLayouter", {
-	        get: function () {
-	            return this._childrenLayouter;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    GridView.prototype.doDrawChildren = function (ctx) {
-	        var top = this.offsetY;
-	        var bottom = top + this.h;
-	        this._children.forEach(function (child) {
-	            var visible = child.visible && child.y < bottom && (child.y + child.h) > top;
-	            if (visible) {
-	                child.draw(ctx);
-	            }
-	        });
-	        return this;
-	    };
-	    GridView.prototype.relayoutChildren = function () {
-	        this.ensureOptions();
-	        var r = _super.prototype.relayoutChildren.call(this);
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = r.h + this.topPadding + this.bottomPadding;
-	        return r;
-	    };
-	    GridView.prototype.ensureOptions = function () {
-	        if (this.rows > 0 && this.cols > 0) {
-	            this.scrollerOptions.scrollingX = false;
-	            this.scrollerOptions.scrollingY = false;
-	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
-	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
-	        }
-	        else if (this.cols > 0) {
-	            this.scrollerOptions.scrollingX = false;
-	            this.scrollerOptions.scrollingY = true;
-	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
-	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
-	        }
-	        else if (this.rows > 0) {
-	            this.scrollerOptions.scrollingX = true;
-	            this.scrollerOptions.scrollingY = false;
-	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
-	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
-	        }
-	        else {
-	            this.scrollerOptions.scrollingX = false;
-	            this.scrollerOptions.scrollingY = true;
-	            this.scrollBarStyle.vBarVisibility = scroll_view_1.ScrollerBarVisibility.AUTO;
-	            this.scrollBarStyle.hBarVisibility = scroll_view_1.ScrollerBarVisibility.INVISIBLE;
-	        }
-	    };
-	    GridView.prototype.onToJson = function (json) {
-	        delete json.childrenLayouter;
-	    };
-	    GridView.prototype.onInit = function () {
-	        _super.prototype.onInit.call(this);
-	        this.relayoutChildren();
-	    };
-	    GridView.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
-	    };
-	    GridView.prototype.getDefProps = function () {
-	        return GridView.defProps;
-	    };
-	    GridView.create = function (options) {
-	        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
-	    };
-	    GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
-	    GridView.TYPE = "grid-view";
-	    GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
-	    return GridView;
-	}(scroll_view_1.ScrollView));
-	exports.GridView = GridView;
-	;
-	widget_factory_1.WidgetFactory.register(GridView.TYPE, GridView.create);
-
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var window_1 = __webpack_require__(99);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var WindowNormal = (function (_super) {
-	    __extends(WindowNormal, _super);
-	    function WindowNormal() {
-	        _super.call(this, WindowNormal.TYPE);
-	    }
-	    WindowNormal.create = function (options) {
-	        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
-	    };
-	    WindowNormal.TYPE = "window-normal";
-	    WindowNormal.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new WindowNormal(); });
-	    return WindowNormal;
-	}(window_1.Window));
-	exports.WindowNormal = WindowNormal;
-	;
-	widget_factory_1.WidgetFactory.register(WindowNormal.TYPE, WindowNormal.create);
-
-
-/***/ },
-/* 130 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Events = __webpack_require__(7);
-	var key_event_1 = __webpack_require__(20);
-	var behavior_1 = __webpack_require__(77);
-	/**
-	 * 让Widget具有拖放功能的拖动功能。
-	 *
-	 */
-	var Draggable = (function (_super) {
-	    __extends(Draggable, _super);
-	    function Draggable(widget, options) {
-	        _super.call(this, Draggable.TYPE, widget, options);
-	    }
-	    Draggable.prototype.init = function (options) {
-	        this.onDrawDragging = function (evt) {
-	            var ctx = evt.ctx;
-	            var win = evt.widget;
-	            var p = win.pointerPosition;
-	            var e = Events.DragEvent.get(Events.DRAGSTART);
-	            var image = e.dataTransfer.dragImage;
-	            if (image) {
-	                if (image.draw) {
-	                    image.draw(ctx, p.x, p.y);
-	                }
-	            }
-	            else {
-	                ctx.fillStyle = "green";
-	                ctx.fillRect(p.x, p.y, 10, 10);
-	            }
-	        };
-	    };
-	    Draggable.prototype.onCancelled = function () {
-	        var widget = this.widget;
-	        widget.win.requestRedraw();
-	        Events.DragEvent.isDragging = false;
-	        widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
-	    };
-	    Draggable.prototype.onKeyDownGlobal = function (evt) {
-	        var keyCode = evt.detail.keyCode;
-	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
-	            this.dragging = false;
-	            this.onCancelled();
-	        }
-	    };
-	    Draggable.prototype.onPointerDown = function (evt) {
-	        this.widget.win.on(Events.AFTER_DRAW, this.onDrawDragging);
-	    };
-	    Draggable.prototype.onPointerUp = function (evt) {
-	        if (this.dragging) {
-	            this.dragging = false;
-	            Events.DragEvent.isDragging = false;
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
-	            this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-	        }
-	    };
-	    Draggable.prototype.onPointerMove = function (evt) {
-	        if (evt.pointerDown && !this.dragging) {
-	            this.dragging = true;
-	            Events.DragEvent.isDragging = true;
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART));
-	        }
-	        if (evt.pointerDown) {
-	            this.widget.win.requestRedraw();
-	        }
-	    };
-	    ;
-	    Draggable.TYPE = "draggable";
-	    return Draggable;
-	}(behavior_1.Behavior));
-	exports.Draggable = Draggable;
-	behavior_1.BehaviorFactory.register(Draggable.TYPE, function (widget, options) {
-	    return new Draggable(widget, options);
-	});
-
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Events = __webpack_require__(7);
-	var behavior_1 = __webpack_require__(77);
-	/**
-	 * 让Widget可作为拖放功能的Drop目标。
-	 *
-	 */
-	var Droppable = (function (_super) {
-	    __extends(Droppable, _super);
-	    function Droppable(widget, options) {
-	        _super.call(this, Droppable.TYPE, widget, options);
-	    }
-	    Droppable.prototype.onPointerEnter = function (evt) {
-	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER));
-	        }
-	    };
-	    Droppable.prototype.onPointerLeave = function (evt) {
-	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE));
-	        }
-	    };
-	    Droppable.prototype.onPointerUp = function (evt) {
-	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP));
-	        }
-	    };
-	    Droppable.prototype.onPointerMove = function (evt) {
-	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER));
-	        }
-	    };
-	    ;
-	    Droppable.TYPE = "droppable";
-	    return Droppable;
-	}(behavior_1.Behavior));
-	exports.Droppable = Droppable;
-	behavior_1.BehaviorFactory.register(Droppable.TYPE, function (widget, options) {
-	    return new Droppable(widget, options);
-	});
-
-
-/***/ },
 /* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -24940,307 +24737,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Events = __webpack_require__(7);
-	var key_event_1 = __webpack_require__(20);
-	var behavior_1 = __webpack_require__(77);
-	/**
-	 * Movable Behavior的初始化参数。
-	 */
-	var MovableOptions = (function () {
-	    function MovableOptions(opts) {
-	        var options = opts || {};
-	        this.xMin = options.xMin || 0;
-	        this.yMin = options.yMin || 0;
-	        this.xMax = options.xMax || 0;
-	        this.yMax = options.yMax || 0;
-	        this.xLimit = options.xLimit || false;
-	        this.yLimit = options.yLimit || false;
-	        this.xMovable = options.xMovable !== undefined ? options.xMovable : true;
-	        this.yMovable = options.yMovable !== undefined ? options.yMovable : true;
-	        this.moveParent = options.moveParent || false;
-	        this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
-	    }
-	    return MovableOptions;
-	}());
-	exports.MovableOptions = MovableOptions;
-	;
-	/**
-	 * 让Widget具有可以Movable的特性，按住鼠标可以拖动控件。
-	 *
-	 * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
-	 */
-	var Movable = (function (_super) {
-	    __extends(Movable, _super);
-	    function Movable(widget, options) {
-	        _super.call(this, Movable.TYPE, widget, options);
-	        this.moveEvent = { type: Events.MOVE };
-	        this.movingEvent = { type: Events.MOVING };
-	    }
-	    Movable.prototype.init = function (options) {
-	        this.options = new MovableOptions(options);
-	    };
-	    Movable.prototype.moveWidget = function (x, y, animate, end) {
-	        var options = this.options;
-	        var moveParent = options.moveParent;
-	        var duration = options.animateDuration;
-	        var widget = moveParent ? this.widget.parent : this.widget;
-	        if (!options.xMovable) {
-	            x = widget.x;
-	        }
-	        if (!options.yMovable) {
-	            y = widget.y;
-	        }
-	        if (options.xLimit) {
-	            x = Math.min(options.xMax, Math.max(options.xMin, x));
-	        }
-	        if (options.yLimit) {
-	            y = Math.min(options.yMax, Math.max(options.yMin, y));
-	        }
-	        widget.moveTo(x, y, animate ? 500 : 0);
-	        if (end) {
-	            widget.dispatchEvent(this.moveEvent);
-	        }
-	        else {
-	            widget.dispatchEvent(this.movingEvent);
-	        }
-	    };
-	    Movable.prototype.onCancelled = function () {
-	        this.widget.requestRedraw();
-	        this.moveWidget(this.x, this.y, true, true);
-	        document.body.style.cursor = "default";
-	    };
-	    Movable.prototype.onKeyDownGlobal = function (evt) {
-	        var keyCode = evt.detail.keyCode;
-	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
-	            this.dragging = false;
-	            this.onCancelled();
-	        }
-	    };
-	    Movable.prototype.onPointerDown = function (evt) {
-	        var moveParent = this.options.moveParent;
-	        var widget = moveParent ? this.widget.parent : this.widget;
-	        this.x = widget.x;
-	        this.y = widget.y;
-	        this.dragging = true;
-	        document.body.style.cursor = "move";
-	    };
-	    Movable.prototype.onPointerUp = function (evt) {
-	        document.body.style.cursor = "default";
-	        if (this.dragging) {
-	            this.dragging = false;
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
-	            this.moveWidget(this.x + dx, this.y + dy, false, true);
-	        }
-	    };
-	    Movable.prototype.onPointerMove = function (evt) {
-	        if (this.dragging) {
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
-	            this.moveWidget(this.x + dx, this.y + dy, false, false);
-	        }
-	    };
-	    ;
-	    Movable.TYPE = "movable";
-	    return Movable;
-	}(behavior_1.Behavior));
-	exports.Movable = Movable;
-	behavior_1.BehaviorFactory.register(Movable.TYPE, function (widget, options) {
-	    return new Movable(widget, options);
-	});
-
-
-/***/ },
-/* 133 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var point_1 = __webpack_require__(1);
-	var key_event_1 = __webpack_require__(20);
-	var behavior_1 = __webpack_require__(77);
-	/**
-	 * Resizable Behavior的初始化参数。
-	 */
-	var ResizableOptions = (function () {
-	    function ResizableOptions(options) {
-	        this.north = options.north || options.all || false;
-	        this.south = options.south || options.all || false;
-	        this.west = options.west || options.all || false;
-	        this.east = options.east || options.all || false;
-	        this.northWest = options.northWest || options.all || false;
-	        this.northEast = options.northEast || options.all || false;
-	        this.southWest = options.southWest || options.all || false;
-	        this.southEast = options.southEast || options.all || false;
-	        this.animateDuration = options.animateDuration >= 0 ? options.animateDuration : 500;
-	    }
-	    return ResizableOptions;
-	}());
-	exports.ResizableOptions = ResizableOptions;
-	;
-	/**
-	 * 让Widget具有可以Resizable的特性。
-	 * 当鼠标移动到Widget对应的位置，如四角和四边时，鼠标的指针会提示在此处按下鼠标可以resize Widget。
-	 *
-	 * Resize的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
-	 */
-	var Resizable = (function (_super) {
-	    __extends(Resizable, _super);
-	    function Resizable(widget, options) {
-	        _super.call(this, Resizable.TYPE, widget, options);
-	    }
-	    Resizable.prototype.init = function (options) {
-	        this.options = new ResizableOptions(options);
-	    };
-	    Resizable.prototype.onCancelled = function () {
-	        this.widget.requestRedraw();
-	        document.body.style.cursor = "default";
-	        this.widget.moveResizeTo(this.x, this.y, this.w, this.h, this.options.animateDuration);
-	    };
-	    Resizable.prototype.onKeyDownGlobal = function (evt) {
-	        var keyCode = evt.detail.keyCode;
-	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.resizing) {
-	            this.resizing = false;
-	            this.onCancelled();
-	        }
-	    };
-	    Resizable.prototype.onPointerDown = function (evt) {
-	        var result = this.testPointerPosition(evt);
-	        if (result) {
-	            this.x = this.widget.x;
-	            this.y = this.widget.y;
-	            this.w = this.widget.w;
-	            this.h = this.widget.h;
-	            this.resizing = true;
-	            this.pointerDownArea = result;
-	            document.body.style.cursor = result + "-resize";
-	        }
-	        else {
-	            document.body.style.cursor = "default";
-	        }
-	    };
-	    Resizable.prototype.onPointerUp = function (evt) {
-	        this.resizing = false;
-	        document.body.style.cursor = "default";
-	    };
-	    Resizable.prototype.testPointerPosition = function (evt) {
-	        var delta = 3;
-	        var w = this.widget.w;
-	        var h = this.widget.h;
-	        var p = this.widget.toLocalPoint(point_1.Point.point.init(evt.x, evt.y));
-	        var right = w - delta;
-	        var bottom = h - delta;
-	        var options = this.options;
-	        if (p.y >= 0 && p.y <= delta) {
-	            if (p.x >= 0 && p.x <= delta && options.northWest) {
-	                return "nw";
-	            }
-	            else if (p.x > delta && p.x < right && options.north) {
-	                return "n";
-	            }
-	            else if (p.x >= right && p.x <= w && options.northEast) {
-	                return "ne";
-	            }
-	        }
-	        else if (p.y > delta && p.y < bottom) {
-	            if (p.x >= 0 && p.x <= delta && options.west) {
-	                return "w";
-	            }
-	            else if (p.x >= right && p.x <= w && options.east) {
-	                return "e";
-	            }
-	        }
-	        else if (p.y >= bottom && p.y <= h && options.southWest) {
-	            if (p.x >= 0 && p.x <= delta) {
-	                return "sw";
-	            }
-	            else if (p.x > delta && p.x < right && options.south) {
-	                return "s";
-	            }
-	            else if (p.x >= right && p.x <= w && options.southEast) {
-	                return "se";
-	            }
-	        }
-	        return null;
-	    };
-	    Resizable.prototype.onPointerMove = function (evt) {
-	        if (this.resizing) {
-	            var widget = this.widget;
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
-	            switch (this.pointerDownArea) {
-	                case "n": {
-	                    widget.moveResizeTo(this.x, this.y + dy, this.w, this.h - dy);
-	                    break;
-	                }
-	                case "ne": {
-	                    widget.moveResizeTo(this.x, this.y + dy, this.w + dx, this.h - dy);
-	                    break;
-	                }
-	                case "nw": {
-	                    widget.moveResizeTo(this.x + dx, this.y + dy, this.w - dx, this.h - dy);
-	                    break;
-	                }
-	                case "w": {
-	                    widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h);
-	                    break;
-	                }
-	                case "e": {
-	                    widget.moveResizeTo(this.x, this.y, this.w + dx, this.h);
-	                    break;
-	                }
-	                case "s": {
-	                    widget.moveResizeTo(this.x, this.y, this.w, this.h + dy);
-	                    break;
-	                }
-	                case "se": {
-	                    widget.moveResizeTo(this.x, this.y, this.w + dx, this.h + dy);
-	                    break;
-	                }
-	                case "sw": {
-	                    widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h + dy);
-	                    break;
-	                }
-	            }
-	        }
-	        else {
-	            var result = this.testPointerPosition(evt);
-	            if (result) {
-	                document.body.style.cursor = result + "-resize";
-	            }
-	            else {
-	                document.body.style.cursor = "default";
-	            }
-	        }
-	    };
-	    Resizable.TYPE = "resizable";
-	    return Resizable;
-	}(behavior_1.Behavior));
-	exports.Resizable = Resizable;
-	behavior_1.BehaviorFactory.register(Resizable.TYPE, function (widget, options) {
-	    return new Resizable(widget, options);
-	});
-
-
-/***/ },
-/* 134 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_1 = __webpack_require__(16);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var title_content_1 = __webpack_require__(135);
-	var collapsable_title_1 = __webpack_require__(136);
+	var title_content_1 = __webpack_require__(133);
+	var collapsable_title_1 = __webpack_require__(134);
 	/**
 	 * 手风琴控件。它有多个页面，在每一时刻只展开一个。
 	 */
@@ -25343,7 +24844,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25352,8 +24853,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var widget_1 = __webpack_require__(16);
-	var Events = __webpack_require__(7);
+	var widget_1 = __webpack_require__(19);
+	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
@@ -25574,7 +25075,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25583,9 +25084,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rect_1 = __webpack_require__(2);
-	var point_1 = __webpack_require__(1);
-	var widget_1 = __webpack_require__(16);
+	var rect_1 = __webpack_require__(1);
+	var point_1 = __webpack_require__(2);
+	var widget_1 = __webpack_require__(19);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
 	 * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
@@ -25660,6 +25161,153 @@ var qtk =
 
 
 /***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var label_1 = __webpack_require__(18);
+	var title_value_1 = __webpack_require__(136);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var TitleLabel = (function (_super) {
+	    __extends(TitleLabel, _super);
+	    function TitleLabel(type) {
+	        _super.call(this, type || TitleLabel.TYPE);
+	    }
+	    TitleLabel.prototype.createValueWidget = function (options) {
+	        return label_1.Label.create(options);
+	    };
+	    TitleLabel.create = function (options) {
+	        return TitleLabel.recycleBin.create().reset(TitleLabel.TYPE, options);
+	    };
+	    TitleLabel.TYPE = "title-label";
+	    TitleLabel.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLabel(); });
+	    return TitleLabel;
+	}(title_value_1.TitleValue));
+	exports.TitleLabel = TitleLabel;
+	;
+	widget_factory_1.WidgetFactory.register(TitleLabel.TYPE, TitleLabel.create);
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var label_1 = __webpack_require__(18);
+	var widget_1 = __webpack_require__(19);
+	var linear_layouter_1 = __webpack_require__(130);
+	var TitleValue = (function (_super) {
+	    __extends(TitleValue, _super);
+	    function TitleValue(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(TitleValue.prototype, "title", {
+	        get: function () {
+	            return this._title;
+	        },
+	        set: function (value) {
+	            this._title = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "titleW", {
+	        get: function () {
+	            return this._titleW;
+	        },
+	        set: function (value) {
+	            this._titleW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "valueW", {
+	        get: function () {
+	            return this._valueW;
+	        },
+	        set: function (value) {
+	            this._valueW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "titleWidget", {
+	        get: function () {
+	            return this._titleWidget;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "valueWidget", {
+	        get: function () {
+	            return this._valueWidget;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleValue.prototype, "value", {
+	        get: function () {
+	            return this._valueWidget ? this.valueWidget.value : this._value;
+	        },
+	        set: function (value) {
+	            this._value = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.value = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /*
+	     * Child must override
+	     */
+	    TitleValue.prototype.createValueWidget = function (options) {
+	        return null;
+	    };
+	    TitleValue.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        this.titleWidget.text = this._title;
+	        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
+	        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
+	    };
+	    TitleValue.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+	        var titleWidget = label_1.Label.create();
+	        this.addChild(titleWidget);
+	        this._titleWidget = titleWidget;
+	        var valueWidget = this.createValueWidget();
+	        this.addChild(valueWidget);
+	        this._valueWidget = valueWidget;
+	    };
+	    TitleValue.prototype.getDefProps = function () {
+	        return TitleValue.defProps;
+	    };
+	    TitleValue.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._titleWidget = null;
+	        this._valueWidget = null;
+	    };
+	    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+	        _title: null, _titleW: 60, _valueW: 60 });
+	    return TitleValue;
+	}(widget_1.Widget));
+	exports.TitleValue = TitleValue;
+	;
+
+
+/***/ },
 /* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -25669,15 +25317,132 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_edit_1 = __webpack_require__(138);
-	var widget_1 = __webpack_require__(16);
-	var title_slider_1 = __webpack_require__(140);
-	var title_text_area_1 = __webpack_require__(141);
-	var title_combo_box_1 = __webpack_require__(142);
-	var title_choosable_edit_1 = __webpack_require__(143);
+	var edit_1 = __webpack_require__(17);
+	var title_value_1 = __webpack_require__(136);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var linear_layouter_1 = __webpack_require__(114);
+	var TitleEdit = (function (_super) {
+	    __extends(TitleEdit, _super);
+	    function TitleEdit(type) {
+	        _super.call(this, type || TitleEdit.TYPE);
+	    }
+	    Object.defineProperty(TitleEdit.prototype, "inputFilter", {
+	        get: function () {
+	            return this._inputFilter;
+	        },
+	        set: function (value) {
+	            this._inputFilter = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputFilter: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleEdit.prototype, "inputType", {
+	        get: function () {
+	            return this._inputType;
+	        },
+	        set: function (value) {
+	            this._inputType = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputType: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TitleEdit.prototype, "inputTips", {
+	        get: function () {
+	            return this._inputTips;
+	        },
+	        set: function (value) {
+	            this._inputTips = value;
+	            if (this._valueWidget) {
+	                this._valueWidget.set({ inputTips: value });
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleEdit.prototype.createValueWidget = function (options) {
+	        var opts = options || {};
+	        if (this._inputTips) {
+	            opts.inputTips = this._inputTips;
+	        }
+	        if (this._inputType) {
+	            opts.inputType = this._inputType;
+	        }
+	        if (this._inputFilter) {
+	            opts.inputFilter = this._inputFilter;
+	        }
+	        return edit_1.Edit.create(opts);
+	    };
+	    TitleEdit.create = function (options) {
+	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
+	    };
+	    TitleEdit.TYPE = "title-edit";
+	    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
+	    return TitleEdit;
+	}(title_value_1.TitleValue));
+	exports.TitleEdit = TitleEdit;
+	;
+	widget_factory_1.WidgetFactory.register(TitleEdit.TYPE, TitleEdit.create);
+
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var slider_1 = __webpack_require__(93);
+	var title_value_1 = __webpack_require__(136);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var TitleSlider = (function (_super) {
+	    __extends(TitleSlider, _super);
+	    function TitleSlider(type) {
+	        _super.call(this, type || TitleSlider.TYPE);
+	    }
+	    TitleSlider.prototype.createValueWidget = function (options) {
+	        return slider_1.Slider.create(options);
+	    };
+	    TitleSlider.create = function (options) {
+	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
+	    };
+	    TitleSlider.TYPE = "title-slider";
+	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
+	    return TitleSlider;
+	}(title_value_1.TitleValue));
+	exports.TitleSlider = TitleSlider;
+	;
+	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
+
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var title_edit_1 = __webpack_require__(137);
+	var widget_1 = __webpack_require__(19);
+	var title_slider_1 = __webpack_require__(138);
+	var title_text_area_1 = __webpack_require__(140);
+	var title_combo_box_1 = __webpack_require__(141);
+	var title_choosable_edit_1 = __webpack_require__(142);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(81);
+	var linear_layouter_1 = __webpack_require__(130);
 	/**
 	 * 属性编辑页，包装了各种TitleValue。
 	 */
@@ -25823,202 +25588,6 @@ var qtk =
 
 
 /***/ },
-/* 138 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var edit_1 = __webpack_require__(83);
-	var title_value_1 = __webpack_require__(139);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var TitleEdit = (function (_super) {
-	    __extends(TitleEdit, _super);
-	    function TitleEdit(type) {
-	        _super.call(this, type || TitleEdit.TYPE);
-	    }
-	    Object.defineProperty(TitleEdit.prototype, "inputFilter", {
-	        get: function () {
-	            return this._inputFilter;
-	        },
-	        set: function (value) {
-	            this._inputFilter = value;
-	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputFilter: value });
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleEdit.prototype, "inputType", {
-	        get: function () {
-	            return this._inputType;
-	        },
-	        set: function (value) {
-	            this._inputType = value;
-	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputType: value });
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleEdit.prototype, "inputTips", {
-	        get: function () {
-	            return this._inputTips;
-	        },
-	        set: function (value) {
-	            this._inputTips = value;
-	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputTips: value });
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TitleEdit.prototype.createValueWidget = function (options) {
-	        var opts = options || {};
-	        if (this._inputTips) {
-	            opts.inputTips = this._inputTips;
-	        }
-	        if (this._inputType) {
-	            opts.inputType = this._inputType;
-	        }
-	        if (this._inputFilter) {
-	            opts.inputFilter = this._inputFilter;
-	        }
-	        return edit_1.Edit.create(opts);
-	    };
-	    TitleEdit.create = function (options) {
-	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
-	    };
-	    TitleEdit.TYPE = "title-edit";
-	    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
-	    return TitleEdit;
-	}(title_value_1.TitleValue));
-	exports.TitleEdit = TitleEdit;
-	;
-	widget_factory_1.WidgetFactory.register(TitleEdit.TYPE, TitleEdit.create);
-
-
-/***/ },
-/* 139 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var label_1 = __webpack_require__(84);
-	var widget_1 = __webpack_require__(16);
-	var linear_layouter_1 = __webpack_require__(114);
-	var TitleValue = (function (_super) {
-	    __extends(TitleValue, _super);
-	    function TitleValue(type) {
-	        _super.call(this, type);
-	    }
-	    Object.defineProperty(TitleValue.prototype, "title", {
-	        get: function () {
-	            return this._title;
-	        },
-	        set: function (value) {
-	            this._title = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleValue.prototype, "titleW", {
-	        get: function () {
-	            return this._titleW;
-	        },
-	        set: function (value) {
-	            this._titleW = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleValue.prototype, "valueW", {
-	        get: function () {
-	            return this._valueW;
-	        },
-	        set: function (value) {
-	            this._valueW = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleValue.prototype, "titleWidget", {
-	        get: function () {
-	            return this._titleWidget;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleValue.prototype, "valueWidget", {
-	        get: function () {
-	            return this._valueWidget;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TitleValue.prototype, "value", {
-	        get: function () {
-	            return this._valueWidget ? this.valueWidget.value : this._value;
-	        },
-	        set: function (value) {
-	            this._value = value;
-	            if (this._valueWidget) {
-	                this._valueWidget.value = value;
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    /*
-	     * Child must override
-	     */
-	    TitleValue.prototype.createValueWidget = function (options) {
-	        return null;
-	    };
-	    TitleValue.prototype.onInit = function () {
-	        _super.prototype.onInit.call(this);
-	        this.titleWidget.text = this._title;
-	        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
-	        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
-	    };
-	    TitleValue.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
-	        var titleWidget = label_1.Label.create();
-	        this.addChild(titleWidget);
-	        this._titleWidget = titleWidget;
-	        var valueWidget = this.createValueWidget();
-	        this.addChild(valueWidget);
-	        this._valueWidget = valueWidget;
-	    };
-	    TitleValue.prototype.getDefProps = function () {
-	        return TitleValue.defProps;
-	    };
-	    TitleValue.prototype.dispose = function () {
-	        _super.prototype.dispose.call(this);
-	        this._titleWidget = null;
-	        this._valueWidget = null;
-	    };
-	    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-	        _title: null, _titleW: 60, _valueW: 60 });
-	    return TitleValue;
-	}(widget_1.Widget));
-	exports.TitleValue = TitleValue;
-	;
-
-
-/***/ },
 /* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26028,42 +25597,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var slider_1 = __webpack_require__(119);
-	var title_value_1 = __webpack_require__(139);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(81);
-	var TitleSlider = (function (_super) {
-	    __extends(TitleSlider, _super);
-	    function TitleSlider(type) {
-	        _super.call(this, type || TitleSlider.TYPE);
-	    }
-	    TitleSlider.prototype.createValueWidget = function (options) {
-	        return slider_1.Slider.create(options);
-	    };
-	    TitleSlider.create = function (options) {
-	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
-	    };
-	    TitleSlider.TYPE = "title-slider";
-	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
-	    return TitleSlider;
-	}(title_value_1.TitleValue));
-	exports.TitleSlider = TitleSlider;
-	;
-	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
-
-
-/***/ },
-/* 141 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var edit_1 = __webpack_require__(83);
-	var title_value_1 = __webpack_require__(139);
+	var edit_1 = __webpack_require__(17);
+	var title_value_1 = __webpack_require__(136);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleTextArea = (function (_super) {
@@ -26105,7 +25640,7 @@ var qtk =
 
 
 /***/ },
-/* 142 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26114,10 +25649,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(139);
+	var title_value_1 = __webpack_require__(136);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var combo_box_1 = __webpack_require__(121);
+	var combo_box_1 = __webpack_require__(109);
 	var TitleComboBoxBase = (function (_super) {
 	    __extends(TitleComboBoxBase, _super);
 	    function TitleComboBoxBase(type) {
@@ -26187,7 +25722,7 @@ var qtk =
 
 
 /***/ },
-/* 143 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26196,8 +25731,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(139);
-	var choosable_edit_1 = __webpack_require__(144);
+	var title_value_1 = __webpack_require__(136);
+	var choosable_edit_1 = __webpack_require__(143);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	var TitleChoosableEdit = (function (_super) {
@@ -26246,7 +25781,7 @@ var qtk =
 
 
 /***/ },
-/* 144 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26255,10 +25790,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(83);
-	var button_1 = __webpack_require__(89);
-	var widget_1 = __webpack_require__(16);
-	var Events = __webpack_require__(7);
+	var edit_1 = __webpack_require__(17);
+	var button_1 = __webpack_require__(92);
+	var widget_1 = __webpack_require__(19);
+	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
 	/**
@@ -26347,7 +25882,7 @@ var qtk =
 
 
 /***/ },
-/* 145 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26356,11 +25891,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(101);
+	var scroll_view_1 = __webpack_require__(98);
 	var widget_factory_1 = __webpack_require__(23);
-	var title_content_1 = __webpack_require__(135);
+	var title_content_1 = __webpack_require__(133);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var collapsable_title_1 = __webpack_require__(136);
+	var collapsable_title_1 = __webpack_require__(134);
 	/**
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
@@ -26458,6 +25993,132 @@ var qtk =
 
 
 /***/ },
+/* 145 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var consts_1 = __webpack_require__(103);
+	var layouter_1 = __webpack_require__(78);
+	var TYPE = "dock";
+	/**
+	 * Dock布局器。
+	 */
+	var DockLayouter = (function (_super) {
+	    __extends(DockLayouter, _super);
+	    function DockLayouter() {
+	        _super.apply(this, arguments);
+	    }
+	    Object.defineProperty(DockLayouter.prototype, "type", {
+	        get: function () {
+	            return TYPE;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    DockLayouter.prototype.layoutChildren = function (widget, children, rect) {
+	        var _this = this;
+	        var r = rect.clone();
+	        var arr = widget.children.forEach(function (child) {
+	            if (r.w > 0 && r.h > 0) {
+	                _this.layoutChild(child, r);
+	            }
+	        });
+	        r.dispose();
+	        return rect;
+	    };
+	    DockLayouter.prototype.layoutChild = function (child, r) {
+	        var x = 0;
+	        var y = 0;
+	        var w = 0;
+	        var h = 0;
+	        var param = child.layoutParam;
+	        if (param && param.type === TYPE && child.visible) {
+	            switch (param.position) {
+	                case consts_1.Direction.LEFT: {
+	                    x = r.x;
+	                    y = r.y;
+	                    h = r.h;
+	                    w = Math.min(r.w, param.size ? layouter_1.Layouter.evalValue(param.size, r.w) : child.w);
+	                    r.x += w;
+	                    r.w -= w;
+	                    break;
+	                }
+	                case consts_1.Direction.RIGHT: {
+	                    y = r.y;
+	                    h = r.h;
+	                    w = Math.min(r.w, param.size ? layouter_1.Layouter.evalValue(param.size, r.w) : child.w);
+	                    x = r.x + r.w - w;
+	                    r.w -= w;
+	                    break;
+	                }
+	                case consts_1.Direction.BOTTOM: {
+	                    x = r.x;
+	                    w = r.w;
+	                    h = Math.min(r.h, param.size ? layouter_1.Layouter.evalValue(param.size, r.h) : child.h);
+	                    y = r.y + r.h - h;
+	                    r.h -= h;
+	                    break;
+	                }
+	                default: {
+	                    x = r.x;
+	                    y = r.y;
+	                    w = r.w;
+	                    h = Math.min(r.h, param.size ? layouter_1.Layouter.evalValue(param.size, r.h) : child.h);
+	                    r.h -= h;
+	                    r.y += h;
+	                    break;
+	                }
+	            }
+	            child.moveResizeTo(x, y, w, h);
+	            child.relayoutChildren();
+	        }
+	    };
+	    DockLayouter.prototype.createParam = function (options) {
+	        return DockLayouterParam.create(options);
+	    };
+	    DockLayouter.create = function (options) {
+	        var layouter = new DockLayouter();
+	        return layouter.setOptions(options);
+	    };
+	    return DockLayouter;
+	}(layouter_1.Layouter));
+	exports.DockLayouter = DockLayouter;
+	;
+	layouter_1.LayouterFactory.register(TYPE, DockLayouter.create);
+	/**
+	 * Dock布局器的参数。
+	 *
+	 * 如果父控件使用DockLayouter布局器，则子控件需要把layoutParam设置为DockLayouterParam。
+	 *
+	 * 对于size参数：
+	 * *.如果以px结尾，则直接取它的值。
+	 * *.如果以%结尾，则表示剩余空间的宽度/高度的百分比。
+	 *
+	 */
+	var DockLayouterParam = (function (_super) {
+	    __extends(DockLayouterParam, _super);
+	    function DockLayouterParam(position, size) {
+	        _super.call(this, TYPE);
+	        this.size = size;
+	        this.position = position;
+	    }
+	    DockLayouterParam.create = function (opts) {
+	        var options = opts || {};
+	        return new DockLayouterParam(options.position, options.size || "");
+	    };
+	    return DockLayouterParam;
+	}(layouter_1.LayouterParam));
+	exports.DockLayouterParam = DockLayouterParam;
+	;
+	layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.create);
+
+
+/***/ },
 /* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26467,28 +26128,371 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var label_1 = __webpack_require__(84);
-	var title_value_1 = __webpack_require__(139);
+	var group_1 = __webpack_require__(89);
+	var dialog_1 = __webpack_require__(90);
+	var label_1 = __webpack_require__(18);
+	var edit_1 = __webpack_require__(17);
+	var button_1 = __webpack_require__(92);
+	var Events = __webpack_require__(6);
+	var graphics_1 = __webpack_require__(25);
+	var list_view_1 = __webpack_require__(110);
+	var progress_bar_1 = __webpack_require__(94);
+	var application_1 = __webpack_require__(119);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
+	var consts_1 = __webpack_require__(103);
 	var recyclable_creator_1 = __webpack_require__(81);
-	var TitleLabel = (function (_super) {
-	    __extends(TitleLabel, _super);
-	    function TitleLabel(type) {
-	        _super.call(this, type || TitleLabel.TYPE);
+	var list_item_1 = __webpack_require__(112);
+	var dock_layouter_1 = __webpack_require__(145);
+	var linear_layouter_1 = __webpack_require__(130);
+	var grid_layouter_1 = __webpack_require__(115);
+	var simple_layouter_1 = __webpack_require__(113);
+	var TitleOptions = (function () {
+	    function TitleOptions(text, iconStyleType, hasCloseButton) {
+	        this.h = 0;
+	        this.text = text;
+	        this.draggable = true;
+	        this.iconStyleType = iconStyleType;
+	        this.hasCloseButton = hasCloseButton;
 	    }
-	    TitleLabel.prototype.createValueWidget = function (options) {
-	        return label_1.Label.create(options);
-	    };
-	    TitleLabel.create = function (options) {
-	        return TitleLabel.recycleBin.create().reset(TitleLabel.TYPE, options);
-	    };
-	    TitleLabel.TYPE = "title-label";
-	    TitleLabel.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLabel(); });
-	    return TitleLabel;
-	}(title_value_1.TitleValue));
-	exports.TitleLabel = TitleLabel;
+	    return TitleOptions;
+	}());
+	exports.TitleOptions = TitleOptions;
 	;
-	widget_factory_1.WidgetFactory.register(TitleLabel.TYPE, TitleLabel.create);
+	var ButtonOption = (function () {
+	    function ButtonOption() {
+	    }
+	    return ButtonOption;
+	}());
+	exports.ButtonOption = ButtonOption;
+	var ButtonsOptions = (function () {
+	    function ButtonsOptions() {
+	        this.buttons = [];
+	    }
+	    Object.defineProperty(ButtonsOptions.prototype, "buttonCount", {
+	        get: function () {
+	            return this.buttons.length;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    return ButtonsOptions;
+	}());
+	exports.ButtonsOptions = ButtonsOptions;
+	;
+	var MessageBox = (function (_super) {
+	    __extends(MessageBox, _super);
+	    function MessageBox(type) {
+	        _super.call(this, type || MessageBox.TYPE);
+	        this._contentPadding = 10;
+	    }
+	    Object.defineProperty(MessageBox.prototype, "title", {
+	        get: function () {
+	            return this._title;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MessageBox.prototype, "content", {
+	        get: function () {
+	            return this._content;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(MessageBox.prototype, "buttons", {
+	        get: function () {
+	            return this._buttons;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    MessageBox.prototype.initTitle = function (titleOptions) {
+	        var w = this.w;
+	        var win = this;
+	        if (titleOptions) {
+	            var title = group_1.Group.create({ styleType: "dialog.title-bg" });
+	            var titleH = titleOptions.h || MessageBox.TITLE_H;
+	            title.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.TOP, size: titleH });
+	            title.childrenLayouter = linear_layouter_1.LinearLayouter.createH();
+	            this.addChild(title);
+	            if (titleOptions.draggable) {
+	                title.useBehavior("movable", { moveParent: true });
+	            }
+	            if (titleOptions.iconStyleType) {
+	                var icon = button_1.Button.create({ name: "icon", styleType: titleOptions.iconStyleType });
+	                icon.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 1, h: "100%", w: title.h });
+	                title.addChild(icon);
+	            }
+	            if (titleOptions.text) {
+	                var label = label_1.Label.create({ name: "text", text: titleOptions.text, styleType: "dialog.title-text" });
+	                label.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 2, h: "100%", w: w - titleH * 2 });
+	                title.addChild(label);
+	            }
+	            if (titleOptions.hasCloseButton) {
+	                var button = button_1.Button.create({ name: "close", styleType: "messagebox.button.close" });
+	                button.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: -1, h: "100%", w: titleH });
+	                title.addChild(button);
+	                button.on(Events.CLICK, function (evt) {
+	                    win.animateClose();
+	                });
+	            }
+	            this._title = title;
+	        }
+	    };
+	    MessageBox.prototype.initButtons = function (buttonsOptions) {
+	        var w = this.w;
+	        var win = this;
+	        if (buttonsOptions && buttonsOptions.buttons) {
+	            var buttons = group_1.Group.create();
+	            var n = buttonsOptions.buttons.length;
+	            var buttonsH = buttonsOptions.h || MessageBox.BUTTONS_H;
+	            var margin = n < 2 ? w / (4 * n) : w / (8 * n);
+	            buttons.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: buttonsH });
+	            buttons.childrenLayouter = grid_layouter_1.GridLayouter.create({
+	                topMargin: 5,
+	                bottomMargin: 5,
+	                leftMargin: margin,
+	                rightMargin: margin,
+	                rows: 1,
+	                cols: n
+	            });
+	            this.addChild(buttons);
+	            buttonsOptions.buttons.forEach(function (iter) {
+	                var b = button_1.Button.create({ text: iter.text, styleType: iter.styleType });
+	                b.on(Events.CLICK, function (evt) {
+	                    if (iter.onClick) {
+	                        iter.onClick();
+	                    }
+	                    win.animateClose();
+	                });
+	                buttons.addChild(b);
+	            });
+	            this._buttons = buttons;
+	        }
+	        return this;
+	    };
+	    MessageBox.prototype.initContent = function (data) {
+	        var content = group_1.Group.create();
+	        content.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: "100%" });
+	        this.addChild(content);
+	        if (data) {
+	            content.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	            var label = label_1.Label.create({ text: data, multiLineMode: true, padding: this._contentPadding });
+	            label.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" });
+	            content.addChild(label);
+	        }
+	        this._content = content;
+	    };
+	    MessageBox.prototype.createChildren = function (titleOptions, buttonsOptions, content) {
+	        var vp = this.app.getViewPort();
+	        var style = this._themeManager.get("messagebox.content", this.stateToString(widget_1.WidgetState.NORMAL));
+	        if (this.w <= 10) {
+	            var textW = graphics_1.Graphics.measureText(content, style.font);
+	            var padding = this.leftPadding + this.rightPadding + this._contentPadding * 2;
+	            var w = Math.min(vp.width, Math.max(60, textW + padding));
+	            if (buttonsOptions) {
+	                w = Math.max(w, buttonsOptions.buttonCount * 128);
+	            }
+	            this.w = w;
+	        }
+	        if (this.h < 10) {
+	            var lines = graphics_1.Graphics.layoutText(content, this.w, style.font);
+	            var n = lines ? lines.length : 0;
+	            var padding = this.topPadding + this.bottomPadding + this._contentPadding * 2;
+	            var h = n * style.fontSize * 1.5 + padding;
+	            if (titleOptions) {
+	                h += titleOptions.h || MessageBox.TITLE_H;
+	            }
+	            if (buttonsOptions) {
+	                h += buttonsOptions.h || MessageBox.BUTTONS_H;
+	            }
+	            this.h = h;
+	        }
+	        this.initTitle(titleOptions);
+	        this.initButtons(buttonsOptions);
+	        this.initContent(content);
+	    };
+	    MessageBox.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this.padding = 1;
+	        this.childrenLayouter = dock_layouter_1.DockLayouter.create();
+	    };
+	    MessageBox.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._title = null;
+	        this._content = null;
+	        this._buttons = null;
+	    };
+	    MessageBox.prototype.open = function () {
+	        _super.prototype.open.call(this);
+	        this.grab();
+	        this.moveToCenter();
+	        return this;
+	    };
+	    MessageBox.prototype.animateClose = function () {
+	        var _this = this;
+	        this.opacityTo(0, 300).onComplete(function (evt) {
+	            _this.close();
+	        });
+	    };
+	    MessageBox.showMessage = function (msg, onClose, w) {
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var rw = Math.min(vp.w, w || 0);
+	        var messageBox = MessageBox.create({ app: app, w: rw, h: 0 });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Close", onClick: null });
+	        var titleOptions = new TitleOptions("Infomation", "messagebox.info.icon", true);
+	        messageBox.createChildren(titleOptions, buttonsOption, msg);
+	        messageBox.on(Events.CLOSE, onClose);
+	        messageBox.open();
+	    };
+	    MessageBox.showConfirm = function (msg, onYes, onNo, w) {
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var rw = Math.min(vp.w, w || 0);
+	        var messageBox = MessageBox.create({ app: app, w: rw, h: 0 });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: onNo });
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Yes", onClick: onYes });
+	        var titleOptions = new TitleOptions("Question", "messagebox.question.icon", false);
+	        messageBox.createChildren(titleOptions, buttonsOption, msg);
+	        messageBox.open();
+	    };
+	    MessageBox.showToast = function (msg, duration, w) {
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var rw = Math.min(vp.w, w || 0);
+	        var messageBox = MessageBox.create({ app: app, styleType: "messagebox.toast", w: rw, h: 0 });
+	        messageBox.createChildren(null, null, msg);
+	        messageBox.on(Events.POINTER_UP, function (evt) {
+	            if (messageBox) {
+	                this.animateClose();
+	                messageBox = null;
+	            }
+	        });
+	        setTimeout(function (evt) {
+	            if (messageBox) {
+	                messageBox.animateClose();
+	                messageBox = null;
+	            }
+	        }, duration || 3000);
+	        messageBox.open();
+	    };
+	    MessageBox.showProgress = function (msg, taskStart, onDone, w) {
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var rw = Math.min(vp.w, w || 0) || 200;
+	        var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
+	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Close", onClick: null });
+	        var titleOptions = new TitleOptions(msg, "messagebox.info.icon", false);
+	        messageBox.createChildren(titleOptions, buttonsOption, null);
+	        var group = messageBox.content;
+	        var progressBar = progress_bar_1.ProgressBar.create();
+	        group.padding = 10;
+	        group.topPadding = 20;
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "20px" });
+	        var closeButton = messageBox.buttons.children[0];
+	        closeButton.enable = false;
+	        function onProgress(value) {
+	            progressBar.value = value;
+	            progressBar.requestRedraw();
+	            if (value >= 1) {
+	                onDone();
+	                closeButton.enable = true;
+	            }
+	        }
+	        group.addChild(progressBar);
+	        messageBox.open();
+	        taskStart(onProgress);
+	    };
+	    MessageBox.showInput = function (title, inputTips, value, isValueValid, onDone, inputType, w) {
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var rw = Math.min(vp.w, w || 0) || 200;
+	        var rh = MessageBox.TITLE_H + MessageBox.BUTTONS_H + 50;
+	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "OK", onClick: onOK });
+	        var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
+	        messageBox.createChildren(titleOptions, buttonsOption, null);
+	        var group = messageBox.content;
+	        var edit = edit_1.Edit.create({ inputTips: inputTips, value: value, inputType: inputType || "text" });
+	        group.padding = 10;
+	        group.topPadding = 15;
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "25px" });
+	        function onOK() {
+	            onDone(edit.text);
+	        }
+	        edit.on(Events.CHANGING, function (evt) {
+	            okButton.enable = isValueValid(evt.value);
+	        });
+	        var okButton = messageBox.buttons.children[1];
+	        okButton.enable = isValueValid(value);
+	        group.addChild(edit);
+	        messageBox.open();
+	    };
+	    MessageBox.showChoice = function (title, data, multiple, onDone, w, h) {
+	        var itemHeight = 30;
+	        var app = application_1.Application.get();
+	        var vp = app.getViewPort();
+	        var contentHeight = Math.min(8, data.length) * itemHeight;
+	        var rw = Math.min(vp.w, w || 0) || 300;
+	        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
+	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "OK", onClick: onOK });
+	        var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
+	        messageBox.createChildren(titleOptions, buttonsOption, null);
+	        var group = messageBox.content;
+	        var listView = list_view_1.ListView.create({ itemHeight: itemHeight, dragToScroll: true });
+	        group.padding = 5;
+	        group.topPadding = 5;
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "100%" });
+	        data.forEach(function (iter) {
+	            var item = list_item_1.ListItemCheckable.create({
+	                multiCheckable: multiple,
+	                iconURL: iter.iconURL,
+	                text: iter.text,
+	                userData: iter,
+	                leftPadding: 2
+	            });
+	            listView.addChild(item, true);
+	        });
+	        listView.relayoutChildren();
+	        function onOK() {
+	            var ret = [];
+	            listView.children.forEach(function (iter) {
+	                if (iter.value) {
+	                    ret.push(iter.userData);
+	                }
+	            });
+	            onDone(ret);
+	        }
+	        group.addChild(listView);
+	        messageBox.open();
+	    };
+	    MessageBox.create = function (options) {
+	        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
+	    };
+	    MessageBox.TITLE_H = 25;
+	    MessageBox.BUTTONS_H = 40;
+	    MessageBox.MSG_FONT_SIZE = 12;
+	    MessageBox.TYPE = "messagebox";
+	    MessageBox.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new MessageBox(); });
+	    return MessageBox;
+	}(dialog_1.Dialog));
+	exports.MessageBox = MessageBox;
+	;
+	widget_factory_1.WidgetFactory.register(MessageBox.TYPE, MessageBox.create);
 
 
 /***/ },
@@ -26502,8 +26506,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var pointer = __webpack_require__(148);
-	var emitter_1 = __webpack_require__(8);
-	var Events = __webpack_require__(7);
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
 	var iview_modal_1 = __webpack_require__(79);
 	var ViewModal = (function (_super) {
 	    __extends(ViewModal, _super);

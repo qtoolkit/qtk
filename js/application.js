@@ -14,7 +14,7 @@ var emitter_1 = require("./emitter");
 var view_port_1 = require("./view-port");
 var image_tile_1 = require("./image-tile");
 var theme_manager_1 = require("./theme-manager");
-var deviceInfo = require("./device-info");
+var device_info_1 = require("./device-info");
 var service_locator_1 = require("./service-locator");
 var inputEventAdapter = require("./input-event-adapter");
 /**
@@ -107,9 +107,9 @@ var Application = (function (_super) {
         this.registerService(consts_1.Services.THEME_MANAGER, themeManager);
         this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
         this._mainLoop = main_loop_1.MainLoop.create();
-        deviceInfo.init(navigator.language, navigator.userAgent);
-        inputEventAdapter.init(document, window, deviceInfo.isPointerSupported, deviceInfo.isMSPointerSupported, deviceInfo.isTouchSupported);
-        if (deviceInfo.isMacOS) {
+        device_info_1.DeviceInfo.init(navigator.language, navigator.userAgent);
+        inputEventAdapter.init(document, window, device_info_1.DeviceInfo.isPointerSupported, device_info_1.DeviceInfo.isMSPointerSupported, device_info_1.DeviceInfo.isTouchSupported);
+        if (device_info_1.DeviceInfo.isMacOS) {
             var density = this.viewPort.density;
             image_tile_1.ImageTile.init(density, 1 / density, function (img) {
                 _this.mainLoop.requestRedraw();

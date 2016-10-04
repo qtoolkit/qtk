@@ -1,197 +1,90 @@
-import {Point} from "./point";
-import {Rect} from "./rect";
-import Assets = require("./assets");
-import {MainLoop} from "./main-loop";
-import {Matrix} from "./matrix";
-import {MatrixStack} from "./matrix-stack";
-import {Image} from "./controls/image";
-import {Group} from "./controls/group";
-import {Edit} from "./controls/edit";
-import {Page} from "./controls/page";
-import {Pages} from "./controls/pages";
-import {Button} from "./controls/button";
-import {TabPage} from "./controls/tab-page";
-import {TabButton} from "./controls/tab-button";
-import {TabControl} from "./controls/tab-control";
-import {ImageDrawType, ImageTile} from "./image-tile";
-import {Direction, Align, AlignH, AlignV, Orientation, Services} from "./consts";
-import {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";
-import {TabButtonGroup} from "./controls/tab-button-group";
-import {RichText} from "./controls/rich-text";
-import {RichTextEdit} from "./controls/rich-text-edit";
-import {Label} from "./controls/label";
-import {Slider} from "./controls/slider";
-import {Switch} from "./controls/switch";
-import {ComboBox, ComboBoxEditable} from "./controls/combo-box";
-import {CheckButton} from "./controls/check-button";
-import {Menu, MenuItem} from "./controls/menu";
-import {MenuBar, MenuBarItem} from "./controls/menu-bar";
-import {ColorTile, ColorLine} from "./controls/color-tile";
-import {RadioButton} from "./controls/radio-button";
-import {ProgressBarType, ProgressBar} from "./controls/progress-bar";
-import {Dialog} from "./controls/dialog";
-import {TreeItem} from "./controls/tree-item";
-import {TreeView} from "./controls/tree-view";
-import {TreeItemData} from "./controls/tree-item-data";
-import {ListItem, ListItemStyle} from "./controls/list-item";
-import {GridView} from "./controls/grid-view";
-import {ListView} from "./controls/list-view";
-import {WindowNormal} from "./controls/window-normal";
-import {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
-import {ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
-import {Style} from "./style";
-import {WidgetFactory} from "./controls/widget-factory";
-import {ThemeManager} from "./theme-manager";
-import Events = require("./events");
-import {Canvas} from "./canvas";
-import {Draggable} from "./behaviors/draggable";
-import {Droppable} from "./behaviors/droppable";
-import {Movable} from "./behaviors/movable";
-import {Resizable} from "./behaviors/resizable";
-import {Emitter} from "./emitter";
-import {ViewPort} from "./view-port";
-import * as deviceInfo from "./device-info";
-import inputEventAdapter = require("./input-event-adapter");
-import {Application} from "./application";
-import {ServiceLocator} from  "./service-locator";
-import {KeyEvent} from "./key-event";
-import {RoundType, Graphics} from "./graphics";
-import {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
-import {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
-import {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
-import {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
-import {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
-import {Accordion} from "./controls/accordion";
-import {PropertyPage} from "./controls-ext/property-page";
-import {PropertySheets} from "./controls-ext/property-sheets";
-import {TitleContent} from "./controls/title-content";
-import {TitleLabel} from "./controls-ext/title-label";
-import {TitleEdit} from "./controls-ext/title-edit";
-import {TitleChoosableEdit} from "./controls-ext/title-choosable-edit";
-import {TitleTextArea} from "./controls-ext/title-text-area";
-import {ChoosableEdit} from "./controls-ext/choosable-edit";
-import {TitleSlider} from "./controls-ext/title-slider";
-import {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
+export {Rect} from "./rect";
+export {Point} from "./point";
+export {Style} from "./style";
+export {Matrix} from "./matrix";
+export {Canvas} from "./canvas";
+export {Edit} from "./controls/edit";
+export {Label} from "./controls/label";
+export {Emitter} from "./emitter";
+export {Page} from "./controls/page";
+export {KeyEvent} from "./key-event";
+export {ViewPort} from "./view-port";
+export {Pages} from "./controls/pages";
+export {MainLoop} from "./main-loop";
+export {Image} from "./controls/image";
+export {Group} from "./controls/group";
+export {Dialog} from "./controls/dialog";
+export {Button} from "./controls/button";
+export {Slider} from "./controls/slider";
+export {Switch} from "./controls/switch";
+export {MatrixStack} from "./matrix-stack";
+export {TabPage} from "./controls/tab-page";
+export {RichText} from "./controls/rich-text";
+export {TabButton} from "./controls/tab-button";
+export {TabControl} from "./controls/tab-control";
+export {ImageDrawType, ImageTile} from "./image-tile";
+export {RichTextEdit} from "./controls/rich-text-edit";
+export {TabButtonGroup} from "./controls/tab-button-group";
+export {ComboBox, ComboBoxEditable} from "./controls/combo-box";
 
-import {ICommand} from "./mvvm/icommand";
-import {ViewModal} from "./mvvm/view-modal";
-import {IViewModal} from "./mvvm/iview-modal";
-import {IValueConverter} from "./mvvm/ivalue-converter";
-import {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
+export {GridView} from "./controls/grid-view";
+export {ListView} from "./controls/list-view";
+export {TreeItem} from "./controls/tree-item";
+export {TreeView} from "./controls/tree-view";
+export {Application} from "./application";
+export {Movable} from "./behaviors/movable";
+export {ThemeManager} from "./theme-manager";
+export {Draggable} from "./behaviors/draggable";
+export {Droppable} from "./behaviors/droppable";
+export {Resizable} from "./behaviors/resizable";
+export {Menu, MenuItem} from "./controls/menu";
+export {RadioButton} from "./controls/radio-button";
+export {TreeItemData} from "./controls/tree-item-data";
+export {CheckButton} from "./controls/check-button";
+export {WindowNormal} from "./controls/window-normal";
+export {WidgetFactory} from "./controls/widget-factory";
+export {MenuBar, MenuBarItem} from "./controls/menu-bar";
+export {ColorTile, ColorLine} from "./controls/color-tile";
+export {ListItem, ListItemStyle} from "./controls/list-item";
+
+export {RoundType, Graphics} from "./graphics";
+export {Accordion} from "./controls/accordion";
+export {ServiceLocator} from  "./service-locator";
+export {TitleContent} from "./controls/title-content";
+export {TitleLabel} from "./controls-ext/title-label";
+export {TitleEdit} from "./controls-ext/title-edit";
+export {TitleSlider} from "./controls-ext/title-slider";
+export {PropertyPage} from "./controls-ext/property-page";
+export {ChoosableEdit} from "./controls-ext/choosable-edit";
+export {TitleTextArea} from "./controls-ext/title-text-area";
+export {PropertySheets} from "./controls-ext/property-sheets";
+export {ProgressBarType, ProgressBar} from "./controls/progress-bar";
+export {TitleChoosableEdit} from "./controls-ext/title-choosable-edit";
+export {DockLayouter, DockLayouterParam} from "./layouters/dock-layouter";
+export {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
+export {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
+export {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
+export {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
+export {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
+export {Direction, Align, AlignH, AlignV, Orientation, Services} from "./consts";
+export {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
+export {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";
+export {ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
+
+export {DeviceInfo} from "./device-info";
+export {ICommand} from "./mvvm/icommand";
+export {ViewModal} from "./mvvm/view-modal";
+export {IViewModal} from "./mvvm/iview-modal";
+export {RecyclableCreator} from "./recyclable-creator";
+export {IValueConverter} from "./mvvm/ivalue-converter";
+export {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
-import TWEEN = require("tween.js");
-import {RecyclableCreator} from "./recyclable-creator";
+var TWEEN = require("tween.js");
+import * as Events from "./events";
+import * as Assets from "./assets";
+import * as inputEventAdapter from "./input-event-adapter";
 
-export {
-	Assets,
-	Point,
-	Rect,
-	Align,
-	AlignV,
-	AlignH,
-	RoundType,
-	Graphics,
-	Services,
-	Orientation,
-	Direction,
-	ViewPort,
-	MainLoop,
-	Accordion,
-	PropertyPage,
-	PropertySheets,
-	Matrix,
-	TWEEN,
-	KeyEvent,
-	MatrixStack,
-	deviceInfo,
-	Application,
-	RecyclableCreator,
-	inputEventAdapter,
-	ImageTile,
-	ImageDrawType,
-	Style,
-	Canvas,
-	Draggable,
-	Droppable,
-	Resizable,
-	Movable,
-	Emitter,
-	Widget,
-	WidgetState,
-	WidgetMode,
-	HitTestResult,
-	Slider,
-	Switch,
-	ComboBox,
-	ComboBoxEditable,
-	Button,
-	TabPage,
-	TabControl,
-	TabButton,
-	TabButtonGroup,
-	RichText,
-	RichTextEdit,
-	MessageBox,
-	ButtonsOptions,
-	TitleOptions,
-	ButtonOption,
-	Page,
-	Pages,
-	Label,
-	Edit,
-	RadioButton,
-	CheckButton,
-	ColorTile,
-	ColorLine,
-	ProgressBar,
-	ProgressBarType,
-	ScrollView,
-	ScrollBarStyle,
-	ScrollerOptions,
-	ScrollerBarVisibility,
-	Image,
-	Group,
-	Dialog,
-	GridView,
-	TreeItem,
-	TreeView,
-	TreeItemData,
-	ListView,
-	ListItem,
-	ListItemStyle,
-	Menu,
-	MenuItem,
-	MenuBar,
-	MenuBarItem,
-	WindowNormal,
-	ServiceLocator,
-	WidgetFactory,
-	ThemeManager,
-	Events,
-	TitleEdit,
-	TitleLabel,
-	TitleContent,
-	TitleChoosableEdit,
-	TitleSlider,
-	TitleComboBox,
-	TitleTextArea,
-	ChoosableEdit,
-	TitleComboBoxEditable,
-	DockLayouter,
-	DockLayouterParam,
-	GridLayouter,
-	GridLayouterParam,
-	ListLayouter,
-	ListLayouterParam,
-	LinearLayouter,
-	LinearLayouterParam,
-	SimpleLayouter,
-	SimpleLayouterParam,
-	IViewModal,
-	ViewModal,
-	IValueConverter,
-	ValidationResult,
-	IValidationRule
-};
+export {TWEEN, Events, Assets, inputEventAdapter};
+
