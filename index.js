@@ -4136,7 +4136,7 @@ var qtk =
 	    Edit.create = function (options) {
 	        return Edit.r.create().reset(Edit.TYPE, options);
 	    };
-	    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _it: null, _itp: null });
+	    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
 	    Edit.TYPE = "edit";
 	    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
 	    return Edit;
@@ -5912,6 +5912,9 @@ var qtk =
 	        this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
 	        return this;
 	    };
+	    /**
+	     * 绑定数据。
+	     */
 	    Widget.prototype.bindData = function (viewModal) {
 	        var _this = this;
 	        var dataBindingRule = this._dataBindingRule;
@@ -5962,6 +5965,9 @@ var qtk =
 	            });
 	        }
 	    };
+	    /*
+	     * 把数据显示到界面上。
+	     */
 	    Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
 	        for (var prop in dataBindingRule) {
 	            var dataSource = dataBindingRule[prop];
@@ -5975,6 +5981,9 @@ var qtk =
 	            }
 	        }
 	    };
+	    /*
+	     * 根据转换函数，把数据转换成适合在界面上显示的格式。
+	     */
 	    Widget.prototype.convertValue = function (viewModal, dataSource, value) {
 	        var v = value;
 	        if (dataSource.converters) {
@@ -5987,6 +5996,9 @@ var qtk =
 	        }
 	        return v;
 	    };
+	    /*
+	     * 根据转换函数，把数据转换成适合存储的格式。
+	     */
 	    Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
 	        var v = value;
 	        if (dataSource.converters) {
@@ -6002,19 +6014,31 @@ var qtk =
 	    Widget.prototype.getPropDefaultBindMode = function (prop) {
 	        return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
 	    };
+	    /*
+	     * 子控件重载此函数向用户提示数据无效。
+	     */
+	    Widget.prototype.onInvalidInput = function (message) {
+	        console.log("invalid value:" + message);
+	    };
+	    /*
+	     * 通过ValidationRule检查数据是否有效。
+	     */
 	    Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
 	        if (dataSource.validationRule) {
 	            var validationRule = viewModal.getValidationRule(dataSource.validationRule);
 	            if (validationRule) {
 	                var result = validationRule.validate(value);
 	                if (result.code) {
-	                    console.log("invalid value:" + result.message);
+	                    this.onInvalidInput(result.message);
 	                    return false;
 	                }
 	            }
 	        }
 	        return true;
 	    };
+	    /*
+	     * 监控控件单个属性的变化。
+	     */
 	    Widget.prototype.watchTargetValueChange = function (dataSource) {
 	        var _this = this;
 	        var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
@@ -6027,6 +6051,9 @@ var qtk =
 	            });
 	        }
 	    };
+	    /*
+	     * 监控控件属性的变化。
+	     */
 	    Widget.prototype.watchTargetChange = function (dataBindingRule) {
 	        for (var prop in dataBindingRule) {
 	            var bindingMode = this.getPropDefaultBindMode(prop);
@@ -17981,7 +18008,7 @@ var qtk =
 	        }
 	        var r = doc.frame.bounds();
 	        this.contentWidth = r.w;
-	        this.contentHeight = r.h;
+	        this.contentH = r.h;
 	    };
 	    RichText.prototype.onInit = function () {
 	        this.dragToScroll = true;
@@ -18105,7 +18132,7 @@ var qtk =
 	                return true;
 	            }
 	            default: {
-	                return (this.h < this.contentHeight);
+	                return (this.h < this.contentH);
 	            }
 	        }
 	    };
@@ -18191,7 +18218,7 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(ScrollView.prototype, "contentHeight", {
+	    Object.defineProperty(ScrollView.prototype, "contentH", {
 	        get: function () {
 	            return this._ch;
 	        },
@@ -18370,9 +18397,9 @@ var qtk =
 	    /*
 	     * 更新Scroller的参数。
 	     */
-	    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentHeight) {
+	    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentH) {
 	        if (this._slideToScroll) {
-	            this.scroller.setDimensions(w, h, contentWidth, contentHeight);
+	            this.scroller.setDimensions(w, h, contentWidth, contentH);
 	        }
 	    };
 	    Object.defineProperty(ScrollView.prototype, "scroller", {
@@ -18414,10 +18441,10 @@ var qtk =
 	            var prop = evt.prop;
 	            var value = evt.newValue;
 	            if (prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-	                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentHeight);
+	                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentH);
 	            }
 	        });
-	        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
+	        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
 	    };
 	    /*
 	     * 绘制垂直滚动条。
@@ -18433,9 +18460,9 @@ var qtk =
 	        var barColor = options.backGroundColor;
 	        var r = options.roundRadius;
 	        var draggerW = options.draggerSize;
-	        var draggerH = Math.max(draggerW, Math.min(h, h * h / this.contentHeight));
+	        var draggerH = Math.max(draggerW, Math.min(h, h * h / this.contentH));
 	        var draggerX = barX + ((barW - draggerW) >> 1);
-	        var draggerY = Math.min(h - draggerH, (this.offsetY / this.contentHeight) * h);
+	        var draggerY = Math.min(h - draggerH, (this.offsetY / this.contentH) * h);
 	        var draggerColor = options.foreGroundColor;
 	        if (hBarVisible) {
 	            draggerY = Math.min(draggerY, h - barW - draggerH);
@@ -21416,7 +21443,7 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
+	    Object.defineProperty(ComboBoxBase.prototype, "itemH", {
 	        get: function () {
 	            return this._ih;
 	        },
@@ -21483,11 +21510,11 @@ var qtk =
 	        var y = p.y + this.h;
 	        var padding = 4;
 	        var scrollable = false;
-	        var itemHeight = this.itemHeight;
+	        var itemH = this.itemH;
 	        var options = this._options;
 	        var dialog = dialog_1.Dialog.create();
 	        var n = this._options.length || 1;
-	        var h = n * itemHeight + padding + padding;
+	        var h = n * itemH + padding + padding;
 	        var halfH = vp.h >> 1;
 	        if ((y + h) > vp.h) {
 	            if (h < halfH) {
@@ -21506,7 +21533,7 @@ var qtk =
 	        dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
 	        var listView = list_view_1.ListView.create();
 	        listView.padding = padding;
-	        listView.itemHeight = itemHeight;
+	        listView.itemH = itemH;
 	        listView.styleType = "combo-box-popup";
 	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
 	        listView.dragToScroll = scrollable;
@@ -21686,6 +21713,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var widget_1 = __webpack_require__(19);
 	var scroll_view_1 = __webpack_require__(98);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(81);
@@ -21697,22 +21725,22 @@ var qtk =
 	    }
 	    Object.defineProperty(ListView.prototype, "itemSpacing", {
 	        get: function () {
-	            return this._itemSpacing;
+	            return this._is;
 	        },
 	        set: function (value) {
-	            this._itemSpacing = value;
+	            this._is = value;
 	            var layouter = this._childrenLayouter;
 	            layouter.spacing = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(ListView.prototype, "itemHeight", {
+	    Object.defineProperty(ListView.prototype, "itemH", {
 	        get: function () {
-	            return this._itemHeight;
+	            return this._ih;
 	        },
 	        set: function (value) {
-	            this._itemHeight = value;
+	            this._ih = value;
 	            var layouter = this._childrenLayouter;
 	            layouter.h = value;
 	        },
@@ -21741,15 +21769,15 @@ var qtk =
 	    };
 	    Object.defineProperty(ListView.prototype, "desireHeight", {
 	        get: function () {
-	            var itemHeight = this.itemHeight;
+	            var itemH = this.itemH;
 	            var h = this.topPadding + this.bottomPadding;
 	            this.children.forEach(function (child) {
 	                var param = child.layoutParam;
 	                if (param) {
-	                    h += param.h || itemHeight;
+	                    h += param.h || itemH;
 	                }
 	                else {
-	                    h += child.h || itemHeight;
+	                    h += child.h || itemH;
 	                }
 	            });
 	            return h;
@@ -21760,19 +21788,21 @@ var qtk =
 	    ListView.prototype.relayoutChildren = function () {
 	        var r = _super.prototype.relayoutChildren.call(this);
 	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
+	        this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
 	        return r;
 	    };
 	    ListView.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this._itemSpacing = 0;
-	        this._itemHeight = 30;
 	        this.scrollerOptions.scrollingX = false;
-	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
+	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemH, spacing: 0 });
+	    };
+	    ListView.prototype.getDefProps = function () {
+	        return ListView.defProps;
 	    };
 	    ListView.create = function (options) {
 	        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
 	    };
+	    ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
 	    ListView.TYPE = "list-view";
 	    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
 	    return ListView;
@@ -22271,7 +22301,7 @@ var qtk =
 	        this.ensureOptions();
 	        var r = _super.prototype.relayoutChildren.call(this);
 	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = r.h + this.topPadding + this.bottomPadding;
+	        this.contentH = r.h + this.topPadding + this.bottomPadding;
 	        return r;
 	    };
 	    GridView.prototype.ensureOptions = function () {
@@ -22842,7 +22872,7 @@ var qtk =
 	                w = desireWidth;
 	            }
 	        });
-	        return Math.max(this.w, w + this.itemHeight * 2);
+	        return Math.max(this.w, w + this.itemH * 2);
 	    };
 	    TreeView.prototype.resetChilren = function () {
 	        this.children.forEach(function (child) {
@@ -23761,12 +23791,12 @@ var qtk =
 	    Menu.prototype.hasItems = function () {
 	        return this._listView.children.length > 0;
 	    };
-	    Object.defineProperty(Menu.prototype, "itemHeight", {
+	    Object.defineProperty(Menu.prototype, "itemH", {
 	        get: function () {
-	            return this._listView.itemHeight;
+	            return this._listView.itemH;
 	        },
 	        set: function (value) {
-	            this._listView.itemHeight = value;
+	            this._listView.itemH = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -23891,7 +23921,7 @@ var qtk =
 	            listView.app = this.app;
 	        }
 	        var item = MenuItem.create();
-	        var h = text === "-" ? this.itemHeight >> 1 : this.itemHeight;
+	        var h = text === "-" ? this.itemH >> 1 : this.itemH;
 	        item.set({ iconURL: iconURL, text: text, shortcut: shortcut, onInitSubMenu: onInitSubMenu });
 	        item.layoutParam = list_layouter_1.ListLayouterParam.create({ h: h });
 	        listView.addChild(item);
@@ -23907,7 +23937,7 @@ var qtk =
 	        this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
 	        var listView = list_view_1.ListView.create();
 	        listView.padding = 0;
-	        listView.itemHeight = 25;
+	        listView.itemH = 25;
 	        listView.styleType = "menu";
 	        listView.dragToScroll = false;
 	        listView.slideToScroll = false;
@@ -24818,12 +24848,12 @@ var qtk =
 	    function Accordion() {
 	        _super.call(this, Accordion.TYPE);
 	    }
-	    Object.defineProperty(Accordion.prototype, "titleHeight", {
+	    Object.defineProperty(Accordion.prototype, "titleH", {
 	        get: function () {
 	            return this._titleHeight;
 	        },
 	        /**
-	         * titleHeight 标题控件的高度。
+	         * titleH 标题控件的高度。
 	         */
 	        set: function (value) {
 	            this._titleHeight = value;
@@ -24834,7 +24864,7 @@ var qtk =
 	    /**
 	     * 增加一个页面。
 	     * @param title 标题文本。
-	     * @param contentHeight 内容控件。
+	     * @param contentH 内容控件。
 	     * @returns 返回新增加的TitleContent。
 	     */
 	    Accordion.prototype.addPage = function (title, contentWidget) {
@@ -24844,7 +24874,7 @@ var qtk =
 	            collapsed: true,
 	            titleWidget: titleWidget,
 	            contentWidget: contentWidget,
-	            titleHeight: this.titleHeight
+	            titleH: this.titleH
 	        });
 	        titleWidget.onClickTrigger = function (collapsed) {
 	            me.setActivePage(titleContent, collapsed, 300);
@@ -24884,11 +24914,11 @@ var qtk =
 	        var y = this.topPadding;
 	        var w = this.clientW;
 	        var n = this.children.length;
-	        var titleHeight = this.titleHeight;
-	        var contentHeight = this.clientH - n * this.titleHeight;
+	        var titleH = this.titleH;
+	        var contentH = this.clientH - n * this.titleH;
 	        this.children.forEach(function (child) {
-	            child.titleHeight = titleHeight;
-	            child.contentHeight = contentHeight;
+	            child.titleH = titleH;
+	            child.contentH = contentH;
 	            child.moveResizeTo(x, y, w, child.h, 0);
 	            child.relayoutChildren();
 	            y += child.h;
@@ -24933,7 +24963,7 @@ var qtk =
 	    function TitleContent() {
 	        _super.call(this, TitleContent.TYPE);
 	    }
-	    Object.defineProperty(TitleContent.prototype, "titleHeight", {
+	    Object.defineProperty(TitleContent.prototype, "titleH", {
 	        get: function () {
 	            return this._th;
 	        },
@@ -24943,7 +24973,7 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(TitleContent.prototype, "contentHeight", {
+	    Object.defineProperty(TitleContent.prototype, "contentH", {
 	        get: function () {
 	            return this._ch;
 	        },
@@ -24974,8 +25004,8 @@ var qtk =
 	        var value = !this._collapsed;
 	        if (this._inited) {
 	            if (duration > 0) {
-	                var minH = this.topPadding + this.bottomPadding + this.titleHeight;
-	                var maxH = minH + this.contentHeight;
+	                var minH = this.topPadding + this.bottomPadding + this.titleH;
+	                var maxH = minH + this.contentH;
 	                var h = value ? minH : maxH;
 	                this._collapsed = false;
 	                this.relayoutChildren();
@@ -25040,8 +25070,8 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
-	                if (!this.titleHeight) {
-	                    this.titleHeight = value.h;
+	                if (!this.titleH) {
+	                    this.titleH = value.h;
 	                }
 	            }
 	            this._titleWidget = value;
@@ -25062,8 +25092,8 @@ var qtk =
 	            }
 	            if (value) {
 	                this.addChild(value);
-	                if (!this.contentHeight) {
-	                    this.contentHeight = value.h;
+	                if (!this.contentH) {
+	                    this.contentH = value.h;
 	                }
 	            }
 	            this._contentWidget = value;
@@ -25087,23 +25117,23 @@ var qtk =
 	        }
 	    };
 	    TitleContent.prototype.reComputeH = function () {
-	        var contentHeight = (!this._collapsed ? this.contentHeight : 0);
-	        this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+	        var contentH = (!this._collapsed ? this.contentH : 0);
+	        this.h = contentH + this.titleH + this.topPadding + this.bottomPadding;
 	    };
 	    TitleContent.prototype.relayoutChildren = function () {
 	        this.requestRedraw();
 	        if (this._animating) {
 	            return this.getLayoutRect();
 	        }
-	        if (this.contentHeight < 1) {
-	            this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+	        if (this.contentH < 1) {
+	            this.contentH = this.h - this.topPadding - this.bottomPadding - this.titleH;
 	        }
 	        this.reComputeH();
 	        var r = this.getLayoutRect();
 	        var titleWidget = this._titleWidget;
 	        var contentWidget = this._contentWidget;
 	        if (titleWidget) {
-	            titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleHeight);
+	            titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleH);
 	            titleWidget.relayoutChildren();
 	        }
 	        if (contentWidget) {
@@ -25111,9 +25141,9 @@ var qtk =
 	                contentWidget.visible = false;
 	            }
 	            else {
-	                var y = r.y + this.titleHeight;
+	                var y = r.y + this.titleH;
 	                contentWidget.visible = true;
-	                contentWidget.moveResizeTo(r.x, y, r.w, this.contentHeight);
+	                contentWidget.moveResizeTo(r.x, y, r.w, this.contentH);
 	                contentWidget.relayoutChildren();
 	            }
 	        }
@@ -25726,14 +25756,14 @@ var qtk =
 	    function TitleComboBoxBase(type) {
 	        _super.call(this, type);
 	    }
-	    Object.defineProperty(TitleComboBoxBase.prototype, "itemHeight", {
+	    Object.defineProperty(TitleComboBoxBase.prototype, "itemH", {
 	        get: function () {
 	            var comboBox = this._valueWidget;
-	            return comboBox.itemHeight;
+	            return comboBox.itemH;
 	        },
 	        set: function (value) {
 	            var comboBox = this._valueWidget;
-	            comboBox.itemHeight = value;
+	            comboBox.itemH = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -25972,12 +26002,12 @@ var qtk =
 	    function PropertySheets() {
 	        _super.call(this, PropertySheets.TYPE);
 	    }
-	    Object.defineProperty(PropertySheets.prototype, "titleHeight", {
+	    Object.defineProperty(PropertySheets.prototype, "titleH", {
 	        get: function () {
 	            return this._titleHeight;
 	        },
 	        /**
-	         * titleHeight 标题控件的高度。
+	         * titleH 标题控件的高度。
 	         */
 	        set: function (value) {
 	            this._titleHeight = value;
@@ -25998,7 +26028,7 @@ var qtk =
 	    /**
 	     * 增加一个页面。
 	     * @param title 标题文本。
-	     * @param contentHeight 内容控件。
+	     * @param contentH 内容控件。
 	     * @returns 返回新增加的TitleContent。
 	     */
 	    PropertySheets.prototype.addPage = function (title, contentWidget) {
@@ -26008,7 +26038,7 @@ var qtk =
 	            collapsed: true,
 	            titleWidget: titleWidget,
 	            contentWidget: contentWidget,
-	            titleHeight: this.titleHeight
+	            titleH: this.titleH
 	        });
 	        titleWidget.onClickTrigger = function (collapsed) {
 	            titleContent.collapsed = !titleContent.collapsed;
@@ -26027,7 +26057,7 @@ var qtk =
 	        return h;
 	    };
 	    PropertySheets.prototype.relayoutChildren = function () {
-	        this.contentHeight = this.computeDesireContentHeight();
+	        this.contentH = this.computeDesireContentHeight();
 	        var r = this.getLayoutRect();
 	        var w = r.w;
 	        var x = r.x;
@@ -26038,7 +26068,7 @@ var qtk =
 	            y += child.h;
 	        });
 	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-	        this.contentHeight = y + this.bottomPadding + 10;
+	        this.contentH = y + this.bottomPadding + 10;
 	        return r;
 	    };
 	    PropertySheets.prototype.onReset = function () {
@@ -26507,12 +26537,12 @@ var qtk =
 	        messageBox.open();
 	    };
 	    MessageBox.showChoice = function (title, data, multiple, onDone, w, h) {
-	        var itemHeight = 30;
+	        var itemH = 30;
 	        var app = application_1.Application.get();
 	        var vp = app.getViewPort();
-	        var contentHeight = Math.min(8, data.length) * itemHeight;
+	        var contentH = Math.min(8, data.length) * itemH;
 	        var rw = Math.min(vp.w, w || 0) || 300;
-	        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
+	        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentH + 30;
 	        var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
 	        var buttonsOption = new ButtonsOptions();
 	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
@@ -26520,7 +26550,7 @@ var qtk =
 	        var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
 	        messageBox.createChildren(titleOptions, buttonsOption, null);
 	        var group = messageBox.content;
-	        var listView = list_view_1.ListView.create({ itemHeight: itemHeight, dragToScroll: true });
+	        var listView = list_view_1.ListView.create({ itemH: itemH, dragToScroll: true });
 	        group.padding = 5;
 	        group.topPadding = 5;
 	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();

@@ -152,7 +152,7 @@ var Edit = (function (_super) {
     Edit.create = function (options) {
         return Edit.r.create().reset(Edit.TYPE, options);
     };
-    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _it: null, _itp: null });
+    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
     Edit.TYPE = "edit";
     Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
     return Edit;

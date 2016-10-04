@@ -71,6 +71,7 @@ export declare class Edit extends Label {
         _rp: number;
         _bp: number;
     } & {
+        _mlm: boolean;
         _it: any;
         _itp: any;
     };

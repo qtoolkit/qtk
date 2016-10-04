@@ -119,7 +119,7 @@ export class TreeView extends ListView {
 			}
 		});
 
-		return Math.max(this.w, w + this.itemHeight * 2);
+		return Math.max(this.w, w + this.itemH * 2);
 	}
 	
 	private resetChilren() : Widget{

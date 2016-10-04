@@ -16,7 +16,7 @@ var TitleContent = (function (_super) {
     function TitleContent() {
         _super.call(this, TitleContent.TYPE);
     }
-    Object.defineProperty(TitleContent.prototype, "titleHeight", {
+    Object.defineProperty(TitleContent.prototype, "titleH", {
         get: function () {
             return this._th;
         },
@@ -26,7 +26,7 @@ var TitleContent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TitleContent.prototype, "contentHeight", {
+    Object.defineProperty(TitleContent.prototype, "contentH", {
         get: function () {
             return this._ch;
         },
@@ -57,8 +57,8 @@ var TitleContent = (function (_super) {
         var value = !this._collapsed;
         if (this._inited) {
             if (duration > 0) {
-                var minH = this.topPadding + this.bottomPadding + this.titleHeight;
-                var maxH = minH + this.contentHeight;
+                var minH = this.topPadding + this.bottomPadding + this.titleH;
+                var maxH = minH + this.contentH;
                 var h = value ? minH : maxH;
                 this._collapsed = false;
                 this.relayoutChildren();
@@ -123,8 +123,8 @@ var TitleContent = (function (_super) {
             }
             if (value) {
                 this.addChild(value);
-                if (!this.titleHeight) {
-                    this.titleHeight = value.h;
+                if (!this.titleH) {
+                    this.titleH = value.h;
                 }
             }
             this._titleWidget = value;
@@ -145,8 +145,8 @@ var TitleContent = (function (_super) {
             }
             if (value) {
                 this.addChild(value);
-                if (!this.contentHeight) {
-                    this.contentHeight = value.h;
+                if (!this.contentH) {
+                    this.contentH = value.h;
                 }
             }
             this._contentWidget = value;
@@ -170,23 +170,23 @@ var TitleContent = (function (_super) {
         }
     };
     TitleContent.prototype.reComputeH = function () {
-        var contentHeight = (!this._collapsed ? this.contentHeight : 0);
-        this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+        var contentH = (!this._collapsed ? this.contentH : 0);
+        this.h = contentH + this.titleH + this.topPadding + this.bottomPadding;
     };
     TitleContent.prototype.relayoutChildren = function () {
         this.requestRedraw();
         if (this._animating) {
             return this.getLayoutRect();
         }
-        if (this.contentHeight < 1) {
-            this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+        if (this.contentH < 1) {
+            this.contentH = this.h - this.topPadding - this.bottomPadding - this.titleH;
         }
         this.reComputeH();
         var r = this.getLayoutRect();
         var titleWidget = this._titleWidget;
         var contentWidget = this._contentWidget;
         if (titleWidget) {
-            titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleHeight);
+            titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleH);
             titleWidget.relayoutChildren();
         }
         if (contentWidget) {
@@ -194,9 +194,9 @@ var TitleContent = (function (_super) {
                 contentWidget.visible = false;
             }
             else {
-                var y = r.y + this.titleHeight;
+                var y = r.y + this.titleH;
                 contentWidget.visible = true;
-                contentWidget.moveResizeTo(r.x, y, r.w, this.contentHeight);
+                contentWidget.moveResizeTo(r.x, y, r.w, this.contentH);
                 contentWidget.relayoutChildren();
             }
         }

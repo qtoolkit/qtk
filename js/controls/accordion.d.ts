@@ -7,13 +7,13 @@ import { TitleContent } from "./title-content";
 export declare class Accordion extends Widget {
     protected _titleHeight: number;
     /**
-     * titleHeight 标题控件的高度。
+     * titleH 标题控件的高度。
      */
-    titleHeight: number;
+    titleH: number;
     /**
      * 增加一个页面。
      * @param title 标题文本。
-     * @param contentHeight 内容控件。
+     * @param contentH 内容控件。
      * @returns 返回新增加的TitleContent。
      */
     addPage(title: string, contentWidget: Widget): TitleContent;

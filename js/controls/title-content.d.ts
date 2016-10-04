@@ -9,15 +9,15 @@ export declare class TitleContent extends Widget {
     protected _titleWidget: Widget;
     protected _contentWidget: Widget;
     /**
-     * titleHeight 标题控件的高度。
+     * titleH 标题控件的高度。
      */
     protected _th: number;
-    titleHeight: number;
+    titleH: number;
     /**
-     * titleHeight 内容控件的高度。
+     * titleH 内容控件的高度。
      */
     protected _ch: number;
-    contentHeight: number;
+    contentH: number;
     /**
      * movable 决定是否能通过拖动标题控件来拖动整个TitleContent控件。
      */

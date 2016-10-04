@@ -357,12 +357,16 @@ export declare class Widget extends Emitter {
      * 设置数据绑定规则。
      */
     setDataBindingRule(dataBindingRule: any): Widget;
+    /**
+     * 绑定数据。
+     */
     bindData(viewModal: IViewModal): Widget;
     protected bindChildren(viewModal: IViewModal): void;
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
     protected convertValue(viewModal: IViewModal, dataSource: any, value: any): any;
     protected convertBackValue(viewModal: IViewModal, dataSource: any, value: any): any;
     protected getPropDefaultBindMode(prop: string): BindingMode;
+    protected onInvalidInput(message: string): void;
     protected isValidValue(viewModal: IViewModal, dataSource: any, value: any): boolean;
     protected watchTargetValueChange(dataSource: any): void;
     protected watchTargetChange(dataBindingRule: any): void;

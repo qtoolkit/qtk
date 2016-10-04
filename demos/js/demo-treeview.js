@@ -28,9 +28,9 @@ function createTreeView1(win) {
 	var treeView = qtk.TreeView.create();
 	treeView.dragToScroll = true;
 	treeView.slideToScroll = true;
-	treeView.itemHeight = 30;
+	treeView.itemH = 30;
 	treeView.layoutParam = qtk.SimpleLayouterParam.create({x:"5%", y:"5%", w:"45%", h:"45%"});
-	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentHeight:2000});	
+	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentH:2000});	
 	win.addChild(treeView);
 	
 	treeView.loadData(data);
@@ -40,9 +40,9 @@ function createTreeView2(win) {
 	var treeView = qtk.TreeView.create();
 	treeView.dragToScroll = true;
 
-	treeView.itemHeight = 30;
+	treeView.itemH = 30;
 	treeView.layoutParam = qtk.SimpleLayouterParam.create({x:"52%", y:"5%", w:"45%", h:"45%"});
-	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentHeight:2000});	
+	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentH:2000});	
 	win.addChild(treeView);
 	var item = treeView.addItem(null, "item1");
 	treeView.addItem(item, "item11");

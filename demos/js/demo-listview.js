@@ -4,7 +4,7 @@ function onReady(app) {
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
-	var listView = qtk.ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
+	var listView = qtk.ListView.create({dragToScroll:true, slideToScroll:true, itemH:40});
 	listView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(listView);
 	

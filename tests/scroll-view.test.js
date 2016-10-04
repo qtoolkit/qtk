@@ -7,7 +7,7 @@ describe('ScrollView', function() {
     	var scrollView = qtk.ScrollView.create();
 		var attrs = {
 			contentWidth:600,
-			contentHeight:800,
+			contentH:800,
 			w:300,
 			h:300,
 			dragToScroll:true, 
@@ -50,7 +50,7 @@ describe('ScrollView', function() {
 			x:0, 
 			y:0,
 			contentWidth:600,
-			contentHeight:600,
+			contentH:600,
 			w:300,
 			h:300,
 			dragToScroll:true 
@@ -73,7 +73,7 @@ describe('ScrollView', function() {
 			x:0, 
 			y:0,
 			contentWidth:600,
-			contentHeight:600,
+			contentH:600,
 			w:300,
 			h:300,
 			dragToScroll:true 

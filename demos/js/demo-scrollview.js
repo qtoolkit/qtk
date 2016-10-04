@@ -7,7 +7,7 @@ function onReady(app) {
 	var scrollView = qtk.ScrollView.create({dragToScroll:true, slideToScroll:true});
 
 	scrollView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
-	scrollView.set({name:"scrollView", contentWidth:500, contentHeight:2000});	
+	scrollView.set({name:"scrollView", contentWidth:500, contentH:2000});	
 	win.addChild(scrollView);
 
 	var button = qtk.Button.create({x:10, y:10, w:400, h:60, text:"Scroll to end"});

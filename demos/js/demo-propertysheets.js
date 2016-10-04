@@ -20,7 +20,7 @@ function onReady(app) {
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
-	var propertySheets = qtk.PropertySheets.create({padding:1, titleHeight:30});
+	var propertySheets = qtk.PropertySheets.create({padding:1, titleH:30});
 	propertySheets.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(propertySheets);
 

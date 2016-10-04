@@ -20,7 +20,7 @@ function createGridView(win, x, y, w, h, cols, colWidth, rows, rowHeight, n) {
 	gridView.layoutParam = qtk.SimpleLayouterParam.create({x:x, y:y, w:w, h:h});
 	gridView.set({cols:cols, rows:rows, colWidth:colWidth, rowHeight:rowHeight});
 	gridView.set({leftPadding:2, rightPadding:0, topPadding:2, bottomPadding:2});
-	gridView.set({name:"gridView", contentWidth:500, contentHeight:2000, dragToScroll:true, slideToScroll:true});
+	gridView.set({name:"gridView", contentWidth:500, contentH:2000, dragToScroll:true, slideToScroll:true});
 	win.addChild(gridView);
 
 	for(var i = 0; i < n; i++) {

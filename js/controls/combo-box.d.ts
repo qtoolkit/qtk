@@ -32,7 +32,7 @@ export declare abstract class ComboBoxBase extends Widget {
     protected _isPopupOpened: boolean;
     protected _options: Array<ComboBoxOption>;
     readonly inputable: boolean;
-    itemHeight: number;
+    itemH: number;
     value: any;
     resetOptions(): Widget;
     readonly optionsCount: number;

@@ -36,11 +36,11 @@ export class Menu extends Dialog {
 		return this._listView.children.length > 0;
 	}
 
-	public set itemHeight(value:number) {
-		this._listView.itemHeight = value;
+	public set itemH(value:number) {
+		this._listView.itemH = value;
 	}
-	public get itemHeight() : number {
-		return this._listView.itemHeight;
+	public get itemH() : number {
+		return this._listView.itemH;
 	}
 
 	/**
@@ -179,7 +179,7 @@ export class Menu extends Dialog {
 		}
 
 		var item = MenuItem.create();
-		var h = text === "-" ? this.itemHeight >> 1 : this.itemHeight;
+		var h = text === "-" ? this.itemH >> 1 : this.itemH;
 
 		item.set({iconURL:iconURL, text:text, shortcut:shortcut, onInitSubMenu:onInitSubMenu});
 		item.layoutParam = ListLayouterParam.create({h:h});
@@ -200,7 +200,7 @@ export class Menu extends Dialog {
 		
 		var listView = <ListView>ListView.create();
 		listView.padding = 0;
-		listView.itemHeight = 25;
+		listView.itemH = 25;
 		listView.styleType = "menu";
 		listView.dragToScroll = false;
 		listView.slideToScroll = false;

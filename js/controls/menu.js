@@ -40,12 +40,12 @@ var Menu = (function (_super) {
     Menu.prototype.hasItems = function () {
         return this._listView.children.length > 0;
     };
-    Object.defineProperty(Menu.prototype, "itemHeight", {
+    Object.defineProperty(Menu.prototype, "itemH", {
         get: function () {
-            return this._listView.itemHeight;
+            return this._listView.itemH;
         },
         set: function (value) {
-            this._listView.itemHeight = value;
+            this._listView.itemH = value;
         },
         enumerable: true,
         configurable: true
@@ -170,7 +170,7 @@ var Menu = (function (_super) {
             listView.app = this.app;
         }
         var item = MenuItem.create();
-        var h = text === "-" ? this.itemHeight >> 1 : this.itemHeight;
+        var h = text === "-" ? this.itemH >> 1 : this.itemH;
         item.set({ iconURL: iconURL, text: text, shortcut: shortcut, onInitSubMenu: onInitSubMenu });
         item.layoutParam = list_layouter_1.ListLayouterParam.create({ h: h });
         listView.addChild(item);
@@ -186,7 +186,7 @@ var Menu = (function (_super) {
         this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
         var listView = list_view_1.ListView.create();
         listView.padding = 0;
-        listView.itemHeight = 25;
+        listView.itemH = 25;
         listView.styleType = "menu";
         listView.dragToScroll = false;
         listView.slideToScroll = false;

@@ -31,12 +31,11 @@ function onReady(app) {
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
 	var listView = qtk.ListView.create({dragToScroll:true, slideToScroll:true, 
-		itemHeight:40, 
-		templateItem:createTemplateItem(),
+		itemH : 40, 
+		templateItem: createTemplateItem(),
 		layoutParam : qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"})
 	});
 
-	listView.setDataBindingRule({$items : {}});
 	win.addChild(listView);
 
 	var viewModal = qtk.CollectionViewModal.create(genData());

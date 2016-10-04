@@ -13,14 +13,14 @@ var TitleComboBoxBase = (function (_super) {
     function TitleComboBoxBase(type) {
         _super.call(this, type);
     }
-    Object.defineProperty(TitleComboBoxBase.prototype, "itemHeight", {
+    Object.defineProperty(TitleComboBoxBase.prototype, "itemH", {
         get: function () {
             var comboBox = this._valueWidget;
-            return comboBox.itemHeight;
+            return comboBox.itemH;
         },
         set: function (value) {
             var comboBox = this._valueWidget;
-            comboBox.itemHeight = value;
+            comboBox.itemH = value;
         },
         enumerable: true,
         configurable: true

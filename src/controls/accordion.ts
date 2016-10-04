@@ -13,19 +13,19 @@ export class Accordion extends Widget {
 	protected _titleHeight : number;
 
 	/**
-	 * titleHeight 标题控件的高度。
+	 * titleH 标题控件的高度。
 	 */
-	public set titleHeight(value:number) {
+	public set titleH(value:number) {
 		this._titleHeight = value;
 	}
-	public get titleHeight() : number {
+	public get titleH() : number {
 		return this._titleHeight;
 	}
 	
 	/**
 	 * 增加一个页面。
 	 * @param title 标题文本。
-	 * @param contentHeight 内容控件。
+	 * @param contentH 内容控件。
 	 * @returns 返回新增加的TitleContent。
 	 */
 	public addPage(title:string, contentWidget:Widget) : TitleContent {
@@ -36,7 +36,7 @@ export class Accordion extends Widget {
 			collapsed : true,
 			titleWidget : titleWidget,
 			contentWidget : contentWidget,
-			titleHeight : this.titleHeight
+			titleH : this.titleH
 		});	
 
 		titleWidget.onClickTrigger = function(collapsed) {
@@ -83,12 +83,12 @@ export class Accordion extends Widget {
 		var y = this.topPadding;
 		var w = this.clientW;
 		var n = this.children.length;
-		var titleHeight = this.titleHeight;
-		var contentHeight = this.clientH - n * this.titleHeight;
+		var titleH = this.titleH;
+		var contentH = this.clientH - n * this.titleH;
 
 		this.children.forEach((child:TitleContent) => {
-			child.titleHeight = titleHeight;
-			child.contentHeight = contentHeight;
+			child.titleH = titleH;
+			child.contentH = contentH;
 			child.moveResizeTo(x, y, w, child.h, 0); 
 			child.relayoutChildren();
 			y += child.h;

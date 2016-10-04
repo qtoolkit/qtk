@@ -371,12 +371,12 @@ export class MessageBox extends Dialog {
 	
 	public static showChoice(title:string, data:Array<any>, multiple:boolean, 
 							 onDone:Function, w?:number, h?:number) {
-		var itemHeight = 30;
+		var itemH = 30;
 		var app = Application.get();
 		var vp = app.getViewPort();
-		var contentHeight = Math.min(8, data.length) * itemHeight;
+		var contentH = Math.min(8, data.length) * itemH;
 		var rw = Math.min(vp.w, w || 0) || 300;
-		var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
+		var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentH + 30;
 
 		var messageBox = MessageBox.create({app:app, w:rw, h:rh});
 
@@ -388,7 +388,7 @@ export class MessageBox extends Dialog {
 		messageBox.createChildren(titleOptions, buttonsOption, null);
 		
 		var group = messageBox.content;
-		var listView = ListView.create({itemHeight:itemHeight, dragToScroll:true});
+		var listView = ListView.create({itemH:itemH, dragToScroll:true});
 		group.padding = 5;
 		group.topPadding = 5;
 		group.childrenLayouter = SimpleLayouter.create();

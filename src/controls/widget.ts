@@ -1815,6 +1815,9 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	/**
+	 * 绑定数据。
+	 */
 	public bindData(viewModal:IViewModal) : Widget {
 		var dataBindingRule = this._dataBindingRule;
 		
@@ -1871,7 +1874,9 @@ export class Widget extends Emitter {
 		}
 	}
 
-	
+	/*
+	 * 把数据显示到界面上。
+	 */
 	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
 		for(var prop in dataBindingRule) {
 			var dataSource = dataBindingRule[prop];
@@ -1887,6 +1892,9 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/*
+	 * 根据转换函数，把数据转换成适合在界面上显示的格式。
+	 */
 	protected convertValue(viewModal:IViewModal, dataSource:any, value:any) : any {
 		var v = value;
 		if(dataSource.converters) {
@@ -1901,6 +1909,9 @@ export class Widget extends Emitter {
 		return v;
 	}
 
+	/*
+	 * 根据转换函数，把数据转换成适合存储的格式。
+	 */
 	protected convertBackValue(viewModal:IViewModal, dataSource:any, value:any) : any {
 		var v = value;
 		if(dataSource.converters) {
@@ -1919,13 +1930,23 @@ export class Widget extends Emitter {
 		return (prop === "value" && this.inputable) ? BindingMode.TWO_WAY : BindingMode.ONE_WAY;
 	}
 
+	/*
+	 * 子控件重载此函数向用户提示数据无效。
+	 */
+	protected onInvalidInput(message:string) {
+		console.log("invalid value:" + message);
+	}
+
+	/*
+	 * 通过ValidationRule检查数据是否有效。 
+	 */
 	protected isValidValue(viewModal:IViewModal, dataSource:any, value:any) : boolean {
 		if(dataSource.validationRule) {
 			var validationRule = viewModal.getValidationRule(dataSource.validationRule);
 			if(validationRule) {
 				var result = validationRule.validate(value);
 				if(result.code) {
-					console.log("invalid value:" + result.message);
+					this.onInvalidInput(result.message);
 					return false;
 				}
 			}
@@ -1934,6 +1955,9 @@ export class Widget extends Emitter {
 		return true;
 	}
 
+	/*
+	 * 监控控件单个属性的变化。
+	 */
 	protected watchTargetValueChange(dataSource:any) {
 		var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
@@ -1947,6 +1971,9 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/*
+	 * 监控控件属性的变化。
+	 */
 	protected watchTargetChange(dataBindingRule) {
 		for(var prop in dataBindingRule) {
 			var bindingMode = this.getPropDefaultBindMode(prop);

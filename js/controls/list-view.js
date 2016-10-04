@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var widget_1 = require("./widget");
 var scroll_view_1 = require("./scroll-view");
 var widget_factory_1 = require("./widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
@@ -15,22 +16,22 @@ var ListView = (function (_super) {
     }
     Object.defineProperty(ListView.prototype, "itemSpacing", {
         get: function () {
-            return this._itemSpacing;
+            return this._is;
         },
         set: function (value) {
-            this._itemSpacing = value;
+            this._is = value;
             var layouter = this._childrenLayouter;
             layouter.spacing = value;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListView.prototype, "itemHeight", {
+    Object.defineProperty(ListView.prototype, "itemH", {
         get: function () {
-            return this._itemHeight;
+            return this._ih;
         },
         set: function (value) {
-            this._itemHeight = value;
+            this._ih = value;
             var layouter = this._childrenLayouter;
             layouter.h = value;
         },
@@ -59,15 +60,15 @@ var ListView = (function (_super) {
     };
     Object.defineProperty(ListView.prototype, "desireHeight", {
         get: function () {
-            var itemHeight = this.itemHeight;
+            var itemH = this.itemH;
             var h = this.topPadding + this.bottomPadding;
             this.children.forEach(function (child) {
                 var param = child.layoutParam;
                 if (param) {
-                    h += param.h || itemHeight;
+                    h += param.h || itemH;
                 }
                 else {
-                    h += child.h || itemHeight;
+                    h += child.h || itemH;
                 }
             });
             return h;
@@ -78,19 +79,21 @@ var ListView = (function (_super) {
     ListView.prototype.relayoutChildren = function () {
         var r = _super.prototype.relayoutChildren.call(this);
         this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-        this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
+        this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
         return r;
     };
     ListView.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this._itemSpacing = 0;
-        this._itemHeight = 30;
         this.scrollerOptions.scrollingX = false;
-        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemHeight, spacing: 0 });
+        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemH, spacing: 0 });
+    };
+    ListView.prototype.getDefProps = function () {
+        return ListView.defProps;
     };
     ListView.create = function (options) {
         return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
     };
+    ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
     ListView.TYPE = "list-view";
     ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
     return ListView;

@@ -57,7 +57,7 @@ export declare class ScrollView extends Widget {
     /**
      * 滚动视图所包含内容的高度。
      */
-    contentHeight: number;
+    contentH: number;
     protected selfHitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
     protected offsetPointerEvent(evt: Events.PointerEvent): void;
     protected unOffsetPointerEvent(evt: Events.PointerEvent): void;
@@ -67,7 +67,7 @@ export declare class ScrollView extends Widget {
     protected dispatchPointerUp(evt: Events.PointerEvent): void;
     protected dispatchClick(evt: any): void;
     protected dispatchDblClick(evt: any): void;
-    protected updateScrollerDimensions(w: number, h: number, contentWidth: number, contentHeight: number): void;
+    protected updateScrollerDimensions(w: number, h: number, contentWidth: number, contentH: number): void;
     protected readonly scroller: Scroller;
     hideScrollBar(): void;
     protected handleScrolling(left: number, top: number): void;

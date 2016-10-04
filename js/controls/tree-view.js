@@ -118,7 +118,7 @@ var TreeView = (function (_super) {
                 w = desireWidth;
             }
         });
-        return Math.max(this.w, w + this.itemHeight * 2);
+        return Math.max(this.w, w + this.itemH * 2);
     };
     TreeView.prototype.resetChilren = function () {
         this.children.forEach(function (child) {

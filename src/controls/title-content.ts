@@ -17,24 +17,24 @@ export class TitleContent extends Widget {
 	protected _contentWidget : Widget;
 
 	/**
-	 * titleHeight 标题控件的高度。
+	 * titleH 标题控件的高度。
 	 */
 	protected _th : number;
-	public set titleHeight(value:number) {
+	public set titleH(value:number) {
 		this._th = value;
 	}
-	public get titleHeight() : number {
+	public get titleH() : number {
 		return this._th;
 	}
 	
 	/**
-	 * titleHeight 内容控件的高度。
+	 * titleH 内容控件的高度。
 	 */
 	protected _ch : number;
-	public set contentHeight(value:number) {
+	public set contentH(value:number) {
 		this._ch = value;
 	}
-	public get contentHeight() : number {
+	public get contentH() : number {
 		return this._ch;
 	}
 
@@ -59,8 +59,8 @@ export class TitleContent extends Widget {
 		var value = !this._collapsed;
 		if(this._inited) {
 			if(duration > 0) {
-				var minH = this.topPadding + this.bottomPadding + this.titleHeight;
-				var maxH = minH + this.contentHeight;
+				var minH = this.topPadding + this.bottomPadding + this.titleH;
+				var maxH = minH + this.contentH;
 				var h = value ? minH : maxH;
 				
 				this._collapsed = false;
@@ -123,8 +123,8 @@ export class TitleContent extends Widget {
 		}
 		if(value) {
 			this.addChild(value);
-			if(!this.titleHeight) {
-				this.titleHeight = value.h;
+			if(!this.titleH) {
+				this.titleH = value.h;
 			}
 		}
 		this._titleWidget = value;
@@ -142,8 +142,8 @@ export class TitleContent extends Widget {
 		}
 		if(value) {
 			this.addChild(value);
-			if(!this.contentHeight) {
-				this.contentHeight = value.h;
+			if(!this.contentH) {
+				this.contentH = value.h;
 			}
 		}
 		this._contentWidget = value;
@@ -169,8 +169,8 @@ export class TitleContent extends Widget {
 	}
 
 	protected reComputeH() {
-		var contentHeight = (!this._collapsed ? this.contentHeight : 0);
-		this.h = contentHeight + this.titleHeight + this.topPadding + this.bottomPadding;
+		var contentH = (!this._collapsed ? this.contentH : 0);
+		this.h = contentH + this.titleH + this.topPadding + this.bottomPadding;
 	}
 
 	public relayoutChildren() : Rect {
@@ -179,8 +179,8 @@ export class TitleContent extends Widget {
 			return this.getLayoutRect();
 		}
 
-		if(this.contentHeight < 1) {
-			this.contentHeight = this.h - this.topPadding - this.bottomPadding - this.titleHeight;
+		if(this.contentH < 1) {
+			this.contentH = this.h - this.topPadding - this.bottomPadding - this.titleH;
 		}
 
 		this.reComputeH();
@@ -189,7 +189,7 @@ export class TitleContent extends Widget {
 		var contentWidget = this._contentWidget;
 
 		if(titleWidget) {
-			titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleHeight);
+			titleWidget.moveResizeTo(r.x, r.y, r.w, this.titleH);
 			titleWidget.relayoutChildren();
 		}
 
@@ -197,9 +197,9 @@ export class TitleContent extends Widget {
 			if(this._collapsed) {
 				contentWidget.visible = false;
 			}else{
-				var y = r.y + this.titleHeight;
+				var y = r.y + this.titleH;
 				contentWidget.visible = true;
-				contentWidget.moveResizeTo(r.x, y, r.w, this.contentHeight);
+				contentWidget.moveResizeTo(r.x, y, r.w, this.contentH);
 				contentWidget.relayoutChildren();
 			}
 		}

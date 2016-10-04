@@ -17,7 +17,7 @@ function onReady(app) {
 		}));
 	win.addChild(label);
 	
-	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemHeight:40});
+	var listView = ListView.create({dragToScroll:true, slideToScroll:true, itemH:40});
 	listView.layoutParam = win.createChildLayoutParam({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(listView);
 

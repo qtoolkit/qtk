@@ -109,11 +109,11 @@ export abstract class ComboBoxBase extends Widget {
 		return true;
 	}
 
-	public get itemHeight() : number {
+	public get itemH() : number {
 		return this._ih;
 	}
 
-	public set itemHeight(value:number) {
+	public set itemH(value:number) {
 		this._ih = value;
 	}
 
@@ -176,11 +176,11 @@ export abstract class ComboBoxBase extends Widget {
 		var y = p.y+this.h;
 		var padding = 4;
 		var scrollable = false;	
-		var itemHeight = this.itemHeight;
+		var itemH = this.itemH;
 		var options = this._options;
 		var dialog = <Dialog>Dialog.create();
 		var n = this._options.length || 1;
-		var h = n * itemHeight + padding + padding;
+		var h = n * itemH + padding + padding;
 
 		var halfH = vp.h >> 1;
 		if((y + h) > vp.h) {
@@ -201,7 +201,7 @@ export abstract class ComboBoxBase extends Widget {
 		
 		var listView = <ListView>ListView.create();
 		listView.padding = padding;
-		listView.itemHeight = itemHeight;
+		listView.itemH = itemH;
 		listView.styleType = "combo-box-popup";
 		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
 		listView.dragToScroll = scrollable;

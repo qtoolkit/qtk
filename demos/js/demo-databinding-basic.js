@@ -27,7 +27,7 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
 	
-	var listView = ListView.create({dragToScroll:true, slideToScroll:false, itemHeight:40});
+	var listView = ListView.create({dragToScroll:true, slideToScroll:false, itemH:40});
 	listView.layoutParam = win.createChildLayoutParam({x:"center", w:"80%", h:"90%"});
 	win.addChild(listView);
 

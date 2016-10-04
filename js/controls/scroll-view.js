@@ -90,7 +90,7 @@ var ScrollView = (function (_super) {
                 return true;
             }
             default: {
-                return (this.h < this.contentHeight);
+                return (this.h < this.contentH);
             }
         }
     };
@@ -176,7 +176,7 @@ var ScrollView = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ScrollView.prototype, "contentHeight", {
+    Object.defineProperty(ScrollView.prototype, "contentH", {
         get: function () {
             return this._ch;
         },
@@ -355,9 +355,9 @@ var ScrollView = (function (_super) {
     /*
      * 更新Scroller的参数。
      */
-    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentHeight) {
+    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentH) {
         if (this._slideToScroll) {
-            this.scroller.setDimensions(w, h, contentWidth, contentHeight);
+            this.scroller.setDimensions(w, h, contentWidth, contentH);
         }
     };
     Object.defineProperty(ScrollView.prototype, "scroller", {
@@ -399,10 +399,10 @@ var ScrollView = (function (_super) {
             var prop = evt.prop;
             var value = evt.newValue;
             if (prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentHeight);
+                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentH);
             }
         });
-        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
+        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
     };
     /*
      * 绘制垂直滚动条。
@@ -418,9 +418,9 @@ var ScrollView = (function (_super) {
         var barColor = options.backGroundColor;
         var r = options.roundRadius;
         var draggerW = options.draggerSize;
-        var draggerH = Math.max(draggerW, Math.min(h, h * h / this.contentHeight));
+        var draggerH = Math.max(draggerW, Math.min(h, h * h / this.contentH));
         var draggerX = barX + ((barW - draggerW) >> 1);
-        var draggerY = Math.min(h - draggerH, (this.offsetY / this.contentHeight) * h);
+        var draggerY = Math.min(h - draggerH, (this.offsetY / this.contentH) * h);
         var draggerColor = options.foreGroundColor;
         if (hBarVisible) {
             draggerY = Math.min(draggerY, h - barW - draggerH);

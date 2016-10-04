@@ -12,7 +12,7 @@ export declare class Menu extends Dialog {
     protected _listView: ListView;
     openedMenu: Menu;
     hasItems(): boolean;
-    itemHeight: number;
+    itemH: number;
     /**
      * owner代表上级菜单或菜单条。
      */

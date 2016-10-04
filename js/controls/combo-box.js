@@ -104,7 +104,7 @@ var ComboBoxBase = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ComboBoxBase.prototype, "itemHeight", {
+    Object.defineProperty(ComboBoxBase.prototype, "itemH", {
         get: function () {
             return this._ih;
         },
@@ -171,11 +171,11 @@ var ComboBoxBase = (function (_super) {
         var y = p.y + this.h;
         var padding = 4;
         var scrollable = false;
-        var itemHeight = this.itemHeight;
+        var itemH = this.itemH;
         var options = this._options;
         var dialog = dialog_1.Dialog.create();
         var n = this._options.length || 1;
-        var h = n * itemHeight + padding + padding;
+        var h = n * itemH + padding + padding;
         var halfH = vp.h >> 1;
         if ((y + h) > vp.h) {
             if (h < halfH) {
@@ -194,7 +194,7 @@ var ComboBoxBase = (function (_super) {
         dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
         var listView = list_view_1.ListView.create();
         listView.padding = padding;
-        listView.itemHeight = itemHeight;
+        listView.itemH = itemH;
         listView.styleType = "combo-box-popup";
         listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
         listView.dragToScroll = scrollable;

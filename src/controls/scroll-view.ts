@@ -76,7 +76,7 @@ export class ScrollView extends Widget {
 				return true;
 			}
 			default: {
-				return (this.h < this.contentHeight);
+				return (this.h < this.contentH);
 			}
 		}
 	}
@@ -154,10 +154,10 @@ export class ScrollView extends Widget {
 	/**
 	 * 滚动视图所包含内容的高度。
 	 */
-	public set contentHeight(value:number) {
+	public set contentH(value:number) {
 		this.setProp("ch", value, true);
 	}
-	public get contentHeight() {
+	public get contentH() {
 		return this._ch;
 	}
 
@@ -338,9 +338,9 @@ export class ScrollView extends Widget {
 	/*
 	 * 更新Scroller的参数。
 	 */
-	protected updateScrollerDimensions(w:number, h:number, contentWidth:number, contentHeight:number){
+	protected updateScrollerDimensions(w:number, h:number, contentWidth:number, contentH:number){
 		if(this._slideToScroll) {
-			this.scroller.setDimensions(w, h, contentWidth, contentHeight);
+			this.scroller.setDimensions(w, h, contentWidth, contentH);
 		}
 	}
 
@@ -384,10 +384,10 @@ export class ScrollView extends Widget {
 			var prop = evt.prop;
 			var value = evt.newValue;
 			if(prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-				this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
+				this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
 			}
 		});
-		this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentHeight);
+		this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
 	}
 
 	/*
@@ -406,9 +406,9 @@ export class ScrollView extends Widget {
 
 		var r = options.roundRadius;	
 		var draggerW = options.draggerSize;
-		var draggerH = Math.max(draggerW, Math.min(h, h*h/this.contentHeight));
+		var draggerH = Math.max(draggerW, Math.min(h, h*h/this.contentH));
 		var draggerX = barX + ((barW - draggerW) >> 1);
-		var draggerY = Math.min(h-draggerH, (this.offsetY/this.contentHeight) * h);
+		var draggerY = Math.min(h-draggerH, (this.offsetY/this.contentH) * h);
 		var draggerColor = options.foreGroundColor;
 		if(hBarVisible) {
 			draggerY = Math.min(draggerY, h - barW - draggerH);

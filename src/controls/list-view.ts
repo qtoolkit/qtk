@@ -9,21 +9,21 @@ import {ListLayouter, ListLayouterParam} from "../layouters/list-layouter";
 
 export class ListView extends ScrollView {
 	public set itemSpacing(value:number) {
-		this._itemSpacing = value;
+		this._is = value;
 		var layouter = <ListLayouter>this._childrenLayouter;
 		layouter.spacing = value;
 	}
 	public get itemSpacing() : number {
-		return this._itemSpacing;
+		return this._is;
 	}
 	
-	public set itemHeight(value:number) {
-		this._itemHeight = value;
+	public set itemH(value:number) {
+		this._ih = value;
 		var layouter = <ListLayouter>this._childrenLayouter;
 		layouter.h = value;
 	}
-	public get itemHeight() : number {
-		return this._itemHeight;
+	public get itemH() : number {
+		return this._ih;
 	}
 
 	public get childrenLayouter() : Layouter{
@@ -47,14 +47,14 @@ export class ListView extends ScrollView {
 	}
 
 	public get desireHeight() : number {
-		var itemHeight = this.itemHeight;
+		var itemH = this.itemH;
 		var h = this.topPadding + this.bottomPadding;
 		this.children.forEach(child => {
 			var param = <ListLayouterParam>child.layoutParam;
 			if(param) {
-				h += param.h || itemHeight; 
+				h += param.h || itemH; 
 			}else{
-				h += child.h || itemHeight; 
+				h += child.h || itemH; 
 			}
 
 		});
@@ -65,13 +65,13 @@ export class ListView extends ScrollView {
 	public relayoutChildren() : Rect {
 		var r = super.relayoutChildren();
 		this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-		this.contentHeight = r.h + this.topPadding + this.bottomPadding + 10;
+		this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
 
 		return r;
 	}
 	
-	protected _itemHeight : number;
-	protected _itemSpacing : number;
+	protected _ih : number;
+	protected _is : number;
 
 	constructor() {
 		super(ListView.TYPE);
@@ -79,12 +79,15 @@ export class ListView extends ScrollView {
 
 	protected onReset() {
 		super.onReset();
-
-		this._itemSpacing = 0;
-		this._itemHeight = 30;
 		this.scrollerOptions.scrollingX = false;
-		this._childrenLayouter = ListLayouter.create({height:this.itemHeight, spacing:0});
+		this._childrenLayouter = ListLayouter.create({height:this.itemH, spacing:0});
 	}
+	
+	protected static defProps = Object.assign({}, Widget.defProps, {_ih:30, _is:0});
+	protected getDefProps() : any {
+		return ListView.defProps;
+	}
+
 
 	public static TYPE = "list-view";
 	private static recycleBinListView = new RecyclableCreator<ListView>(function() {return new ListView()});

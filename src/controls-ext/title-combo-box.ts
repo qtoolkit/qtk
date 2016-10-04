@@ -9,16 +9,16 @@ export class TitleComboBoxBase extends TitleValue {
 		super(type);
 	}
 
-	public get itemHeight() : number {
+	public get itemH() : number {
 		var comboBox = <ComboBox>this._valueWidget;
 
-		return comboBox.itemHeight;
+		return comboBox.itemH;
 	}
 
-	public set itemHeight(value:number) {
+	public set itemH(value:number) {
 		var comboBox = <ComboBox>this._valueWidget;
 
-		comboBox.itemHeight = value;
+		comboBox.itemH = value;
 	}
 
 	public resetOptions() : Widget {

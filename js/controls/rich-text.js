@@ -78,7 +78,7 @@ var RichText = (function (_super) {
         }
         var r = doc.frame.bounds();
         this.contentWidth = r.w;
-        this.contentHeight = r.h;
+        this.contentH = r.h;
     };
     RichText.prototype.onInit = function () {
         this.dragToScroll = true;

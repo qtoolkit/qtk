@@ -315,12 +315,12 @@ var MessageBox = (function (_super) {
         messageBox.open();
     };
     MessageBox.showChoice = function (title, data, multiple, onDone, w, h) {
-        var itemHeight = 30;
+        var itemH = 30;
         var app = application_1.Application.get();
         var vp = app.getViewPort();
-        var contentHeight = Math.min(8, data.length) * itemHeight;
+        var contentH = Math.min(8, data.length) * itemH;
         var rw = Math.min(vp.w, w || 0) || 300;
-        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentHeight + 30;
+        var rh = Math.min(vp.h, h || 0) || MessageBox.TITLE_H + MessageBox.BUTTONS_H + contentH + 30;
         var messageBox = MessageBox.create({ app: app, w: rw, h: rh });
         var buttonsOption = new ButtonsOptions();
         buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: null });
@@ -328,7 +328,7 @@ var MessageBox = (function (_super) {
         var titleOptions = new TitleOptions(title, "messagebox.info.icon", false);
         messageBox.createChildren(titleOptions, buttonsOption, null);
         var group = messageBox.content;
-        var listView = list_view_1.ListView.create({ itemHeight: itemHeight, dragToScroll: true });
+        var listView = list_view_1.ListView.create({ itemH: itemH, dragToScroll: true });
         group.padding = 5;
         group.topPadding = 5;
         group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();

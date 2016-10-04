@@ -17,12 +17,12 @@ var PropertySheets = (function (_super) {
     function PropertySheets() {
         _super.call(this, PropertySheets.TYPE);
     }
-    Object.defineProperty(PropertySheets.prototype, "titleHeight", {
+    Object.defineProperty(PropertySheets.prototype, "titleH", {
         get: function () {
             return this._titleHeight;
         },
         /**
-         * titleHeight 标题控件的高度。
+         * titleH 标题控件的高度。
          */
         set: function (value) {
             this._titleHeight = value;
@@ -43,7 +43,7 @@ var PropertySheets = (function (_super) {
     /**
      * 增加一个页面。
      * @param title 标题文本。
-     * @param contentHeight 内容控件。
+     * @param contentH 内容控件。
      * @returns 返回新增加的TitleContent。
      */
     PropertySheets.prototype.addPage = function (title, contentWidget) {
@@ -53,7 +53,7 @@ var PropertySheets = (function (_super) {
             collapsed: true,
             titleWidget: titleWidget,
             contentWidget: contentWidget,
-            titleHeight: this.titleHeight
+            titleH: this.titleH
         });
         titleWidget.onClickTrigger = function (collapsed) {
             titleContent.collapsed = !titleContent.collapsed;
@@ -72,7 +72,7 @@ var PropertySheets = (function (_super) {
         return h;
     };
     PropertySheets.prototype.relayoutChildren = function () {
-        this.contentHeight = this.computeDesireContentHeight();
+        this.contentH = this.computeDesireContentHeight();
         var r = this.getLayoutRect();
         var w = r.w;
         var x = r.x;
@@ -83,7 +83,7 @@ var PropertySheets = (function (_super) {
             y += child.h;
         });
         this.contentWidth = r.w + this.leftPadding + this.rightPadding;
-        this.contentHeight = y + this.bottomPadding + 10;
+        this.contentH = y + this.bottomPadding + 10;
         return r;
     };
     PropertySheets.prototype.onReset = function () {

@@ -151,7 +151,7 @@ export class Edit extends Label {
 		}
 	}
 
-	protected static defProps = Object.assign({}, Label.defProps, {_it:null, _itp:null});
+	protected static defProps = Object.assign({}, Label.defProps, {_mlm:false, _it:null, _itp:null});
 	protected getDefProps() : any {
 		return Edit.defProps;
 	}

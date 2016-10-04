@@ -1644,6 +1644,9 @@ var Widget = (function (_super) {
         this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
         return this;
     };
+    /**
+     * 绑定数据。
+     */
     Widget.prototype.bindData = function (viewModal) {
         var _this = this;
         var dataBindingRule = this._dataBindingRule;
@@ -1694,6 +1697,9 @@ var Widget = (function (_super) {
             });
         }
     };
+    /*
+     * 把数据显示到界面上。
+     */
     Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
         for (var prop in dataBindingRule) {
             var dataSource = dataBindingRule[prop];
@@ -1707,6 +1713,9 @@ var Widget = (function (_super) {
             }
         }
     };
+    /*
+     * 根据转换函数，把数据转换成适合在界面上显示的格式。
+     */
     Widget.prototype.convertValue = function (viewModal, dataSource, value) {
         var v = value;
         if (dataSource.converters) {
@@ -1719,6 +1728,9 @@ var Widget = (function (_super) {
         }
         return v;
     };
+    /*
+     * 根据转换函数，把数据转换成适合存储的格式。
+     */
     Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
         var v = value;
         if (dataSource.converters) {
@@ -1734,19 +1746,31 @@ var Widget = (function (_super) {
     Widget.prototype.getPropDefaultBindMode = function (prop) {
         return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
     };
+    /*
+     * 子控件重载此函数向用户提示数据无效。
+     */
+    Widget.prototype.onInvalidInput = function (message) {
+        console.log("invalid value:" + message);
+    };
+    /*
+     * 通过ValidationRule检查数据是否有效。
+     */
     Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
         if (dataSource.validationRule) {
             var validationRule = viewModal.getValidationRule(dataSource.validationRule);
             if (validationRule) {
                 var result = validationRule.validate(value);
                 if (result.code) {
-                    console.log("invalid value:" + result.message);
+                    this.onInvalidInput(result.message);
                     return false;
                 }
             }
         }
         return true;
     };
+    /*
+     * 监控控件单个属性的变化。
+     */
     Widget.prototype.watchTargetValueChange = function (dataSource) {
         var _this = this;
         var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
@@ -1759,6 +1783,9 @@ var Widget = (function (_super) {
             });
         }
     };
+    /*
+     * 监控控件属性的变化。
+     */
     Widget.prototype.watchTargetChange = function (dataBindingRule) {
         for (var prop in dataBindingRule) {
             var bindingMode = this.getPropDefaultBindMode(prop);
