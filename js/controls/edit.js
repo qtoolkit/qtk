@@ -122,7 +122,7 @@ var Edit = (function (_super) {
         input.on(Events.CHANGING, function (evt) {
             var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            e.init(Events.CHANGE, { value: _this.text });
+            e.init(Events.CHANGING, { value: _this.text });
             ;
             _this.dispatchEvent(e);
         });

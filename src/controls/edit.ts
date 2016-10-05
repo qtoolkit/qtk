@@ -120,7 +120,7 @@ export class Edit extends Label {
 			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
 			
-			e.init(Events.CHANGE, {value:this.text});;
+			e.init(Events.CHANGING, {value:this.text});;
 			this.dispatchEvent(e);
 		});
 		

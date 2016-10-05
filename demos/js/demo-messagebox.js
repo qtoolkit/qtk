@@ -52,7 +52,7 @@ function addShowProgress(win, w) {
 }
 
 function isInputValid(value) {
-	return value && value.length > 3;
+	return value && value.length > 0;
 }
 
 function addShowInput(win, inputTips, value, inputType, w) {
