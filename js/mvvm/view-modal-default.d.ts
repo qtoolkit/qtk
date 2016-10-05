@@ -14,7 +14,7 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     getBindingMode(): BindingMode;
     onChange(callback: Function): void;
     offChange(callback: Function): void;
-    protected notifyChange(type: string, path: string, value: any, trigger?: any): void;
+    notifyChange(type: string, path: string, value: any, trigger?: any): void;
     protected fixPath(path: string): string;
     getProp(path: string): any;
     delProp(path: string, trigger: any): IViewModal;

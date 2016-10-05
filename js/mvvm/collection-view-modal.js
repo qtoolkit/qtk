@@ -4,42 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
 var view_modal_default_1 = require("./view-modal-default");
-var ItemViewModal = (function (_super) {
-    __extends(ItemViewModal, _super);
-    function ItemViewModal(collectionViewModal, index) {
-        _super.call(this, collectionViewModal.collection[index]);
-        this.isCollectionViewModal = false;
-        this.index = index;
-        this.collectionViewModal = collectionViewModal;
-    }
-    ItemViewModal.prototype.getCommand = function (name) {
-        return this.collectionViewModal.getCommand(name);
-    };
-    ItemViewModal.prototype.execCommand = function (name, args) {
-        if (args) {
-            args.$index = this.index;
-        }
-        else {
-            args = { $index: this.index };
-        }
-        return this.collectionViewModal.execCommand(name, args);
-    };
-    ItemViewModal.prototype.getValueConverter = function (name) {
-        return this.collectionViewModal.getValueConverter(name);
-    };
-    ItemViewModal.prototype.getValidationRule = function (name) {
-        return this.collectionViewModal.getValidationRule(name);
-    };
-    ItemViewModal.prototype.isCurrent = function () {
-        return this.collectionViewModal.current === this.index;
-    };
-    ItemViewModal.create = function (collectionViewModal, index) {
-        return new ItemViewModal(collectionViewModal, index);
-    };
-    return ItemViewModal;
-}(view_modal_default_1.ViewModalDefault));
-exports.ItemViewModal = ItemViewModal;
+/**
+ * 集合ViewModal。delProp/getProp/setProp操作当前的项。
+ */
 var CollectionViewModal = (function (_super) {
     __extends(CollectionViewModal, _super);
     function CollectionViewModal(data) {
@@ -64,10 +33,18 @@ var CollectionViewModal = (function (_super) {
         this.currentViewModal.setProp(path, value, trigger);
         return this;
     };
-    CollectionViewModal.prototype.addItem = function (data) {
+    CollectionViewModal.prototype.addItem = function (data, index) {
+        var n = this._collection.length;
+        var index = index < n ? index : n;
+        this._collection.splice(index, 0, data);
+        this._viewModalItems.splice(index, 0, this.createItemViewModal(index));
+        this.notifyChange(Events.ITEM_ADD, "/", index, this);
         return this;
     };
     CollectionViewModal.prototype.removeItem = function (index) {
+        this._collection.splice(index, 1);
+        this._viewModalItems.splice(index, 1);
+        this.notifyChange(Events.ITEM_DELETE, "/", index, this);
         return this;
     };
     Object.defineProperty(CollectionViewModal.prototype, "collection", {
@@ -118,3 +95,44 @@ var CollectionViewModal = (function (_super) {
 }(view_modal_default_1.ViewModalDefault));
 exports.CollectionViewModal = CollectionViewModal;
 ;
+var ItemViewModal = (function (_super) {
+    __extends(ItemViewModal, _super);
+    function ItemViewModal(collectionViewModal, index) {
+        _super.call(this, collectionViewModal.collection[index]);
+        this.isCollectionViewModal = false;
+        this.index = index;
+        this.collectionViewModal = collectionViewModal;
+    }
+    ItemViewModal.prototype.getCommand = function (name) {
+        return this.collectionViewModal.getCommand(name);
+    };
+    ItemViewModal.prototype.execCommand = function (name, args) {
+        if (args) {
+            args.$index = this.index;
+        }
+        else {
+            args = { $index: this.index };
+        }
+        return this.collectionViewModal.execCommand(name, args);
+    };
+    ItemViewModal.prototype.getValueConverter = function (name) {
+        return this.collectionViewModal.getValueConverter(name);
+    };
+    ItemViewModal.prototype.getValidationRule = function (name) {
+        return this.collectionViewModal.getValidationRule(name);
+    };
+    ItemViewModal.prototype.isCurrent = function () {
+        return this.collectionViewModal.current === this.index;
+    };
+    ItemViewModal.prototype.notifyChange = function (type, path, value, trigger) {
+        if (this.isCurrent) {
+            this.collectionViewModal.notifyChange(type, path, value, trigger);
+        }
+        _super.prototype.notifyChange.call(this, type, path, value, trigger);
+    };
+    ItemViewModal.create = function (collectionViewModal, index) {
+        return new ItemViewModal(collectionViewModal, index);
+    };
+    return ItemViewModal;
+}(view_modal_default_1.ViewModalDefault));
+exports.ItemViewModal = ItemViewModal;

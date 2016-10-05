@@ -20,6 +20,8 @@ export declare const PROGRESS: string;
 export declare const CHANGING: string;
 export declare const PROP_CHANGE: string;
 export declare const PROP_DELETE: string;
+export declare const ITEM_ADD: string;
+export declare const ITEM_DELETE: string;
 export declare const DISPOSE: string;
 export declare const RUN: string;
 export declare const QUIT: string;

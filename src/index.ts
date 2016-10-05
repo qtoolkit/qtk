@@ -77,8 +77,13 @@ export {ViewModal} from "./mvvm/view-modal";
 export {IViewModal} from "./mvvm/iview-modal";
 export {RecyclableCreator} from "./recyclable-creator";
 export {IValueConverter} from "./mvvm/ivalue-converter";
+export {DelegateCommand} from "./mvvm/delegate-command";
 export {CollectionViewModal} from "./mvvm/collection-view-modal";
+export {DelegateValueConverter} from "./mvvm/delegate-value-converter";
 export {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
+export {DelegateValidationRule} from "./mvvm/delegate-validation-rule";
+export {BindingRule, IBindingSource, BindingDataSource,
+	BindingCommandSource, BindingRuleItem} from "./mvvm/binding-rule";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 

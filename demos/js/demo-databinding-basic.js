@@ -18,6 +18,26 @@ var ageValidationRule = {
 	}
 };
 
+function createViewModal() {
+	var data = {
+		name:"QTK",
+		age:100,
+		gender:1,
+		org : {
+			name:"QToolKit"
+		}
+	};
+
+	var viewModal = qtk.ViewModal.create(data);
+	viewModal.registerValueConverter("gender", genderConverter);
+	viewModal.registerValidationRule("age", ageValidationRule);
+	viewModal.registerCommand("dummy", qtk.DelegateCommand.create(function execute(args) {
+		console.log("dummy");
+	}, null));
+
+	return viewModal;
+}
+
 function onReady(app) {
 	var Events = qtk.Events;
 	var ListItem = qtk.ListItem;
@@ -96,23 +116,15 @@ function onReady(app) {
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 	}), "/org/name");
 	
+	var command = addItem(qtk.Button.create({text:"command",
+		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+	}), {"click" : {command:"dummy"}});
+
 	var summary = addItem(qtk.Label.create({text:"",
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 	}));
-	
-	var data = {
-		name:"QTK",
-		age:100,
-		gender:1,
-		org : {
-			name:"QToolKit"
-		}
-	};
 
-	var viewModal = qtk.ViewModal.create(data);
-	viewModal.registerValueConverter("gender", genderConverter);
-	viewModal.registerValidationRule("age", ageValidationRule);
-
+	var viewModal = createViewModal();
 	listView.bindData(viewModal);
 
 	viewModal.on(Events.PROP_CHANGE, function(evt) {

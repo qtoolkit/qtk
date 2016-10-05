@@ -35,8 +35,24 @@ function onReady(app) {
 		templateItem: createTemplateItem(),
 		layoutParam : qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"})
 	});
-
 	win.addChild(listView);
+	
+	var group = qtk.Group.create({
+		childrenLayouter : qtk.GridLayouter.create({cols:3, rows:1}),
+		layoutParam : qtk.SimpleLayouterParam.create({y:"-50", w:"100%", h:"40"})
+	});
+	win.addChild(group);
+
+	var addButton = qtk.Button.create({text:"Add",
+		layoutParam : qtk.GridLayouterParam.create({margin:2})
+	});
+
+	var removeButton = qtk.Button.create({text:"Remove",
+		layoutParam : qtk.GridLayouterParam.create({margin:2})
+	});
+	
+	group.addChild(addButton);
+	group.addChild(removeButton);
 
 	var viewModal = qtk.CollectionViewModal.create(genData());
 	listView.bindData(viewModal);

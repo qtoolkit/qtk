@@ -236,14 +236,14 @@ export abstract class ComboBoxBase extends Widget {
 		});
 	}
 
-	protected onBindProp(viewModal:IViewModal, prop:string, value:any) {
+	protected onBindProp(prop:string, value:any) {
 		if(prop === "options") {
 			this.resetOptions();
 			value.forEach((opt:any) => {
 				this.addOption(opt.text, opt.value, opt.imageURL, opt.color);
 			});
 		}else{
-			return super.onBindProp(viewModal, prop, value);
+			return super.onBindProp(prop, value);
 		}
 	}
 

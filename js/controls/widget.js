@@ -20,7 +20,7 @@ var dirty_rect_context_1 = require("../dirty-rect-context");
 var image_tile_1 = require("../image-tile");
 var behavior_1 = require("../behaviors/behavior");
 var layouter_1 = require('../layouters/layouter');
-var binding_rule_parser_1 = require("../mvvm/binding-rule-parser");
+var binding_rule_1 = require("../mvvm/binding-rule");
 var iview_modal_1 = require("../mvvm/iview-modal");
 (function (WidgetMode) {
     WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
@@ -1629,7 +1629,7 @@ var Widget = (function (_super) {
     };
     ////////////////////////////////////////////	
     //绑定单个属性，子控件可以重载本函数去支持其它属性。
-    Widget.prototype.onBindProp = function (viewModal, prop, value) {
+    Widget.prototype.onBindProp = function (prop, value) {
         if (prop === "text") {
             this.text = value;
         }
@@ -1641,7 +1641,7 @@ var Widget = (function (_super) {
      * 设置数据绑定规则。
      */
     Widget.prototype.setDataBindingRule = function (dataBindingRule) {
-        this._dataBindingRule = binding_rule_parser_1.BindingRuleParser.parse(dataBindingRule);
+        this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
         return this;
     };
     /**
@@ -1697,21 +1697,40 @@ var Widget = (function (_super) {
             });
         }
     };
+    Widget.prototype.onBindCommand = function (viewModal, prop, commandSource) {
+        if (prop === "click") {
+            if (commandSource.eventHandler) {
+                this.off(Events.CLICK, commandSource.eventHandler);
+            }
+            commandSource.eventHandler = function (evt) {
+                viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+            };
+            this.on(Events.CLICK, commandSource.eventHandler);
+        }
+    };
     /*
      * 把数据显示到界面上。
      */
     Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
-        for (var prop in dataBindingRule) {
-            var dataSource = dataBindingRule[prop];
-            var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
-            var value = dataSource.value;
-            if (value === undefined && dataSource.path) {
-                value = viewModal.getProp(dataSource.path);
+        var _this = this;
+        dataBindingRule.forEach(function (prop, item) {
+            var source = item.source;
+            if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
+                var commandSource = source;
+                _this.onBindCommand(viewModal, prop, commandSource);
             }
-            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                this.onBindProp(viewModal, prop, this.convertValue(viewModal, dataSource, value));
+            else {
+                var dataSource = source;
+                var value = dataSource.value;
+                var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
+                if (value === undefined && dataSource.path) {
+                    value = viewModal.getProp(dataSource.path);
+                }
+                if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                    _this.onBindProp(prop, _this.convertValue(viewModal, dataSource, value));
+                }
             }
-        }
+        });
     };
     /*
      * 根据转换函数，把数据转换成适合在界面上显示的格式。
@@ -1773,7 +1792,7 @@ var Widget = (function (_super) {
      */
     Widget.prototype.watchTargetValueChange = function (dataSource) {
         var _this = this;
-        var bindingMode = dataSource.bindingMode || iview_modal_1.BindingMode.TWO_WAY;
+        var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
         if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
             this.on(Events.CHANGE, function (evt) {
                 var value = _this.convertBackValue(_this._viewModal, dataSource, evt.value);
@@ -1787,13 +1806,17 @@ var Widget = (function (_super) {
      * 监控控件属性的变化。
      */
     Widget.prototype.watchTargetChange = function (dataBindingRule) {
-        for (var prop in dataBindingRule) {
-            var bindingMode = this.getPropDefaultBindMode(prop);
-            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY) {
-                var dataSource = dataBindingRule[prop];
-                this.watchTargetValueChange(dataSource);
+        var _this = this;
+        dataBindingRule.forEach(function (prop, item) {
+            var source = item.source;
+            if (source.type === binding_rule_1.BindingDataSource.TYPE) {
+                var dataSource = source;
+                var bindingMode = _this.getPropDefaultBindMode(prop);
+                if (bindingMode === iview_modal_1.BindingMode.TWO_WAY) {
+                    _this.watchTargetValueChange(dataSource);
+                }
             }
-        }
+        });
     };
     Widget.defProps = {
         _x: 0,

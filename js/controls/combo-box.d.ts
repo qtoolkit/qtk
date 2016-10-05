@@ -5,7 +5,6 @@ import { Button } from "./button";
 import { Widget } from "./widget";
 import { ListItem } from "./list-item";
 import { ImageTile } from "../image-tile";
-import { IViewModal } from "../mvvm/iview-modal";
 export declare class ComboBoxOption {
     value: any;
     text: string;
@@ -39,7 +38,7 @@ export declare abstract class ComboBoxBase extends Widget {
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;
     protected onItemSelected(data: ComboBoxOption): void;
     protected showPopup(): void;
-    protected onBindProp(viewModal: IViewModal, prop: string, value: any): void;
+    protected onBindProp(prop: string, value: any): void;
     protected onReset(): void;
     protected onToJson(json: any): void;
     onFromJson(json: any): void;

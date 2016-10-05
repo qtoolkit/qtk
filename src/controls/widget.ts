@@ -23,7 +23,8 @@ import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '..
 
 import {ICommand} from "../mvvm/icommand";
 import {IValueConverter} from "../mvvm/ivalue-converter";
-import {BindingRuleParser} from "../mvvm/binding-rule-parser";
+import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource, 
+	BindingCommandSource} from "../mvvm/binding-rule";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
 import {IViewModal, ICollectionViewModal, BindingMode} from "../mvvm/iview-modal";
 
@@ -1795,7 +1796,7 @@ export class Widget extends Emitter {
 
 ////////////////////////////////////////////	
 	//绑定单个属性，子控件可以重载本函数去支持其它属性。
-	protected onBindProp(viewModal:IViewModal, prop:string, value:any) {
+	protected onBindProp(prop:string, value:any) {
 		if(prop === "text") {
 			this.text = value;
 		} else if(prop === "value") {
@@ -1810,7 +1811,7 @@ export class Widget extends Emitter {
 	 * 设置数据绑定规则。
 	 */
 	public setDataBindingRule(dataBindingRule:any) : Widget {
-		this._dataBindingRule = BindingRuleParser.parse(dataBindingRule);
+		this._dataBindingRule = BindingRule.create(dataBindingRule);
 
 		return this;
 	}
@@ -1874,28 +1875,47 @@ export class Widget extends Emitter {
 		}
 	}
 
+	protected onBindCommand(viewModal:IViewModal, prop:string, commandSource:BindingCommandSource) {
+		if(prop === "click") {
+			if(commandSource.eventHandler) {
+				this.off(Events.CLICK, commandSource.eventHandler);
+			}
+			commandSource.eventHandler = function(evt:any) {
+				viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+			}
+			this.on(Events.CLICK, commandSource.eventHandler);
+		}
+	}
+
 	/*
 	 * 把数据显示到界面上。
 	 */
 	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
-		for(var prop in dataBindingRule) {
-			var dataSource = dataBindingRule[prop];
-			var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
-			var value = dataSource.value;
-			if(value === undefined && dataSource.path) {
-				value = viewModal.getProp(dataSource.path);
+		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+			var source = item.source;
+			if(source.type === BindingCommandSource.TYPE) {
+				var commandSource = <BindingCommandSource>source;
+				this.onBindCommand(viewModal, prop, commandSource);	
+			}else{
+				var dataSource = <BindingDataSource>source;
+				var value = dataSource.value;
+				var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
+				
+				if(value === undefined && dataSource.path) {
+					value = viewModal.getProp(dataSource.path);
+				}
+				
+				if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
+					this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+				}
 			}
-			
-			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-				this.onBindProp(viewModal, prop, this.convertValue(viewModal, dataSource, value));
-			}
-		}
+		});
 	}
 
 	/*
 	 * 根据转换函数，把数据转换成适合在界面上显示的格式。
 	 */
-	protected convertValue(viewModal:IViewModal, dataSource:any, value:any) : any {
+	protected convertValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : any {
 		var v = value;
 		if(dataSource.converters) {
 			dataSource.converters.forEach((name:string) => {
@@ -1912,7 +1932,7 @@ export class Widget extends Emitter {
 	/*
 	 * 根据转换函数，把数据转换成适合存储的格式。
 	 */
-	protected convertBackValue(viewModal:IViewModal, dataSource:any, value:any) : any {
+	protected convertBackValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : any {
 		var v = value;
 		if(dataSource.converters) {
 			dataSource.converters.forEachR((name:string) => {
@@ -1940,7 +1960,7 @@ export class Widget extends Emitter {
 	/*
 	 * 通过ValidationRule检查数据是否有效。 
 	 */
-	protected isValidValue(viewModal:IViewModal, dataSource:any, value:any) : boolean {
+	protected isValidValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : boolean {
 		if(dataSource.validationRule) {
 			var validationRule = viewModal.getValidationRule(dataSource.validationRule);
 			if(validationRule) {
@@ -1958,8 +1978,8 @@ export class Widget extends Emitter {
 	/*
 	 * 监控控件单个属性的变化。
 	 */
-	protected watchTargetValueChange(dataSource:any) {
-		var bindingMode = dataSource.bindingMode || BindingMode.TWO_WAY;
+	protected watchTargetValueChange(dataSource:BindingDataSource) {
+		var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
 			this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
 				var value = this.convertBackValue(this._viewModal, dataSource, evt.value);
@@ -1975,13 +1995,16 @@ export class Widget extends Emitter {
 	 * 监控控件属性的变化。
 	 */
 	protected watchTargetChange(dataBindingRule) {
-		for(var prop in dataBindingRule) {
-			var bindingMode = this.getPropDefaultBindMode(prop);
-			if(bindingMode === BindingMode.TWO_WAY) {
-				var dataSource = dataBindingRule[prop];
-				this.watchTargetValueChange(dataSource);
+		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+			var source = item.source;
+			if(source.type === BindingDataSource.TYPE) {
+				var dataSource = <BindingDataSource>source;
+				var bindingMode = this.getPropDefaultBindMode(prop);
+				if(bindingMode === BindingMode.TWO_WAY) {
+					this.watchTargetValueChange(dataSource);
+				}
 			}
-		}
+		});
 	}
 
 	private static ID = 10000;

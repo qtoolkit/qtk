@@ -40,7 +40,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		this.off(Events.PROP_CHANGE, callback);
 	}
 
-	protected notifyChange(type:string, path:string, value:any, trigger?:any) {
+	public notifyChange(type:string, path:string, value:any, trigger?:any) {
 		this.dispatchEvent(this._ePropChange.init(type, {prop:path, value:value, trigger:trigger}));
 	}
 

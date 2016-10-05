@@ -18,8 +18,8 @@ export interface ICollectionViewModal extends IViewModal {
     total: number;
     current: number;
     getItemViewModal(index: number): IViewModal;
-    addItem(data: any): ICollectionViewModal;
     removeItem(index: number): ICollectionViewModal;
+    addItem(data: any, index?: number): ICollectionViewModal;
 }
 export declare enum BindingMode {
     TWO_WAY = 0,

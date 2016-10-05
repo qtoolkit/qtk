@@ -26,8 +26,8 @@ export interface ICollectionViewModal extends IViewModal {
 	current : number;
 	getItemViewModal(index:number) : IViewModal;
 	
-	addItem(data:any) : ICollectionViewModal;
 	removeItem(index:number) : ICollectionViewModal;
+	addItem(data:any, index?:number) : ICollectionViewModal;
 };
 
 export enum BindingMode {

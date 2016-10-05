@@ -15,6 +15,7 @@ import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
 import { Behavior } from "../behaviors/behavior";
 import { Layouter } from '../layouters/layouter';
+import { BindingDataSource, BindingCommandSource } from "../mvvm/binding-rule";
 import { IViewModal, BindingMode } from "../mvvm/iview-modal";
 export declare enum WidgetMode {
     RUNTIME = 0,
@@ -350,7 +351,7 @@ export declare class Widget extends Emitter {
     protected _templateItemJson: Widget;
     templateItem: Widget;
     addChildWithTemplate(fastMode?: boolean): Widget;
-    protected onBindProp(viewModal: IViewModal, prop: string, value: any): void;
+    protected onBindProp(prop: string, value: any): void;
     protected _dataBindingRule: any;
     protected _viewModal: IViewModal;
     /**
@@ -362,13 +363,14 @@ export declare class Widget extends Emitter {
      */
     bindData(viewModal: IViewModal): Widget;
     protected bindChildren(viewModal: IViewModal): void;
+    protected onBindCommand(viewModal: IViewModal, prop: string, commandSource: BindingCommandSource): void;
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
-    protected convertValue(viewModal: IViewModal, dataSource: any, value: any): any;
-    protected convertBackValue(viewModal: IViewModal, dataSource: any, value: any): any;
+    protected convertValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): any;
+    protected convertBackValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): any;
     protected getPropDefaultBindMode(prop: string): BindingMode;
     protected onInvalidInput(message: string): void;
-    protected isValidValue(viewModal: IViewModal, dataSource: any, value: any): boolean;
-    protected watchTargetValueChange(dataSource: any): void;
+    protected isValidValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): boolean;
+    protected watchTargetValueChange(dataSource: BindingDataSource): void;
     protected watchTargetChange(dataBindingRule: any): void;
     private static ID;
 }
