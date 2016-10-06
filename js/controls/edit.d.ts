@@ -1,7 +1,7 @@
 import { Style } from "../style";
 import { Label } from "./label";
-import { Widget } from "./widget";
 import { HtmlEdit } from "../html/html-edit";
+import { Widget } from "./widget";
 /**
  * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
  */
@@ -30,6 +30,10 @@ export declare class Edit extends Label {
     protected getStyleType(): string;
     protected filterText(value: string): string;
     protected showEditor(): void;
+    protected _validationTips: string;
+    validationTips: string;
+    protected drawInvalidInputTips: any;
+    protected onInvalidInput(message: string): void;
     constructor();
     dispose(): void;
     protected dispatchClick(evt: any): void;

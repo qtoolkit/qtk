@@ -1948,6 +1948,8 @@ export class Widget extends Emitter {
 				var result = this._viewModal.setProp(path, value, converter, validationRule);
 				if(result.code) {
 					this.onInvalidInput(result.message);
+				}else{
+					this.onInvalidInput(null);
 				}
 			});
 		}

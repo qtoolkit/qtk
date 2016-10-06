@@ -4001,11 +4001,14 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
 	var label_1 = __webpack_require__(18);
 	var Events = __webpack_require__(6);
-	var widget_factory_1 = __webpack_require__(23);
 	var html_edit_1 = __webpack_require__(83);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var graphics_1 = __webpack_require__(25);
 	var recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
@@ -4014,6 +4017,34 @@ var qtk =
 	    __extends(Edit, _super);
 	    function Edit() {
 	        _super.call(this, Edit.TYPE);
+	        this.drawInvalidInputTips = function (evt) {
+	            var win = this.win;
+	            var tm = this._themeManager;
+	            var text = this._validationTips;
+	            var style = tm.get("edit.invalid.tips", this.stateToString(widget_1.WidgetState.NORMAL));
+	            if (!this._isEditing || !text || !style) {
+	                return;
+	            }
+	            var maxH = win.h;
+	            var maxW = win.w;
+	            var ctx = evt.ctx;
+	            var p = this.toGlobalPoint(point_1.Point.point.init(0, 0));
+	            var width = graphics_1.Graphics.measureText(text, style.font) + 20;
+	            var x = p.x - win.x;
+	            var y = p.y - win.y + 5;
+	            if ((x + width) >= maxW) {
+	                x = maxW - width;
+	            }
+	            var r = null;
+	            if ((y + this.h) < maxH) {
+	                r = rect_1.Rect.rect.init(x, y + this.h, width, 30);
+	            }
+	            else {
+	                r = rect_1.Rect.rect.init(x, y, width, 30);
+	            }
+	            graphics_1.Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth, r.x, r.y, r.w, r.h, style.roundRadius);
+	            graphics_1.Graphics.drawTextSL(ctx, text, style, r);
+	        }.bind(this);
 	    }
 	    Object.defineProperty(Edit.prototype, "inputable", {
 	        get: function () {
@@ -4130,6 +4161,25 @@ var qtk =
 	            ;
 	            _this.dispatchEvent(e);
 	        });
+	    };
+	    Object.defineProperty(Edit.prototype, "validationTips", {
+	        set: function (value) {
+	            this._validationTips = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Edit.prototype.onInvalidInput = function (message) {
+	        var win = this.win;
+	        if (this._validationTips === message) {
+	            return;
+	        }
+	        this._validationTips = message;
+	        win.off(Events.AFTER_DRAW, this.drawInvalidInputTips);
+	        if (message) {
+	            win.on(Events.AFTER_DRAW, this.drawInvalidInputTips);
+	        }
+	        win.requestRedraw();
 	    };
 	    Edit.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -6051,6 +6101,9 @@ var qtk =
 	                var result = _this._viewModal.setProp(path, value, converter, validationRule);
 	                if (result.code) {
 	                    _this.onInvalidInput(result.message);
+	                }
+	                else {
+	                    _this.onInvalidInput(null);
 	                }
 	            });
 	        }

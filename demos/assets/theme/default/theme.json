@@ -58,6 +58,16 @@
 			"textColor" : "#CCCCCC"
 		}
 	},
+	"edit.invalid.tips": {
+		"extends": "edit",
+		"common" : {
+			"textAlign":"center",
+			"lineColor":"#606060",
+			"textBaseline" : "middle",
+			"backGroundColor":"#FEEFAB",
+			"textColor" : "Red"
+		}
+	},
 	"button": {
 		"extends": "widget",
 		"common" : {

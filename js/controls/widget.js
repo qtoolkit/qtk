@@ -1771,6 +1771,9 @@ var Widget = (function (_super) {
                 if (result.code) {
                     _this.onInvalidInput(result.message);
                 }
+                else {
+                    _this.onInvalidInput(null);
+                }
             });
         }
     };

@@ -1,11 +1,15 @@
 
-import {Style} from "../style";
+import {Rect} from "../rect";
 import {Point} from "../point";
+import {Style} from "../style";
 import {Label} from "./label";
-import {Widget} from "./widget";
 import Events = require("../events");
-import {WidgetFactory} from "./widget-factory";
 import {HtmlEdit} from "../html/html-edit";
+import {IApplication} from "../iapplication";
+import {Widget, WidgetState} from "./widget";
+import {IThemeManager} from "../itheme-manager";
+import {WidgetFactory} from "./widget-factory";
+import {RoundType, Graphics} from "../graphics";
 import {RecyclableCreator} from "../recyclable-creator";
 
 /**
@@ -131,6 +135,61 @@ export class Edit extends Label {
 			e.init(Events.CHANGE, {value:this.text});;
 			this.dispatchEvent(e);
 		});
+	}
+
+	protected _validationTips : string;
+	public set validationTips(value:string) {
+		this._validationTips = value;
+	}
+
+	protected drawInvalidInputTips = function(evt:Events.DrawEvent) {
+		var win = this.win;
+		var tm = this._themeManager;
+		var text = this._validationTips;
+		var style = tm.get("edit.invalid.tips", this.stateToString(WidgetState.NORMAL));
+		
+		if(!this._isEditing || !text || !style) {
+			return;
+		}
+
+		var maxH = win.h;
+		var maxW = win.w;
+		var ctx = evt.ctx;
+		var p = this.toGlobalPoint(Point.point.init(0, 0));
+		var width = Graphics.measureText(text, style.font) + 20;
+	
+		var x = p.x - win.x;
+		var y = p.y - win.y + 5;
+		
+		if((x + width) >= maxW) {
+			x = maxW - width;
+		}
+		
+		var r = null;
+		if((y + this.h) < maxH) {
+			r = Rect.rect.init(x, y+this.h, width, 30);
+		}else{
+			r = Rect.rect.init(x, y, width, 30);
+		}
+
+		Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth,
+							   r.x, r.y, r.w, r.h, style.roundRadius); 
+		Graphics.drawTextSL(ctx, text, style, r);
+
+	}.bind(this);
+
+	protected onInvalidInput(message:string) {
+		var win = this.win;
+		if(this._validationTips === message) {
+			return;
+		}
+
+		this._validationTips = message;
+		win.off(Events.AFTER_DRAW, this.drawInvalidInputTips);
+		if(message) {
+			win.on(Events.AFTER_DRAW, this.drawInvalidInputTips); 
+		}
+		win.requestRedraw();
 	}
 
 	constructor() {

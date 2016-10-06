@@ -13,7 +13,7 @@ var ageValidationRule = {
 		if(value >= 0 && value <= 128) {
 			return qtk.ValidationResult.validResult;
 		}else{
-			return qtk.ValidationResult.create(-1, "Age must between 0 and 100.");
+			return qtk.ValidationResult.create(-1, "Age must between 0 and 128.");
 		}
 	}
 };

@@ -4,11 +4,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var rect_1 = require("../rect");
 var point_1 = require("../point");
 var label_1 = require("./label");
 var Events = require("../events");
-var widget_factory_1 = require("./widget-factory");
 var html_edit_1 = require("../html/html-edit");
+var widget_1 = require("./widget");
+var widget_factory_1 = require("./widget-factory");
+var graphics_1 = require("../graphics");
 var recyclable_creator_1 = require("../recyclable-creator");
 /**
  * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
@@ -17,6 +20,34 @@ var Edit = (function (_super) {
     __extends(Edit, _super);
     function Edit() {
         _super.call(this, Edit.TYPE);
+        this.drawInvalidInputTips = function (evt) {
+            var win = this.win;
+            var tm = this._themeManager;
+            var text = this._validationTips;
+            var style = tm.get("edit.invalid.tips", this.stateToString(widget_1.WidgetState.NORMAL));
+            if (!this._isEditing || !text || !style) {
+                return;
+            }
+            var maxH = win.h;
+            var maxW = win.w;
+            var ctx = evt.ctx;
+            var p = this.toGlobalPoint(point_1.Point.point.init(0, 0));
+            var width = graphics_1.Graphics.measureText(text, style.font) + 20;
+            var x = p.x - win.x;
+            var y = p.y - win.y + 5;
+            if ((x + width) >= maxW) {
+                x = maxW - width;
+            }
+            var r = null;
+            if ((y + this.h) < maxH) {
+                r = rect_1.Rect.rect.init(x, y + this.h, width, 30);
+            }
+            else {
+                r = rect_1.Rect.rect.init(x, y, width, 30);
+            }
+            graphics_1.Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth, r.x, r.y, r.w, r.h, style.roundRadius);
+            graphics_1.Graphics.drawTextSL(ctx, text, style, r);
+        }.bind(this);
     }
     Object.defineProperty(Edit.prototype, "inputable", {
         get: function () {
@@ -133,6 +164,25 @@ var Edit = (function (_super) {
             ;
             _this.dispatchEvent(e);
         });
+    };
+    Object.defineProperty(Edit.prototype, "validationTips", {
+        set: function (value) {
+            this._validationTips = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Edit.prototype.onInvalidInput = function (message) {
+        var win = this.win;
+        if (this._validationTips === message) {
+            return;
+        }
+        this._validationTips = message;
+        win.off(Events.AFTER_DRAW, this.drawInvalidInputTips);
+        if (message) {
+            win.on(Events.AFTER_DRAW, this.drawInvalidInputTips);
+        }
+        win.requestRedraw();
     };
     Edit.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
