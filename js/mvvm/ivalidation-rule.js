@@ -14,9 +14,13 @@ var ValidationResult = (function () {
         return new ValidationResult(code, message);
     };
     /**
-     * 数据有效时，可以共用的结果，不能在运行是修改。
+     * 数据有效时，可以共用的结果，不能在运行时修改。
      */
     ValidationResult.validResult = ValidationResult.create(0, "valid");
+    /**
+     * 数据无效时，可以共用的结果，不能在运行时修改。
+     */
+    ValidationResult.invalidResult = ValidationResult.create(-1, "invalid");
     return ValidationResult;
 }());
 exports.ValidationResult = ValidationResult;

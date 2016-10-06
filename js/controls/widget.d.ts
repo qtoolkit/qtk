@@ -15,7 +15,7 @@ import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
 import { Behavior } from "../behaviors/behavior";
 import { Layouter } from '../layouters/layouter';
-import { BindingDataSource, BindingCommandSource } from "../mvvm/binding-rule";
+import { BindingRule, BindingDataSource, BindingCommandSource } from "../mvvm/binding-rule";
 import { IViewModal, BindingMode } from "../mvvm/iview-modal";
 export declare enum WidgetMode {
     RUNTIME = 0,
@@ -352,12 +352,12 @@ export declare class Widget extends Emitter {
     templateItem: Widget;
     addChildWithTemplate(fastMode?: boolean): Widget;
     protected onBindProp(prop: string, value: any): void;
-    protected _dataBindingRule: any;
+    protected _dataBindingRule: BindingRule;
     protected _viewModal: IViewModal;
     /**
-     * 设置数据绑定规则。
+     * 数据绑定规则。
      */
-    setDataBindingRule(dataBindingRule: any): Widget;
+    dataBindingRule: any;
     /**
      * 绑定数据。
      */
@@ -365,11 +365,8 @@ export declare class Widget extends Emitter {
     protected bindChildren(viewModal: IViewModal): void;
     protected onBindCommand(viewModal: IViewModal, prop: string, commandSource: BindingCommandSource): void;
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
-    protected convertValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): any;
-    protected convertBackValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): any;
     protected getPropDefaultBindMode(prop: string): BindingMode;
     protected onInvalidInput(message: string): void;
-    protected isValidValue(viewModal: IViewModal, dataSource: BindingDataSource, value: any): boolean;
     protected watchTargetValueChange(dataSource: BindingDataSource): void;
     protected watchTargetChange(dataBindingRule: any): void;
     private static ID;

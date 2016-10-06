@@ -1,7 +1,7 @@
 import { Emitter } from "../emitter";
 import { ICommand } from "./icommand";
 import { IValueConverter } from "./ivalue-converter";
-import { IValidationRule } from "./ivalidation-rule";
+import { IValidationRule, ValidationResult } from "./ivalidation-rule";
 import { IViewModal, BindingMode } from "./iview-modal";
 export declare class ViewModalDefault extends Emitter implements IViewModal {
     private _data;
@@ -9,24 +9,28 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     private _converters;
     private _validationRules;
     private _ePropChange;
-    isCollectionViewModal: boolean;
+    isCollection: boolean;
     constructor(data: any);
     getBindingMode(): BindingMode;
-    onChange(callback: Function): void;
-    offChange(callback: Function): void;
-    notifyChange(type: string, path: string, value: any, trigger?: any): void;
+    onChange(callback: Function): IViewModal;
+    offChange(callback: Function): IViewModal;
+    notifyChange(type: string, path: string, value: any): void;
     protected fixPath(path: string): string;
-    getProp(path: string): any;
-    delProp(path: string, trigger: any): IViewModal;
-    setProp(path: string, value: any, trigger?: any): IViewModal;
+    getProp(path: string, converterName?: string): any;
+    delProp(path: string): IViewModal;
+    setProp(path: string, v: any, converterName?: string, validationRule?: string): ValidationResult;
     getCommand(name: string): ICommand;
+    canExecute(name: string): boolean;
     execCommand(name: string, args: any): boolean;
     registerCommand(name: string, cmd: ICommand): IViewModal;
     unregisterCommand(name: string, cmd: ICommand): IViewModal;
     getValueConverter(name: string): IValueConverter;
     registerValueConverter(name: string, converter: IValueConverter): IViewModal;
     unregisterValueConverter(name: string, converter: IValueConverter): IViewModal;
+    convert(converterName: string, value: any): any;
+    convertBack(converterName: string, value: any): any;
     getValidationRule(name: string): IValidationRule;
     registerValidationRule(name: string, validationRule: IValidationRule): IViewModal;
     unregisterValidationRule(name: string, validationRule: IValidationRule): IViewModal;
+    isValueValid(ruleName: string, value: any): ValidationResult;
 }

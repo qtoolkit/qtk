@@ -6,18 +6,20 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var json_serializer_1 = require("../json-serializer");
 var iview_modal_1 = require("../mvvm/iview-modal");
+var iview_modal_2 = require("../mvvm/iview-modal");
 ;
 /**
  * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModal中获取数据。
  */
 var BindingDataSource = (function (_super) {
     __extends(BindingDataSource, _super);
-    function BindingDataSource(path, value, mode, validationRule, converters) {
+    function BindingDataSource(path, value, mode, updateTiming, validationRule, converter) {
         _super.call(this);
-        this.converters = converters;
+        this.converter = converter;
         this.type = BindingDataSource.TYPE;
         this.validationRule = validationRule;
-        this.mode = mode || iview_modal_1.BindingMode.TWO_WAY;
+        this.mode = mode || iview_modal_2.BindingMode.TWO_WAY;
+        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_modal_2.UpdateTiming.CHANGED;
         if (path !== undefined) {
             this.path = path;
         }
@@ -25,8 +27,8 @@ var BindingDataSource = (function (_super) {
             this.value = value;
         }
     }
-    BindingDataSource.create = function (path, value, mode, validationRule, converters) {
-        return new BindingDataSource(path, value, mode, validationRule, converters);
+    BindingDataSource.create = function (path, value, mode, updateTiming, validationRule, converter) {
+        return new BindingDataSource(path, value, mode, updateTiming, validationRule, converter);
     };
     BindingDataSource.TYPE = "data";
     return BindingDataSource;
@@ -70,7 +72,7 @@ var BindingRuleItem = (function () {
             this.source = BindingCommandSource.create(source.command, source.commandArgs);
         }
         else {
-            this.source = BindingDataSource.create(source.path, source.value, source.mode, source.validationRule, source.converters);
+            this.source = BindingDataSource.create(source.path, source.value, source.mode, source.updateTiming, source.validationRule, source.converter);
         }
         return this;
     };
@@ -107,7 +109,7 @@ var BindingRule = (function () {
                 source = BindingCommandSource.create(sJson.command, sJson.commandArgs);
             }
             else {
-                source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.validationRule, sJson.converters);
+                source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, sJson.validationRule, sJson.converter);
             }
             this._items[prop] = BindingRuleItem.create(prop, source);
         }
@@ -135,6 +137,14 @@ var BindingRule = (function () {
             var path = dataSource.path;
             if (path && path.charAt(0) !== '/') {
                 dataSource.path = '/' + dataSource.path;
+            }
+            var mode = dataSource.mode;
+            if (mode && typeof mode === "string") {
+                dataSource.mode = iview_modal_1.toBindingMode(mode);
+            }
+            var updateTiming = dataSource.updateTiming;
+            if (updateTiming && typeof updateTiming === "string") {
+                dataSource.updateTiming = iview_modal_1.toUpdateTiming(updateTiming);
             }
         }
         return rule;

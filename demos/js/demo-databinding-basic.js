@@ -60,9 +60,9 @@ function onReady(app) {
 		item.childrenLayouter = qtk.SimpleLayouter.create();
 		item.addChild(titleValue);
 		if(titleValue.valueWidget) {
-			titleValue.valueWidget.setDataBindingRule(bindingRule);
+			titleValue.valueWidget.dataBindingRule = bindingRule;
 		}else{
-			titleValue.setDataBindingRule(bindingRule);
+			titleValue.dataBindingRule = bindingRule;
 		}
 		return titleValue;
 	}
@@ -72,7 +72,7 @@ function onReady(app) {
 				titleW:"60", 
 				valueW:"80%", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
-		}), {value: {path:"name"}});
+		}), {value: {path:"name", updateTiming:"changed"}});
 
 	addItem(qtk.TitleEdit.create({
 				inputType:"number",
@@ -80,14 +80,14 @@ function onReady(app) {
 				titleW:"60", 
 				valueW:"100", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
-		}), {value: {path:"age", validationRule:"age"}});
+		}), {value: {path:"age", validationRule:"age", updateTiming:"changing"}});
 	
 	addItem(qtk.TitleComboBox.create({
 				title:"Gender", 
 				titleW:"60", 
 				valueW:"60%", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
-		}), {value: {path:"gender", converters:["gender"]}, 
+		}), {value: {path:"gender", converter:"gender"}, 
 			options: {value:[{text:"female"}, {text:"male"}]}});
 
 	addItem(qtk.TitleLabel.create({
@@ -107,7 +107,7 @@ function onReady(app) {
 		titleW:"60", 
 		valueW:"100", 
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
-	}), {value: {path:"gender", converters:["gender"]}});
+	}), {value: {path:"gender", converter:"gender"}});
 	
 	addItem(qtk.TitleLabel.create({
 		title:"Org Name(*)", 

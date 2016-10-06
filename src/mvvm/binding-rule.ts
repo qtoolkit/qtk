@@ -1,11 +1,17 @@
 import {JsonSerializer} from "../json-serializer"
-import {IViewModal, ICollectionViewModal, BindingMode} from "../mvvm/iview-modal";
+import {toUpdateTiming, toBindingMode} from "../mvvm/iview-modal";
+import {IViewModal, ICollectionViewModal, UpdateTiming, BindingMode} from "../mvvm/iview-modal";
+
+export type DataSourceType = "data" | "command";
 
 /**
  * 绑定源。
  */
 export interface IBindingSource {
-	type : string;
+	/**
+	 * 类型。命令或数据。
+	 */
+	type : DataSourceType;
 
 	toJson() : any;
 	fromJson(json:any);
@@ -15,21 +21,44 @@ export interface IBindingSource {
  * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModal中获取数据。
  */
 export class BindingDataSource extends JsonSerializer implements IBindingSource{
+	/**
+	 * 常量数据。如果存在则优先使用此值，否则通过path从ViewModal中获取。
+	 */
 	public value : any;
+	
+	/**
+	 * 路径。通过path从ViewModal中获取数据。
+	 */
 	public path : string;
-	public type : string;
+	
+	public type : DataSourceType;
+	/**
+	 * 绑定模式。
+	 */
 	public mode : BindingMode;
+	/**
+	 * 转换器。
+	 */
+	public converter : string;
+	/**
+	 * 验证器。
+	 */
 	public validationRule : string;
-	public converters : Array<string>;
+	/**
+	 * 更新ViewModal的时机。
+	 */
+	public updateTiming : UpdateTiming;
 
-	constructor(path?:string, value?:any, mode?:BindingMode, validationRule?:string, converters?:Array<string>) {
+	constructor(path?:string, value?:any, mode?:BindingMode, updateTiming?:UpdateTiming, 
+				validationRule?:string, converter?:string){
 		super();
 
-		this.converters = converters;
-		this.type = BindingDataSource.TYPE;
+		this.converter = converter;
+		this.type = <DataSourceType>BindingDataSource.TYPE;
 		this.validationRule = validationRule;
 		this.mode = mode || BindingMode.TWO_WAY;
-		
+		this.updateTiming = updateTiming !== undefined ? updateTiming :  UpdateTiming.CHANGED;
+
 		if(path !== undefined) {
 			this.path = path;
 		}
@@ -39,9 +68,9 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
 	}
 
 	public static TYPE = "data";
-	public static create(path?:string, value?:any, mode?:BindingMode, 
-						 validationRule?:string, converters?:Array<string>) {
-		return new BindingDataSource(path, value, mode, validationRule, converters);
+	public static create(path?:string, value?:any, mode?:BindingMode, updateTiming?:UpdateTiming, 
+						 validationRule?:string, converter?:string) {
+		return new BindingDataSource(path, value, mode, updateTiming, validationRule, converter);
 	}
 };
 
@@ -49,9 +78,18 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
  * 命令源。 
  */
 export class BindingCommandSource extends JsonSerializer implements IBindingSource{
-	public type : string;
+	public type : DataSourceType;
+	/**
+	 * 命令的名称。
+	 */
 	public command : string;
+	/**
+	 * 命令的参数。
+	 */
 	public commandArgs : any;
+	/**
+	 * 命令的处理函数。
+	 */
 	public eventHandler : Function;
 
 	constructor(command:string, commandArgs?:any) {
@@ -59,7 +97,7 @@ export class BindingCommandSource extends JsonSerializer implements IBindingSour
 		this.command = command;
 		this.eventHandler = null;
 		this.commandArgs = commandArgs;
-		this.type = BindingCommandSource.TYPE;
+		this.type = <DataSourceType>BindingCommandSource.TYPE;
 	}
 
 	public static TYPE = "command";
@@ -72,7 +110,13 @@ export class BindingCommandSource extends JsonSerializer implements IBindingSour
  * 单项数据绑定规则。
  */
 export class BindingRuleItem {
+	/**
+	 * 属性名。
+	 */
 	public prop : string;
+	/**
+	 * 数据源。
+	 */
 	public source : IBindingSource;
 
 	public toJson() : any {
@@ -85,8 +129,8 @@ export class BindingRuleItem {
 		if(source.command) {
 			this.source = BindingCommandSource.create(source.command, source.commandArgs); 
 		}else{
-			this.source = BindingDataSource.create(source.path, source.value, source.mode,
-							source.validationRule, source.converters);
+			this.source = BindingDataSource.create(source.path, source.value, source.mode, source.updateTiming,
+							source.validationRule, source.converter);
 		}
 
 		return this;
@@ -133,8 +177,8 @@ export class BindingRule {
 			if(sJson.command) {
 				source = BindingCommandSource.create(sJson.command, sJson.commandArgs) 
 			}else{
-				source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, 
-												  sJson.validationRule, sJson.converters); 
+				source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, 
+												  sJson.validationRule, sJson.converter); 
 			}
 			this._items[prop] = BindingRuleItem.create(prop, source);
 		}
@@ -170,6 +214,15 @@ export class BindingRule {
 			var path = dataSource.path;
 			if(path && path.charAt(0) !== '/') {
 				dataSource.path = '/' + dataSource.path;
+			}
+			var mode = dataSource.mode;
+			if(mode && typeof mode === "string") {
+				dataSource.mode = toBindingMode(mode);
+			}
+
+			var updateTiming = dataSource.updateTiming;
+			if(updateTiming && typeof updateTiming === "string") {
+				dataSource.updateTiming = toUpdateTiming(updateTiming);
 			}
 		}
 

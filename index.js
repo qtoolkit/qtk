@@ -219,13 +219,13 @@ var qtk =
 	exports.ViewModal = view_modal_1.ViewModal;
 	var recyclable_creator_1 = __webpack_require__(82);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(152);
+	var delegate_command_1 = __webpack_require__(153);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_modal_1 = __webpack_require__(153);
+	var collection_view_modal_1 = __webpack_require__(154);
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
-	var delegate_value_converter_1 = __webpack_require__(154);
+	var delegate_value_converter_1 = __webpack_require__(155);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
-	var ivalidation_rule_1 = __webpack_require__(155);
+	var ivalidation_rule_1 = __webpack_require__(152);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
 	var delegate_validation_rule_1 = __webpack_require__(156);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
@@ -5918,13 +5918,19 @@ var qtk =
 	            this.value = value;
 	        }
 	    };
-	    /**
-	     * 设置数据绑定规则。
-	     */
-	    Widget.prototype.setDataBindingRule = function (dataBindingRule) {
-	        this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
-	        return this;
-	    };
+	    Object.defineProperty(Widget.prototype, "dataBindingRule", {
+	        get: function () {
+	            return this._dataBindingRule;
+	        },
+	        /**
+	         * 数据绑定规则。
+	         */
+	        set: function (dataBindingRule) {
+	            this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    /**
 	     * 绑定数据。
 	     */
@@ -5947,10 +5953,16 @@ var qtk =
 	            }
 	        }
 	        this.bindChildren(viewModal);
+	        if (viewModal.isCollection && this._templateItemJson) {
+	            var collectionViewModal = viewModal;
+	            collectionViewModal.onItemsChange(function (evt) {
+	                _this.bindChildren(viewModal);
+	            });
+	        }
 	        return this;
 	    };
 	    Widget.prototype.bindChildren = function (viewModal) {
-	        if (viewModal.isCollectionViewModal) {
+	        if (viewModal.isCollection) {
 	            if (this._templateItemJson) {
 	                //对于集合viewModal，如果有模板项存在，则动态生成子控件。
 	                var json = this._templateItemJson;
@@ -6005,43 +6017,13 @@ var qtk =
 	                var value = dataSource.value;
 	                var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
 	                if (value === undefined && dataSource.path) {
-	                    value = viewModal.getProp(dataSource.path);
+	                    value = viewModal.getProp(dataSource.path, dataSource.converter);
 	                }
 	                if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-	                    _this.onBindProp(prop, _this.convertValue(viewModal, dataSource, value));
+	                    _this.onBindProp(prop, value);
 	                }
 	            }
 	        });
-	    };
-	    /*
-	     * 根据转换函数，把数据转换成适合在界面上显示的格式。
-	     */
-	    Widget.prototype.convertValue = function (viewModal, dataSource, value) {
-	        var v = value;
-	        if (dataSource.converters) {
-	            dataSource.converters.forEach(function (name) {
-	                var c = viewModal.getValueConverter(name);
-	                if (c) {
-	                    v = c.convert(v);
-	                }
-	            });
-	        }
-	        return v;
-	    };
-	    /*
-	     * 根据转换函数，把数据转换成适合存储的格式。
-	     */
-	    Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
-	        var v = value;
-	        if (dataSource.converters) {
-	            dataSource.converters.forEachR(function (name) {
-	                var c = viewModal.getValueConverter(name);
-	                if (c) {
-	                    v = c.convertBack(v);
-	                }
-	            });
-	        }
-	        return v;
 	    };
 	    Widget.prototype.getPropDefaultBindMode = function (prop) {
 	        return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
@@ -6053,32 +6035,22 @@ var qtk =
 	        console.log("invalid value:" + message);
 	    };
 	    /*
-	     * 通过ValidationRule检查数据是否有效。
-	     */
-	    Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
-	        if (dataSource.validationRule) {
-	            var validationRule = viewModal.getValidationRule(dataSource.validationRule);
-	            if (validationRule) {
-	                var result = validationRule.validate(value);
-	                if (result.code) {
-	                    this.onInvalidInput(result.message);
-	                    return false;
-	                }
-	            }
-	        }
-	        return true;
-	    };
-	    /*
 	     * 监控控件单个属性的变化。
 	     */
 	    Widget.prototype.watchTargetValueChange = function (dataSource) {
 	        var _this = this;
 	        var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
 	        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-	            this.on(Events.CHANGE, function (evt) {
-	                var value = _this.convertBackValue(_this._viewModal, dataSource, evt.value);
-	                if (_this.isValidValue(_this._viewModal, dataSource, value)) {
-	                    _this._viewModal.setProp(dataSource.path, value, _this);
+	            var updateTiming = dataSource.updateTiming;
+	            var eventName = updateTiming === iview_modal_1.UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
+	            this.on(eventName, function (evt) {
+	                var value = evt.value;
+	                var path = dataSource.path;
+	                var converter = dataSource.converter;
+	                var validationRule = dataSource.validationRule;
+	                var result = _this._viewModal.setProp(path, value, converter, validationRule);
+	                if (result.code) {
+	                    _this.onInvalidInput(result.message);
 	                }
 	            });
 	        }
@@ -16650,18 +16622,20 @@ var qtk =
 	};
 	var json_serializer_1 = __webpack_require__(80);
 	var iview_modal_1 = __webpack_require__(81);
+	var iview_modal_2 = __webpack_require__(81);
 	;
 	/**
 	 * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModal中获取数据。
 	 */
 	var BindingDataSource = (function (_super) {
 	    __extends(BindingDataSource, _super);
-	    function BindingDataSource(path, value, mode, validationRule, converters) {
+	    function BindingDataSource(path, value, mode, updateTiming, validationRule, converter) {
 	        _super.call(this);
-	        this.converters = converters;
+	        this.converter = converter;
 	        this.type = BindingDataSource.TYPE;
 	        this.validationRule = validationRule;
-	        this.mode = mode || iview_modal_1.BindingMode.TWO_WAY;
+	        this.mode = mode || iview_modal_2.BindingMode.TWO_WAY;
+	        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_modal_2.UpdateTiming.CHANGED;
 	        if (path !== undefined) {
 	            this.path = path;
 	        }
@@ -16669,8 +16643,8 @@ var qtk =
 	            this.value = value;
 	        }
 	    }
-	    BindingDataSource.create = function (path, value, mode, validationRule, converters) {
-	        return new BindingDataSource(path, value, mode, validationRule, converters);
+	    BindingDataSource.create = function (path, value, mode, updateTiming, validationRule, converter) {
+	        return new BindingDataSource(path, value, mode, updateTiming, validationRule, converter);
 	    };
 	    BindingDataSource.TYPE = "data";
 	    return BindingDataSource;
@@ -16714,7 +16688,7 @@ var qtk =
 	            this.source = BindingCommandSource.create(source.command, source.commandArgs);
 	        }
 	        else {
-	            this.source = BindingDataSource.create(source.path, source.value, source.mode, source.validationRule, source.converters);
+	            this.source = BindingDataSource.create(source.path, source.value, source.mode, source.updateTiming, source.validationRule, source.converter);
 	        }
 	        return this;
 	    };
@@ -16751,7 +16725,7 @@ var qtk =
 	                source = BindingCommandSource.create(sJson.command, sJson.commandArgs);
 	            }
 	            else {
-	                source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.validationRule, sJson.converters);
+	                source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, sJson.validationRule, sJson.converter);
 	            }
 	            this._items[prop] = BindingRuleItem.create(prop, source);
 	        }
@@ -16779,6 +16753,14 @@ var qtk =
 	            var path = dataSource.path;
 	            if (path && path.charAt(0) !== '/') {
 	                dataSource.path = '/' + dataSource.path;
+	            }
+	            var mode = dataSource.mode;
+	            if (mode && typeof mode === "string") {
+	                dataSource.mode = iview_modal_1.toBindingMode(mode);
+	            }
+	            var updateTiming = dataSource.updateTiming;
+	            if (updateTiming && typeof updateTiming === "string") {
+	                dataSource.updateTiming = iview_modal_1.toUpdateTiming(updateTiming);
 	            }
 	        }
 	        return rule;
@@ -16830,22 +16812,62 @@ var qtk =
 	"use strict";
 	;
 	;
+	/**
+	 * 数据绑定模式。
+	 */
 	(function (BindingMode) {
+	    /**
+	     * 双向数据绑定。
+	     * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时自动更新界面。
+	     */
 	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
+	    /**
+	     * 单向数据绑定。
+	     * 界面数据变化时不更新ViewModal，ViewModal数据有变化时自动更新界面。
+	     */
 	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
+	    /**
+	     * 只在初始化时绑定。
+	     * 界面数据变化时不更新ViewModal，ViewModal数据有变化时不更新界面。
+	     */
 	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
+	    /**
+	     * 单向数据绑定。
+	     * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时不更新界面。
+	     */
 	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
 	})(exports.BindingMode || (exports.BindingMode = {}));
 	var BindingMode = exports.BindingMode;
 	;
-	(function (UpdateSourceTrigger) {
-	    UpdateSourceTrigger[UpdateSourceTrigger["DEFAULT"] = 0] = "DEFAULT";
-	    UpdateSourceTrigger[UpdateSourceTrigger["EXPLICIT"] = 1] = "EXPLICIT";
-	    UpdateSourceTrigger[UpdateSourceTrigger["LOSTFOCUS"] = 2] = "LOSTFOCUS";
-	    UpdateSourceTrigger[UpdateSourceTrigger["PROPERTYCHANGED"] = 3] = "PROPERTYCHANGED";
-	})(exports.UpdateSourceTrigger || (exports.UpdateSourceTrigger = {}));
-	var UpdateSourceTrigger = exports.UpdateSourceTrigger;
+	var BindingModeNames = ["two-way", "one-way", "one-time", "one-way-to-source"];
+	function toBindingMode(name) {
+	    return Math.max(0, BindingModeNames.indexOf(name));
+	}
+	exports.toBindingMode = toBindingMode;
+	/**
+	 * 更新ViewModal的时机。
+	 */
+	(function (UpdateTiming) {
+	    /**
+	     * 有变化时立即更新(如编辑器正在输入)。
+	     */
+	    UpdateTiming[UpdateTiming["CHANGING"] = 0] = "CHANGING";
+	    /**
+	     * 变化完成时才更新(如编辑器失去焦点时)。
+	     */
+	    UpdateTiming[UpdateTiming["CHANGED"] = 1] = "CHANGED";
+	    /**
+	     * 手动更新。
+	     */
+	    UpdateTiming[UpdateTiming["EXPLICIT"] = 2] = "EXPLICIT";
+	})(exports.UpdateTiming || (exports.UpdateTiming = {}));
+	var UpdateTiming = exports.UpdateTiming;
 	;
+	var UpdateTimingNames = ["changing", "changed", "explicity"];
+	function toUpdateTiming(name) {
+	    return Math.max(0, UpdateTimingNames.indexOf(name));
+	}
+	exports.toUpdateTiming = toUpdateTiming;
 
 
 /***/ },
@@ -26817,16 +26839,17 @@ var qtk =
 	var pointer = __webpack_require__(150);
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
+	var ivalidation_rule_1 = __webpack_require__(152);
 	var iview_modal_1 = __webpack_require__(81);
 	var ViewModalDefault = (function (_super) {
 	    __extends(ViewModalDefault, _super);
 	    function ViewModalDefault(data) {
 	        _super.call(this);
-	        this.isCollectionViewModal = false;
 	        this._commands = {};
 	        this._converters = {};
 	        this._data = data || {};
 	        this._validationRules = {};
+	        this.isCollection = false;
 	        this._ePropChange = Events.PropChangeEvent.create();
 	    }
 	    ViewModalDefault.prototype.getBindingMode = function () {
@@ -26835,13 +26858,15 @@ var qtk =
 	    ViewModalDefault.prototype.onChange = function (callback) {
 	        this.on(Events.PROP_DELETE, callback);
 	        this.on(Events.PROP_CHANGE, callback);
+	        return this;
 	    };
 	    ViewModalDefault.prototype.offChange = function (callback) {
 	        this.off(Events.PROP_DELETE, callback);
 	        this.off(Events.PROP_CHANGE, callback);
+	        return this;
 	    };
-	    ViewModalDefault.prototype.notifyChange = function (type, path, value, trigger) {
-	        this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value, trigger: trigger }));
+	    ViewModalDefault.prototype.notifyChange = function (type, path, value) {
+	        this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value }));
 	    };
 	    ViewModalDefault.prototype.fixPath = function (path) {
 	        if (path && path.charAt(0) !== '/') {
@@ -26851,21 +26876,38 @@ var qtk =
 	            return path;
 	        }
 	    };
-	    ViewModalDefault.prototype.getProp = function (path) {
-	        return pointer.get(this._data, this.fixPath(path));
+	    ViewModalDefault.prototype.getProp = function (path, converterName) {
+	        var value = pointer.get(this._data, this.fixPath(path));
+	        return this.convert(converterName, value);
 	    };
-	    ViewModalDefault.prototype.delProp = function (path, trigger) {
+	    ViewModalDefault.prototype.delProp = function (path) {
 	        pointer.remove(this._data, path);
-	        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
+	        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
 	        return this;
 	    };
-	    ViewModalDefault.prototype.setProp = function (path, value, trigger) {
-	        pointer.set(this._data, path, value);
-	        this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
-	        return this;
+	    ViewModalDefault.prototype.setProp = function (path, v, converterName, validationRule) {
+	        var value = this.convertBack(converterName, v);
+	        var validateResult = this.isValueValid(validationRule, value);
+	        if (!validateResult.code) {
+	            pointer.set(this._data, path, value);
+	            this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value);
+	        }
+	        else {
+	            console.log("invalid value");
+	        }
+	        return validateResult;
+	        ;
 	    };
 	    ViewModalDefault.prototype.getCommand = function (name) {
 	        return this._commands[name];
+	    };
+	    ViewModalDefault.prototype.canExecute = function (name) {
+	        var ret = false;
+	        var cmd = this.getCommand(name);
+	        if (cmd && cmd.canExecute()) {
+	            ret = true;
+	        }
+	        return ret;
 	    };
 	    ViewModalDefault.prototype.execCommand = function (name, args) {
 	        var ret = false;
@@ -26894,6 +26936,14 @@ var qtk =
 	        this._converters[name] = null;
 	        return this;
 	    };
+	    ViewModalDefault.prototype.convert = function (converterName, value) {
+	        var converter = converterName ? this.getValueConverter(converterName) : null;
+	        return converter ? converter.convert(value) : value;
+	    };
+	    ViewModalDefault.prototype.convertBack = function (converterName, value) {
+	        var converter = converterName ? this.getValueConverter(converterName) : null;
+	        return converter ? converter.convertBack(value) : value;
+	    };
 	    ViewModalDefault.prototype.getValidationRule = function (name) {
 	        return this._validationRules[name];
 	    };
@@ -26904,6 +26954,10 @@ var qtk =
 	    ViewModalDefault.prototype.unregisterValidationRule = function (name, validationRule) {
 	        this._validationRules[name] = null;
 	        return this;
+	    };
+	    ViewModalDefault.prototype.isValueValid = function (ruleName, value) {
+	        var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
+	        return validationRule ? validationRule.validate(value) : ivalidation_rule_1.ValidationResult.validResult;
 	    };
 	    return ViewModalDefault;
 	}(emitter_1.Emitter));
@@ -27161,6 +27215,39 @@ var qtk =
 /***/ function(module, exports) {
 
 	"use strict";
+	/**
+	 * 数据有效性检查的结果。
+	 */
+	var ValidationResult = (function () {
+	    function ValidationResult(code, message) {
+	        this.code = code;
+	        this.message = message;
+	    }
+	    /**
+	     * 创建函数。
+	     */
+	    ValidationResult.create = function (code, message) {
+	        return new ValidationResult(code, message);
+	    };
+	    /**
+	     * 数据有效时，可以共用的结果，不能在运行时修改。
+	     */
+	    ValidationResult.validResult = ValidationResult.create(0, "valid");
+	    /**
+	     * 数据无效时，可以共用的结果，不能在运行时修改。
+	     */
+	    ValidationResult.invalidResult = ValidationResult.create(-1, "invalid");
+	    return ValidationResult;
+	}());
+	exports.ValidationResult = ValidationResult;
+	;
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports) {
+
+	"use strict";
 	var DelegateCommand = (function () {
 	    function DelegateCommand(execute, canExecute) {
 	        this._execute = execute;
@@ -27182,7 +27269,7 @@ var qtk =
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27192,6 +27279,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
+	var delegate_command_1 = __webpack_require__(153);
+	var ivalidation_rule_1 = __webpack_require__(152);
 	var view_modal_default_1 = __webpack_require__(149);
 	/**
 	 * 集合ViewModal。delProp/getProp/setProp操作当前的项。
@@ -27200,7 +27289,7 @@ var qtk =
 	    __extends(CollectionViewModal, _super);
 	    function CollectionViewModal(data) {
 	        _super.call(this, data);
-	        this.isCollectionViewModal = true;
+	        this.isCollection = true;
 	        this._collection = data;
 	        var n = data.length;
 	        var viewModalItems = [];
@@ -27210,28 +27299,51 @@ var qtk =
 	        this._current = 0;
 	        this._viewModalItems = viewModalItems;
 	    }
-	    CollectionViewModal.prototype.getProp = function (path) {
-	        return this.currentViewModal.getProp(path);
+	    CollectionViewModal.prototype.getProp = function (path, converterName) {
+	        var vm = this.currentViewModal;
+	        return vm ? vm.getProp(path, converterName) : null;
 	    };
-	    CollectionViewModal.prototype.delProp = function (path, trigger) {
-	        return this.currentViewModal.delProp(path, trigger);
+	    CollectionViewModal.prototype.delProp = function (path) {
+	        var vm = this.currentViewModal;
+	        return vm ? vm.delProp(path) : this;
 	    };
-	    CollectionViewModal.prototype.setProp = function (path, value, trigger) {
-	        this.currentViewModal.setProp(path, value, trigger);
+	    CollectionViewModal.prototype.setProp = function (path, value, converterName, validationRule) {
+	        var vm = this.currentViewModal;
+	        return vm ? vm.setProp(path, value, converterName, validationRule) : ivalidation_rule_1.ValidationResult.invalidResult;
+	    };
+	    CollectionViewModal.prototype.onItemsChange = function (callback) {
+	        this.on(Events.ITEM_ADD, callback);
+	        this.on(Events.ITEM_DELETE, callback);
 	        return this;
+	    };
+	    CollectionViewModal.prototype.offItemsChange = function (callback) {
+	        this.off(Events.ITEM_ADD, callback);
+	        this.off(Events.ITEM_DELETE, callback);
+	        return this;
+	    };
+	    CollectionViewModal.prototype.fixState = function () {
+	        var n = this._collection.length;
+	        if (this.current >= n) {
+	            this.current = n - 1;
+	        }
+	        this._viewModalItems.forEach(function (item, index) {
+	            item.index = index;
+	        });
 	    };
 	    CollectionViewModal.prototype.addItem = function (data, index) {
 	        var n = this._collection.length;
 	        var index = index < n ? index : n;
 	        this._collection.splice(index, 0, data);
 	        this._viewModalItems.splice(index, 0, this.createItemViewModal(index));
-	        this.notifyChange(Events.ITEM_ADD, "/", index, this);
+	        this.fixState();
+	        this.notifyChange(Events.ITEM_ADD, "/", index);
 	        return this;
 	    };
 	    CollectionViewModal.prototype.removeItem = function (index) {
 	        this._collection.splice(index, 1);
 	        this._viewModalItems.splice(index, 1);
-	        this.notifyChange(Events.ITEM_DELETE, "/", index, this);
+	        this.fixState();
+	        this.notifyChange(Events.ITEM_DELETE, "/", index);
 	        return this;
 	    };
 	    Object.defineProperty(CollectionViewModal.prototype, "collection", {
@@ -27262,7 +27374,8 @@ var qtk =
 	            return this._current;
 	        },
 	        set: function (value) {
-	            this._current = Math.min(this._viewModalItems.length, Math.max(0, value));
+	            this._current = Math.min(this._viewModalItems.length - 1, Math.max(0, value));
+	            this.notifyChange(Events.PROP_CHANGE, "/", value);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -27282,25 +27395,57 @@ var qtk =
 	}(view_modal_default_1.ViewModalDefault));
 	exports.CollectionViewModal = CollectionViewModal;
 	;
+	/**
+	 * 表示集合ViewModal中的单项ViewModal。
+	 *
+	 */
 	var ItemViewModal = (function (_super) {
 	    __extends(ItemViewModal, _super);
 	    function ItemViewModal(collectionViewModal, index) {
 	        _super.call(this, collectionViewModal.collection[index]);
-	        this.isCollectionViewModal = false;
+	        this.isCollection = false;
 	        this.index = index;
 	        this.collectionViewModal = collectionViewModal;
+	        this.initCommands();
 	    }
 	    ItemViewModal.prototype.getCommand = function (name) {
-	        return this.collectionViewModal.getCommand(name);
+	        var cmd = _super.prototype.getCommand.call(this, name);
+	        if (!cmd) {
+	            cmd = this.collectionViewModal.getCommand(name);
+	        }
+	        return cmd;
 	    };
-	    ItemViewModal.prototype.execCommand = function (name, args) {
-	        if (args) {
-	            args.$index = this.index;
+	    ItemViewModal.prototype.canExecute = function (name) {
+	        if (_super.prototype.canExecute.call(this, name)) {
+	            return true;
 	        }
 	        else {
-	            args = { $index: this.index };
+	            return this.collectionViewModal.canExecute(name);
 	        }
-	        return this.collectionViewModal.execCommand(name, args);
+	    };
+	    ItemViewModal.prototype.execCommand = function (name, args) {
+	        var cmd = _super.prototype.getCommand.call(this, name);
+	        if (cmd) {
+	            return _super.prototype.execCommand.call(this, name, args);
+	        }
+	        else {
+	            if (args) {
+	                args.$index = this.index;
+	            }
+	            else {
+	                args = { $index: this.index };
+	            }
+	            return this.collectionViewModal.execCommand(name, args);
+	        }
+	    };
+	    ItemViewModal.prototype.convert = function (converterName, value) {
+	        return this.collectionViewModal.convert(converterName, value);
+	    };
+	    ItemViewModal.prototype.convertBack = function (converterName, value) {
+	        return this.collectionViewModal.convertBack(converterName, value);
+	    };
+	    ItemViewModal.prototype.isValueValid = function (ruleName, value) {
+	        return this.collectionViewModal.isValueValid(ruleName, value);
 	    };
 	    ItemViewModal.prototype.getValueConverter = function (name) {
 	        return this.collectionViewModal.getValueConverter(name);
@@ -27311,11 +27456,21 @@ var qtk =
 	    ItemViewModal.prototype.isCurrent = function () {
 	        return this.collectionViewModal.current === this.index;
 	    };
-	    ItemViewModal.prototype.notifyChange = function (type, path, value, trigger) {
+	    ItemViewModal.prototype.notifyChange = function (type, path, value) {
 	        if (this.isCurrent) {
-	            this.collectionViewModal.notifyChange(type, path, value, trigger);
+	            this.collectionViewModal.notifyChange(type, path, value);
 	        }
-	        _super.prototype.notifyChange.call(this, type, path, value, trigger);
+	        _super.prototype.notifyChange.call(this, type, path, value);
+	    };
+	    ItemViewModal.prototype.initCommands = function () {
+	        var _this = this;
+	        var collectionViewModal = this.collectionViewModal;
+	        this.registerCommand("activate", delegate_command_1.DelegateCommand.create(function (args) {
+	            collectionViewModal.current = _this.index;
+	        }));
+	        this.registerCommand("remove", delegate_command_1.DelegateCommand.create(function (args) {
+	            collectionViewModal.removeItem(collectionViewModal.current);
+	        }));
 	    };
 	    ItemViewModal.create = function (collectionViewModal, index) {
 	        return new ItemViewModal(collectionViewModal, index);
@@ -27326,7 +27481,7 @@ var qtk =
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27347,35 +27502,6 @@ var qtk =
 	    return DelegateValueConverter;
 	}());
 	exports.DelegateValueConverter = DelegateValueConverter;
-	;
-
-
-/***/ },
-/* 155 */
-/***/ function(module, exports) {
-
-	"use strict";
-	/**
-	 * 数据有效性检查的结果。
-	 */
-	var ValidationResult = (function () {
-	    function ValidationResult(code, message) {
-	        this.code = code;
-	        this.message = message;
-	    }
-	    /**
-	     * 创建函数。
-	     */
-	    ValidationResult.create = function (code, message) {
-	        return new ValidationResult(code, message);
-	    };
-	    /**
-	     * 数据有效时，可以共用的结果，不能在运行是修改。
-	     */
-	    ValidationResult.validResult = ValidationResult.create(0, "valid");
-	    return ValidationResult;
-	}());
-	exports.ValidationResult = ValidationResult;
 	;
 
 

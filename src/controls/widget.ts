@@ -26,7 +26,7 @@ import {IValueConverter} from "../mvvm/ivalue-converter";
 import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource, 
 	BindingCommandSource} from "../mvvm/binding-rule";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
-import {IViewModal, ICollectionViewModal, BindingMode} from "../mvvm/iview-modal";
+import {IViewModal, ICollectionViewModal, UpdateTiming, BindingMode} from "../mvvm/iview-modal";
 
 export enum WidgetMode {
 	RUNTIME = 0,
@@ -1804,16 +1804,18 @@ export class Widget extends Emitter {
 		}
 	}
 
-	protected _dataBindingRule : any;
+	protected _dataBindingRule : BindingRule;
 	protected _viewModal : IViewModal;
 
 	/**
-	 * 设置数据绑定规则。
+	 * 数据绑定规则。
 	 */
-	public setDataBindingRule(dataBindingRule:any) : Widget {
+	public set dataBindingRule(dataBindingRule:any) {
 		this._dataBindingRule = BindingRule.create(dataBindingRule);
+	}
 
-		return this;
+	public get dataBindingRule() : any {
+		return this._dataBindingRule;
 	}
 
 	/**
@@ -1842,12 +1844,18 @@ export class Widget extends Emitter {
 		}
 
 		this.bindChildren(viewModal);
+		if(viewModal.isCollection && this._templateItemJson) {
+			var collectionViewModal = <ICollectionViewModal>viewModal;
+			collectionViewModal.onItemsChange((evt:Events.ChangeEvent) => {
+				this.bindChildren(viewModal);
+			});
+		}
 
 		return this;
 	}
 	
 	protected bindChildren(viewModal:IViewModal) {
-		if(viewModal.isCollectionViewModal) {
+		if(viewModal.isCollection) {
 			if(this._templateItemJson) {	
 				//对于集合viewModal，如果有模板项存在，则动态生成子控件。
 				var json = this._templateItemJson;
@@ -1902,48 +1910,14 @@ export class Widget extends Emitter {
 				var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
 				
 				if(value === undefined && dataSource.path) {
-					value = viewModal.getProp(dataSource.path);
+					value = viewModal.getProp(dataSource.path, dataSource.converter);
 				}
 				
 				if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-					this.onBindProp(prop, this.convertValue(viewModal, dataSource, value));
+					this.onBindProp(prop, value);
 				}
 			}
 		});
-	}
-
-	/*
-	 * 根据转换函数，把数据转换成适合在界面上显示的格式。
-	 */
-	protected convertValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : any {
-		var v = value;
-		if(dataSource.converters) {
-			dataSource.converters.forEach((name:string) => {
-				var c = viewModal.getValueConverter(name);
-				if(c) {
-					v = c.convert(v);
-				}
-			});
-		}
-		
-		return v;
-	}
-
-	/*
-	 * 根据转换函数，把数据转换成适合存储的格式。
-	 */
-	protected convertBackValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : any {
-		var v = value;
-		if(dataSource.converters) {
-			dataSource.converters.forEachR((name:string) => {
-				var c = viewModal.getValueConverter(name);
-				if(c) {
-					v = c.convertBack(v);
-				}
-			});
-		}
-		
-		return v;
 	}
 
 	protected getPropDefaultBindMode(prop:string) : BindingMode {
@@ -1958,34 +1932,22 @@ export class Widget extends Emitter {
 	}
 
 	/*
-	 * 通过ValidationRule检查数据是否有效。 
-	 */
-	protected isValidValue(viewModal:IViewModal, dataSource:BindingDataSource, value:any) : boolean {
-		if(dataSource.validationRule) {
-			var validationRule = viewModal.getValidationRule(dataSource.validationRule);
-			if(validationRule) {
-				var result = validationRule.validate(value);
-				if(result.code) {
-					this.onInvalidInput(result.message);
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/*
 	 * 监控控件单个属性的变化。
 	 */
 	protected watchTargetValueChange(dataSource:BindingDataSource) {
 		var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
-			this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
-				var value = this.convertBackValue(this._viewModal, dataSource, evt.value);
-			
-				if(this.isValidValue(this._viewModal, dataSource, value)) {
-					this._viewModal.setProp(dataSource.path, value, this);
+			var updateTiming = dataSource.updateTiming;
+			var eventName = updateTiming === UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
+
+			this.on(eventName, (evt:Events.ChangeEvent) => {
+				var value = evt.value;
+				var path  = dataSource.path;
+				var converter = dataSource.converter;
+				var validationRule = dataSource.validationRule;
+				var result = this._viewModal.setProp(path, value, converter, validationRule);
+				if(result.code) {
+					this.onInvalidInput(result.message);
 				}
 			});
 		}

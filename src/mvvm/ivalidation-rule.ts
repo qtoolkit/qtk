@@ -16,9 +16,14 @@ export class ValidationResult {
 	}
 
 	/**
-	 * 数据有效时，可以共用的结果，不能在运行是修改。
+	 * 数据有效时，可以共用的结果，不能在运行时修改。
 	 */
 	public static validResult = ValidationResult.create(0, "valid");
+	
+	/**
+	 * 数据无效时，可以共用的结果，不能在运行时修改。
+	 */
+	public static invalidResult = ValidationResult.create(-1, "invalid");
 
 	/**
 	 * 创建函数。

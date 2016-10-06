@@ -4,7 +4,7 @@ import {Emitter} from "../emitter";
 import Events = require("../events");
 import {ICommand} from "./icommand";
 import {IValueConverter} from "./ivalue-converter";
-import {IValidationRule} from "./ivalidation-rule";
+import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 import {IViewModal, BindingMode,ICollectionViewModal} from "./iview-modal";
 
 export class ViewModalDefault extends Emitter implements IViewModal {
@@ -14,7 +14,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	private _validationRules : any;
 	private _ePropChange : Events.PropChangeEvent;
 	
-	public isCollectionViewModal = false;
+	public isCollection : boolean;
 
 	constructor(data:any) {
 		super();
@@ -23,6 +23,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		this._converters = {};
 		this._data = data || {};
 		this._validationRules = {};
+		this.isCollection = false;
 		this._ePropChange = Events.PropChangeEvent.create();
 	}
 	
@@ -30,18 +31,22 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		return BindingMode.TWO_WAY;
 	}
 
-	public onChange(callback:Function) {
+	public onChange(callback:Function) : IViewModal {
 		this.on(Events.PROP_DELETE, callback);
 		this.on(Events.PROP_CHANGE, callback);
+
+		return this;
 	}
 
-	public offChange(callback:Function) {
+	public offChange(callback:Function) : IViewModal {
 		this.off(Events.PROP_DELETE, callback);
 		this.off(Events.PROP_CHANGE, callback);
+
+		return this;
 	}
 
-	public notifyChange(type:string, path:string, value:any, trigger?:any) {
-		this.dispatchEvent(this._ePropChange.init(type, {prop:path, value:value, trigger:trigger}));
+	public notifyChange(type:string, path:string, value:any) {
+		this.dispatchEvent(this._ePropChange.init(type, {prop:path, value:value}));
 	}
 
 	protected fixPath(path:string) : string {
@@ -52,28 +57,48 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		}
 	}
 
-	public getProp(path:string) : any {
-		return pointer.get(this._data, this.fixPath(path));
+	public getProp(path:string, converterName?:string) : any {
+		var value = pointer.get(this._data, this.fixPath(path));
+
+		return this.convert(converterName, value);
 	}
 
-	public delProp(path:string, trigger:any) : IViewModal {
+	public delProp(path:string) : IViewModal {
 		pointer.remove(this._data, path);
-		this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null, trigger);
+		this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
 
 		return this;
 	}
 	
-	public setProp(path:string, value:any, trigger?:any) : IViewModal {
-		pointer.set(this._data, path, value);
-		this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value, trigger);
+	public setProp(path:string, v:any, converterName?:string, validationRule?:string) : ValidationResult {
+		
+		var value = this.convertBack(converterName, v);
+		var validateResult = this.isValueValid(validationRule, value);
+		if(!validateResult.code) {
+			pointer.set(this._data, path, value);
+			this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value);
+		}else{
+			console.log("invalid value");
+		}
 
-		return this;
+		return validateResult;;
 	}
 
 	public getCommand(name:string) : ICommand {
 		return this._commands[name];
 	}
 	
+	public canExecute(name:string) : boolean {
+		var ret = false;
+		var cmd = this.getCommand(name);
+
+		if(cmd && cmd.canExecute()) {
+			ret = true;
+		}
+
+		return ret;
+	}
+
 	public execCommand(name:string, args:any) : boolean{
 		var ret = false;
 		var cmd = this.getCommand(name);
@@ -110,6 +135,16 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		return this;
 	}
 	
+	public convert(converterName:string, value:any) : any {
+		var converter = converterName ? this.getValueConverter(converterName) : null;
+		return converter ? converter.convert(value) : value;
+	}
+	
+	public convertBack(converterName:string, value:any) : any {
+		var converter = converterName ? this.getValueConverter(converterName) : null;
+		return converter ? converter.convertBack(value) : value;
+	}
+
 	public getValidationRule(name:string) : IValidationRule {
 		return this._validationRules[name];
 	}
@@ -122,5 +157,11 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		this._validationRules[name] = null;
 	
 		return this;
+	}
+
+	public isValueValid(ruleName:string, value:any) : ValidationResult {
+		var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
+
+		return validationRule ? validationRule.validate(value) : ValidationResult.validResult;
 	}
 };

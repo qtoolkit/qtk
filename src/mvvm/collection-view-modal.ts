@@ -2,8 +2,9 @@
 import {Emitter} from "../emitter";
 import Events = require("../events");
 import {ICommand} from "./icommand";
+import {DelegateCommand} from "./delegate-command";
 import {IValueConverter} from "./ivalue-converter";
-import {IValidationRule} from "./ivalidation-rule";
+import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 import {IViewModal, BindingMode, ICollectionViewModal} from "./iview-modal";
 import {ViewModalDefault} from "./view-modal-default"
 
@@ -15,20 +16,47 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	protected _collection : Array<any>;
 	protected _viewModalItems : Array<IViewModal>;
 	
-	public isCollectionViewModal = true;
-	public getProp(path:string) : any {
-		return this.currentViewModal.getProp(path);
+	public isCollection = true;
+	public getProp(path:string, converterName?:string) : any {
+		var vm = this.currentViewModal;
+
+		return vm ? vm.getProp(path, converterName) : null;
 	}
 
-	public delProp(path:string, trigger:any) : IViewModal {
-		return this.currentViewModal.delProp(path, trigger);
+	public delProp(path:string) : IViewModal {
+		var vm = this.currentViewModal;
+		return vm ? vm.delProp(path) : this;
 	}
 
-	public setProp(path:string, value:any, trigger?:any) : IViewModal {
-		this.currentViewModal.setProp(path, value, trigger);
+	public setProp(path:string, value:any, converterName?:string, validationRule?:string) : ValidationResult {
+		var vm = this.currentViewModal;
+		return vm ? vm.setProp(path, value, converterName, validationRule) : ValidationResult.invalidResult;
+	}
+
+	public onItemsChange(callback:Function) : ICollectionViewModal {
+		this.on(Events.ITEM_ADD, callback);
+		this.on(Events.ITEM_DELETE, callback);
+
 		return this;
 	}
-	
+
+	public offItemsChange(callback:Function) : ICollectionViewModal {
+		this.off(Events.ITEM_ADD, callback);
+		this.off(Events.ITEM_DELETE, callback);
+
+		return this;
+	}
+
+	protected fixState() {
+		var n = this._collection.length;
+		if(this.current >= n) {
+			this.current = n-1;
+		}
+		this._viewModalItems.forEach((item:ItemViewModal, index:number) => {
+			item.index = index;
+		});
+	}
+
 	public addItem(data:any, index?:number) : ICollectionViewModal {
 		var n = this._collection.length;
 		var index = index < n ? index : n;
@@ -36,7 +64,8 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 		this._collection.splice(index, 0, data);
 		this._viewModalItems.splice(index, 0, this.createItemViewModal(index));
 
-		this.notifyChange(Events.ITEM_ADD, "/", index, this);
+		this.fixState();
+		this.notifyChange(Events.ITEM_ADD, "/", index);
 		
 		return this;
 	}
@@ -44,15 +73,16 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	public removeItem(index:number) : ICollectionViewModal {
 		this._collection.splice(index, 1);
 		this._viewModalItems.splice(index, 1);
-		this.notifyChange(Events.ITEM_DELETE, "/", index, this);
-
+		
+		this.fixState();
+		this.notifyChange(Events.ITEM_DELETE, "/", index);
+		
 		return this;
 	}
 
 	public get collection() : Array<any> {
 		return this._collection;
 	}
-
 	public get currentViewModal() : IViewModal {
 		return this._viewModalItems[this._current];
 	}
@@ -64,7 +94,8 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	}
 
 	public set current(value:number) {
-		this._current = Math.min(this._viewModalItems.length, Math.max(0, value));
+		this._current = Math.min(this._viewModalItems.length-1, Math.max(0, value));
+		this.notifyChange(Events.PROP_CHANGE, "/", value);
 	}
 
 	public get current() : number {
@@ -101,23 +132,57 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	}
 };
 
+/**
+ * 表示集合ViewModal中的单项ViewModal。
+ * 
+ */
 export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	public index : number;
-	public isCollectionViewModal = false;
+	public isCollection = false;
 	public collectionViewModal : CollectionViewModal;
 
 	public getCommand(name:string) : ICommand {
-		return this.collectionViewModal.getCommand(name);
+		var cmd = super.getCommand(name);
+		if(!cmd) {
+			cmd = this.collectionViewModal.getCommand(name);
+		}
+
+		return cmd;
+	}
+
+	public canExecute(name:string) : boolean {
+		if(super.canExecute(name)) {
+			return true;
+		}else{
+			return this.collectionViewModal.canExecute(name);
+		}
 	}
 
 	public execCommand(name:string, args:any) : boolean{
-		if(args) {
-			args.$index = this.index;
-		}else {
-			args = {$index:this.index};
-		}
+		var cmd = super.getCommand(name);
+		if(cmd) {
+			return super.execCommand(name, args);
+		}else{
+			if(args) {
+				args.$index = this.index;
+			}else {
+				args = {$index:this.index};
+			}
 
-		return this.collectionViewModal.execCommand(name, args);
+			return this.collectionViewModal.execCommand(name, args);
+		}
+	}
+
+	public convert(converterName:string, value:any) : any {
+		return this.collectionViewModal.convert(converterName, value);	
+	}
+
+	public convertBack(converterName:string, value:any) : any {
+		return this.collectionViewModal.convertBack(converterName, value);
+	}
+
+	public isValueValid(ruleName:string, value:any) : ValidationResult {
+		return this.collectionViewModal.isValueValid(ruleName, value);
 	}
 
 	public getValueConverter(name:string) : IValueConverter {
@@ -132,12 +197,23 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 		return this.collectionViewModal.current === this.index; 
 	}
 	
-	public notifyChange(type:string, path:string, value:any, trigger?:any) {
+	public notifyChange(type:string, path:string, value:any) {
 		if(this.isCurrent) {
-			this.collectionViewModal.notifyChange(type, path, value, trigger);
+			this.collectionViewModal.notifyChange(type, path, value);
 		}
 
-		super.notifyChange(type, path, value, trigger);
+		super.notifyChange(type, path, value);
+	}
+
+	protected initCommands() {
+		var collectionViewModal = this.collectionViewModal;
+		this.registerCommand("activate", DelegateCommand.create(args => {
+			collectionViewModal.current = this.index;
+		}));
+
+		this.registerCommand("remove", DelegateCommand.create(args => {
+			collectionViewModal.removeItem(collectionViewModal.current);
+		}));
 	}
 
 	public constructor(collectionViewModal:CollectionViewModal, index:number) {
@@ -145,6 +221,8 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 
 		this.index = index;
 		this.collectionViewModal = collectionViewModal;
+		
+		this.initCommands();
 	}
 
 	public static create(collectionViewModal:CollectionViewModal, index:number) { 

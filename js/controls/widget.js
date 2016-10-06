@@ -1637,13 +1637,19 @@ var Widget = (function (_super) {
             this.value = value;
         }
     };
-    /**
-     * 设置数据绑定规则。
-     */
-    Widget.prototype.setDataBindingRule = function (dataBindingRule) {
-        this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
-        return this;
-    };
+    Object.defineProperty(Widget.prototype, "dataBindingRule", {
+        get: function () {
+            return this._dataBindingRule;
+        },
+        /**
+         * 数据绑定规则。
+         */
+        set: function (dataBindingRule) {
+            this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * 绑定数据。
      */
@@ -1666,10 +1672,16 @@ var Widget = (function (_super) {
             }
         }
         this.bindChildren(viewModal);
+        if (viewModal.isCollection && this._templateItemJson) {
+            var collectionViewModal = viewModal;
+            collectionViewModal.onItemsChange(function (evt) {
+                _this.bindChildren(viewModal);
+            });
+        }
         return this;
     };
     Widget.prototype.bindChildren = function (viewModal) {
-        if (viewModal.isCollectionViewModal) {
+        if (viewModal.isCollection) {
             if (this._templateItemJson) {
                 //对于集合viewModal，如果有模板项存在，则动态生成子控件。
                 var json = this._templateItemJson;
@@ -1724,43 +1736,13 @@ var Widget = (function (_super) {
                 var value = dataSource.value;
                 var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
                 if (value === undefined && dataSource.path) {
-                    value = viewModal.getProp(dataSource.path);
+                    value = viewModal.getProp(dataSource.path, dataSource.converter);
                 }
                 if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                    _this.onBindProp(prop, _this.convertValue(viewModal, dataSource, value));
+                    _this.onBindProp(prop, value);
                 }
             }
         });
-    };
-    /*
-     * 根据转换函数，把数据转换成适合在界面上显示的格式。
-     */
-    Widget.prototype.convertValue = function (viewModal, dataSource, value) {
-        var v = value;
-        if (dataSource.converters) {
-            dataSource.converters.forEach(function (name) {
-                var c = viewModal.getValueConverter(name);
-                if (c) {
-                    v = c.convert(v);
-                }
-            });
-        }
-        return v;
-    };
-    /*
-     * 根据转换函数，把数据转换成适合存储的格式。
-     */
-    Widget.prototype.convertBackValue = function (viewModal, dataSource, value) {
-        var v = value;
-        if (dataSource.converters) {
-            dataSource.converters.forEachR(function (name) {
-                var c = viewModal.getValueConverter(name);
-                if (c) {
-                    v = c.convertBack(v);
-                }
-            });
-        }
-        return v;
     };
     Widget.prototype.getPropDefaultBindMode = function (prop) {
         return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
@@ -1772,32 +1754,22 @@ var Widget = (function (_super) {
         console.log("invalid value:" + message);
     };
     /*
-     * 通过ValidationRule检查数据是否有效。
-     */
-    Widget.prototype.isValidValue = function (viewModal, dataSource, value) {
-        if (dataSource.validationRule) {
-            var validationRule = viewModal.getValidationRule(dataSource.validationRule);
-            if (validationRule) {
-                var result = validationRule.validate(value);
-                if (result.code) {
-                    this.onInvalidInput(result.message);
-                    return false;
-                }
-            }
-        }
-        return true;
-    };
-    /*
      * 监控控件单个属性的变化。
      */
     Widget.prototype.watchTargetValueChange = function (dataSource) {
         var _this = this;
         var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
         if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-            this.on(Events.CHANGE, function (evt) {
-                var value = _this.convertBackValue(_this._viewModal, dataSource, evt.value);
-                if (_this.isValidValue(_this._viewModal, dataSource, value)) {
-                    _this._viewModal.setProp(dataSource.path, value, _this);
+            var updateTiming = dataSource.updateTiming;
+            var eventName = updateTiming === iview_modal_1.UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
+            this.on(eventName, function (evt) {
+                var value = evt.value;
+                var path = dataSource.path;
+                var converter = dataSource.converter;
+                var validationRule = dataSource.validationRule;
+                var result = _this._viewModal.setProp(path, value, converter, validationRule);
+                if (result.code) {
+                    _this.onInvalidInput(result.message);
                 }
             });
         }

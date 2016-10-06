@@ -5,6 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Events = require("../events");
+var delegate_command_1 = require("./delegate-command");
+var ivalidation_rule_1 = require("./ivalidation-rule");
 var view_modal_default_1 = require("./view-modal-default");
 /**
  * 集合ViewModal。delProp/getProp/setProp操作当前的项。
@@ -13,7 +15,7 @@ var CollectionViewModal = (function (_super) {
     __extends(CollectionViewModal, _super);
     function CollectionViewModal(data) {
         _super.call(this, data);
-        this.isCollectionViewModal = true;
+        this.isCollection = true;
         this._collection = data;
         var n = data.length;
         var viewModalItems = [];
@@ -23,28 +25,51 @@ var CollectionViewModal = (function (_super) {
         this._current = 0;
         this._viewModalItems = viewModalItems;
     }
-    CollectionViewModal.prototype.getProp = function (path) {
-        return this.currentViewModal.getProp(path);
+    CollectionViewModal.prototype.getProp = function (path, converterName) {
+        var vm = this.currentViewModal;
+        return vm ? vm.getProp(path, converterName) : null;
     };
-    CollectionViewModal.prototype.delProp = function (path, trigger) {
-        return this.currentViewModal.delProp(path, trigger);
+    CollectionViewModal.prototype.delProp = function (path) {
+        var vm = this.currentViewModal;
+        return vm ? vm.delProp(path) : this;
     };
-    CollectionViewModal.prototype.setProp = function (path, value, trigger) {
-        this.currentViewModal.setProp(path, value, trigger);
+    CollectionViewModal.prototype.setProp = function (path, value, converterName, validationRule) {
+        var vm = this.currentViewModal;
+        return vm ? vm.setProp(path, value, converterName, validationRule) : ivalidation_rule_1.ValidationResult.invalidResult;
+    };
+    CollectionViewModal.prototype.onItemsChange = function (callback) {
+        this.on(Events.ITEM_ADD, callback);
+        this.on(Events.ITEM_DELETE, callback);
         return this;
+    };
+    CollectionViewModal.prototype.offItemsChange = function (callback) {
+        this.off(Events.ITEM_ADD, callback);
+        this.off(Events.ITEM_DELETE, callback);
+        return this;
+    };
+    CollectionViewModal.prototype.fixState = function () {
+        var n = this._collection.length;
+        if (this.current >= n) {
+            this.current = n - 1;
+        }
+        this._viewModalItems.forEach(function (item, index) {
+            item.index = index;
+        });
     };
     CollectionViewModal.prototype.addItem = function (data, index) {
         var n = this._collection.length;
         var index = index < n ? index : n;
         this._collection.splice(index, 0, data);
         this._viewModalItems.splice(index, 0, this.createItemViewModal(index));
-        this.notifyChange(Events.ITEM_ADD, "/", index, this);
+        this.fixState();
+        this.notifyChange(Events.ITEM_ADD, "/", index);
         return this;
     };
     CollectionViewModal.prototype.removeItem = function (index) {
         this._collection.splice(index, 1);
         this._viewModalItems.splice(index, 1);
-        this.notifyChange(Events.ITEM_DELETE, "/", index, this);
+        this.fixState();
+        this.notifyChange(Events.ITEM_DELETE, "/", index);
         return this;
     };
     Object.defineProperty(CollectionViewModal.prototype, "collection", {
@@ -75,7 +100,8 @@ var CollectionViewModal = (function (_super) {
             return this._current;
         },
         set: function (value) {
-            this._current = Math.min(this._viewModalItems.length, Math.max(0, value));
+            this._current = Math.min(this._viewModalItems.length - 1, Math.max(0, value));
+            this.notifyChange(Events.PROP_CHANGE, "/", value);
         },
         enumerable: true,
         configurable: true
@@ -95,25 +121,57 @@ var CollectionViewModal = (function (_super) {
 }(view_modal_default_1.ViewModalDefault));
 exports.CollectionViewModal = CollectionViewModal;
 ;
+/**
+ * 表示集合ViewModal中的单项ViewModal。
+ *
+ */
 var ItemViewModal = (function (_super) {
     __extends(ItemViewModal, _super);
     function ItemViewModal(collectionViewModal, index) {
         _super.call(this, collectionViewModal.collection[index]);
-        this.isCollectionViewModal = false;
+        this.isCollection = false;
         this.index = index;
         this.collectionViewModal = collectionViewModal;
+        this.initCommands();
     }
     ItemViewModal.prototype.getCommand = function (name) {
-        return this.collectionViewModal.getCommand(name);
+        var cmd = _super.prototype.getCommand.call(this, name);
+        if (!cmd) {
+            cmd = this.collectionViewModal.getCommand(name);
+        }
+        return cmd;
     };
-    ItemViewModal.prototype.execCommand = function (name, args) {
-        if (args) {
-            args.$index = this.index;
+    ItemViewModal.prototype.canExecute = function (name) {
+        if (_super.prototype.canExecute.call(this, name)) {
+            return true;
         }
         else {
-            args = { $index: this.index };
+            return this.collectionViewModal.canExecute(name);
         }
-        return this.collectionViewModal.execCommand(name, args);
+    };
+    ItemViewModal.prototype.execCommand = function (name, args) {
+        var cmd = _super.prototype.getCommand.call(this, name);
+        if (cmd) {
+            return _super.prototype.execCommand.call(this, name, args);
+        }
+        else {
+            if (args) {
+                args.$index = this.index;
+            }
+            else {
+                args = { $index: this.index };
+            }
+            return this.collectionViewModal.execCommand(name, args);
+        }
+    };
+    ItemViewModal.prototype.convert = function (converterName, value) {
+        return this.collectionViewModal.convert(converterName, value);
+    };
+    ItemViewModal.prototype.convertBack = function (converterName, value) {
+        return this.collectionViewModal.convertBack(converterName, value);
+    };
+    ItemViewModal.prototype.isValueValid = function (ruleName, value) {
+        return this.collectionViewModal.isValueValid(ruleName, value);
     };
     ItemViewModal.prototype.getValueConverter = function (name) {
         return this.collectionViewModal.getValueConverter(name);
@@ -124,11 +182,21 @@ var ItemViewModal = (function (_super) {
     ItemViewModal.prototype.isCurrent = function () {
         return this.collectionViewModal.current === this.index;
     };
-    ItemViewModal.prototype.notifyChange = function (type, path, value, trigger) {
+    ItemViewModal.prototype.notifyChange = function (type, path, value) {
         if (this.isCurrent) {
-            this.collectionViewModal.notifyChange(type, path, value, trigger);
+            this.collectionViewModal.notifyChange(type, path, value);
         }
-        _super.prototype.notifyChange.call(this, type, path, value, trigger);
+        _super.prototype.notifyChange.call(this, type, path, value);
+    };
+    ItemViewModal.prototype.initCommands = function () {
+        var _this = this;
+        var collectionViewModal = this.collectionViewModal;
+        this.registerCommand("activate", delegate_command_1.DelegateCommand.create(function (args) {
+            collectionViewModal.current = _this.index;
+        }));
+        this.registerCommand("remove", delegate_command_1.DelegateCommand.create(function (args) {
+            collectionViewModal.removeItem(collectionViewModal.current);
+        }));
     };
     ItemViewModal.create = function (collectionViewModal, index) {
         return new ItemViewModal(collectionViewModal, index);
