@@ -23369,6 +23369,11 @@ var qtk =
 	        this.dispatchEvent({ type: Events.RUN });
 	        this._mainLoop.requestRedraw();
 	    };
+	    /**
+	     * 子类可以重载此函数，做App的初始化工作。
+	     */
+	    Application.prototype.start = function () {
+	    };
 	    Application.prototype.init = function (args) {
 	        var _this = this;
 	        this.initOptions(args);
@@ -23387,11 +23392,13 @@ var qtk =
 	                        themeManager.load(json, baseURL);
 	                        _this.dispatchEventAsync({ type: Events.READY });
 	                        _this._isReady = true;
+	                        _this.start();
 	                    });
 	                }
 	                else {
 	                    _this.dispatchEventAsync({ type: Events.READY });
 	                    _this._isReady = true;
+	                    _this.start();
 	                }
 	            });
 	        }

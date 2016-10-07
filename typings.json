@@ -2,6 +2,7 @@
   "name": "foo",
   "dependencies": {},
   "globalDependencies": {
+    "json-pointer": "registry:dt/json-pointer#1.0.0+20160317120654",
     "scroller": "registry:dt/scroller#0.0.0+20160316155526",
     "tween.js": "registry:dt/tween.js#0.0.0+20160608102153",
     "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160728142841"

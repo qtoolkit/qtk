@@ -78,6 +78,12 @@ export class Application extends Emitter implements IApplication {
 		this._mainLoop.requestRedraw();
 	}
 
+	/**
+	 * 子类可以重载此函数，做App的初始化工作。
+	 */
+	public start() {
+	}
+
 	public init(args:any) {
 		this.initOptions(args);
 		var themeManager = new ThemeManager();
@@ -97,10 +103,12 @@ export class Application extends Emitter implements IApplication {
 						themeManager.load(json, baseURL);
 						this.dispatchEventAsync({type:Events.READY});
 						this._isReady = true;
+						this.start();
 					});
 				}else{
 					this.dispatchEventAsync({type:Events.READY});
 					this._isReady = true;
+					this.start();
 				}
 			});
 		}

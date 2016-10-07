@@ -22,6 +22,10 @@ export declare class Application extends Emitter implements IApplication {
     options: any;
     private initOptions(args);
     run(): void;
+    /**
+     * 子类可以重载此函数，做App的初始化工作。
+     */
+    start(): void;
     init(args: any): this;
     getService(name: string): any;
     registerService(name: string, service: any): Application;
