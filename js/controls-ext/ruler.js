@@ -67,6 +67,18 @@ var Ruler = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Ruler.prototype.setPointer = function (x, y) {
+        this._pointerX = x;
+        this._pointerY = y;
+        this.requestRedraw();
+        return this;
+    };
+    Ruler.prototype.setOrigin = function (x, y) {
+        this._originX = x;
+        this._originY = y;
+        this.requestRedraw();
+        return this;
+    };
     Ruler.prototype.drawBackground = function (ctx, style) {
         ctx.lineWidth = 1;
         ctx.font = style.font;

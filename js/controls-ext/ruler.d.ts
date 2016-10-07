@@ -11,6 +11,8 @@ export declare class Ruler extends Widget {
     scale: number;
     pointerX: number;
     pointerY: number;
+    setPointer(x: number, y: number): Ruler;
+    setOrigin(x: number, y: number): Ruler;
     drawBackground(ctx: any, style: Style): Widget;
     static SIZE: number;
     constructor(type: string);

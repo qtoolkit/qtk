@@ -26,14 +26,29 @@ function onReady(app) {
 
 	win.childrenLayouter = DockLayouter.create();
 
-	var topButton = HRuler.create().set({text:"Top", h:20});
-	topButton.layoutParam = DockLayouterParam.create({position:Direction.TOP});
-	win.addChild(topButton);
+	var topRuler = HRuler.create().set({text:"Top", h:20}).setOrigin(100, 100);
+	topRuler.layoutParam = DockLayouterParam.create({position:Direction.TOP});
+	win.addChild(topRuler);
 
-	var leftButton = VRuler.create().set({text:"Left", w:20});
-	leftButton.layoutParam = DockLayouterParam.create({position:Direction.LEFT});
-	win.addChild(leftButton);
+	var leftRuler = VRuler.create().set({text:"Left", w:20}).setOrigin(100, 100);
+	leftRuler.layoutParam = DockLayouterParam.create({position:Direction.LEFT});
+	win.addChild(leftRuler);
 
+	win.on(qtk.Events.POINTER_MOVE, function(evt) {
+		leftRuler.setPointer(evt.x-leftRuler.x, evt.y-leftRuler.y);		
+		topRuler.setPointer(evt.x-topRuler.x, evt.y-topRuler.y);		
+	});
 	
+	win.on(qtk.Events.WHEEL, function(evt) {
+		console.log(evt.delta);
+		if(evt.delta > 0) {
+			topRuler.scale += 0.2;
+			leftRuler.scale += 0.2;
+		}else{
+			topRuler.scale *= 0.9;
+			leftRuler.scale *= 0.9;
+		}
+		win.requestRedraw();
+	});
 	win.open();
 }

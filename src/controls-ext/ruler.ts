@@ -46,6 +46,22 @@ export class Ruler extends Widget {
 		return this._pointerY;
 	}
 
+	public setPointer(x:number, y:number) : Ruler {
+		this._pointerX = x;
+		this._pointerY = y;
+		this.requestRedraw();
+
+		return this;
+	}
+
+	public setOrigin(x:number, y:number) : Ruler {
+		this._originX = x;
+		this._originY = y;
+		this.requestRedraw();
+
+		return this;
+	}
+
 	public drawBackground(ctx:any, style:Style) : Widget{
 		ctx.lineWidth = 1;
 		ctx.font = style.font;
