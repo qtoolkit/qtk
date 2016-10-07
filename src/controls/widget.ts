@@ -1817,6 +1817,19 @@ export class Widget extends Emitter {
 	public get dataBindingRule() : any {
 		return this._dataBindingRule;
 	}
+	
+	/**
+	 * 显式的更新ViewModal。
+	 */
+	public updateExplicit() {
+		if(this._dataBindingRule) {
+			this.onUpdateToDataSource();
+		}
+
+		this.children.forEach((child:Widget) => {
+			child.updateExplicit();
+		});
+	}
 
 	/**
 	 * 绑定数据。
@@ -1931,26 +1944,45 @@ export class Widget extends Emitter {
 		console.log("invalid value:" + message);
 	}
 
+	protected onUpdateToDataSource() {
+		var dataBindingRule = this._dataBindingRule;
+		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+			if(item.source.type === BindingDataSource.TYPE) {
+				var dataSource = <BindingDataSource>item.source;
+				if(dataSource.updateTiming === UpdateTiming.EXPLICIT) {
+					this.updateValueToSource(this.value, dataSource);
+				}
+			}
+		});
+	}
+
+	protected updateValueToSource(value:any, dataSource:BindingDataSource) {
+		var path  = dataSource.path;
+		var converter = dataSource.converter;
+		var validationRule = dataSource.validationRule;
+		var result = this._viewModal.setProp(path, value, converter, validationRule);
+		if(result.code) {
+			this.onInvalidInput(result.message);
+		}else{
+			this.onInvalidInput(null);
+		}
+	}
+
 	/*
 	 * 监控控件单个属性的变化。
 	 */
 	protected watchTargetValueChange(dataSource:BindingDataSource) {
+		var updateTiming = dataSource.updateTiming;
 		var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
+		
+		if(updateTiming === UpdateTiming.EXPLICIT) {
+			return;
+		}
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
-			var updateTiming = dataSource.updateTiming;
 			var eventName = updateTiming === UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
 
 			this.on(eventName, (evt:Events.ChangeEvent) => {
-				var value = evt.value;
-				var path  = dataSource.path;
-				var converter = dataSource.converter;
-				var validationRule = dataSource.validationRule;
-				var result = this._viewModal.setProp(path, value, converter, validationRule);
-				if(result.code) {
-					this.onInvalidInput(result.message);
-				}else{
-					this.onInvalidInput(null);
-				}
+				this.updateValueToSource(evt.value, dataSource);
 			});
 		}
 	}
@@ -1958,7 +1990,7 @@ export class Widget extends Emitter {
 	/*
 	 * 监控控件属性的变化。
 	 */
-	protected watchTargetChange(dataBindingRule) {
+	protected watchTargetChange(dataBindingRule:BindingRule) {
 		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
 			var source = item.source;
 			if(source.type === BindingDataSource.TYPE) {

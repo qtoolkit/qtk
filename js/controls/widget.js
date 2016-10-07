@@ -1651,6 +1651,17 @@ var Widget = (function (_super) {
         configurable: true
     });
     /**
+     * 显式的更新ViewModal。
+     */
+    Widget.prototype.updateExplicit = function () {
+        if (this._dataBindingRule) {
+            this.onUpdateToDataSource();
+        }
+        this.children.forEach(function (child) {
+            child.updateExplicit();
+        });
+    };
+    /**
      * 绑定数据。
      */
     Widget.prototype.bindData = function (viewModal) {
@@ -1753,27 +1764,44 @@ var Widget = (function (_super) {
     Widget.prototype.onInvalidInput = function (message) {
         console.log("invalid value:" + message);
     };
+    Widget.prototype.onUpdateToDataSource = function () {
+        var _this = this;
+        var dataBindingRule = this._dataBindingRule;
+        dataBindingRule.forEach(function (prop, item) {
+            if (item.source.type === binding_rule_1.BindingDataSource.TYPE) {
+                var dataSource = item.source;
+                if (dataSource.updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+                    _this.updateValueToSource(_this.value, dataSource);
+                }
+            }
+        });
+    };
+    Widget.prototype.updateValueToSource = function (value, dataSource) {
+        var path = dataSource.path;
+        var converter = dataSource.converter;
+        var validationRule = dataSource.validationRule;
+        var result = this._viewModal.setProp(path, value, converter, validationRule);
+        if (result.code) {
+            this.onInvalidInput(result.message);
+        }
+        else {
+            this.onInvalidInput(null);
+        }
+    };
     /*
      * 监控控件单个属性的变化。
      */
     Widget.prototype.watchTargetValueChange = function (dataSource) {
         var _this = this;
+        var updateTiming = dataSource.updateTiming;
         var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
+        if (updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+            return;
+        }
         if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-            var updateTiming = dataSource.updateTiming;
             var eventName = updateTiming === iview_modal_1.UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
             this.on(eventName, function (evt) {
-                var value = evt.value;
-                var path = dataSource.path;
-                var converter = dataSource.converter;
-                var validationRule = dataSource.validationRule;
-                var result = _this._viewModal.setProp(path, value, converter, validationRule);
-                if (result.code) {
-                    _this.onInvalidInput(result.message);
-                }
-                else {
-                    _this.onInvalidInput(null);
-                }
+                _this.updateValueToSource(evt.value, dataSource);
             });
         }
     };

@@ -29,6 +29,7 @@ function onReady(app) {
 		{title:"Switch", data:"switch"},
 		{title:"Dialog", data:"dialog"},
 		{title:"Basic Data Binding", data:"databinding-basic"},
+		{title:"List Data Binding", data:"databinding-ext"},
 		{title:"Accordion", data:"accordion"},
 		{title:"PropertySheets", data:"propertysheets"},
 		{title:"Movable", data:"movable"},

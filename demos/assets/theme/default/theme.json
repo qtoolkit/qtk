@@ -548,6 +548,19 @@
 	"rich-text-edit": {
 		"extends": "widget"
 	},
+	"ruler": {
+		"extends": "widget",
+		"common" : {
+			"backGroundColor" : null,
+			"textAlign" : "left"
+		}
+	},
+	"vruler": {
+		"extends": "ruler"
+	},
+	"hruler": {
+		"extends": "ruler"
+	},
 	"window-normal": {
 		"extends": "widget"
 	}

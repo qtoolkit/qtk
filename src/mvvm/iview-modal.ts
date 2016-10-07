@@ -174,7 +174,7 @@ export enum UpdateTiming {
 	 */
 	EXPLICIT
 };
-const UpdateTimingNames = ["changing", "changed", "explicity"];
+const UpdateTimingNames = ["changing", "changed", "explicit"];
 export function toUpdateTiming(name:string) : UpdateTiming {
 	return <UpdateTiming>Math.max(0, UpdateTimingNames.indexOf(name));
 }

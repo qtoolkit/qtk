@@ -359,6 +359,10 @@ export declare class Widget extends Emitter {
      */
     dataBindingRule: any;
     /**
+     * 显式的更新ViewModal。
+     */
+    updateExplicit(): void;
+    /**
      * 绑定数据。
      */
     bindData(viewModal: IViewModal): Widget;
@@ -367,7 +371,9 @@ export declare class Widget extends Emitter {
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
     protected getPropDefaultBindMode(prop: string): BindingMode;
     protected onInvalidInput(message: string): void;
+    protected onUpdateToDataSource(): void;
+    protected updateValueToSource(value: any, dataSource: BindingDataSource): void;
     protected watchTargetValueChange(dataSource: BindingDataSource): void;
-    protected watchTargetChange(dataBindingRule: any): void;
+    protected watchTargetChange(dataBindingRule: BindingRule): void;
     private static ID;
 }

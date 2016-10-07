@@ -153,28 +153,31 @@ var qtk =
 	exports.Accordion = accordion_1.Accordion;
 	var service_locator_1 = __webpack_require__(123);
 	exports.ServiceLocator = service_locator_1.ServiceLocator;
+	var ruler_1 = __webpack_require__(136);
+	exports.VRuler = ruler_1.VRuler;
+	exports.HRuler = ruler_1.HRuler;
 	var title_content_1 = __webpack_require__(134);
 	exports.TitleContent = title_content_1.TitleContent;
-	var title_label_1 = __webpack_require__(136);
+	var title_label_1 = __webpack_require__(137);
 	exports.TitleLabel = title_label_1.TitleLabel;
-	var title_edit_1 = __webpack_require__(138);
+	var title_edit_1 = __webpack_require__(139);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_slider_1 = __webpack_require__(139);
+	var title_slider_1 = __webpack_require__(140);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var property_page_1 = __webpack_require__(140);
+	var property_page_1 = __webpack_require__(141);
 	exports.PropertyPage = property_page_1.PropertyPage;
-	var choosable_edit_1 = __webpack_require__(144);
+	var choosable_edit_1 = __webpack_require__(145);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_text_area_1 = __webpack_require__(141);
+	var title_text_area_1 = __webpack_require__(142);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var property_sheets_1 = __webpack_require__(145);
+	var property_sheets_1 = __webpack_require__(146);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var progress_bar_1 = __webpack_require__(95);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
 	exports.ProgressBar = progress_bar_1.ProgressBar;
-	var title_choosable_edit_1 = __webpack_require__(143);
+	var title_choosable_edit_1 = __webpack_require__(144);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var dock_layouter_1 = __webpack_require__(146);
+	var dock_layouter_1 = __webpack_require__(147);
 	exports.DockLayouter = dock_layouter_1.DockLayouter;
 	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
 	var grid_layouter_1 = __webpack_require__(116);
@@ -201,10 +204,10 @@ var qtk =
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
 	exports.Services = consts_1.Services;
-	var title_combo_box_1 = __webpack_require__(142);
+	var title_combo_box_1 = __webpack_require__(143);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
-	var message_box_1 = __webpack_require__(147);
+	var message_box_1 = __webpack_require__(148);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
 	exports.TitleOptions = message_box_1.TitleOptions;
@@ -215,19 +218,19 @@ var qtk =
 	exports.ScrollView = scroll_view_1.ScrollView;
 	var device_info_1 = __webpack_require__(122);
 	exports.DeviceInfo = device_info_1.DeviceInfo;
-	var view_modal_1 = __webpack_require__(148);
+	var view_modal_1 = __webpack_require__(149);
 	exports.ViewModal = view_modal_1.ViewModal;
 	var recyclable_creator_1 = __webpack_require__(82);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(153);
+	var delegate_command_1 = __webpack_require__(154);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_modal_1 = __webpack_require__(154);
+	var collection_view_modal_1 = __webpack_require__(155);
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
-	var delegate_value_converter_1 = __webpack_require__(155);
+	var delegate_value_converter_1 = __webpack_require__(156);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
-	var ivalidation_rule_1 = __webpack_require__(152);
+	var ivalidation_rule_1 = __webpack_require__(153);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
-	var delegate_validation_rule_1 = __webpack_require__(156);
+	var delegate_validation_rule_1 = __webpack_require__(157);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
 	var binding_rule_1 = __webpack_require__(79);
 	exports.BindingRule = binding_rule_1.BindingRule;
@@ -5982,6 +5985,17 @@ var qtk =
 	        configurable: true
 	    });
 	    /**
+	     * 显式的更新ViewModal。
+	     */
+	    Widget.prototype.updateExplicit = function () {
+	        if (this._dataBindingRule) {
+	            this.onUpdateToDataSource();
+	        }
+	        this.children.forEach(function (child) {
+	            child.updateExplicit();
+	        });
+	    };
+	    /**
 	     * 绑定数据。
 	     */
 	    Widget.prototype.bindData = function (viewModal) {
@@ -6084,27 +6098,44 @@ var qtk =
 	    Widget.prototype.onInvalidInput = function (message) {
 	        console.log("invalid value:" + message);
 	    };
+	    Widget.prototype.onUpdateToDataSource = function () {
+	        var _this = this;
+	        var dataBindingRule = this._dataBindingRule;
+	        dataBindingRule.forEach(function (prop, item) {
+	            if (item.source.type === binding_rule_1.BindingDataSource.TYPE) {
+	                var dataSource = item.source;
+	                if (dataSource.updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+	                    _this.updateValueToSource(_this.value, dataSource);
+	                }
+	            }
+	        });
+	    };
+	    Widget.prototype.updateValueToSource = function (value, dataSource) {
+	        var path = dataSource.path;
+	        var converter = dataSource.converter;
+	        var validationRule = dataSource.validationRule;
+	        var result = this._viewModal.setProp(path, value, converter, validationRule);
+	        if (result.code) {
+	            this.onInvalidInput(result.message);
+	        }
+	        else {
+	            this.onInvalidInput(null);
+	        }
+	    };
 	    /*
 	     * 监控控件单个属性的变化。
 	     */
 	    Widget.prototype.watchTargetValueChange = function (dataSource) {
 	        var _this = this;
+	        var updateTiming = dataSource.updateTiming;
 	        var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
+	        if (updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+	            return;
+	        }
 	        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-	            var updateTiming = dataSource.updateTiming;
 	            var eventName = updateTiming === iview_modal_1.UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
 	            this.on(eventName, function (evt) {
-	                var value = evt.value;
-	                var path = dataSource.path;
-	                var converter = dataSource.converter;
-	                var validationRule = dataSource.validationRule;
-	                var result = _this._viewModal.setProp(path, value, converter, validationRule);
-	                if (result.code) {
-	                    _this.onInvalidInput(result.message);
-	                }
-	                else {
-	                    _this.onInvalidInput(null);
-	                }
+	                _this.updateValueToSource(evt.value, dataSource);
 	            });
 	        }
 	    };
@@ -16916,7 +16947,7 @@ var qtk =
 	})(exports.UpdateTiming || (exports.UpdateTiming = {}));
 	var UpdateTiming = exports.UpdateTiming;
 	;
-	var UpdateTimingNames = ["changing", "changed", "explicity"];
+	var UpdateTimingNames = ["changing", "changed", "explicit"];
 	function toUpdateTiming(name) {
 	    return Math.max(0, UpdateTimingNames.indexOf(name));
 	}
@@ -17032,6 +17063,11 @@ var qtk =
 	            else {
 	                me.e.init(Events.CHANGING, detail);
 	            }
+	            me.dispatchEvent(me.e);
+	        };
+	        element.oninput = function (evt) {
+	            var detail = { oldValue: this.value, newValue: this.value };
+	            me.e.init(Events.CHANGING, detail);
 	            me.dispatchEvent(me.e);
 	        };
 	        element.onchange = function (evt) {
@@ -25525,8 +25561,305 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	var Ruler = (function (_super) {
+	    __extends(Ruler, _super);
+	    function Ruler(type) {
+	        _super.call(this, type);
+	        this.scale = 1;
+	        this.originX = 0;
+	        this.originY = 0;
+	        this.pointerX = 0;
+	        this.pointerY = 0;
+	    }
+	    Object.defineProperty(Ruler.prototype, "originX", {
+	        get: function () {
+	            return this._originX;
+	        },
+	        set: function (value) {
+	            this._originX = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Ruler.prototype, "originY", {
+	        get: function () {
+	            return this._originY;
+	        },
+	        set: function (value) {
+	            this._originY = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Ruler.prototype, "scale", {
+	        get: function () {
+	            return this._scale;
+	        },
+	        set: function (value) {
+	            this._scale = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Ruler.prototype, "pointerX", {
+	        get: function () {
+	            return this._pointerX;
+	        },
+	        set: function (value) {
+	            this._pointerX = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Ruler.prototype, "pointerY", {
+	        get: function () {
+	            return this._pointerY;
+	        },
+	        set: function (value) {
+	            this._pointerY = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Ruler.prototype.drawBackground = function (ctx, style) {
+	        ctx.lineWidth = 1;
+	        ctx.font = style.font;
+	        ctx.textAlign = "left";
+	        ctx.textBaseline = "middle";
+	        ctx.strokeStyle = style.lineColor;
+	        ctx.fillStyle = style.textColor;
+	        ctx.beginPath();
+	        this.drawColorBackground(ctx, style);
+	        return this;
+	    };
+	    Ruler.SIZE = 10;
+	    return Ruler;
+	}(widget_1.Widget));
+	exports.Ruler = Ruler;
+	;
+	var VRuler = (function (_super) {
+	    __extends(VRuler, _super);
+	    function VRuler() {
+	        _super.call(this, VRuler.TYPE);
+	    }
+	    VRuler.prototype.drawColorBackground = function (ctx, style) {
+	        var h = this.w;
+	        var w = this.h;
+	        var ox = this.originX;
+	        var oy = this.originY;
+	        var i = 0;
+	        var x = 0;
+	        var y = 0;
+	        var fh = h;
+	        var th = h / 3;
+	        var hh = h / 2;
+	        var scale = this.scale;
+	        var rs = Ruler.SIZE;
+	        var pixels = Math.floor(10 / scale);
+	        var scaledPixels = pixels * scale;
+	        ctx.translate(0, oy);
+	        ctx.rotate(Math.PI * 0.5);
+	        ctx.translate(0, -h);
+	        function getH(i) {
+	            if (i % 10 === 0) {
+	                return fh;
+	            }
+	            else if (i % 5 === 0) {
+	                return hh;
+	            }
+	            else {
+	                return th;
+	            }
+	        }
+	        ox = oy;
+	        /////////////////////////////////	
+	        ctx.beginPath();
+	        var n = Math.floor((w - ox) / scaledPixels);
+	        for (i = 0; i < n; i++) {
+	            h = getH(i);
+	            x = i * scaledPixels;
+	            if ((x + ox) < 0)
+	                continue;
+	            ctx.moveTo(x + 0.5, 0);
+	            ctx.lineTo(x + 0.5, h);
+	        }
+	        ctx.stroke();
+	        for (i = 0; i < n; i++) {
+	            x = i * scaledPixels;
+	            if ((x + ox) < 0)
+	                continue;
+	            if (i % 10 === 0) {
+	                var str = i * pixels;
+	                x = x;
+	                y = fh;
+	                ctx.save();
+	                ctx.translate(x, y);
+	                ctx.rotate(Math.PI);
+	                ctx.fillText(str, 5, th);
+	                ctx.restore();
+	            }
+	        }
+	        /////////////////////////////////	
+	        ctx.beginPath();
+	        var n = Math.floor((ox - rs) / scaledPixels);
+	        for (i = 1; i < n; i++) {
+	            h = getH(i);
+	            x = -i * scaledPixels;
+	            ctx.moveTo(x + 0.5, 0);
+	            ctx.lineTo(x + 0.5, h);
+	        }
+	        ctx.stroke();
+	        for (i = 1; i < n; i++) {
+	            x = -i * scaledPixels;
+	            if (i % 10 === 0) {
+	                var str = -i * pixels;
+	                x = x;
+	                y = fh;
+	                ctx.save();
+	                ctx.translate(x, y);
+	                ctx.rotate(Math.PI);
+	                ctx.fillText(str, 5, th);
+	                ctx.restore();
+	            }
+	        }
+	        /////////////////////////////////	
+	        h = fh;
+	        x = this.pointerY - oy;
+	        ctx.fillStyle = style.foreGroundColor;
+	        ctx.beginPath();
+	        ctx.moveTo(x - th, hh);
+	        ctx.lineTo(x + th, hh);
+	        ctx.lineTo(x, 0);
+	        ctx.lineTo(x - th, hh);
+	        ctx.fill();
+	        return this;
+	    };
+	    VRuler.prototype.relayout = function () {
+	        this.moveTo(0, 0, 0);
+	        this.resizeTo(this.w, this.parent.h, 0);
+	    };
+	    VRuler.create = function (options) {
+	        return VRuler.recycleBin.create().reset(VRuler.TYPE, options);
+	    };
+	    VRuler.TYPE = "vruler";
+	    VRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new VRuler(); });
+	    return VRuler;
+	}(Ruler));
+	exports.VRuler = VRuler;
+	;
+	widget_factory_1.WidgetFactory.register(VRuler.TYPE, VRuler.create);
+	var HRuler = (function (_super) {
+	    __extends(HRuler, _super);
+	    function HRuler() {
+	        _super.call(this, HRuler.TYPE);
+	    }
+	    HRuler.prototype.drawColorBackground = function (ctx, style) {
+	        var w = this.w;
+	        var h = this.h;
+	        var ox = this.originX;
+	        var oy = this.originY;
+	        var i = 0;
+	        var x = 0;
+	        var fh = h;
+	        var th = h / 3;
+	        var hh = h / 2;
+	        var scale = this.scale;
+	        var rs = Ruler.SIZE;
+	        var pixels = Math.floor(10 / scale);
+	        var scaledPixels = pixels * scale;
+	        ctx.translate(ox, h);
+	        function getH(i) {
+	            if (i % 10 === 0) {
+	                return fh;
+	            }
+	            else if (i % 5 === 0) {
+	                return hh;
+	            }
+	            else {
+	                return th;
+	            }
+	        }
+	        /////////////////////////////////	
+	        ctx.beginPath();
+	        var n = Math.floor((w - ox) / scaledPixels);
+	        for (i = 0; i < n; i++) {
+	            h = getH(i);
+	            x = i * scaledPixels;
+	            if ((x + ox) < 0)
+	                continue;
+	            ctx.moveTo(x + 0.5, 0);
+	            ctx.lineTo(x + 0.5, -h);
+	        }
+	        ctx.stroke();
+	        for (i = 0; i < n; i++) {
+	            x = i * scaledPixels;
+	            if ((x + ox) < 0)
+	                continue;
+	            if (i % 10 === 0) {
+	                var str = i * pixels;
+	                ctx.fillText(str, x + 5, -hh);
+	            }
+	        }
+	        /////////////////////////////////	
+	        ctx.beginPath();
+	        var n = Math.floor((ox - rs) / scaledPixels);
+	        for (i = 1; i < n; i++) {
+	            h = getH(i);
+	            x = -i * scaledPixels;
+	            ctx.moveTo(x + 0.5, 0);
+	            ctx.lineTo(x + 0.5, -h);
+	        }
+	        ctx.stroke();
+	        for (i = 1; i < n; i++) {
+	            x = -i * scaledPixels;
+	            if (i % 10 === 0) {
+	                var str = -i * pixels;
+	                ctx.fillText(str, x + 5, -hh);
+	            }
+	        }
+	        /////////////////////////////////	
+	        h = fh;
+	        x = this.pointerX - ox;
+	        ctx.fillStyle = style.foreGroundColor;
+	        ctx.beginPath();
+	        ctx.moveTo(x - th, -hh);
+	        ctx.lineTo(x + th, -hh);
+	        ctx.lineTo(x, 0);
+	        ctx.lineTo(x - th, -hh);
+	        ctx.fill();
+	        return this;
+	    };
+	    HRuler.prototype.relayout = function () {
+	        this.moveTo(0, 0, 0);
+	        this.resizeTo(this.parent.w, this.h, 0);
+	    };
+	    HRuler.create = function (options) {
+	        return HRuler.recycleBin.create().reset(HRuler.TYPE, options);
+	    };
+	    HRuler.TYPE = "hruler";
+	    HRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new HRuler(); });
+	    return HRuler;
+	}(Ruler));
+	exports.HRuler = HRuler;
+	;
+	widget_factory_1.WidgetFactory.register(HRuler.TYPE, HRuler.create);
+
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var label_1 = __webpack_require__(18);
-	var title_value_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(138);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleLabel = (function (_super) {
@@ -25550,7 +25883,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25663,7 +25996,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25673,7 +26006,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(17);
-	var title_value_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(138);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleEdit = (function (_super) {
@@ -25746,7 +26079,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25756,7 +26089,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var slider_1 = __webpack_require__(94);
-	var title_value_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(138);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleSlider = (function (_super) {
@@ -25780,7 +26113,7 @@ var qtk =
 
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25789,12 +26122,12 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_edit_1 = __webpack_require__(138);
+	var title_edit_1 = __webpack_require__(139);
 	var widget_1 = __webpack_require__(19);
-	var title_slider_1 = __webpack_require__(139);
-	var title_text_area_1 = __webpack_require__(141);
-	var title_combo_box_1 = __webpack_require__(142);
-	var title_choosable_edit_1 = __webpack_require__(143);
+	var title_slider_1 = __webpack_require__(140);
+	var title_text_area_1 = __webpack_require__(142);
+	var title_combo_box_1 = __webpack_require__(143);
+	var title_choosable_edit_1 = __webpack_require__(144);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var linear_layouter_1 = __webpack_require__(131);
@@ -25943,7 +26276,7 @@ var qtk =
 
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25953,7 +26286,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(17);
-	var title_value_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(138);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleTextArea = (function (_super) {
@@ -25995,7 +26328,7 @@ var qtk =
 
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26004,7 +26337,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(137);
+	var title_value_1 = __webpack_require__(138);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var combo_box_1 = __webpack_require__(110);
@@ -26077,7 +26410,7 @@ var qtk =
 
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26086,8 +26419,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(137);
-	var choosable_edit_1 = __webpack_require__(144);
+	var title_value_1 = __webpack_require__(138);
+	var choosable_edit_1 = __webpack_require__(145);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleChoosableEdit = (function (_super) {
@@ -26136,7 +26469,7 @@ var qtk =
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26237,7 +26570,7 @@ var qtk =
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26348,7 +26681,7 @@ var qtk =
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26474,7 +26807,7 @@ var qtk =
 
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26498,7 +26831,7 @@ var qtk =
 	var consts_1 = __webpack_require__(104);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var list_item_1 = __webpack_require__(113);
-	var dock_layouter_1 = __webpack_require__(146);
+	var dock_layouter_1 = __webpack_require__(147);
 	var linear_layouter_1 = __webpack_require__(131);
 	var grid_layouter_1 = __webpack_require__(116);
 	var simple_layouter_1 = __webpack_require__(114);
@@ -26851,7 +27184,7 @@ var qtk =
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26860,7 +27193,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var view_modal_default_1 = __webpack_require__(149);
+	var view_modal_default_1 = __webpack_require__(150);
 	/**
 	 * IViewModal的基本实现。如果不能满足要求，可以重载部分函数。
 	 */
@@ -26880,7 +27213,7 @@ var qtk =
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26889,10 +27222,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var pointer = __webpack_require__(150);
+	var pointer = __webpack_require__(151);
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
-	var ivalidation_rule_1 = __webpack_require__(152);
+	var ivalidation_rule_1 = __webpack_require__(153);
 	var iview_modal_1 = __webpack_require__(81);
 	var ViewModalDefault = (function (_super) {
 	    __extends(ViewModalDefault, _super);
@@ -27019,12 +27352,12 @@ var qtk =
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var each = __webpack_require__(151);
+	var each = __webpack_require__(152);
 	module.exports = api;
 
 
@@ -27236,7 +27569,7 @@ var qtk =
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports) {
 
 	
@@ -27264,7 +27597,7 @@ var qtk =
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27297,7 +27630,7 @@ var qtk =
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27322,7 +27655,7 @@ var qtk =
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27332,9 +27665,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var delegate_command_1 = __webpack_require__(153);
-	var ivalidation_rule_1 = __webpack_require__(152);
-	var view_modal_default_1 = __webpack_require__(149);
+	var delegate_command_1 = __webpack_require__(154);
+	var ivalidation_rule_1 = __webpack_require__(153);
+	var view_modal_default_1 = __webpack_require__(150);
 	/**
 	 * 集合ViewModal。delProp/getProp/setProp操作当前的项。
 	 */
@@ -27534,7 +27867,7 @@ var qtk =
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27559,7 +27892,7 @@ var qtk =
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports) {
 
 	"use strict";

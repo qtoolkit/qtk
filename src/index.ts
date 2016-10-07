@@ -50,6 +50,7 @@ export {ListItem, ListItemStyle} from "./controls/list-item";
 export {RoundType, Graphics} from "./graphics";
 export {Accordion} from "./controls/accordion";
 export {ServiceLocator} from  "./service-locator";
+export {VRuler, HRuler} from "./controls-ext/ruler";
 export {TitleContent} from "./controls/title-content";
 export {TitleLabel} from "./controls-ext/title-label";
 export {TitleEdit} from "./controls-ext/title-edit";

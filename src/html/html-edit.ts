@@ -56,6 +56,12 @@ export class HtmlEdit extends HtmlElement {
 			me.dispatchEvent(me.e);
 		}
 		
+		element.oninput = function(evt) {
+			var detail = {oldValue:this.value, newValue:this.value};
+			me.e.init(Events.CHANGING, detail);
+			me.dispatchEvent(me.e);
+		}
+
 		element.onchange = function(evt) {
 			var detail = {oldValue:this.value, newValue:this.value};
 			me.e.init(Events.CHANGE, detail);

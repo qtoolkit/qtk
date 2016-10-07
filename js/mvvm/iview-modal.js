@@ -52,7 +52,7 @@ exports.toBindingMode = toBindingMode;
 })(exports.UpdateTiming || (exports.UpdateTiming = {}));
 var UpdateTiming = exports.UpdateTiming;
 ;
-var UpdateTimingNames = ["changing", "changed", "explicity"];
+var UpdateTimingNames = ["changing", "changed", "explicit"];
 function toUpdateTiming(name) {
     return Math.max(0, UpdateTimingNames.indexOf(name));
 }
