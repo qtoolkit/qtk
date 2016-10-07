@@ -18,6 +18,28 @@ var LinearLayouterParam = qtk.LinearLayouterParam;
 
 var imageURL = "/demos/assets/icons/@density/";
 
+function drawCommbox(ctx, style, rect, option) {
+	rect.x += 10;
+	rect.w -= 10;
+	drawCommboxItem(ctx, style, rect, option);
+
+	return;
+}
+
+function drawCommboxItem(ctx, style, rect, option) {
+	var x = rect.x;
+	var y = rect.y + (rect.h >> 1);
+
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + rect.w, y);
+	
+	ctx.lineWidth = option.value || 1;
+	ctx.strokeStyle = style.lineColor;
+	ctx.stroke();
+
+}
+
 function onReady(app) {
 	var Events = Events;
 	var vp = app.getViewPort();
@@ -38,11 +60,11 @@ function onReady(app) {
 	comboBox.addOption("blue", 3, null, "blue");
 	win.addChild(comboBox);
 	
-	comboBox = ComboBox.create({value:1});
+	comboBox = ComboBox.create({value:1, customDraw:drawCommbox, customItemDraw:drawCommboxItem});
 	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"-60px", w:"50%", h:"30px"});
-	comboBox.addOption("item1", 1);
-	comboBox.addOption("item2", 2);
-	comboBox.addOption("item3", 3);
+	comboBox.addOption(null, 1);
+	comboBox.addOption(null, 2);
+	comboBox.addOption(null, 3);
 	win.addChild(comboBox);
 	
 	comboBox = ComboBox.create({value:1});

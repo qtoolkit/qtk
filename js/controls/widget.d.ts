@@ -178,6 +178,7 @@ export declare class Widget extends Emitter {
      * 计算脏矩形。
      */
     computeDirtyRect(ctx: DirtyRectContext): void;
+    protected doDraw(ctx: any, style: Style): void;
     draw(ctx: any): void;
     stateToString(state: WidgetState): string;
     styleType: string;

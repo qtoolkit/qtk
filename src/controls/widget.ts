@@ -832,6 +832,18 @@ export class Widget extends Emitter {
 		ctx.restore();
 	}
 
+	protected doDraw(ctx:any, style:Style) {
+		if(style) {
+			this.drawBackground(ctx, style)
+				.drawImage(ctx, style)
+				.drawChildren(ctx)
+				.drawText(ctx, style)
+				.drawTips(ctx, style);
+		}else{
+			this.drawChildren(ctx);
+		}
+	}
+
 	public draw(ctx:any) {
 		this._dirty = false;
 		var style = this.getStyle();
@@ -846,15 +858,7 @@ export class Widget extends Emitter {
 		var drawEvent = Events.DrawEvent.get();
 
 		this.dispatchEvent(drawEvent.reset(Events.BEFORE_DRAW, ctx, this));
-		if(style) {
-			this.drawBackground(ctx, style)
-				.drawImage(ctx, style)
-				.drawChildren(ctx)
-				.drawText(ctx, style)
-				.drawTips(ctx, style);
-		}else{
-			this.drawChildren(ctx);
-		}
+		this.doDraw(ctx, style);
 		this.dispatchEvent(drawEvent.reset(Events.AFTER_DRAW, ctx, this));
 
 		ctx.restore();

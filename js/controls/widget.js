@@ -729,6 +729,18 @@ var Widget = (function (_super) {
         });
         ctx.restore();
     };
+    Widget.prototype.doDraw = function (ctx, style) {
+        if (style) {
+            this.drawBackground(ctx, style)
+                .drawImage(ctx, style)
+                .drawChildren(ctx)
+                .drawText(ctx, style)
+                .drawTips(ctx, style);
+        }
+        else {
+            this.drawChildren(ctx);
+        }
+    };
     Widget.prototype.draw = function (ctx) {
         this._dirty = false;
         var style = this.getStyle();
@@ -740,16 +752,7 @@ var Widget = (function (_super) {
         this.applyTransform(ctx);
         var drawEvent = Events.DrawEvent.get();
         this.dispatchEvent(drawEvent.reset(Events.BEFORE_DRAW, ctx, this));
-        if (style) {
-            this.drawBackground(ctx, style)
-                .drawImage(ctx, style)
-                .drawChildren(ctx)
-                .drawText(ctx, style)
-                .drawTips(ctx, style);
-        }
-        else {
-            this.drawChildren(ctx);
-        }
+        this.doDraw(ctx, style);
         this.dispatchEvent(drawEvent.reset(Events.AFTER_DRAW, ctx, this));
         ctx.restore();
         return;

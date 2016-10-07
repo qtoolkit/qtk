@@ -15,6 +15,7 @@ export declare class ComboBoxOption {
 }
 export declare class ComboBoxItem extends ListItem {
     data: ComboBoxOption;
+    customDraw: CustomItemDrawFunc;
     constructor();
     protected onReset(): void;
     readonly text: string;
@@ -30,6 +31,8 @@ export declare abstract class ComboBoxBase extends Widget {
     protected _current: ComboBoxOption;
     protected _isPopupOpened: boolean;
     protected _options: Array<ComboBoxOption>;
+    protected _customItemDraw: CustomItemDrawFunc;
+    customItemDraw: CustomItemDrawFunc;
     readonly inputable: boolean;
     itemH: number;
     value: any;
@@ -81,9 +84,14 @@ export declare abstract class ComboBoxBase extends Widget {
     protected getDefProps(): any;
     constructor(type?: string);
 }
+export declare type CustomDrawFunc = (ctx: any, style: Style, rect: Rect, data: ComboBoxOption) => void;
+export declare type CustomItemDrawFunc = (ctx: any, style: Style, rect: Rect, data: ComboBoxOption) => void;
 export declare class ComboBox extends ComboBoxBase {
+    protected _customDraw: CustomDrawFunc;
+    customDraw: CustomDrawFunc;
     readonly text: string;
     protected getFgImageRect(style: Style): Rect;
+    protected drawText(ctx: any, style: Style): Widget;
     protected dispatchClick(evt: any): void;
     constructor();
     static TYPE: string;

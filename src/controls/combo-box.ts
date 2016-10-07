@@ -36,6 +36,7 @@ export class ComboBoxOption {
 
 export class ComboBoxItem extends ListItem {
 	public data : ComboBoxOption;
+	public customDraw : CustomItemDrawFunc;
 
 	constructor() {
 		super(ComboBoxItem.TYPE);
@@ -83,9 +84,14 @@ export class ComboBoxItem extends ListItem {
 			x += h + this.leftPadding;
 		}
 
-		var text = this.getLocaleText();
-		if(text && style.textColor) {
-			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(x, y, w, h));
+		var r = Rect.rect.init(x, y, w, h);
+		if(this.customDraw) {
+			this.customDraw(ctx, style, r, this.data);
+		}else{
+			var text = this.getLocaleText();
+			if(text && style.textColor) {
+				Graphics.drawTextSL(ctx, text, style, r);
+			}
 		}
 
 		return this;
@@ -104,6 +110,15 @@ export abstract class ComboBoxBase extends Widget {
 	protected _current : ComboBoxOption;
 	protected _isPopupOpened : boolean;
 	protected _options : Array<ComboBoxOption>;
+	protected _customItemDraw : CustomItemDrawFunc;
+	
+	public set customItemDraw(value:CustomItemDrawFunc) {
+		this._customItemDraw = value;
+	}
+
+	public get customItemDraw() : CustomItemDrawFunc {
+		return this._customItemDraw;
+	}
 
 	public get inputable() {
 		return true;
@@ -211,7 +226,7 @@ export abstract class ComboBoxBase extends Widget {
 
 		for(var i = 0; i < n; i++) {
 			var iter = options[i];
-			var item = ComboBoxItem.create();
+			var item = ComboBoxItem.create({customDraw:this.customItemDraw});
 			iter.isDefault = this._current === iter;
 			item.set({data:iter});
 			listView.addChild(item, true);
@@ -274,7 +289,20 @@ export abstract class ComboBoxBase extends Widget {
 	}
 };
 
+export type CustomDrawFunc = (ctx:any, style:Style, rect:Rect, data:ComboBoxOption) => void;
+export type CustomItemDrawFunc = (ctx:any, style:Style, rect:Rect, data:ComboBoxOption) => void;
+
 export class ComboBox extends ComboBoxBase {
+	protected _customDraw : CustomDrawFunc;
+
+	public set customDraw(value:CustomDrawFunc) {
+		this._customDraw = value;
+	}
+	
+	public get customDraw() : CustomDrawFunc {
+		return this._customDraw;
+	}
+
 	public get text() {
 		return this._current ? this._current.text : "";
 	}
@@ -284,7 +312,18 @@ export class ComboBox extends ComboBoxBase {
 
 		return Rect.rect.init(this.w - this.h, this.topPadding, h, h);
 	}
-	
+
+	protected drawText(ctx:any, style:Style) : Widget {
+		if(this.customDraw) {
+			var r = Rect.rect.init(this.leftPadding, this.topPadding, this.clientW-this.h, this.clientH);
+			this.customDraw(ctx, style, r, this._current);
+		}else{
+			super.drawText(ctx, style);
+		}
+
+		return this;
+	}
+
 	protected dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this._isPopupOpened) {

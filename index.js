@@ -5063,6 +5063,18 @@ var qtk =
 	        });
 	        ctx.restore();
 	    };
+	    Widget.prototype.doDraw = function (ctx, style) {
+	        if (style) {
+	            this.drawBackground(ctx, style)
+	                .drawImage(ctx, style)
+	                .drawChildren(ctx)
+	                .drawText(ctx, style)
+	                .drawTips(ctx, style);
+	        }
+	        else {
+	            this.drawChildren(ctx);
+	        }
+	    };
 	    Widget.prototype.draw = function (ctx) {
 	        this._dirty = false;
 	        var style = this.getStyle();
@@ -5074,16 +5086,7 @@ var qtk =
 	        this.applyTransform(ctx);
 	        var drawEvent = Events.DrawEvent.get();
 	        this.dispatchEvent(drawEvent.reset(Events.BEFORE_DRAW, ctx, this));
-	        if (style) {
-	            this.drawBackground(ctx, style)
-	                .drawImage(ctx, style)
-	                .drawChildren(ctx)
-	                .drawText(ctx, style)
-	                .drawTips(ctx, style);
-	        }
-	        else {
-	            this.drawChildren(ctx);
-	        }
+	        this.doDraw(ctx, style);
 	        this.dispatchEvent(drawEvent.reset(Events.AFTER_DRAW, ctx, this));
 	        ctx.restore();
 	        return;
@@ -21709,9 +21712,15 @@ var qtk =
 	            ctx.fillRect(x, y, h, h);
 	            x += h + this.leftPadding;
 	        }
-	        var text = this.getLocaleText();
-	        if (text && style.textColor) {
-	            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
+	        var r = rect_1.Rect.rect.init(x, y, w, h);
+	        if (this.customDraw) {
+	            this.customDraw(ctx, style, r, this.data);
+	        }
+	        else {
+	            var text = this.getLocaleText();
+	            if (text && style.textColor) {
+	                graphics_1.Graphics.drawTextSL(ctx, text, style, r);
+	            }
 	        }
 	        return this;
 	    };
@@ -21729,6 +21738,16 @@ var qtk =
 	    function ComboBoxBase(type) {
 	        _super.call(this, type);
 	    }
+	    Object.defineProperty(ComboBoxBase.prototype, "customItemDraw", {
+	        get: function () {
+	            return this._customItemDraw;
+	        },
+	        set: function (value) {
+	            this._customItemDraw = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(ComboBoxBase.prototype, "inputable", {
 	        get: function () {
 	            return true;
@@ -21834,7 +21853,7 @@ var qtk =
 	        dialog.target = listView;
 	        for (var i = 0; i < n; i++) {
 	            var iter = options[i];
-	            var item = ComboBoxItem.create();
+	            var item = ComboBoxItem.create({ customDraw: this.customItemDraw });
 	            iter.isDefault = this._current === iter;
 	            item.set({ data: iter });
 	            listView.addChild(item, true);
@@ -21896,6 +21915,16 @@ var qtk =
 	    function ComboBox() {
 	        _super.call(this, ComboBox.TYPE);
 	    }
+	    Object.defineProperty(ComboBox.prototype, "customDraw", {
+	        get: function () {
+	            return this._customDraw;
+	        },
+	        set: function (value) {
+	            this._customDraw = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(ComboBox.prototype, "text", {
 	        get: function () {
 	            return this._current ? this._current.text : "";
@@ -21906,6 +21935,16 @@ var qtk =
 	    ComboBox.prototype.getFgImageRect = function (style) {
 	        var h = this.clientH;
 	        return rect_1.Rect.rect.init(this.w - this.h, this.topPadding, h, h);
+	    };
+	    ComboBox.prototype.drawText = function (ctx, style) {
+	        if (this.customDraw) {
+	            var r = rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW - this.h, this.clientH);
+	            this.customDraw(ctx, style, r, this._current);
+	        }
+	        else {
+	            _super.prototype.drawText.call(this, ctx, style);
+	        }
+	        return this;
 	    };
 	    ComboBox.prototype.dispatchClick = function (evt) {
 	        _super.prototype.dispatchClick.call(this, evt);
