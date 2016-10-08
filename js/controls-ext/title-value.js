@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
 var label_1 = require("../controls/label");
 var widget_1 = require("../controls/widget");
 var linear_layouter_1 = require("../layouters/linear-layouter");
@@ -82,6 +83,7 @@ var TitleValue = (function (_super) {
         this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
     };
     TitleValue.prototype.onReset = function () {
+        var _this = this;
         _super.prototype.onReset.call(this);
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
         var titleWidget = label_1.Label.create();
@@ -90,6 +92,18 @@ var TitleValue = (function (_super) {
         var valueWidget = this.createValueWidget();
         this.addChild(valueWidget);
         this._valueWidget = valueWidget;
+        if (this._value !== undefined) {
+            valueWidget.value = this._value;
+        }
+        valueWidget.on(Events.CHANGE, function (evt) {
+            _this.dispatchEvent(evt);
+        });
+        valueWidget.on(Events.CHANGING, function (evt) {
+            _this.dispatchEvent(evt);
+        });
+    };
+    TitleValue.prototype.onToJson = function (json) {
+        delete json._value;
     };
     TitleValue.prototype.getDefProps = function () {
         return TitleValue.defProps;

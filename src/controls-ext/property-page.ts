@@ -1,6 +1,9 @@
 
 import {Rect} from "../rect";
 import {TitleEdit} from "./title-edit";
+import {TitleLabel} from "./title-label";
+import {TitleRange} from "./title-range";
+import {TitleVector} from "./title-vector";
 import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
 import {TitleTextArea} from "./title-text-area";
@@ -37,6 +40,70 @@ export class PropertyPage extends Widget {
 	public get valueW():string{
 		return this._valueW;
 	}
+	
+	public addLabel(title:string, value?:string) : TitleLabel {
+		var itemH = this.itemH;
+		var widget = TitleLabel.create({
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW,
+				layoutParam : LinearLayouterParam.create({h:itemH})
+			});
+
+		widget.value = value,
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
+	public addRange(title:string, firstValue?:number, secondValue?:number) : TitleRange{
+		var itemH = this.itemH;
+		var widget = TitleRange.create({
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW,
+				layoutParam : LinearLayouterParam.create({h:itemH})
+			});
+		widget.value = {first:firstValue, second:secondValue};
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
+	public addVector2(title:string, x?:number, y?:number) : TitleVector {
+		var itemH = this.itemH;
+		var widget = TitleVector.create({
+				d:2,
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW,
+				layoutParam : LinearLayouterParam.create({h:itemH})
+			});
+		widget.value = {x:x, y:y};
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
+	public addVector3(title:string, x?:number, y?:number, z?:number) : TitleVector {
+		var itemH = this.itemH;
+		var widget = TitleVector.create({
+				d:3,
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW,
+				layoutParam : LinearLayouterParam.create({h:itemH})
+			});
+		widget.value = {x:x, y:y, z:z};
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
 
 	public addEdit(title:string, value?:string, inputTips?:string, 
 				   inputType?:string, inputFilter?:Function) : TitleEdit {
@@ -46,7 +113,6 @@ export class PropertyPage extends Widget {
 		var widget = TitleEdit.create({
 				name:title,
 				title:title,
-				value:value,
 				valueW:valueW,
 				titleW:this.titleW,
 				inputType:inputType,
@@ -54,6 +120,8 @@ export class PropertyPage extends Widget {
 				inputFilter:inputFilter,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		
+		widget.value = value,
 		this.addChild(widget, true);
 
 		return widget;
@@ -64,12 +132,12 @@ export class PropertyPage extends Widget {
 		var widget = TitleChoosableEdit.create({
 				name:title,
 				title:title,
-				value:value,
 				inputTips:inputTips,
 				titleW:this.titleW,
 				valueW:this.valueW,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		widget.value = value,
 		this.addChild(widget, true);
 
 		return widget;
@@ -80,11 +148,11 @@ export class PropertyPage extends Widget {
 		var widget = TitleComboBox.create({
 				name:title,
 				title:title,
-				value:value,
 				titleW:this.titleW,
 				valueW:this.valueW,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		widget.value = value,
 		this.addChild(widget, true);
 
 		return widget;
@@ -100,6 +168,7 @@ export class PropertyPage extends Widget {
 				valueW:this.valueW,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		widget.value = value,
 		this.addChild(widget, true);
 
 		return widget;
@@ -110,11 +179,11 @@ export class PropertyPage extends Widget {
 		var widget = TitleSlider.create({
 				name:title,
 				title:title,
-				value:value,
 				titleW:this.titleW,
 				valueW:this.valueW,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		widget.value = value,
 		this.addChild(widget, true);
 
 		return widget;
@@ -125,11 +194,11 @@ export class PropertyPage extends Widget {
 		var widget = TitleTextArea.create({
 				name:title,
 				title:title,
-				value:value,
 				titleW:this.titleW,
 				valueW:this.valueW,
 				layoutParam : LinearLayouterParam.create({h:itemH})
 			});
+		widget.value = value,
 		this.addChild(widget, true);
 		
 		return widget;

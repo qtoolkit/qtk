@@ -1,7 +1,7 @@
 
 var imageURL = "/demos/assets/test.jpg";
 function addPage(propertySheets, title) {
-	var page = qtk.PropertyPage.create({h:400});
+	var page = qtk.PropertyPage.create({h:500});
 	propertySheets.addPage(title, page);
 	
 	page.addEdit("Name", "QTK"); 
@@ -13,6 +13,18 @@ function addPage(propertySheets, title) {
 	page.addSlider("Opacity", 0.3); 
 	page.addComboBox("Color", "Red").addOption("Red").addOption("Green").addOption("Blue"); 
 	page.addComboBoxEditable("Color", "Red").addOption("Red").addOption("Green").addOption("Blue"); 
+	page.addLabel("Address", "China"); 
+	page.addRange("Range", 10, 100).on(qtk.Events.CHANGING, function(evt) {
+		console.log(this.value);
+	}); 
+	
+	page.addVector2("Vector2", 10, 100).on(qtk.Events.CHANGING, function(evt) {
+		console.log(this.value);
+	}); 
+	
+	page.addVector3("Vector3", 10, 100, 1000).on(qtk.Events.CHANGING, function(evt) {
+		console.log(this.value);
+	}); 
 }
 
 function onReady(app) {

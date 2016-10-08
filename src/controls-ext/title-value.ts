@@ -84,8 +84,23 @@ export abstract class TitleValue extends Widget {
 		var valueWidget = this.createValueWidget();
 		this.addChild(valueWidget);
 		this._valueWidget = valueWidget;
+
+		if(this._value !== undefined) {
+			valueWidget.value = this._value;
+		}
+
+		valueWidget.on(Events.CHANGE, evt => {
+			this.dispatchEvent(evt);
+		});
+		valueWidget.on(Events.CHANGING, evt => {
+			this.dispatchEvent(evt);
+		});
 	}
 	
+	protected onToJson(json:any) {
+		delete json._value;
+	}
+
 	protected static defProps = Object.assign({}, Widget.defProps, {_lp:2, _tp:2, _rp:2, _bp:2,
 		_title:null, _titleW:60, _valueW:60});
 

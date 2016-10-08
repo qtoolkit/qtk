@@ -5,6 +5,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var title_edit_1 = require("./title-edit");
+var title_label_1 = require("./title-label");
+var title_range_1 = require("./title-range");
+var title_vector_1 = require("./title-vector");
 var widget_1 = require("../controls/widget");
 var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
@@ -51,13 +54,66 @@ var PropertyPage = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    PropertyPage.prototype.addLabel = function (title, value) {
+        var itemH = this.itemH;
+        var widget = title_label_1.TitleLabel.create({
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW,
+            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+        });
+        widget.value = value,
+            this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addRange = function (title, firstValue, secondValue) {
+        var itemH = this.itemH;
+        var widget = title_range_1.TitleRange.create({
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW,
+            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+        });
+        widget.value = { first: firstValue, second: secondValue };
+        this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addVector2 = function (title, x, y) {
+        var itemH = this.itemH;
+        var widget = title_vector_1.TitleVector.create({
+            d: 2,
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW,
+            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+        });
+        widget.value = { x: x, y: y };
+        this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addVector3 = function (title, x, y, z) {
+        var itemH = this.itemH;
+        var widget = title_vector_1.TitleVector.create({
+            d: 3,
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW,
+            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+        });
+        widget.value = { x: x, y: y, z: z };
+        this.addChild(widget, true);
+        return widget;
+    };
     PropertyPage.prototype.addEdit = function (title, value, inputTips, inputType, inputFilter) {
         var itemH = this.itemH;
         var valueW = inputType === "number" ? "50%" : this.valueW;
         var widget = title_edit_1.TitleEdit.create({
             name: title,
             title: title,
-            value: value,
             valueW: valueW,
             titleW: this.titleW,
             inputType: inputType,
@@ -65,7 +121,8 @@ var PropertyPage = (function (_super) {
             inputFilter: inputFilter,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
@@ -73,13 +130,13 @@ var PropertyPage = (function (_super) {
         var widget = title_choosable_edit_1.TitleChoosableEdit.create({
             name: title,
             title: title,
-            value: value,
             inputTips: inputTips,
             titleW: this.titleW,
             valueW: this.valueW,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addComboBox = function (title, value) {
@@ -87,12 +144,12 @@ var PropertyPage = (function (_super) {
         var widget = title_combo_box_1.TitleComboBox.create({
             name: title,
             title: title,
-            value: value,
             titleW: this.titleW,
             valueW: this.valueW,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addComboBoxEditable = function (title, value) {
@@ -105,7 +162,8 @@ var PropertyPage = (function (_super) {
             valueW: this.valueW,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addSlider = function (title, value) {
@@ -113,12 +171,12 @@ var PropertyPage = (function (_super) {
         var widget = title_slider_1.TitleSlider.create({
             name: title,
             title: title,
-            value: value,
             titleW: this.titleW,
             valueW: this.valueW,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addTextArea = function (title, value, h) {
@@ -126,12 +184,12 @@ var PropertyPage = (function (_super) {
         var widget = title_text_area_1.TitleTextArea.create({
             name: title,
             title: title,
-            value: value,
             titleW: this.titleW,
             valueW: this.valueW,
             layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
         });
-        this.addChild(widget, true);
+        widget.value = value,
+            this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.findByTitle = function (title) {

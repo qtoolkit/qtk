@@ -1,4 +1,7 @@
 import { TitleEdit } from "./title-edit";
+import { TitleLabel } from "./title-label";
+import { TitleRange } from "./title-range";
+import { TitleVector } from "./title-vector";
 import { Widget } from "../controls/widget";
 import { TitleSlider } from "./title-slider";
 import { TitleTextArea } from "./title-text-area";
@@ -14,6 +17,10 @@ export declare class PropertyPage extends Widget {
     itemH: number;
     titleW: string;
     valueW: string;
+    addLabel(title: string, value?: string): TitleLabel;
+    addRange(title: string, firstValue?: number, secondValue?: number): TitleRange;
+    addVector2(title: string, x?: number, y?: number): TitleVector;
+    addVector3(title: string, x?: number, y?: number, z?: number): TitleVector;
     addEdit(title: string, value?: string, inputTips?: string, inputType?: string, inputFilter?: Function): TitleEdit;
     addChoosableEdit(title: string, value?: string, inputTips?: string): TitleChoosableEdit;
     addComboBox(title: string, value?: string): TitleComboBox;

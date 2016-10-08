@@ -1,21 +1,31 @@
+import { Rect } from "../rect";
+import { Label } from "../controls/label";
+import { Edit } from "../controls/edit";
 import { Widget } from "../controls/widget";
-export declare abstract class TitleValue extends Widget {
-    protected _title: string;
-    protected _titleW: string;
-    protected _valueW: string;
-    protected _titleWidget: Widget;
-    protected _valueWidget: Widget;
-    constructor(type?: string);
-    title: string;
-    titleW: string;
-    valueW: string;
-    readonly titleWidget: Widget;
-    readonly valueWidget: Widget;
+/**
+ * 范围编辑器。
+ */
+export declare class VectorEdit extends Widget {
+    protected _d: number;
+    protected _xLabel: Label;
+    protected _xEditor: Edit;
+    protected _yLabel: Label;
+    protected _yEditor: Edit;
+    protected _zLabel: Label;
+    protected _zEditor: Edit;
+    /**
+     * dimension
+     */
+    d: number;
+    readonly xEditor: Edit;
+    readonly yEditor: Edit;
+    readonly zEditor: Edit;
     value: any;
-    protected createValueWidget(options?: any): Widget;
-    onInit(): void;
-    onReset(): void;
     protected onToJson(json: any): void;
+    relayoutChildren(): Rect;
+    dispose(): void;
+    protected onCreated(): void;
+    constructor();
     protected static defProps: {} & {
         _x: number;
         _y: number;
@@ -48,14 +58,10 @@ export declare abstract class TitleValue extends Widget {
         _rp: number;
         _bp: number;
     } & {
-        _lp: number;
-        _tp: number;
-        _rp: number;
-        _bp: number;
-        _title: any;
-        _titleW: number;
-        _valueW: number;
+        _d: number;
     };
     protected getDefProps(): any;
-    dispose(): void;
+    static TYPE: string;
+    private static rBin;
+    static create(options?: any): VectorEdit;
 }

@@ -77,6 +77,15 @@ function onReady(app) {
 				valueW:"80%", 
 				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 		}), 200);
+	
+	addItem(qtk.TitleRange.create({
+				value : 0.1,
+				title:"Opacity", 
+				titleW:"60", 
+				valueW:"80%", 
+				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		}));
+
 	win.target = listView;
 	win.open();
 }
