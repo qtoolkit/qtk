@@ -30,6 +30,7 @@ export { GridView } from "./controls/grid-view";
 export { ListView } from "./controls/list-view";
 export { TreeItem } from "./controls/tree-item";
 export { TreeView } from "./controls/tree-view";
+export { IApplication } from "./iapplication";
 export { Application } from "./application";
 export { Movable } from "./behaviors/movable";
 export { ThemeManager } from "./theme-manager";

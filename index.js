@@ -3053,8 +3053,28 @@ var qtk =
 	 * Present one asset.
 	 */
 	var Item = (function () {
-	    function Item() {
+	    function Item(src, type) {
+	        if (!type) {
+	            var name = path.extname(src).toLowerCase();
+	            if (name === ".json") {
+	                type = exports.JSON;
+	            }
+	            else if (name === ".jpg" || name === ".png" || name === ".svg") {
+	                type = exports.IMAGE;
+	            }
+	            else if (type === ".txt") {
+	                type = exports.TEXT;
+	            }
+	            else {
+	                type = exports.BLOB;
+	            }
+	        }
+	        this.src = src;
+	        this.type = type;
 	    }
+	    Item.create = function (src, type) {
+	        return new Item(src, type);
+	    };
 	    return Item;
 	}());
 	exports.Item = Item;
@@ -3077,7 +3097,7 @@ var qtk =
 	 */
 	var Group = (function (_super) {
 	    __extends(Group, _super);
-	    function Group(items) {
+	    function Group(items, onProgress) {
 	        _super.call(this);
 	        this.event = {
 	            total: 0,
@@ -3089,6 +3109,9 @@ var qtk =
 	        this.loaded = 0;
 	        this.total = items.length;
 	        this.event.total = this.total;
+	        if (onProgress) {
+	            this.onProgress(onProgress);
+	        }
 	        items.forEach(this.loadOne.bind(this));
 	    }
 	    /**
@@ -3107,10 +3130,10 @@ var qtk =
 	        var type = item.type;
 	        var addLoaded = this.addLoaded.bind(this);
 	        var name = path.extname(src).toLowerCase();
-	        if (type === exports.JSON || (!type && name === 'json')) {
+	        if (type === exports.JSON || (!type && name === '.json')) {
 	            loadJSON(src).then(addLoaded, addLoaded);
 	        }
-	        else if (type === exports.IMAGE || (!type && (name === "jpg" || name === "png" || name === "svg"))) {
+	        else if (type === exports.IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
 	            loadImage(src).then(addLoaded, addLoaded);
 	        }
 	        else if (type === exports.BLOB) {
@@ -3119,6 +3142,15 @@ var qtk =
 	        else {
 	            loadText(src).then(addLoaded, addLoaded);
 	        }
+	    };
+	    Group.create = function (items, onProgress) {
+	        return new Group(items, onProgress);
+	    };
+	    Group.preload = function (assetsURLS, onProgress) {
+	        var arr = assetsURLS.map(function (iter) {
+	            return Item.create(iter);
+	        });
+	        return Group.create(arr, onProgress);
 	    };
 	    return Group;
 	}(emitter_1.Emitter));
@@ -23358,17 +23390,24 @@ var qtk =
 	        this.name = name;
 	        this._options = {};
 	        this.servicesManager = new service_locator_1.ServiceLocator();
+	        var options = this._options;
+	        var str = window.location.search.substr(1);
+	        var arr = str.split('&');
+	        arr.forEach(function (iter) {
+	            var keyValue = iter.split("=");
+	            options[keyValue[0]] = keyValue[1];
+	        });
 	    }
-	    Object.defineProperty(Application.prototype, "isReady", {
+	    Object.defineProperty(Application.prototype, "assets", {
 	        get: function () {
-	            return this._isReady;
+	            return Assets;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Application.prototype, "assets", {
+	    Object.defineProperty(Application.prototype, "isReady", {
 	        get: function () {
-	            return Assets;
+	            return this._isReady;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -23392,26 +23431,31 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Application.prototype.loadScript = function (src) {
+	        Assets.loadScript(src);
+	    };
+	    Application.prototype.preload = function (assetsURLS, onDone, onProgress) {
+	        Assets.Group.preload(assetsURLS, function (evt) {
+	            if (evt.loaded === evt.total) {
+	                if (onDone) {
+	                    onDone(evt);
+	                }
+	            }
+	            if (onProgress) {
+	                onProgress(evt);
+	            }
+	        });
+	        return this;
+	    };
 	    Application.prototype.initOptions = function (args) {
 	        var options = this._options;
 	        for (var key in args) {
 	            options[key] = args[key];
 	        }
-	        var str = window.location.search.substr(1);
-	        var arr = str.split('&');
-	        arr.forEach(function (iter) {
-	            var keyValue = iter.split("=");
-	            options[keyValue[0]] = keyValue[1];
-	        });
 	    };
 	    Application.prototype.run = function () {
 	        this.dispatchEvent({ type: Events.RUN });
 	        this._mainLoop.requestRedraw();
-	    };
-	    /**
-	     * 子类可以重载此函数，做App的初始化工作。
-	     */
-	    Application.prototype.start = function () {
 	    };
 	    Application.prototype.init = function (args) {
 	        var _this = this;
@@ -23431,13 +23475,13 @@ var qtk =
 	                        themeManager.load(json, baseURL);
 	                        _this.dispatchEventAsync({ type: Events.READY });
 	                        _this._isReady = true;
-	                        _this.start();
+	                        _this.onReady(_this);
 	                    });
 	                }
 	                else {
 	                    _this.dispatchEventAsync({ type: Events.READY });
 	                    _this._isReady = true;
-	                    _this.start();
+	                    _this.onReady(_this);
 	                }
 	            });
 	        }
@@ -23478,13 +23522,10 @@ var qtk =
 	    Application.prototype.getViewPort = function () {
 	        return this._viewPort;
 	    };
-	    Application.prototype.onReady = function (func) {
-	        if (this._isReady) {
-	            func.call(this);
-	        }
-	        else {
-	            this.on(Events.READY, func);
-	        }
+	    /**
+	     * 子类可以重载此函数，做App的初始化工作。
+	     */
+	    Application.prototype.onReady = function (app) {
 	    };
 	    Application.get = function () {
 	        return Application.instance;

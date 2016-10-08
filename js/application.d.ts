@@ -1,3 +1,4 @@
+import Assets = require("./assets");
 import { Emitter } from "./emitter";
 import { IViewPort } from "./iview-port";
 import { IMainLoop } from "./imain-loop";
@@ -15,24 +16,25 @@ export declare class Application extends Emitter implements IApplication {
     private _mainLoop;
     private servicesManager;
     constructor(name: string);
+    readonly assets: typeof Assets;
     readonly isReady: boolean;
-    readonly assets: any;
     readonly mainLoop: IMainLoop;
     getMainLoop(): IMainLoop;
     options: any;
+    loadScript(src: string): void;
+    preload(assetsURLS: Array<string>, onDone: Function, onProgress?: Function): this;
     private initOptions(args);
     run(): void;
-    /**
-     * 子类可以重载此函数，做App的初始化工作。
-     */
-    start(): void;
     init(args: any): this;
     getService(name: string): any;
     registerService(name: string, service: any): Application;
     getThemeManager(): IThemeManager;
     readonly viewPort: IViewPort;
     getViewPort(): IViewPort;
-    onReady(func: Function): void;
+    /**
+     * 子类可以重载此函数，做App的初始化工作。
+     */
+    onReady(app: IApplication): void;
     private static instance;
     static get(): Application;
     static create(name: string): Application;

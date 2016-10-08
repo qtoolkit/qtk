@@ -169,6 +169,28 @@ export class Item {
      * The type of asset, options are TEXT, JSON, BLOB, IMAGE, AUDIO. 
      */
     public type : string;
+
+    constructor(src:string, type?:string) {
+    	if(!type) {
+        	var name = path.extname(src).toLowerCase();
+    		if(name === ".json") {
+    			type = JSON;
+			}else if(name === ".jpg" || name === ".png" || name === ".svg") {
+				type = IMAGE;
+			}else if(type === ".txt") {
+				type = TEXT;
+			}else{
+				type = BLOB;
+			}
+		}
+
+    	this.src = src;
+		this.type = type;
+	}
+
+	public static create(src:string, type?:string) : Item {
+		return new Item(src, type);
+	}
 };
 
 /**
@@ -196,13 +218,18 @@ export class Group extends Emitter {
         type:Events.PROGRESS
     };
 
-    constructor(items:Array<Item>) {
+    constructor(items:Array<Item>, onProgress?:Function) {
         super();
         var i = 0;
         var n = items.length;
         this.loaded = 0;    
         this.total = items.length;
         this.event.total = this.total;
+
+        if(onProgress) {
+        	this.onProgress(onProgress);
+		}
+
         items.forEach(this.loadOne.bind(this));
     }
 
@@ -225,9 +252,9 @@ export class Group extends Emitter {
         var addLoaded = this.addLoaded.bind(this);
         var name = path.extname(src).toLowerCase();
         
-        if(type === JSON || (!type && name === 'json')) {
+        if(type === JSON || (!type && name === '.json')) {
             loadJSON(src).then(addLoaded, addLoaded);
-        }else if(type === IMAGE || (!type && (name === "jpg" || name === "png" || name === "svg"))) {
+        }else if(type === IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
             loadImage(src).then(addLoaded, addLoaded);
         }else if(type === BLOB) {
             loadBlob(src).then(addLoaded, addLoaded);
@@ -235,4 +262,16 @@ export class Group extends Emitter {
             loadText(src).then(addLoaded, addLoaded);
         }
     }
+	
+	public static create(items:Array<Item>, onProgress?:Function) {
+		return new Group(items, onProgress);
+	}
+
+	public static preload(assetsURLS:Array<string>, onProgress:Function) : Group {
+		var arr = assetsURLS.map((iter:string) => {
+			return Item.create(iter);
+		});
+
+		return Group.create(arr, onProgress);
+	}
 }

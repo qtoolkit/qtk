@@ -28,17 +28,24 @@ var Application = (function (_super) {
         this.name = name;
         this._options = {};
         this.servicesManager = new service_locator_1.ServiceLocator();
+        var options = this._options;
+        var str = window.location.search.substr(1);
+        var arr = str.split('&');
+        arr.forEach(function (iter) {
+            var keyValue = iter.split("=");
+            options[keyValue[0]] = keyValue[1];
+        });
     }
-    Object.defineProperty(Application.prototype, "isReady", {
+    Object.defineProperty(Application.prototype, "assets", {
         get: function () {
-            return this._isReady;
+            return Assets;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Application.prototype, "assets", {
+    Object.defineProperty(Application.prototype, "isReady", {
         get: function () {
-            return Assets;
+            return this._isReady;
         },
         enumerable: true,
         configurable: true
@@ -62,26 +69,31 @@ var Application = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Application.prototype.loadScript = function (src) {
+        Assets.loadScript(src);
+    };
+    Application.prototype.preload = function (assetsURLS, onDone, onProgress) {
+        Assets.Group.preload(assetsURLS, function (evt) {
+            if (evt.loaded === evt.total) {
+                if (onDone) {
+                    onDone(evt);
+                }
+            }
+            if (onProgress) {
+                onProgress(evt);
+            }
+        });
+        return this;
+    };
     Application.prototype.initOptions = function (args) {
         var options = this._options;
         for (var key in args) {
             options[key] = args[key];
         }
-        var str = window.location.search.substr(1);
-        var arr = str.split('&');
-        arr.forEach(function (iter) {
-            var keyValue = iter.split("=");
-            options[keyValue[0]] = keyValue[1];
-        });
     };
     Application.prototype.run = function () {
         this.dispatchEvent({ type: Events.RUN });
         this._mainLoop.requestRedraw();
-    };
-    /**
-     * 子类可以重载此函数，做App的初始化工作。
-     */
-    Application.prototype.start = function () {
     };
     Application.prototype.init = function (args) {
         var _this = this;
@@ -101,13 +113,13 @@ var Application = (function (_super) {
                         themeManager.load(json, baseURL);
                         _this.dispatchEventAsync({ type: Events.READY });
                         _this._isReady = true;
-                        _this.start();
+                        _this.onReady(_this);
                     });
                 }
                 else {
                     _this.dispatchEventAsync({ type: Events.READY });
                     _this._isReady = true;
-                    _this.start();
+                    _this.onReady(_this);
                 }
             });
         }
@@ -148,13 +160,10 @@ var Application = (function (_super) {
     Application.prototype.getViewPort = function () {
         return this._viewPort;
     };
-    Application.prototype.onReady = function (func) {
-        if (this._isReady) {
-            func.call(this);
-        }
-        else {
-            this.on(Events.READY, func);
-        }
+    /**
+     * 子类可以重载此函数，做App的初始化工作。
+     */
+    Application.prototype.onReady = function (app) {
     };
     Application.get = function () {
         return Application.instance;

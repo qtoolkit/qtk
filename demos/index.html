@@ -35,22 +35,22 @@ body { -ms-touch-action:none; }
 </style>
 
 <title>QToolKit Demos</title>
-<script src='../index.js'></script>
+<script src='/index.js'></script>
 
 <script type="application/javascript">
 
-var app = new qtk.Application.create("test");
-app.init({
-	sysThemeDataURL:"/demos/assets/theme/default/theme.json",
-	appThemeDataURL:"/demos/assets/theme/default/demo.json"
-});
+var themeURL = "/demos/assets/theme/default/theme.json";
+var appThemeURL = "/demos/assets/theme/default/demo.json";
+var assetsURLs = [themeURL, appThemeURL];
 
-var demo = app.options["demo"] || "main";
-app.assets.loadScript("js/demo-"+demo+".js");	
+var app = new qtk.Application.create("test");
+app.loadScript("js/demo-"+(app.options["demo"] || "main")+".js");
 
 window.onload = function() {
-	app.onReady(function() {
-		onReady(app);
+	app.preload(assetsURLs, function onLoad() {
+		app.onReady = onReady;
+		app.init({sysThemeDataURL:themeURL, appThemeDataURL:appThemeURL});
+		
 		app.run();
 	});
 }

@@ -68,6 +68,8 @@ export declare class Item {
      * The type of asset, options are TEXT, JSON, BLOB, IMAGE, AUDIO.
      */
     type: string;
+    constructor(src: string, type?: string);
+    static create(src: string, type?: string): Item;
 }
 /**
  * Assets group to preload
@@ -93,11 +95,13 @@ export declare class Group extends Emitter {
         loaded: number;
         type: string;
     };
-    constructor(items: Array<Item>);
+    constructor(items: Array<Item>, onProgress?: Function);
     /**
      * Register of a progress callback function
      */
     onProgress(callback: Function): void;
     private addLoaded();
     private loadOne(item);
+    static create(items: Array<Item>, onProgress?: Function): Group;
+    static preload(assetsURLS: Array<string>, onProgress: Function): Group;
 }

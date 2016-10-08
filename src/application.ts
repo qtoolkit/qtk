@@ -33,14 +33,22 @@ export class Application extends Emitter implements IApplication {
 		this.name = name;
 		this._options = {};
 		this.servicesManager = new ServiceLocator();
+		
+		var options = this._options;
+		var str = window.location.search.substr(1);
+		var arr = str.split('&');
+		arr.forEach(function(iter) {
+			var keyValue = iter.split("=");
+			options[keyValue[0]] = keyValue[1];
+		});
+	}
+
+	public get assets() {
+		return Assets;
 	}
 
 	public get isReady() : boolean {
 		return this._isReady;
-	}
-
-	public get assets() : any{
-		return Assets;
 	}
 
 	public get mainLoop() : IMainLoop {
@@ -57,31 +65,37 @@ export class Application extends Emitter implements IApplication {
 
 	public set options(options){
 	}
-	
+
+	public loadScript(src:string) {
+		Assets.loadScript(src);
+	}
+
+	public preload(assetsURLS:Array<string>, onDone:Function, onProgress?:Function) {
+		Assets.Group.preload(assetsURLS, function(evt) {
+			if(evt.loaded === evt.total) {
+				if(onDone) {
+					onDone(evt);
+				}
+			}
+
+			if(onProgress) {
+				onProgress(evt);
+			}
+		});
+		return this;
+	}
+
 	private initOptions(args:any) {
 		var options = this._options;
 
 		for(var key in args) {
 			options[key] = args[key];
 		}
-
-		var str = window.location.search.substr(1);
-		var arr = str.split('&');
-		arr.forEach(function(iter) {
-			var keyValue = iter.split("=");
-			options[keyValue[0]] = keyValue[1];
-		});
 	}
 
 	public run() {
 		this.dispatchEvent({type:Events.RUN});
 		this._mainLoop.requestRedraw();
-	}
-
-	/**
-	 * 子类可以重载此函数，做App的初始化工作。
-	 */
-	public start() {
 	}
 
 	public init(args:any) {
@@ -103,12 +117,12 @@ export class Application extends Emitter implements IApplication {
 						themeManager.load(json, baseURL);
 						this.dispatchEventAsync({type:Events.READY});
 						this._isReady = true;
-						this.start();
+						this.onReady(this);
 					});
 				}else{
 					this.dispatchEventAsync({type:Events.READY});
 					this._isReady = true;
-					this.start();
+					this.onReady(this);
 				}
 			});
 		}
@@ -157,12 +171,10 @@ export class Application extends Emitter implements IApplication {
 		return this._viewPort;
 	}
 
-	public onReady(func:Function) {
-		if(this._isReady) {
-			func.call(this);
-		}else{
-			this.on(Events.READY, func);
-		}
+	/**
+	 * 子类可以重载此函数，做App的初始化工作。
+	 */
+	public onReady(app:IApplication) {
 	}
 
 	private static instance : Application;

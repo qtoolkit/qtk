@@ -147,8 +147,28 @@ exports.clear = clear;
  * Present one asset.
  */
 var Item = (function () {
-    function Item() {
+    function Item(src, type) {
+        if (!type) {
+            var name = path.extname(src).toLowerCase();
+            if (name === ".json") {
+                type = exports.JSON;
+            }
+            else if (name === ".jpg" || name === ".png" || name === ".svg") {
+                type = exports.IMAGE;
+            }
+            else if (type === ".txt") {
+                type = exports.TEXT;
+            }
+            else {
+                type = exports.BLOB;
+            }
+        }
+        this.src = src;
+        this.type = type;
     }
+    Item.create = function (src, type) {
+        return new Item(src, type);
+    };
     return Item;
 }());
 exports.Item = Item;
@@ -171,7 +191,7 @@ exports.Item = Item;
  */
 var Group = (function (_super) {
     __extends(Group, _super);
-    function Group(items) {
+    function Group(items, onProgress) {
         _super.call(this);
         this.event = {
             total: 0,
@@ -183,6 +203,9 @@ var Group = (function (_super) {
         this.loaded = 0;
         this.total = items.length;
         this.event.total = this.total;
+        if (onProgress) {
+            this.onProgress(onProgress);
+        }
         items.forEach(this.loadOne.bind(this));
     }
     /**
@@ -201,10 +224,10 @@ var Group = (function (_super) {
         var type = item.type;
         var addLoaded = this.addLoaded.bind(this);
         var name = path.extname(src).toLowerCase();
-        if (type === exports.JSON || (!type && name === 'json')) {
+        if (type === exports.JSON || (!type && name === '.json')) {
             loadJSON(src).then(addLoaded, addLoaded);
         }
-        else if (type === exports.IMAGE || (!type && (name === "jpg" || name === "png" || name === "svg"))) {
+        else if (type === exports.IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
             loadImage(src).then(addLoaded, addLoaded);
         }
         else if (type === exports.BLOB) {
@@ -213,6 +236,15 @@ var Group = (function (_super) {
         else {
             loadText(src).then(addLoaded, addLoaded);
         }
+    };
+    Group.create = function (items, onProgress) {
+        return new Group(items, onProgress);
+    };
+    Group.preload = function (assetsURLS, onProgress) {
+        var arr = assetsURLS.map(function (iter) {
+            return Item.create(iter);
+        });
+        return Group.create(arr, onProgress);
     };
     return Group;
 }(emitter_1.Emitter));
