@@ -57,6 +57,9 @@ var Emitter = (function () {
      * @param useCapture 是否注册为capture阶段的处理函数。
      */
     Emitter.prototype.addEventListener = function (type, callback, useCapture) {
+        if (!callback) {
+            return;
+        }
         if (useCapture) {
             this.emitter.addListener(toCaptureEventName(type), callback, this);
         }

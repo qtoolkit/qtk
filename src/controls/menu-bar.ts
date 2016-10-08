@@ -88,7 +88,9 @@ export class MenuBar extends Widget {
 	public addTextButton(text:string, onClick:Function, width?:number, position?:number) : Widget {
 		var item = MenuBarItem.create();
 		item.set({text:text});
-		item.on(Events.CLICK, onClick);
+		if(onClick) {
+			item.on(Events.CLICK, onClick);
+		}
 		item.layoutParam = this.createChildLayoutParam({w:width||this.itemWidth, h:"100%", position:position||1});
 		this.addChild(item);
 
@@ -98,7 +100,9 @@ export class MenuBar extends Widget {
 	public addImageButton(normalIconURL:string, overIconURL:string, activeIconURL:string, 
 				disableIconURL:string, checkedIconURL:string, onClick:Function, position?:number) : Widget {
 		var item = MenuBarItem.create();
-		item.on(Events.CLICK, onClick);
+		if(onClick) {
+			item.on(Events.CLICK, onClick);
+		}
 		item.styleType = "widget.transparent";
 		item.setIcons(normalIconURL, overIconURL, activeIconURL, disableIconURL, checkedIconURL);
 		item.layoutParam = this.createChildLayoutParam({w:this.h, h:"100%", position:position||1});

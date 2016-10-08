@@ -153,14 +153,18 @@ export class Menu extends Dialog {
 		var item = this.addItemExt(text, null, shortcut, null);
 		item.set({checkable:true, value:value});
 		item.styleType = item.type + ".checkable";
-		item.on(Events.CLICK, onClick);
+		if(onClick) {
+			item.on(Events.CLICK, onClick);
+		}
 
 		return item;
 	}
 	
 	public addItem(text:string, onClick:Function, iconURL?:string, shortcut?:string) : Widget {
 		var item = this.addItemExt(text, iconURL, shortcut, null);
-		item.on(Events.CLICK, onClick);
+		if(onClick) {
+			item.on(Events.CLICK, onClick);
+		}
 
 		return item;
 	}

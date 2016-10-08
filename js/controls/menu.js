@@ -150,12 +150,16 @@ var Menu = (function (_super) {
         var item = this.addItemExt(text, null, shortcut, null);
         item.set({ checkable: true, value: value });
         item.styleType = item.type + ".checkable";
-        item.on(Events.CLICK, onClick);
+        if (onClick) {
+            item.on(Events.CLICK, onClick);
+        }
         return item;
     };
     Menu.prototype.addItem = function (text, onClick, iconURL, shortcut) {
         var item = this.addItemExt(text, iconURL, shortcut, null);
-        item.on(Events.CLICK, onClick);
+        if (onClick) {
+            item.on(Events.CLICK, onClick);
+        }
         return item;
     };
     Menu.prototype.addFolderItem = function (text, onInitSubMenu) {

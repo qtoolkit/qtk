@@ -57,6 +57,10 @@ export class Emitter {
 	 * @param useCapture 是否注册为capture阶段的处理函数。
 	 */
 	public addEventListener(type:string, callback:Function, useCapture?:boolean) {
+		if(!callback) {
+			return;
+		}
+
 		if(useCapture) {
 			this.emitter.addListener(toCaptureEventName(type), callback, this);
 		}else{
