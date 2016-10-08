@@ -176,10 +176,10 @@ export abstract class ComboBoxBase extends Widget {
 
 	protected onItemSelected(data:ComboBoxOption) {
 		if(data) {
-			this.requestRedraw();
 			this._current = data;
 			this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {oldValue:null, newValue:data.value}));
 		}
+		this.requestRedraw();
 	}
 
 	protected showPopup() {

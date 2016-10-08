@@ -173,10 +173,10 @@ var ComboBoxBase = (function (_super) {
     };
     ComboBoxBase.prototype.onItemSelected = function (data) {
         if (data) {
-            this.requestRedraw();
             this._current = data;
             this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: null, newValue: data.value }));
         }
+        this.requestRedraw();
     };
     ComboBoxBase.prototype.showPopup = function () {
         var _this = this;
