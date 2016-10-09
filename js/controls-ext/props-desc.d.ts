@@ -62,3 +62,9 @@ export declare class PropsDesc {
     parse(json: Array<any>): PropsDesc;
     static create(json: any): PropsDesc;
 }
+export declare class PagePropsDesc {
+    title: string;
+    propsDesc: PropsDesc;
+    constructor(title: string, propsDesc: PropsDesc);
+    static create(title: string, json: any): PagePropsDesc;
+}

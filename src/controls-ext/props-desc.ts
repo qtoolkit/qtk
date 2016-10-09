@@ -181,3 +181,20 @@ export class PropsDesc {
 	}
 };
 
+export class PagePropsDesc {
+	public title:string;
+	public propsDesc:PropsDesc;
+
+	constructor(title:string, propsDesc:PropsDesc) {
+		this.title = title;
+		this.propsDesc = propsDesc;
+	}
+
+	public static create(title:string, json:any) : PagePropsDesc {
+		var propsDesc = PropsDesc.create(json);
+		var pagePropsDesc = new PagePropsDesc(title, propsDesc);
+
+		return pagePropsDesc;
+	}
+};
+

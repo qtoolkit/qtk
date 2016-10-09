@@ -27216,6 +27216,20 @@ var qtk =
 	}());
 	exports.PropsDesc = PropsDesc;
 	;
+	var PagePropsDesc = (function () {
+	    function PagePropsDesc(title, propsDesc) {
+	        this.title = title;
+	        this.propsDesc = propsDesc;
+	    }
+	    PagePropsDesc.create = function (title, json) {
+	        var propsDesc = PropsDesc.create(json);
+	        var pagePropsDesc = new PagePropsDesc(title, propsDesc);
+	        return pagePropsDesc;
+	    };
+	    return PagePropsDesc;
+	}());
+	exports.PagePropsDesc = PagePropsDesc;
+	;
 
 
 /***/ },
