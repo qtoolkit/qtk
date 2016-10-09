@@ -103,8 +103,8 @@ function onReady(app) {
 	propertySheets.layoutParam = qtk.SimpleLayouterParam.create({x:"10%", y:"10%", w:"80%", h:"80%"});
 	win.addChild(propertySheets);
 
-//	addPage(propertySheets, "Normal");
-//	addPageFromJson(propertySheets, "Create From Json");
+	addPage(propertySheets, "Normal");
+	addPageFromJson(propertySheets, "Create From Json");
 	addPageDataBinding(propertySheets, "Data Binding");
 	
 	win.open();
