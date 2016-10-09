@@ -91,6 +91,10 @@ export {DelegateValidationRule} from "./mvvm/delegate-validation-rule";
 export {BindingRule, IBindingSource, BindingDataSource,
 	BindingCommandSource, BindingRuleItem} from "./mvvm/binding-rule";
 
+export {PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc} from "./controls-ext/props-desc";
+export {TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc} from "./controls-ext/props-desc";
+export {Vector2PropDesc, Vector3PropDesc} from "./controls-ext/props-desc";
+
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 
 var TWEEN = require("tween.js");
