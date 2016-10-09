@@ -1,3 +1,4 @@
+import Events = require("../events");
 import { Widget } from "../controls/widget";
 export declare abstract class TitleValue extends Widget {
     protected _title: string;
@@ -15,6 +16,8 @@ export declare abstract class TitleValue extends Widget {
     protected createValueWidget(options?: any): Widget;
     onInit(): void;
     onReset(): void;
+    protected forwardChangeEvent(evt: Events.ChangeEvent): void;
+    protected onCreated(): void;
     protected onToJson(json: any): void;
     protected static defProps: {} & {
         _x: number;

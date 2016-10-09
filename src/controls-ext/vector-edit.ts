@@ -22,6 +22,10 @@ export class VectorEdit extends Widget {
 	protected _yEditor : Edit;
 	protected _zLabel : Label;
 	protected _zEditor : Edit;
+	
+	public get inputable() {
+		return true;
+	}
 
 	/**
 	 * dimension
@@ -124,6 +128,11 @@ export class VectorEdit extends Widget {
 		super.dispose();
 	}
 
+	protected forwardChangeEvent(evt:Events.ChangeEvent) {
+		var e = this.eChangeEvent;
+		e.init(evt.type, {value:this.value});
+		this.dispatchEvent(e);
+	}
 	protected onCreated() {
 		super.onCreated();
 		
@@ -136,10 +145,10 @@ export class VectorEdit extends Widget {
 		this._xEditor = Edit.create({multiLineMode:false, value:value.x, inputType:"number"});
 		this.addChild(this._xEditor, false);
 		this._xEditor.on(Events.CHANGE, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 		this._xEditor.on(Events.CHANGING, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 
 		this._yLabel = Label.create({text:"Y"});
@@ -147,10 +156,10 @@ export class VectorEdit extends Widget {
 		this._yEditor = Edit.create({multiLineMode:false, value:value.y, inputType:"number"});
 		this.addChild(this._yEditor, false);
 		this._yEditor.on(Events.CHANGE, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 		this._yEditor.on(Events.CHANGING, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 	
 		if(this.d > 2) {
@@ -159,10 +168,10 @@ export class VectorEdit extends Widget {
 			this._zEditor = Edit.create({inputType:"number"});
 			this.addChild(this._zEditor, false);
 			this._zEditor.on(Events.CHANGE, evt => {
-				this.dispatchEvent(evt);
+				this.forwardChangeEvent(evt);
 			});
 			this._zEditor.on(Events.CHANGING, evt => {
-				this.dispatchEvent(evt);
+				this.forwardChangeEvent(evt);
 			});
 		}
 

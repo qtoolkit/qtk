@@ -135,12 +135,12 @@ var Edit = (function (_super) {
         var input = this._input;
         var p = this.toViewPoint(point_1.Point.point.init(0, 0));
         input.move(p.x, p.y);
-        input.text = this.text || "";
         input.resize(this.w, this.h);
         input.fontSize = style.fontSize;
         input.inputType = this.inputType;
         input.textColor = style.textColor;
         input.fontFamily = style.fontFamily;
+        input.text = this.text || "";
         input.show();
         input.z = this.win.z + 1;
         this.dispatchEvent({ type: Events.FOCUS });

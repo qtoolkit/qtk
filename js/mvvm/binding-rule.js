@@ -19,7 +19,7 @@ var BindingDataSource = (function (_super) {
         this.type = BindingDataSource.TYPE;
         this.validationRule = validationRule;
         this.mode = mode || iview_modal_2.BindingMode.TWO_WAY;
-        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_modal_2.UpdateTiming.CHANGED;
+        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_modal_2.UpdateTiming.CHANGING;
         if (path !== undefined) {
             this.path = path;
         }

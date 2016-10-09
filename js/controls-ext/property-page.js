@@ -11,6 +11,8 @@ var title_vector_1 = require("./title-vector");
 var widget_1 = require("../controls/widget");
 var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
+var props_desc_1 = require("./props-desc");
+var props_desc_2 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
 var title_choosable_edit_1 = require("./title-choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
@@ -198,6 +200,60 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createV({ spacing: 5 });
+    };
+    PropertyPage.prototype.initWithPropDesc = function (item) {
+        var titleValue = null;
+        if (item.type === props_desc_1.NumberPropDesc.TYPE) {
+            titleValue = this.addEdit(item.name, item.value, item.desc, "number");
+        }
+        else if (item.type === props_desc_1.TextPropDesc.TYPE) {
+            titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+        }
+        else if (item.type === props_desc_1.ReadonlyTextPropDesc.TYPE) {
+            titleValue = this.addLabel(item.name, item.value);
+        }
+        else if (item.type === props_desc_2.SliderPropDesc.TYPE) {
+            titleValue = this.addSlider(item.name, item.value);
+        }
+        else if (item.type === props_desc_2.RangePropDesc.TYPE) {
+            var value = item.value || { first: 0, second: 0 };
+            titleValue = this.addRange(item.name, value.first, value.second);
+        }
+        else if (item.type === props_desc_2.Vector2PropDesc.TYPE) {
+            var value = item.value || { x: 0, y: 0 };
+            titleValue = this.addVector2(item.name, value.x, value.y);
+        }
+        else if (item.type === props_desc_2.OptionsPropDesc.TYPE) {
+            var value = item.value || { x: 0, y: 0 };
+            var propDesc = item;
+            titleValue = this.addComboBox(item.name, value);
+            if (propDesc.options) {
+                var comboBox = titleValue.valueWidget;
+                comboBox.optionsJson = propDesc.options;
+            }
+        }
+        else if (item.type === props_desc_2.Vector3PropDesc.TYPE) {
+            var value = item.value || { x: 0, y: 0, z: 0 };
+            titleValue = this.addVector3(item.name, value.x, value.y, value.z);
+        }
+        if (titleValue && item.path) {
+            var valueWidget = titleValue.valueWidget;
+            var bindRule = {
+                value: {
+                    path: item.path,
+                    converter: item.converter,
+                    validationRule: item.validationRule
+                }
+            };
+            valueWidget.dataBindingRule = bindRule;
+        }
+    };
+    PropertyPage.prototype.initWithPropsDesc = function (json) {
+        var _this = this;
+        var propsDesc = props_desc_1.PropsDesc.create(json);
+        propsDesc.forEach(function (item) {
+            _this.initWithPropDesc(item);
+        });
     };
     PropertyPage.prototype.getDefProps = function () {
         return PropertyPage.defProps;

@@ -19,6 +19,9 @@ export class Slider extends ProgressBar {
 		super(type || Slider.TYPE);
 	}
 	
+	public get inputable() {
+		return true;
+	}
 	public onDraggerMoved(dragEnd:boolean){
 		var oldValue = this.value;
 		if(this.barType === ProgressBarType.V) {

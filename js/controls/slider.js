@@ -18,6 +18,13 @@ var Slider = (function (_super) {
     function Slider(type) {
         _super.call(this, type || Slider.TYPE);
     }
+    Object.defineProperty(Slider.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Slider.prototype.onDraggerMoved = function (dragEnd) {
         var oldValue = this.value;
         if (this.barType === progress_bar_1.ProgressBarType.V) {

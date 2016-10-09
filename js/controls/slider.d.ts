@@ -8,6 +8,7 @@ import { ProgressBar } from "./progress-bar";
 export declare class Slider extends ProgressBar {
     protected dragger: Widget;
     constructor(type?: string);
+    readonly inputable: boolean;
     onDraggerMoved(dragEnd: boolean): void;
     relayoutChildren(): Rect;
     protected onInit(): void;

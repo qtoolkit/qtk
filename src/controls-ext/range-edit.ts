@@ -18,6 +18,10 @@ export class RangeEdit extends Widget {
 	protected _secondEditor : Edit;
 	protected _label : Label;
 
+	public get inputable() {
+		return true;
+	}
+
 	public get firstEditor() : Edit {
 		return this._firstEditor;
 	}
@@ -82,6 +86,12 @@ export class RangeEdit extends Widget {
 		super.dispose();
 	}
 
+	protected forwardChangeEvent(evt:Events.ChangeEvent) {
+		var e = this.eChangeEvent;
+		e.init(evt.type, {value:this.value});
+		this.dispatchEvent(e);
+	}
+
 	protected onReset() {
 		super.onReset();
 		
@@ -90,10 +100,10 @@ export class RangeEdit extends Widget {
 		this._firstEditor = Edit.create({value:value.first, inputType:"number"});
 		this.addChild(this._firstEditor, false);
 		this._firstEditor.on(Events.CHANGE, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 		this._firstEditor.on(Events.CHANGING, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 
 		this._label = Label.create({text:"-", multiLineMode:false});
@@ -102,10 +112,10 @@ export class RangeEdit extends Widget {
 		this._secondEditor = Edit.create({value:value.second, inputType:"number"});
 		this.addChild(this._secondEditor, false);
 		this._secondEditor.on(Events.CHANGE, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 		this._secondEditor.on(Events.CHANGING, evt => {
-			this.dispatchEvent(evt);
+			this.forwardChangeEvent(evt);
 		});
 
 		this.relayoutChildren();

@@ -1,12 +1,16 @@
 
 import {Rect} from "../rect";
 import {TitleEdit} from "./title-edit";
+import {TitleValue} from "./title-value";
 import {TitleLabel} from "./title-label";
 import {TitleRange} from "./title-range";
 import {TitleVector} from "./title-vector";
 import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
+import {ComboBox} from "../controls/combo-box";
 import {TitleTextArea} from "./title-text-area";
+import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
+import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
 import {TitleChoosableEdit} from "./title-choosable-edit";
 import {WidgetFactory} from "../controls/widget-factory";
@@ -211,6 +215,56 @@ export class PropertyPage extends Widget {
 	protected onReset() {
 		super.onReset();
 		this.childrenLayouter = LinearLayouter.createV({spacing:5});
+	}
+
+	protected initWithPropDesc(item:PropDesc) {
+		var titleValue:TitleValue = null;
+
+		if(item.type === NumberPropDesc.TYPE) {
+			titleValue = this.addEdit(item.name, item.value, item.desc, "number");
+		}else if(item.type === TextPropDesc.TYPE) {
+			titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+		}else if(item.type === ReadonlyTextPropDesc.TYPE) {
+			titleValue = this.addLabel(item.name, item.value);
+		}else if(item.type === SliderPropDesc.TYPE) {
+			titleValue = this.addSlider(item.name, item.value);
+		}else if(item.type === RangePropDesc.TYPE) {
+			var value = item.value || {first:0, second:0};
+			titleValue = this.addRange(item.name, value.first, value.second);
+		}else if(item.type === Vector2PropDesc.TYPE) {
+			var value = item.value || {x:0, y:0};
+			titleValue = this.addVector2(item.name, value.x, value.y);
+		}else if(item.type === OptionsPropDesc.TYPE) {
+			var value = item.value || {x:0, y:0};
+			var propDesc = <OptionsPropDesc>item;
+			titleValue = this.addComboBox(item.name, value);
+			if(propDesc.options) {
+				var comboBox = <ComboBox>titleValue.valueWidget;
+				comboBox.optionsJson = propDesc.options;
+			}
+		}else if(item.type === Vector3PropDesc.TYPE) {
+			var value = item.value || {x:0, y:0, z:0};
+			titleValue = this.addVector3(item.name, value.x, value.y, value.z);
+		}
+
+		if(titleValue && item.path) {
+			var valueWidget = titleValue.valueWidget;
+			var bindRule = {
+				value:{
+					path:item.path, 
+					converter:item.converter, 
+					validationRule:item.validationRule
+				}
+			};
+			valueWidget.dataBindingRule = bindRule;
+		}
+	}
+
+	public initWithPropsDesc(json:any) {
+		var propsDesc = PropsDesc.create(json);
+		propsDesc.forEach((item:PropDesc) => {
+			this.initWithPropDesc(item);
+		});
 	}
 
 	constructor() {

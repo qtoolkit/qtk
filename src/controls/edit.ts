@@ -103,12 +103,12 @@ export class Edit extends Label {
 		var p = this.toViewPoint(Point.point.init(0, 0));
 
 		input.move(p.x, p.y);
-		input.text = this.text || ""; 
 		input.resize(this.w, this.h);
 		input.fontSize = style.fontSize;
 		input.inputType = this.inputType;
 		input.textColor = style.textColor;
 		input.fontFamily = style.fontFamily;
+		input.text = this.text || ""; 
 		input.show();
 		input.z = this.win.z + 1;
 

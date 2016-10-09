@@ -112,6 +112,21 @@ export abstract class ComboBoxBase extends Widget {
 	protected _options : Array<ComboBoxOption>;
 	protected _customItemDraw : CustomItemDrawFunc;
 	
+	public get options() : Array<ComboBoxOption>{
+		return this._options;
+	}
+	
+	public set optionsJson(options:any) {
+		this.resetOptions();
+		options.forEach(item => {
+			if(typeof item === "string") {
+				this.addOption(item);
+			}else{
+				this.addOption(item.text, item.value, item.imageURL, item.color);
+			}
+		});
+	}
+
 	public set customItemDraw(value:CustomItemDrawFunc) {
 		this._customItemDraw = value;
 	}
@@ -157,10 +172,6 @@ export abstract class ComboBoxBase extends Widget {
 		this._options = [];
 
 		return this;
-	}
-
-	public get optionsCount() : number {
-		return this._options.length;
 	}
 
 	public addOption(text:string, value?:any, imageURL?:string, color?:string) : Widget {

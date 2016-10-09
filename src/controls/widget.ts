@@ -1983,11 +1983,15 @@ export class Widget extends Emitter {
 			return;
 		}
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
-			var eventName = updateTiming === UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
-
-			this.on(eventName, (evt:Events.ChangeEvent) => {
+			this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
 				this.updateValueToSource(evt.value, dataSource);
 			});
+
+			if(updateTiming === UpdateTiming.CHANGING) {
+				this.on(Events.CHANGING, (evt:Events.ChangeEvent) => {
+					this.updateValueToSource(evt.value, dataSource);
+				});
+			}
 		}
 	}
 

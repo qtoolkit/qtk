@@ -57,7 +57,7 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
 		this.type = <DataSourceType>BindingDataSource.TYPE;
 		this.validationRule = validationRule;
 		this.mode = mode || BindingMode.TWO_WAY;
-		this.updateTiming = updateTiming !== undefined ? updateTiming :  UpdateTiming.CHANGED;
+		this.updateTiming = updateTiming !== undefined ? updateTiming :  UpdateTiming.CHANGING;
 
 		if(path !== undefined) {
 			this.path = path;

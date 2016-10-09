@@ -16,7 +16,7 @@ export abstract class TitleValue extends Widget {
 	constructor(type?:string) {
 		super(type);
 	}
-
+	
 	public set title(value:string) {
 		this._title = value;
 	}
@@ -89,14 +89,26 @@ export abstract class TitleValue extends Widget {
 			valueWidget.value = this._value;
 		}
 
-		valueWidget.on(Events.CHANGE, evt => {
-			this.dispatchEvent(evt);
+	}
+
+	protected forwardChangeEvent(evt:Events.ChangeEvent) {
+		var e = this.eChangeEvent;
+		e.init(evt.type, {value:this.value});
+		this.dispatchEvent(e);
+	}
+
+	protected onCreated() {
+		super.onCreated();
+
+		var valueWidget = this.valueWidget;
+		valueWidget.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
+			this.forwardChangeEvent(evt);
 		});
-		valueWidget.on(Events.CHANGING, evt => {
-			this.dispatchEvent(evt);
+		valueWidget.on(Events.CHANGING, (evt:Events.ChangeEvent) => {
+			this.forwardChangeEvent(evt);
 		});
 	}
-	
+
 	protected onToJson(json:any) {
 		delete json._value;
 	}

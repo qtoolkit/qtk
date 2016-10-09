@@ -1802,10 +1802,14 @@ var Widget = (function (_super) {
             return;
         }
         if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-            var eventName = updateTiming === iview_modal_1.UpdateTiming.CHANGED ? Events.CHANGE : Events.CHANGING;
-            this.on(eventName, function (evt) {
+            this.on(Events.CHANGE, function (evt) {
                 _this.updateValueToSource(evt.value, dataSource);
             });
+            if (updateTiming === iview_modal_1.UpdateTiming.CHANGING) {
+                this.on(Events.CHANGING, function (evt) {
+                    _this.updateValueToSource(evt.value, dataSource);
+                });
+            }
         }
     };
     /*

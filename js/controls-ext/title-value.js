@@ -83,7 +83,6 @@ var TitleValue = (function (_super) {
         this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
     };
     TitleValue.prototype.onReset = function () {
-        var _this = this;
         _super.prototype.onReset.call(this);
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
         var titleWidget = label_1.Label.create();
@@ -95,11 +94,21 @@ var TitleValue = (function (_super) {
         if (this._value !== undefined) {
             valueWidget.value = this._value;
         }
+    };
+    TitleValue.prototype.forwardChangeEvent = function (evt) {
+        var e = this.eChangeEvent;
+        e.init(evt.type, { value: this.value });
+        this.dispatchEvent(e);
+    };
+    TitleValue.prototype.onCreated = function () {
+        var _this = this;
+        _super.prototype.onCreated.call(this);
+        var valueWidget = this.valueWidget;
         valueWidget.on(Events.CHANGE, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         valueWidget.on(Events.CHANGING, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
     };
     TitleValue.prototype.onToJson = function (json) {

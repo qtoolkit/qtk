@@ -18,6 +18,13 @@ var VectorEdit = (function (_super) {
     function VectorEdit() {
         _super.call(this, VectorEdit.TYPE);
     }
+    Object.defineProperty(VectorEdit.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(VectorEdit.prototype, "d", {
         /**
          * dimension
@@ -122,6 +129,11 @@ var VectorEdit = (function (_super) {
         this._zLabel = null;
         _super.prototype.dispose.call(this);
     };
+    VectorEdit.prototype.forwardChangeEvent = function (evt) {
+        var e = this.eChangeEvent;
+        e.init(evt.type, { value: this.value });
+        this.dispatchEvent(e);
+    };
     VectorEdit.prototype.onCreated = function () {
         var _this = this;
         _super.prototype.onCreated.call(this);
@@ -133,20 +145,20 @@ var VectorEdit = (function (_super) {
         this._xEditor = edit_1.Edit.create({ multiLineMode: false, value: value.x, inputType: "number" });
         this.addChild(this._xEditor, false);
         this._xEditor.on(Events.CHANGE, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._xEditor.on(Events.CHANGING, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._yLabel = label_1.Label.create({ text: "Y" });
         this.addChild(this._yLabel, false);
         this._yEditor = edit_1.Edit.create({ multiLineMode: false, value: value.y, inputType: "number" });
         this.addChild(this._yEditor, false);
         this._yEditor.on(Events.CHANGE, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._yEditor.on(Events.CHANGING, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         if (this.d > 2) {
             this._zLabel = label_1.Label.create({ multiLineMode: false, value: value.z, text: "Z" });
@@ -154,10 +166,10 @@ var VectorEdit = (function (_super) {
             this._zEditor = edit_1.Edit.create({ inputType: "number" });
             this.addChild(this._zEditor, false);
             this._zEditor.on(Events.CHANGE, function (evt) {
-                _this.dispatchEvent(evt);
+                _this.forwardChangeEvent(evt);
             });
             this._zEditor.on(Events.CHANGING, function (evt) {
-                _this.dispatchEvent(evt);
+                _this.forwardChangeEvent(evt);
             });
         }
         this.relayoutChildren();

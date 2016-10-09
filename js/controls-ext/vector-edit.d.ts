@@ -2,6 +2,7 @@ import { Rect } from "../rect";
 import { Label } from "../controls/label";
 import { Edit } from "../controls/edit";
 import { Widget } from "../controls/widget";
+import Events = require("../events");
 /**
  * 范围编辑器。
  */
@@ -13,6 +14,7 @@ export declare class VectorEdit extends Widget {
     protected _yEditor: Edit;
     protected _zLabel: Label;
     protected _zEditor: Edit;
+    readonly inputable: boolean;
     /**
      * dimension
      */
@@ -24,6 +26,7 @@ export declare class VectorEdit extends Widget {
     protected onToJson(json: any): void;
     relayoutChildren(): Rect;
     dispose(): void;
+    protected forwardChangeEvent(evt: Events.ChangeEvent): void;
     protected onCreated(): void;
     constructor();
     protected static defProps: {} & {

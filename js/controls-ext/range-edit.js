@@ -18,6 +18,13 @@ var RangeEdit = (function (_super) {
     function RangeEdit() {
         _super.call(this, RangeEdit.TYPE);
     }
+    Object.defineProperty(RangeEdit.prototype, "inputable", {
+        get: function () {
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(RangeEdit.prototype, "firstEditor", {
         get: function () {
             return this._firstEditor;
@@ -81,6 +88,11 @@ var RangeEdit = (function (_super) {
         this._secondEditor = null;
         _super.prototype.dispose.call(this);
     };
+    RangeEdit.prototype.forwardChangeEvent = function (evt) {
+        var e = this.eChangeEvent;
+        e.init(evt.type, { value: this.value });
+        this.dispatchEvent(e);
+    };
     RangeEdit.prototype.onReset = function () {
         var _this = this;
         _super.prototype.onReset.call(this);
@@ -89,20 +101,20 @@ var RangeEdit = (function (_super) {
         this._firstEditor = edit_1.Edit.create({ value: value.first, inputType: "number" });
         this.addChild(this._firstEditor, false);
         this._firstEditor.on(Events.CHANGE, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._firstEditor.on(Events.CHANGING, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._label = label_1.Label.create({ text: "-", multiLineMode: false });
         this.addChild(this._label, false);
         this._secondEditor = edit_1.Edit.create({ value: value.second, inputType: "number" });
         this.addChild(this._secondEditor, false);
         this._secondEditor.on(Events.CHANGE, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this._secondEditor.on(Events.CHANGING, function (evt) {
-            _this.dispatchEvent(evt);
+            _this.forwardChangeEvent(evt);
         });
         this.relayoutChildren();
     };

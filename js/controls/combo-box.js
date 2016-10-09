@@ -103,6 +103,29 @@ var ComboBoxBase = (function (_super) {
     function ComboBoxBase(type) {
         _super.call(this, type);
     }
+    Object.defineProperty(ComboBoxBase.prototype, "options", {
+        get: function () {
+            return this._options;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComboBoxBase.prototype, "optionsJson", {
+        set: function (options) {
+            var _this = this;
+            this.resetOptions();
+            options.forEach(function (item) {
+                if (typeof item === "string") {
+                    _this.addOption(item);
+                }
+                else {
+                    _this.addOption(item.text, item.value, item.imageURL, item.color);
+                }
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ComboBoxBase.prototype, "customItemDraw", {
         get: function () {
             return this._customItemDraw;
@@ -156,13 +179,6 @@ var ComboBoxBase = (function (_super) {
         this._options = [];
         return this;
     };
-    Object.defineProperty(ComboBoxBase.prototype, "optionsCount", {
-        get: function () {
-            return this._options.length;
-        },
-        enumerable: true,
-        configurable: true
-    });
     ComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
         var item = new ComboBoxOption(text, value, imageURL, color);
         this._options.push(item);

@@ -5,6 +5,7 @@ import { TitleVector } from "./title-vector";
 import { Widget } from "../controls/widget";
 import { TitleSlider } from "./title-slider";
 import { TitleTextArea } from "./title-text-area";
+import { PropDesc } from "./props-desc";
 import { TitleComboBox, TitleComboBoxEditable } from "./title-combo-box";
 import { TitleChoosableEdit } from "./title-choosable-edit";
 /**
@@ -29,6 +30,8 @@ export declare class PropertyPage extends Widget {
     addTextArea(title: string, value?: string, h?: number): TitleTextArea;
     findByTitle(title: string): Widget;
     protected onReset(): void;
+    protected initWithPropDesc(item: PropDesc): void;
+    initWithPropsDesc(json: any): void;
     constructor();
     protected static defProps: {} & {
         _x: number;
