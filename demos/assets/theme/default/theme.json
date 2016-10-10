@@ -19,6 +19,14 @@
 			"textAlign" : "left"
 		}
 	},
+	"label.center": {
+		"extends": "widget",
+		"common" : {
+			"backGroundColor" : null,
+			"textAlign" : "center",
+			"textBaseline" : "middle"
+		}
+	},
 	"edit": {
 		"extends": "widget",
 		"common" : {

@@ -1,4 +1,3 @@
-import { Rect } from "../rect";
 import { Label } from "../controls/label";
 import { Edit } from "../controls/edit";
 import { Widget } from "../controls/widget";
@@ -24,7 +23,6 @@ export declare class VectorEdit extends Widget {
     readonly zEditor: Edit;
     value: any;
     protected onToJson(json: any): void;
-    relayoutChildren(): Rect;
     dispose(): void;
     protected forwardChangeEvent(evt: Events.ChangeEvent): void;
     protected onCreated(): void;

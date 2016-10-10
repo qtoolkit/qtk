@@ -77,7 +77,7 @@ export class PropertyPage extends Widget {
 	}
 	
 	public addVector2(title:string, x?:number, y?:number) : TitleVector {
-		var itemH = this.itemH;
+		var itemH = this.itemH * 2;
 		var widget = TitleVector.create({
 				d:2,
 				name:title,
@@ -93,7 +93,7 @@ export class PropertyPage extends Widget {
 	}
 	
 	public addVector3(title:string, x?:number, y?:number, z?:number) : TitleVector {
-		var itemH = this.itemH;
+		var itemH = this.itemH *2;
 		var widget = TitleVector.create({
 				d:3,
 				name:title,

@@ -1380,7 +1380,7 @@ var Widget = (function (_super) {
             return this._lp;
         },
         set: function (value) {
-            this.setProp("leftPadding", value, true);
+            this.setProp("lp", value, true);
         },
         enumerable: true,
         configurable: true
@@ -1390,7 +1390,7 @@ var Widget = (function (_super) {
             return this._rp;
         },
         set: function (value) {
-            this.setProp("rightPadding", value, true);
+            this.setProp("rp", value, true);
         },
         enumerable: true,
         configurable: true
@@ -1400,7 +1400,7 @@ var Widget = (function (_super) {
             return this._tp;
         },
         set: function (value) {
-            this.setProp("topPadding", value, true);
+            this.setProp("tp", value, true);
         },
         enumerable: true,
         configurable: true
@@ -1410,7 +1410,7 @@ var Widget = (function (_super) {
             return this._bp;
         },
         set: function (value) {
-            this.setProp("bottomPadding", value, true);
+            this.setProp("bp", value, true);
         },
         enumerable: true,
         configurable: true

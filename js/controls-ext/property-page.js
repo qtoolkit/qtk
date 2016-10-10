@@ -83,7 +83,7 @@ var PropertyPage = (function (_super) {
         return widget;
     };
     PropertyPage.prototype.addVector2 = function (title, x, y) {
-        var itemH = this.itemH;
+        var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 2,
             name: title,
@@ -97,7 +97,7 @@ var PropertyPage = (function (_super) {
         return widget;
     };
     PropertyPage.prototype.addVector3 = function (title, x, y, z) {
-        var itemH = this.itemH;
+        var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 3,
             name: title,

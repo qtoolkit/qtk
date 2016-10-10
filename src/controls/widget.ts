@@ -1429,21 +1429,21 @@ export class Widget extends Emitter {
 		return this._lp;
 	}
 	public set leftPadding(value) {
-		this.setProp("leftPadding", value, true);
+		this.setProp("lp", value, true);
 	}
 
 	public get rightPadding() {
 		return this._rp;
 	}
 	public set rightPadding(value) {
-		this.setProp("rightPadding", value, true);
+		this.setProp("rp", value, true);
 	}
 
 	public get topPadding() {
 		return this._tp;
 	}
 	public set topPadding(value) {
-		this.setProp("topPadding", value, true);
+		this.setProp("tp", value, true);
 	}
 
 
@@ -1451,7 +1451,7 @@ export class Widget extends Emitter {
 		return this._bp;
 	}
 	public set bottomPadding(value) {
-		this.setProp("bottomPadding", value, true);
+		this.setProp("bp", value, true);
 	}
 
 

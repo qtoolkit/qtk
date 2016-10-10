@@ -10,6 +10,7 @@ var widget_1 = require("../controls/widget");
 var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+var grid_layouter_1 = require("../layouters/grid-layouter");
 /**
  * 范围编辑器。
  */
@@ -94,32 +95,6 @@ var VectorEdit = (function (_super) {
     VectorEdit.prototype.onToJson = function (json) {
         delete json._value;
     };
-    VectorEdit.prototype.relayoutChildren = function () {
-        this.requestRedraw();
-        if (this.w && this.h) {
-            var x = this.leftPadding;
-            var y = this.topPadding;
-            var h = this.clientH;
-            var iw = this.clientW / this.d;
-            var labelW = 15;
-            var editW = iw - labelW;
-            this._xLabel.moveResizeTo(x, y, labelW, h, 0);
-            x += labelW;
-            this._xEditor.moveResizeTo(x, y, editW, h, 0);
-            x += editW;
-            this._yLabel.moveResizeTo(x, y, labelW, h, 0);
-            x += labelW;
-            this._yEditor.moveResizeTo(x, y, editW, h, 0);
-            x += editW;
-            if (this.d > 2) {
-                this._zLabel.moveResizeTo(x, y, labelW, h, 0);
-                x += labelW;
-                this._zEditor.moveResizeTo(x, y, editW, h, 0);
-                x += editW;
-            }
-        }
-        return this.getLayoutRect();
-    };
     VectorEdit.prototype.dispose = function () {
         this._xEditor = null;
         this._yEditor = null;
@@ -140,8 +115,21 @@ var VectorEdit = (function (_super) {
         this.padding = 0;
         var value = this._value || { x: 0, y: 0, z: 0 };
         this.d = Math.max(2, Math.min(3, this.d || 2));
+        var cols = this.d;
+        var rows = 2;
+        this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
+        var labelOptions = { multiLineMode: false, topPadding: 10, bottomPadding: 0 };
         this._xLabel = label_1.Label.create({ text: "X" });
+        this._xLabel.set(labelOptions);
         this.addChild(this._xLabel, false);
+        this._yLabel = label_1.Label.create({ text: "Y" });
+        this._yLabel.set(labelOptions);
+        this.addChild(this._yLabel, false);
+        if (this.d > 2) {
+            this._zLabel = label_1.Label.create({ text: "Z" });
+            this._zLabel.set(labelOptions);
+            this.addChild(this._zLabel, false);
+        }
         this._xEditor = edit_1.Edit.create({ multiLineMode: false, value: value.x, inputType: "number" });
         this.addChild(this._xEditor, false);
         this._xEditor.on(Events.CHANGE, function (evt) {
@@ -150,8 +138,6 @@ var VectorEdit = (function (_super) {
         this._xEditor.on(Events.CHANGING, function (evt) {
             _this.forwardChangeEvent(evt);
         });
-        this._yLabel = label_1.Label.create({ text: "Y" });
-        this.addChild(this._yLabel, false);
         this._yEditor = edit_1.Edit.create({ multiLineMode: false, value: value.y, inputType: "number" });
         this.addChild(this._yEditor, false);
         this._yEditor.on(Events.CHANGE, function (evt) {
@@ -161,8 +147,6 @@ var VectorEdit = (function (_super) {
             _this.forwardChangeEvent(evt);
         });
         if (this.d > 2) {
-            this._zLabel = label_1.Label.create({ multiLineMode: false, value: value.z, text: "Z" });
-            this.addChild(this._zLabel, false);
             this._zEditor = edit_1.Edit.create({ inputType: "number" });
             this.addChild(this._zEditor, false);
             this._zEditor.on(Events.CHANGE, function (evt) {
