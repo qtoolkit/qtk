@@ -16,6 +16,14 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	
 	public isCollection : boolean;
 
+	public get data() : any {
+		return this._data;
+	}
+
+	public set data(value:any) {
+		this._data = value;
+	}
+
 	constructor(data:any) {
 		super();
 

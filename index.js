@@ -28157,6 +28157,16 @@ var qtk =
 	        this.isCollection = false;
 	        this._ePropChange = Events.PropChangeEvent.create();
 	    }
+	    Object.defineProperty(ViewModalDefault.prototype, "data", {
+	        get: function () {
+	            return this._data;
+	        },
+	        set: function (value) {
+	            this._data = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    ViewModalDefault.prototype.getBindingMode = function () {
 	        return iview_modal_1.BindingMode.TWO_WAY;
 	    };
