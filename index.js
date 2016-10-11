@@ -24659,11 +24659,12 @@ var qtk =
 	        this.addChild(item);
 	        return item;
 	    };
-	    MenuBar.prototype.addLogo = function (iconURL) {
+	    MenuBar.prototype.addLogo = function (iconURL, width) {
 	        var item = MenuBarItem.create();
+	        var w = width || this.h || (this.itemWidth >> 1);
 	        item.styleType = "widget.transparent";
 	        item.setIcons(iconURL, iconURL);
-	        item.layoutParam = this.createChildLayoutParam({ w: this.h, h: "100%", position: 0.1 });
+	        item.layoutParam = this.createChildLayoutParam({ w: w, h: "100%", position: 0.1 });
 	        this.addChild(item);
 	        return item;
 	    };

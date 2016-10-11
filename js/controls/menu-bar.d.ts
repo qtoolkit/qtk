@@ -11,7 +11,7 @@ export declare class MenuBar extends Widget {
     onItemEnter(child: MenuBarItem): void;
     addChild(child: Widget, fastMode?: boolean): Widget;
     addSpace(width?: number, position?: number): Widget;
-    addLogo(iconURL: any): Widget;
+    addLogo(iconURL: any, width?: number): Widget;
     addItem(text: string, onInitSubMenu: Function, width?: number, position?: number): Widget;
     addTextButton(text: string, onClick: Function, width?: number, position?: number): Widget;
     addImageButton(normalIconURL: string, overIconURL: string, activeIconURL: string, disableIconURL: string, checkedIconURL: string, onClick: Function, position?: number): Widget;
