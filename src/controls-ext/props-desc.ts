@@ -112,6 +112,16 @@ export class Vector3PropDesc extends PropDesc {
 	}
 }
 
+export class LinePropDesc extends PropDesc {
+	constructor() {
+		super(LinePropDesc.TYPE);
+	}
+	
+	public static TYPE = "line";
+	public static create() {
+		return new LinePropDesc();
+	}
+}
 export class OptionsPropDesc extends PropDesc {
 	public options:any;
 
@@ -159,6 +169,8 @@ export class PropsDesc {
 				desc = Vector3PropDesc.create();
 			}else if(type === OptionsPropDesc.TYPE) {
 				desc = OptionsPropDesc.create(data.options);
+			}else if(type === LinePropDesc.TYPE) {
+				desc = LinePropDesc.create();
 			}else{
 				console.log("not supported:" + type);
 				return;

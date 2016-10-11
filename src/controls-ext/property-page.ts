@@ -1,5 +1,6 @@
 
 import {Rect} from "../rect";
+import {TitleLine} from "./title-line";
 import {TitleEdit} from "./title-edit";
 import {TitleValue} from "./title-value";
 import {TitleLabel} from "./title-label";
@@ -9,6 +10,7 @@ import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
 import {ComboBox} from "../controls/combo-box";
 import {TitleTextArea} from "./title-text-area";
+import {LinePropDesc} from "./props-desc";
 import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
 import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
@@ -56,6 +58,34 @@ export class PropertyPage extends Widget {
 			});
 
 		widget.value = value,
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
+	public addGroupBegin(title:string) : TitleLine{
+		var itemH = this.itemH;
+		var widget = TitleLine.create({
+				h:itemH,
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW
+			});
+
+		this.addChild(widget, true);
+
+		return widget;
+	}
+	
+	public addGroupEnd() : TitleLine {
+		var itemH = this.itemH;
+		var widget = TitleLine.create({
+				h:itemH,
+				titleW:this.titleW,
+				valueW:this.valueW
+			});
+
 		this.addChild(widget, true);
 
 		return widget;
@@ -223,6 +253,12 @@ export class PropertyPage extends Widget {
 			titleValue = this.addLabel(item.name, item.value);
 		}else if(item.type === SliderPropDesc.TYPE) {
 			titleValue = this.addSlider(item.name, item.value);
+		}else if(item.type === LinePropDesc.TYPE) {
+			if(item.name) {
+				titleValue = this.addGroupBegin(item.name);
+			}else{
+				titleValue = this.addGroupEnd();
+			}
 		}else if(item.type === RangePropDesc.TYPE) {
 			var value = item.value || {first:0, second:0};
 			titleValue = this.addRange(item.name, value.first, value.second);

@@ -16,7 +16,8 @@ function addPage(propertySheets, title) {
 	page.addRange("Range", 10, 100).on(qtk.Events.CHANGING, function(evt) {
 		console.log(this.value);
 	}); 
-	
+
+	page.addGroupBegin("Vector");
 	page.addVector2("Vector2", 10, 100).on(qtk.Events.CHANGING, function(evt) {
 		console.log(this.value);
 	}); 
@@ -24,6 +25,7 @@ function addPage(propertySheets, title) {
 	page.addVector3("Vector3", 10, 100, 1000).on(qtk.Events.CHANGING, function(evt) {
 		console.log(this.value);
 	}); 
+	page.addGroupEnd();
 	
 	propertySheets.addPage(title, page);
 }
@@ -77,8 +79,10 @@ function addPageDataBinding(propertySheets, title) {
 		{type:"number", name:"Age", desc:"age", path:"age"},
 		{type:"text", name:"Name", desc:"name", path:"name"},
 		{type:"text-readonly", name:"Desc", path:"desc"},
+		{type:"line", name:"Point"},
 		{type:"vector2", name:"Point", path:"point"},
 		{type:"vector3", name:"Point3D", path:"point3d"},
+		{type:"line", name:""},
 		{type:"range", name:"Range", path:"range"},
 		{type:"options", name:"Color", path:"color", options:["Green", "Red", "Blue"]},
 		{type:"slider", name:"Opacity", path:"opacity"},

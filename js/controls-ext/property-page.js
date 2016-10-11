@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var title_line_1 = require("./title-line");
 var title_edit_1 = require("./title-edit");
 var title_label_1 = require("./title-label");
 var title_range_1 = require("./title-range");
@@ -13,6 +14,7 @@ var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
 var props_desc_1 = require("./props-desc");
 var props_desc_2 = require("./props-desc");
+var props_desc_3 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
 var title_choosable_edit_1 = require("./title-choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
@@ -66,6 +68,28 @@ var PropertyPage = (function (_super) {
         });
         widget.value = value,
             this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addGroupBegin = function (title) {
+        var itemH = this.itemH;
+        var widget = title_line_1.TitleLine.create({
+            h: itemH,
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW
+        });
+        this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addGroupEnd = function () {
+        var itemH = this.itemH;
+        var widget = title_line_1.TitleLine.create({
+            h: itemH,
+            titleW: this.titleW,
+            valueW: this.valueW
+        });
+        this.addChild(widget, true);
         return widget;
     };
     PropertyPage.prototype.addRange = function (title, firstValue, secondValue) {
@@ -198,27 +222,35 @@ var PropertyPage = (function (_super) {
     };
     PropertyPage.prototype.addWithPropDesc = function (item) {
         var titleValue = null;
-        if (item.type === props_desc_1.NumberPropDesc.TYPE) {
+        if (item.type === props_desc_2.NumberPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
         }
-        else if (item.type === props_desc_1.TextPropDesc.TYPE) {
+        else if (item.type === props_desc_2.TextPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "text");
         }
-        else if (item.type === props_desc_1.ReadonlyTextPropDesc.TYPE) {
+        else if (item.type === props_desc_2.ReadonlyTextPropDesc.TYPE) {
             titleValue = this.addLabel(item.name, item.value);
         }
-        else if (item.type === props_desc_2.SliderPropDesc.TYPE) {
+        else if (item.type === props_desc_3.SliderPropDesc.TYPE) {
             titleValue = this.addSlider(item.name, item.value);
         }
-        else if (item.type === props_desc_2.RangePropDesc.TYPE) {
+        else if (item.type === props_desc_1.LinePropDesc.TYPE) {
+            if (item.name) {
+                titleValue = this.addGroupBegin(item.name);
+            }
+            else {
+                titleValue = this.addGroupEnd();
+            }
+        }
+        else if (item.type === props_desc_3.RangePropDesc.TYPE) {
             var value = item.value || { first: 0, second: 0 };
             titleValue = this.addRange(item.name, value.first, value.second);
         }
-        else if (item.type === props_desc_2.Vector2PropDesc.TYPE) {
+        else if (item.type === props_desc_3.Vector2PropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0 };
             titleValue = this.addVector2(item.name, value.x, value.y);
         }
-        else if (item.type === props_desc_2.OptionsPropDesc.TYPE) {
+        else if (item.type === props_desc_3.OptionsPropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0 };
             var propDesc = item;
             titleValue = this.addComboBox(item.name, value);
@@ -227,7 +259,7 @@ var PropertyPage = (function (_super) {
                 comboBox.optionsJson = propDesc.options;
             }
         }
-        else if (item.type === props_desc_2.Vector3PropDesc.TYPE) {
+        else if (item.type === props_desc_3.Vector3PropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0, z: 0 };
             titleValue = this.addVector3(item.name, value.x, value.y, value.z);
         }
@@ -245,7 +277,7 @@ var PropertyPage = (function (_super) {
     };
     PropertyPage.prototype.initWithPropsDesc = function (json) {
         var _this = this;
-        var propsDesc = props_desc_1.PropsDesc.create(json);
+        var propsDesc = props_desc_2.PropsDesc.create(json);
         propsDesc.forEach(function (item) {
             _this.addWithPropDesc(item);
         });

@@ -762,6 +762,9 @@ var Widget = (function (_super) {
     };
     ;
     Object.defineProperty(Widget.prototype, "styleType", {
+        get: function () {
+            return this._styleType;
+        },
         set: function (styleType) {
             this._styleType = styleType;
         },

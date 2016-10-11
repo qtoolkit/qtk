@@ -50,6 +50,11 @@ export declare class Vector3PropDesc extends PropDesc {
     static TYPE: string;
     static create(): Vector3PropDesc;
 }
+export declare class LinePropDesc extends PropDesc {
+    constructor();
+    static TYPE: string;
+    static create(): LinePropDesc;
+}
 export declare class OptionsPropDesc extends PropDesc {
     options: any;
     constructor(options: any);

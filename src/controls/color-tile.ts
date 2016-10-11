@@ -73,6 +73,10 @@ export class Color extends Widget {
 	}
 
 	public getStyle() : Style {
+		if(this.styleType) {
+			return super.getStyle();
+		}
+
 		return this._style;
 	}
 };

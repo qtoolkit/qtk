@@ -78,6 +78,9 @@ var Color = (function (_super) {
         this._style.textColor = "Black";
     };
     Color.prototype.getStyle = function () {
+        if (this.styleType) {
+            return _super.prototype.getStyle.call(this);
+        }
         return this._style;
     };
     return Color;

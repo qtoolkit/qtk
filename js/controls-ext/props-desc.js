@@ -110,6 +110,18 @@ var Vector3PropDesc = (function (_super) {
     return Vector3PropDesc;
 }(PropDesc));
 exports.Vector3PropDesc = Vector3PropDesc;
+var LinePropDesc = (function (_super) {
+    __extends(LinePropDesc, _super);
+    function LinePropDesc() {
+        _super.call(this, LinePropDesc.TYPE);
+    }
+    LinePropDesc.create = function () {
+        return new LinePropDesc();
+    };
+    LinePropDesc.TYPE = "line";
+    return LinePropDesc;
+}(PropDesc));
+exports.LinePropDesc = LinePropDesc;
 var OptionsPropDesc = (function (_super) {
     __extends(OptionsPropDesc, _super);
     function OptionsPropDesc(options) {
@@ -160,6 +172,9 @@ var PropsDesc = (function () {
             }
             else if (type === OptionsPropDesc.TYPE) {
                 desc = OptionsPropDesc.create(data.options);
+            }
+            else if (type === LinePropDesc.TYPE) {
+                desc = LinePropDesc.create();
             }
             else {
                 console.log("not supported:" + type);

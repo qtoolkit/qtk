@@ -12,6 +12,13 @@
 		"selected" : {},
 		"disable" : {}
 	},
+	"title.line": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth" : 1,
+			"lineColor" : "gray"
+		}
+	},
 	"label": {
 		"extends": "widget",
 		"common" : {

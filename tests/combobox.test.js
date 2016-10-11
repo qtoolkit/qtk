@@ -8,7 +8,7 @@ describe('ComoboBox', function() {
 		widget.addOption("Green", 1);
 		widget.addOption("Blue", 2);
 		widget.value = 2;
-		result = widget.optionsCount === 3 && widget.value === 2;
+		result = widget.options.length === 3 && widget.value === 2;
 
         done(result ? null : new Error("test attr"));
     });

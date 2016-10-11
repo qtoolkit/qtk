@@ -874,6 +874,10 @@ export class Widget extends Emitter {
 		this._styleType = styleType;
 	}
 	
+	public get styleType() : string{
+		return this._styleType;
+	}
+	
 	public setStyle(state:WidgetState, style:Style):Widget{
 		if(!this._styles) {
 			this._styles = {};

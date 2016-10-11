@@ -1,4 +1,5 @@
 import { Rect } from "../rect";
+import { TitleLine } from "./title-line";
 import { TitleEdit } from "./title-edit";
 import { TitleLabel } from "./title-label";
 import { TitleRange } from "./title-range";
@@ -20,6 +21,8 @@ export declare class PropertyPage extends Widget {
     titleW: string;
     valueW: string;
     addLabel(title: string, value?: string): TitleLabel;
+    addGroupBegin(title: string): TitleLine;
+    addGroupEnd(): TitleLine;
     addRange(title: string, firstValue?: number, secondValue?: number): TitleRange;
     addVector2(title: string, x?: number, y?: number): TitleVector;
     addVector3(title: string, x?: number, y?: number, z?: number): TitleVector;
