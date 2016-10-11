@@ -1,3 +1,4 @@
+import { Rect } from "../rect";
 import { TitleEdit } from "./title-edit";
 import { TitleLabel } from "./title-label";
 import { TitleRange } from "./title-range";
@@ -29,9 +30,12 @@ export declare class PropertyPage extends Widget {
     addSlider(title: string, value?: string): TitleSlider;
     addTextArea(title: string, value?: string, h?: number): TitleTextArea;
     findByTitle(title: string): Widget;
-    protected onReset(): void;
-    protected initWithPropDesc(item: PropDesc): void;
+    protected addWithPropDesc(item: PropDesc): void;
     initWithPropsDesc(json: any): void;
+    protected onAddChild(child: Widget): void;
+    protected onRemoveChild(child: Widget): void;
+    protected reComputeH(): Widget;
+    relayoutChildren(): Rect;
     constructor();
     protected static defProps: {} & {
         _x: number;

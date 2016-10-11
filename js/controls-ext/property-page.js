@@ -17,7 +17,6 @@ var title_combo_box_1 = require("./title-combo-box");
 var title_choosable_edit_1 = require("./title-choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
-var linear_layouter_1 = require('../layouters/linear-layouter');
 /**
  * 属性编辑页，包装了各种TitleValue。
  */
@@ -59,11 +58,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addLabel = function (title, value) {
         var itemH = this.itemH;
         var widget = title_label_1.TitleLabel.create({
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -72,11 +71,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addRange = function (title, firstValue, secondValue) {
         var itemH = this.itemH;
         var widget = title_range_1.TitleRange.create({
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = { first: firstValue, second: secondValue };
         this.addChild(widget, true);
@@ -86,11 +85,11 @@ var PropertyPage = (function (_super) {
         var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 2,
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = { x: x, y: y };
         this.addChild(widget, true);
@@ -100,11 +99,11 @@ var PropertyPage = (function (_super) {
         var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 3,
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = { x: x, y: y, z: z };
         this.addChild(widget, true);
@@ -114,14 +113,14 @@ var PropertyPage = (function (_super) {
         var itemH = this.itemH;
         var valueW = inputType === "number" ? "50%" : this.valueW;
         var widget = title_edit_1.TitleEdit.create({
+            h: itemH,
             name: title,
             title: title,
             valueW: valueW,
             titleW: this.titleW,
             inputType: inputType,
             inputTips: inputTips,
-            inputFilter: inputFilter,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            inputFilter: inputFilter
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -130,12 +129,12 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
         var itemH = this.itemH;
         var widget = title_choosable_edit_1.TitleChoosableEdit.create({
+            h: itemH,
             name: title,
             title: title,
             inputTips: inputTips,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -144,11 +143,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addComboBox = function (title, value) {
         var itemH = this.itemH;
         var widget = title_combo_box_1.TitleComboBox.create({
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -157,12 +156,12 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addComboBoxEditable = function (title, value) {
         var itemH = this.itemH;
         var widget = title_combo_box_1.TitleComboBoxEditable.create({
+            h: itemH,
             name: title,
             title: title,
             value: value,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -171,11 +170,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addSlider = function (title, value) {
         var itemH = this.itemH;
         var widget = title_slider_1.TitleSlider.create({
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -184,11 +183,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addTextArea = function (title, value, h) {
         var itemH = h || (this.itemH * 4);
         var widget = title_text_area_1.TitleTextArea.create({
+            h: itemH,
             name: title,
             title: title,
             titleW: this.titleW,
-            valueW: this.valueW,
-            layoutParam: linear_layouter_1.LinearLayouterParam.create({ h: itemH })
+            valueW: this.valueW
         });
         widget.value = value,
             this.addChild(widget, true);
@@ -197,11 +196,7 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.findByTitle = function (title) {
         return this.findChildByName(title);
     };
-    PropertyPage.prototype.onReset = function () {
-        _super.prototype.onReset.call(this);
-        this.childrenLayouter = linear_layouter_1.LinearLayouter.createV({ spacing: 5 });
-    };
-    PropertyPage.prototype.initWithPropDesc = function (item) {
+    PropertyPage.prototype.addWithPropDesc = function (item) {
         var titleValue = null;
         if (item.type === props_desc_1.NumberPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
@@ -252,8 +247,34 @@ var PropertyPage = (function (_super) {
         var _this = this;
         var propsDesc = props_desc_1.PropsDesc.create(json);
         propsDesc.forEach(function (item) {
-            _this.initWithPropDesc(item);
+            _this.addWithPropDesc(item);
         });
+    };
+    PropertyPage.prototype.onAddChild = function (child) {
+        this.reComputeH();
+    };
+    PropertyPage.prototype.onRemoveChild = function (child) {
+        this.reComputeH();
+    };
+    PropertyPage.prototype.reComputeH = function () {
+        var h = this.topPadding + this.bottomPadding;
+        this.children.forEach(function (child) {
+            h += child.h;
+        });
+        this.h = h;
+        return this;
+    };
+    PropertyPage.prototype.relayoutChildren = function () {
+        var r = this.getLayoutRect();
+        var y = r.y;
+        this.children.forEach(function (child) {
+            child.moveResizeTo(r.x, y, r.w, child.h, 0);
+            child.relayoutChildren();
+            y += child.h;
+        });
+        this.h = this.bottomPadding + y;
+        this.requestRedraw();
+        return r;
     };
     PropertyPage.prototype.getDefProps = function () {
         return PropertyPage.defProps;

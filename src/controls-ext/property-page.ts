@@ -48,11 +48,11 @@ export class PropertyPage extends Widget {
 	public addLabel(title:string, value?:string) : TitleLabel {
 		var itemH = this.itemH;
 		var widget = TitleLabel.create({
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 
 		widget.value = value,
@@ -64,11 +64,11 @@ export class PropertyPage extends Widget {
 	public addRange(title:string, firstValue?:number, secondValue?:number) : TitleRange{
 		var itemH = this.itemH;
 		var widget = TitleRange.create({
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = {first:firstValue, second:secondValue};
 		this.addChild(widget, true);
@@ -80,11 +80,11 @@ export class PropertyPage extends Widget {
 		var itemH = this.itemH * 2;
 		var widget = TitleVector.create({
 				d:2,
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = {x:x, y:y};
 		this.addChild(widget, true);
@@ -96,11 +96,11 @@ export class PropertyPage extends Widget {
 		var itemH = this.itemH *2;
 		var widget = TitleVector.create({
 				d:3,
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = {x:x, y:y, z:z};
 		this.addChild(widget, true);
@@ -115,14 +115,14 @@ export class PropertyPage extends Widget {
 		var valueW = inputType === "number" ? "50%" : this.valueW;
 
 		var widget = TitleEdit.create({
+				h:itemH,
 				name:title,
 				title:title,
 				valueW:valueW,
 				titleW:this.titleW,
 				inputType:inputType,
 				inputTips:inputTips,
-				inputFilter:inputFilter,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				inputFilter:inputFilter
 			});
 		
 		widget.value = value,
@@ -134,12 +134,12 @@ export class PropertyPage extends Widget {
 	public addChoosableEdit(title:string, value?:string, inputTips?:string) : TitleChoosableEdit {
 		var itemH = this.itemH;
 		var widget = TitleChoosableEdit.create({
+				h:itemH,
 				name:title,
 				title:title,
 				inputTips:inputTips,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = value,
 		this.addChild(widget, true);
@@ -150,11 +150,11 @@ export class PropertyPage extends Widget {
 	public addComboBox(title:string, value?:string) : TitleComboBox {
 		var itemH = this.itemH;
 		var widget = TitleComboBox.create({
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = value,
 		this.addChild(widget, true);
@@ -165,12 +165,12 @@ export class PropertyPage extends Widget {
 	public addComboBoxEditable(title:string, value?:string) : TitleComboBoxEditable {
 		var itemH = this.itemH;
 		var widget = TitleComboBoxEditable.create({
+				h:itemH,
 				name:title,
 				title:title,
 				value:value,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = value,
 		this.addChild(widget, true);
@@ -181,11 +181,11 @@ export class PropertyPage extends Widget {
 	public addSlider(title:string, value?:string) : TitleSlider{
 		var itemH = this.itemH;
 		var widget = TitleSlider.create({
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = value,
 		this.addChild(widget, true);
@@ -196,11 +196,11 @@ export class PropertyPage extends Widget {
 	public addTextArea(title:string, value?:string, h?:number) : TitleTextArea {
 		var itemH = h || (this.itemH * 4);
 		var widget = TitleTextArea.create({
+				h:itemH,
 				name:title,
 				title:title,
 				titleW:this.titleW,
-				valueW:this.valueW,
-				layoutParam : LinearLayouterParam.create({h:itemH})
+				valueW:this.valueW
 			});
 		widget.value = value,
 		this.addChild(widget, true);
@@ -212,12 +212,7 @@ export class PropertyPage extends Widget {
 		return this.findChildByName(title);
 	}
 
-	protected onReset() {
-		super.onReset();
-		this.childrenLayouter = LinearLayouter.createV({spacing:5});
-	}
-
-	protected initWithPropDesc(item:PropDesc) {
+	protected addWithPropDesc(item:PropDesc) {
 		var titleValue:TitleValue = null;
 
 		if(item.type === NumberPropDesc.TYPE) {
@@ -263,8 +258,43 @@ export class PropertyPage extends Widget {
 	public initWithPropsDesc(json:any) {
 		var propsDesc = PropsDesc.create(json);
 		propsDesc.forEach((item:PropDesc) => {
-			this.initWithPropDesc(item);
+			this.addWithPropDesc(item);
 		});
+	}
+
+	protected onAddChild(child:Widget) {
+		this.reComputeH();
+	}
+	
+	protected onRemoveChild(child:Widget) {
+		this.reComputeH();
+	}
+
+	protected reComputeH() : Widget {
+		var h = this.topPadding + this.bottomPadding;
+
+		this.children.forEach((child:Widget) => {
+			h += child.h;
+		});
+
+		this.h = h;
+
+		return this;
+	}
+
+	public relayoutChildren() : Rect {
+		var r = this.getLayoutRect();
+		
+		var y = r.y;
+		this.children.forEach((child:Widget) => {
+			child.moveResizeTo(r.x, y, r.w, child.h, 0);
+			child.relayoutChildren();
+			y+= child.h;
+		});
+
+		this.h = this.bottomPadding + y;
+		this.requestRedraw();
+		return r;
 	}
 
 	constructor() {

@@ -189,7 +189,9 @@ export declare class Widget extends Emitter {
     getStyle(): Style;
     sortChildren(): Widget;
     removeAllChildren(): Widget;
+    protected onRemoveChild(child: Widget): void;
     removeChild(child: Widget, fastMode?: boolean, destroy?: boolean): Widget;
+    protected onAddChild(child: Widget): void;
     addChild(child: Widget, fastMode?: boolean): Widget;
     dispose(): void;
     requestRedraw(): Widget;

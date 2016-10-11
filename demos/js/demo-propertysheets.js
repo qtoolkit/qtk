@@ -1,8 +1,7 @@
 
 var imageURL = "/demos/assets/test.jpg";
 function addPage(propertySheets, title) {
-	var page = qtk.PropertyPage.create({h:500});
-	propertySheets.addPage(title, page);
+	var page = qtk.PropertyPage.create();
 	
 	page.addEdit("Name", "QTK"); 
 	page.addEdit("Age", "100", "Age", "number"); 
@@ -25,6 +24,8 @@ function addPage(propertySheets, title) {
 	page.addVector3("Vector3", 10, 100, 1000).on(qtk.Events.CHANGING, function(evt) {
 		console.log(this.value);
 	}); 
+	
+	propertySheets.addPage(title, page);
 }
 
 function addPageFromJson(propertySheets, title) {

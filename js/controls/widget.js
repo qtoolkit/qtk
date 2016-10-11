@@ -820,6 +820,8 @@ var Widget = (function (_super) {
         this._lastOverWidget = null;
         return this;
     };
+    Widget.prototype.onRemoveChild = function (child) {
+    };
     Widget.prototype.removeChild = function (child, fastMode, destroy) {
         var arr = this._children;
         var index = arr.indexOf(child);
@@ -829,11 +831,14 @@ var Widget = (function (_super) {
                 this.relayoutChildren();
             }
         }
+        this.onRemoveChild(child);
         if (destroy) {
             child.deinit();
             child.dispose();
         }
         return this;
+    };
+    Widget.prototype.onAddChild = function (child) {
     };
     Widget.prototype.addChild = function (child, fastMode) {
         var arr = this._children;
@@ -847,6 +852,7 @@ var Widget = (function (_super) {
             this.sortChildren();
             this.relayoutChildren();
         }
+        this.onAddChild(child);
         return this;
     };
     Widget.prototype.dispose = function () {

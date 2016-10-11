@@ -940,6 +940,9 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	protected onRemoveChild(child:Widget) {
+	}
+
 	public removeChild(child:Widget, fastMode?:boolean, destroy?:boolean) : Widget {
 		var arr = this._children;
 		var index = arr.indexOf(child);
@@ -951,12 +954,17 @@ export class Widget extends Emitter {
 			}
 		}
 
+		this.onRemoveChild(child);
+
 		if(destroy) {
 			child.deinit();
 			child.dispose();
 		}
 
 		return this;
+	}
+
+	protected onAddChild(child:Widget) {
 	}
 
 	public addChild(child:Widget, fastMode?:boolean) : Widget {
@@ -974,6 +982,7 @@ export class Widget extends Emitter {
 			this.sortChildren();
 			this.relayoutChildren();
 		}
+		this.onAddChild(child);
 
 		return this;
 	}
