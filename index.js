@@ -259,6 +259,7 @@ var qtk =
 	var props_desc_3 = __webpack_require__(148);
 	exports.Vector2PropDesc = props_desc_3.Vector2PropDesc;
 	exports.Vector3PropDesc = props_desc_3.Vector3PropDesc;
+	exports.LinePropDesc = props_desc_3.LinePropDesc;
 	/// <reference path="../typings/globals/tween.js/index.d.ts"/>
 	var TWEEN = __webpack_require__(20);
 	exports.TWEEN = TWEEN;
@@ -6070,8 +6071,8 @@ var qtk =
 	    Widget.prototype.bindData = function (viewModal) {
 	        var _this = this;
 	        var dataBindingRule = this._dataBindingRule;
+	        this._viewModal = viewModal;
 	        if (dataBindingRule && viewModal) {
-	            this._viewModal = viewModal;
 	            var bindingMode = viewModal.getBindingMode();
 	            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
 	                this.onBindData(viewModal, dataBindingRule);
@@ -26721,6 +26722,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var Events = __webpack_require__(6);
 	var title_line_1 = __webpack_require__(146);
 	var title_edit_1 = __webpack_require__(143);
 	var title_label_1 = __webpack_require__(137);
@@ -26992,12 +26994,27 @@ var qtk =
 	            valueWidget.dataBindingRule = bindRule;
 	        }
 	    };
-	    PropertyPage.prototype.initWithPropsDesc = function (json) {
+	    PropertyPage.prototype.initWithPropsDesc = function (propsDesc) {
 	        var _this = this;
-	        var propsDesc = props_desc_2.PropsDesc.create(json);
+	        this.removeAllChildren();
 	        propsDesc.forEach(function (item) {
 	            _this.addWithPropDesc(item);
 	        });
+	        propsDesc.once(Events.CHANGE, function (evt) {
+	            console.log("reload changed");
+	            _this.initWithPropsDesc(propsDesc);
+	        });
+	        var viewModal = this._viewModal;
+	        if (viewModal) {
+	            this.children.forEach(function (child) {
+	                child.bindData(viewModal);
+	            });
+	        }
+	        this.relayoutChildren();
+	    };
+	    PropertyPage.prototype.initWithJson = function (json) {
+	        var propsDesc = props_desc_2.PropsDesc.create(json);
+	        this.initWithPropsDesc(propsDesc);
 	    };
 	    PropertyPage.prototype.onAddChild = function (child) {
 	        this.reComputeH();
@@ -27129,7 +27146,7 @@ var qtk =
 
 /***/ },
 /* 148 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var __extends = (this && this.__extends) || function (d, b) {
@@ -27137,6 +27154,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var Events = __webpack_require__(6);
+	var emitter_1 = __webpack_require__(4);
 	var PropDesc = (function () {
 	    function PropDesc(type) {
 	        this.type = type;
@@ -27268,9 +27287,17 @@ var qtk =
 	    return OptionsPropDesc;
 	}(PropDesc));
 	exports.OptionsPropDesc = OptionsPropDesc;
-	var PropsDesc = (function () {
+	var PropsDesc = (function (_super) {
+	    __extends(PropsDesc, _super);
 	    function PropsDesc() {
+	        _super.apply(this, arguments);
 	    }
+	    PropsDesc.prototype.notifyChange = function () {
+	        var e = Events.ChangeEvent.create().init(Events.CHANGE, { value: null });
+	        this.dispatchEvent(e);
+	        e.dispose();
+	        return this;
+	    };
 	    PropsDesc.prototype.forEach = function (func) {
 	        var items = this._items;
 	        items.forEach(function (item) {
@@ -27325,7 +27352,7 @@ var qtk =
 	        return propsDesc.parse(json);
 	    };
 	    return PropsDesc;
-	}());
+	}(emitter_1.Emitter));
 	exports.PropsDesc = PropsDesc;
 	;
 	var PagePropsDesc = (function () {

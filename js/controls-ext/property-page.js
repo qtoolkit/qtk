@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
 var title_line_1 = require("./title-line");
 var title_edit_1 = require("./title-edit");
 var title_label_1 = require("./title-label");
@@ -275,12 +276,27 @@ var PropertyPage = (function (_super) {
             valueWidget.dataBindingRule = bindRule;
         }
     };
-    PropertyPage.prototype.initWithPropsDesc = function (json) {
+    PropertyPage.prototype.initWithPropsDesc = function (propsDesc) {
         var _this = this;
-        var propsDesc = props_desc_2.PropsDesc.create(json);
+        this.removeAllChildren();
         propsDesc.forEach(function (item) {
             _this.addWithPropDesc(item);
         });
+        propsDesc.once(Events.CHANGE, function (evt) {
+            console.log("reload changed");
+            _this.initWithPropsDesc(propsDesc);
+        });
+        var viewModal = this._viewModal;
+        if (viewModal) {
+            this.children.forEach(function (child) {
+                child.bindData(viewModal);
+            });
+        }
+        this.relayoutChildren();
+    };
+    PropertyPage.prototype.initWithJson = function (json) {
+        var propsDesc = props_desc_2.PropsDesc.create(json);
+        this.initWithPropsDesc(propsDesc);
     };
     PropertyPage.prototype.onAddChild = function (child) {
         this.reComputeH();

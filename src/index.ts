@@ -93,7 +93,7 @@ export {BindingRule, IBindingSource, BindingDataSource,
 
 export {PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc} from "./controls-ext/props-desc";
 export {TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc} from "./controls-ext/props-desc";
-export {Vector2PropDesc, Vector3PropDesc} from "./controls-ext/props-desc";
+export {Vector2PropDesc, Vector3PropDesc, LinePropDesc} from "./controls-ext/props-desc";
 
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 

@@ -88,7 +88,7 @@ export { DelegateValidationRule } from "./mvvm/delegate-validation-rule";
 export { BindingRule, IBindingSource, BindingDataSource, BindingCommandSource, BindingRuleItem } from "./mvvm/binding-rule";
 export { PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc } from "./controls-ext/props-desc";
 export { TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc } from "./controls-ext/props-desc";
-export { Vector2PropDesc, Vector3PropDesc } from "./controls-ext/props-desc";
+export { Vector2PropDesc, Vector3PropDesc, LinePropDesc } from "./controls-ext/props-desc";
 declare var TWEEN: any;
 import * as Events from "./events";
 import * as Assets from "./assets";

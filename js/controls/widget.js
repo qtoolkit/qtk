@@ -1679,8 +1679,8 @@ var Widget = (function (_super) {
     Widget.prototype.bindData = function (viewModal) {
         var _this = this;
         var dataBindingRule = this._dataBindingRule;
+        this._viewModal = viewModal;
         if (dataBindingRule && viewModal) {
-            this._viewModal = viewModal;
             var bindingMode = viewModal.getBindingMode();
             if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
                 this.onBindData(viewModal, dataBindingRule);

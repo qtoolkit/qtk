@@ -1854,8 +1854,8 @@ export class Widget extends Emitter {
 	public bindData(viewModal:IViewModal) : Widget {
 		var dataBindingRule = this._dataBindingRule;
 		
+		this._viewModal = viewModal;
 		if(dataBindingRule && viewModal) {
-			this._viewModal = viewModal;
 			var bindingMode = viewModal.getBindingMode();
 			
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {

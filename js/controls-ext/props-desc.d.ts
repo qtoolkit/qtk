@@ -1,3 +1,4 @@
+import { Emitter } from "../emitter";
 export declare class PropDesc {
     type: string;
     name: string;
@@ -61,8 +62,9 @@ export declare class OptionsPropDesc extends PropDesc {
     static TYPE: string;
     static create(options: any): OptionsPropDesc;
 }
-export declare class PropsDesc {
+export declare class PropsDesc extends Emitter {
     _items: Array<PropDesc>;
+    notifyChange(): PropsDesc;
     forEach(func: Function): void;
     parse(json: Array<any>): PropsDesc;
     static create(json: any): PropsDesc;

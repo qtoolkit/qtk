@@ -45,7 +45,70 @@ function addPageFromJson(propertySheets, title) {
 		{type:"slider", name:"Opacity", value:0.5}
 	];
 
-	page.initWithPropsDesc(json);
+	page.initWithJson(json);
+}
+
+function addPageFromJsonWatch(propertySheets, title) {
+	var page = qtk.PropertyPage.create({h:560});
+	propertySheets.addPage(title, page);
+
+	var data = {
+		name:"QTK",
+		age:100,
+		desc:"QToolKit",
+		point:{x:100, y:200},
+		point3d:{x:1, y:2, z:3},
+		range:{first:100, second:200},
+		color:"Red",
+		opacity:0.5
+	};
+
+	var objectConverter = {
+		convert:function(data) {
+			return JSON.stringify(data);
+		},
+		convertBack:function(data) {
+			return JSON.parse(data);
+		}
+	}
+
+	var vm = qtk.ViewModal.create(data);
+
+	vm.registerValueConverter("object", objectConverter);
+	var json = [
+		{type:"number", name:"Age", desc:"age", path:"age"},
+		{type:"text", name:"Name", desc:"name", path:"name"},
+		{type:"text-readonly", name:"Desc", path:"desc"},
+		{type:"line", name:"Point"},
+		{type:"vector2", name:"Point", path:"point"},
+		{type:"vector3", name:"Point3D", path:"point3d"},
+		{type:"line", name:""},
+		{type:"range", name:"Range", path:"range"},
+		{type:"options", name:"Color", path:"color", options:["Green", "Red", "Blue"]},
+		{type:"slider", name:"Opacity", path:"opacity"},
+		{type:"text-readonly", name:"Name(*)", path:"name"},
+		{type:"text-readonly", name:"Age(*)", path:"age"},
+		{type:"text-readonly", name:"Point(*)", path:"point", converter:"object"},
+		{type:"text-readonly", name:"Point3D(*)", path:"point3d", converter:"object"},
+		{type:"text-readonly", name:"Range(*)", path:"range", converter:"object"},
+		{type:"text-readonly", name:"Opacity(*)", path:"opacity"},
+		{type:"text-readonly", name:"Color(*)", path:"color"}
+	];
+
+	
+	var json2 = [
+		{type:"number", name:"Age", desc:"age", path:"age"},
+		{type:"text", name:"Name", path:"name"}
+	];
+
+	var propsDesc = qtk.PropsDesc.create(json);
+
+	setTimeout(function() {
+		propsDesc.parse(json2);
+		propsDesc.notifyChange();
+	}, 5000);
+	page.initWithPropsDesc(propsDesc);
+	page.bindData(vm);
 }
 
 function addPageDataBinding(propertySheets, title) {
@@ -95,7 +158,7 @@ function addPageDataBinding(propertySheets, title) {
 		{type:"text-readonly", name:"Color(*)", path:"color"}
 	];
 
-	page.initWithPropsDesc(json);
+	page.initWithJson(json);
 	page.bindData(vm);
 }
 
@@ -109,6 +172,7 @@ function onReady(app) {
 	win.addChild(propertySheets);
 
 	addPage(propertySheets, "Normal");
+	addPageFromJsonWatch(propertySheets, "Create From Json Watch");
 	addPageFromJson(propertySheets, "Create From Json");
 	addPageDataBinding(propertySheets, "Data Binding");
 	

@@ -212,6 +212,7 @@ exports.RangePropDesc = props_desc_2.RangePropDesc;
 var props_desc_3 = require("./controls-ext/props-desc");
 exports.Vector2PropDesc = props_desc_3.Vector2PropDesc;
 exports.Vector3PropDesc = props_desc_3.Vector3PropDesc;
+exports.LinePropDesc = props_desc_3.LinePropDesc;
 /// <reference path="../typings/globals/tween.js/index.d.ts"/>
 var TWEEN = require("tween.js");
 exports.TWEEN = TWEEN;

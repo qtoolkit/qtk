@@ -1,4 +1,7 @@
 
+import Events = require("../events");
+import {Emitter} from "../emitter";
+
 export class PropDesc {
 	public type : string;
 	public name : string;
@@ -136,8 +139,16 @@ export class OptionsPropDesc extends PropDesc {
 	}
 }
 
-export class PropsDesc {
+export class PropsDesc extends Emitter {
 	public _items : Array<PropDesc>;
+
+	public notifyChange() : PropsDesc {
+		var e = Events.ChangeEvent.create().init(Events.CHANGE, {value:null});
+		this.dispatchEvent(e);
+		e.dispose();
+
+		return this;
+	}
 
 	public forEach(func:Function) {
 		var items = this._items;

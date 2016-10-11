@@ -34,7 +34,8 @@ export declare class PropertyPage extends Widget {
     addTextArea(title: string, value?: string, h?: number): TitleTextArea;
     findByTitle(title: string): Widget;
     protected addWithPropDesc(item: PropDesc): void;
-    initWithPropsDesc(json: any): void;
+    initWithPropsDesc(propsDesc: any): void;
+    initWithJson(json: any): void;
     protected onAddChild(child: Widget): void;
     protected onRemoveChild(child: Widget): void;
     protected reComputeH(): Widget;

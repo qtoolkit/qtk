@@ -1,5 +1,6 @@
 
 import {Rect} from "../rect";
+import Events = require("../events");
 import {TitleLine} from "./title-line";
 import {TitleEdit} from "./title-edit";
 import {TitleValue} from "./title-value";
@@ -291,11 +292,29 @@ export class PropertyPage extends Widget {
 		}
 	}
 
-	public initWithPropsDesc(json:any) {
-		var propsDesc = PropsDesc.create(json);
+	public initWithPropsDesc(propsDesc) {
+		this.removeAllChildren();
 		propsDesc.forEach((item:PropDesc) => {
 			this.addWithPropDesc(item);
 		});
+		propsDesc.once(Events.CHANGE, evt=> {
+			console.log("reload changed");
+			this.initWithPropsDesc(propsDesc);
+		});
+		
+		var viewModal = this._viewModal;
+		if(viewModal) {
+			this.children.forEach((child:Widget) => {
+				child.bindData(viewModal);
+			});
+		}
+
+		this.relayoutChildren();
+	}
+
+	public initWithJson(json:any) {
+		var propsDesc = PropsDesc.create(json);
+		this.initWithPropsDesc(propsDesc);
 	}
 
 	protected onAddChild(child:Widget) {

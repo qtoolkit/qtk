@@ -4,6 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
+var emitter_1 = require("../emitter");
 var PropDesc = (function () {
     function PropDesc(type) {
         this.type = type;
@@ -135,9 +137,17 @@ var OptionsPropDesc = (function (_super) {
     return OptionsPropDesc;
 }(PropDesc));
 exports.OptionsPropDesc = OptionsPropDesc;
-var PropsDesc = (function () {
+var PropsDesc = (function (_super) {
+    __extends(PropsDesc, _super);
     function PropsDesc() {
+        _super.apply(this, arguments);
     }
+    PropsDesc.prototype.notifyChange = function () {
+        var e = Events.ChangeEvent.create().init(Events.CHANGE, { value: null });
+        this.dispatchEvent(e);
+        e.dispose();
+        return this;
+    };
     PropsDesc.prototype.forEach = function (func) {
         var items = this._items;
         items.forEach(function (item) {
@@ -192,7 +202,7 @@ var PropsDesc = (function () {
         return propsDesc.parse(json);
     };
     return PropsDesc;
-}());
+}(emitter_1.Emitter));
 exports.PropsDesc = PropsDesc;
 ;
 var PagePropsDesc = (function () {
