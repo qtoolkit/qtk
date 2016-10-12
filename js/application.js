@@ -35,6 +35,9 @@ var Application = (function (_super) {
             var keyValue = iter.split("=");
             options[keyValue[0]] = keyValue[1];
         });
+        if (!Application.instance) {
+            Application.instance = this;
+        }
     }
     Object.defineProperty(Application.prototype, "assets", {
         get: function () {
@@ -170,9 +173,6 @@ var Application = (function (_super) {
     };
     Application.create = function (name) {
         var app = new Application(name);
-        if (!Application.instance) {
-            Application.instance = app;
-        }
         return app;
     };
     return Application;

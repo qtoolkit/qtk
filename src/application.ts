@@ -41,6 +41,10 @@ export class Application extends Emitter implements IApplication {
 			var keyValue = iter.split("=");
 			options[keyValue[0]] = keyValue[1];
 		});
+		
+		if(!Application.instance) {
+			Application.instance = this;
+		}
 	}
 
 	public get assets() {
@@ -184,10 +188,6 @@ export class Application extends Emitter implements IApplication {
 
 	public static create(name:string) {
 		var app = new Application(name);
-
-		if(!Application.instance) {
-			Application.instance = app;
-		}
 
 		return app;
 	}

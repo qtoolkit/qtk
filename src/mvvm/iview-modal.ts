@@ -87,6 +87,10 @@ export interface IViewModal {
 	 */
 	getCommand(name:string) : ICommand;
 
+	/**
+	 * 发送一个视图请求。
+	 */
+	sendViewRequest(name:string, callback?:Function, payload?:any);
 };
 
 /**

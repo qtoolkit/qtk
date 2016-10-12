@@ -36,7 +36,8 @@ export class PropertyDialog extends MessageBox {
 					onNo(data);
 				}
 			}});
-		buttonsOption.buttons.push({styleType: "button.ok", text:"Yes", onClick : function() {
+
+		buttonsOption.buttons.push({styleType: "button.ok", text:onNo ? "Yes" : "OK", onClick : function() {
 			if(onYes) {
 				onYes(dataCopy);
 			}
