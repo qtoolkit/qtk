@@ -27782,11 +27782,13 @@ var qtk =
 	        var messageBox = PropertyDialog.create({ app: app, styleType: message_box_1.MessageBox.TYPE, w: rw, h: h });
 	        var titleOptions = new message_box_1.TitleOptions(pagePropsDesc.title, "messagebox.info.icon", false);
 	        var buttonsOption = new message_box_1.ButtonsOptions();
-	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: function () {
-	                if (onNo) {
-	                    onNo(data);
-	                }
-	            } });
+	        if (onNo) {
+	            buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: function () {
+	                    if (onNo) {
+	                        onNo(data);
+	                    }
+	                } });
+	        }
 	        buttonsOption.buttons.push({ styleType: "button.ok", text: onNo ? "Yes" : "OK", onClick: function () {
 	                if (onYes) {
 	                    onYes(dataCopy);

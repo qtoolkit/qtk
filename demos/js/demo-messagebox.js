@@ -85,7 +85,7 @@ function addShowChoice(win, multiple, w, h) {
 	win.addChild(item, true);
 }
 
-function addShowProperty(win, w) {
+function addShowProperty(win, w, onlyOK) {
 	var data = {
 		name:"QTK",
 		age:100,
@@ -116,7 +116,7 @@ function addShowProperty(win, w) {
 	item.on(qtk.Events.CLICK, function(evt) {
 		qtk.PropertyDialog.show(propsDesc, data, function onYes(ret) {
 			console.dir(ret);
-		}, function onNo(ret) {
+		}, onlyOK ? null : function onNo(ret) {
 			console.dir(ret);
 		}, w);
 	});
@@ -157,7 +157,7 @@ function onReady(app) {
 	
 	addShowProperty(win);
 	addShowProperty(win, 200);
-	addShowProperty(win, 500);
+	addShowProperty(win, 500, true);
 	
 	win.relayoutChildren();
 	win.open();
