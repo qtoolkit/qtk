@@ -57,6 +57,7 @@ export { TitleVector } from "./controls-ext/title-vector";
 export { TitleEdit } from "./controls-ext/title-edit";
 export { TitleSlider } from "./controls-ext/title-slider";
 export { PropertyPage } from "./controls-ext/property-page";
+export { PropertyDialog } from "./controls-ext/property-dialog";
 export { RangeEdit } from "./controls-ext/range-edit";
 export { VectorEdit } from "./controls-ext/vector-edit";
 export { ChoosableEdit } from "./controls-ext/choosable-edit";

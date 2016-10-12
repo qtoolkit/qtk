@@ -85,6 +85,45 @@ function addShowChoice(win, multiple, w, h) {
 	win.addChild(item, true);
 }
 
+function addShowProperty(win, w) {
+	var data = {
+		name:"QTK",
+		age:100,
+		desc:"QToolKit",
+		point:{x:100, y:200},
+		point3d:{x:1, y:2, z:3},
+		range:{first:100, second:200},
+		color:"Red",
+		opacity:0.5
+	};
+
+	var json = [
+		{type:"number", name:"Age", desc:"age", path:"age"},
+		{type:"text", name:"Name", desc:"name", path:"name"},
+		{type:"text-readonly", name:"Desc", path:"desc"},
+		{type:"line", name:"Point"},
+		{type:"vector2", name:"Point", path:"point"},
+		{type:"vector3", name:"Point3D", path:"point3d"},
+		{type:"line", name:""},
+		{type:"range", name:"Range", path:"range"},
+		{type:"options", name:"Color", path:"color", options:["Green", "Red", "Blue"]},
+		{type:"slider", name:"Opacity", path:"opacity"},
+	];
+	
+	var propsDesc = qtk.PagePropsDesc.create("Property", json);
+
+	var item = qtk.Button.create({text:"showProperty"});
+	item.on(qtk.Events.CLICK, function(evt) {
+		qtk.PropertyDialog.show(propsDesc, data, function onYes(ret) {
+			console.dir(ret);
+		}, function onNo(ret) {
+			console.dir(ret);
+		}, w);
+	});
+
+	win.addChild(item, true);
+}
+
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app,  w:vp.width, h:vp.height, padding : 10});
@@ -115,6 +154,10 @@ function onReady(app) {
 	addShowChoice(win, true);
 	addShowChoice(win, false);
 	addShowChoice(win, true, 500);
+	
+	addShowProperty(win);
+	addShowProperty(win, 200);
+	addShowProperty(win, 500);
 	
 	win.relayoutChildren();
 	win.open();
