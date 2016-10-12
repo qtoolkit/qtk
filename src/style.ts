@@ -360,7 +360,18 @@ export class Style extends Emitter {
 
 
 	public get font() {
-		return this._fontSize + "px " + (this._fontFamily||"Sans");
+		var font = "";
+		if(this._fontBold) {
+			font += "bold ";
+		}
+
+		if(this._fontItalic) {
+			font += "italic ";
+		}
+
+		font += this._fontSize + "px " + (this._fontFamily||"Sans");
+		
+		return font;
 	}
 
 	public get fontFamily() {

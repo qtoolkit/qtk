@@ -8,6 +8,7 @@ function addPage(propertySheets, title) {
 	page.addChoosableEdit("URL", "https://qtoolkit.github.io/demos/index.html").onChoose = function() {
 		this.value = "choose";
 	};
+	page.addLink("Home", "https://github.com/qtoolkit/qtk"); 
 	page.addTextArea("Desc", "QToolKit"); 
 	page.addSlider("Opacity", 0.3); 
 	page.addComboBox("Color", "Red").addOption("Red").addOption("Green").addOption("Blue"); 

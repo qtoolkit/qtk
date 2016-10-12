@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Events = require("../events");
+var title_link_1 = require("./title-link");
 var title_line_1 = require("./title-line");
 var title_edit_1 = require("./title-edit");
 var title_label_1 = require("./title-label");
@@ -61,6 +62,19 @@ var PropertyPage = (function (_super) {
     PropertyPage.prototype.addLabel = function (title, value) {
         var itemH = this.itemH;
         var widget = title_label_1.TitleLabel.create({
+            h: itemH,
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW
+        });
+        widget.value = value,
+            this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addLink = function (title, value) {
+        var itemH = this.itemH;
+        var widget = title_link_1.TitleLink.create({
             h: itemH,
             name: title,
             title: title,

@@ -170,24 +170,24 @@ var qtk =
 	exports.TitleSlider = title_slider_1.TitleSlider;
 	var property_page_1 = __webpack_require__(145);
 	exports.PropertyPage = property_page_1.PropertyPage;
-	var property_dialog_1 = __webpack_require__(152);
+	var property_dialog_1 = __webpack_require__(153);
 	exports.PropertyDialog = property_dialog_1.PropertyDialog;
 	var range_edit_1 = __webpack_require__(140);
 	exports.RangeEdit = range_edit_1.RangeEdit;
 	var vector_edit_1 = __webpack_require__(142);
 	exports.VectorEdit = vector_edit_1.VectorEdit;
-	var choosable_edit_1 = __webpack_require__(151);
+	var choosable_edit_1 = __webpack_require__(152);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_text_area_1 = __webpack_require__(147);
+	var title_text_area_1 = __webpack_require__(148);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var property_sheets_1 = __webpack_require__(160);
+	var property_sheets_1 = __webpack_require__(161);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var progress_bar_1 = __webpack_require__(95);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
 	exports.ProgressBar = progress_bar_1.ProgressBar;
-	var title_choosable_edit_1 = __webpack_require__(150);
+	var title_choosable_edit_1 = __webpack_require__(151);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var dock_layouter_1 = __webpack_require__(159);
+	var dock_layouter_1 = __webpack_require__(160);
 	exports.DockLayouter = dock_layouter_1.DockLayouter;
 	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
 	var grid_layouter_1 = __webpack_require__(116);
@@ -214,10 +214,10 @@ var qtk =
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
 	exports.Services = consts_1.Services;
-	var title_combo_box_1 = __webpack_require__(149);
+	var title_combo_box_1 = __webpack_require__(150);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
-	var message_box_1 = __webpack_require__(158);
+	var message_box_1 = __webpack_require__(159);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
 	exports.TitleOptions = message_box_1.TitleOptions;
@@ -228,37 +228,37 @@ var qtk =
 	exports.ScrollView = scroll_view_1.ScrollView;
 	var device_info_1 = __webpack_require__(122);
 	exports.DeviceInfo = device_info_1.DeviceInfo;
-	var view_modal_1 = __webpack_require__(153);
+	var view_modal_1 = __webpack_require__(154);
 	exports.ViewModal = view_modal_1.ViewModal;
 	var recyclable_creator_1 = __webpack_require__(82);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(161);
+	var delegate_command_1 = __webpack_require__(162);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_modal_1 = __webpack_require__(162);
+	var collection_view_modal_1 = __webpack_require__(163);
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
-	var delegate_value_converter_1 = __webpack_require__(163);
+	var delegate_value_converter_1 = __webpack_require__(164);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
-	var ivalidation_rule_1 = __webpack_require__(157);
+	var ivalidation_rule_1 = __webpack_require__(158);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
-	var delegate_validation_rule_1 = __webpack_require__(164);
+	var delegate_validation_rule_1 = __webpack_require__(165);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
 	var binding_rule_1 = __webpack_require__(79);
 	exports.BindingRule = binding_rule_1.BindingRule;
 	exports.BindingDataSource = binding_rule_1.BindingDataSource;
 	exports.BindingCommandSource = binding_rule_1.BindingCommandSource;
 	exports.BindingRuleItem = binding_rule_1.BindingRuleItem;
-	var props_desc_1 = __webpack_require__(148);
+	var props_desc_1 = __webpack_require__(149);
 	exports.PagePropsDesc = props_desc_1.PagePropsDesc;
 	exports.PropsDesc = props_desc_1.PropsDesc;
 	exports.PropDesc = props_desc_1.PropDesc;
 	exports.NumberPropDesc = props_desc_1.NumberPropDesc;
 	exports.SliderPropDesc = props_desc_1.SliderPropDesc;
-	var props_desc_2 = __webpack_require__(148);
+	var props_desc_2 = __webpack_require__(149);
 	exports.TextPropDesc = props_desc_2.TextPropDesc;
 	exports.ReadonlyTextPropDesc = props_desc_2.ReadonlyTextPropDesc;
 	exports.OptionsPropDesc = props_desc_2.OptionsPropDesc;
 	exports.RangePropDesc = props_desc_2.RangePropDesc;
-	var props_desc_3 = __webpack_require__(148);
+	var props_desc_3 = __webpack_require__(149);
 	exports.Vector2PropDesc = props_desc_3.Vector2PropDesc;
 	exports.Vector3PropDesc = props_desc_3.Vector3PropDesc;
 	exports.LinePropDesc = props_desc_3.LinePropDesc;
@@ -661,7 +661,15 @@ var qtk =
 	    });
 	    Object.defineProperty(Style.prototype, "font", {
 	        get: function () {
-	            return this._fontSize + "px " + (this._fontFamily || "Sans");
+	            var font = "";
+	            if (this._fontBold) {
+	                font += "bold ";
+	            }
+	            if (this._fontItalic) {
+	                font += "italic ";
+	            }
+	            font += this._fontSize + "px " + (this._fontFamily || "Sans");
+	            return font;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -1358,6 +1366,7 @@ var qtk =
 	exports.DRAGLEAVE = "dragleave";
 	exports.DRAGOVER = "dragover";
 	exports.DRAGSTART = "dragstart";
+	exports.SHOW_VIEW = "show-view";
 	var Event = (function () {
 	    function Event() {
 	    }
@@ -1420,6 +1429,35 @@ var qtk =
 	    return AnyEvent;
 	}(Event));
 	exports.AnyEvent = AnyEvent;
+	;
+	/**
+	 * View Modal请求显示指定的视图或跳转到指定的视图。
+	 */
+	var ViewRequestEvent = (function (_super) {
+	    __extends(ViewRequestEvent, _super);
+	    function ViewRequestEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    ;
+	    ViewRequestEvent.prototype.returnResult = function () {
+	        if (this._callback) {
+	            this._callback(this.payload);
+	        }
+	    };
+	    ViewRequestEvent.prototype.init = function (type, detail) {
+	        _super.prototype.init.call(this, type);
+	        this.name = detail.name;
+	        this.payload = detail.payload;
+	        this._callback = detail.callback;
+	        return this;
+	    };
+	    ViewRequestEvent.create = function (type, detail) {
+	        var e = new ViewRequestEvent();
+	        return e.init(type, detail);
+	    };
+	    return ViewRequestEvent;
+	}(Event));
+	exports.ViewRequestEvent = ViewRequestEvent;
 	;
 	var InputEvent = (function (_super) {
 	    __extends(InputEvent, _super);
@@ -26737,19 +26775,20 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var title_line_1 = __webpack_require__(146);
+	var title_link_1 = __webpack_require__(146);
+	var title_line_1 = __webpack_require__(147);
 	var title_edit_1 = __webpack_require__(143);
 	var title_label_1 = __webpack_require__(137);
 	var title_range_1 = __webpack_require__(139);
 	var title_vector_1 = __webpack_require__(141);
 	var widget_1 = __webpack_require__(19);
 	var title_slider_1 = __webpack_require__(144);
-	var title_text_area_1 = __webpack_require__(147);
-	var props_desc_1 = __webpack_require__(148);
-	var props_desc_2 = __webpack_require__(148);
-	var props_desc_3 = __webpack_require__(148);
-	var title_combo_box_1 = __webpack_require__(149);
-	var title_choosable_edit_1 = __webpack_require__(150);
+	var title_text_area_1 = __webpack_require__(148);
+	var props_desc_1 = __webpack_require__(149);
+	var props_desc_2 = __webpack_require__(149);
+	var props_desc_3 = __webpack_require__(149);
+	var title_combo_box_1 = __webpack_require__(150);
+	var title_choosable_edit_1 = __webpack_require__(151);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	/**
@@ -26793,6 +26832,19 @@ var qtk =
 	    PropertyPage.prototype.addLabel = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_label_1.TitleLabel.create({
+	            h: itemH,
+	            name: title,
+	            title: title,
+	            titleW: this.titleW,
+	            valueW: this.valueW
+	        });
+	        widget.value = value,
+	            this.addChild(widget, true);
+	        return widget;
+	    };
+	    PropertyPage.prototype.addLink = function (title, value) {
+	        var itemH = this.itemH;
+	        var widget = title_link_1.TitleLink.create({
 	            h: itemH,
 	            name: title,
 	            title: title,
@@ -27082,6 +27134,52 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var Events = __webpack_require__(6);
+	var label_1 = __webpack_require__(18);
+	var title_value_1 = __webpack_require__(138);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	var TitleLink = (function (_super) {
+	    __extends(TitleLink, _super);
+	    function TitleLink(type) {
+	        _super.call(this, type || TitleLink.TYPE);
+	    }
+	    TitleLink.prototype.createValueWidget = function (options) {
+	        var link = label_1.Label.create(options);
+	        link.styleType = "link";
+	        link.on(Events.CLICK, function (evt) {
+	            window.open(this.text, "_blank");
+	        });
+	        link.on(Events.POINTER_ENTER, function (evt) {
+	            document.body.style.cursor = "pointer";
+	        });
+	        link.on(Events.POINTER_LEAVE, function (evt) {
+	            document.body.style.cursor = "default";
+	        });
+	        return link;
+	    };
+	    TitleLink.create = function (options) {
+	        return TitleLink.recycleBin.create().reset(TitleLink.TYPE, options);
+	    };
+	    TitleLink.TYPE = "title-link";
+	    TitleLink.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLink(); });
+	    return TitleLink;
+	}(title_value_1.TitleValue));
+	exports.TitleLink = TitleLink;
+	;
+	widget_factory_1.WidgetFactory.register(TitleLink.TYPE, TitleLink.create);
+
+
+/***/ },
+/* 147 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var title_value_1 = __webpack_require__(138);
 	var color_tile_1 = __webpack_require__(132);
 	var widget_factory_1 = __webpack_require__(23);
@@ -27107,7 +27205,7 @@ var qtk =
 
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27159,7 +27257,7 @@ var qtk =
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27386,7 +27484,7 @@ var qtk =
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27468,7 +27566,7 @@ var qtk =
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27478,7 +27576,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var title_value_1 = __webpack_require__(138);
-	var choosable_edit_1 = __webpack_require__(151);
+	var choosable_edit_1 = __webpack_require__(152);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var TitleChoosableEdit = (function (_super) {
@@ -27527,7 +27625,7 @@ var qtk =
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27628,7 +27726,7 @@ var qtk =
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27639,10 +27737,10 @@ var qtk =
 	};
 	var application_1 = __webpack_require__(120);
 	var property_page_1 = __webpack_require__(145);
-	var view_modal_1 = __webpack_require__(153);
+	var view_modal_1 = __webpack_require__(154);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var widget_factory_1 = __webpack_require__(23);
-	var message_box_1 = __webpack_require__(158);
+	var message_box_1 = __webpack_require__(159);
 	var simple_layouter_1 = __webpack_require__(114);
 	/**
 	 * 属性对话框。
@@ -27695,7 +27793,7 @@ var qtk =
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27704,7 +27802,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var view_modal_default_1 = __webpack_require__(154);
+	var view_modal_default_1 = __webpack_require__(155);
 	/**
 	 * IViewModal的基本实现。如果不能满足要求，可以重载部分函数。
 	 */
@@ -27724,7 +27822,7 @@ var qtk =
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27733,10 +27831,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var pointer = __webpack_require__(155);
+	var pointer = __webpack_require__(156);
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
-	var ivalidation_rule_1 = __webpack_require__(157);
+	var ivalidation_rule_1 = __webpack_require__(158);
 	var iview_modal_1 = __webpack_require__(81);
 	var ViewModalDefault = (function (_super) {
 	    __extends(ViewModalDefault, _super);
@@ -27872,6 +27970,12 @@ var qtk =
 	        var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
 	        return validationRule ? validationRule.validate(value) : ivalidation_rule_1.ValidationResult.validResult;
 	    };
+	    ViewModalDefault.prototype.sendViewRequest = function (name, callback, payload) {
+	        var detail = { name: name, callback: callback, payload: payload };
+	        var e = Events.ViewRequestEvent.create(Events.SHOW_VIEW, detail);
+	        this.dispatchEvent(e);
+	        e.dispose();
+	    };
 	    return ViewModalDefault;
 	}(emitter_1.Emitter));
 	exports.ViewModalDefault = ViewModalDefault;
@@ -27879,12 +27983,12 @@ var qtk =
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var each = __webpack_require__(156);
+	var each = __webpack_require__(157);
 	module.exports = api;
 
 
@@ -28096,7 +28200,7 @@ var qtk =
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports) {
 
 	
@@ -28124,7 +28228,7 @@ var qtk =
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28157,7 +28261,7 @@ var qtk =
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28181,7 +28285,7 @@ var qtk =
 	var consts_1 = __webpack_require__(104);
 	var recyclable_creator_1 = __webpack_require__(82);
 	var list_item_1 = __webpack_require__(113);
-	var dock_layouter_1 = __webpack_require__(159);
+	var dock_layouter_1 = __webpack_require__(160);
 	var linear_layouter_1 = __webpack_require__(131);
 	var grid_layouter_1 = __webpack_require__(116);
 	var simple_layouter_1 = __webpack_require__(114);
@@ -28534,7 +28638,7 @@ var qtk =
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28660,7 +28764,7 @@ var qtk =
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28771,7 +28875,7 @@ var qtk =
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28796,7 +28900,7 @@ var qtk =
 
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28806,9 +28910,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var delegate_command_1 = __webpack_require__(161);
-	var ivalidation_rule_1 = __webpack_require__(157);
-	var view_modal_default_1 = __webpack_require__(154);
+	var delegate_command_1 = __webpack_require__(162);
+	var ivalidation_rule_1 = __webpack_require__(158);
+	var view_modal_default_1 = __webpack_require__(155);
 	/**
 	 * 集合ViewModal。delProp/getProp/setProp操作当前的项。
 	 */
@@ -29008,7 +29112,7 @@ var qtk =
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29033,7 +29137,7 @@ var qtk =
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports) {
 
 	"use strict";

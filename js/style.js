@@ -295,7 +295,15 @@ var Style = (function (_super) {
     });
     Object.defineProperty(Style.prototype, "font", {
         get: function () {
-            return this._fontSize + "px " + (this._fontFamily || "Sans");
+            var font = "";
+            if (this._fontBold) {
+                font += "bold ";
+            }
+            if (this._fontItalic) {
+                font += "italic ";
+            }
+            font += this._fontSize + "px " + (this._fontFamily || "Sans");
+            return font;
         },
         enumerable: true,
         configurable: true

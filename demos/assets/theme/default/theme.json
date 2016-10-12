@@ -26,6 +26,15 @@
 			"textAlign" : "left"
 		}
 	},
+	"link": {
+		"extends": "widget",
+		"common" : {
+			"textAlign" : "left"
+		},
+		"over" : {
+			"fontItalic" : true
+		}
+	},
 	"label.center": {
 		"extends": "widget",
 		"common" : {

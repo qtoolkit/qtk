@@ -1,6 +1,7 @@
 
 import {Rect} from "../rect";
 import Events = require("../events");
+import {TitleLink} from "./title-link";
 import {TitleLine} from "./title-line";
 import {TitleEdit} from "./title-edit";
 import {TitleValue} from "./title-value";
@@ -48,7 +49,7 @@ export class PropertyPage extends Widget {
 		return this._valueW;
 	}
 	
-	public addLabel(title:string, value?:string) : TitleLabel {
+	public addLabel(title:string, value:string) : TitleLabel {
 		var itemH = this.itemH;
 		var widget = TitleLabel.create({
 				h:itemH,
@@ -64,6 +65,22 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 	
+	public addLink(title:string, value:string) : TitleLink {
+		var itemH = this.itemH;
+		var widget = TitleLink.create({
+				h:itemH,
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW
+			});
+
+		widget.value = value,
+		this.addChild(widget, true);
+
+		return widget;
+	}
+
 	public addGroupBegin(title:string) : TitleLine{
 		var itemH = this.itemH;
 		var widget = TitleLine.create({
