@@ -12,3 +12,14 @@ export interface  ICommand {
 	 */
 	execute(args:any) : boolean;
 };
+
+/**
+ * 可以通过undo撤销的命令。
+ */
+export interface  IUndoCommand extends ICommand {
+	/**
+	 * 撤销命令。
+	 */
+	undo() : boolean;
+};
+
