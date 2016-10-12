@@ -45,11 +45,11 @@ export class RangeEdit extends Widget {
 			this._value = {};
 		}
 		if(this._firstEditor) {
-			this._value.first = this._firstEditor.value;
+			this._value.first = +this._firstEditor.value;
 		}
 
 		if(this._secondEditor) {
-			this._value.second  = this._secondEditor.value;
+			this._value.second  = +this._secondEditor.value;
 		}
 
 		return this._value;

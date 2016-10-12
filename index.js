@@ -26276,10 +26276,10 @@ var qtk =
 	                this._value = {};
 	            }
 	            if (this._firstEditor) {
-	                this._value.first = this._firstEditor.value;
+	                this._value.first = +this._firstEditor.value;
 	            }
 	            if (this._secondEditor) {
-	                this._value.second = this._secondEditor.value;
+	                this._value.second = +this._secondEditor.value;
 	            }
 	            return this._value;
 	        },
@@ -26500,13 +26500,13 @@ var qtk =
 	        set: function (value) {
 	            this._value = value;
 	            if (this._xEditor) {
-	                this._xEditor.value = value.x;
+	                this._xEditor.value = +value.x;
 	            }
 	            if (this._yEditor) {
-	                this._yEditor.value = value.y;
+	                this._yEditor.value = +value.y;
 	            }
 	            if (this._zEditor) {
-	                this._zEditor.value = value.z;
+	                this._zEditor.value = +value.z;
 	            }
 	        },
 	        enumerable: true,
