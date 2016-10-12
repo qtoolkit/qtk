@@ -249,6 +249,9 @@ var PropertyPage = (function (_super) {
         else if (item.type === props_desc_3.SliderPropDesc.TYPE) {
             titleValue = this.addSlider(item.name, item.value);
         }
+        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
+            titleValue = this.addLink(item.name, item.value);
+        }
         else if (item.type === props_desc_1.LinePropDesc.TYPE) {
             if (item.name) {
                 titleValue = this.addGroupBegin(item.name);

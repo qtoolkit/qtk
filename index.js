@@ -27019,6 +27019,9 @@ var qtk =
 	        else if (item.type === props_desc_3.SliderPropDesc.TYPE) {
 	            titleValue = this.addSlider(item.name, item.value);
 	        }
+	        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
+	            titleValue = this.addLink(item.name, item.value);
+	        }
 	        else if (item.type === props_desc_1.LinePropDesc.TYPE) {
 	            if (item.name) {
 	                titleValue = this.addGroupBegin(item.name);
@@ -27314,6 +27317,18 @@ var qtk =
 	    return TextPropDesc;
 	}(PropDesc));
 	exports.TextPropDesc = TextPropDesc;
+	var LinkPropDesc = (function (_super) {
+	    __extends(LinkPropDesc, _super);
+	    function LinkPropDesc() {
+	        _super.call(this, LinkPropDesc.TYPE);
+	    }
+	    LinkPropDesc.create = function () {
+	        return new LinkPropDesc();
+	    };
+	    LinkPropDesc.TYPE = "link";
+	    return LinkPropDesc;
+	}(PropDesc));
+	exports.LinkPropDesc = LinkPropDesc;
 	var ReadonlyTextPropDesc = (function (_super) {
 	    __extends(ReadonlyTextPropDesc, _super);
 	    function ReadonlyTextPropDesc() {
@@ -27429,6 +27444,9 @@ var qtk =
 	            }
 	            else if (type === TextPropDesc.TYPE) {
 	                desc = TextPropDesc.create();
+	            }
+	            else if (type === LinkPropDesc.TYPE) {
+	                desc = LinkPropDesc.create();
 	            }
 	            else if (type === ReadonlyTextPropDesc.TYPE) {
 	                desc = ReadonlyTextPropDesc.create();

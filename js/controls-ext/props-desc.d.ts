@@ -26,6 +26,11 @@ export declare class TextPropDesc extends PropDesc {
     static TYPE: string;
     static create(): TextPropDesc;
 }
+export declare class LinkPropDesc extends PropDesc {
+    constructor();
+    static TYPE: string;
+    static create(): LinkPropDesc;
+}
 export declare class ReadonlyTextPropDesc extends PropDesc {
     constructor();
     static TYPE: string;

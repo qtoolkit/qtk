@@ -12,7 +12,7 @@ import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
 import {ComboBox} from "../controls/combo-box";
 import {TitleTextArea} from "./title-text-area";
-import {LinePropDesc} from "./props-desc";
+import {LinePropDesc, LinkPropDesc} from "./props-desc";
 import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
 import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
@@ -271,6 +271,8 @@ export class PropertyPage extends Widget {
 			titleValue = this.addLabel(item.name, item.value);
 		}else if(item.type === SliderPropDesc.TYPE) {
 			titleValue = this.addSlider(item.name, item.value);
+		}else if(item.type === LinkPropDesc.TYPE) {
+			titleValue = this.addLink(item.name, item.value);
 		}else if(item.type === LinePropDesc.TYPE) {
 			if(item.name) {
 				titleValue = this.addGroupBegin(item.name);

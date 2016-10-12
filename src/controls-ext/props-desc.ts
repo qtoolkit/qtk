@@ -60,6 +60,17 @@ export class TextPropDesc extends PropDesc {
 	}
 }
 
+export class LinkPropDesc extends PropDesc {
+	constructor() {
+		super(LinkPropDesc.TYPE);
+	}
+
+	public static TYPE = "link";
+	public static create() {
+		return new LinkPropDesc();
+	}
+}
+
 export class ReadonlyTextPropDesc extends PropDesc {
 	constructor() {
 		super(ReadonlyTextPropDesc.TYPE);
@@ -170,6 +181,8 @@ export class PropsDesc extends Emitter {
 				desc = SliderPropDesc.create();
 			}else if(type === TextPropDesc.TYPE) {
 				desc = TextPropDesc.create();
+			}else if(type === LinkPropDesc.TYPE) {
+				desc = LinkPropDesc.create();
 			}else if(type === ReadonlyTextPropDesc.TYPE) {
 				desc = ReadonlyTextPropDesc.create();
 			}else if(type === RangePropDesc.TYPE) {
