@@ -32,8 +32,10 @@ exports.RUN = "run";
 exports.QUIT = "quit";
 exports.SHOW = "show";
 exports.HIDE = "hide";
-exports.MOVE = "move";
+exports.MOVE = "move-end";
 exports.MOVING = "moving";
+exports.MOVE_END = "move-end";
+exports.MOVE_BEGIN = "move-begin";
 exports.CHOOSE = "choose";
 exports.OPEN = "open";
 exports.INIT = "init";
@@ -230,9 +232,10 @@ var ChangeEvent = (function (_super) {
     }
     ChangeEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
-        this.value = detail.newValue || detail.value;
+        var value = detail.newValue === undefined ? detail.value : detail.newValue;
+        this.value = value;
+        this.newValue = value;
         this.oldValue = detail.oldValue;
-        this.newValue = detail.newValue;
         return this;
     };
     ChangeEvent.create = function () {

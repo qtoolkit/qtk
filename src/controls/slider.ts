@@ -23,7 +23,7 @@ export class Slider extends ProgressBar {
 		return true;
 	}
 	public onDraggerMoved(dragEnd:boolean){
-		var oldValue = this.value;
+		var oldValue = this.dragger.userData;
 		if(this.barType === ProgressBarType.V) {
 			var h = this.dragger.h;
 			var y = this.h - this.dragger.y;
@@ -52,7 +52,7 @@ export class Slider extends ProgressBar {
 		if(dragEnd) {
 			this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:oldValue});
 		}else{
-			this.eChangeEvent.init(Events.CHANGING, {newValue:this.value, oldValue:oldValue});
+			this.eChangeEvent.init(Events.CHANGING, {newValue:this.value, oldValue:null});
 		}
 		this.dispatchEvent(this.eChangeEvent);
 		this.requestRedraw();
@@ -81,15 +81,20 @@ export class Slider extends ProgressBar {
 
 	protected onInit() {
 		super.onInit();
-		this.dragger = Button.create();
-		this.addChild(this.dragger);
-		this.dragger.styleType  = "slider-dragger";
-		this.dragger.on(Events.MOVING, evt => {
+		var dragger = Button.create();
+		this.addChild(dragger);
+		dragger.styleType  = "slider-dragger";
+		dragger.on(Events.MOVING, evt => {
 			this.onDraggerMoved(false);
 		});
-		this.dragger.on(Events.MOVE, evt => {
+		dragger.on(Events.MOVE_END, evt => {
 			this.onDraggerMoved(true);
 		});
+		dragger.on(Events.MOVE_BEGIN, evt => {
+			dragger.userData = this.value;
+		});
+
+		this.dragger = dragger;
 	}
 
 	protected setProp(prop:string, newValue:any, notify:boolean) : Widget {

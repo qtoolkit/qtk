@@ -29,6 +29,8 @@ export declare const SHOW: string;
 export declare const HIDE: string;
 export declare const MOVE: string;
 export declare const MOVING: string;
+export declare const MOVE_END: string;
+export declare const MOVE_BEGIN: string;
 export declare const CHOOSE: string;
 export declare const OPEN: string;
 export declare const INIT: string;

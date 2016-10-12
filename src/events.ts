@@ -28,8 +28,10 @@ export const RUN = "run"
 export const QUIT = "quit"
 export const SHOW = "show"
 export const HIDE = "hide"
-export const MOVE = "move";
+export const MOVE = "move-end";
 export const MOVING = "moving";
+export const MOVE_END = "move-end";
+export const MOVE_BEGIN = "move-begin";
 export const CHOOSE = "choose";
 export const OPEN = "open"
 export const INIT = "init"
@@ -293,10 +295,10 @@ export class ChangeEvent extends Event {
 
 	public init(type:string, detail:any) : any {
 		super.init(type);
-
-		this.value = detail.newValue || detail.value;
+		var value = detail.newValue === undefined ? detail.value : detail.newValue;
+		this.value = value;
+		this.newValue = value;
 		this.oldValue = detail.oldValue;
-		this.newValue = detail.newValue;
 
 		return this;
 	}

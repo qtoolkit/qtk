@@ -1,5 +1,6 @@
 
 import {ICommand} from "./icommand";
+import {BindingDataSource} from "./binding-rule";
 import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 
@@ -40,6 +41,15 @@ export interface IViewModal {
 	 * @returns 返回ValidationResult, ValidationResult.code为0表示设置成功。
 	 */
 	setProp(path:string, value:any, converter?:string, validationRule?:string) : ValidationResult;
+	
+	/**
+	 * 设置属性的值。
+	 * @param source BindingDataSource。
+	 * @param value 属性的值。
+	 * @param oldValue 旧的属性的值。主要用于实现Undo/Redo
+	 * @returns 返回ValidationResult, ValidationResult.code为0表示设置成功。
+	 */
+	setPropEx(source:BindingDataSource, value: any, oldValue?:any) : ValidationResult;
 
 	/**
 	 * 注册数据改变事件。

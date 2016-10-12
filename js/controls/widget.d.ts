@@ -375,7 +375,7 @@ export declare class Widget extends Emitter {
     protected getPropDefaultBindMode(prop: string): BindingMode;
     protected onInvalidInput(message: string): void;
     protected onUpdateToDataSource(): void;
-    protected updateValueToSource(value: any, dataSource: BindingDataSource): void;
+    protected updateValueToSource(value: any, dataSource: BindingDataSource, oldValue?: any): void;
     protected watchTargetValueChange(dataSource: BindingDataSource): void;
     protected watchTargetChange(dataBindingRule: BindingRule): void;
     private static ID;

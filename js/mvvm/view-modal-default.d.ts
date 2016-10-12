@@ -1,5 +1,6 @@
 import { Emitter } from "../emitter";
 import { ICommand } from "./icommand";
+import { BindingDataSource } from "./binding-rule";
 import { IValueConverter } from "./ivalue-converter";
 import { IValidationRule, ValidationResult } from "./ivalidation-rule";
 import { IViewModal, BindingMode } from "./iview-modal";
@@ -19,6 +20,7 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     protected fixPath(path: string): string;
     getProp(path: string, converterName?: string): any;
     delProp(path: string): IViewModal;
+    setPropEx(source: BindingDataSource, value: any, oldValue?: any): ValidationResult;
     setProp(path: string, v: any, converterName?: string, validationRule?: string): ValidationResult;
     getCommand(name: string): ICommand;
     canExecute(name: string): boolean;

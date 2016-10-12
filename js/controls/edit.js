@@ -143,6 +143,7 @@ var Edit = (function (_super) {
         input.text = this.text || "";
         input.show();
         input.z = this.win.z + 1;
+        var oldValue = this.value;
         this.dispatchEvent({ type: Events.FOCUS });
         input.on(Events.HIDE, function (evt) {
             _this._isEditing = false;
@@ -160,7 +161,7 @@ var Edit = (function (_super) {
         input.on(Events.CHANGE, function (evt) {
             var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            e.init(Events.CHANGE, { value: _this.text });
+            e.init(Events.CHANGE, { value: _this.text, oldValue: oldValue });
             ;
             _this.dispatchEvent(e);
         });

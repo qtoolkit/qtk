@@ -59,6 +59,12 @@ export declare class Movable extends Behavior {
     protected movingEvent: {
         type: string;
     };
+    protected moveEndEvent: {
+        type: string;
+    };
+    protected moveBeginEvent: {
+        type: string;
+    };
     protected init(options: any): void;
     protected moveWidget(x: number, y: number, animate: boolean, end: boolean): void;
     protected onCancelled(): void;

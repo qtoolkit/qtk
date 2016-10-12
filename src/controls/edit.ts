@@ -111,6 +111,7 @@ export class Edit extends Label {
 		input.text = this.text || ""; 
 		input.show();
 		input.z = this.win.z + 1;
+		var oldValue = this.value;
 
 		this.dispatchEvent({type:Events.FOCUS});
 		input.on(Events.HIDE, evt => {
@@ -132,7 +133,7 @@ export class Edit extends Label {
 			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
 			
-			e.init(Events.CHANGE, {value:this.text});;
+			e.init(Events.CHANGE, {value:this.text, oldValue:oldValue});;
 			this.dispatchEvent(e);
 		});
 	}

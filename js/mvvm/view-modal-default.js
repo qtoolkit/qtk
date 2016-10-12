@@ -63,6 +63,12 @@ var ViewModalDefault = (function (_super) {
         this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
         return this;
     };
+    ViewModalDefault.prototype.setPropEx = function (source, value, oldValue) {
+        var path = source.path;
+        var converterName = source.converter;
+        var validationRule = source.validationRule;
+        return this.setProp(path, value, converterName, validationRule);
+    };
     ViewModalDefault.prototype.setProp = function (path, v, converterName, validationRule) {
         var value = this.convertBack(converterName, v);
         var validateResult = this.isValueValid(validationRule, value);

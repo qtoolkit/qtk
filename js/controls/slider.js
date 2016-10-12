@@ -26,7 +26,7 @@ var Slider = (function (_super) {
         configurable: true
     });
     Slider.prototype.onDraggerMoved = function (dragEnd) {
-        var oldValue = this.value;
+        var oldValue = this.dragger.userData;
         if (this.barType === progress_bar_1.ProgressBarType.V) {
             var h = this.dragger.h;
             var y = this.h - this.dragger.y;
@@ -57,7 +57,7 @@ var Slider = (function (_super) {
             this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: oldValue });
         }
         else {
-            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: oldValue });
+            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: null });
         }
         this.dispatchEvent(this.eChangeEvent);
         this.requestRedraw();
@@ -85,15 +85,19 @@ var Slider = (function (_super) {
     Slider.prototype.onInit = function () {
         var _this = this;
         _super.prototype.onInit.call(this);
-        this.dragger = button_1.Button.create();
-        this.addChild(this.dragger);
-        this.dragger.styleType = "slider-dragger";
-        this.dragger.on(Events.MOVING, function (evt) {
+        var dragger = button_1.Button.create();
+        this.addChild(dragger);
+        dragger.styleType = "slider-dragger";
+        dragger.on(Events.MOVING, function (evt) {
             _this.onDraggerMoved(false);
         });
-        this.dragger.on(Events.MOVE, function (evt) {
+        dragger.on(Events.MOVE_END, function (evt) {
             _this.onDraggerMoved(true);
         });
+        dragger.on(Events.MOVE_BEGIN, function (evt) {
+            dragger.userData = _this.value;
+        });
+        this.dragger = dragger;
     };
     Slider.prototype.setProp = function (prop, newValue, notify) {
         _super.prototype.setProp.call(this, prop, newValue, notify);

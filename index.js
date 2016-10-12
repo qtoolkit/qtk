@@ -1325,8 +1325,10 @@ var qtk =
 	exports.QUIT = "quit";
 	exports.SHOW = "show";
 	exports.HIDE = "hide";
-	exports.MOVE = "move";
+	exports.MOVE = "move-end";
 	exports.MOVING = "moving";
+	exports.MOVE_END = "move-end";
+	exports.MOVE_BEGIN = "move-begin";
 	exports.CHOOSE = "choose";
 	exports.OPEN = "open";
 	exports.INIT = "init";
@@ -1523,9 +1525,10 @@ var qtk =
 	    }
 	    ChangeEvent.prototype.init = function (type, detail) {
 	        _super.prototype.init.call(this, type);
-	        this.value = detail.newValue || detail.value;
+	        var value = detail.newValue === undefined ? detail.value : detail.newValue;
+	        this.value = value;
+	        this.newValue = value;
 	        this.oldValue = detail.oldValue;
-	        this.newValue = detail.newValue;
 	        return this;
 	    };
 	    ChangeEvent.create = function () {
@@ -4203,6 +4206,7 @@ var qtk =
 	        input.text = this.text || "";
 	        input.show();
 	        input.z = this.win.z + 1;
+	        var oldValue = this.value;
 	        this.dispatchEvent({ type: Events.FOCUS });
 	        input.on(Events.HIDE, function (evt) {
 	            _this._isEditing = false;
@@ -4220,7 +4224,7 @@ var qtk =
 	        input.on(Events.CHANGE, function (evt) {
 	            var e = _this.eChangeEvent;
 	            _this.text = _this.filterText(evt.value);
-	            e.init(Events.CHANGE, { value: _this.text });
+	            e.init(Events.CHANGE, { value: _this.text, oldValue: oldValue });
 	            ;
 	            _this.dispatchEvent(e);
 	        });
@@ -6168,7 +6172,9 @@ var qtk =
 	     * 子控件重载此函数向用户提示数据无效。
 	     */
 	    Widget.prototype.onInvalidInput = function (message) {
-	        console.log("invalid value:" + message);
+	        if (message) {
+	            console.log("invalid value:" + message);
+	        }
 	    };
 	    Widget.prototype.onUpdateToDataSource = function () {
 	        var _this = this;
@@ -6182,11 +6188,8 @@ var qtk =
 	            }
 	        });
 	    };
-	    Widget.prototype.updateValueToSource = function (value, dataSource) {
-	        var path = dataSource.path;
-	        var converter = dataSource.converter;
-	        var validationRule = dataSource.validationRule;
-	        var result = this._viewModal.setProp(path, value, converter, validationRule);
+	    Widget.prototype.updateValueToSource = function (value, dataSource, oldValue) {
+	        var result = this._viewModal.setPropEx(dataSource, value, oldValue);
 	        if (result.code) {
 	            this.onInvalidInput(result.message);
 	        }
@@ -6206,7 +6209,7 @@ var qtk =
 	        }
 	        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
 	            this.on(Events.CHANGE, function (evt) {
-	                _this.updateValueToSource(evt.value, dataSource);
+	                _this.updateValueToSource(evt.value, dataSource, evt.oldValue);
 	            });
 	            if (updateTiming === iview_modal_1.UpdateTiming.CHANGING) {
 	                this.on(Events.CHANGING, function (evt) {
@@ -17910,7 +17913,7 @@ var qtk =
 	        configurable: true
 	    });
 	    Slider.prototype.onDraggerMoved = function (dragEnd) {
-	        var oldValue = this.value;
+	        var oldValue = this.dragger.userData;
 	        if (this.barType === progress_bar_1.ProgressBarType.V) {
 	            var h = this.dragger.h;
 	            var y = this.h - this.dragger.y;
@@ -17941,7 +17944,7 @@ var qtk =
 	            this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: oldValue });
 	        }
 	        else {
-	            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: oldValue });
+	            this.eChangeEvent.init(Events.CHANGING, { newValue: this.value, oldValue: null });
 	        }
 	        this.dispatchEvent(this.eChangeEvent);
 	        this.requestRedraw();
@@ -17969,15 +17972,19 @@ var qtk =
 	    Slider.prototype.onInit = function () {
 	        var _this = this;
 	        _super.prototype.onInit.call(this);
-	        this.dragger = button_1.Button.create();
-	        this.addChild(this.dragger);
-	        this.dragger.styleType = "slider-dragger";
-	        this.dragger.on(Events.MOVING, function (evt) {
+	        var dragger = button_1.Button.create();
+	        this.addChild(dragger);
+	        dragger.styleType = "slider-dragger";
+	        dragger.on(Events.MOVING, function (evt) {
 	            _this.onDraggerMoved(false);
 	        });
-	        this.dragger.on(Events.MOVE, function (evt) {
+	        dragger.on(Events.MOVE_END, function (evt) {
 	            _this.onDraggerMoved(true);
 	        });
+	        dragger.on(Events.MOVE_BEGIN, function (evt) {
+	            dragger.userData = _this.value;
+	        });
+	        this.dragger = dragger;
 	    };
 	    Slider.prototype.setProp = function (prop, newValue, notify) {
 	        _super.prototype.setProp.call(this, prop, newValue, notify);
@@ -21904,8 +21911,9 @@ var qtk =
 	    };
 	    ComboBoxBase.prototype.onItemSelected = function (data) {
 	        if (data) {
+	            var oldValue = this._current ? this._current.value : null;
 	            this._current = data;
-	            this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: null, newValue: data.value }));
+	            this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: oldValue, newValue: data.value }));
 	        }
 	        this.requestRedraw();
 	    };
@@ -23802,6 +23810,8 @@ var qtk =
 	        _super.call(this, Movable.TYPE, widget, options);
 	        this.moveEvent = { type: Events.MOVE };
 	        this.movingEvent = { type: Events.MOVING };
+	        this.moveEndEvent = { type: Events.MOVE_END };
+	        this.moveBeginEvent = { type: Events.MOVE_BEGIN };
 	    }
 	    Movable.prototype.init = function (options) {
 	        this.options = new MovableOptions(options);
@@ -23825,7 +23835,7 @@ var qtk =
 	        }
 	        widget.moveTo(x, y, animate ? 500 : 0);
 	        if (end) {
-	            widget.dispatchEvent(this.moveEvent);
+	            widget.dispatchEvent(this.moveEndEvent);
 	        }
 	        else {
 	            widget.dispatchEvent(this.movingEvent);
@@ -23849,6 +23859,7 @@ var qtk =
 	        this.x = widget.x;
 	        this.y = widget.y;
 	        this.dragging = true;
+	        widget.dispatchEvent(this.moveBeginEvent);
 	        document.body.style.cursor = "move";
 	    };
 	    Movable.prototype.onPointerUp = function (evt) {
@@ -27633,6 +27644,9 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(23);
 	var message_box_1 = __webpack_require__(158);
 	var simple_layouter_1 = __webpack_require__(114);
+	/**
+	 * 属性对话框。
+	 */
 	var PropertyDialog = (function (_super) {
 	    __extends(PropertyDialog, _super);
 	    function PropertyDialog() {
@@ -27777,6 +27791,12 @@ var qtk =
 	        pointer.remove(this._data, path);
 	        this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
 	        return this;
+	    };
+	    ViewModalDefault.prototype.setPropEx = function (source, value, oldValue) {
+	        var path = source.path;
+	        var converterName = source.converter;
+	        var validationRule = source.validationRule;
+	        return this.setProp(path, value, converterName, validationRule);
 	    };
 	    ViewModalDefault.prototype.setProp = function (path, v, converterName, validationRule) {
 	        var value = this.convertBack(converterName, v);

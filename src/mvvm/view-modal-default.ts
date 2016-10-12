@@ -3,6 +3,7 @@ var pointer = require('json-pointer');
 import {Emitter} from "../emitter";
 import Events = require("../events");
 import {ICommand} from "./icommand";
+import {BindingDataSource} from "./binding-rule";
 import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 import {IViewModal, BindingMode,ICollectionViewModal} from "./iview-modal";
@@ -78,6 +79,14 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		return this;
 	}
 	
+	public setPropEx(source:BindingDataSource, value: any, oldValue?:any) : ValidationResult {
+		var path = source.path;
+		var converterName = source.converter;
+		var validationRule = source.validationRule;
+
+		return this.setProp(path, value, converterName, validationRule);
+	}
+
 	public setProp(path:string, v:any, converterName?:string, validationRule?:string) : ValidationResult {
 		
 		var value = this.convertBack(converterName, v);

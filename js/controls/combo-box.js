@@ -189,8 +189,9 @@ var ComboBoxBase = (function (_super) {
     };
     ComboBoxBase.prototype.onItemSelected = function (data) {
         if (data) {
+            var oldValue = this._current ? this._current.value : null;
             this._current = data;
-            this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: null, newValue: data.value }));
+            this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { oldValue: oldValue, newValue: data.value }));
         }
         this.requestRedraw();
     };

@@ -79,6 +79,8 @@ export class MovableOptions {
 export class Movable extends Behavior {
 	protected moveEvent = {type:Events.MOVE};
 	protected movingEvent = {type:Events.MOVING};
+	protected moveEndEvent = {type:Events.MOVE_END};
+	protected moveBeginEvent = {type:Events.MOVE_BEGIN};
 
 	protected init(options:any) {
 		this.options = new MovableOptions(options);
@@ -107,7 +109,7 @@ export class Movable extends Behavior {
 
 		widget.moveTo(x, y, animate ? 500 : 0);
 		if(end) {
-			widget.dispatchEvent(this.moveEvent);
+			widget.dispatchEvent(this.moveEndEvent);
 		}else{
 			widget.dispatchEvent(this.movingEvent);
 		}
@@ -133,6 +135,8 @@ export class Movable extends Behavior {
 		this.x = widget.x;
 		this.y = widget.y;
 		this.dragging = true;
+		widget.dispatchEvent(this.moveBeginEvent);
+
 		document.body.style.cursor = "move"; 
 	}
 	

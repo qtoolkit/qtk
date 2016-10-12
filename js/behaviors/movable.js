@@ -39,6 +39,8 @@ var Movable = (function (_super) {
         _super.call(this, Movable.TYPE, widget, options);
         this.moveEvent = { type: Events.MOVE };
         this.movingEvent = { type: Events.MOVING };
+        this.moveEndEvent = { type: Events.MOVE_END };
+        this.moveBeginEvent = { type: Events.MOVE_BEGIN };
     }
     Movable.prototype.init = function (options) {
         this.options = new MovableOptions(options);
@@ -62,7 +64,7 @@ var Movable = (function (_super) {
         }
         widget.moveTo(x, y, animate ? 500 : 0);
         if (end) {
-            widget.dispatchEvent(this.moveEvent);
+            widget.dispatchEvent(this.moveEndEvent);
         }
         else {
             widget.dispatchEvent(this.movingEvent);
@@ -86,6 +88,7 @@ var Movable = (function (_super) {
         this.x = widget.x;
         this.y = widget.y;
         this.dragging = true;
+        widget.dispatchEvent(this.moveBeginEvent);
         document.body.style.cursor = "move";
     };
     Movable.prototype.onPointerUp = function (evt) {

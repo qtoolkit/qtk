@@ -1774,7 +1774,9 @@ var Widget = (function (_super) {
      * 子控件重载此函数向用户提示数据无效。
      */
     Widget.prototype.onInvalidInput = function (message) {
-        console.log("invalid value:" + message);
+        if (message) {
+            console.log("invalid value:" + message);
+        }
     };
     Widget.prototype.onUpdateToDataSource = function () {
         var _this = this;
@@ -1788,11 +1790,8 @@ var Widget = (function (_super) {
             }
         });
     };
-    Widget.prototype.updateValueToSource = function (value, dataSource) {
-        var path = dataSource.path;
-        var converter = dataSource.converter;
-        var validationRule = dataSource.validationRule;
-        var result = this._viewModal.setProp(path, value, converter, validationRule);
+    Widget.prototype.updateValueToSource = function (value, dataSource, oldValue) {
+        var result = this._viewModal.setPropEx(dataSource, value, oldValue);
         if (result.code) {
             this.onInvalidInput(result.message);
         }
@@ -1812,7 +1811,7 @@ var Widget = (function (_super) {
         }
         if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
             this.on(Events.CHANGE, function (evt) {
-                _this.updateValueToSource(evt.value, dataSource);
+                _this.updateValueToSource(evt.value, dataSource, evt.oldValue);
             });
             if (updateTiming === iview_modal_1.UpdateTiming.CHANGING) {
                 this.on(Events.CHANGING, function (evt) {

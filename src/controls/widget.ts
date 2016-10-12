@@ -1958,7 +1958,9 @@ export class Widget extends Emitter {
 	 * 子控件重载此函数向用户提示数据无效。
 	 */
 	protected onInvalidInput(message:string) {
-		console.log("invalid value:" + message);
+		if(message) {
+			console.log("invalid value:" + message);
+		}
 	}
 
 	protected onUpdateToDataSource() {
@@ -1973,11 +1975,8 @@ export class Widget extends Emitter {
 		});
 	}
 
-	protected updateValueToSource(value:any, dataSource:BindingDataSource) {
-		var path  = dataSource.path;
-		var converter = dataSource.converter;
-		var validationRule = dataSource.validationRule;
-		var result = this._viewModal.setProp(path, value, converter, validationRule);
+	protected updateValueToSource(value:any, dataSource:BindingDataSource, oldValue?:any) {
+		var result = this._viewModal.setPropEx(dataSource, value, oldValue);
 		if(result.code) {
 			this.onInvalidInput(result.message);
 		}else{
@@ -1997,7 +1996,7 @@ export class Widget extends Emitter {
 		}
 		if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
 			this.on(Events.CHANGE, (evt:Events.ChangeEvent) => {
-				this.updateValueToSource(evt.value, dataSource);
+				this.updateValueToSource(evt.value, dataSource, evt.oldValue);
 			});
 
 			if(updateTiming === UpdateTiming.CHANGING) {
