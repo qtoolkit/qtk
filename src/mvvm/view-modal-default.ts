@@ -181,4 +181,11 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 
 		return validationRule ? validationRule.validate(value) : ValidationResult.validResult;
 	}
+
+	public sendViewRequest(name:string, callback?:Function, payload?:any) {
+		var detail = {name:name, callback:callback, payload:payload};
+		var e = Events.ViewRequestEvent.create(Events.SHOW_VIEW, detail);
+		this.dispatchEvent(e);
+		e.dispose();
+	}
 };

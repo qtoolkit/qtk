@@ -65,6 +65,7 @@ exports.DRAGEXIT = "dragexit";
 exports.DRAGLEAVE = "dragleave";
 exports.DRAGOVER = "dragover";
 exports.DRAGSTART = "dragstart";
+exports.SHOW_VIEW = "show-view";
 var Event = (function () {
     function Event() {
     }
@@ -127,6 +128,35 @@ var AnyEvent = (function (_super) {
     return AnyEvent;
 }(Event));
 exports.AnyEvent = AnyEvent;
+;
+/**
+ * View Modal请求显示指定的视图或跳转到指定的视图。
+ */
+var ViewRequestEvent = (function (_super) {
+    __extends(ViewRequestEvent, _super);
+    function ViewRequestEvent() {
+        _super.apply(this, arguments);
+    }
+    ;
+    ViewRequestEvent.prototype.returnResult = function () {
+        if (this._callback) {
+            this._callback(this.payload);
+        }
+    };
+    ViewRequestEvent.prototype.init = function (type, detail) {
+        _super.prototype.init.call(this, type);
+        this.name = detail.name;
+        this.payload = detail.payload;
+        this._callback = detail.callback;
+        return this;
+    };
+    ViewRequestEvent.create = function (type, detail) {
+        var e = new ViewRequestEvent();
+        return e.init(type, detail);
+    };
+    return ViewRequestEvent;
+}(Event));
+exports.ViewRequestEvent = ViewRequestEvent;
 ;
 var InputEvent = (function (_super) {
     __extends(InputEvent, _super);

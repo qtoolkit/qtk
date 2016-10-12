@@ -64,6 +64,8 @@ export const DRAGLEAVE = "dragleave";
 export const DRAGOVER  = "dragover";
 export const DRAGSTART = "dragstart";
 
+export const SHOW_VIEW = "show-view";
+
 export class Event {
 	private _type : string;
 	private _target : any;
@@ -124,6 +126,44 @@ export class AnyEvent extends Event {
 		var e = new AnyEvent();
 
 		return e.init(type, payload);
+	}
+};
+
+/**
+ * View Modal请求显示指定的视图或跳转到指定的视图。
+ */
+export class ViewRequestEvent extends Event {
+	/**
+	 * 消息具体的信息。
+	 */
+	public payload : any
+
+	/**
+	 * 视图的名称。
+	 */
+	public name: string;;
+	protected _callback : Function;
+	
+	public returnResult() {
+		if(this._callback) {
+			this._callback(this.payload);
+		}
+	}
+
+	public init(type:string, detail:any) : Event {
+		super.init(type);
+
+		this.name = detail.name;
+		this.payload = detail.payload;
+		this._callback = detail.callback;
+
+		return this;
+	}
+
+	public static create(type:string, detail:any) : Event {
+		var e = new ViewRequestEvent();
+
+		return e.init(type, detail);
 	}
 };
 
