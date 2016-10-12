@@ -27780,7 +27780,7 @@ var qtk =
 	        page.initWithPropsDesc(pagePropsDesc.propsDesc);
 	        var h = page.h + message_box_1.MessageBox.TITLE_H + message_box_1.MessageBox.BUTTONS_H + 20;
 	        var messageBox = PropertyDialog.create({ app: app, styleType: message_box_1.MessageBox.TYPE, w: rw, h: h });
-	        var titleOptions = new message_box_1.TitleOptions(pagePropsDesc.title, "messagebox.information.icon", false);
+	        var titleOptions = new message_box_1.TitleOptions(pagePropsDesc.title, "messagebox.info.icon", false);
 	        var buttonsOption = new message_box_1.ButtonsOptions();
 	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: function () {
 	                if (onNo) {

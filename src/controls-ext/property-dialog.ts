@@ -29,7 +29,7 @@ export class PropertyDialog extends MessageBox {
 		var h = page.h + MessageBox.TITLE_H + MessageBox.BUTTONS_H + 20;
 		var messageBox = PropertyDialog.create({app:app, styleType:MessageBox.TYPE, w:rw, h:h});
 
-		var titleOptions = new TitleOptions(pagePropsDesc.title, "messagebox.information.icon", false);
+		var titleOptions = new TitleOptions(pagePropsDesc.title, "messagebox.info.icon", false);
 		var buttonsOption = new ButtonsOptions();
 		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : function() {
 				if(onNo) {
