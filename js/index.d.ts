@@ -104,3 +104,4 @@ export { NotificationInfo } from "./interaction-request/notification-info";
 export { InteractionTypes } from "./interaction-request/interaction-types";
 export { InteractionRequest } from "./interaction-request/interaction-request";
 export { InteractionService } from "./interaction-request/interaction-service";
+export { ItemsStorage } from "./items-storage";

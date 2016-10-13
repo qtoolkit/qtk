@@ -242,3 +242,5 @@ var interaction_request_1 = require("./interaction-request/interaction-request")
 exports.InteractionRequest = interaction_request_1.InteractionRequest;
 var interaction_service_1 = require("./interaction-request/interaction-service");
 exports.InteractionService = interaction_service_1.InteractionService;
+var items_storage_1 = require("./items-storage");
+exports.ItemsStorage = items_storage_1.ItemsStorage;
