@@ -6,6 +6,7 @@ var InteractionTypes = (function () {
     InteractionTypes.TOAST = "toast";
     InteractionTypes.INPUT = "input";
     InteractionTypes.CHOICE = "choice";
+    InteractionTypes.PROGRESS = "progress";
     InteractionTypes.NOTIFICATION = "notification";
     InteractionTypes.CONFIRMATION = "confirmation";
     return InteractionTypes;

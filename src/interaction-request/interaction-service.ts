@@ -6,6 +6,7 @@ import {ToastDialog} from "./toast-dialog";
 import {InputDialog} from "./input-dialog";
 import {PropsDialog} from "./props-dialog";
 import {ChoiceDialog} from "./choice-dialog";
+import {ProgressDialog} from "./progress-dialog";
 import {ConfirmationDialog} from "./confirmation-dialog";
 import {NotificationDialog} from "./notification-dialog";
 
@@ -13,6 +14,7 @@ import {ToastInfo} from "./toast-info";
 import {InputInfo} from "./input-info";
 import {PropsInfo} from "./props-info";
 import {ChoiceInfo} from "./choice-info";
+import {ProgressInfo} from "./progress-info";
 import {ConfirmationInfo} from "./confirmation-info";
 import {NotificationInfo} from "./notification-info";
 import {InteractionTypes} from "./interaction-types";
@@ -51,6 +53,10 @@ export class InteractionService implements IInteractionService {
 			}
 			case InteractionTypes.INPUT: {
 				InputDialog.show(e);
+				break;
+			}
+			case InteractionTypes.PROGRESS: {
+				ProgressDialog.show(e);
 				break;
 			}
 			case InteractionTypes.CHOICE: {

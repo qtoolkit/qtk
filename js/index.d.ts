@@ -99,6 +99,7 @@ export { ToastInfo } from "./interaction-request/toast-info";
 export { InputInfo } from "./interaction-request/input-info";
 export { PropsInfo } from "./interaction-request/props-info";
 export { ChoiceInfo } from "./interaction-request/choice-info";
+export { ProgressInfo } from "./interaction-request/progress-info";
 export { ConfirmationInfo } from "./interaction-request/confirmation-info";
 export { NotificationInfo } from "./interaction-request/notification-info";
 export { InteractionTypes } from "./interaction-request/interaction-types";

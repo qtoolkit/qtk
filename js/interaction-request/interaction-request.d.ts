@@ -2,6 +2,7 @@ import { ToastInfo } from "./toast-info";
 import { InputInfo } from "./input-info";
 import { PropsInfo } from "./props-info";
 import { ChoiceInfo } from "./choice-info";
+import { ProgressInfo } from "./progress-info";
 import { ConfirmationInfo } from "./confirmation-info";
 import { NotificationInfo } from "./notification-info";
 import { IInteractionService } from "./iinteraction-service";
@@ -14,6 +15,7 @@ export declare class InteractionRequest {
     input(info: InputInfo, callback?: Function): void;
     choice(info: ChoiceInfo, callback?: Function): void;
     props(info: PropsInfo, callback?: Function): void;
+    progress(info: ProgressInfo, callback?: Function): void;
     constructor(service: IInteractionService);
     protected static instance: InteractionRequest;
     static init(service: IInteractionService): void;
@@ -23,5 +25,6 @@ export declare class InteractionRequest {
     static input(info: InputInfo, callback?: Function): void;
     static choice(info: ChoiceInfo, callback?: Function): void;
     static props(info: PropsInfo, callback?: Function): void;
+    static progress(info: ProgressInfo, callback?: Function): void;
     static request(name: string, callback?: Function, payload?: any): void;
 }

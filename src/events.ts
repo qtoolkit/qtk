@@ -505,6 +505,26 @@ export class ScrollEvent extends Event {
 	}
 };
 
+export class ProgressEvent extends Event {
+	public done: number;
+	public total: number;
+	public progress : number;
+
+	public reset(progress:number, total?:number, done?:number) : ProgressEvent {
+		super.init(PROGRESS);
+
+		this.done = done;
+		this.total = total;
+		this.progress = progress;
+
+		return this;
+	}
+
+	public static create() : ProgressEvent  {
+		return new ProgressEvent();
+	}
+};
+
 export function createAnyEvent(type:string, payload?:any) : AnyEvent {
 	return AnyEvent.create(type, payload);
 }

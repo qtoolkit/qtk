@@ -114,17 +114,17 @@ var qtk =
 	exports.TreeView = tree_view_1.TreeView;
 	var application_1 = __webpack_require__(120);
 	exports.Application = application_1.Application;
-	var movable_1 = __webpack_require__(159);
+	var movable_1 = __webpack_require__(160);
 	exports.Movable = movable_1.Movable;
 	var theme_manager_1 = __webpack_require__(121);
 	exports.ThemeManager = theme_manager_1.ThemeManager;
-	var draggable_1 = __webpack_require__(160);
+	var draggable_1 = __webpack_require__(161);
 	exports.Draggable = draggable_1.Draggable;
-	var droppable_1 = __webpack_require__(161);
+	var droppable_1 = __webpack_require__(162);
 	exports.Droppable = droppable_1.Droppable;
-	var resizable_1 = __webpack_require__(162);
+	var resizable_1 = __webpack_require__(163);
 	exports.Resizable = resizable_1.Resizable;
-	var menu_1 = __webpack_require__(163);
+	var menu_1 = __webpack_require__(164);
 	exports.Menu = menu_1.Menu;
 	exports.MenuItem = menu_1.MenuItem;
 	var radio_button_1 = __webpack_require__(105);
@@ -133,11 +133,11 @@ var qtk =
 	exports.TreeItemData = tree_item_data_1.TreeItemData;
 	var check_button_1 = __webpack_require__(106);
 	exports.CheckButton = check_button_1.CheckButton;
-	var window_normal_1 = __webpack_require__(164);
+	var window_normal_1 = __webpack_require__(165);
 	exports.WindowNormal = window_normal_1.WindowNormal;
 	var widget_factory_1 = __webpack_require__(23);
 	exports.WidgetFactory = widget_factory_1.WidgetFactory;
-	var menu_bar_1 = __webpack_require__(165);
+	var menu_bar_1 = __webpack_require__(166);
 	exports.MenuBar = menu_bar_1.MenuBar;
 	exports.MenuBarItem = menu_bar_1.MenuBarItem;
 	var color_tile_1 = __webpack_require__(138);
@@ -149,14 +149,14 @@ var qtk =
 	var graphics_1 = __webpack_require__(25);
 	exports.RoundType = graphics_1.RoundType;
 	exports.Graphics = graphics_1.Graphics;
-	var accordion_1 = __webpack_require__(166);
+	var accordion_1 = __webpack_require__(167);
 	exports.Accordion = accordion_1.Accordion;
 	var service_locator_1 = __webpack_require__(123);
 	exports.ServiceLocator = service_locator_1.ServiceLocator;
-	var ruler_1 = __webpack_require__(169);
+	var ruler_1 = __webpack_require__(170);
 	exports.VRuler = ruler_1.VRuler;
 	exports.HRuler = ruler_1.HRuler;
-	var title_content_1 = __webpack_require__(167);
+	var title_content_1 = __webpack_require__(168);
 	exports.TitleContent = title_content_1.TitleContent;
 	var title_label_1 = __webpack_require__(140);
 	exports.TitleLabel = title_label_1.TitleLabel;
@@ -180,7 +180,7 @@ var qtk =
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
 	var title_text_area_1 = __webpack_require__(146);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var property_sheets_1 = __webpack_require__(170);
+	var property_sheets_1 = __webpack_require__(171);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var progress_bar_1 = __webpack_require__(95);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
@@ -232,15 +232,15 @@ var qtk =
 	exports.ViewModal = view_modal_1.ViewModal;
 	var recyclable_creator_1 = __webpack_require__(82);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(171);
+	var delegate_command_1 = __webpack_require__(172);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_modal_1 = __webpack_require__(172);
+	var collection_view_modal_1 = __webpack_require__(173);
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
-	var delegate_value_converter_1 = __webpack_require__(173);
+	var delegate_value_converter_1 = __webpack_require__(174);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
 	var ivalidation_rule_1 = __webpack_require__(155);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
-	var delegate_validation_rule_1 = __webpack_require__(174);
+	var delegate_validation_rule_1 = __webpack_require__(175);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
 	var binding_rule_1 = __webpack_require__(79);
 	exports.BindingRule = binding_rule_1.BindingRule;
@@ -271,17 +271,19 @@ var qtk =
 	exports.Assets = Assets;
 	var inputEventAdapter = __webpack_require__(15);
 	exports.inputEventAdapter = inputEventAdapter;
-	var toast_info_1 = __webpack_require__(175);
+	var toast_info_1 = __webpack_require__(176);
 	exports.ToastInfo = toast_info_1.ToastInfo;
-	var input_info_1 = __webpack_require__(176);
+	var input_info_1 = __webpack_require__(177);
 	exports.InputInfo = input_info_1.InputInfo;
-	var props_info_1 = __webpack_require__(177);
+	var props_info_1 = __webpack_require__(178);
 	exports.PropsInfo = props_info_1.PropsInfo;
-	var choice_info_1 = __webpack_require__(178);
+	var choice_info_1 = __webpack_require__(179);
 	exports.ChoiceInfo = choice_info_1.ChoiceInfo;
-	var confirmation_info_1 = __webpack_require__(179);
+	var progress_info_1 = __webpack_require__(180);
+	exports.ProgressInfo = progress_info_1.ProgressInfo;
+	var confirmation_info_1 = __webpack_require__(181);
 	exports.ConfirmationInfo = confirmation_info_1.ConfirmationInfo;
-	var notification_info_1 = __webpack_require__(180);
+	var notification_info_1 = __webpack_require__(182);
 	exports.NotificationInfo = notification_info_1.NotificationInfo;
 	var interaction_types_1 = __webpack_require__(125);
 	exports.InteractionTypes = interaction_types_1.InteractionTypes;
@@ -289,6 +291,8 @@ var qtk =
 	exports.InteractionRequest = interaction_request_1.InteractionRequest;
 	var interaction_service_1 = __webpack_require__(126);
 	exports.InteractionService = interaction_service_1.InteractionService;
+	var items_storage_1 = __webpack_require__(183);
+	exports.ItemsStorage = items_storage_1.ItemsStorage;
 
 
 /***/ },
@@ -1738,6 +1742,25 @@ var qtk =
 	    return ScrollEvent;
 	}(Event));
 	exports.ScrollEvent = ScrollEvent;
+	;
+	var ProgressEvent = (function (_super) {
+	    __extends(ProgressEvent, _super);
+	    function ProgressEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    ProgressEvent.prototype.reset = function (progress, total, done) {
+	        _super.prototype.init.call(this, exports.PROGRESS);
+	        this.done = done;
+	        this.total = total;
+	        this.progress = progress;
+	        return this;
+	    };
+	    ProgressEvent.create = function () {
+	        return new ProgressEvent();
+	    };
+	    return ProgressEvent;
+	}(Event));
+	exports.ProgressEvent = ProgressEvent;
 	;
 	function createAnyEvent(type, payload) {
 	    return AnyEvent.create(type, payload);
@@ -23869,6 +23892,9 @@ var qtk =
 	    InteractionRequest.prototype.props = function (info, callback) {
 	        this.request(interaction_types_1.InteractionTypes.PROPS, callback, info);
 	    };
+	    InteractionRequest.prototype.progress = function (info, callback) {
+	        this.request(interaction_types_1.InteractionTypes.PROGRESS, callback, info);
+	    };
 	    InteractionRequest.init = function (service) {
 	        InteractionRequest.instance = new InteractionRequest(service);
 	    };
@@ -23890,6 +23916,9 @@ var qtk =
 	    InteractionRequest.props = function (info, callback) {
 	        InteractionRequest.instance.props(info, callback);
 	    };
+	    InteractionRequest.progress = function (info, callback) {
+	        InteractionRequest.instance.progress(info, callback);
+	    };
 	    InteractionRequest.request = function (name, callback, payload) {
 	        InteractionRequest.instance.request(name, callback, payload);
 	    };
@@ -23910,6 +23939,7 @@ var qtk =
 	    InteractionTypes.TOAST = "toast";
 	    InteractionTypes.INPUT = "input";
 	    InteractionTypes.CHOICE = "choice";
+	    InteractionTypes.PROGRESS = "progress";
 	    InteractionTypes.NOTIFICATION = "notification";
 	    InteractionTypes.CONFIRMATION = "confirmation";
 	    return InteractionTypes;
@@ -23929,8 +23959,9 @@ var qtk =
 	var input_dialog_1 = __webpack_require__(131);
 	var props_dialog_1 = __webpack_require__(132);
 	var choice_dialog_1 = __webpack_require__(156);
-	var confirmation_dialog_1 = __webpack_require__(157);
-	var notification_dialog_1 = __webpack_require__(158);
+	var progress_dialog_1 = __webpack_require__(157);
+	var confirmation_dialog_1 = __webpack_require__(158);
+	var notification_dialog_1 = __webpack_require__(159);
 	var interaction_types_1 = __webpack_require__(125);
 	var InteractionService = (function () {
 	    function InteractionService() {
@@ -23961,6 +23992,10 @@ var qtk =
 	            }
 	            case interaction_types_1.InteractionTypes.INPUT: {
 	                input_dialog_1.InputDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.PROGRESS: {
+	                progress_dialog_1.ProgressDialog.show(e);
 	                break;
 	            }
 	            case interaction_types_1.InteractionTypes.CHOICE: {
@@ -27327,6 +27362,26 @@ var qtk =
 
 	"use strict";
 	var message_box_1 = __webpack_require__(128);
+	var ProgressDialog = (function () {
+	    function ProgressDialog() {
+	    }
+	    ProgressDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showProgress(info.title, info.runTask, function () {
+	            e.returnResult();
+	        }, info.w);
+	    };
+	    return ProgressDialog;
+	}());
+	exports.ProgressDialog = ProgressDialog;
+
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(128);
 	var ConfirmationDialog = (function () {
 	    function ConfirmationDialog() {
 	    }
@@ -27346,7 +27401,7 @@ var qtk =
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27366,7 +27421,7 @@ var qtk =
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27489,7 +27544,7 @@ var qtk =
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27574,7 +27629,7 @@ var qtk =
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27625,7 +27680,7 @@ var qtk =
 
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27801,7 +27856,7 @@ var qtk =
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28167,7 +28222,7 @@ var qtk =
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28197,7 +28252,7 @@ var qtk =
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28206,7 +28261,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var menu_1 = __webpack_require__(163);
+	var menu_1 = __webpack_require__(164);
 	var point_1 = __webpack_require__(2);
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
@@ -28422,7 +28477,7 @@ var qtk =
 
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28434,8 +28489,8 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var recyclable_creator_1 = __webpack_require__(82);
-	var title_content_1 = __webpack_require__(167);
-	var collapsable_title_1 = __webpack_require__(168);
+	var title_content_1 = __webpack_require__(168);
+	var collapsable_title_1 = __webpack_require__(169);
 	/**
 	 * 手风琴控件。它有多个页面，在每一时刻只展开一个。
 	 */
@@ -28538,7 +28593,7 @@ var qtk =
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28769,7 +28824,7 @@ var qtk =
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28855,7 +28910,7 @@ var qtk =
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29164,7 +29219,7 @@ var qtk =
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29175,9 +29230,9 @@ var qtk =
 	};
 	var scroll_view_1 = __webpack_require__(99);
 	var widget_factory_1 = __webpack_require__(23);
-	var title_content_1 = __webpack_require__(167);
+	var title_content_1 = __webpack_require__(168);
 	var recyclable_creator_1 = __webpack_require__(82);
-	var collapsable_title_1 = __webpack_require__(168);
+	var collapsable_title_1 = __webpack_require__(169);
 	/**
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
@@ -29275,7 +29330,7 @@ var qtk =
 
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29300,7 +29355,7 @@ var qtk =
 
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29310,7 +29365,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var delegate_command_1 = __webpack_require__(171);
+	var delegate_command_1 = __webpack_require__(172);
 	var ivalidation_rule_1 = __webpack_require__(155);
 	var view_modal_default_1 = __webpack_require__(152);
 	/**
@@ -29512,7 +29567,7 @@ var qtk =
 
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29537,7 +29592,7 @@ var qtk =
 
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29558,7 +29613,7 @@ var qtk =
 
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29578,7 +29633,7 @@ var qtk =
 
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29603,7 +29658,7 @@ var qtk =
 
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29624,7 +29679,7 @@ var qtk =
 
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29664,7 +29719,27 @@ var qtk =
 
 
 /***/ },
-/* 179 */
+/* 180 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ProgressInfo = (function () {
+	    function ProgressInfo(title, runTask, w) {
+	        this.w = w;
+	        this.title = title;
+	        this.runTask = runTask;
+	    }
+	    ProgressInfo.create = function (title, runTask, w) {
+	        return new ProgressInfo(title, runTask, w);
+	    };
+	    return ProgressInfo;
+	}());
+	exports.ProgressInfo = ProgressInfo;
+	;
+
+
+/***/ },
+/* 181 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29684,7 +29759,7 @@ var qtk =
 
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29699,6 +29774,52 @@ var qtk =
 	    return NotificationInfo;
 	}());
 	exports.NotificationInfo = NotificationInfo;
+	;
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ItemsStorage = (function () {
+	    function ItemsStorage(prefix) {
+	        this._prefix = prefix + ".";
+	    }
+	    ItemsStorage.prototype.getKey = function (name) {
+	        return this._prefix + name;
+	    };
+	    ItemsStorage.prototype.set = function (name, data) {
+	        var key = this.getKey(name);
+	        localStorage.setItem(key, data);
+	    };
+	    ItemsStorage.prototype.remove = function (name) {
+	        var key = this.getKey(name);
+	        localStorage.removeItem(key);
+	        return true;
+	    };
+	    ItemsStorage.prototype.get = function (name) {
+	        var key = this.getKey(name);
+	        return localStorage.getItem(key);
+	    };
+	    ItemsStorage.prototype.getItems = function () {
+	        var n = localStorage.length;
+	        var items = [];
+	        var prefix = this._prefix;
+	        for (var i = 0; i < n; i++) {
+	            var key = localStorage.key(i);
+	            if (key.indexOf(prefix) === 0) {
+	                items.push(key.substr(prefix.length));
+	            }
+	        }
+	        return items;
+	    };
+	    ItemsStorage.create = function (prefix) {
+	        return new ItemsStorage(prefix);
+	    };
+	    return ItemsStorage;
+	}());
+	exports.ItemsStorage = ItemsStorage;
 	;
 
 

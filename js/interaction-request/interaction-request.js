@@ -26,6 +26,9 @@ var InteractionRequest = (function () {
     InteractionRequest.prototype.props = function (info, callback) {
         this.request(interaction_types_1.InteractionTypes.PROPS, callback, info);
     };
+    InteractionRequest.prototype.progress = function (info, callback) {
+        this.request(interaction_types_1.InteractionTypes.PROGRESS, callback, info);
+    };
     InteractionRequest.init = function (service) {
         InteractionRequest.instance = new InteractionRequest(service);
     };
@@ -46,6 +49,9 @@ var InteractionRequest = (function () {
     };
     InteractionRequest.props = function (info, callback) {
         InteractionRequest.instance.props(info, callback);
+    };
+    InteractionRequest.progress = function (info, callback) {
+        InteractionRequest.instance.progress(info, callback);
     };
     InteractionRequest.request = function (name, callback, payload) {
         InteractionRequest.instance.request(name, callback, payload);

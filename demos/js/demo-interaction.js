@@ -32,7 +32,7 @@ function addShowProgress(win, w) {
 			progress += 0.1;
 			onProgress(progress);
 			if(progress < 1) {
-				setTimeout(updateProgress, 1000);
+				setTimeout(updateProgress, 200);
 			}
 		}
 		updateProgress();
@@ -40,9 +40,11 @@ function addShowProgress(win, w) {
 
 	var item = qtk.Button.create({text:"Show Progress"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showProgress("Downloading...",  download, function(evt) {
-			console.log("done");
-		}, w);
+		var info = qtk.ProgressInfo.create("Downloading...", download, w);
+
+		qtk.InteractionRequest.progress(info, function(ret) {
+			console.dir(ret);
+		});
 	});
 	win.addChild(item, true);
 }

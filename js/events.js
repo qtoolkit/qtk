@@ -420,6 +420,25 @@ var ScrollEvent = (function (_super) {
 }(Event));
 exports.ScrollEvent = ScrollEvent;
 ;
+var ProgressEvent = (function (_super) {
+    __extends(ProgressEvent, _super);
+    function ProgressEvent() {
+        _super.apply(this, arguments);
+    }
+    ProgressEvent.prototype.reset = function (progress, total, done) {
+        _super.prototype.init.call(this, exports.PROGRESS);
+        this.done = done;
+        this.total = total;
+        this.progress = progress;
+        return this;
+    };
+    ProgressEvent.create = function () {
+        return new ProgressEvent();
+    };
+    return ProgressEvent;
+}(Event));
+exports.ProgressEvent = ProgressEvent;
+;
 function createAnyEvent(type, payload) {
     return AnyEvent.create(type, payload);
 }

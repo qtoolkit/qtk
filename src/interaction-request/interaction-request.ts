@@ -4,6 +4,7 @@ import {ToastInfo} from "./toast-info";
 import {InputInfo} from "./input-info";
 import {PropsInfo} from "./props-info";
 import {ChoiceInfo} from "./choice-info";
+import {ProgressInfo} from "./progress-info";
 import {ConfirmationInfo} from "./confirmation-info";
 import {NotificationInfo} from "./notification-info";
 import {InteractionTypes} from "./interaction-types";
@@ -40,6 +41,10 @@ export class InteractionRequest {
 	public props(info:PropsInfo, callback?:Function) {
 		this.request(InteractionTypes.PROPS, callback, info);
 	}
+	
+	public progress(info:ProgressInfo, callback?:Function) {
+		this.request(InteractionTypes.PROGRESS, callback, info);
+	}
 
 	constructor(service:IInteractionService) {
 		this.service = service;
@@ -73,6 +78,10 @@ export class InteractionRequest {
 	
 	public static props(info:PropsInfo, callback?:Function) {
 		InteractionRequest.instance.props(info, callback);
+	}
+	
+	public static progress(info:ProgressInfo, callback?:Function) {
+		InteractionRequest.instance.progress(info, callback);
 	}
 	
 	public static request(name:string, callback?:Function, payload?:any) {

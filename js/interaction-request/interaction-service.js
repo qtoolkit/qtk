@@ -5,6 +5,7 @@ var toast_dialog_1 = require("./toast-dialog");
 var input_dialog_1 = require("./input-dialog");
 var props_dialog_1 = require("./props-dialog");
 var choice_dialog_1 = require("./choice-dialog");
+var progress_dialog_1 = require("./progress-dialog");
 var confirmation_dialog_1 = require("./confirmation-dialog");
 var notification_dialog_1 = require("./notification-dialog");
 var interaction_types_1 = require("./interaction-types");
@@ -37,6 +38,10 @@ var InteractionService = (function () {
             }
             case interaction_types_1.InteractionTypes.INPUT: {
                 input_dialog_1.InputDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.PROGRESS: {
+                progress_dialog_1.ProgressDialog.show(e);
                 break;
             }
             case interaction_types_1.InteractionTypes.CHOICE: {

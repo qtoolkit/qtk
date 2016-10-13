@@ -246,4 +246,11 @@ export declare class ScrollEvent extends Event {
     reset(type: string, widget: any, offsetX: number, offsetY: number): any;
     static create(): ScrollEvent;
 }
+export declare class ProgressEvent extends Event {
+    done: number;
+    total: number;
+    progress: number;
+    reset(progress: number, total?: number, done?: number): ProgressEvent;
+    static create(): ProgressEvent;
+}
 export declare function createAnyEvent(type: string, payload?: any): AnyEvent;
