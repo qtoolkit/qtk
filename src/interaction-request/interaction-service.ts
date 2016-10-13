@@ -82,8 +82,10 @@ export class InteractionService implements IInteractionService {
 		return InteractionService.instance;
 	}
 
-	public static init() {
+	public static init() : InteractionService {
 		InteractionService.instance = new InteractionService();
+
+		return InteractionService.instance;
 	}
 	
 	public static onRequest(callback:InteractionRequestHandler) {

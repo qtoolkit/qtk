@@ -63,6 +63,7 @@ var InteractionService = (function () {
     };
     InteractionService.init = function () {
         InteractionService.instance = new InteractionService();
+        return InteractionService.instance;
     };
     InteractionService.onRequest = function (callback) {
         InteractionService.instance.onRequest(callback);

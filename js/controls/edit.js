@@ -154,14 +154,16 @@ var Edit = (function (_super) {
         input.on(Events.CHANGING, function (evt) {
             var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            e.init(Events.CHANGING, { value: _this.text });
+            var value = _this.inputType === "number" ? +_this.text : _this.text;
+            e.init(Events.CHANGING, { value: value });
             ;
             _this.dispatchEvent(e);
         });
         input.on(Events.CHANGE, function (evt) {
             var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
-            e.init(Events.CHANGE, { value: _this.text, oldValue: oldValue });
+            var value = _this.inputType === "number" ? +_this.text : _this.text;
+            e.init(Events.CHANGE, { value: value, oldValue: oldValue });
             ;
             _this.dispatchEvent(e);
         });

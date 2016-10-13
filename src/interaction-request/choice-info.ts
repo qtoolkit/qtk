@@ -1,11 +1,9 @@
 export class ChoiceOption {
 	public text:string;
 	public iconURL:string;
-	public choosed:boolean;
 
 	constructor(text:string, iconURL?:string) {
 		this.text = text;
-		this.choosed = false;
 		this.iconURL = iconURL || null;
 	}
 
@@ -30,15 +28,16 @@ export class ChoiceInfo {
 		this.options.push(ChoiceOption.create(text, iconURL));
 	}
 
-	constructor(title:string, multiple?:boolean, w?:number) {
+	constructor(title:string, multiple?:boolean, w?:number, h?:number) {
 		this.w = w;
+		this.h = h;
 		this.title = title;
 		this.multiple = multiple;
 		this.resetOptions();
 	}
 
-	public static create(title:string, multiple?:boolean, w?:number) {
-		return new ChoiceInfo(title, multiple, w);
+	public static create(title:string, multiple?:boolean, w?:number, h?:number) {
+		return new ChoiceInfo(title, multiple, w, h);
 	}
 };
 

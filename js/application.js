@@ -17,6 +17,8 @@ var theme_manager_1 = require("./theme-manager");
 var device_info_1 = require("./device-info");
 var service_locator_1 = require("./service-locator");
 var inputEventAdapter = require("./input-event-adapter");
+var interaction_request_1 = require("./interaction-request/interaction-request");
+var interaction_service_1 = require("./interaction-request/interaction-service");
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
  *
@@ -104,6 +106,7 @@ var Application = (function (_super) {
         var themeManager = new theme_manager_1.ThemeManager();
         var sysThemeDataURL = this._options.sysThemeDataURL;
         var appThemeDataURL = this._options.appThemeDataURL;
+        interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
         if (sysThemeDataURL) {
             Assets.loadJSON(sysThemeDataURL).then(function (json) {
                 var baseURL = path.dirname(sysThemeDataURL);

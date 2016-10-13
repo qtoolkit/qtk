@@ -10,7 +10,7 @@ export declare class InteractionService implements IInteractionService {
     constructor();
     protected static instance: InteractionService;
     static getInstance(): InteractionService;
-    static init(): void;
+    static init(): InteractionService;
     static onRequest(callback: InteractionRequestHandler): void;
     static offRequest(callback: InteractionRequestHandler): void;
 }

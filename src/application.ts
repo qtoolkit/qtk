@@ -15,6 +15,8 @@ import {DeviceInfo} from "./device-info";
 import {IThemeManager} from "./itheme-manager";
 import {ServiceLocator} from  "./service-locator";
 import inputEventAdapter = require("./input-event-adapter");
+import {InteractionRequest} from "./interaction-request/interaction-request";
+import {InteractionService} from "./interaction-request/interaction-service";
 
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
@@ -107,6 +109,7 @@ export class Application extends Emitter implements IApplication {
 		var themeManager = new ThemeManager();
 		var sysThemeDataURL = this._options.sysThemeDataURL;
 		var appThemeDataURL = this._options.appThemeDataURL;
+		InteractionRequest.init(InteractionService.init());
 
 		if(sysThemeDataURL) {
 			Assets.loadJSON(sysThemeDataURL).then(json => {

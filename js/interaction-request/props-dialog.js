@@ -7,6 +7,7 @@ var PropsDialog = (function () {
         var info = e.payload;
         var onCancel = info.mutable ? function (ret) { } : null;
         property_dialog_1.PropertyDialog.show(info.pagePropsDesc, info.data, function (ret) {
+            info.data = ret;
             e.returnResult();
         }, onCancel, info.w);
     };

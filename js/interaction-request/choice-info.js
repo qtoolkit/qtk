@@ -2,7 +2,6 @@
 var ChoiceOption = (function () {
     function ChoiceOption(text, iconURL) {
         this.text = text;
-        this.choosed = false;
         this.iconURL = iconURL || null;
     }
     ChoiceOption.create = function (text, iconURL) {
@@ -13,8 +12,9 @@ var ChoiceOption = (function () {
 exports.ChoiceOption = ChoiceOption;
 ;
 var ChoiceInfo = (function () {
-    function ChoiceInfo(title, multiple, w) {
+    function ChoiceInfo(title, multiple, w, h) {
         this.w = w;
+        this.h = h;
         this.title = title;
         this.multiple = multiple;
         this.resetOptions();
@@ -25,8 +25,8 @@ var ChoiceInfo = (function () {
     ChoiceInfo.prototype.addOption = function (text, iconURL) {
         this.options.push(ChoiceOption.create(text, iconURL));
     };
-    ChoiceInfo.create = function (title, multiple, w) {
-        return new ChoiceInfo(title, multiple, w);
+    ChoiceInfo.create = function (title, multiple, w, h) {
+        return new ChoiceInfo(title, multiple, w, h);
     };
     return ChoiceInfo;
 }());

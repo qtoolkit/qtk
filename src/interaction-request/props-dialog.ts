@@ -9,6 +9,7 @@ export class PropsDialog {
 		var onCancel = info.mutable ? function(ret) {} : null;
 
 		PropertyDialog.show(info.pagePropsDesc, info.data, function(ret) {
+			info.data = ret;
 			e.returnResult();
 		}, onCancel, info.w);
 	}

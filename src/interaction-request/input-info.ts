@@ -12,6 +12,9 @@ export class InputInfo {
 		this.title = title;
 		this.inputTips = inputTips;
 		this.inputType = inputType;
+		this.isValueValid = function(value) {
+			return !!value;
+		}
 	}
 
 	public static create(title:string, value:string, inputTips?:string, inputType?:string, w?:number) {

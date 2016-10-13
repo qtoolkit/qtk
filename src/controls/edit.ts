@@ -124,16 +124,17 @@ export class Edit extends Label {
 		input.on(Events.CHANGING, evt => {
 			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
-			
-			e.init(Events.CHANGING, {value:this.text});;
+			var value = this.inputType === "number" ? +this.text : this.text;	
+			e.init(Events.CHANGING, {value:value});;
 			this.dispatchEvent(e);
 		});
 		
 		input.on(Events.CHANGE, evt => {
 			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
+			var value = this.inputType === "number" ? +this.text : this.text;	
 			
-			e.init(Events.CHANGE, {value:this.text, oldValue:oldValue});;
+			e.init(Events.CHANGE, {value:value, oldValue:oldValue});;
 			this.dispatchEvent(e);
 		});
 	}
