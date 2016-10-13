@@ -27275,6 +27275,26 @@ var qtk =
 	    function PropDesc(type) {
 	        this.type = type;
 	    }
+	    PropDesc.prototype.toJson = function () {
+	        var _this = this;
+	        var json = {};
+	        PropDesc.keys.forEach(function (key) {
+	            var value = _this[key];
+	            if (value !== undefined) {
+	                json[key] = value;
+	            }
+	        });
+	        return json;
+	    };
+	    PropDesc.prototype.fromJson = function (json) {
+	        var _this = this;
+	        PropDesc.keys.forEach(function (key) {
+	            var value = _this[key];
+	            if (value !== undefined) {
+	                _this[key] = value;
+	            }
+	        });
+	    };
 	    PropDesc.prototype.setBasic = function (name, value, desc) {
 	        this.name = name;
 	        this.desc = desc;
@@ -27286,6 +27306,7 @@ var qtk =
 	        this.validationRule = validationRule;
 	        return this;
 	    };
+	    PropDesc.keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
 	    return PropDesc;
 	}());
 	exports.PropDesc = PropDesc;
@@ -27297,6 +27318,17 @@ var qtk =
 	        this.min = min;
 	        this.max = max;
 	    }
+	    NumberPropDesc.prototype.toJson = function () {
+	        var json = _super.prototype.toJson.call(this);
+	        json.min = this.min;
+	        json.max = this.max;
+	        return json;
+	    };
+	    NumberPropDesc.prototype.fromJson = function (json) {
+	        _super.prototype.fromJson.call(this, json);
+	        this.min = json.min;
+	        this.max = json.max;
+	    };
 	    NumberPropDesc.create = function (min, max) {
 	        return new NumberPropDesc(min, max);
 	    };
@@ -27407,6 +27439,15 @@ var qtk =
 	        _super.call(this, OptionsPropDesc.TYPE);
 	        this.options = options;
 	    }
+	    OptionsPropDesc.prototype.toJson = function () {
+	        var json = _super.prototype.toJson.call(this);
+	        json.options = this.options;
+	        return json;
+	    };
+	    OptionsPropDesc.prototype.fromJson = function (json) {
+	        _super.prototype.fromJson.call(this, json);
+	        this.options = json.options;
+	    };
 	    OptionsPropDesc.create = function (options) {
 	        return new OptionsPropDesc(options);
 	    };
@@ -27430,6 +27471,17 @@ var qtk =
 	        items.forEach(function (item) {
 	            func(item);
 	        });
+	    };
+	    PropsDesc.prototype.toJson = function () {
+	        var json = {};
+	        json.items = this._items.map(function (item) {
+	            return item.toJson();
+	        });
+	        return json;
+	    };
+	    ;
+	    PropsDesc.prototype.fromJson = function (json) {
+	        this.parse(json.items);
 	    };
 	    PropsDesc.prototype.parse = function (json) {
 	        var items = [];
@@ -27479,7 +27531,10 @@ var qtk =
 	    };
 	    PropsDesc.create = function (json) {
 	        var propsDesc = new PropsDesc();
-	        return propsDesc.parse(json);
+	        if (json) {
+	            propsDesc.parse(json);
+	        }
+	        return propsDesc;
 	    };
 	    return PropsDesc;
 	}(emitter_1.Emitter));
@@ -27490,6 +27545,13 @@ var qtk =
 	        this.title = title;
 	        this.propsDesc = propsDesc;
 	    }
+	    PagePropsDesc.prototype.toJson = function () {
+	        return { title: this.title, propsDesc: this.propsDesc.toJson() };
+	    };
+	    PagePropsDesc.prototype.fromJson = function (json) {
+	        this.title = json.title;
+	        this.propsDesc = PropsDesc.create(json.propsDesc.items);
+	    };
 	    PagePropsDesc.create = function (title, json) {
 	        var propsDesc = PropsDesc.create(json);
 	        var pagePropsDesc = new PagePropsDesc(title, propsDesc);

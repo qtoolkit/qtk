@@ -4,6 +4,9 @@ export declare class PropDesc {
     name: string;
     desc: string;
     value: any;
+    static keys: string[];
+    toJson(): any;
+    fromJson(json: any): void;
     constructor(type: string);
     setBasic(name: string, value: any, desc?: string): void;
     /**
@@ -17,6 +20,8 @@ export declare class PropDesc {
 export declare class NumberPropDesc extends PropDesc {
     max: number;
     min: number;
+    toJson(): any;
+    fromJson(json: any): void;
     constructor(min: number, max: number);
     static TYPE: string;
     static create(min: number, max: number): NumberPropDesc;
@@ -63,6 +68,8 @@ export declare class LinePropDesc extends PropDesc {
 }
 export declare class OptionsPropDesc extends PropDesc {
     options: any;
+    toJson(): any;
+    fromJson(json: any): void;
     constructor(options: any);
     static TYPE: string;
     static create(options: any): OptionsPropDesc;
@@ -71,12 +78,16 @@ export declare class PropsDesc extends Emitter {
     _items: Array<PropDesc>;
     notifyChange(): PropsDesc;
     forEach(func: Function): void;
+    toJson(): any;
+    fromJson(json: any): void;
     parse(json: Array<any>): PropsDesc;
     static create(json: any): PropsDesc;
 }
 export declare class PagePropsDesc {
     title: string;
     propsDesc: PropsDesc;
+    toJson(): any;
+    fromJson(json: any): void;
     constructor(title: string, propsDesc: PropsDesc);
     static create(title: string, json: any): PagePropsDesc;
 }

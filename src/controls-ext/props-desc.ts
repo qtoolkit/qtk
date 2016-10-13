@@ -8,6 +8,30 @@ export class PropDesc {
 	public desc : string;
 	public value : any;
 
+	public static keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
+	
+	public toJson() : any {
+		var json : any = {};
+
+		PropDesc.keys.forEach((key:string) => {
+			var value = this[key];
+			if(value !== undefined) {
+				json[key] = value;
+			}
+		});
+
+		return json;
+	}
+	
+	public fromJson(json:any) {
+		PropDesc.keys.forEach((key:string) => {
+			var value = this[key];
+			if(value !== undefined) {
+				this[key] = value;
+			}
+		});
+	}
+
 	constructor(type:string) {
 		this.type = type;
 	}
@@ -36,6 +60,20 @@ export class PropDesc {
 export class NumberPropDesc extends PropDesc {
 	public max : number;
 	public min : number;
+
+	public toJson() : any {
+		var json = super.toJson();
+		json.min = this.min;
+		json.max = this.max;
+
+		return json;
+	}
+	
+	public fromJson(json:any) {
+		super.fromJson(json);
+		this.min = json.min;
+		this.max = json.max;
+	}
 
 	constructor(min:number, max:number) {
 		super(NumberPropDesc.TYPE);
@@ -136,8 +174,21 @@ export class LinePropDesc extends PropDesc {
 		return new LinePropDesc();
 	}
 }
+
 export class OptionsPropDesc extends PropDesc {
 	public options:any;
+
+	public toJson() : any {
+		var json = super.toJson();
+		json.options = this.options;
+
+		return json;
+	}
+
+	public fromJson(json:any) {
+		super.fromJson(json);
+		this.options = json.options;
+	}
 
 	constructor(options:any) {
 		super(OptionsPropDesc.TYPE);
@@ -166,6 +217,19 @@ export class PropsDesc extends Emitter {
 		items.forEach((item:PropDesc) => {
 			func(item);
 		});
+	}
+
+	public toJson() : any {
+		var json:any = {};
+		json.items = this._items.map((item:PropDesc) => {
+			return item.toJson();
+		});
+
+		return json;
+	};
+
+	public fromJson(json:any) {
+		this.parse(json.items);
 	}
 
 	public parse(json:Array<any>) : PropsDesc {
@@ -212,8 +276,11 @@ export class PropsDesc extends Emitter {
 
 	public static create(json:any) : PropsDesc {
 		var propsDesc = new PropsDesc();
+		if(json) {
+			propsDesc.parse(json);
+		}
 
-		return propsDesc.parse(json);
+		return propsDesc;
 	}
 };
 
@@ -221,7 +288,16 @@ export class PagePropsDesc {
 	public title:string;
 	public propsDesc:PropsDesc;
 
-	constructor(title:string, propsDesc:PropsDesc) {
+	public toJson() : any {
+		return {title:this.title, propsDesc:this.propsDesc.toJson()};
+	}
+
+	public fromJson(json:any) {
+		this.title = json.title;
+		this.propsDesc = PropsDesc.create(json.propsDesc.items);
+	}
+
+	public constructor(title:string, propsDesc:PropsDesc) {
 		this.title = title;
 		this.propsDesc = propsDesc;
 	}
