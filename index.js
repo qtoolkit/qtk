@@ -271,6 +271,24 @@ var qtk =
 	exports.Assets = Assets;
 	var inputEventAdapter = __webpack_require__(15);
 	exports.inputEventAdapter = inputEventAdapter;
+	var toast_info_1 = __webpack_require__(166);
+	exports.ToastInfo = toast_info_1.ToastInfo;
+	var input_info_1 = __webpack_require__(167);
+	exports.InputInfo = input_info_1.InputInfo;
+	var props_info_1 = __webpack_require__(168);
+	exports.PropsInfo = props_info_1.PropsInfo;
+	var choice_info_1 = __webpack_require__(169);
+	exports.ChoiceInfo = choice_info_1.ChoiceInfo;
+	var confirmation_info_1 = __webpack_require__(170);
+	exports.ConfirmationInfo = confirmation_info_1.ConfirmationInfo;
+	var notification_info_1 = __webpack_require__(171);
+	exports.NotificationInfo = notification_info_1.NotificationInfo;
+	var interaction_types_1 = __webpack_require__(172);
+	exports.InteractionTypes = interaction_types_1.InteractionTypes;
+	var interaction_request_1 = __webpack_require__(173);
+	exports.InteractionRequest = interaction_request_1.InteractionRequest;
+	var interaction_service_1 = __webpack_require__(174);
+	exports.InteractionService = interaction_service_1.InteractionService;
 
 
 /***/ },
@@ -1366,16 +1384,27 @@ var qtk =
 	exports.DRAGLEAVE = "dragleave";
 	exports.DRAGOVER = "dragover";
 	exports.DRAGSTART = "dragstart";
-	exports.SHOW_VIEW = "show-view";
+	exports.INTERACTION_REQUEST = "interaction-request";
 	var Event = (function () {
 	    function Event() {
 	    }
 	    Event.prototype.init = function (type, detail) {
 	        this._type = type;
 	        this._target = null;
+	        this._preventedDefault = false;
 	        this._propagationStopped = false;
 	        return this;
 	    };
+	    Event.prototype.preventDefault = function () {
+	        this._preventedDefault = true;
+	    };
+	    Object.defineProperty(Event.prototype, "defaultPrevented", {
+	        get: function () {
+	            return this._preventedDefault;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Event.prototype, "propagationStopped", {
 	        get: function () {
 	            return this._propagationStopped;
@@ -1433,31 +1462,31 @@ var qtk =
 	/**
 	 * View Modal请求显示指定的视图或跳转到指定的视图。
 	 */
-	var ViewRequestEvent = (function (_super) {
-	    __extends(ViewRequestEvent, _super);
-	    function ViewRequestEvent() {
+	var InteractionRequestEvent = (function (_super) {
+	    __extends(InteractionRequestEvent, _super);
+	    function InteractionRequestEvent() {
 	        _super.apply(this, arguments);
 	    }
 	    ;
-	    ViewRequestEvent.prototype.returnResult = function () {
+	    InteractionRequestEvent.prototype.returnResult = function () {
 	        if (this._callback) {
 	            this._callback(this.payload);
 	        }
 	    };
-	    ViewRequestEvent.prototype.init = function (type, detail) {
+	    InteractionRequestEvent.prototype.init = function (type, detail) {
 	        _super.prototype.init.call(this, type);
 	        this.name = detail.name;
 	        this.payload = detail.payload;
 	        this._callback = detail.callback;
 	        return this;
 	    };
-	    ViewRequestEvent.create = function (type, detail) {
-	        var e = new ViewRequestEvent();
+	    InteractionRequestEvent.create = function (type, detail) {
+	        var e = new InteractionRequestEvent();
 	        return e.init(type, detail);
 	    };
-	    return ViewRequestEvent;
+	    return InteractionRequestEvent;
 	}(Event));
-	exports.ViewRequestEvent = ViewRequestEvent;
+	exports.InteractionRequestEvent = InteractionRequestEvent;
 	;
 	var InputEvent = (function (_super) {
 	    __extends(InputEvent, _super);
@@ -28052,12 +28081,6 @@ var qtk =
 	        var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
 	        return validationRule ? validationRule.validate(value) : ivalidation_rule_1.ValidationResult.validResult;
 	    };
-	    ViewModalDefault.prototype.sendViewRequest = function (name, callback, payload) {
-	        var detail = { name: name, callback: callback, payload: payload };
-	        var e = Events.ViewRequestEvent.create(Events.SHOW_VIEW, detail);
-	        this.dispatchEvent(e);
-	        e.dispose();
-	    };
 	    return ViewModalDefault;
 	}(emitter_1.Emitter));
 	exports.ViewModalDefault = ViewModalDefault;
@@ -29237,6 +29260,436 @@ var qtk =
 	}());
 	exports.DelegateValidationRule = DelegateValidationRule;
 	;
+
+
+/***/ },
+/* 166 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ToastInfo = (function () {
+	    function ToastInfo(text, duration, w) {
+	        this.text = text;
+	        this.duration = duration || 2000;
+	        this.w = w;
+	    }
+	    ToastInfo.create = function (text, duration, w) {
+	        return new ToastInfo(text, duration, w);
+	    };
+	    return ToastInfo;
+	}());
+	exports.ToastInfo = ToastInfo;
+	;
+
+
+/***/ },
+/* 167 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var InputInfo = (function () {
+	    function InputInfo(title, value, inputTips, inputType, w) {
+	        this.w = w;
+	        this.value = value;
+	        this.title = title;
+	        this.inputTips = inputTips;
+	        this.inputType = inputType;
+	    }
+	    InputInfo.create = function (title, value, inputTips, inputType, w) {
+	        return new InputInfo(title, value, inputTips, inputType, w);
+	    };
+	    return InputInfo;
+	}());
+	exports.InputInfo = InputInfo;
+	;
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var PropsInfo = (function () {
+	    function PropsInfo(pagePropsDesc, data, mutable, w) {
+	        this.w = w;
+	        this.data = data;
+	        this.mutable = mutable;
+	        this.pagePropsDesc = pagePropsDesc;
+	    }
+	    PropsInfo.create = function (pagePropsDesc, data, mutable, w) {
+	        return new PropsInfo(pagePropsDesc, data, mutable, w);
+	    };
+	    return PropsInfo;
+	}());
+	exports.PropsInfo = PropsInfo;
+	;
+
+
+/***/ },
+/* 169 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ChoiceOption = (function () {
+	    function ChoiceOption(text, iconURL) {
+	        this.text = text;
+	        this.choosed = false;
+	        this.iconURL = iconURL || null;
+	    }
+	    ChoiceOption.create = function (text, iconURL) {
+	        return new ChoiceOption(text, iconURL);
+	    };
+	    return ChoiceOption;
+	}());
+	exports.ChoiceOption = ChoiceOption;
+	;
+	var ChoiceInfo = (function () {
+	    function ChoiceInfo(title, multiple, w) {
+	        this.w = w;
+	        this.title = title;
+	        this.multiple = multiple;
+	        this.resetOptions();
+	    }
+	    ChoiceInfo.prototype.resetOptions = function () {
+	        this.options = [];
+	    };
+	    ChoiceInfo.prototype.addOption = function (text, iconURL) {
+	        this.options.push(ChoiceOption.create(text, iconURL));
+	    };
+	    ChoiceInfo.create = function (title, multiple, w) {
+	        return new ChoiceInfo(title, multiple, w);
+	    };
+	    return ChoiceInfo;
+	}());
+	exports.ChoiceInfo = ChoiceInfo;
+	;
+
+
+/***/ },
+/* 170 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var ConfirmationInfo = (function () {
+	    function ConfirmationInfo(content, w) {
+	        this.w = w;
+	        this.content = content;
+	        this.confirmed = false;
+	    }
+	    ConfirmationInfo.create = function (content, w) {
+	        return new ConfirmationInfo(content, w);
+	    };
+	    return ConfirmationInfo;
+	}());
+	exports.ConfirmationInfo = ConfirmationInfo;
+	;
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var NotificationInfo = (function () {
+	    function NotificationInfo(content, w) {
+	        this.w = w;
+	        this.content = content;
+	    }
+	    NotificationInfo.create = function (content, w) {
+	        return new NotificationInfo(content, w);
+	    };
+	    return NotificationInfo;
+	}());
+	exports.NotificationInfo = NotificationInfo;
+	;
+
+
+/***/ },
+/* 172 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var InteractionTypes = (function () {
+	    function InteractionTypes() {
+	    }
+	    InteractionTypes.PROPS = "props";
+	    InteractionTypes.TOAST = "toast";
+	    InteractionTypes.INPUT = "input";
+	    InteractionTypes.CHOICE = "choice";
+	    InteractionTypes.NOTIFICATION = "notification";
+	    InteractionTypes.CONFIRMATION = "confirmation";
+	    return InteractionTypes;
+	}());
+	exports.InteractionTypes = InteractionTypes;
+	;
+
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var interaction_types_1 = __webpack_require__(172);
+	var InteractionRequest = (function () {
+	    function InteractionRequest(service) {
+	        this.service = service;
+	    }
+	    InteractionRequest.prototype.request = function (name, callback, payload) {
+	        var detail = { name: name, callback: callback, payload: payload };
+	        this.service.dispatchRequest(detail);
+	    };
+	    InteractionRequest.prototype.toast = function (info) {
+	        this.request(interaction_types_1.InteractionTypes.TOAST, null, info);
+	    };
+	    InteractionRequest.prototype.notify = function (info) {
+	        this.request(interaction_types_1.InteractionTypes.NOTIFICATION, null, info);
+	    };
+	    InteractionRequest.prototype.confirm = function (info, callback) {
+	        this.request(interaction_types_1.InteractionTypes.CONFIRMATION, callback, info);
+	    };
+	    InteractionRequest.prototype.input = function (info, callback) {
+	        this.request(interaction_types_1.InteractionTypes.INPUT, callback, info);
+	    };
+	    InteractionRequest.prototype.choice = function (info, callback) {
+	        this.request(interaction_types_1.InteractionTypes.CHOICE, callback, info);
+	    };
+	    InteractionRequest.prototype.props = function (info, callback) {
+	        this.request(interaction_types_1.InteractionTypes.PROPS, callback, info);
+	    };
+	    InteractionRequest.init = function (service) {
+	        InteractionRequest.instance = new InteractionRequest(service);
+	    };
+	    InteractionRequest.toast = function (info) {
+	        InteractionRequest.instance.toast(info);
+	    };
+	    InteractionRequest.notify = function (info) {
+	        InteractionRequest.instance.notify(info);
+	    };
+	    InteractionRequest.confirm = function (info, callback) {
+	        InteractionRequest.instance.confirm(info, callback);
+	    };
+	    InteractionRequest.input = function (info, callback) {
+	        InteractionRequest.instance.input(info, callback);
+	    };
+	    InteractionRequest.choice = function (info, callback) {
+	        InteractionRequest.instance.choice(info, callback);
+	    };
+	    InteractionRequest.props = function (info, callback) {
+	        InteractionRequest.instance.props(info, callback);
+	    };
+	    InteractionRequest.request = function (name, callback, payload) {
+	        InteractionRequest.instance.request(name, callback, payload);
+	    };
+	    return InteractionRequest;
+	}());
+	exports.InteractionRequest = InteractionRequest;
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var emitter_1 = __webpack_require__(4);
+	var Events = __webpack_require__(6);
+	var toast_dialog_1 = __webpack_require__(175);
+	var input_dialog_1 = __webpack_require__(176);
+	var props_dialog_1 = __webpack_require__(177);
+	var choice_dialog_1 = __webpack_require__(178);
+	var confirmation_dialog_1 = __webpack_require__(179);
+	var notification_dialog_1 = __webpack_require__(180);
+	var interaction_types_1 = __webpack_require__(172);
+	var InteractionService = (function () {
+	    function InteractionService() {
+	        this._emitter = new emitter_1.Emitter();
+	    }
+	    InteractionService.prototype.onRequest = function (callback) {
+	        this._emitter.on(Events.INTERACTION_REQUEST, callback);
+	    };
+	    InteractionService.prototype.offRequest = function (callback) {
+	        this._emitter.off(Events.INTERACTION_REQUEST, callback);
+	    };
+	    InteractionService.prototype.dispatchRequest = function (detail) {
+	        var type = Events.INTERACTION_REQUEST;
+	        var e = Events.InteractionRequestEvent.create(type, detail);
+	        this._emitter.dispatchEvent(e);
+	        if (!e.defaultPrevented) {
+	            this.defaultHandler(e);
+	        }
+	        e.dispose();
+	    };
+	    InteractionService.prototype.defaultHandler = function (e) {
+	        var name = e.name;
+	        var payload = e.payload;
+	        switch (name) {
+	            case interaction_types_1.InteractionTypes.TOAST: {
+	                toast_dialog_1.ToastDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.INPUT: {
+	                input_dialog_1.InputDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.CHOICE: {
+	                choice_dialog_1.ChoiceDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.PROPS: {
+	                props_dialog_1.PropsDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.NOTIFICATION: {
+	                notification_dialog_1.NotificationDialog.show(e);
+	                break;
+	            }
+	            case interaction_types_1.InteractionTypes.CONFIRMATION: {
+	                confirmation_dialog_1.ConfirmationDialog.show(e);
+	                break;
+	            }
+	            default: break;
+	        }
+	    };
+	    InteractionService.getInstance = function () {
+	        return InteractionService.instance;
+	    };
+	    InteractionService.init = function () {
+	        InteractionService.instance = new InteractionService();
+	    };
+	    InteractionService.onRequest = function (callback) {
+	        InteractionService.instance.onRequest(callback);
+	    };
+	    InteractionService.offRequest = function (callback) {
+	        InteractionService.instance.offRequest(callback);
+	    };
+	    return InteractionService;
+	}());
+	exports.InteractionService = InteractionService;
+	;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(159);
+	var ToastDialog = (function () {
+	    function ToastDialog() {
+	    }
+	    ToastDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showToast(info.text, info.duration || 1000, info.w);
+	    };
+	    return ToastDialog;
+	}());
+	exports.ToastDialog = ToastDialog;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(159);
+	var InputDialog = (function () {
+	    function InputDialog() {
+	    }
+	    InputDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showInput(info.title, info.inputTips, info.value, info.isValueValid, function (value) {
+	            info.value = value;
+	            e.returnResult();
+	        }, info.inputType, info.w);
+	    };
+	    return InputDialog;
+	}());
+	exports.InputDialog = InputDialog;
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var property_dialog_1 = __webpack_require__(153);
+	var PropsDialog = (function () {
+	    function PropsDialog() {
+	    }
+	    PropsDialog.show = function (e) {
+	        var info = e.payload;
+	        var onCancel = info.mutable ? function (ret) { } : null;
+	        property_dialog_1.PropertyDialog.show(info.pagePropsDesc, info.data, function (ret) {
+	            e.returnResult();
+	        }, onCancel, info.w);
+	    };
+	    return PropsDialog;
+	}());
+	exports.PropsDialog = PropsDialog;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(159);
+	var ChoiceDialog = (function () {
+	    function ChoiceDialog() {
+	    }
+	    ChoiceDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showChoice(info.title, info.options, info.multiple, function (value) {
+	            info.value = value;
+	            e.returnResult();
+	        }, info.w, info.h);
+	    };
+	    return ChoiceDialog;
+	}());
+	exports.ChoiceDialog = ChoiceDialog;
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(159);
+	var ConfirmationDialog = (function () {
+	    function ConfirmationDialog() {
+	    }
+	    ConfirmationDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showConfirm(info.content, function (ret) {
+	            info.confirmed = true;
+	            e.returnResult();
+	        }, function (ret) {
+	            info.confirmed = false;
+	            e.returnResult();
+	        }, info.w);
+	    };
+	    return ConfirmationDialog;
+	}());
+	exports.ConfirmationDialog = ConfirmationDialog;
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var message_box_1 = __webpack_require__(159);
+	var NotificationDialog = (function () {
+	    function NotificationDialog() {
+	    }
+	    NotificationDialog.show = function (e) {
+	        var info = e.payload;
+	        message_box_1.MessageBox.showMessage(info.content, function (ret) {
+	            e.returnResult();
+	        }, info.w);
+	    };
+	    return NotificationDialog;
+	}());
+	exports.NotificationDialog = NotificationDialog;
 
 
 /***/ }

@@ -60,13 +60,16 @@ export declare const DRAGEXIT: string;
 export declare const DRAGLEAVE: string;
 export declare const DRAGOVER: string;
 export declare const DRAGSTART: string;
-export declare const SHOW_VIEW: string;
+export declare const INTERACTION_REQUEST: string;
 export declare class Event {
     private _type;
     private _target;
     private _propagationStopped;
+    private _preventedDefault;
     timeStamp: number;
     init(type: string, detail?: any): any;
+    preventDefault(): void;
+    readonly defaultPrevented: boolean;
     readonly propagationStopped: boolean;
     stopPropagation(): void;
     type: string;
@@ -84,7 +87,7 @@ export declare class AnyEvent extends Event {
 /**
  * View Modal请求显示指定的视图或跳转到指定的视图。
  */
-export declare class ViewRequestEvent extends Event {
+export declare class InteractionRequestEvent extends Event {
     /**
      * 消息具体的信息。
      */

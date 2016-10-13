@@ -143,12 +143,6 @@ var ViewModalDefault = (function (_super) {
         var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
         return validationRule ? validationRule.validate(value) : ivalidation_rule_1.ValidationResult.validResult;
     };
-    ViewModalDefault.prototype.sendViewRequest = function (name, callback, payload) {
-        var detail = { name: name, callback: callback, payload: payload };
-        var e = Events.ViewRequestEvent.create(Events.SHOW_VIEW, detail);
-        this.dispatchEvent(e);
-        e.dispose();
-    };
     return ViewModalDefault;
 }(emitter_1.Emitter));
 exports.ViewModalDefault = ViewModalDefault;

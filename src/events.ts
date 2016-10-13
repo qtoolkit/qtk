@@ -64,20 +64,30 @@ export const DRAGLEAVE = "dragleave";
 export const DRAGOVER  = "dragover";
 export const DRAGSTART = "dragstart";
 
-export const SHOW_VIEW = "show-view";
+export const INTERACTION_REQUEST = "interaction-request";
 
 export class Event {
 	private _type : string;
 	private _target : any;
 	private _propagationStopped : boolean;
+	private _preventedDefault : boolean;
 
 	public timeStamp : number;
 	public init(type:string, detail?:any) : any {
 		this._type = type;
 		this._target = null;
+		this._preventedDefault = false;
 		this._propagationStopped = false;
 
 		return this;
+	}
+
+	public preventDefault() {
+		this._preventedDefault = true;
+	}
+
+	public get defaultPrevented() : boolean {
+		return this._preventedDefault;
 	}
 
 	public get propagationStopped() {
@@ -132,7 +142,7 @@ export class AnyEvent extends Event {
 /**
  * View Modal请求显示指定的视图或跳转到指定的视图。
  */
-export class ViewRequestEvent extends Event {
+export class InteractionRequestEvent extends Event {
 	/**
 	 * 消息具体的信息。
 	 */
@@ -161,7 +171,7 @@ export class ViewRequestEvent extends Event {
 	}
 
 	public static create(type:string, detail:any) : Event {
-		var e = new ViewRequestEvent();
+		var e = new InteractionRequestEvent();
 
 		return e.init(type, detail);
 	}

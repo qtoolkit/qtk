@@ -73,10 +73,6 @@ export interface IViewModal {
      * @returns 指定名称的命令。
      */
     getCommand(name: string): ICommand;
-    /**
-     * 发送一个视图请求。
-     */
-    sendViewRequest(name: string, callback?: Function, payload?: any): any;
 }
 /**
  * 集合的ViewModal。

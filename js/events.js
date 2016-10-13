@@ -65,16 +65,27 @@ exports.DRAGEXIT = "dragexit";
 exports.DRAGLEAVE = "dragleave";
 exports.DRAGOVER = "dragover";
 exports.DRAGSTART = "dragstart";
-exports.SHOW_VIEW = "show-view";
+exports.INTERACTION_REQUEST = "interaction-request";
 var Event = (function () {
     function Event() {
     }
     Event.prototype.init = function (type, detail) {
         this._type = type;
         this._target = null;
+        this._preventedDefault = false;
         this._propagationStopped = false;
         return this;
     };
+    Event.prototype.preventDefault = function () {
+        this._preventedDefault = true;
+    };
+    Object.defineProperty(Event.prototype, "defaultPrevented", {
+        get: function () {
+            return this._preventedDefault;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Event.prototype, "propagationStopped", {
         get: function () {
             return this._propagationStopped;
@@ -132,31 +143,31 @@ exports.AnyEvent = AnyEvent;
 /**
  * View Modal请求显示指定的视图或跳转到指定的视图。
  */
-var ViewRequestEvent = (function (_super) {
-    __extends(ViewRequestEvent, _super);
-    function ViewRequestEvent() {
+var InteractionRequestEvent = (function (_super) {
+    __extends(InteractionRequestEvent, _super);
+    function InteractionRequestEvent() {
         _super.apply(this, arguments);
     }
     ;
-    ViewRequestEvent.prototype.returnResult = function () {
+    InteractionRequestEvent.prototype.returnResult = function () {
         if (this._callback) {
             this._callback(this.payload);
         }
     };
-    ViewRequestEvent.prototype.init = function (type, detail) {
+    InteractionRequestEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
         this.name = detail.name;
         this.payload = detail.payload;
         this._callback = detail.callback;
         return this;
     };
-    ViewRequestEvent.create = function (type, detail) {
-        var e = new ViewRequestEvent();
+    InteractionRequestEvent.create = function (type, detail) {
+        var e = new InteractionRequestEvent();
         return e.init(type, detail);
     };
-    return ViewRequestEvent;
+    return InteractionRequestEvent;
 }(Event));
-exports.ViewRequestEvent = ViewRequestEvent;
+exports.InteractionRequestEvent = InteractionRequestEvent;
 ;
 var InputEvent = (function (_super) {
     __extends(InputEvent, _super);

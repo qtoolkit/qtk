@@ -105,3 +105,13 @@ import * as inputEventAdapter from "./input-event-adapter";
 
 export {TWEEN, Events, Assets, inputEventAdapter};
 
+export {ToastInfo} from "./interaction-request/toast-info";
+export {InputInfo} from "./interaction-request/input-info";
+export {PropsInfo} from "./interaction-request/props-info";
+export {ChoiceInfo} from "./interaction-request/choice-info";
+export {ConfirmationInfo} from "./interaction-request/confirmation-info";
+export {NotificationInfo} from "./interaction-request/notification-info";
+export {InteractionTypes} from "./interaction-request/interaction-types";
+export {InteractionRequest} from "./interaction-request/interaction-request";
+export {InteractionService} from "./interaction-request/interaction-service";
+

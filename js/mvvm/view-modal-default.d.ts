@@ -36,5 +36,4 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     registerValidationRule(name: string, validationRule: IValidationRule): IViewModal;
     unregisterValidationRule(name: string, validationRule: IValidationRule): IViewModal;
     isValueValid(ruleName: string, value: any): ValidationResult;
-    sendViewRequest(name: string, callback?: Function, payload?: any): void;
 }
