@@ -5613,8 +5613,21 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(Widget.prototype, "isEnableFunc", {
+	        get: function () {
+	            return this._isEnableFunc;
+	        },
+	        set: function (value) {
+	            this._isEnableFunc = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Widget.prototype, "enable", {
 	        get: function () {
+	            if (this.isEnableFunc) {
+	                return this.isEnableFunc();
+	            }
 	            return this._enable;
 	        },
 	        set: function (value) {
@@ -6183,6 +6196,17 @@ var qtk =
 	                    _this.onBindData(viewModal, dataBindingRule);
 	                });
 	            }
+	            this._isEnableFunc = function () {
+	                var enable = true;
+	                dataBindingRule.forEach(function (prop, item) {
+	                    var source = item.source;
+	                    if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
+	                        var commandSource = source;
+	                        enable = enable && viewModal.canExecute(commandSource.command);
+	                    }
+	                });
+	                return enable;
+	            };
 	        }
 	        this.bindChildren(viewModal);
 	        if (viewModal.isCollection && this._templateItemJson) {

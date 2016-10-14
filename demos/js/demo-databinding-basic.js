@@ -29,12 +29,19 @@ function createViewModal() {
 		}
 	};
 
+	var commandEnable = false;
+	setTimeout(function() {
+		commandEnable = true;
+	}, 3000);
+
 	var viewModal = qtk.ViewModal.create(data);
 	viewModal.registerValueConverter("gender", genderConverter);
 	viewModal.registerValidationRule("age", ageValidationRule);
 	viewModal.registerCommand("dummy", qtk.DelegateCommand.create(function execute(args) {
 		console.log("dummy");
-	}, null));
+	}, function() {
+		return commandEnable;
+	}));
 
 	return viewModal;
 }

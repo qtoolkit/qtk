@@ -1241,7 +1241,20 @@ export class Widget extends Emitter {
 		this.setProp("selected", value, true);
 	}
 
+	protected _isEnableFunc : Function;
+
+	public get isEnableFunc() : Function {
+		return this._isEnableFunc;
+	}
+	public set isEnableFunc(value:Function) {
+		this._isEnableFunc = value;
+	}
+
 	public get enable() {
+		if(this.isEnableFunc) {
+			return this.isEnableFunc();
+		}
+
 		return this._enable;
 	}
 	public set enable(value) {
@@ -1870,6 +1883,20 @@ export class Widget extends Emitter {
 				viewModal.onChange(evt => {
 					this.onBindData(viewModal, dataBindingRule);
 				});
+			}
+
+			this._isEnableFunc = function() {
+				var enable = true;
+
+				dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+					var source = item.source;
+					if(source.type === BindingCommandSource.TYPE) {
+						var commandSource = <BindingCommandSource>source;
+						enable = enable && viewModal.canExecute(commandSource.command)	
+					}
+				});
+
+				return enable;
 			}
 		}
 

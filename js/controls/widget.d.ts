@@ -210,7 +210,9 @@ export declare class Widget extends Emitter {
     state: WidgetState;
     value: any;
     selected: boolean;
-    enable: boolean;
+    protected _isEnableFunc: Function;
+    isEnableFunc: Function;
+    enable: any;
     visible: boolean;
     /**
      * 用户是否可以通过本控件输入/选择数据。
