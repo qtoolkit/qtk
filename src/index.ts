@@ -117,3 +117,8 @@ export {InteractionRequest} from "./interaction-request/interaction-request";
 export {InteractionService} from "./interaction-request/interaction-service";
 export {ItemsStorage} from "./items-storage";
 
+export {RangeFixer} from "./mvvm/range-fixer";
+export {NumberFixer} from "./mvvm/number-fixer";
+export {Vector2Fixer} from "./mvvm/vector2-fixer";
+export {Vector3Fixer} from "./mvvm/vector3-fixer";
+

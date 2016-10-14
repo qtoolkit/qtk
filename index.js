@@ -293,6 +293,14 @@ var qtk =
 	exports.InteractionService = interaction_service_1.InteractionService;
 	var items_storage_1 = __webpack_require__(183);
 	exports.ItemsStorage = items_storage_1.ItemsStorage;
+	var range_fixer_1 = __webpack_require__(184);
+	exports.RangeFixer = range_fixer_1.RangeFixer;
+	var number_fixer_1 = __webpack_require__(185);
+	exports.NumberFixer = number_fixer_1.NumberFixer;
+	var vector2_fixer_1 = __webpack_require__(186);
+	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
+	var vector3_fixer_1 = __webpack_require__(187);
+	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 
 
 /***/ },
@@ -29867,6 +29875,130 @@ var qtk =
 	}());
 	exports.ItemsStorage = ItemsStorage;
 	;
+
+
+/***/ },
+/* 184 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var RangeFixer = (function () {
+	    function RangeFixer(firstMin, firstMax, secondMin, secondMax, secondMustGreater) {
+	        this._value = { first: 0, second: 0 };
+	        this._firstMin = firstMin;
+	        this._firstMax = firstMax;
+	        this._secondMin = secondMin;
+	        this._secondMax = secondMax;
+	        this._secondMustGreater = secondMustGreater || false;
+	    }
+	    RangeFixer.prototype.convertBack = function (value) {
+	        var first = Math.min(this._firstMax, Math.max(this._firstMin, +value.first));
+	        var second = Math.min(this._secondMax, Math.max(this._secondMin, +value.second));
+	        if (this._secondMustGreater) {
+	            this._value.first = Math.min(first, second);
+	            this._value.second = Math.max(first, second);
+	        }
+	        else {
+	            this._value.first = first;
+	            this._value.second = second;
+	        }
+	        return this._value;
+	    };
+	    RangeFixer.prototype.convert = function (value) {
+	        return value;
+	    };
+	    RangeFixer.create = function (firstMin, firstMax, secondMin, secondMax, secondMustGreater) {
+	        return new RangeFixer(firstMin, firstMax, secondMin, secondMax, secondMustGreater);
+	    };
+	    return RangeFixer;
+	}());
+	exports.RangeFixer = RangeFixer;
+	;
+
+
+/***/ },
+/* 185 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var NumberFixer = (function () {
+	    function NumberFixer(vMin, vMax) {
+	        this.vMin = vMin;
+	        this.vMax = vMax;
+	    }
+	    NumberFixer.prototype.convertBack = function (value) {
+	        return Math.min(this.vMax, Math.max(this.vMin, +value));
+	    };
+	    NumberFixer.prototype.convert = function (value) {
+	        return value;
+	    };
+	    NumberFixer.create = function (vMin, vMax) {
+	        return new NumberFixer(vMin, vMax);
+	    };
+	    return NumberFixer;
+	}());
+	exports.NumberFixer = NumberFixer;
+
+
+/***/ },
+/* 186 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var Vector2Fixer = (function () {
+	    function Vector2Fixer(xMin, xMax, yMin, yMax) {
+	        this._value = { x: 0, y: 0 };
+	        this._xMin = xMin;
+	        this._xMax = xMax;
+	        this._yMin = yMin;
+	        this._yMax = yMax;
+	    }
+	    Vector2Fixer.prototype.convertBack = function (value) {
+	        this._value.x = Math.min(this._xMax, Math.max(this._xMin, +value.x));
+	        this._value.y = Math.min(this._yMax, Math.max(this._yMin, +value.y));
+	        return this._value;
+	    };
+	    Vector2Fixer.prototype.convert = function (value) {
+	        return value;
+	    };
+	    Vector2Fixer.create = function (xMin, xMax, yMin, yMax) {
+	        return new Vector2Fixer(xMin, xMax, yMin, yMax);
+	    };
+	    return Vector2Fixer;
+	}());
+	exports.Vector2Fixer = Vector2Fixer;
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var Vector3Fixer = (function () {
+	    function Vector3Fixer(xMin, xMax, yMin, yMax, zMin, zMax) {
+	        this._value = { x: 0, y: 0, z: 0 };
+	        this._xMin = xMin;
+	        this._xMax = xMax;
+	        this._yMin = yMin;
+	        this._yMax = yMax;
+	        this._zMin = zMin;
+	        this._zMax = zMax;
+	    }
+	    Vector3Fixer.prototype.convertBack = function (value) {
+	        this._value.x = Math.min(this._xMax, Math.max(this._xMin, +value.x));
+	        this._value.y = Math.min(this._yMax, Math.max(this._yMin, +value.y));
+	        this._value.z = Math.min(this._zMax, Math.max(this._zMin, +value.z));
+	        return this._value;
+	    };
+	    Vector3Fixer.prototype.convert = function (value) {
+	        return value;
+	    };
+	    Vector3Fixer.create = function (xMin, xMax, yMin, yMax, zMin, zMax) {
+	        return new Vector3Fixer(xMin, xMax, yMin, yMax, zMin, zMax);
+	    };
+	    return Vector3Fixer;
+	}());
+	exports.Vector3Fixer = Vector3Fixer;
 
 
 /***/ }
