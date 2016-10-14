@@ -1008,6 +1008,9 @@ export class Widget extends Emitter {
 		this._children = [];
 		this._layoutParam = null;
 		this._childrenLayouter = null;
+		this._viewModal = null;
+		this._dataBindingRule = null;
+		this.removeBinding();
 
 		if(this.recycle) {
 			this.recycle();
@@ -1861,6 +1864,26 @@ export class Widget extends Emitter {
 		});
 	}
 
+	protected viewModalChangeFunc = function(evt) {
+		var viewModal = this._viewModal;
+		var dataBindingRule = this._dataBindingRule;
+		
+		if(dataBindingRule && viewModal) {
+			this.onBindData(viewModal, dataBindingRule);
+		}
+	}.bind(this);
+
+	protected removeBinding() {
+		var viewModal = this._viewModal;
+		var dataBindingRule = this._dataBindingRule;
+		
+		if(dataBindingRule && viewModal) {
+			viewModal.offChange(this.viewModalChangeFunc);
+		}
+		this._viewModal = null;
+		this._dataBindingRule = null;
+	}
+
 	/**
 	 * 绑定数据。
 	 */
@@ -1871,6 +1894,7 @@ export class Widget extends Emitter {
 		if(dataBindingRule && viewModal) {
 			var bindingMode = viewModal.getBindingMode();
 			
+			this.onBindCommand(viewModal, dataBindingRule);
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
 				this.onBindData(viewModal, dataBindingRule);
 			}
@@ -1880,9 +1904,7 @@ export class Widget extends Emitter {
 			}
 
 			if(bindingMode !== BindingMode.ONE_TIME && bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-				viewModal.onChange(evt => {
-					this.onBindData(viewModal, dataBindingRule);
-				});
+				viewModal.onChange(this.viewModalChangeFunc);
 			}
 
 			this._isEnableFunc = function() {
@@ -1940,16 +1962,22 @@ export class Widget extends Emitter {
 		}
 	}
 
-	protected onBindCommand(viewModal:IViewModal, prop:string, commandSource:BindingCommandSource) {
-		if(prop === "click") {
-			if(commandSource.eventHandler) {
-				this.off(Events.CLICK, commandSource.eventHandler);
+	protected onBindCommand(viewModal:IViewModal, dataBindingRule:any) {
+		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+			var source = item.source;
+			if(source.type === BindingCommandSource.TYPE) {
+				var commandSource = <BindingCommandSource>source;
+				if(prop === "click") {
+					if(commandSource.eventHandler) {
+						this.off(Events.CLICK, commandSource.eventHandler);
+					}
+					commandSource.eventHandler = function(evt:any) {
+						viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+					}
+					this.on(Events.CLICK, commandSource.eventHandler);
+				}
 			}
-			commandSource.eventHandler = function(evt:any) {
-				viewModal.execCommand(commandSource.command, commandSource.commandArgs);
-			}
-			this.on(Events.CLICK, commandSource.eventHandler);
-		}
+		});
 	}
 
 	/*
@@ -1958,10 +1986,7 @@ export class Widget extends Emitter {
 	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
 		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
 			var source = item.source;
-			if(source.type === BindingCommandSource.TYPE) {
-				var commandSource = <BindingCommandSource>source;
-				this.onBindCommand(viewModal, prop, commandSource);	
-			}else{
+			if(source.type === BindingDataSource.TYPE) {
 				var dataSource = <BindingDataSource>source;
 				var value = dataSource.value;
 				var bindingMode = dataSource.mode || BindingMode.TWO_WAY;

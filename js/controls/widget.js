@@ -63,6 +63,13 @@ var Widget = (function (_super) {
         this.layoutRect = rect_1.Rect.create(0, 0, 0, 0);
         this.eChangeEvent = Events.ChangeEvent.create();
         this.ePropChangeEvent = Events.PropChangeEvent.create();
+        this.viewModalChangeFunc = function (evt) {
+            var viewModal = this._viewModal;
+            var dataBindingRule = this._dataBindingRule;
+            if (dataBindingRule && viewModal) {
+                this.onBindData(viewModal, dataBindingRule);
+            }
+        }.bind(this);
         this.type = type;
     }
     /**
@@ -873,6 +880,9 @@ var Widget = (function (_super) {
         this._children = [];
         this._layoutParam = null;
         this._childrenLayouter = null;
+        this._viewModal = null;
+        this._dataBindingRule = null;
+        this.removeBinding();
         if (this.recycle) {
             this.recycle();
         }
@@ -1686,6 +1696,15 @@ var Widget = (function (_super) {
             child.updateExplicit();
         });
     };
+    Widget.prototype.removeBinding = function () {
+        var viewModal = this._viewModal;
+        var dataBindingRule = this._dataBindingRule;
+        if (dataBindingRule && viewModal) {
+            viewModal.offChange(this.viewModalChangeFunc);
+        }
+        this._viewModal = null;
+        this._dataBindingRule = null;
+    };
     /**
      * 绑定数据。
      */
@@ -1695,6 +1714,7 @@ var Widget = (function (_super) {
         this._viewModal = viewModal;
         if (dataBindingRule && viewModal) {
             var bindingMode = viewModal.getBindingMode();
+            this.onBindCommand(viewModal, dataBindingRule);
             if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
                 this.onBindData(viewModal, dataBindingRule);
             }
@@ -1702,9 +1722,7 @@ var Widget = (function (_super) {
                 this.watchTargetChange(dataBindingRule);
             }
             if (bindingMode !== iview_modal_1.BindingMode.ONE_TIME && bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                viewModal.onChange(function (evt) {
-                    _this.onBindData(viewModal, dataBindingRule);
-                });
+                viewModal.onChange(this.viewModalChangeFunc);
             }
             this._isEnableFunc = function () {
                 var enable = true;
@@ -1756,16 +1774,23 @@ var Widget = (function (_super) {
             });
         }
     };
-    Widget.prototype.onBindCommand = function (viewModal, prop, commandSource) {
-        if (prop === "click") {
-            if (commandSource.eventHandler) {
-                this.off(Events.CLICK, commandSource.eventHandler);
+    Widget.prototype.onBindCommand = function (viewModal, dataBindingRule) {
+        var _this = this;
+        dataBindingRule.forEach(function (prop, item) {
+            var source = item.source;
+            if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
+                var commandSource = source;
+                if (prop === "click") {
+                    if (commandSource.eventHandler) {
+                        _this.off(Events.CLICK, commandSource.eventHandler);
+                    }
+                    commandSource.eventHandler = function (evt) {
+                        viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+                    };
+                    _this.on(Events.CLICK, commandSource.eventHandler);
+                }
             }
-            commandSource.eventHandler = function (evt) {
-                viewModal.execCommand(commandSource.command, commandSource.commandArgs);
-            };
-            this.on(Events.CLICK, commandSource.eventHandler);
-        }
+        });
     };
     /*
      * 把数据显示到界面上。
@@ -1774,11 +1799,7 @@ var Widget = (function (_super) {
         var _this = this;
         dataBindingRule.forEach(function (prop, item) {
             var source = item.source;
-            if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
-                var commandSource = source;
-                _this.onBindCommand(viewModal, prop, commandSource);
-            }
-            else {
+            if (source.type === binding_rule_1.BindingDataSource.TYPE) {
                 var dataSource = source;
                 var value = dataSource.value;
                 var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;

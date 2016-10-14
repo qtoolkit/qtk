@@ -15,7 +15,7 @@ import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
 import { Behavior } from "../behaviors/behavior";
 import { Layouter } from '../layouters/layouter';
-import { BindingRule, BindingDataSource, BindingCommandSource } from "../mvvm/binding-rule";
+import { BindingRule, BindingDataSource } from "../mvvm/binding-rule";
 import { IViewModal, BindingMode } from "../mvvm/iview-modal";
 export declare enum WidgetMode {
     RUNTIME = 0,
@@ -367,12 +367,14 @@ export declare class Widget extends Emitter {
      * 显式的更新ViewModal。
      */
     updateExplicit(): void;
+    protected viewModalChangeFunc: any;
+    protected removeBinding(): void;
     /**
      * 绑定数据。
      */
     bindData(viewModal: IViewModal): Widget;
     protected bindChildren(viewModal: IViewModal): void;
-    protected onBindCommand(viewModal: IViewModal, prop: string, commandSource: BindingCommandSource): void;
+    protected onBindCommand(viewModal: IViewModal, dataBindingRule: any): void;
     protected onBindData(viewModal: IViewModal, dataBindingRule: any): void;
     protected getPropDefaultBindMode(prop: string): BindingMode;
     protected onInvalidInput(message: string): void;
