@@ -10,7 +10,9 @@
 		"active" : {},
 		"over" : {},
 		"selected" : {},
-		"disable" : {}
+		"disable" : {
+			"textColor" : "gray"
+		}
 	},
 	"title.line": {
 		"extends": "widget",
@@ -433,6 +435,10 @@
 		},
 		"active" : {
 			"backGroundColor" : "#3E93F9"
+		},
+		"disable" : {
+			"textColor" : "#CCCCCC",
+			"backGroundColor" : null
 		}
 	},
 	"menu-item.space": {

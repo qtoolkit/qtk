@@ -26,6 +26,7 @@ var ViewModalDefault = (function (_super) {
         },
         set: function (value) {
             this._data = value;
+            this.notifyChange(Events.PROP_CHANGE, "/", null);
         },
         enumerable: true,
         configurable: true
