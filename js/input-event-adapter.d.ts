@@ -28,7 +28,7 @@ export declare function grab(target: any): void;
 /**
  * ungrab移出最后grab的target。
  */
-export declare function ungrab(target?: any): any;
+export declare function ungrab(target?: any): boolean;
 /**
  * grab输入事件。输入事件后发送给最后grab的target。
  */

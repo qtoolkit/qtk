@@ -240,7 +240,7 @@ exports.grab = grab;
  * ungrab移出最后grab的target。
  */
 function ungrab(target) {
-    return grabs.pop();
+    return grabs.remove(target);
 }
 exports.ungrab = ungrab;
 /**

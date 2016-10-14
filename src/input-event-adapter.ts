@@ -270,7 +270,7 @@ export function grab(target:any) {
  * ungrab移出最后grab的target。
  */
 export function ungrab(target?:any) {
-	return grabs.pop();
+	return grabs.remove(target);
 }
 
 /**
