@@ -21,7 +21,9 @@ QTK主要特色如下：
 
 [BLOG](https://qtoolkit.github.io/)
 
-[Demos](https://qtoolkit.github.io/demos/index.html)
+[基本控件DEMO](https://qtoolkit.github.io/demos/index.html)
+
+[Proton粒子编辑器](https://qtoolkit.github.io/qtk-proton-editor/index.html)
 
 ### 编译
 ```
