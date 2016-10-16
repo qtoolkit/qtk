@@ -3,14 +3,15 @@ import { TitleLink } from "./title-link";
 import { TitleLine } from "./title-line";
 import { TitleEdit } from "./title-edit";
 import { TitleLabel } from "./title-label";
+import { TitleCheckButton } from "./title-check-button";
 import { TitleRange } from "./title-range";
 import { TitleVector } from "./title-vector";
 import { Widget } from "../controls/widget";
 import { TitleSlider } from "./title-slider";
 import { TitleTextArea } from "./title-text-area";
-import { PropDesc } from "./props-desc";
-import { TitleComboBox, TitleComboBoxEditable } from "./title-combo-box";
 import { TitleChoosableEdit } from "./title-choosable-edit";
+import { TitleComboBox, TitleComboBoxEditable } from "./title-combo-box";
+import { PropDesc } from "./props-desc";
 /**
  * 属性编辑页，包装了各种TitleValue。
  */
@@ -22,6 +23,7 @@ export declare class PropertyPage extends Widget {
     titleW: string;
     valueW: string;
     addLabel(title: string, value: string): TitleLabel;
+    addCheckButton(title: string, value: boolean): TitleCheckButton;
     addLink(title: string, value: string): TitleLink;
     addGroupBegin(title: string): TitleLine;
     addGroupEnd(): TitleLine;

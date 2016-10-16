@@ -217,6 +217,17 @@ export class LinePropDesc extends PropDesc {
 	}
 }
 
+export class BoolPropDesc extends PropDesc {
+	constructor() {
+		super(BoolPropDesc.TYPE);
+	}
+	
+	public static TYPE = "bool";
+	public static create() {
+		return new BoolPropDesc();
+	}
+}
+
 export class OptionsPropDesc extends PropDesc {
 	public options:any;
 
@@ -301,6 +312,8 @@ export class PropsDesc extends Emitter {
 				desc = OptionsPropDesc.create(data.options);
 			}else if(type === LinePropDesc.TYPE) {
 				desc = LinePropDesc.create();
+			}else if(type === BoolPropDesc.TYPE) {
+				desc = BoolPropDesc.create();
 			}else{
 				console.log("not supported:" + type);
 				return;

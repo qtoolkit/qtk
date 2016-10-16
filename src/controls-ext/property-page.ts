@@ -6,20 +6,21 @@ import {TitleLine} from "./title-line";
 import {TitleEdit} from "./title-edit";
 import {TitleValue} from "./title-value";
 import {TitleLabel} from "./title-label";
+import {TitleCheckButton} from "./title-check-button";
 import {TitleRange} from "./title-range";
 import {TitleVector} from "./title-vector";
 import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
 import {ComboBox} from "../controls/combo-box";
 import {TitleTextArea} from "./title-text-area";
-import {LinePropDesc, LinkPropDesc} from "./props-desc";
-import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
-import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
-import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
-import {TitleChoosableEdit} from "./title-choosable-edit";
 import {WidgetFactory} from "../controls/widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
+import {TitleChoosableEdit} from "./title-choosable-edit";
+import {BoolPropDesc, LinePropDesc, LinkPropDesc} from "./props-desc";
+import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
 import {LinearLayouterParam, LinearLayouter} from '../layouters/linear-layouter';
+import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
+import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 
 /**
  * 属性编辑页，包装了各种TitleValue。
@@ -65,6 +66,23 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 	
+	public addCheckButton(title:string, value:boolean) : TitleCheckButton {
+		var itemH = this.itemH;
+		var widget = TitleCheckButton.create({
+				h:itemH,
+				name:title,
+				titleW:this.titleW,
+				valueW:this.valueW
+			});
+		var valueWidget = widget.valueWidget;
+		valueWidget.text = title;
+
+		widget.value = value,
+		this.addChild(widget, true);
+
+		return widget;
+	}
+
 	public addLink(title:string, value:string) : TitleLink {
 		var itemH = this.itemH;
 		var widget = TitleLink.create({
@@ -281,6 +299,8 @@ export class PropertyPage extends Widget {
 			titleValue = this.addSlider(item.name, item.value);
 		}else if(item.type === LinkPropDesc.TYPE) {
 			titleValue = this.addLink(item.name, item.value);
+		}else if(item.type === BoolPropDesc.TYPE) {
+			titleValue = this.addCheckButton(item.name, item.value);
 		}else if(item.type === LinePropDesc.TYPE) {
 			if(item.name) {
 				titleValue = this.addGroupBegin(item.name);

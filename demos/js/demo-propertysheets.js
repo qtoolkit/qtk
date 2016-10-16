@@ -36,6 +36,7 @@ function addPageFromJson(propertySheets, title) {
 	propertySheets.addPage(title, page);
 
 	var json = [
+		{type:"bool", name:"Check", value:true, desc:"check"},
 		{type:"number", name:"Age", value:"100", desc:"age"},
 		{type:"text", name:"Name", value:"QTK"},
 		{type:"text-readonly", name:"Desc", value:"QToolKit"},

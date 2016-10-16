@@ -9,18 +9,19 @@ var title_link_1 = require("./title-link");
 var title_line_1 = require("./title-line");
 var title_edit_1 = require("./title-edit");
 var title_label_1 = require("./title-label");
+var title_check_button_1 = require("./title-check-button");
 var title_range_1 = require("./title-range");
 var title_vector_1 = require("./title-vector");
 var widget_1 = require("../controls/widget");
 var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
-var props_desc_1 = require("./props-desc");
-var props_desc_2 = require("./props-desc");
-var props_desc_3 = require("./props-desc");
-var title_combo_box_1 = require("./title-combo-box");
-var title_choosable_edit_1 = require("./title-choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
+var title_choosable_edit_1 = require("./title-choosable-edit");
+var props_desc_1 = require("./props-desc");
+var title_combo_box_1 = require("./title-combo-box");
+var props_desc_2 = require("./props-desc");
+var props_desc_3 = require("./props-desc");
 /**
  * 属性编辑页，包装了各种TitleValue。
  */
@@ -68,6 +69,20 @@ var PropertyPage = (function (_super) {
             titleW: this.titleW,
             valueW: this.valueW
         });
+        widget.value = value,
+            this.addChild(widget, true);
+        return widget;
+    };
+    PropertyPage.prototype.addCheckButton = function (title, value) {
+        var itemH = this.itemH;
+        var widget = title_check_button_1.TitleCheckButton.create({
+            h: itemH,
+            name: title,
+            titleW: this.titleW,
+            valueW: this.valueW
+        });
+        var valueWidget = widget.valueWidget;
+        valueWidget.text = title;
         widget.value = value,
             this.addChild(widget, true);
         return widget;
@@ -255,6 +270,9 @@ var PropertyPage = (function (_super) {
         }
         else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
             titleValue = this.addLink(item.name, item.value);
+        }
+        else if (item.type === props_desc_1.BoolPropDesc.TYPE) {
+            titleValue = this.addCheckButton(item.name, item.value);
         }
         else if (item.type === props_desc_1.LinePropDesc.TYPE) {
             if (item.name) {

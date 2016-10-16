@@ -75,6 +75,11 @@ export declare class LinePropDesc extends PropDesc {
     static TYPE: string;
     static create(): LinePropDesc;
 }
+export declare class BoolPropDesc extends PropDesc {
+    constructor();
+    static TYPE: string;
+    static create(): BoolPropDesc;
+}
 export declare class OptionsPropDesc extends PropDesc {
     options: any;
     toJson(): any;

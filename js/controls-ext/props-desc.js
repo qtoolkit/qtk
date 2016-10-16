@@ -197,6 +197,18 @@ var LinePropDesc = (function (_super) {
     return LinePropDesc;
 }(PropDesc));
 exports.LinePropDesc = LinePropDesc;
+var BoolPropDesc = (function (_super) {
+    __extends(BoolPropDesc, _super);
+    function BoolPropDesc() {
+        _super.call(this, BoolPropDesc.TYPE);
+    }
+    BoolPropDesc.create = function () {
+        return new BoolPropDesc();
+    };
+    BoolPropDesc.TYPE = "bool";
+    return BoolPropDesc;
+}(PropDesc));
+exports.BoolPropDesc = BoolPropDesc;
 var OptionsPropDesc = (function (_super) {
     __extends(OptionsPropDesc, _super);
     function OptionsPropDesc(options) {
@@ -281,6 +293,9 @@ var PropsDesc = (function (_super) {
             }
             else if (type === LinePropDesc.TYPE) {
                 desc = LinePropDesc.create();
+            }
+            else if (type === BoolPropDesc.TYPE) {
+                desc = BoolPropDesc.create();
             }
             else {
                 console.log("not supported:" + type);
