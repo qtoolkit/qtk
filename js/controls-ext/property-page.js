@@ -22,6 +22,7 @@ var props_desc_1 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
 var props_desc_2 = require("./props-desc");
 var props_desc_3 = require("./props-desc");
+var props_desc_4 = require("./props-desc");
 /**
  * 属性编辑页，包装了各种TitleValue。
  */
@@ -167,6 +168,22 @@ var PropertyPage = (function (_super) {
         this.addChild(widget, true);
         return widget;
     };
+    PropertyPage.prototype.addVector4 = function (title, x, y, z, w, xTitle, yTitle, zTitle, wTitle) {
+        var itemH = this.itemH * 2;
+        var widget = title_vector_1.TitleVector.create({
+            d: 4,
+            h: itemH,
+            name: title,
+            title: title,
+            titleW: this.titleW,
+            valueW: this.valueW
+        });
+        var valueWidget = widget.valueWidget;
+        valueWidget.set({ xTitle: xTitle, yTitle: yTitle, zTitle: zTitle, wTitle: wTitle });
+        widget.value = { x: x, y: y, z: z, w: w };
+        this.addChild(widget, true);
+        return widget;
+    };
     PropertyPage.prototype.addEdit = function (title, value, inputTips, inputType, inputFilter) {
         var itemH = this.itemH;
         var valueW = inputType === "number" ? "50%" : this.valueW;
@@ -256,16 +273,16 @@ var PropertyPage = (function (_super) {
     };
     PropertyPage.prototype.addWithPropDesc = function (item) {
         var titleValue = null;
-        if (item.type === props_desc_2.NumberPropDesc.TYPE) {
+        if (item.type === props_desc_3.NumberPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
         }
-        else if (item.type === props_desc_2.TextPropDesc.TYPE) {
+        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "text");
         }
-        else if (item.type === props_desc_2.ReadonlyTextPropDesc.TYPE) {
+        else if (item.type === props_desc_3.ReadonlyTextPropDesc.TYPE) {
             titleValue = this.addLabel(item.name, item.value);
         }
-        else if (item.type === props_desc_3.SliderPropDesc.TYPE) {
+        else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
             titleValue = this.addSlider(item.name, item.value);
         }
         else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
@@ -282,16 +299,16 @@ var PropertyPage = (function (_super) {
                 titleValue = this.addGroupEnd();
             }
         }
-        else if (item.type === props_desc_3.RangePropDesc.TYPE) {
+        else if (item.type === props_desc_4.RangePropDesc.TYPE) {
             var value = item.value || { first: 0, second: 0 };
             titleValue = this.addRange(item.name, value.first, value.second);
         }
-        else if (item.type === props_desc_3.Vector2PropDesc.TYPE) {
+        else if (item.type === props_desc_4.Vector2PropDesc.TYPE) {
             var p2 = item;
             var value = item.value || { x: 0, y: 0 };
             titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
         }
-        else if (item.type === props_desc_3.OptionsPropDesc.TYPE) {
+        else if (item.type === props_desc_4.OptionsPropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0 };
             var propDesc = item;
             titleValue = this.addComboBox(item.name, value);
@@ -300,10 +317,15 @@ var PropertyPage = (function (_super) {
                 comboBox.optionsJson = propDesc.options;
             }
         }
-        else if (item.type === props_desc_3.Vector3PropDesc.TYPE) {
+        else if (item.type === props_desc_4.Vector3PropDesc.TYPE) {
             var p3 = item;
             var value = item.value || { x: 0, y: 0, z: 0 };
             titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
+        }
+        else if (item.type === props_desc_2.Vector4PropDesc.TYPE) {
+            var p4 = item;
+            var value = item.value || { x: 0, y: 0, z: 0, w: 0 };
+            titleValue = this.addVector4(item.name, value.x, value.y, value.z, value.w, p4.xTitle, p4.yTitle, p4.zTitle, p4.wTitle);
         }
         if (titleValue && item.path) {
             var valueWidget = titleValue.valueWidget;
@@ -336,7 +358,7 @@ var PropertyPage = (function (_super) {
         this.relayoutChildren();
     };
     PropertyPage.prototype.initWithJson = function (json) {
-        var propsDesc = props_desc_2.PropsDesc.create(json);
+        var propsDesc = props_desc_3.PropsDesc.create(json);
         this.initWithPropsDesc(propsDesc);
     };
     PropertyPage.prototype.onAddChild = function (child) {

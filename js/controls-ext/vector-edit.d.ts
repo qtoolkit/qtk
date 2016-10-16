@@ -7,18 +7,22 @@ import Events = require("../events");
  */
 export declare class VectorEdit extends Widget {
     protected _d: number;
+    protected _xTitle: string;
     protected _xLabel: Label;
     protected _xEditor: Edit;
+    protected _yTitle: string;
     protected _yLabel: Label;
     protected _yEditor: Edit;
     protected _zLabel: Label;
     protected _zEditor: Edit;
-    protected _xTitle: string;
-    protected _yTitle: string;
     protected _zTitle: string;
+    protected _wLabel: Label;
+    protected _wEditor: Edit;
+    protected _wTitle: string;
     xTitle: string;
     yTitle: string;
     zTitle: string;
+    wTitle: string;
     readonly inputable: boolean;
     /**
      * dimension
@@ -27,10 +31,13 @@ export declare class VectorEdit extends Widget {
     readonly xEditor: Edit;
     readonly yEditor: Edit;
     readonly zEditor: Edit;
+    readonly wEditor: Edit;
     value: any;
     protected onToJson(json: any): void;
     dispose(): void;
     protected forwardChangeEvent(evt: Events.ChangeEvent): void;
+    protected createEdit(value: number): Edit;
+    protected createLabel(text: string): Label;
     protected onCreated(): void;
     constructor();
     protected static defProps: {} & {
@@ -69,6 +76,7 @@ export declare class VectorEdit extends Widget {
         _xTitle: string;
         _yTitle: string;
         _zTitle: string;
+        _wTitle: string;
     };
     protected getDefProps(): any;
     static TYPE: string;

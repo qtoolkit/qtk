@@ -28,6 +28,14 @@
 			"textAlign" : "left"
 		}
 	},
+	"label.small": {
+		"extends": "widget",
+		"common" : {
+			"fontSize" : 10,
+			"backGroundColor" : null,
+			"textAlign" : "left"
+		}
+	},
 	"link": {
 		"extends": "widget",
 		"common" : {

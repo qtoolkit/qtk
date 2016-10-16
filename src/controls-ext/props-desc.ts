@@ -206,6 +206,44 @@ export class Vector3PropDesc extends PropDesc {
 	}
 }
 
+export class Vector4PropDesc extends PropDesc {
+	public xTitle : string;
+	public yTitle : string;
+	public zTitle : string;
+	public wTitle : string;
+
+	public toJson() : any {
+		var json = super.toJson();
+		json.xTitle = this.xTitle;
+		json.yTitle = this.yTitle;
+		json.zTitle = this.zTitle;
+		json.wTitle = this.wTitle;
+
+		return json;
+	}
+	
+	public fromJson(json:any) {
+		super.fromJson(json);
+		this.xTitle = json.xTitle;
+		this.yTitle = json.yTitle;
+		this.zTitle = json.zTitle;
+		this.wTitle = json.wTitle;
+	}
+
+	constructor(xTitle:string, yTitle:string, zTitle:string, wTitle:string) {
+		super(Vector4PropDesc.TYPE);
+		this.xTitle = xTitle;
+		this.yTitle = yTitle;
+		this.zTitle = zTitle;
+		this.wTitle = wTitle;
+	}
+	
+	public static TYPE = "vector4";
+	public static create(xTitle:string, yTitle:string, zTitle:string, wTitle:string) {
+		return new Vector4PropDesc(xTitle, yTitle, zTitle, wTitle);
+	}
+}
+
 export class LinePropDesc extends PropDesc {
 	constructor() {
 		super(LinePropDesc.TYPE);
@@ -308,6 +346,8 @@ export class PropsDesc extends Emitter {
 				desc = Vector2PropDesc.create(data.xTitle, data.yTitle);
 			}else if(type === Vector3PropDesc.TYPE) {
 				desc = Vector3PropDesc.create(data.xTitle, data.yTitle, data.zTitle);
+			}else if(type === Vector4PropDesc.TYPE) {
+				desc = Vector4PropDesc.create(data.xTitle, data.yTitle, data.zTitle, data.wTitle);
 			}else if(type === OptionsPropDesc.TYPE) {
 				desc = OptionsPropDesc.create(data.options);
 			}else if(type === LinePropDesc.TYPE) {

@@ -185,6 +185,37 @@ var Vector3PropDesc = (function (_super) {
     return Vector3PropDesc;
 }(PropDesc));
 exports.Vector3PropDesc = Vector3PropDesc;
+var Vector4PropDesc = (function (_super) {
+    __extends(Vector4PropDesc, _super);
+    function Vector4PropDesc(xTitle, yTitle, zTitle, wTitle) {
+        _super.call(this, Vector4PropDesc.TYPE);
+        this.xTitle = xTitle;
+        this.yTitle = yTitle;
+        this.zTitle = zTitle;
+        this.wTitle = wTitle;
+    }
+    Vector4PropDesc.prototype.toJson = function () {
+        var json = _super.prototype.toJson.call(this);
+        json.xTitle = this.xTitle;
+        json.yTitle = this.yTitle;
+        json.zTitle = this.zTitle;
+        json.wTitle = this.wTitle;
+        return json;
+    };
+    Vector4PropDesc.prototype.fromJson = function (json) {
+        _super.prototype.fromJson.call(this, json);
+        this.xTitle = json.xTitle;
+        this.yTitle = json.yTitle;
+        this.zTitle = json.zTitle;
+        this.wTitle = json.wTitle;
+    };
+    Vector4PropDesc.create = function (xTitle, yTitle, zTitle, wTitle) {
+        return new Vector4PropDesc(xTitle, yTitle, zTitle, wTitle);
+    };
+    Vector4PropDesc.TYPE = "vector4";
+    return Vector4PropDesc;
+}(PropDesc));
+exports.Vector4PropDesc = Vector4PropDesc;
 var LinePropDesc = (function (_super) {
     __extends(LinePropDesc, _super);
     function LinePropDesc() {
@@ -287,6 +318,9 @@ var PropsDesc = (function (_super) {
             }
             else if (type === Vector3PropDesc.TYPE) {
                 desc = Vector3PropDesc.create(data.xTitle, data.yTitle, data.zTitle);
+            }
+            else if (type === Vector4PropDesc.TYPE) {
+                desc = Vector4PropDesc.create(data.xTitle, data.yTitle, data.zTitle, data.wTitle);
             }
             else if (type === OptionsPropDesc.TYPE) {
                 desc = OptionsPropDesc.create(data.options);

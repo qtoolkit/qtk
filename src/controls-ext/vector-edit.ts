@@ -17,16 +17,21 @@ import {GridLayouter, GridLayouterParam} from "../layouters/grid-layouter";
 export class VectorEdit extends Widget {
 	protected _d : number;
 
+	protected _xTitle : string;
 	protected _xLabel : Label;
 	protected _xEditor : Edit;
+	
+	protected _yTitle : string;
 	protected _yLabel : Label;
 	protected _yEditor : Edit;
+	
 	protected _zLabel : Label;
 	protected _zEditor : Edit;
-
-	protected _xTitle : string;
-	protected _yTitle : string;
 	protected _zTitle : string;
+	
+	protected _wLabel : Label;
+	protected _wEditor : Edit;
+	protected _wTitle : string;
 
 	public set xTitle(value:string) {
 		if(value || value === "") {
@@ -57,6 +62,16 @@ export class VectorEdit extends Widget {
 	public get zTitle() : string{
 		return this._zTitle;
 	}
+	
+	public set wTitle(value:string) {
+		if(value || value === "") {
+			this._wTitle;
+			this._wLabel.text = value;
+		}
+	}
+	public get wTitle() : string{
+		return this._wTitle;
+	}
 
 	public get inputable() {
 		return true;
@@ -84,6 +99,10 @@ export class VectorEdit extends Widget {
 	public get zEditor() : Edit {
 		return this._zEditor;
 	}
+	
+	public get wEditor() : Edit {
+		return this._wEditor;
+	}
 
 	public set value(value:any) {
 		this._value = value;
@@ -96,6 +115,9 @@ export class VectorEdit extends Widget {
 		if(this._zEditor) {
 			this._zEditor.value = +value.z;
 		}
+		if(this._wEditor) {
+			this._wEditor.value = +value.w;
+		}
 	}
 
 	public get value() : any {
@@ -103,14 +125,16 @@ export class VectorEdit extends Widget {
 			this._value = {};
 		}
 		if(this._xEditor) {
-			this._value.x = this._xEditor.value;
+			this._value.x = +(this._xEditor.value);
 		}
-
 		if(this._yEditor) {
-			this._value.y  = this._yEditor.value;
+			this._value.y = +(this._yEditor.value);
 		}
 		if(this._zEditor) {
-			this._value.z  = this._zEditor.value;
+			this._value.z = +(this._zEditor.value);
+		}
+		if(this._wEditor) {
+			this._value.w = +(this._wEditor.value);
 		}
 
 		return this._value;
@@ -124,9 +148,11 @@ export class VectorEdit extends Widget {
 		this._xEditor = null;
 		this._yEditor = null;
 		this._zEditor = null;
+		this._wEditor = null;
 		this._xLabel = null;
 		this._yLabel = null;
 		this._zLabel = null;
+		this._wLabel = null;
 
 		super.dispose();
 	}
@@ -136,56 +162,55 @@ export class VectorEdit extends Widget {
 		e.init(evt.type, {value:this.value});
 		this.dispatchEvent(e);
 	}
+
+	protected createEdit(value:number) : Edit {
+		var edit = Edit.create({multiLineMode:false, value:value, inputType:"number"});
+		this.addChild(edit, false);
+
+		edit.on(Events.CHANGE, evt => {
+			this.forwardChangeEvent(evt);
+		});
+		edit.on(Events.CHANGING, evt => {
+			this.forwardChangeEvent(evt);
+		});
+
+		return edit;
+	}
+
+	protected createLabel(text:string) : Label {
+		var label  = Label.create({text:text});
+		label.set({multiLineMode:false, topPadding:10, bottomPadding:0, styleType:"label.small"});
+		this.addChild(label, false);
+
+		return label;
+	}
+
 	protected onCreated() {
 		super.onCreated();
 		this.padding = 0;
-		var value = this._value || {x:0, y:0, z:0};
-		this.d = Math.max(2, Math.min(3, this.d || 2));
+		var value = this._value || {x:0, y:0, z:0, w:0};
+		this.d = Math.max(2, Math.min(4, this.d || 2));
 		var cols = this.d;
 		var rows = 2;
 		
 		this.childrenLayouter = GridLayouter.create({rows:rows, cols:cols, rightMargin:10}); 
 		
-		var labelOptions = {multiLineMode:false, topPadding:10, bottomPadding:0};
-		this._xLabel = Label.create({text:this._xTitle});
-		this._xLabel.set(labelOptions);
-		this.addChild(this._xLabel, false);
-		this._yLabel = Label.create({text:this._yTitle});
-		this._yLabel.set(labelOptions);
-		this.addChild(this._yLabel, false);
+		this._xLabel = this.createLabel(this._xTitle);
+		this._yLabel = this.createLabel(this._yTitle);
 		if(this.d > 2) {
-			this._zLabel = Label.create({text:this._zTitle});
-			this._zLabel.set(labelOptions);
-			this.addChild(this._zLabel, false);
+			this._zLabel = this.createLabel(this._zTitle);
+		}
+		if(this.d > 3) {
+			this._wLabel = this.createLabel(this._wTitle);
 		}
 
-		this._xEditor = Edit.create({multiLineMode:false, value:value.x, inputType:"number"});
-		this.addChild(this._xEditor, false);
-		this._xEditor.on(Events.CHANGE, evt => {
-			this.forwardChangeEvent(evt);
-		});
-		this._xEditor.on(Events.CHANGING, evt => {
-			this.forwardChangeEvent(evt);
-		});
-
-		this._yEditor = Edit.create({multiLineMode:false, value:value.y, inputType:"number"});
-		this.addChild(this._yEditor, false);
-		this._yEditor.on(Events.CHANGE, evt => {
-			this.forwardChangeEvent(evt);
-		});
-		this._yEditor.on(Events.CHANGING, evt => {
-			this.forwardChangeEvent(evt);
-		});
-	
+		this._xEditor = this.createEdit(value.x);
+		this._yEditor = this.createEdit(value.y);
 		if(this.d > 2) {
-			this._zEditor = Edit.create({inputType:"number"});
-			this.addChild(this._zEditor, false);
-			this._zEditor.on(Events.CHANGE, evt => {
-				this.forwardChangeEvent(evt);
-			});
-			this._zEditor.on(Events.CHANGING, evt => {
-				this.forwardChangeEvent(evt);
-			});
+			this._zEditor = this.createEdit(value.z);
+		}
+		if(this.d > 3) {
+			this._wEditor = this.createEdit(value.w);
 		}
 
 		this.relayoutChildren();
@@ -195,7 +220,8 @@ export class VectorEdit extends Widget {
 		super(VectorEdit.TYPE);
 	}
 	
-	protected static defProps = Object.assign({}, Widget.defProps, {_d:2, _xTitle:"X", _yTitle:"Y", _zTitle:"Z"});
+	protected static defProps = Object.assign({}, Widget.defProps, 
+				{_d:2, _xTitle:"X", _yTitle:"Y", _zTitle:"Z", _wTitle:"W"});
 	protected getDefProps() : any {
 		return VectorEdit.defProps;
 	}

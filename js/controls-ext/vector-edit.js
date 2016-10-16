@@ -58,6 +58,19 @@ var VectorEdit = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(VectorEdit.prototype, "wTitle", {
+        get: function () {
+            return this._wTitle;
+        },
+        set: function (value) {
+            if (value || value === "") {
+                this._wTitle;
+                this._wLabel.text = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(VectorEdit.prototype, "inputable", {
         get: function () {
             return true;
@@ -100,19 +113,29 @@ var VectorEdit = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(VectorEdit.prototype, "wEditor", {
+        get: function () {
+            return this._wEditor;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(VectorEdit.prototype, "value", {
         get: function () {
             if (!this._value) {
                 this._value = {};
             }
             if (this._xEditor) {
-                this._value.x = this._xEditor.value;
+                this._value.x = +(this._xEditor.value);
             }
             if (this._yEditor) {
-                this._value.y = this._yEditor.value;
+                this._value.y = +(this._yEditor.value);
             }
             if (this._zEditor) {
-                this._value.z = this._zEditor.value;
+                this._value.z = +(this._zEditor.value);
+            }
+            if (this._wEditor) {
+                this._value.w = +(this._wEditor.value);
             }
             return this._value;
         },
@@ -127,6 +150,9 @@ var VectorEdit = (function (_super) {
             if (this._zEditor) {
                 this._zEditor.value = +value.z;
             }
+            if (this._wEditor) {
+                this._wEditor.value = +value.w;
+            }
         },
         enumerable: true,
         configurable: true
@@ -138,9 +164,11 @@ var VectorEdit = (function (_super) {
         this._xEditor = null;
         this._yEditor = null;
         this._zEditor = null;
+        this._wEditor = null;
         this._xLabel = null;
         this._yLabel = null;
         this._zLabel = null;
+        this._wLabel = null;
         _super.prototype.dispose.call(this);
     };
     VectorEdit.prototype.forwardChangeEvent = function (evt) {
@@ -148,52 +176,47 @@ var VectorEdit = (function (_super) {
         e.init(evt.type, { value: this.value });
         this.dispatchEvent(e);
     };
-    VectorEdit.prototype.onCreated = function () {
+    VectorEdit.prototype.createEdit = function (value) {
         var _this = this;
+        var edit = edit_1.Edit.create({ multiLineMode: false, value: value, inputType: "number" });
+        this.addChild(edit, false);
+        edit.on(Events.CHANGE, function (evt) {
+            _this.forwardChangeEvent(evt);
+        });
+        edit.on(Events.CHANGING, function (evt) {
+            _this.forwardChangeEvent(evt);
+        });
+        return edit;
+    };
+    VectorEdit.prototype.createLabel = function (text) {
+        var label = label_1.Label.create({ text: text });
+        label.set({ multiLineMode: false, topPadding: 10, bottomPadding: 0, styleType: "label.small" });
+        this.addChild(label, false);
+        return label;
+    };
+    VectorEdit.prototype.onCreated = function () {
         _super.prototype.onCreated.call(this);
         this.padding = 0;
-        var value = this._value || { x: 0, y: 0, z: 0 };
-        this.d = Math.max(2, Math.min(3, this.d || 2));
+        var value = this._value || { x: 0, y: 0, z: 0, w: 0 };
+        this.d = Math.max(2, Math.min(4, this.d || 2));
         var cols = this.d;
         var rows = 2;
         this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
-        var labelOptions = { multiLineMode: false, topPadding: 10, bottomPadding: 0 };
-        this._xLabel = label_1.Label.create({ text: this._xTitle });
-        this._xLabel.set(labelOptions);
-        this.addChild(this._xLabel, false);
-        this._yLabel = label_1.Label.create({ text: this._yTitle });
-        this._yLabel.set(labelOptions);
-        this.addChild(this._yLabel, false);
+        this._xLabel = this.createLabel(this._xTitle);
+        this._yLabel = this.createLabel(this._yTitle);
         if (this.d > 2) {
-            this._zLabel = label_1.Label.create({ text: this._zTitle });
-            this._zLabel.set(labelOptions);
-            this.addChild(this._zLabel, false);
+            this._zLabel = this.createLabel(this._zTitle);
         }
-        this._xEditor = edit_1.Edit.create({ multiLineMode: false, value: value.x, inputType: "number" });
-        this.addChild(this._xEditor, false);
-        this._xEditor.on(Events.CHANGE, function (evt) {
-            _this.forwardChangeEvent(evt);
-        });
-        this._xEditor.on(Events.CHANGING, function (evt) {
-            _this.forwardChangeEvent(evt);
-        });
-        this._yEditor = edit_1.Edit.create({ multiLineMode: false, value: value.y, inputType: "number" });
-        this.addChild(this._yEditor, false);
-        this._yEditor.on(Events.CHANGE, function (evt) {
-            _this.forwardChangeEvent(evt);
-        });
-        this._yEditor.on(Events.CHANGING, function (evt) {
-            _this.forwardChangeEvent(evt);
-        });
+        if (this.d > 3) {
+            this._wLabel = this.createLabel(this._wTitle);
+        }
+        this._xEditor = this.createEdit(value.x);
+        this._yEditor = this.createEdit(value.y);
         if (this.d > 2) {
-            this._zEditor = edit_1.Edit.create({ inputType: "number" });
-            this.addChild(this._zEditor, false);
-            this._zEditor.on(Events.CHANGE, function (evt) {
-                _this.forwardChangeEvent(evt);
-            });
-            this._zEditor.on(Events.CHANGING, function (evt) {
-                _this.forwardChangeEvent(evt);
-            });
+            this._zEditor = this.createEdit(value.z);
+        }
+        if (this.d > 3) {
+            this._wEditor = this.createEdit(value.w);
         }
         this.relayoutChildren();
     };
@@ -203,7 +226,7 @@ var VectorEdit = (function (_super) {
     VectorEdit.create = function (options) {
         return VectorEdit.rBin.create().reset(VectorEdit.TYPE, options);
     };
-    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z" });
+    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z", _wTitle: "W" });
     VectorEdit.TYPE = "vector.edit";
     VectorEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
         return new VectorEdit();

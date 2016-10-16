@@ -30,6 +30,7 @@ export declare class PropertyPage extends Widget {
     addRange(title: string, firstValue?: number, secondValue?: number): TitleRange;
     addVector2(title: string, x?: number, y?: number, xTitle?: string, yTitle?: string): TitleVector;
     addVector3(title: string, x?: number, y?: number, z?: number, xTitle?: string, yTitle?: string, zTitle?: string): TitleVector;
+    addVector4(title: string, x?: number, y?: number, z?: number, w?: number, xTitle?: string, yTitle?: string, zTitle?: string, wTitle?: string): TitleVector;
     addEdit(title: string, value?: string, inputTips?: string, inputType?: string, inputFilter?: Function): TitleEdit;
     addChoosableEdit(title: string, value?: string, inputTips?: string): TitleChoosableEdit;
     addComboBox(title: string, value?: string): TitleComboBox;

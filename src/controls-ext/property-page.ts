@@ -19,6 +19,7 @@ import {TitleChoosableEdit} from "./title-choosable-edit";
 import {BoolPropDesc, LinePropDesc, LinkPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
 import {LinearLayouterParam, LinearLayouter} from '../layouters/linear-layouter';
+import {Vector4PropDesc} from "./props-desc";
 import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
 import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 
@@ -162,7 +163,8 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 	
-	public addVector3(title:string, x?:number, y?:number, z?:number, xTitle?:string, yTitle?:string, zTitle?:string) : TitleVector {
+	public addVector3(title:string, x?:number, y?:number, z?:number, 
+					  xTitle?:string, yTitle?:string, zTitle?:string) : TitleVector {
 		var itemH = this.itemH *2;
 		var widget = TitleVector.create({
 				d:3,
@@ -182,6 +184,26 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 	
+	public addVector4(title:string, x?:number, y?:number, z?:number, w?:number, 
+					  xTitle?:string, yTitle?:string, zTitle?:string, wTitle?:string) : TitleVector {
+		var itemH = this.itemH*2;
+		var widget = TitleVector.create({
+				d:4,
+				h:itemH,
+				name:title,
+				title:title,
+				titleW:this.titleW,
+				valueW:this.valueW
+			});
+		
+		var valueWidget = widget.valueWidget;
+		valueWidget.set({xTitle:xTitle, yTitle:yTitle, zTitle:zTitle, wTitle:wTitle});
+
+		widget.value = {x:x, y:y, z:z, w:w};
+		this.addChild(widget, true);
+
+		return widget;
+	}
 
 	public addEdit(title:string, value?:string, inputTips?:string, 
 				   inputType?:string, inputFilter?:Function) : TitleEdit {
@@ -326,6 +348,11 @@ export class PropertyPage extends Widget {
 			var p3 = <Vector3PropDesc>item;
 			var value = item.value || {x:0, y:0, z:0};
 			titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
+		}else if(item.type === Vector4PropDesc.TYPE) {
+			var p4 = <Vector4PropDesc>item;
+			var value = item.value || {x:0, y:0, z:0, w:0};
+			titleValue = this.addVector4(item.name, value.x, value.y, value.z, value.w,
+							p4.xTitle, p4.yTitle, p4.zTitle, p4.wTitle);
 		}
 
 		if(titleValue && item.path) {

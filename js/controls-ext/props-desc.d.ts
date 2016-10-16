@@ -70,6 +70,17 @@ export declare class Vector3PropDesc extends PropDesc {
     static TYPE: string;
     static create(xTitle: string, yTitle: string, zTitle: string): Vector3PropDesc;
 }
+export declare class Vector4PropDesc extends PropDesc {
+    xTitle: string;
+    yTitle: string;
+    zTitle: string;
+    wTitle: string;
+    toJson(): any;
+    fromJson(json: any): void;
+    constructor(xTitle: string, yTitle: string, zTitle: string, wTitle: string);
+    static TYPE: string;
+    static create(xTitle: string, yTitle: string, zTitle: string, wTitle: string): Vector4PropDesc;
+}
 export declare class LinePropDesc extends PropDesc {
     constructor();
     static TYPE: string;

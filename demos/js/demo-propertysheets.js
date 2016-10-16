@@ -62,6 +62,7 @@ function addPageFromJsonWatch(propertySheets, title) {
 		point3d:{x:1, y:2, z:3},
 		range:{first:100, second:200},
 		color:"Red",
+		rect:{},
 		opacity:0.5
 	};
 
@@ -99,6 +100,7 @@ function addPageFromJsonWatch(propertySheets, title) {
 
 	
 	var json2 = [
+		{type:"vector4", name:"Rect", path:"rect", zTitle:"Width", wTitle:"Height"},
 		{type:"number", name:"Age", desc:"age", path:"age"},
 		{type:"text", name:"Name", path:"name"}
 	];
