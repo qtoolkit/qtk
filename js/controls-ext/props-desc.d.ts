@@ -52,14 +52,23 @@ export declare class RangePropDesc extends PropDesc {
     static create(): RangePropDesc;
 }
 export declare class Vector2PropDesc extends PropDesc {
-    constructor();
+    xTitle: string;
+    yTitle: string;
+    toJson(): any;
+    fromJson(json: any): void;
+    constructor(xTitle: string, yTitle: string);
     static TYPE: string;
-    static create(): Vector2PropDesc;
+    static create(xTitle: string, yTitle: string): Vector2PropDesc;
 }
 export declare class Vector3PropDesc extends PropDesc {
-    constructor();
+    xTitle: string;
+    yTitle: string;
+    zTitle: string;
+    toJson(): any;
+    fromJson(json: any): void;
+    constructor(xTitle: string, yTitle: string, zTitle: string);
     static TYPE: string;
-    static create(): Vector3PropDesc;
+    static create(xTitle: string, yTitle: string, zTitle: string): Vector3PropDesc;
 }
 export declare class LinePropDesc extends PropDesc {
     constructor();

@@ -143,24 +143,66 @@ export class RangePropDesc extends PropDesc {
 }
 
 export class Vector2PropDesc extends PropDesc {
-	constructor() {
+	public xTitle : string;
+	public yTitle : string;
+
+	public toJson() : any {
+		var json = super.toJson();
+		json.xTitle = this.xTitle;
+		json.yTitle = this.yTitle;
+
+		return json;
+	}
+	
+	public fromJson(json:any) {
+		super.fromJson(json);
+		this.xTitle = json.xTitle;
+		this.yTitle = json.yTitle;
+	}
+
+	constructor(xTitle:string, yTitle:string) {
 		super(Vector2PropDesc.TYPE);
+		this.xTitle = xTitle;
+		this.yTitle = yTitle;
 	}
 	
 	public static TYPE = "vector2";
-	public static create() {
-		return new Vector2PropDesc();
+	public static create(xTitle:string, yTitle:string) {
+		return new Vector2PropDesc(xTitle, yTitle);
 	}
 }
 
 export class Vector3PropDesc extends PropDesc {
-	constructor() {
+	public xTitle : string;
+	public yTitle : string;
+	public zTitle : string;
+
+	public toJson() : any {
+		var json = super.toJson();
+		json.xTitle = this.xTitle;
+		json.yTitle = this.yTitle;
+		json.zTitle = this.zTitle;
+
+		return json;
+	}
+	
+	public fromJson(json:any) {
+		super.fromJson(json);
+		this.xTitle = json.xTitle;
+		this.yTitle = json.yTitle;
+		this.zTitle = json.zTitle;
+	}
+
+	constructor(xTitle:string, yTitle:string, zTitle:string) {
 		super(Vector3PropDesc.TYPE);
+		this.xTitle = xTitle;
+		this.yTitle = yTitle;
+		this.zTitle = zTitle;
 	}
 	
 	public static TYPE = "vector3";
-	public static create() {
-		return new Vector3PropDesc();
+	public static create(xTitle:string, yTitle:string, zTitle:string) {
+		return new Vector3PropDesc(xTitle, yTitle, zTitle);
 	}
 }
 
@@ -252,9 +294,9 @@ export class PropsDesc extends Emitter {
 			}else if(type === RangePropDesc.TYPE) {
 				desc = RangePropDesc.create();
 			}else if(type === Vector2PropDesc.TYPE) {
-				desc = Vector2PropDesc.create();
+				desc = Vector2PropDesc.create(data.xTitle, data.yTitle);
 			}else if(type === Vector3PropDesc.TYPE) {
-				desc = Vector3PropDesc.create();
+				desc = Vector3PropDesc.create(data.xTitle, data.yTitle, data.zTitle);
 			}else if(type === OptionsPropDesc.TYPE) {
 				desc = OptionsPropDesc.create(data.options);
 			}else if(type === LinePropDesc.TYPE) {

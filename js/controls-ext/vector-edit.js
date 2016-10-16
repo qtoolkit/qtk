@@ -19,6 +19,45 @@ var VectorEdit = (function (_super) {
     function VectorEdit() {
         _super.call(this, VectorEdit.TYPE);
     }
+    Object.defineProperty(VectorEdit.prototype, "xTitle", {
+        get: function () {
+            return this._xTitle;
+        },
+        set: function (value) {
+            if (value || value === "") {
+                this._xTitle;
+                this._xLabel.text = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(VectorEdit.prototype, "yTitle", {
+        get: function () {
+            return this._yTitle;
+        },
+        set: function (value) {
+            if (value || value === "") {
+                this._yTitle;
+                this._yLabel.text = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(VectorEdit.prototype, "zTitle", {
+        get: function () {
+            return this._zTitle;
+        },
+        set: function (value) {
+            if (value || value === "") {
+                this._zTitle;
+                this._zLabel.text = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(VectorEdit.prototype, "inputable", {
         get: function () {
             return true;
@@ -119,14 +158,14 @@ var VectorEdit = (function (_super) {
         var rows = 2;
         this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
         var labelOptions = { multiLineMode: false, topPadding: 10, bottomPadding: 0 };
-        this._xLabel = label_1.Label.create({ text: "X" });
+        this._xLabel = label_1.Label.create({ text: this._xTitle });
         this._xLabel.set(labelOptions);
         this.addChild(this._xLabel, false);
-        this._yLabel = label_1.Label.create({ text: "Y" });
+        this._yLabel = label_1.Label.create({ text: this._yTitle });
         this._yLabel.set(labelOptions);
         this.addChild(this._yLabel, false);
         if (this.d > 2) {
-            this._zLabel = label_1.Label.create({ text: "Z" });
+            this._zLabel = label_1.Label.create({ text: this._zTitle });
             this._zLabel.set(labelOptions);
             this.addChild(this._zLabel, false);
         }
@@ -164,7 +203,7 @@ var VectorEdit = (function (_super) {
     VectorEdit.create = function (options) {
         return VectorEdit.rBin.create().reset(VectorEdit.TYPE, options);
     };
-    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2 });
+    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z" });
     VectorEdit.TYPE = "vector.edit";
     VectorEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
         return new VectorEdit();

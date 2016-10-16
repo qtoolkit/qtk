@@ -124,7 +124,7 @@ export class PropertyPage extends Widget {
 		return widget;
 	}
 	
-	public addVector2(title:string, x?:number, y?:number) : TitleVector {
+	public addVector2(title:string, x?:number, y?:number, xTitle?:string, yTitle?:string) : TitleVector {
 		var itemH = this.itemH * 2;
 		var widget = TitleVector.create({
 				d:2,
@@ -134,13 +134,17 @@ export class PropertyPage extends Widget {
 				titleW:this.titleW,
 				valueW:this.valueW
 			});
+		
+		var valueWidget = widget.valueWidget;
+		valueWidget.set({xTitle:xTitle, yTitle:yTitle});
+
 		widget.value = {x:x, y:y};
 		this.addChild(widget, true);
 
 		return widget;
 	}
 	
-	public addVector3(title:string, x?:number, y?:number, z?:number) : TitleVector {
+	public addVector3(title:string, x?:number, y?:number, z?:number, xTitle?:string, yTitle?:string, zTitle?:string) : TitleVector {
 		var itemH = this.itemH *2;
 		var widget = TitleVector.create({
 				d:3,
@@ -150,6 +154,10 @@ export class PropertyPage extends Widget {
 				titleW:this.titleW,
 				valueW:this.valueW
 			});
+		
+		var valueWidget = widget.valueWidget;
+		valueWidget.set({xTitle:xTitle, yTitle:yTitle, zTitle:zTitle});
+
 		widget.value = {x:x, y:y, z:z};
 		this.addChild(widget, true);
 
@@ -283,8 +291,9 @@ export class PropertyPage extends Widget {
 			var value = item.value || {first:0, second:0};
 			titleValue = this.addRange(item.name, value.first, value.second);
 		}else if(item.type === Vector2PropDesc.TYPE) {
+			var p2 = <Vector2PropDesc>item;
 			var value = item.value || {x:0, y:0};
-			titleValue = this.addVector2(item.name, value.x, value.y);
+			titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
 		}else if(item.type === OptionsPropDesc.TYPE) {
 			var value = item.value || {x:0, y:0};
 			var propDesc = <OptionsPropDesc>item;
@@ -294,8 +303,9 @@ export class PropertyPage extends Widget {
 				comboBox.optionsJson = propDesc.options;
 			}
 		}else if(item.type === Vector3PropDesc.TYPE) {
+			var p3 = <Vector3PropDesc>item;
 			var value = item.value || {x:0, y:0, z:0};
-			titleValue = this.addVector3(item.name, value.x, value.y, value.z);
+			titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
 		}
 
 		if(titleValue && item.path) {

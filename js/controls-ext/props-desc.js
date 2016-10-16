@@ -134,11 +134,24 @@ var RangePropDesc = (function (_super) {
 exports.RangePropDesc = RangePropDesc;
 var Vector2PropDesc = (function (_super) {
     __extends(Vector2PropDesc, _super);
-    function Vector2PropDesc() {
+    function Vector2PropDesc(xTitle, yTitle) {
         _super.call(this, Vector2PropDesc.TYPE);
+        this.xTitle = xTitle;
+        this.yTitle = yTitle;
     }
-    Vector2PropDesc.create = function () {
-        return new Vector2PropDesc();
+    Vector2PropDesc.prototype.toJson = function () {
+        var json = _super.prototype.toJson.call(this);
+        json.xTitle = this.xTitle;
+        json.yTitle = this.yTitle;
+        return json;
+    };
+    Vector2PropDesc.prototype.fromJson = function (json) {
+        _super.prototype.fromJson.call(this, json);
+        this.xTitle = json.xTitle;
+        this.yTitle = json.yTitle;
+    };
+    Vector2PropDesc.create = function (xTitle, yTitle) {
+        return new Vector2PropDesc(xTitle, yTitle);
     };
     Vector2PropDesc.TYPE = "vector2";
     return Vector2PropDesc;
@@ -146,11 +159,27 @@ var Vector2PropDesc = (function (_super) {
 exports.Vector2PropDesc = Vector2PropDesc;
 var Vector3PropDesc = (function (_super) {
     __extends(Vector3PropDesc, _super);
-    function Vector3PropDesc() {
+    function Vector3PropDesc(xTitle, yTitle, zTitle) {
         _super.call(this, Vector3PropDesc.TYPE);
+        this.xTitle = xTitle;
+        this.yTitle = yTitle;
+        this.zTitle = zTitle;
     }
-    Vector3PropDesc.create = function () {
-        return new Vector3PropDesc();
+    Vector3PropDesc.prototype.toJson = function () {
+        var json = _super.prototype.toJson.call(this);
+        json.xTitle = this.xTitle;
+        json.yTitle = this.yTitle;
+        json.zTitle = this.zTitle;
+        return json;
+    };
+    Vector3PropDesc.prototype.fromJson = function (json) {
+        _super.prototype.fromJson.call(this, json);
+        this.xTitle = json.xTitle;
+        this.yTitle = json.yTitle;
+        this.zTitle = json.zTitle;
+    };
+    Vector3PropDesc.create = function (xTitle, yTitle, zTitle) {
+        return new Vector3PropDesc(xTitle, yTitle, zTitle);
     };
     Vector3PropDesc.TYPE = "vector3";
     return Vector3PropDesc;
@@ -242,10 +271,10 @@ var PropsDesc = (function (_super) {
                 desc = RangePropDesc.create();
             }
             else if (type === Vector2PropDesc.TYPE) {
-                desc = Vector2PropDesc.create();
+                desc = Vector2PropDesc.create(data.xTitle, data.yTitle);
             }
             else if (type === Vector3PropDesc.TYPE) {
-                desc = Vector3PropDesc.create();
+                desc = Vector3PropDesc.create(data.xTitle, data.yTitle, data.zTitle);
             }
             else if (type === OptionsPropDesc.TYPE) {
                 desc = OptionsPropDesc.create(data.options);

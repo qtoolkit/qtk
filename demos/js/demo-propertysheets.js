@@ -23,7 +23,7 @@ function addPage(propertySheets, title) {
 		console.log(this.value);
 	}); 
 	
-	page.addVector3("Vector3", 10, 100, 1000).on(qtk.Events.CHANGING, function(evt) {
+	page.addVector3("Vector3", 10, 100, 1000, "X", "Y", "R").on(qtk.Events.CHANGING, function(evt) {
 		console.log(this.value);
 	}); 
 	page.addGroupEnd();
@@ -40,7 +40,7 @@ function addPageFromJson(propertySheets, title) {
 		{type:"text", name:"Name", value:"QTK"},
 		{type:"text-readonly", name:"Desc", value:"QToolKit"},
 		{type:"vector2", name:"Point", value:{x:10, y:20}},
-		{type:"vector3", name:"Point3D", value:{x:10, y:20, z:30}},
+		{type:"vector3", name:"Point3D", value:{x:10, y:20, z:30}, zTitle:"Radius"},
 		{type:"range", name:"Range", value:{first:100, second:1000}},
 		{type:"options", name:"Color", value:"Green", options:["Green", "Red", "Blue"]},
 		{type:"slider", name:"Opacity", value:0.5}

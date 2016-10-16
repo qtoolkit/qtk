@@ -4576,7 +4576,10 @@ var qtk =
 	    Widget.prototype.set = function (props) {
 	        if (props) {
 	            for (var key in props) {
-	                this[key] = props[key];
+	                var value = props[key];
+	                if (value !== undefined) {
+	                    this[key] = value;
+	                }
 	            }
 	        }
 	        return this;
@@ -25059,7 +25062,7 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
-	    PropertyPage.prototype.addVector2 = function (title, x, y) {
+	    PropertyPage.prototype.addVector2 = function (title, x, y, xTitle, yTitle) {
 	        var itemH = this.itemH * 2;
 	        var widget = title_vector_1.TitleVector.create({
 	            d: 2,
@@ -25069,11 +25072,13 @@ var qtk =
 	            titleW: this.titleW,
 	            valueW: this.valueW
 	        });
+	        var valueWidget = widget.valueWidget;
+	        valueWidget.set({ xTitle: xTitle, yTitle: yTitle });
 	        widget.value = { x: x, y: y };
 	        this.addChild(widget, true);
 	        return widget;
 	    };
-	    PropertyPage.prototype.addVector3 = function (title, x, y, z) {
+	    PropertyPage.prototype.addVector3 = function (title, x, y, z, xTitle, yTitle, zTitle) {
 	        var itemH = this.itemH * 2;
 	        var widget = title_vector_1.TitleVector.create({
 	            d: 3,
@@ -25083,6 +25088,8 @@ var qtk =
 	            titleW: this.titleW,
 	            valueW: this.valueW
 	        });
+	        var valueWidget = widget.valueWidget;
+	        valueWidget.set({ xTitle: xTitle, yTitle: yTitle, zTitle: zTitle });
 	        widget.value = { x: x, y: y, z: z };
 	        this.addChild(widget, true);
 	        return widget;
@@ -25204,8 +25211,9 @@ var qtk =
 	            titleValue = this.addRange(item.name, value.first, value.second);
 	        }
 	        else if (item.type === props_desc_3.Vector2PropDesc.TYPE) {
+	            var p2 = item;
 	            var value = item.value || { x: 0, y: 0 };
-	            titleValue = this.addVector2(item.name, value.x, value.y);
+	            titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
 	        }
 	        else if (item.type === props_desc_3.OptionsPropDesc.TYPE) {
 	            var value = item.value || { x: 0, y: 0 };
@@ -25217,8 +25225,9 @@ var qtk =
 	            }
 	        }
 	        else if (item.type === props_desc_3.Vector3PropDesc.TYPE) {
+	            var p3 = item;
 	            var value = item.value || { x: 0, y: 0, z: 0 };
-	            titleValue = this.addVector3(item.name, value.x, value.y, value.z);
+	            titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
 	        }
 	        if (titleValue && item.path) {
 	            var valueWidget = titleValue.valueWidget;
@@ -26137,6 +26146,45 @@ var qtk =
 	    function VectorEdit() {
 	        _super.call(this, VectorEdit.TYPE);
 	    }
+	    Object.defineProperty(VectorEdit.prototype, "xTitle", {
+	        get: function () {
+	            return this._xTitle;
+	        },
+	        set: function (value) {
+	            if (value || value === "") {
+	                this._xTitle;
+	                this._xLabel.text = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(VectorEdit.prototype, "yTitle", {
+	        get: function () {
+	            return this._yTitle;
+	        },
+	        set: function (value) {
+	            if (value || value === "") {
+	                this._yTitle;
+	                this._yLabel.text = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(VectorEdit.prototype, "zTitle", {
+	        get: function () {
+	            return this._zTitle;
+	        },
+	        set: function (value) {
+	            if (value || value === "") {
+	                this._zTitle;
+	                this._zLabel.text = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(VectorEdit.prototype, "inputable", {
 	        get: function () {
 	            return true;
@@ -26237,14 +26285,14 @@ var qtk =
 	        var rows = 2;
 	        this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
 	        var labelOptions = { multiLineMode: false, topPadding: 10, bottomPadding: 0 };
-	        this._xLabel = label_1.Label.create({ text: "X" });
+	        this._xLabel = label_1.Label.create({ text: this._xTitle });
 	        this._xLabel.set(labelOptions);
 	        this.addChild(this._xLabel, false);
-	        this._yLabel = label_1.Label.create({ text: "Y" });
+	        this._yLabel = label_1.Label.create({ text: this._yTitle });
 	        this._yLabel.set(labelOptions);
 	        this.addChild(this._yLabel, false);
 	        if (this.d > 2) {
-	            this._zLabel = label_1.Label.create({ text: "Z" });
+	            this._zLabel = label_1.Label.create({ text: this._zTitle });
 	            this._zLabel.set(labelOptions);
 	            this.addChild(this._zLabel, false);
 	        }
@@ -26282,7 +26330,7 @@ var qtk =
 	    VectorEdit.create = function (options) {
 	        return VectorEdit.rBin.create().reset(VectorEdit.TYPE, options);
 	    };
-	    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2 });
+	    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z" });
 	    VectorEdit.TYPE = "vector.edit";
 	    VectorEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
 	        return new VectorEdit();
@@ -26520,11 +26568,24 @@ var qtk =
 	exports.RangePropDesc = RangePropDesc;
 	var Vector2PropDesc = (function (_super) {
 	    __extends(Vector2PropDesc, _super);
-	    function Vector2PropDesc() {
+	    function Vector2PropDesc(xTitle, yTitle) {
 	        _super.call(this, Vector2PropDesc.TYPE);
+	        this.xTitle = xTitle;
+	        this.yTitle = yTitle;
 	    }
-	    Vector2PropDesc.create = function () {
-	        return new Vector2PropDesc();
+	    Vector2PropDesc.prototype.toJson = function () {
+	        var json = _super.prototype.toJson.call(this);
+	        json.xTitle = this.xTitle;
+	        json.yTitle = this.yTitle;
+	        return json;
+	    };
+	    Vector2PropDesc.prototype.fromJson = function (json) {
+	        _super.prototype.fromJson.call(this, json);
+	        this.xTitle = json.xTitle;
+	        this.yTitle = json.yTitle;
+	    };
+	    Vector2PropDesc.create = function (xTitle, yTitle) {
+	        return new Vector2PropDesc(xTitle, yTitle);
 	    };
 	    Vector2PropDesc.TYPE = "vector2";
 	    return Vector2PropDesc;
@@ -26532,11 +26593,27 @@ var qtk =
 	exports.Vector2PropDesc = Vector2PropDesc;
 	var Vector3PropDesc = (function (_super) {
 	    __extends(Vector3PropDesc, _super);
-	    function Vector3PropDesc() {
+	    function Vector3PropDesc(xTitle, yTitle, zTitle) {
 	        _super.call(this, Vector3PropDesc.TYPE);
+	        this.xTitle = xTitle;
+	        this.yTitle = yTitle;
+	        this.zTitle = zTitle;
 	    }
-	    Vector3PropDesc.create = function () {
-	        return new Vector3PropDesc();
+	    Vector3PropDesc.prototype.toJson = function () {
+	        var json = _super.prototype.toJson.call(this);
+	        json.xTitle = this.xTitle;
+	        json.yTitle = this.yTitle;
+	        json.zTitle = this.zTitle;
+	        return json;
+	    };
+	    Vector3PropDesc.prototype.fromJson = function (json) {
+	        _super.prototype.fromJson.call(this, json);
+	        this.xTitle = json.xTitle;
+	        this.yTitle = json.yTitle;
+	        this.zTitle = json.zTitle;
+	    };
+	    Vector3PropDesc.create = function (xTitle, yTitle, zTitle) {
+	        return new Vector3PropDesc(xTitle, yTitle, zTitle);
 	    };
 	    Vector3PropDesc.TYPE = "vector3";
 	    return Vector3PropDesc;
@@ -26628,10 +26705,10 @@ var qtk =
 	                desc = RangePropDesc.create();
 	            }
 	            else if (type === Vector2PropDesc.TYPE) {
-	                desc = Vector2PropDesc.create();
+	                desc = Vector2PropDesc.create(data.xTitle, data.yTitle);
 	            }
 	            else if (type === Vector3PropDesc.TYPE) {
-	                desc = Vector3PropDesc.create();
+	                desc = Vector3PropDesc.create(data.xTitle, data.yTitle, data.zTitle);
 	            }
 	            else if (type === OptionsPropDesc.TYPE) {
 	                desc = OptionsPropDesc.create(data.options);

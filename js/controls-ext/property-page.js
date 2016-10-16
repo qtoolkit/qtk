@@ -120,7 +120,7 @@ var PropertyPage = (function (_super) {
         this.addChild(widget, true);
         return widget;
     };
-    PropertyPage.prototype.addVector2 = function (title, x, y) {
+    PropertyPage.prototype.addVector2 = function (title, x, y, xTitle, yTitle) {
         var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 2,
@@ -130,11 +130,13 @@ var PropertyPage = (function (_super) {
             titleW: this.titleW,
             valueW: this.valueW
         });
+        var valueWidget = widget.valueWidget;
+        valueWidget.set({ xTitle: xTitle, yTitle: yTitle });
         widget.value = { x: x, y: y };
         this.addChild(widget, true);
         return widget;
     };
-    PropertyPage.prototype.addVector3 = function (title, x, y, z) {
+    PropertyPage.prototype.addVector3 = function (title, x, y, z, xTitle, yTitle, zTitle) {
         var itemH = this.itemH * 2;
         var widget = title_vector_1.TitleVector.create({
             d: 3,
@@ -144,6 +146,8 @@ var PropertyPage = (function (_super) {
             titleW: this.titleW,
             valueW: this.valueW
         });
+        var valueWidget = widget.valueWidget;
+        valueWidget.set({ xTitle: xTitle, yTitle: yTitle, zTitle: zTitle });
         widget.value = { x: x, y: y, z: z };
         this.addChild(widget, true);
         return widget;
@@ -265,8 +269,9 @@ var PropertyPage = (function (_super) {
             titleValue = this.addRange(item.name, value.first, value.second);
         }
         else if (item.type === props_desc_3.Vector2PropDesc.TYPE) {
+            var p2 = item;
             var value = item.value || { x: 0, y: 0 };
-            titleValue = this.addVector2(item.name, value.x, value.y);
+            titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
         }
         else if (item.type === props_desc_3.OptionsPropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0 };
@@ -278,8 +283,9 @@ var PropertyPage = (function (_super) {
             }
         }
         else if (item.type === props_desc_3.Vector3PropDesc.TYPE) {
+            var p3 = item;
             var value = item.value || { x: 0, y: 0, z: 0 };
-            titleValue = this.addVector3(item.name, value.x, value.y, value.z);
+            titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
         }
         if (titleValue && item.path) {
             var valueWidget = titleValue.valueWidget;

@@ -13,6 +13,12 @@ export declare class VectorEdit extends Widget {
     protected _yEditor: Edit;
     protected _zLabel: Label;
     protected _zEditor: Edit;
+    protected _xTitle: string;
+    protected _yTitle: string;
+    protected _zTitle: string;
+    xTitle: string;
+    yTitle: string;
+    zTitle: string;
     readonly inputable: boolean;
     /**
      * dimension
@@ -60,6 +66,9 @@ export declare class VectorEdit extends Widget {
         _bp: number;
     } & {
         _d: number;
+        _xTitle: string;
+        _yTitle: string;
+        _zTitle: string;
     };
     protected getDefProps(): any;
     static TYPE: string;

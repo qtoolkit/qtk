@@ -23,7 +23,41 @@ export class VectorEdit extends Widget {
 	protected _yEditor : Edit;
 	protected _zLabel : Label;
 	protected _zEditor : Edit;
-	
+
+	protected _xTitle : string;
+	protected _yTitle : string;
+	protected _zTitle : string;
+
+	public set xTitle(value:string) {
+		if(value || value === "") {
+			this._xTitle;
+			this._xLabel.text = value;
+		}
+	}
+	public get xTitle() : string{
+		return this._xTitle;
+	}
+
+	public set yTitle(value:string) {
+		if(value || value === "") {
+			this._yTitle;
+			this._yLabel.text = value;
+		}
+	}
+	public get yTitle() : string{
+		return this._yTitle;
+	}
+
+	public set zTitle(value:string) {
+		if(value || value === "") {
+			this._zTitle;
+			this._zLabel.text = value;
+		}
+	}
+	public get zTitle() : string{
+		return this._zTitle;
+	}
+
 	public get inputable() {
 		return true;
 	}
@@ -113,14 +147,14 @@ export class VectorEdit extends Widget {
 		this.childrenLayouter = GridLayouter.create({rows:rows, cols:cols, rightMargin:10}); 
 		
 		var labelOptions = {multiLineMode:false, topPadding:10, bottomPadding:0};
-		this._xLabel = Label.create({text:"X"});
+		this._xLabel = Label.create({text:this._xTitle});
 		this._xLabel.set(labelOptions);
 		this.addChild(this._xLabel, false);
-		this._yLabel = Label.create({text:"Y"});
+		this._yLabel = Label.create({text:this._yTitle});
 		this._yLabel.set(labelOptions);
 		this.addChild(this._yLabel, false);
 		if(this.d > 2) {
-			this._zLabel = Label.create({text:"Z"});
+			this._zLabel = Label.create({text:this._zTitle});
 			this._zLabel.set(labelOptions);
 			this.addChild(this._zLabel, false);
 		}
@@ -161,7 +195,7 @@ export class VectorEdit extends Widget {
 		super(VectorEdit.TYPE);
 	}
 	
-	protected static defProps = Object.assign({}, Widget.defProps, {_d:2});
+	protected static defProps = Object.assign({}, Widget.defProps, {_d:2, _xTitle:"X", _yTitle:"Y", _zTitle:"Z"});
 	protected getDefProps() : any {
 		return VectorEdit.defProps;
 	}

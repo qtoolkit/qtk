@@ -78,7 +78,10 @@ var Widget = (function (_super) {
     Widget.prototype.set = function (props) {
         if (props) {
             for (var key in props) {
-                this[key] = props[key];
+                var value = props[key];
+                if (value !== undefined) {
+                    this[key] = value;
+                }
             }
         }
         return this;

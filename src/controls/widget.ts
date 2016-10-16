@@ -71,7 +71,10 @@ export class Widget extends Emitter {
 	public set(props?:any) : Widget {
 		if(props) {
 			for(var key in props) {
-				this[key] = props[key];
+				var value = props[key];
+				if(value !== undefined) {
+					this[key] = value;
+				}
 			}
 		}
 
