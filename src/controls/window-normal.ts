@@ -1,6 +1,6 @@
 
 import {Widget} from "./widget";
-import {Window, WindowType} from "./window";
+import {Window} from "./window";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";

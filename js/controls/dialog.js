@@ -15,17 +15,6 @@ var Dialog = (function (_super) {
     function Dialog(type) {
         _super.call(this, type || Dialog.TYPE);
     }
-    /**
-     * 将对话框移动到屏幕中间。
-     */
-    Dialog.prototype.moveToCenter = function () {
-        if (this.app) {
-            var vp = this.app.getViewPort();
-            this.x = (vp.w - this.w) >> 1;
-            this.y = (vp.h - this.h) >> 1;
-        }
-        return this;
-    };
     Dialog.create = function (options) {
         return Dialog.recycleBin.create().reset(Dialog.TYPE, options);
     };

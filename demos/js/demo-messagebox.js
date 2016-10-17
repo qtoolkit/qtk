@@ -125,8 +125,7 @@ function addShowProperty(win, w, onlyOK) {
 }
 
 function onReady(app) {
-	var vp = app.getViewPort();
-	var win = qtk.WindowNormal.create({app:app,  w:vp.width, h:vp.height, padding : 10});
+	var win = qtk.WindowNormal.create({app:app, padding : 10}).maximize();;
 	
 	win.childrenLayouter = qtk.GridLayouter.create({rowHeight:60, cols:3, margin:10});
 
