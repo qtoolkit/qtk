@@ -51,14 +51,14 @@ function addShowProgress(win, w) {
 	win.addChild(item, true);
 }
 
-function isInputValid(value) {
-	return value && value.length > 0;
+function isValidAge(value) {
+	return value >= 0 && value <= 128;
 }
 
 function addShowInput(win, inputTips, value, inputType, w) {
 	var item = qtk.Button.create({text:"Show Input"});
 	item.on(qtk.Events.CLICK, function(evt) {
-		qtk.MessageBox.showInput("Please Input...", inputTips, value, isInputValid, function(value) {
+		qtk.MessageBox.showInput("Please Input...", inputTips, value, isValidAge, function(value) {
 			console.log("input:" + value);
 		}, inputType, w);
 	});
