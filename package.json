@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "carota": "git+https://github.com/qtoolkit/carota.git",
+    "chart.js": "git+https://github.com/chartjs/Chart.js.git",
     "eventemitter3": "^1.2.0",
     "scroller": "0.0.3",
     "tween.js": "^16.3.5",

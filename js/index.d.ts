@@ -46,6 +46,7 @@ export { WidgetFactory } from "./controls/widget-factory";
 export { MenuBar, MenuBarItem } from "./controls/menu-bar";
 export { ColorTile, ColorLine } from "./controls/color-tile";
 export { ListItem, ListItemStyle } from "./controls/list-item";
+export { ChartView } from "./controls-ext/chart-view";
 export { RoundType, Graphics } from "./graphics";
 export { Accordion } from "./controls/accordion";
 export { ServiceLocator } from "./service-locator";

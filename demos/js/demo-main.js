@@ -28,6 +28,7 @@ function onReady(app) {
 		{title:"Pages", data:"pages"},
 		{title:"Switch", data:"switch"},
 		{title:"Dialog", data:"dialog"},
+		{title:"Chart Pie", data:"chart-pie"},
 		{title:"Basic Data Binding", data:"databinding-basic"},
 		{title:"List Data Binding", data:"databinding-ext"},
 		{title:"Accordion", data:"accordion"},

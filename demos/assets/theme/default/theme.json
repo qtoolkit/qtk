@@ -21,6 +21,9 @@
 			"lineColor" : "gray"
 		}
 	},
+	"chart-view": {
+		"extends": "widget"
+	},
 	"label": {
 		"extends": "widget",
 		"common" : {
