@@ -65,6 +65,7 @@ exports.DRAGEXIT = "dragexit";
 exports.DRAGLEAVE = "dragleave";
 exports.DRAGOVER = "dragover";
 exports.DRAGSTART = "dragstart";
+exports.SHORTCUT = "shortcut";
 exports.INTERACTION_REQUEST = "interaction-request";
 var Event = (function () {
     function Event() {
@@ -246,6 +247,23 @@ var KeyEvent = (function (_super) {
     return KeyEvent;
 }(InputEvent));
 exports.KeyEvent = KeyEvent;
+var ShortcutEvent = (function (_super) {
+    __extends(ShortcutEvent, _super);
+    function ShortcutEvent() {
+        _super.apply(this, arguments);
+    }
+    ShortcutEvent.prototype.init = function (type, keys) {
+        _super.prototype.init.call(this, type, {});
+        this.keys = keys;
+        return this;
+    };
+    ShortcutEvent.create = function (type, keys) {
+        var e = new ShortcutEvent();
+        return e.init(type, keys);
+    };
+    return ShortcutEvent;
+}(Event));
+exports.ShortcutEvent = ShortcutEvent;
 var TickEvent = (function (_super) {
     __extends(TickEvent, _super);
     function TickEvent() {

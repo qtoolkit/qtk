@@ -60,6 +60,7 @@ export declare const DRAGEXIT: string;
 export declare const DRAGLEAVE: string;
 export declare const DRAGOVER: string;
 export declare const DRAGSTART: string;
+export declare const SHORTCUT: string;
 export declare const INTERACTION_REQUEST: string;
 export declare class Event {
     private _type;
@@ -164,6 +165,11 @@ export declare class KeyEvent extends InputEvent {
     keyCode: number;
     init(type: string, detail: KeyEventDetail): any;
     static create(type: string, detail: KeyEventDetail): any;
+}
+export declare class ShortcutEvent extends Event {
+    keys: string;
+    init(type: string, keys: string): any;
+    static create(type: string, keys: string): any;
 }
 export declare class TickEvent extends Event {
     /**

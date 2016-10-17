@@ -63,6 +63,7 @@ export var KeyEvent = {
 	VK_X: 88,
 	VK_Y: 89,
 	VK_Z: 90,
+	VK_COMMAND: 91,
 	VK_CONTEXT_MENU: 93,
 	VK_NUMPAD0: 96,
 	VK_NUMPAD1: 97,

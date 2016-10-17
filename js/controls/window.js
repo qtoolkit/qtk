@@ -146,11 +146,46 @@ var Window = (function (_super) {
         this.y = (h - this.h) >> 1;
         return this;
     };
+    Window.prototype.dispatchKeyDown = function (evt) {
+        _super.prototype.dispatchKeyDown.call(this, evt);
+        var keys = "";
+        if (evt.ctrlKey) {
+            keys = "ctrl";
+        }
+        if (evt.commandKey) {
+            keys += keys ? "+cmd" : "cmd";
+        }
+        if (evt.altKey) {
+            keys += keys ? "+alt" : "alt";
+        }
+        if (evt.shiftKey) {
+            keys += keys ? "+shift" : "shift";
+        }
+        var key = String.fromCharCode(evt.keyCode).toLowerCase();
+        if (key) {
+            keys += (keys ? ("+" + key) : key);
+            var e = this._shortcutEvent;
+            e.init(Events.SHORTCUT, keys);
+            this.dispatchShortcut(e);
+        }
+    };
+    Window.prototype.dispatchShortcut = function (e) {
+        this.dispatchEvent(e);
+    };
+    Window.prototype.registerShortcut = function (keys, func) {
+        var lowerKeys = keys.toLowerCase();
+        this.on(Events.SHORTCUT, function (evt) {
+            if (lowerKeys === evt.keys) {
+                func(evt);
+            }
+        });
+    };
     Window.prototype.onReset = function () {
         this._isWindow = true;
         this._grabbed = false;
         this.hasOwnCanvas = true;
         this._pointerPosition = point_1.Point.create(0, 0);
+        this._shortcutEvent = Events.ShortcutEvent.create(null, null);
     };
     return Window;
 }(widget_1.Widget));

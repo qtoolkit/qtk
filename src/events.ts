@@ -63,7 +63,7 @@ export const DRAGEXIT  = "dragexit";
 export const DRAGLEAVE = "dragleave";
 export const DRAGOVER  = "dragover";
 export const DRAGSTART = "dragstart";
-
+export const SHORTCUT  = "shortcut";
 export const INTERACTION_REQUEST = "interaction-request";
 
 export class Event {
@@ -294,6 +294,23 @@ export class KeyEvent extends InputEvent {
 		var e = new KeyEvent();
 
 		return e.init(type, detail);
+	}
+}
+
+export class ShortcutEvent extends Event {
+	public keys : string;
+	
+	public init(type:string, keys:string) : any {
+		super.init(type, {});
+		this.keys = keys;
+
+		return this;
+	}
+
+	public static create(type:string, keys:string) {
+		var e = new ShortcutEvent();
+
+		return e.init(type, keys);
 	}
 }
 

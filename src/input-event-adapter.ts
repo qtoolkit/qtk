@@ -155,7 +155,7 @@ function updateKeysStatus(keyCode, value) {
 			shiftKey = value;
 			break;
 		}
-		case KeyEvent.VK_META: {
+		case KeyEvent.VK_COMMAND: {
 			commandKey = value;
 			break;
 		}

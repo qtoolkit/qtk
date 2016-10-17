@@ -10,6 +10,7 @@ export declare abstract class Window extends Widget {
     private _hasOwnCanvas;
     private _pointerPosition;
     private _shouldGrabWhenVisible;
+    private _shortcutEvent;
     constructor(type: string);
     /**
      * 是否有自己的Canvas元素(此属性需要在窗口打开之前赋值)。
@@ -51,5 +52,8 @@ export declare abstract class Window extends Widget {
      * 将对话框移动到屏幕中间。
      */
     moveToCenter(): Widget;
+    protected dispatchKeyDown(evt: any): void;
+    protected dispatchShortcut(e: Events.ShortcutEvent): void;
+    registerShortcut(keys: string, func: Function): void;
     protected onReset(): void;
 }

@@ -53,5 +53,11 @@ function onReady(app) {
 	menuBar.addTextButton("About", onClick);
 	menuBar.addTextButton("Login", onClick, 100, -1);
 
+	win.registerShortcut("ctrl+c", function() {
+		console.log("ctrl+c");
+	});
+	win.registerShortcut("ctrl+v", function() {
+		console.log("ctrl+v");
+	});
 	win.open();
 }

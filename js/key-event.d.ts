@@ -62,6 +62,7 @@ export declare var KeyEvent: {
     VK_X: number;
     VK_Y: number;
     VK_Z: number;
+    VK_COMMAND: number;
     VK_CONTEXT_MENU: number;
     VK_NUMPAD0: number;
     VK_NUMPAD1: number;

@@ -133,7 +133,7 @@ function updateKeysStatus(keyCode, value) {
             shiftKey = value;
             break;
         }
-        case key_event_1.KeyEvent.VK_META: {
+        case key_event_1.KeyEvent.VK_COMMAND: {
             commandKey = value;
             break;
         }

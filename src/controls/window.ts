@@ -13,7 +13,7 @@ export abstract class Window extends Widget {
 	private _hasOwnCanvas : boolean;
 	private _pointerPosition : Point;
 	private _shouldGrabWhenVisible : boolean;
-
+	private _shortcutEvent : Events.ShortcutEvent;
 	constructor(type:string) {
 		super(type);
 	}
@@ -161,12 +161,52 @@ export abstract class Window extends Widget {
 		
 		return this;
 	}
-	
+
+	protected dispatchKeyDown(evt:any) {
+		super.dispatchKeyDown(evt);
+		var keys = "";
+		if(evt.ctrlKey) {
+			keys = "ctrl";
+		}
+		if(evt.commandKey) {
+			keys += keys ? "+cmd" : "cmd";
+		}
+		if(evt.altKey) {
+			keys += keys ? "+alt" : "alt";
+		}
+		if(evt.shiftKey) {
+			keys += keys ? "+shift" : "shift";
+		}
+
+		var key = String.fromCharCode(evt.keyCode).toLowerCase();	
+
+		if(key) {
+			keys += (keys ? ("+" + key) : key);
+			var e = this._shortcutEvent;
+			e.init(Events.SHORTCUT, keys);
+			this.dispatchShortcut(e);
+		}
+	}
+
+	protected dispatchShortcut(e:Events.ShortcutEvent) {
+		this.dispatchEvent(e);
+	}
+
+	public registerShortcut(keys:string, func:Function) {
+		var lowerKeys = keys.toLowerCase();
+		this.on(Events.SHORTCUT, function(evt:Events.ShortcutEvent) {
+			if(lowerKeys === evt.keys) {
+				func(evt);
+			}
+		});
+	}
+
 	protected onReset() {
 		this._isWindow = true;
 		this._grabbed = false;
 		this.hasOwnCanvas = true;
 		this._pointerPosition = Point.create(0, 0);
+		this._shortcutEvent = Events.ShortcutEvent.create(null, null);
 	}
 
 };
