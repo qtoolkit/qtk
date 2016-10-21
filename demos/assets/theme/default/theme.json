@@ -303,6 +303,7 @@
 	"list-item": {
 		"extends": "widget",
 		"common" : {
+			"lineColor" : "#DDDDDD",
 			"textAlign":"center"
 		},
 		"normal" : {
@@ -313,6 +314,30 @@
 		},
 		"active" : {
 			"backGroundColor" : "#DDDDDD"
+		}
+	},
+	"list-item.odd": {
+		"extends": "list-item",
+		"normal" : {
+			"backGroundColor" : "#F0F0F0"
+		},
+		"over" : {
+			"backGroundColor" : "#DDDDDD"
+		},
+		"active" : {
+			"backGroundColor" : "#CCCCCC"
+		}
+	},
+	"list-item.even": {
+		"extends": "list-item",
+		"normal" : {
+			"backGroundColor" : "#FFFFFF"
+		},
+		"over" : {
+			"backGroundColor" : "#DDDDDD"
+		},
+		"active" : {
+			"backGroundColor" : "#CCCCCC"
 		}
 	},
 	"combo-box": {

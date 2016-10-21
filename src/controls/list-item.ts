@@ -13,15 +13,43 @@ export enum ListItemStyle {
 	LAST
 };
 
+/**
+ * 列表项。
+ */
 export class ListItem extends Widget {
 	public listItemStyle : ListItemStyle;
 	protected _icon : ImageTile;
 	protected _iconURL : string;
-
-	constructor(type?:string) {
-		super(type || ListItem.TYPE);
+	protected _index : number; 
+	protected _oddEvenStyle : boolean;
+	
+	/**
+	 * 奇数行和偶数行是否采用不同的风格。 
+	 */
+	public set oddEvenStyle(value:boolean) {
+		this._oddEvenStyle = value;
 	}
 	
+	public get oddEvenStyle() : boolean{
+		return this._oddEvenStyle;
+	}
+	
+	protected getStyleType() : string {
+		if(!this._oddEvenStyle) {
+			return super.getStyleType();
+		}
+
+		return this._index%2 ? "list-item.even" : "list-item.odd";
+	}
+
+	public relayoutChildren() : Rect {
+		if(this.parent) {
+			this._index = this.parent.children.indexOf(this);
+		}
+
+		return super.relayoutChildren();
+	}
+
 	public set iconURL(value:string) {
 		if(value) {
 			this._icon = ImageTile.create(value, evt => {
@@ -80,7 +108,11 @@ export class ListItem extends Widget {
 		return Rect.rect.init(x, y, w, h);
 	}
 	
-	protected static defProps = Object.assign({}, Widget.defProps, {_iconURL:null});
+	constructor(type?:string) {
+		super(type || ListItem.TYPE);
+	}
+
+	protected static defProps = Object.assign({}, Widget.defProps, {_oddEvenStyle:false, _iconURL:null});
 	protected getDefProps() : any {
 		return ListItem.defProps;
 	}

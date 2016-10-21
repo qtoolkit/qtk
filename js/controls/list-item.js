@@ -17,11 +17,39 @@ var image_tile_1 = require("../image-tile");
 })(exports.ListItemStyle || (exports.ListItemStyle = {}));
 var ListItemStyle = exports.ListItemStyle;
 ;
+/**
+ * 列表项。
+ */
 var ListItem = (function (_super) {
     __extends(ListItem, _super);
     function ListItem(type) {
         _super.call(this, type || ListItem.TYPE);
     }
+    Object.defineProperty(ListItem.prototype, "oddEvenStyle", {
+        get: function () {
+            return this._oddEvenStyle;
+        },
+        /**
+         * 奇数行和偶数行是否采用不同的风格。
+         */
+        set: function (value) {
+            this._oddEvenStyle = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ListItem.prototype.getStyleType = function () {
+        if (!this._oddEvenStyle) {
+            return _super.prototype.getStyleType.call(this);
+        }
+        return this._index % 2 ? "list-item.even" : "list-item.odd";
+    };
+    ListItem.prototype.relayoutChildren = function () {
+        if (this.parent) {
+            this._index = this.parent.children.indexOf(this);
+        }
+        return _super.prototype.relayoutChildren.call(this);
+    };
     Object.defineProperty(ListItem.prototype, "iconURL", {
         get: function () {
             return this._iconURL;
@@ -84,7 +112,7 @@ var ListItem = (function (_super) {
     ListItem.create = function (options) {
         return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
     };
-    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null });
+    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _oddEvenStyle: false, _iconURL: null });
     ListItem.TYPE = "list-item";
     ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
     return ListItem;

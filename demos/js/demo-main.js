@@ -62,7 +62,7 @@ function onReady(app) {
 	}
 
 	items.forEach(iter => {
-		var item = ListItem.create({text:iter.title, userData:iter.data});
+		var item = ListItem.create({oddEvenStyle:true, text:iter.title, userData:iter.data});
 		item.on(Events.CLICK, onItemClick);
 		listView.addChild(item, true);
 	});

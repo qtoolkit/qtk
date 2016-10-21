@@ -7,15 +7,26 @@ export declare enum ListItemStyle {
     FIRST = 1,
     LAST = 2,
 }
+/**
+ * 列表项。
+ */
 export declare class ListItem extends Widget {
     listItemStyle: ListItemStyle;
     protected _icon: ImageTile;
     protected _iconURL: string;
-    constructor(type?: string);
+    protected _index: number;
+    protected _oddEvenStyle: boolean;
+    /**
+     * 奇数行和偶数行是否采用不同的风格。
+     */
+    oddEvenStyle: boolean;
+    protected getStyleType(): string;
+    relayoutChildren(): Rect;
     iconURL: string;
     protected drawBackground(ctx: any, style: Style): Widget;
     protected drawImage(ctx: any, style: Style): Widget;
     protected getTextRect(style: Style): Rect;
+    constructor(type?: string);
     protected static defProps: {} & {
         _x: number;
         _y: number;
@@ -48,6 +59,7 @@ export declare class ListItem extends Widget {
         _rp: number;
         _bp: number;
     } & {
+        _oddEvenStyle: boolean;
         _iconURL: any;
     };
     protected getDefProps(): any;
