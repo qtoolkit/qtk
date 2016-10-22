@@ -4293,6 +4293,13 @@ var qtk =
 	        if (!this._isEditing) {
 	            _super.prototype.draw.call(this, ctx);
 	        }
+	        else {
+	            var input = this._input;
+	            var p = this.toViewPoint(point_1.Point.point.init(0, 0));
+	            if (input.x !== p.x || input.y !== p.y) {
+	                input.move(p.x, p.y);
+	            }
+	        }
 	    };
 	    Edit.prototype.relayoutText = function () {
 	        if (!this._isEditing) {
@@ -17394,16 +17401,33 @@ var qtk =
 	    function HtmlElement() {
 	        _super.call(this);
 	    }
-	    Object.defineProperty(HtmlElement.prototype, "tag", {
+	    Object.defineProperty(HtmlElement.prototype, "x", {
 	        get: function () {
-	            return this._tag;
+	            return parseInt(this.element.style.left);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(HtmlElement.prototype, "y", {
+	        get: function () {
+	            return parseInt(this.element.style.top);
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(HtmlElement.prototype, "z", {
+	        get: function () {
+	            return parseInt(this.element.style.zIndex);
+	        },
 	        set: function (value) {
 	            this.element.style.zIndex = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(HtmlElement.prototype, "tag", {
+	        get: function () {
+	            return this._tag;
 	        },
 	        enumerable: true,
 	        configurable: true

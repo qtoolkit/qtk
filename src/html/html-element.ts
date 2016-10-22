@@ -8,13 +8,25 @@ export class HtmlElement extends Emitter {
 	constructor() {
 		super();
 	}
+	
+	public get x() : number {
+		return parseInt(this.element.style.left);
+	}
+	
+	public get y() : number {
+		return parseInt(this.element.style.top);
+	}
 
-	public get tag() : string {
-		return this._tag;
+	public get z() : number {
+		return parseInt(this.element.style.zIndex);
 	}
 
 	public set z(value:number) {
 		this.element.style.zIndex = value;
+	}
+
+	public get tag() : string {
+		return this._tag;
 	}
 
 	public set textColor(color:string) {

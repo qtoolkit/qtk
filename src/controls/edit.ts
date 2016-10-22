@@ -58,6 +58,12 @@ export class Edit extends Label {
 	public draw(ctx:any) {
 		if(!this._isEditing) {
 			super.draw(ctx);
+		}else{
+			var input = this._input;
+			var p = this.toViewPoint(Point.point.init(0, 0));
+			if(input.x !== p.x || input.y !== p.y) {
+				input.move(p.x, p.y);
+			}
 		}
 	}
 

@@ -10,16 +10,33 @@ var HtmlElement = (function (_super) {
     function HtmlElement() {
         _super.call(this);
     }
-    Object.defineProperty(HtmlElement.prototype, "tag", {
+    Object.defineProperty(HtmlElement.prototype, "x", {
         get: function () {
-            return this._tag;
+            return parseInt(this.element.style.left);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HtmlElement.prototype, "y", {
+        get: function () {
+            return parseInt(this.element.style.top);
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(HtmlElement.prototype, "z", {
+        get: function () {
+            return parseInt(this.element.style.zIndex);
+        },
         set: function (value) {
             this.element.style.zIndex = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(HtmlElement.prototype, "tag", {
+        get: function () {
+            return this._tag;
         },
         enumerable: true,
         configurable: true

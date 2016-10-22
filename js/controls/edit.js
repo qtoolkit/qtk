@@ -96,6 +96,13 @@ var Edit = (function (_super) {
         if (!this._isEditing) {
             _super.prototype.draw.call(this, ctx);
         }
+        else {
+            var input = this._input;
+            var p = this.toViewPoint(point_1.Point.point.init(0, 0));
+            if (input.x !== p.x || input.y !== p.y) {
+                input.move(p.x, p.y);
+            }
+        }
     };
     Edit.prototype.relayoutText = function () {
         if (!this._isEditing) {

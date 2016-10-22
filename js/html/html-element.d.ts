@@ -3,8 +3,10 @@ export declare class HtmlElement extends Emitter {
     element: any;
     protected _tag: string;
     constructor();
-    readonly tag: string;
+    readonly x: number;
+    readonly y: number;
     z: number;
+    readonly tag: string;
     textColor: string;
     backgroundColor: string;
     fontSize: number;
