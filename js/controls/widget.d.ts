@@ -369,6 +369,8 @@ export declare class Widget extends Emitter {
     updateExplicit(): void;
     protected viewModalChangeFunc: any;
     protected removeBinding(): void;
+    protected onBeforeBindData(): void;
+    protected onAfterBindData(): void;
     /**
      * 绑定数据。
      */

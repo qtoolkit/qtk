@@ -73,8 +73,8 @@ export class ListView extends ScrollView {
 	protected _ih : number;
 	protected _is : number;
 
-	constructor() {
-		super(ListView.TYPE);
+	constructor(type?:string) {
+		super(type || ListView.TYPE);
 	}
 
 	protected onReset() {

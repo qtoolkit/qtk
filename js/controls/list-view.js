@@ -11,8 +11,8 @@ var recyclable_creator_1 = require("../recyclable-creator");
 var list_layouter_1 = require("../layouters/list-layouter");
 var ListView = (function (_super) {
     __extends(ListView, _super);
-    function ListView() {
-        _super.call(this, ListView.TYPE);
+    function ListView(type) {
+        _super.call(this, type || ListView.TYPE);
     }
     Object.defineProperty(ListView.prototype, "itemSpacing", {
         get: function () {

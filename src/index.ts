@@ -118,6 +118,14 @@ export {InteractionRequest} from "./interaction-request/interaction-request";
 export {InteractionService} from "./interaction-request/interaction-service";
 export {ItemsStorage} from "./items-storage";
 
+export {TableRow} from "./table/table-row";
+export {TableClient} from "./table/table-client";
+export {TableIndex} from "./table/table-index";
+export {TableHeader} from "./table/table-header";
+export {Table, TableColInfo} from "./table/table";
+export {TableIndexItem} from "./table/table-index-item";
+export {TableHeaderItem} from "./table/table-header-item";
+
 export {RangeFixer} from "./mvvm/range-fixer";
 export {NumberFixer} from "./mvvm/number-fixer";
 export {Vector2Fixer} from "./mvvm/vector2-fixer";

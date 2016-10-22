@@ -295,13 +295,28 @@ var qtk =
 	exports.InteractionService = interaction_service_1.InteractionService;
 	var items_storage_1 = __webpack_require__(337);
 	exports.ItemsStorage = items_storage_1.ItemsStorage;
-	var range_fixer_1 = __webpack_require__(338);
+	var table_row_1 = __webpack_require__(338);
+	exports.TableRow = table_row_1.TableRow;
+	var table_client_1 = __webpack_require__(339);
+	exports.TableClient = table_client_1.TableClient;
+	var table_index_1 = __webpack_require__(340);
+	exports.TableIndex = table_index_1.TableIndex;
+	var table_header_1 = __webpack_require__(342);
+	exports.TableHeader = table_header_1.TableHeader;
+	var table_1 = __webpack_require__(343);
+	exports.Table = table_1.Table;
+	exports.TableColInfo = table_1.TableColInfo;
+	var table_index_item_1 = __webpack_require__(344);
+	exports.TableIndexItem = table_index_item_1.TableIndexItem;
+	var table_header_item_1 = __webpack_require__(345);
+	exports.TableHeaderItem = table_header_item_1.TableHeaderItem;
+	var range_fixer_1 = __webpack_require__(346);
 	exports.RangeFixer = range_fixer_1.RangeFixer;
-	var number_fixer_1 = __webpack_require__(339);
+	var number_fixer_1 = __webpack_require__(347);
 	exports.NumberFixer = number_fixer_1.NumberFixer;
-	var vector2_fixer_1 = __webpack_require__(340);
+	var vector2_fixer_1 = __webpack_require__(348);
 	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
-	var vector3_fixer_1 = __webpack_require__(341);
+	var vector3_fixer_1 = __webpack_require__(349);
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 
 
@@ -6110,7 +6125,7 @@ var qtk =
 	        this._children.length = 0;
 	        if (json.children) {
 	            json.children.forEach(function (childJson) {
-	                var child = widget_factory_1.WidgetFactory.create(childJson.type);
+	                var child = widget_factory_1.WidgetFactory.create(childJson.type, { parent: _this, app: _this.app });
 	                child.fromJson(childJson);
 	                _this._children.push(child);
 	            });
@@ -6227,6 +6242,10 @@ var qtk =
 	        this._viewModal = null;
 	        this._dataBindingRule = null;
 	    };
+	    Widget.prototype.onBeforeBindData = function () {
+	    };
+	    Widget.prototype.onAfterBindData = function () {
+	    };
 	    /**
 	     * 绑定数据。
 	     */
@@ -6234,6 +6253,7 @@ var qtk =
 	        var _this = this;
 	        var dataBindingRule = this._dataBindingRule;
 	        this._viewModal = viewModal;
+	        this.onBeforeBindData();
 	        if (dataBindingRule && viewModal) {
 	            var bindingMode = viewModal.getBindingMode();
 	            this.onBindCommand(viewModal, dataBindingRule);
@@ -6265,6 +6285,7 @@ var qtk =
 	                _this.bindChildren(viewModal);
 	            });
 	        }
+	        this.onAfterBindData();
 	        return this;
 	    };
 	    Widget.prototype.bindChildren = function (viewModal) {
@@ -18960,6 +18981,9 @@ var qtk =
 	            _super.prototype.dispatchPointerMove.call(this, evt, ctx);
 	            this.unOffsetPointerEvent(evt);
 	        }
+	        else {
+	            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
+	        }
 	        this.requestRedraw();
 	    };
 	    ScrollView.prototype.dispatchPointerUp = function (evt) {
@@ -19192,6 +19216,9 @@ var qtk =
 	        if (this.slideToScroll) {
 	            this.scroller.scrollTo(this.offsetX, this.offsetY);
 	            this.handleScrollDone();
+	        }
+	        else {
+	            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
 	        }
 	    };
 	    Object.defineProperty(ScrollView.prototype, "scrollerOptions", {
@@ -22392,8 +22419,8 @@ var qtk =
 	var list_layouter_1 = __webpack_require__(112);
 	var ListView = (function (_super) {
 	    __extends(ListView, _super);
-	    function ListView() {
-	        _super.call(this, ListView.TYPE);
+	    function ListView(type) {
+	        _super.call(this, type || ListView.TYPE);
 	    }
 	    Object.defineProperty(ListView.prototype, "itemSpacing", {
 	        get: function () {
@@ -56373,6 +56400,634 @@ var qtk =
 
 /***/ },
 /* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	/**
+	 * 表格
+	 */
+	var TableRow = (function (_super) {
+	    __extends(TableRow, _super);
+	    function TableRow() {
+	        _super.call(this, TableRow.TYPE);
+	    }
+	    TableRow.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	    };
+	    TableRow.prototype.relayoutChildren = function () {
+	        var tableClient = (this.parent);
+	        if (!this.w || !this.h || !tableClient) {
+	            return;
+	        }
+	        var colsWidth = tableClient.colsWidth;
+	        var h = this.clientH;
+	        var x = this.leftPadding;
+	        var y = this.rightPadding;
+	        this.children.forEach(function (child, index) {
+	            var w = colsWidth[index] || 100;
+	            child.moveResizeTo(x, y, w, h);
+	            x += w;
+	        });
+	        this.w = x + this.rightPadding;
+	        return null;
+	    };
+	    TableRow.create = function (options) {
+	        return TableRow.recycleBin.create().reset(TableRow.TYPE, options);
+	    };
+	    TableRow.TYPE = "table-row";
+	    TableRow.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableRow(); });
+	    return TableRow;
+	}(widget_1.Widget));
+	exports.TableRow = TableRow;
+	;
+	widget_factory_1.WidgetFactory.register(TableRow.TYPE, TableRow.create);
+
+
+/***/ },
+/* 339 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var list_view_1 = __webpack_require__(111);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	/**
+	 * 表格
+	 */
+	var TableClient = (function (_super) {
+	    __extends(TableClient, _super);
+	    function TableClient() {
+	        _super.call(this, TableClient.TYPE);
+	    }
+	    Object.defineProperty(TableClient.prototype, "colsWidth", {
+	        get: function () {
+	            return this._colsWidth;
+	        },
+	        set: function (value) {
+	            this._colsWidth = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TableClient.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this.dragToScroll = true;
+	    };
+	    TableClient.create = function (options) {
+	        return TableClient.rBin.create().reset(TableClient.TYPE, options);
+	    };
+	    TableClient.TYPE = "table-client";
+	    TableClient.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableClient(); });
+	    return TableClient;
+	}(list_view_1.ListView));
+	exports.TableClient = TableClient;
+	;
+	widget_factory_1.WidgetFactory.register(TableClient.TYPE, TableClient.create);
+
+
+/***/ },
+/* 340 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	var passive_scrollable_group_1 = __webpack_require__(341);
+	/**
+	 * 表格左边的索引序数。
+	 */
+	var TableIndex = (function (_super) {
+	    __extends(TableIndex, _super);
+	    function TableIndex() {
+	        _super.call(this, TableIndex.TYPE);
+	    }
+	    TableIndex.create = function (options) {
+	        return TableIndex.recycleBin.create().reset(TableIndex.TYPE, options);
+	    };
+	    TableIndex.TYPE = "table-index";
+	    TableIndex.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableIndex(); });
+	    return TableIndex;
+	}(passive_scrollable_group_1.PassiveScrollableGroup));
+	exports.TableIndex = TableIndex;
+	;
+	widget_factory_1.WidgetFactory.register(TableIndex.TYPE, TableIndex.create);
+
+
+/***/ },
+/* 341 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	/**
+	 * 可滚的分组。
+	 */
+	var PassiveScrollableGroup = (function (_super) {
+	    __extends(PassiveScrollableGroup, _super);
+	    function PassiveScrollableGroup(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(PassiveScrollableGroup.prototype, "offsetX", {
+	        get: function () {
+	            return this._ox;
+	        },
+	        set: function (value) {
+	            this._ox = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(PassiveScrollableGroup.prototype, "offsetY", {
+	        get: function () {
+	            return this._oy;
+	        },
+	        set: function (value) {
+	            this._oy = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    PassiveScrollableGroup.prototype.relayoutChildren = function () {
+	        if (!this.w || !this.h) {
+	            return null;
+	        }
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        if (this.w > this.h) {
+	            var h = this.clientH;
+	            this.children.forEach(function (child) {
+	                child.moveResizeTo(x, y, child.w, h);
+	                child.relayoutChildren();
+	                x += child.w;
+	            });
+	        }
+	        else {
+	            var w = this.clientW;
+	            this.children.forEach(function (child) {
+	                child.moveResizeTo(x, y, w, child.h);
+	                child.relayoutChildren();
+	                y += child.h;
+	            });
+	        }
+	        return this.getLayoutRect();
+	    };
+	    PassiveScrollableGroup.prototype.doDrawChildren = function (ctx) {
+	        _super.prototype.drawChildren.call(this, ctx);
+	    };
+	    PassiveScrollableGroup.prototype.drawChildren = function (ctx) {
+	        var ox = this._ox;
+	        var oy = this._oy;
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var w = this.w - x - this.rightPadding;
+	        var h = this.h - y - this.bottomPadding;
+	        ctx.save();
+	        ctx.beginPath();
+	        ctx.rect(x, y, w, h);
+	        ctx.clip();
+	        ctx.translate(-ox, -oy);
+	        this.doDrawChildren(ctx);
+	        ctx.restore();
+	        return this;
+	    };
+	    /*
+	     * 在处理指针事件前，先加上滚动的偏移。
+	     */
+	    PassiveScrollableGroup.prototype.offsetPointerEvent = function (evt) {
+	        evt.x += this._ox;
+	        evt.y += this._oy;
+	    };
+	    /*
+	     * 在处理指针事件后，再减去滚动的偏移。
+	     */
+	    PassiveScrollableGroup.prototype.unOffsetPointerEvent = function (evt) {
+	        evt.y -= this._oy;
+	    };
+	    PassiveScrollableGroup.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._ox = 0;
+	        this._oy = 0;
+	    };
+	    PassiveScrollableGroup.prototype.dispatchClick = function (evt) {
+	        this.offsetPointerEvent(evt);
+	        _super.prototype.dispatchClick.call(this, evt);
+	        this.unOffsetPointerEvent(evt);
+	    };
+	    PassiveScrollableGroup.prototype.dispatchDblClick = function (evt) {
+	        this.offsetPointerEvent(evt);
+	        _super.prototype.dispatchDblClick.call(this, evt);
+	        this.unOffsetPointerEvent(evt);
+	    };
+	    PassiveScrollableGroup.prototype.dispatchPointerDown = function (evt, ctx) {
+	        this.offsetPointerEvent(evt);
+	        _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+	        this.unOffsetPointerEvent(evt);
+	    };
+	    PassiveScrollableGroup.prototype.dispatchPointerMove = function (evt, ctx) {
+	        this.offsetPointerEvent(evt);
+	        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+	        this.unOffsetPointerEvent(evt);
+	    };
+	    PassiveScrollableGroup.prototype.dispatchPointerUp = function (evt) {
+	        this.offsetPointerEvent(evt);
+	        _super.prototype.dispatchPointerUp.call(this, evt);
+	        this.unOffsetPointerEvent(evt);
+	    };
+	    return PassiveScrollableGroup;
+	}(widget_1.Widget));
+	exports.PassiveScrollableGroup = PassiveScrollableGroup;
+	;
+
+
+/***/ },
+/* 342 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_factory_1 = __webpack_require__(23);
+	var passive_scrollable_group_1 = __webpack_require__(341);
+	/**
+	 * 表格头
+	 */
+	var TableHeader = (function (_super) {
+	    __extends(TableHeader, _super);
+	    function TableHeader() {
+	        _super.call(this, TableHeader.TYPE);
+	    }
+	    TableHeader.create = function (options) {
+	        return TableHeader.recycleBin.create().reset(TableHeader.TYPE, options);
+	    };
+	    TableHeader.TYPE = "table-header";
+	    TableHeader.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeader(); });
+	    return TableHeader;
+	}(passive_scrollable_group_1.PassiveScrollableGroup));
+	exports.TableHeader = TableHeader;
+	;
+	widget_factory_1.WidgetFactory.register(TableHeader.TYPE, TableHeader.create);
+
+
+/***/ },
+/* 343 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var Events = __webpack_require__(6);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	var table_row_1 = __webpack_require__(338);
+	var table_index_1 = __webpack_require__(340);
+	var table_client_1 = __webpack_require__(339);
+	var table_header_1 = __webpack_require__(342);
+	var table_index_item_1 = __webpack_require__(344);
+	var table_header_item_1 = __webpack_require__(345);
+	var TableColInfo = (function () {
+	    function TableColInfo(title, widgetType, w, options, sortable) {
+	        this.w = w;
+	        this.title = title;
+	        this.sortable = sortable;
+	        this.widgetType = widgetType;
+	        this.options = options || {};
+	    }
+	    TableColInfo.create = function (title, widgetType, w, options, sortable) {
+	        return new TableColInfo(title, widgetType, w, options, sortable);
+	    };
+	    return TableColInfo;
+	}());
+	exports.TableColInfo = TableColInfo;
+	;
+	/**
+	 * 表格
+	 */
+	var Table = (function (_super) {
+	    __extends(Table, _super);
+	    function Table() {
+	        _super.call(this, Table.TYPE);
+	    }
+	    Object.defineProperty(Table.prototype, "itemH", {
+	        get: function () {
+	            return this._itemH;
+	        },
+	        set: function (value) {
+	            this._itemH = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "indexBarW", {
+	        get: function () {
+	            return this._indexBarW;
+	        },
+	        set: function (value) {
+	            this._indexBarW = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "headerBarH", {
+	        get: function () {
+	            return this._headerBarH;
+	        },
+	        set: function (value) {
+	            this._headerBarH = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "showIndexBar", {
+	        get: function () {
+	            return this._showIndexBar;
+	        },
+	        set: function (value) {
+	            this._showIndexBar = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Table.prototype.resetColumns = function () {
+	        this._colsInfo = [];
+	        return this;
+	    };
+	    Table.prototype.addColumn = function (colInfo) {
+	        this._colsInfo.push(colInfo);
+	        return this;
+	    };
+	    Table.prototype.getColumns = function () {
+	        return this._colsInfo;
+	    };
+	    Table.prototype.getTemplateRow = function () {
+	        if (!this._templateRow) {
+	            var row = table_row_1.TableRow.create({ w: this.w, h: this.itemH, app: this.app });
+	            this._colsInfo.forEach(function (item) {
+	                var widget = widget_factory_1.WidgetFactory.create(item.widgetType, item.options);
+	                row.addChild(widget, true);
+	            });
+	            this._templateRow = row;
+	        }
+	        return this._templateRow;
+	    };
+	    Table.prototype.bindData = function (viewModal) {
+	        this.prepareUI();
+	        var client = this._client;
+	        if (client) {
+	            client.templateItem = this.getTemplateRow();
+	            client.bindData(viewModal);
+	        }
+	        var indexBar = this._indexBar;
+	        if (indexBar) {
+	            var itemH = this.itemH;
+	            indexBar.removeAllChildren();
+	            client.children.forEach(function (item, index) {
+	                indexBar.addChild(table_index_item_1.TableIndexItem.create({ text: index, h: itemH }), true);
+	            });
+	            indexBar.relayoutChildren();
+	        }
+	        return this;
+	    };
+	    Table.prototype.prepareUI = function () {
+	        var _this = this;
+	        var itemH = this.itemH;
+	        this.removeAllChildren();
+	        var showIndexBar = this.showIndexBar;
+	        this._headerBar = table_header_1.TableHeader.create({ h: this.headerBarH, w: this.w });
+	        this._indexBar = table_index_1.TableIndex.create({ w: this.indexBarW, h: this.h });
+	        this._client = table_client_1.TableClient.create({ itemH: itemH, w: this.w - this.indexBarW, h: this.h - this.headerBarH });
+	        this.addChild(this._client, false);
+	        this.addChild(this._headerBar, false);
+	        this.addChild(this._indexBar, false);
+	        var headerBar = this._headerBar;
+	        this._colsInfo.forEach(function (item) {
+	            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
+	            headerBar.addChild(headerItem);
+	        });
+	        var client = this._client;
+	        var indexBar = this._indexBar;
+	        var headerBar = this._headerBar;
+	        client.on(Events.SCROLL, function (evt) {
+	            indexBar.offsetY = evt.offsetY;
+	            headerBar.offsetX = evt.offsetX;
+	            _this.requestRedraw();
+	        });
+	        this.relayoutChildren();
+	    };
+	    Table.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        if (!this._headerBar) {
+	            this.prepareUI();
+	        }
+	    };
+	    Table.prototype.relayoutChildren = function () {
+	        if (!this.w || !this.h) {
+	            return null;
+	        }
+	        var w = 0;
+	        var h = 0;
+	        var x = this.leftPadding;
+	        var y = this.topPadding;
+	        var client = this._client;
+	        var indexBar = this._indexBar;
+	        var headerBar = this._headerBar;
+	        var indexBarW = this._indexBarW;
+	        var headerBarH = this._headerBarH;
+	        var yy = y + headerBarH;
+	        var xx = this.showIndexBar ? x + this._indexBarW : x;
+	        w = this.w - xx - this.rightPadding;
+	        h = this.h - yy - this.bottomPadding;
+	        var colsWidth = null;
+	        if (headerBar) {
+	            headerBar.moveResizeTo(xx, y, w, headerBarH);
+	            headerBar.relayoutChildren();
+	            colsWidth = headerBar.children.map(function (item) {
+	                return item.w;
+	            });
+	        }
+	        if (indexBar) {
+	            indexBar.moveResizeTo(x, yy, indexBarW, h);
+	            indexBar.relayoutChildren();
+	        }
+	        if (client) {
+	            client.colsWidth = colsWidth;
+	            client.moveResizeTo(xx, yy, w, h);
+	            client.relayoutChildren();
+	        }
+	        return this.getLayoutRect();
+	    };
+	    Table.prototype.dispose = function () {
+	        _super.prototype.dispose.call(this);
+	        this._templateRow = null;
+	        this._headerBar = null;
+	        this._indexBar = null;
+	        this._client = null;
+	        this.resetColumns();
+	    };
+	    Table.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._itemH = 30;
+	        this.resetColumns();
+	        this._indexBarW = 30;
+	        this._headerBarH = 30;
+	        this._showIndexBar = true;
+	    };
+	    Table.create = function (options) {
+	        return Table.recycleBin.create().reset(Table.TYPE, options);
+	    };
+	    Table.TYPE = "table";
+	    Table.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Table(); });
+	    return Table;
+	}(widget_1.Widget));
+	exports.Table = Table;
+	;
+	widget_factory_1.WidgetFactory.register(Table.TYPE, Table.create);
+
+
+/***/ },
+/* 344 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	/**
+	 * 表格左边的序数项。
+	 */
+	var TableIndexItem = (function (_super) {
+	    __extends(TableIndexItem, _super);
+	    function TableIndexItem() {
+	        _super.call(this, TableIndexItem.TYPE);
+	    }
+	    TableIndexItem.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	    };
+	    TableIndexItem.create = function (options) {
+	        return TableIndexItem.recycleBin.create().reset(TableIndexItem.TYPE, options);
+	    };
+	    TableIndexItem.TYPE = "table-index-item";
+	    TableIndexItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableIndexItem(); });
+	    return TableIndexItem;
+	}(widget_1.Widget));
+	exports.TableIndexItem = TableIndexItem;
+	;
+	widget_factory_1.WidgetFactory.register(TableIndexItem.TYPE, TableIndexItem.create);
+
+
+/***/ },
+/* 345 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var rect_1 = __webpack_require__(1);
+	var Events = __webpack_require__(6);
+	var widget_1 = __webpack_require__(19);
+	var widget_factory_1 = __webpack_require__(23);
+	var recyclable_creator_1 = __webpack_require__(82);
+	/**
+	 * 表格头的一项。
+	 */
+	var TableHeaderItem = (function (_super) {
+	    __extends(TableHeaderItem, _super);
+	    function TableHeaderItem() {
+	        _super.call(this, TableHeaderItem.TYPE);
+	    }
+	    Object.defineProperty(TableHeaderItem.prototype, "sortable", {
+	        get: function () {
+	            return this._sortable;
+	        },
+	        set: function (value) {
+	            this._sortable = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TableHeaderItem.prototype.getFgImageRect = function (style) {
+	        var x = this.w - this.h;
+	        var y = this.topPadding;
+	        var w = this.clientH;
+	        var h = this.clientH;
+	        return rect_1.Rect.rect.init(x, y, w, h);
+	    };
+	    TableHeaderItem.prototype.getStyleType = function () {
+	        var styleType = this._styleType || this.type;
+	        if (!this._sortable || !this._sortStatus) {
+	            return styleType;
+	        }
+	        return styleType + "." + this._sortStatus;
+	    };
+	    TableHeaderItem.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	        this._sortStatus = null;
+	        this.on(Events.CLICK, this.triggerSortStatus.bind(this));
+	    };
+	    TableHeaderItem.prototype.triggerSortStatus = function () {
+	        if (this._sortable) {
+	            if (this._sortStatus === TableHeaderItem.SORT_INC) {
+	                this._sortStatus = TableHeaderItem.SORT_DEC;
+	            }
+	            else {
+	                this._sortStatus = TableHeaderItem.SORT_INC;
+	            }
+	        }
+	    };
+	    TableHeaderItem.create = function (options) {
+	        return TableHeaderItem.recycleBin.create().reset(TableHeaderItem.TYPE, options);
+	    };
+	    TableHeaderItem.SORT_INC = "inc";
+	    TableHeaderItem.SORT_DEC = "dec";
+	    TableHeaderItem.TYPE = "table-header-item";
+	    TableHeaderItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeaderItem(); });
+	    return TableHeaderItem;
+	}(widget_1.Widget));
+	exports.TableHeaderItem = TableHeaderItem;
+	;
+	widget_factory_1.WidgetFactory.register(TableHeaderItem.TYPE, TableHeaderItem.create);
+
+
+/***/ },
+/* 346 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56411,7 +57066,7 @@ var qtk =
 
 
 /***/ },
-/* 339 */
+/* 347 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56435,7 +57090,7 @@ var qtk =
 
 
 /***/ },
-/* 340 */
+/* 348 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56464,7 +57119,7 @@ var qtk =
 
 
 /***/ },
-/* 341 */
+/* 349 */
 /***/ function(module, exports) {
 
 	"use strict";

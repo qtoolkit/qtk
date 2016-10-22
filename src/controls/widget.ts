@@ -1736,7 +1736,7 @@ export class Widget extends Emitter {
 		this._children.length = 0;
 		if(json.children) {
 			json.children.forEach((childJson:any) => {
-				var child = WidgetFactory.create(childJson.type);
+				var child = WidgetFactory.create(childJson.type, {parent:this, app:this.app});
 				child.fromJson(childJson);
 				this._children.push(child);
 			});
@@ -1887,13 +1887,20 @@ export class Widget extends Emitter {
 		this._dataBindingRule = null;
 	}
 
+	protected onBeforeBindData() {
+	}
+	
+	protected onAfterBindData() {
+	}
+
 	/**
 	 * 绑定数据。
 	 */
 	public bindData(viewModal:IViewModal) : Widget {
 		var dataBindingRule = this._dataBindingRule;
-		
 		this._viewModal = viewModal;
+		this.onBeforeBindData();
+
 		if(dataBindingRule && viewModal) {
 			var bindingMode = viewModal.getBindingMode();
 			
@@ -1932,6 +1939,7 @@ export class Widget extends Emitter {
 				this.bindChildren(viewModal);
 			});
 		}
+		this.onAfterBindData();
 
 		return this;
 	}

@@ -277,6 +277,8 @@ export class ScrollView extends Widget {
 			this.offsetPointerEvent(evt);
 			super.dispatchPointerMove(evt, ctx);
 			this.unOffsetPointerEvent(evt);
+		}else{
+			this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
 		}
 
 		this.requestRedraw();
@@ -541,6 +543,8 @@ export class ScrollView extends Widget {
 		if(this.slideToScroll) {
 			this.scroller.scrollTo(this.offsetX, this.offsetY);
 			this.handleScrollDone();
+		}else{
+			this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
 		}
 	}
 

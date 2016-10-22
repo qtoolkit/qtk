@@ -299,6 +299,9 @@ var ScrollView = (function (_super) {
             _super.prototype.dispatchPointerMove.call(this, evt, ctx);
             this.unOffsetPointerEvent(evt);
         }
+        else {
+            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
+        }
         this.requestRedraw();
     };
     ScrollView.prototype.dispatchPointerUp = function (evt) {
@@ -531,6 +534,9 @@ var ScrollView = (function (_super) {
         if (this.slideToScroll) {
             this.scroller.scrollTo(this.offsetX, this.offsetY);
             this.handleScrollDone();
+        }
+        else {
+            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
         }
     };
     Object.defineProperty(ScrollView.prototype, "scrollerOptions", {

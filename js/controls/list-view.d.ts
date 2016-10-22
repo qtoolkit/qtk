@@ -11,7 +11,7 @@ export declare class ListView extends ScrollView {
     relayoutChildren(): Rect;
     protected _ih: number;
     protected _is: number;
-    constructor();
+    constructor(type?: string);
     protected onReset(): void;
     protected static defProps: {} & {
         _x: number;

@@ -27,6 +27,7 @@ function onReady(app) {
 		{title:"Label", data:"label"},
 		{title:"Pages", data:"pages"},
 		{title:"Switch", data:"switch"},
+		{title:"Table", data:"table"},
 		{title:"Dialog", data:"dialog"},
 		{title:"Accordion", data:"accordion"},
 		{title:"Chart Line", data:"chart-line"},

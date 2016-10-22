@@ -33,7 +33,8 @@ function onReady(app) {
 	var imageURL = "/demos/assets/test.jpg";
 	image.set({name:"image", value:imageURL});
 	image.layoutParam = win.createChildLayoutParam({x:"40%", y:"40%", w:"20%", h:"20%"});
-	image.scaleTo(2, 2, 2000).repeat(500).yoyo(true);
+	//image.scaleTo(2, 2, 2000).repeat(500).yoyo(true);
+	image.rotateTo(Math.PI*2, 10000).repeat(500).yoyo(true);
 	win.addChild(image);
 	
 	win.open();

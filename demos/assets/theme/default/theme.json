@@ -372,6 +372,54 @@
 			"lineColor":"#CCCCCC"
 		}
 	},
+	"table-header-item": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 0
+		},
+		"normal" : {
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		},
+		"over" : {
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
+		},
+		"active" : {
+			"lineColor" : "#4D90FC",
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
+	},
+	"table-header-item.inc": {
+		"extends": "table-header-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/arrow-up.png"
+		}
+	},
+	"table-header-item.dec": {
+		"extends": "table-header-item",
+		"common" : {
+			"foreGroundImage" : "images/@density/arrow-down.png"
+		}
+	},
+	"table-index-item": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 0
+		},
+		"normal" : {
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F6F6F6","#EEEEEE","#E9E9E9", "#E3E3E3", "#E1E1E1"]
+		},
+		"over" : {
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
+		},
+		"active" : {
+			"lineColor" : "#4D90FC",
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
+	},
 	"menu": {
 		"extends": "widget",
 		"common" : {

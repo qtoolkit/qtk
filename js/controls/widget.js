@@ -1591,7 +1591,7 @@ var Widget = (function (_super) {
         this._children.length = 0;
         if (json.children) {
             json.children.forEach(function (childJson) {
-                var child = widget_factory_1.WidgetFactory.create(childJson.type);
+                var child = widget_factory_1.WidgetFactory.create(childJson.type, { parent: _this, app: _this.app });
                 child.fromJson(childJson);
                 _this._children.push(child);
             });
@@ -1708,6 +1708,10 @@ var Widget = (function (_super) {
         this._viewModal = null;
         this._dataBindingRule = null;
     };
+    Widget.prototype.onBeforeBindData = function () {
+    };
+    Widget.prototype.onAfterBindData = function () {
+    };
     /**
      * 绑定数据。
      */
@@ -1715,6 +1719,7 @@ var Widget = (function (_super) {
         var _this = this;
         var dataBindingRule = this._dataBindingRule;
         this._viewModal = viewModal;
+        this.onBeforeBindData();
         if (dataBindingRule && viewModal) {
             var bindingMode = viewModal.getBindingMode();
             this.onBindCommand(viewModal, dataBindingRule);
@@ -1746,6 +1751,7 @@ var Widget = (function (_super) {
                 _this.bindChildren(viewModal);
             });
         }
+        this.onAfterBindData();
         return this;
     };
     Widget.prototype.bindChildren = function (viewModal) {
