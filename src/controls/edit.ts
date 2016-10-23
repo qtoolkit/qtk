@@ -59,13 +59,16 @@ export class Edit extends Label {
 		if(!this._isEditing) {
 			super.draw(ctx);
 		}else{
-			var input = this._input;
-			var p = this.toViewPoint(Point.point.init(0, 0));
-			if(input.x !== p.x || input.y !== p.y) {
-				input.move(p.x, p.y);
-			}
 		}
 	}
+
+	protected onWheel = function() {
+		var input = this._input;
+		if(input) {
+			input.hide();
+			this.hideEditor();
+		}
+	}.bind(this);
 
 	public relayoutText() : Widget {
 		if(!this._isEditing) {
@@ -101,6 +104,16 @@ export class Edit extends Label {
 		return this._inputFilter ? this._inputFilter(value) : value;
 	}
 
+	protected hideEditor() {
+		if(this._isEditing) {
+			this._isEditing = false;
+			this.relayoutText();
+			this._input = null;
+			this.dispatchEvent({type:Events.BLUR});
+			this.win.off(Events.WHEEL, this.onWheel);
+		}
+	}
+
 	protected showEditor() {
 		var style = this.getStyle();
 		this._input = this.multiLineMode ? HtmlEdit.textArea : HtmlEdit.input;
@@ -120,11 +133,10 @@ export class Edit extends Label {
 		var oldValue = this.value;
 
 		this.dispatchEvent({type:Events.FOCUS});
+		this.win.on(Events.WHEEL, this.onWheel);
+
 		input.on(Events.HIDE, evt => {
-			this._isEditing = false;
-			this.relayoutText();
-			this._input = null;
-			this.dispatchEvent({type:Events.BLUR});
+			this.hideEditor();
 		});
 		
 		input.on(Events.CHANGING, evt => {

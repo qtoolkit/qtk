@@ -20,6 +20,13 @@ var Edit = (function (_super) {
     __extends(Edit, _super);
     function Edit() {
         _super.call(this, Edit.TYPE);
+        this.onWheel = function () {
+            var input = this._input;
+            if (input) {
+                input.hide();
+                this.hideEditor();
+            }
+        }.bind(this);
         this.drawInvalidInputTips = function (evt) {
             var win = this.win;
             var tm = this._themeManager;
@@ -97,11 +104,6 @@ var Edit = (function (_super) {
             _super.prototype.draw.call(this, ctx);
         }
         else {
-            var input = this._input;
-            var p = this.toViewPoint(point_1.Point.point.init(0, 0));
-            if (input.x !== p.x || input.y !== p.y) {
-                input.move(p.x, p.y);
-            }
         }
     };
     Edit.prototype.relayoutText = function () {
@@ -135,6 +137,15 @@ var Edit = (function (_super) {
     Edit.prototype.filterText = function (value) {
         return this._inputFilter ? this._inputFilter(value) : value;
     };
+    Edit.prototype.hideEditor = function () {
+        if (this._isEditing) {
+            this._isEditing = false;
+            this.relayoutText();
+            this._input = null;
+            this.dispatchEvent({ type: Events.BLUR });
+            this.win.off(Events.WHEEL, this.onWheel);
+        }
+    };
     Edit.prototype.showEditor = function () {
         var _this = this;
         var style = this.getStyle();
@@ -152,11 +163,9 @@ var Edit = (function (_super) {
         input.z = this.win.z + 1;
         var oldValue = this.value;
         this.dispatchEvent({ type: Events.FOCUS });
+        this.win.on(Events.WHEEL, this.onWheel);
         input.on(Events.HIDE, function (evt) {
-            _this._isEditing = false;
-            _this.relayoutText();
-            _this._input = null;
-            _this.dispatchEvent({ type: Events.BLUR });
+            _this.hideEditor();
         });
         input.on(Events.CHANGING, function (evt) {
             var e = _this.eChangeEvent;

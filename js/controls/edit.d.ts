@@ -25,10 +25,12 @@ export declare class Edit extends Label {
      */
     inputType: string;
     draw(ctx: any): void;
+    protected onWheel: any;
     relayoutText(): Widget;
     protected drawText(ctx: any, style: Style): Widget;
     protected getStyleType(): string;
     protected filterText(value: string): string;
+    protected hideEditor(): void;
     protected showEditor(): void;
     protected _validationTips: string;
     validationTips: string;
