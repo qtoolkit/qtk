@@ -93,6 +93,7 @@ var Table = (function (_super) {
             var row = table_row_1.TableRow.create({ w: this.w, h: this.itemH, app: this.app });
             this._colsInfo.forEach(function (item) {
                 var widget = widget_factory_1.WidgetFactory.create(item.widgetType, item.options);
+                widget.styleType = widget.type + ".table";
                 row.addChild(widget, true);
             });
             this._templateRow = row;

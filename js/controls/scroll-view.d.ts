@@ -88,6 +88,8 @@ export declare class ScrollView extends Widget {
     readonly scrollerOptions: ScrollerOptions;
     protected getLayoutWidth(): number;
     protected getLayoutHeight(): number;
+    protected getViewWidth(): number;
+    protected getViewHeight(): number;
     protected getLayoutRect(): Rect;
     protected onInit(): void;
     protected onReset(): void;

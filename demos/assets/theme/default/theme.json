@@ -690,6 +690,36 @@
 	"hruler": {
 		"extends": "ruler"
 	},
+	"edit.table": {
+		"extends": "edit",
+		"common" : {
+			"roundRadius" : 0
+		}
+	},
+	"combo-box.table": {
+		"extends": "combo-box",
+		"common" : {
+			"roundRadius" : 0
+		},
+		"normal" : {
+			"lineColor" : null, 
+			"backGroundColor" : null
+		},
+		"over" : {
+			"lineColor" : null, 
+			"backGroundColor" : null
+		},
+		"active" : {
+			"lineColor" : null, 
+			"backGroundColor" : null
+		}
+	},
+	"label.table": {
+		"extends": "label",
+		"common" : {
+			"roundRadius" : 0
+		}
+	},
 	"window-normal": {
 		"extends": "widget"
 	}

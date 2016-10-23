@@ -116,6 +116,15 @@ export abstract class ComboBoxBase extends Widget {
 		return this._options;
 	}
 	
+	public set options(value:Array<ComboBoxOption>){
+		this.resetOptions();
+		if(value) {
+			value.forEach((item:any) => {
+				this.addOption(item.text, item.value, item.imageURL, item.color);
+			});
+		}
+	}
+	
 	public set optionsJson(options:any) {
 		this.resetOptions();
 		options.forEach(item => {

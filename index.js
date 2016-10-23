@@ -4348,9 +4348,15 @@ var qtk =
 	        var style = this.getStyle();
 	        this._input = this.multiLineMode ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
 	        var input = this._input;
+	        var vp = this.app.getViewPort();
 	        var p = this.toViewPoint(point_1.Point.point.init(0, 0));
-	        input.move(p.x, p.y);
-	        input.resize(this.w, this.h);
+	        var borderWidth = input.borderWidth * 2;
+	        var x = Math.max(0, p.x);
+	        var y = Math.max(0, p.y);
+	        var w = Math.min(this.w, vp.w - x - borderWidth);
+	        var h = Math.min(this.h, vp.h - y - borderWidth);
+	        input.move(x, y);
+	        input.resize(w, h);
 	        input.fontSize = style.fontSize;
 	        input.inputType = this.inputType;
 	        input.textColor = style.textColor;
@@ -17488,11 +17494,19 @@ var qtk =
 	        this.element.style.top = y + "px";
 	        return this;
 	    };
+	    Object.defineProperty(HtmlElement.prototype, "borderWidth", {
+	        get: function () {
+	            var borderWidth = 0;
+	            if (window.getComputedStyle) {
+	                borderWidth = parseInt(window.getComputedStyle(this.element).borderWidth);
+	            }
+	            return borderWidth;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    HtmlElement.prototype.resize = function (w, h) {
-	        var borderWidth = 0;
-	        if (window.getComputedStyle) {
-	            borderWidth = 2 * parseInt(window.getComputedStyle(this.element).borderWidth);
-	        }
+	        var borderWidth = this.borderWidth * 2;
 	        var ww = w - borderWidth;
 	        var hh = h - borderWidth;
 	        this.element.style.width = ww + "px";
@@ -19281,6 +19295,20 @@ var qtk =
 	    };
 	    ScrollView.prototype.getLayoutHeight = function () {
 	        return this.h - this.topPadding - this.bottomPadding;
+	    };
+	    ScrollView.prototype.getViewWidth = function () {
+	        var w = this.clientW;
+	        if (this.dragToScroll && this.isVScrollBarVisible()) {
+	            w -= this._scrollBarStyle.size;
+	        }
+	        return w;
+	    };
+	    ScrollView.prototype.getViewHeight = function () {
+	        var h = this.clientH;
+	        if (this.dragToScroll && this.isHScrollBarVisible()) {
+	            h -= this._scrollBarStyle.size;
+	        }
+	        return h;
 	    };
 	    ScrollView.prototype.getLayoutRect = function () {
 	        var w = this.getLayoutWidth();
@@ -22139,6 +22167,15 @@ var qtk =
 	    Object.defineProperty(ComboBoxBase.prototype, "options", {
 	        get: function () {
 	            return this._options;
+	        },
+	        set: function (value) {
+	            var _this = this;
+	            this.resetOptions();
+	            if (value) {
+	                value.forEach(function (item) {
+	                    _this.addOption(item.text, item.value, item.imageURL, item.color);
+	                });
+	            }
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -56533,6 +56570,9 @@ var qtk =
 	        get: function () {
 	            return this._colsWidth;
 	        },
+	        /**
+	         * 记录每一列的宽度，从TableHeader获取。
+	         */
 	        set: function (value) {
 	            this._colsWidth = value;
 	        },
@@ -56543,6 +56583,9 @@ var qtk =
 	        get: function () {
 	            return this._selectedRows;
 	        },
+	        /**
+	         * 当前选择的行的范围。
+	         */
 	        set: function (value) {
 	            this._selectedRows.first = value.first;
 	            this._selectedRows.second = value.second;
@@ -56554,6 +56597,9 @@ var qtk =
 	        get: function () {
 	            return this._selectedCols;
 	        },
+	        /**
+	         * 当前选择的列的范围。
+	         */
 	        set: function (value) {
 	            this._selectedCols.first = value.first;
 	            this._selectedCols.second = value.second;
@@ -56561,6 +56607,9 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /*
+	     * 把X坐标转换成对应的列数。
+	     */
 	    TableClient.prototype.xToCol = function (x) {
 	        var xx = x;
 	        var col = -1;
@@ -56571,14 +56620,20 @@ var qtk =
 	        });
 	        return col;
 	    };
+	    /*
+	     * 把Y坐标转换成对应的行数。
+	     */
 	    TableClient.prototype.yToRow = function (y) {
 	        return Math.floor(y / this.itemH);
 	    };
+	    /**
+	     * 计算选中的行列数对应的像素范围。
+	     */
 	    TableClient.prototype.calcSelectRect = function () {
-	        var selectedCols = this._selectedCols;
-	        var selectedRows = this._selectedRows;
 	        var left = 0;
 	        var right = 0;
+	        var selectedCols = this._selectedCols;
+	        var selectedRows = this._selectedRows;
 	        this.colsWidth.some(function (width, index) {
 	            if (index < selectedCols.first) {
 	                left += width;
@@ -56595,11 +56650,21 @@ var qtk =
 	        var w = right - left;
 	        var y = selectedRows.first * this.itemH - this.offsetY;
 	        var h = (selectedRows.second - selectedRows.first + 1) * this.itemH;
-	        if ((x + w) >= this.contentW) {
-	            w = this.contentW - x - 1;
+	        var maxW = Math.min(this.getViewWidth(), this.contentW);
+	        var maxH = Math.min(this.getViewHeight(), this.contentH);
+	        if (x < 0) {
+	            w += x;
+	            x = 0;
+	        }
+	        if ((x + w) >= maxW) {
+	            w = maxW - x - 1;
+	        }
+	        if (y < 0) {
+	            h += y;
+	            y = 0;
 	        }
 	        if ((y + h) >= this.contentH) {
-	            h = this.contentH - y - 1;
+	            h = maxH - y - 1;
 	        }
 	        return rect_1.Rect.rect.init(x, y, w, h);
 	    };
@@ -56644,36 +56709,57 @@ var qtk =
 	            this.updateSelection(evt.x, evt.y, false, true);
 	        }
 	    };
-	    TableClient.prototype.dispatchPointerUp = function (evt) {
-	        _super.prototype.dispatchPointerUp.call(this, evt);
-	        if (!this._pointerInBar) {
-	            this.updateSelection(evt.x, evt.y, false, true);
+	    TableClient.prototype.drawVLine = function (ctx, x, yStart, yEnd) {
+	        if (x >= this.w) {
+	            return;
 	        }
+	        ctx.moveTo(x, yStart);
+	        ctx.lineTo(x, yEnd);
 	    };
-	    TableClient.prototype.drawGrid = function (ctx, style) {
-	        var itemH = this.itemH;
+	    TableClient.prototype.drawVLines = function (ctx) {
+	        var _this = this;
+	        var startCol = 0;
 	        var ox = this.offsetX;
-	        var oy = this.offsetY;
-	        var w = this.clientW;
-	        var h = this.clientH;
-	        var b = this.topPadding + h;
-	        var r = this.leftPadding + w;
-	        var itemW = this.colsWidth[0];
-	        var y = this.topPadding;
-	        var x = this.leftPadding;
-	        ctx.beginPath();
-	        this.colsWidth.forEach(function (width, index) {
-	            ctx.moveTo(x, y);
-	            ctx.lineTo(x, b);
-	            x += width;
+	        this.colsWidth.some(function (width, index) {
+	            if (ox > width) {
+	                ox -= width;
+	                return false;
+	            }
+	            else {
+	                startCol = index;
+	                ox = width - ox;
+	                return true;
+	            }
 	        });
-	        x = this.leftPadding;
-	        y = this.topPadding + (itemH - oy % itemH);
+	        var y = this.topPadding;
+	        var x = this.leftPadding + ox;
+	        var b = this.topPadding + this.clientH;
+	        this.drawVLine(ctx, x, y, b);
+	        this.colsWidth.forEach(function (width, index) {
+	            if (index <= startCol) {
+	                return;
+	            }
+	            x += width;
+	            _this.drawVLine(ctx, x, y, b);
+	        });
+	    };
+	    TableClient.prototype.drawHLines = function (ctx) {
+	        var oy = this.offsetY;
+	        var itemH = this.itemH;
+	        var x = this.leftPadding;
+	        var b = this.topPadding + this.clientH;
+	        var r = this.leftPadding + this.clientW;
+	        var y = this.topPadding + (itemH - oy % itemH);
 	        while (y < b) {
 	            ctx.moveTo(x, y);
 	            ctx.lineTo(r, y);
 	            y += itemH;
 	        }
+	    };
+	    TableClient.prototype.drawGrid = function (ctx, style) {
+	        ctx.beginPath();
+	        this.drawVLines(ctx);
+	        this.drawHLines(ctx);
 	        ctx.lineWidth = 1;
 	        ctx.strokeStyle = style.lineColor;
 	        ctx.stroke();
@@ -56690,14 +56776,20 @@ var qtk =
 	    };
 	    TableClient.prototype.afterDrawChildren = function (ctx) {
 	        _super.prototype.afterDrawChildren.call(this, ctx);
-	        var style = this.getStyleOfState(widget_1.WidgetState.NORMAL);
-	        this.drawGrid(ctx, style);
-	        style = this.getStyleOfState(widget_1.WidgetState.ACTIVE);
-	        this.drawSelection(ctx, style);
+	        this.drawGrid(ctx, this.getStyleOfState(widget_1.WidgetState.NORMAL));
+	        this.drawSelection(ctx, this.getStyleOfState(widget_1.WidgetState.ACTIVE));
+	    };
+	    TableClient.prototype.getLayoutWidth = function () {
+	        var w = 0;
+	        this.colsWidth.forEach(function (width) {
+	            w += width;
+	        });
+	        return Math.max(w, this.clientW);
 	    };
 	    TableClient.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this.dragToScroll = true;
+	        this.scrollerOptions.scrollingX = true;
 	        this._selectedCols = range_1.Range.create(0, 0);
 	        this._selectedRows = range_1.Range.create(0, 0);
 	    };
@@ -57036,6 +57128,7 @@ var qtk =
 	            var row = table_row_1.TableRow.create({ w: this.w, h: this.itemH, app: this.app });
 	            this._colsInfo.forEach(function (item) {
 	                var widget = widget_factory_1.WidgetFactory.create(item.widgetType, item.options);
+	                widget.styleType = widget.type + ".table";
 	                row.addChild(widget, true);
 	            });
 	            this._templateRow = row;

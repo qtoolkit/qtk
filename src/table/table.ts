@@ -106,6 +106,7 @@ export class Table extends Widget {
 			var row = TableRow.create({w:this.w, h:this.itemH, app:this.app});
 			this._colsInfo.forEach((item:TableColInfo) => {
 				var widget = WidgetFactory.create(item.widgetType, item.options);
+				widget.styleType = widget.type + ".table";
 				row.addChild(widget, true);
 			});
 			this._templateRow = row;

@@ -18,6 +18,9 @@ export class TableClient extends ListView {
 	protected _selectedCols : Range;
 	protected _selectedRows : Range;
 
+	/**
+	 * 记录每一列的宽度，从TableHeader获取。
+	 */
 	public set colsWidth(value:Array<number>) {
 		this._colsWidth = value;
 	}
@@ -25,7 +28,10 @@ export class TableClient extends ListView {
 	public get colsWidth() : Array<number> {
 		return this._colsWidth;
 	}
-	
+
+	/**
+	 * 当前选择的行的范围。
+	 */
 	public set selectedRows(value:Range) {
 		this._selectedRows.first = value.first;
 		this._selectedRows.second = value.second;
@@ -35,6 +41,9 @@ export class TableClient extends ListView {
 		return this._selectedRows;
 	}
 	
+	/**
+	 * 当前选择的列的范围。
+	 */
 	public set selectedCols(value:Range) {
 		this._selectedCols.first = value.first;
 		this._selectedCols.second = value.second;
@@ -44,10 +53,12 @@ export class TableClient extends ListView {
 		return this._selectedCols;
 	}
 
+	/*
+	 * 把X坐标转换成对应的列数。
+	 */
 	protected xToCol(x:number) : number {
 		var xx = x;
 		var col = -1;
-
 		this.colsWidth.some(function(w:number, index:number) {
 			xx -= w;
 			col = index;
@@ -57,21 +68,26 @@ export class TableClient extends ListView {
 		return col;
 	}
 	
+	/*
+	 * 把Y坐标转换成对应的行数。
+	 */
 	protected yToRow(y:number) : number {
 		return Math.floor(y/this.itemH);
 	}
 
+	/**
+	 * 计算选中的行列数对应的像素范围。
+	 */
 	protected calcSelectRect() : Rect {
+		var left = 0;
+		var right = 0;
 		var selectedCols = this._selectedCols;
 		var selectedRows = this._selectedRows;
 
-		var left = 0;
-		var right = 0;
 		this.colsWidth.some(function(width:number, index:number) {
 			if(index < selectedCols.first) {
 				left += width;
 			}
-
 			if(index <= selectedCols.second) {
 				right += width;
 				return false;
@@ -84,12 +100,23 @@ export class TableClient extends ListView {
 		var w = right - left;
 		var y = selectedRows.first * this.itemH - this.offsetY;
 		var h = (selectedRows.second-selectedRows.first+1) * this.itemH;
-	
-		if((x + w) >= this.contentW) {
-			w = this.contentW - x - 1;
+
+		var maxW = Math.min(this.getViewWidth(), this.contentW);
+		var maxH = Math.min(this.getViewHeight(), this.contentH);
+
+		if(x < 0) {
+			w += x;
+			x = 0;
+		}
+		if((x + w) >= maxW) {
+			w = maxW - x - 1;
+		}
+		if(y < 0) {
+			h += y;
+			y = 0;
 		}
 		if((y + h) >= this.contentH) {
-			h = this.contentH - y - 1;
+			h = maxH - y - 1;
 		}
 
 		return Rect.rect.init(x, y, w, h);
@@ -149,42 +176,61 @@ export class TableClient extends ListView {
 		}
 	}
 	
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
-		super.dispatchPointerUp(evt);
-
-		if(!this._pointerInBar) {
-			this.updateSelection(evt.x, evt.y, false, true);
+	protected drawVLine(ctx:any, x:number, yStart:number, yEnd:number) {
+		if(x >= this.w) {
+			return;
 		}
+		ctx.moveTo(x, yStart);
+		ctx.lineTo(x, yEnd);
 	}
-	
-	protected drawGrid(ctx:any, style:Style) {
-		var itemH = this.itemH;
+
+	protected drawVLines(ctx:any) {
+		var startCol = 0;
 		var ox = this.offsetX;
-		var oy = this.offsetY;
-		var w = this.clientW;
-		var h = this.clientH;
-		var b = this.topPadding + h;
-		var r = this.leftPadding + w;
-
-		var itemW = this.colsWidth[0];
-		var y = this.topPadding;
-		var x = this.leftPadding;
-
-		ctx.beginPath();
-		this.colsWidth.forEach((width:number, index:number) => {
-			ctx.moveTo(x, y);
-			ctx.lineTo(x, b);
-			x += width;
+		this.colsWidth.some((width:number, index:number) => {
+			if(ox > width) {
+				ox -= width;
+				return false;
+			}else{
+				startCol = index;
+				ox = width - ox;
+				return true;
+			}
 		});
 
-		x = this.leftPadding;
-		y = this.topPadding + (itemH - oy%itemH);
+		var y = this.topPadding;
+		var x = this.leftPadding + ox;
+		var b = this.topPadding + this.clientH;
+		this.drawVLine(ctx, x, y, b);
+		this.colsWidth.forEach((width:number, index:number) => {
+			if(index <= startCol) {
+				return;
+			}
+			x += width;
+			this.drawVLine(ctx, x, y, b);
+		});
+	}
+
+	protected drawHLines(ctx:any) {
+		var oy = this.offsetY;
+		var itemH = this.itemH;
+		var x = this.leftPadding;
+		var b = this.topPadding + this.clientH;
+		var r = this.leftPadding + this.clientW;
+		var y = this.topPadding + (itemH - oy%itemH);
+		
 		while(y < b) {
 			ctx.moveTo(x, y);
 			ctx.lineTo(r, y);
 		
 			y += itemH;
 		}
+	}
+
+	protected drawGrid(ctx:any, style:Style) {
+		ctx.beginPath();
+		this.drawVLines(ctx);
+		this.drawHLines(ctx);
 
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = style.lineColor;
@@ -205,12 +251,18 @@ export class TableClient extends ListView {
 
 	protected afterDrawChildren(ctx:any) {
 		super.afterDrawChildren(ctx);
-
-		var style = this.getStyleOfState(WidgetState.NORMAL);
-		this.drawGrid(ctx, style);
+		this.drawGrid(ctx, this.getStyleOfState(WidgetState.NORMAL));
+		this.drawSelection(ctx, this.getStyleOfState(WidgetState.ACTIVE));
+	}
+	
+	protected getLayoutWidth() : number {
+		var w = 0;
 		
-		style = this.getStyleOfState(WidgetState.ACTIVE);
-		this.drawSelection(ctx, style);
+		this.colsWidth.forEach((width:number) => {
+			w += width;
+		});
+
+		return Math.max(w, this.clientW);
 	}
 
 	constructor() {
@@ -220,6 +272,7 @@ export class TableClient extends ListView {
 	protected onReset() {
 		super.onReset();
 		this.dragToScroll = true;
+		this.scrollerOptions.scrollingX = true;
 		this._selectedCols = Range.create(0, 0);
 		this._selectedRows = Range.create(0, 0);
 	}

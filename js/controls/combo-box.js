@@ -107,6 +107,15 @@ var ComboBoxBase = (function (_super) {
         get: function () {
             return this._options;
         },
+        set: function (value) {
+            var _this = this;
+            this.resetOptions();
+            if (value) {
+                value.forEach(function (item) {
+                    _this.addOption(item.text, item.value, item.imageURL, item.color);
+                });
+            }
+        },
         enumerable: true,
         configurable: true
     });

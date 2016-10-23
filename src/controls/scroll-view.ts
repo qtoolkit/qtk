@@ -570,6 +570,24 @@ export class ScrollView extends Widget {
 		return this.h - this.topPadding - this.bottomPadding;
 	}
 
+	protected getViewWidth() : number {
+		var w = this.clientW;
+		if(this.dragToScroll && this.isVScrollBarVisible()) {
+			w -= this._scrollBarStyle.size;
+		}
+		return w;
+	}
+	
+	protected getViewHeight() : number {
+		var h = this.clientH;
+		if(this.dragToScroll && this.isHScrollBarVisible()) {
+			h -= this._scrollBarStyle.size;
+		}
+
+		return h;
+	}
+
+
 	protected getLayoutRect() : Rect {
 		var w = this.getLayoutWidth();
 		var h = this.getLayoutHeight();

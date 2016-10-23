@@ -70,12 +70,17 @@ export class HtmlElement extends Emitter {
 		return this;
 	}
 
-	public resize(w:number, h:number) : HtmlElement  {
+	public get borderWidth() : number {
 		var borderWidth = 0;
 		if(window.getComputedStyle) {
-			borderWidth = 2*parseInt(window.getComputedStyle(this.element).borderWidth);
+			borderWidth = parseInt(window.getComputedStyle(this.element).borderWidth);
 		}
-		
+
+		return borderWidth;
+	}
+
+	public resize(w:number, h:number) : HtmlElement  {
+		var borderWidth = this.borderWidth * 2;	
 		var ww = w - borderWidth;
 		var hh = h - borderWidth;
 		this.element.style.width = ww + "px";

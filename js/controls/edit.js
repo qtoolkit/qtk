@@ -151,9 +151,15 @@ var Edit = (function (_super) {
         var style = this.getStyle();
         this._input = this.multiLineMode ? html_edit_1.HtmlEdit.textArea : html_edit_1.HtmlEdit.input;
         var input = this._input;
+        var vp = this.app.getViewPort();
         var p = this.toViewPoint(point_1.Point.point.init(0, 0));
-        input.move(p.x, p.y);
-        input.resize(this.w, this.h);
+        var borderWidth = input.borderWidth * 2;
+        var x = Math.max(0, p.x);
+        var y = Math.max(0, p.y);
+        var w = Math.min(this.w, vp.w - x - borderWidth);
+        var h = Math.min(this.h, vp.h - y - borderWidth);
+        input.move(x, y);
+        input.resize(w, h);
         input.fontSize = style.fontSize;
         input.inputType = this.inputType;
         input.textColor = style.textColor;

@@ -14,6 +14,7 @@ export declare class HtmlElement extends Emitter {
     show(): HtmlElement;
     hide(): HtmlElement;
     move(x: number, y: number): HtmlElement;
+    readonly borderWidth: number;
     resize(w: number, h: number): HtmlElement;
     destroy(): void;
     create(tag: string): HtmlElement;

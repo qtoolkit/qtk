@@ -5,6 +5,7 @@ import {Style} from "../style";
 import {Label} from "./label";
 import Events = require("../events");
 import {HtmlEdit} from "../html/html-edit";
+import {IViewPort} from "../iview-port";
 import {IApplication} from "../iapplication";
 import {Widget, WidgetState} from "./widget";
 import {IThemeManager} from "../itheme-manager";
@@ -117,12 +118,17 @@ export class Edit extends Label {
 	protected showEditor() {
 		var style = this.getStyle();
 		this._input = this.multiLineMode ? HtmlEdit.textArea : HtmlEdit.input;
-		
 		var input = this._input;
+		var vp = this.app.getViewPort();	
 		var p = this.toViewPoint(Point.point.init(0, 0));
+		var borderWidth = input.borderWidth * 2;
+		var x = Math.max(0, p.x);
+		var y = Math.max(0, p.y);
+		var w = Math.min(this.w, vp.w - x - borderWidth);
+		var h = Math.min(this.h, vp.h - y - borderWidth);
 
-		input.move(p.x, p.y);
-		input.resize(this.w, this.h);
+		input.move(x, y);
+		input.resize(w, h);
 		input.fontSize = style.fontSize;
 		input.inputType = this.inputType;
 		input.textColor = style.textColor;

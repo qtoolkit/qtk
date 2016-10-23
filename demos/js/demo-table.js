@@ -1,8 +1,8 @@
 
 function genData() {
 	var data = [];
-	for(var i = 0; i < 1000; i++) {
-		data.push({name:"name"+i, age:i, address:"QToolKit"});
+	for(var i = 0; i < 500; i++) {
+		data.push({name:"name"+i, age:i, address:"QToolKit", gender:i%2?"Male":"Female"});
 	}
 
 	return data;
@@ -21,13 +21,16 @@ function onReady(app) {
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
 	var table = qtk.Table.create();
-	table.layoutParam = qtk.SimpleLayouterParam.create({w:320, h:"100%"});
+	table.layoutParam = qtk.SimpleLayouterParam.create({w:"100%", h:"100%"});
 	
 	win.addChild(table);
 
 	table.addColumn(qtk.TableColInfo.create("Name", "label", 100, {dataBindingRule:"name"}));
 	table.addColumn(qtk.TableColInfo.create("Age", "edit", 100, {dataBindingRule:"age"}));
-	table.addColumn(qtk.TableColInfo.create("Address", "edit", 100, {dataBindingRule:"address"}));
+	table.addColumn(qtk.TableColInfo.create("Gender", "combo-box", 100, {dataBindingRule:"gender",
+		options:[{text:"Male"}, {text:"Female"}]
+	}));
+	table.addColumn(qtk.TableColInfo.create("Address", "edit", table.w-300, {dataBindingRule:"address"}));
 	
 	var viewModal = createViewModal();
 	table.bindData(viewModal);

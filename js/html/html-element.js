@@ -88,11 +88,19 @@ var HtmlElement = (function (_super) {
         this.element.style.top = y + "px";
         return this;
     };
+    Object.defineProperty(HtmlElement.prototype, "borderWidth", {
+        get: function () {
+            var borderWidth = 0;
+            if (window.getComputedStyle) {
+                borderWidth = parseInt(window.getComputedStyle(this.element).borderWidth);
+            }
+            return borderWidth;
+        },
+        enumerable: true,
+        configurable: true
+    });
     HtmlElement.prototype.resize = function (w, h) {
-        var borderWidth = 0;
-        if (window.getComputedStyle) {
-            borderWidth = 2 * parseInt(window.getComputedStyle(this.element).borderWidth);
-        }
+        var borderWidth = this.borderWidth * 2;
         var ww = w - borderWidth;
         var hh = h - borderWidth;
         this.element.style.width = ww + "px";

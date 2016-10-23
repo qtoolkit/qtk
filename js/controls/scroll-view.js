@@ -561,6 +561,20 @@ var ScrollView = (function (_super) {
     ScrollView.prototype.getLayoutHeight = function () {
         return this.h - this.topPadding - this.bottomPadding;
     };
+    ScrollView.prototype.getViewWidth = function () {
+        var w = this.clientW;
+        if (this.dragToScroll && this.isVScrollBarVisible()) {
+            w -= this._scrollBarStyle.size;
+        }
+        return w;
+    };
+    ScrollView.prototype.getViewHeight = function () {
+        var h = this.clientH;
+        if (this.dragToScroll && this.isHScrollBarVisible()) {
+            h -= this._scrollBarStyle.size;
+        }
+        return h;
+    };
     ScrollView.prototype.getLayoutRect = function () {
         var w = this.getLayoutWidth();
         var h = this.getLayoutHeight();
