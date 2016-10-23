@@ -94,7 +94,7 @@ export class GridView extends ScrollView {
 	public relayoutChildren() : Rect {
 		this.ensureOptions();
 		var r = super.relayoutChildren();
-		this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+		this.contentW = r.w + this.leftPadding + this.rightPadding;
 		this.contentH = r.h + this.topPadding + this.bottomPadding;
 		
 		return r;

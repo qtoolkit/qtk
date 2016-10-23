@@ -82,7 +82,7 @@ var PropertySheets = (function (_super) {
             child.relayoutChildren();
             y += child.h;
         });
-        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+        this.contentW = r.w + this.leftPadding + this.rightPadding;
         this.contentH = y + this.bottomPadding + 10;
         return r;
     };

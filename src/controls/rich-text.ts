@@ -86,7 +86,7 @@ export class RichText extends ScrollView {
 		}
         
         var r = doc.frame.bounds();
-		this.contentWidth = r.w;
+		this.contentW = r.w;
 		this.contentH = r.h;
 	}
 

@@ -94,7 +94,7 @@ export class ScrollView extends Widget {
 				return true;
 			}
 			default: {
-				return (this.w < this.contentWidth);
+				return (this.w < this.contentW);
 			}
 		}
 	}
@@ -144,10 +144,10 @@ export class ScrollView extends Widget {
 	/**
 	 * 滚动视图所包含内容的宽度。
 	 */
-	public set contentWidth(value:number) {
+	public set contentW(value:number) {
 		this.setProp("cw", value, true);
 	}
-	public get contentWidth() {
+	public get contentW() {
 		return this._cw;
 	}
 
@@ -316,6 +316,8 @@ export class ScrollView extends Widget {
 			this.offsetPointerEvent(evt);
 			super.dispatchPointerUp(evt);
 			this.unOffsetPointerEvent(evt);
+		}else{
+			this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
 		}
 
 		this._pointerInBar = false;
@@ -340,9 +342,9 @@ export class ScrollView extends Widget {
 	/*
 	 * 更新Scroller的参数。
 	 */
-	protected updateScrollerDimensions(w:number, h:number, contentWidth:number, contentH:number){
+	protected updateScrollerDimensions(w:number, h:number, contentW:number, contentH:number){
 		if(this._slideToScroll) {
-			this.scroller.setDimensions(w, h, contentWidth, contentH);
+			this.scroller.setDimensions(w, h, contentW, contentH);
 		}
 	}
 
@@ -386,10 +388,10 @@ export class ScrollView extends Widget {
 			var prop = evt.prop;
 			var value = evt.newValue;
 			if(prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-				this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
+				this.updateScrollerDimensions(this.w, this.h, this.contentW, this.contentH);
 			}
 		});
-		this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
+		this.updateScrollerDimensions(this.w, this.h, this.contentW, this.contentH);
 	}
 
 	/*
@@ -446,9 +448,9 @@ export class ScrollView extends Widget {
 
 		var r = options.roundRadius;	
 		var draggerH = options.draggerSize;
-		var draggerW = Math.max(draggerH, Math.min(w, w*w/this.contentWidth));
+		var draggerW = Math.max(draggerH, Math.min(w, w*w/this.contentW));
 		var draggerY = barY + ((barH - draggerH) >> 1);
-		var draggerX = Math.min(w-draggerW, (this.offsetX/this.contentWidth) * w);
+		var draggerX = Math.min(w-draggerW, (this.offsetX/this.contentW) * w);
 		var draggerColor = options.foreGroundColor;
 
 		if(vBarVisible) {

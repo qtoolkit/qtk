@@ -89,8 +89,14 @@ var HtmlElement = (function (_super) {
         return this;
     };
     HtmlElement.prototype.resize = function (w, h) {
-        this.element.style.width = w + "px";
-        this.element.style.height = (h - 4) + "px";
+        var borderWidth = 0;
+        if (window.getComputedStyle) {
+            borderWidth = 2 * parseInt(window.getComputedStyle(this.element).borderWidth);
+        }
+        var ww = w - borderWidth;
+        var hh = h - borderWidth;
+        this.element.style.width = ww + "px";
+        this.element.style.height = hh + "px";
         return this;
     };
     HtmlElement.prototype.destroy = function () {

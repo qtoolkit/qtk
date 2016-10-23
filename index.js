@@ -17489,8 +17489,14 @@ var qtk =
 	        return this;
 	    };
 	    HtmlElement.prototype.resize = function (w, h) {
-	        this.element.style.width = w + "px";
-	        this.element.style.height = (h - 4) + "px";
+	        var borderWidth = 0;
+	        if (window.getComputedStyle) {
+	            borderWidth = 2 * parseInt(window.getComputedStyle(this.element).borderWidth);
+	        }
+	        var ww = w - borderWidth;
+	        var hh = h - borderWidth;
+	        this.element.style.width = ww + "px";
+	        this.element.style.height = hh + "px";
 	        return this;
 	    };
 	    HtmlElement.prototype.destroy = function () {
@@ -18680,7 +18686,7 @@ var qtk =
 	            doc.width(w);
 	        }
 	        var r = doc.frame.bounds();
-	        this.contentWidth = r.w;
+	        this.contentW = r.w;
 	        this.contentH = r.h;
 	    };
 	    RichText.prototype.onInit = function () {
@@ -18822,7 +18828,7 @@ var qtk =
 	                return true;
 	            }
 	            default: {
-	                return (this.w < this.contentWidth);
+	                return (this.w < this.contentW);
 	            }
 	        }
 	    };
@@ -18878,7 +18884,7 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(ScrollView.prototype, "contentWidth", {
+	    Object.defineProperty(ScrollView.prototype, "contentW", {
 	        get: function () {
 	            return this._cw;
 	        },
@@ -19054,6 +19060,9 @@ var qtk =
 	            _super.prototype.dispatchPointerUp.call(this, evt);
 	            this.unOffsetPointerEvent(evt);
 	        }
+	        else {
+	            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
+	        }
 	        this._pointerInBar = false;
 	    };
 	    ScrollView.prototype.dispatchClick = function (evt) {
@@ -19073,9 +19082,9 @@ var qtk =
 	    /*
 	     * 更新Scroller的参数。
 	     */
-	    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentH) {
+	    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentW, contentH) {
 	        if (this._slideToScroll) {
-	            this.scroller.setDimensions(w, h, contentWidth, contentH);
+	            this.scroller.setDimensions(w, h, contentW, contentH);
 	        }
 	    };
 	    Object.defineProperty(ScrollView.prototype, "scroller", {
@@ -19117,10 +19126,10 @@ var qtk =
 	            var prop = evt.prop;
 	            var value = evt.newValue;
 	            if (prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-	                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentH);
+	                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentW, _this.contentH);
 	            }
 	        });
-	        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
+	        this.updateScrollerDimensions(this.w, this.h, this.contentW, this.contentH);
 	    };
 	    /*
 	     * 绘制垂直滚动条。
@@ -19169,9 +19178,9 @@ var qtk =
 	        var barColor = options.backGroundColor;
 	        var r = options.roundRadius;
 	        var draggerH = options.draggerSize;
-	        var draggerW = Math.max(draggerH, Math.min(w, w * w / this.contentWidth));
+	        var draggerW = Math.max(draggerH, Math.min(w, w * w / this.contentW));
 	        var draggerY = barY + ((barH - draggerH) >> 1);
-	        var draggerX = Math.min(w - draggerW, (this.offsetX / this.contentWidth) * w);
+	        var draggerX = Math.min(w - draggerW, (this.offsetX / this.contentW) * w);
 	        var draggerColor = options.foreGroundColor;
 	        if (vBarVisible) {
 	            draggerX = Math.min(draggerX, w - barH - draggerW);
@@ -22530,7 +22539,7 @@ var qtk =
 	    });
 	    ListView.prototype.relayoutChildren = function () {
 	        var r = _super.prototype.relayoutChildren.call(this);
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentW = r.w + this.leftPadding + this.rightPadding;
 	        this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
 	        return r;
 	    };
@@ -23071,7 +23080,7 @@ var qtk =
 	    GridView.prototype.relayoutChildren = function () {
 	        this.ensureOptions();
 	        var r = _super.prototype.relayoutChildren.call(this);
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentW = r.w + this.leftPadding + this.rightPadding;
 	        this.contentH = r.h + this.topPadding + this.bottomPadding;
 	        return r;
 	    };
@@ -55925,7 +55934,7 @@ var qtk =
 	            child.relayoutChildren();
 	            y += child.h;
 	        });
-	        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+	        this.contentW = r.w + this.leftPadding + this.rightPadding;
 	        this.contentH = y + this.bottomPadding + 10;
 	        return r;
 	    };
@@ -56586,16 +56595,22 @@ var qtk =
 	        var w = right - left;
 	        var y = selectedRows.first * this.itemH - this.offsetY;
 	        var h = (selectedRows.second - selectedRows.first + 1) * this.itemH;
+	        if ((x + w) >= this.contentW) {
+	            w = this.contentW - x - 1;
+	        }
+	        if ((y + h) >= this.contentH) {
+	            h = this.contentH - y - 1;
+	        }
 	        return rect_1.Rect.rect.init(x, y, w, h);
 	    };
 	    TableClient.prototype.setSelectedRows = function (first, second) {
-	        this._selectedRows.first = first;
-	        this._selectedRows.second = second;
+	        this._selectedRows.first = Math.min(first, second);
+	        this._selectedRows.second = Math.max(first, second);
 	        return this;
 	    };
 	    TableClient.prototype.setSelectedCols = function (first, second) {
-	        this._selectedCols.first = first;
-	        this._selectedCols.second = second;
+	        this._selectedCols.first = Math.min(first, second);
+	        this._selectedCols.second = Math.max(first, second);
 	        return this;
 	    };
 	    TableClient.prototype.updateSelection = function (x, y, updateFirst, updateSecond) {
@@ -56626,6 +56641,12 @@ var qtk =
 	    TableClient.prototype.dispatchPointerMove = function (evt, ctx) {
 	        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
 	        if (!this._pointerInBar && evt.pointerDown) {
+	            this.updateSelection(evt.x, evt.y, false, true);
+	        }
+	    };
+	    TableClient.prototype.dispatchPointerUp = function (evt) {
+	        _super.prototype.dispatchPointerUp.call(this, evt);
+	        if (!this._pointerInBar) {
 	            this.updateSelection(evt.x, evt.y, false, true);
 	        }
 	    };

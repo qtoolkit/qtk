@@ -22,6 +22,7 @@ export declare class TableClient extends ListView {
     protected updateSelection(x: number, y: number, updateFirst: boolean, updateSecond: boolean): void;
     protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    protected dispatchPointerUp(evt: Events.PointerEvent): void;
     protected drawGrid(ctx: any, style: Style): void;
     protected drawSelection(ctx: any, style: Style): void;
     protected afterDrawChildren(ctx: any): void;

@@ -85,16 +85,22 @@ var TableClient = (function (_super) {
         var w = right - left;
         var y = selectedRows.first * this.itemH - this.offsetY;
         var h = (selectedRows.second - selectedRows.first + 1) * this.itemH;
+        if ((x + w) >= this.contentW) {
+            w = this.contentW - x - 1;
+        }
+        if ((y + h) >= this.contentH) {
+            h = this.contentH - y - 1;
+        }
         return rect_1.Rect.rect.init(x, y, w, h);
     };
     TableClient.prototype.setSelectedRows = function (first, second) {
-        this._selectedRows.first = first;
-        this._selectedRows.second = second;
+        this._selectedRows.first = Math.min(first, second);
+        this._selectedRows.second = Math.max(first, second);
         return this;
     };
     TableClient.prototype.setSelectedCols = function (first, second) {
-        this._selectedCols.first = first;
-        this._selectedCols.second = second;
+        this._selectedCols.first = Math.min(first, second);
+        this._selectedCols.second = Math.max(first, second);
         return this;
     };
     TableClient.prototype.updateSelection = function (x, y, updateFirst, updateSecond) {
@@ -125,6 +131,12 @@ var TableClient = (function (_super) {
     TableClient.prototype.dispatchPointerMove = function (evt, ctx) {
         _super.prototype.dispatchPointerMove.call(this, evt, ctx);
         if (!this._pointerInBar && evt.pointerDown) {
+            this.updateSelection(evt.x, evt.y, false, true);
+        }
+    };
+    TableClient.prototype.dispatchPointerUp = function (evt) {
+        _super.prototype.dispatchPointerUp.call(this, evt);
+        if (!this._pointerInBar) {
             this.updateSelection(evt.x, evt.y, false, true);
         }
     };

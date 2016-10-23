@@ -77,7 +77,7 @@ var RichText = (function (_super) {
             doc.width(w);
         }
         var r = doc.frame.bounds();
-        this.contentWidth = r.w;
+        this.contentW = r.w;
         this.contentH = r.h;
     };
     RichText.prototype.onInit = function () {

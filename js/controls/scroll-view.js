@@ -107,7 +107,7 @@ var ScrollView = (function (_super) {
                 return true;
             }
             default: {
-                return (this.w < this.contentWidth);
+                return (this.w < this.contentW);
             }
         }
     };
@@ -163,7 +163,7 @@ var ScrollView = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ScrollView.prototype, "contentWidth", {
+    Object.defineProperty(ScrollView.prototype, "contentW", {
         get: function () {
             return this._cw;
         },
@@ -339,6 +339,9 @@ var ScrollView = (function (_super) {
             _super.prototype.dispatchPointerUp.call(this, evt);
             this.unOffsetPointerEvent(evt);
         }
+        else {
+            this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));
+        }
         this._pointerInBar = false;
     };
     ScrollView.prototype.dispatchClick = function (evt) {
@@ -358,9 +361,9 @@ var ScrollView = (function (_super) {
     /*
      * 更新Scroller的参数。
      */
-    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentWidth, contentH) {
+    ScrollView.prototype.updateScrollerDimensions = function (w, h, contentW, contentH) {
         if (this._slideToScroll) {
-            this.scroller.setDimensions(w, h, contentWidth, contentH);
+            this.scroller.setDimensions(w, h, contentW, contentH);
         }
     };
     Object.defineProperty(ScrollView.prototype, "scroller", {
@@ -402,10 +405,10 @@ var ScrollView = (function (_super) {
             var prop = evt.prop;
             var value = evt.newValue;
             if (prop === "w" || prop === "h" || prop === "cw" || prop === "ch") {
-                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentWidth, _this.contentH);
+                _this.updateScrollerDimensions(_this.w, _this.h, _this.contentW, _this.contentH);
             }
         });
-        this.updateScrollerDimensions(this.w, this.h, this.contentWidth, this.contentH);
+        this.updateScrollerDimensions(this.w, this.h, this.contentW, this.contentH);
     };
     /*
      * 绘制垂直滚动条。
@@ -454,9 +457,9 @@ var ScrollView = (function (_super) {
         var barColor = options.backGroundColor;
         var r = options.roundRadius;
         var draggerH = options.draggerSize;
-        var draggerW = Math.max(draggerH, Math.min(w, w * w / this.contentWidth));
+        var draggerW = Math.max(draggerH, Math.min(w, w * w / this.contentW));
         var draggerY = barY + ((barH - draggerH) >> 1);
-        var draggerX = Math.min(w - draggerW, (this.offsetX / this.contentWidth) * w);
+        var draggerX = Math.min(w - draggerW, (this.offsetX / this.contentW) * w);
         var draggerColor = options.foreGroundColor;
         if (vBarVisible) {
             draggerX = Math.min(draggerX, w - barH - draggerW);

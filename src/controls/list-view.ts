@@ -70,7 +70,7 @@ export class ListView extends ScrollView {
 
 	public relayoutChildren() : Rect {
 		var r = super.relayoutChildren();
-		this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+		this.contentW = r.w + this.leftPadding + this.rightPadding;
 		this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
 
 		return r;

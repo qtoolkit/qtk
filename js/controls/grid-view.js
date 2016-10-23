@@ -108,7 +108,7 @@ var GridView = (function (_super) {
     GridView.prototype.relayoutChildren = function () {
         this.ensureOptions();
         var r = _super.prototype.relayoutChildren.call(this);
-        this.contentWidth = r.w + this.leftPadding + this.rightPadding;
+        this.contentW = r.w + this.leftPadding + this.rightPadding;
         this.contentH = r.h + this.topPadding + this.bottomPadding;
         return r;
     };

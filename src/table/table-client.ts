@@ -84,20 +84,27 @@ export class TableClient extends ListView {
 		var w = right - left;
 		var y = selectedRows.first * this.itemH - this.offsetY;
 		var h = (selectedRows.second-selectedRows.first+1) * this.itemH;
+	
+		if((x + w) >= this.contentW) {
+			w = this.contentW - x - 1;
+		}
+		if((y + h) >= this.contentH) {
+			h = this.contentH - y - 1;
+		}
 
 		return Rect.rect.init(x, y, w, h);
 	}
 
 	protected setSelectedRows(first:number, second:number) : TableClient {
-		this._selectedRows.first = first;
-		this._selectedRows.second = second;
+		this._selectedRows.first = Math.min(first, second);
+		this._selectedRows.second = Math.max(first, second);
 
 		return this;
 	}
 	
 	protected setSelectedCols(first:number, second:number) : TableClient {
-		this._selectedCols.first = first;
-		this._selectedCols.second = second;
+		this._selectedCols.first = Math.min(first, second);
+		this._selectedCols.second = Math.max(first, second);
 
 		return this;
 	}
@@ -138,6 +145,14 @@ export class TableClient extends ListView {
 		super.dispatchPointerMove(evt, ctx);
 
 		if(!this._pointerInBar && evt.pointerDown) {
+			this.updateSelection(evt.x, evt.y, false, true);
+		}
+	}
+	
+	protected dispatchPointerUp(evt:Events.PointerEvent) {
+		super.dispatchPointerUp(evt);
+
+		if(!this._pointerInBar) {
 			this.updateSelection(evt.x, evt.y, false, true);
 		}
 	}
