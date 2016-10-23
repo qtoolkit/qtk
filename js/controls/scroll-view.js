@@ -497,6 +497,10 @@ var ScrollView = (function (_super) {
     ScrollView.prototype.doDrawChildren = function (ctx) {
         _super.prototype.drawChildren.call(this, ctx);
     };
+    ScrollView.prototype.beforeDrawChildren = function (ctx) {
+    };
+    ScrollView.prototype.afterDrawChildren = function (ctx) {
+    };
     ScrollView.prototype.drawChildren = function (ctx) {
         var ox = this._ox;
         var oy = this._oy;
@@ -508,9 +512,11 @@ var ScrollView = (function (_super) {
         ctx.beginPath();
         ctx.rect(x, y, w, h);
         ctx.clip();
+        this.beforeDrawChildren(ctx);
         ctx.translate(-ox, -oy);
         this.doDrawChildren(ctx);
         ctx.restore();
+        this.afterDrawChildren(ctx);
         this.drawScrollBar(ctx);
         return this;
     };

@@ -499,6 +499,12 @@ export class ScrollView extends Widget {
 		super.drawChildren(ctx);
 	}
 
+	protected beforeDrawChildren(ctx:any) {
+	}
+
+	protected afterDrawChildren(ctx:any) {
+	}
+
 	protected drawChildren(ctx:any) : Widget {
 		var ox = this._ox;
 		var oy = this._oy;
@@ -511,10 +517,12 @@ export class ScrollView extends Widget {
 		ctx.beginPath();
 		ctx.rect(x, y, w, h);
 		ctx.clip();
-		
+	
+		this.beforeDrawChildren(ctx);
 		ctx.translate(-ox, -oy);
 		this.doDrawChildren(ctx);
 		ctx.restore();
+		this.afterDrawChildren(ctx);
 
 		this.drawScrollBar(ctx);
 

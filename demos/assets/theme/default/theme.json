@@ -390,6 +390,21 @@
 			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
 		}
 	},
+	"table-client": {
+		"extends": "widget",
+		"common" : {
+			"roundRadius" : 0
+		},
+		"normal" : {
+			"lineColor" : "#A8A8A8"
+		},
+		"over" : {
+			"lineColor" : "#A8A8A8"
+		},
+		"active" : {
+			"lineColor" : "#4D90FC"
+		}
+	},
 	"table-header-item.inc": {
 		"extends": "table-header-item",
 		"common" : {

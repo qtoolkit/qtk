@@ -77,6 +77,8 @@ export declare class ScrollView extends Widget {
     protected drawScrollBarH(ctx: any, vBarVisible: any): void;
     protected drawScrollBar(ctx: any): void;
     protected doDrawChildren(ctx: any): void;
+    protected beforeDrawChildren(ctx: any): void;
+    protected afterDrawChildren(ctx: any): void;
     protected drawChildren(ctx: any): Widget;
     /**
      * 滚动到指定的位置。

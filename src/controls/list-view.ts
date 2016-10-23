@@ -32,7 +32,15 @@ export class ListView extends ScrollView {
 	public set childrenLayouter(layouter:Layouter) {
 	}
 	
-	protected doDrawChildren(ctx:any) : Widget {
+	protected beforeDrawChildren(ctx:any) {
+		super.beforeDrawChildren(ctx);
+	}
+
+	protected afterDrawChildren(ctx:any) {
+		super.afterDrawChildren(ctx);
+	}
+
+	protected doDrawChildren(ctx:any) {
 		var top = this.offsetY;
 		var bottom = top + this.h;
 
@@ -42,8 +50,6 @@ export class ListView extends ScrollView {
 				child.draw(ctx);
 			}
 		});
-
-		return this;
 	}
 
 	public get desireHeight() : number {

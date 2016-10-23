@@ -1,12 +1,13 @@
 import { Rect } from "../rect";
-import { Widget } from "./widget";
 import { ScrollView } from "./scroll-view";
 import { Layouter } from "../layouters/layouter";
 export declare class ListView extends ScrollView {
     itemSpacing: number;
     itemH: number;
     childrenLayouter: Layouter;
-    protected doDrawChildren(ctx: any): Widget;
+    protected beforeDrawChildren(ctx: any): void;
+    protected afterDrawChildren(ctx: any): void;
+    protected doDrawChildren(ctx: any): void;
     readonly desireHeight: number;
     relayoutChildren(): Rect;
     protected _ih: number;

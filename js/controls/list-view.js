@@ -47,6 +47,12 @@ var ListView = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    ListView.prototype.beforeDrawChildren = function (ctx) {
+        _super.prototype.beforeDrawChildren.call(this, ctx);
+    };
+    ListView.prototype.afterDrawChildren = function (ctx) {
+        _super.prototype.afterDrawChildren.call(this, ctx);
+    };
     ListView.prototype.doDrawChildren = function (ctx) {
         var top = this.offsetY;
         var bottom = top + this.h;
@@ -56,7 +62,6 @@ var ListView = (function (_super) {
                 child.draw(ctx);
             }
         });
-        return this;
     };
     Object.defineProperty(ListView.prototype, "desireHeight", {
         get: function () {
