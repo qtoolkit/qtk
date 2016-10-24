@@ -77,20 +77,18 @@ export class MovableOptions {
  * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
  */
 export class Movable extends Behavior {
-	protected moveEvent = {type:Events.MOVE};
 	protected movingEvent = {type:Events.MOVING};
 	protected moveEndEvent = {type:Events.MOVE_END};
 	protected moveBeginEvent = {type:Events.MOVE_BEGIN};
+	protected moveCancelEvent = {type:Events.MOVE_CANCEL};
 
 	protected init(options:any) {
 		this.options = new MovableOptions(options);
 	}
 
-	protected moveWidget(x:number, y:number, animate:boolean, end:boolean) {
+	protected moveWidget(x:number, y:number, end:boolean) {
 		var options = this.options;
-
 		var moveParent = options.moveParent;
-		var duration = options.animateDuration;
 		var widget = moveParent ? this.widget.parent : this.widget;
 
 		if(!options.xMovable) {
@@ -107,7 +105,7 @@ export class Movable extends Behavior {
 			y = Math.min(options.yMax, Math.max(options.yMin, y));
 		}
 
-		widget.moveTo(x, y, animate ? 500 : 0);
+		widget.moveTo(x, y);
 		if(end) {
 			widget.dispatchEvent(this.moveEndEvent);
 		}else{
@@ -116,9 +114,24 @@ export class Movable extends Behavior {
 	}
 
 	protected onCancelled() {
-		this.widget.requestRedraw();
-		this.moveWidget(this.x, this.y, true, true);
+		var animate = true;
+		var widget = this.widget;
+		var duration = this.options.animateDuration;
+		
+		widget.requestRedraw();
 		document.body.style.cursor = "default"; 
+
+		var tween = widget.moveTo(this.x, this.y, duration);
+		if(tween) {
+			tween.onComplete(evt => {
+				widget.dispatchEvent(this.moveCancelEvent);
+			});
+			tween.onUpdate(evt => {
+				widget.dispatchEvent(this.movingEvent);
+			});
+
+			return;
+		}
 	}
 
 	protected onKeyDownGlobal(evt:CustomEvent) {
@@ -146,7 +159,7 @@ export class Movable extends Behavior {
 			this.dragging = false;
 			var dx = evt.x - evt.pointerDownX;
 			var dy = evt.y - evt.pointerDownY;
-			this.moveWidget(this.x+dx, this.y+dy, false, true);
+			this.moveWidget(this.x+dx, this.y+dy, true);
 		}
 	}
 
@@ -154,7 +167,7 @@ export class Movable extends Behavior {
 		if(this.dragging) {
 			var dx = evt.x - evt.pointerDownX;
 			var dy = evt.y - evt.pointerDownY;
-			this.moveWidget(this.x+dx, this.y+dy, false, false);
+			this.moveWidget(this.x+dx, this.y+dy, false);
 		}
 	}
 
