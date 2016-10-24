@@ -67,6 +67,11 @@ export class ResizableOptions {
  * Resize的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
  */
 export class Resizable extends Behavior {
+	protected resizingEvent = {type:Events.RESIZING};
+	protected resizeEndEvent = {type:Events.RESIZE_END};
+	protected resizeBeginEvent = {type:Events.RESIZE_BEGIN};
+	protected resizeCancelEvent = {type:Events.RESIZE_CANCEL};
+	
 	constructor(widget:Widget, options:any) {
 		super(Resizable.TYPE, widget, options);
 	}
@@ -76,9 +81,23 @@ export class Resizable extends Behavior {
 	}
 
 	private onCancelled() {
-		this.widget.requestRedraw();
+		var widget = this.widget;
+		var duration = this.options.animateDuration;
+		
+		widget.requestRedraw();
 		document.body.style.cursor = "default"; 
-		this.widget.moveResizeTo(this.x, this.y, this.w, this.h, this.options.animateDuration);
+		
+		var tween = this.widget.moveResizeTo(this.x, this.y, this.w, this.h, duration);
+		if(tween) {
+			tween.onComplete(evt=> {
+				widget.dispatchEvent(this.resizeCancelEvent);
+			});
+			tween.onUpdate(evt => {
+				widget.dispatchEvent(this.resizingEvent);
+			});
+		}else{
+			widget.dispatchEvent(this.resizeCancelEvent);
+		}
 	}
 
 	protected onKeyDownGlobal(evt:CustomEvent) {
@@ -92,19 +111,24 @@ export class Resizable extends Behavior {
 	protected onPointerDown(evt:Events.PointerEvent){
 		var result = this.testPointerPosition(evt);
 		if(result) {
-			this.x = this.widget.x;
-			this.y = this.widget.y;
-			this.w = this.widget.w;
-			this.h = this.widget.h;
+			var widget = this.widget;
+			this.x = widget.x;
+			this.y = widget.y;
+			this.w = widget.w;
+			this.h = widget.h;
 			this.resizing = true;
 			this.pointerDownArea = result;
 			document.body.style.cursor = result + "-resize";
+			widget.dispatchEvent(this.resizeBeginEvent);
 		}else{
 			document.body.style.cursor = "default"; 
 		}
 	}
 	
 	protected onPointerUp(evt:Events.PointerEvent){
+		if(this.resizing) {	
+			this.widget.dispatchEvent(this.resizeEndEvent);
+		}
 		this.resizing = false;
 		document.body.style.cursor = "default"; 
 	}
@@ -177,6 +201,7 @@ export class Resizable extends Behavior {
 					break;
 				}
 			}
+			widget.dispatchEvent(this.resizingEvent);
 		}else{
 			var result = this.testPointerPosition(evt);
 			if(result) {
