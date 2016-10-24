@@ -176,6 +176,18 @@ var Table = (function (_super) {
         }
         return this;
     };
+    Table.prototype.onHeaderItemResized = function () {
+        var client = this.client;
+        var colsWidth = this.headerBar.children.map(function (item) {
+            return item.w;
+        });
+        client.colsWidth = colsWidth;
+        client.relayoutChildren();
+        this.headerBar.relayoutChildren();
+    };
+    Table.prototype.onHeaderItemResizing = function () {
+        this.headerBar.relayoutChildren();
+    };
     Table.prototype.prepareUI = function () {
         var _this = this;
         var itemH = this.rowH;
@@ -193,6 +205,15 @@ var Table = (function (_super) {
         this._colsInfo.forEach(function (item) {
             var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
             headerBar.addChild(headerItem);
+            headerItem.on(Events.RESIZE_END, function (evt) {
+                _this.onHeaderItemResized();
+            });
+            headerItem.on(Events.RESIZE_CANCEL, function (evt) {
+                _this.onHeaderItemResized();
+            });
+            headerItem.on(Events.RESIZING, function (evt) {
+                _this.onHeaderItemResizing();
+            });
         });
         var client = this._client;
         var indexBar = this._indexBar;

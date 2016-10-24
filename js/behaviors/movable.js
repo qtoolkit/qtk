@@ -37,18 +37,17 @@ var Movable = (function (_super) {
     __extends(Movable, _super);
     function Movable(widget, options) {
         _super.call(this, Movable.TYPE, widget, options);
-        this.moveEvent = { type: Events.MOVE };
         this.movingEvent = { type: Events.MOVING };
         this.moveEndEvent = { type: Events.MOVE_END };
         this.moveBeginEvent = { type: Events.MOVE_BEGIN };
+        this.moveCancelEvent = { type: Events.MOVE_CANCEL };
     }
     Movable.prototype.init = function (options) {
         this.options = new MovableOptions(options);
     };
-    Movable.prototype.moveWidget = function (x, y, animate, end) {
+    Movable.prototype.moveWidget = function (x, y, end) {
         var options = this.options;
         var moveParent = options.moveParent;
-        var duration = options.animateDuration;
         var widget = moveParent ? this.widget.parent : this.widget;
         if (!options.xMovable) {
             x = widget.x;
@@ -62,7 +61,7 @@ var Movable = (function (_super) {
         if (options.yLimit) {
             y = Math.min(options.yMax, Math.max(options.yMin, y));
         }
-        widget.moveTo(x, y, animate ? 500 : 0);
+        widget.moveTo(x, y);
         if (end) {
             widget.dispatchEvent(this.moveEndEvent);
         }
@@ -71,9 +70,22 @@ var Movable = (function (_super) {
         }
     };
     Movable.prototype.onCancelled = function () {
-        this.widget.requestRedraw();
-        this.moveWidget(this.x, this.y, true, true);
+        var _this = this;
+        var animate = true;
+        var widget = this.widget;
+        var duration = this.options.animateDuration;
+        widget.requestRedraw();
         document.body.style.cursor = "default";
+        var tween = widget.moveTo(this.x, this.y, duration);
+        if (tween) {
+            tween.onComplete(function (evt) {
+                widget.dispatchEvent(_this.moveCancelEvent);
+            });
+            tween.onUpdate(function (evt) {
+                widget.dispatchEvent(_this.movingEvent);
+            });
+            return;
+        }
     };
     Movable.prototype.onKeyDownGlobal = function (evt) {
         var keyCode = evt.detail.keyCode;
@@ -97,14 +109,14 @@ var Movable = (function (_super) {
             this.dragging = false;
             var dx = evt.x - evt.pointerDownX;
             var dy = evt.y - evt.pointerDownY;
-            this.moveWidget(this.x + dx, this.y + dy, false, true);
+            this.moveWidget(this.x + dx, this.y + dy, true);
         }
     };
     Movable.prototype.onPointerMove = function (evt) {
         if (this.dragging) {
             var dx = evt.x - evt.pointerDownX;
             var dy = evt.y - evt.pointerDownY;
-            this.moveWidget(this.x + dx, this.y + dy, false, false);
+            this.moveWidget(this.x + dx, this.y + dy, false);
         }
     };
     ;

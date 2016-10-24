@@ -53,9 +53,6 @@ export declare class MovableOptions {
  * move的过程中，按下ESCAPE键，Widget将恢复原来的位置。
  */
 export declare class Movable extends Behavior {
-    protected moveEvent: {
-        type: string;
-    };
     protected movingEvent: {
         type: string;
     };
@@ -65,8 +62,11 @@ export declare class Movable extends Behavior {
     protected moveBeginEvent: {
         type: string;
     };
+    protected moveCancelEvent: {
+        type: string;
+    };
     protected init(options: any): void;
-    protected moveWidget(x: number, y: number, animate: boolean, end: boolean): void;
+    protected moveWidget(x: number, y: number, end: boolean): void;
     protected onCancelled(): void;
     protected onKeyDownGlobal(evt: CustomEvent): void;
     protected onPointerDown(evt: Events.PointerEvent): void;

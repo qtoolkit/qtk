@@ -59,6 +59,10 @@ var TableHeaderItem = (function (_super) {
         this._sortStatus = null;
         this.on(Events.CLICK, this.triggerSortStatus.bind(this));
     };
+    TableHeaderItem.prototype.onInit = function () {
+        _super.prototype.onInit.call(this);
+        this.useBehavior("resizable", { east: true, animateDuration: 0 });
+    };
     TableHeaderItem.prototype.triggerSortStatus = function () {
         if (this._sortable) {
             if (this._sortStatus === TableHeaderItem.SORT_INC) {

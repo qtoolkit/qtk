@@ -1386,6 +1386,7 @@ var qtk =
 	exports.MOVING = "moving";
 	exports.MOVE_END = "move-end";
 	exports.MOVE_BEGIN = "move-begin";
+	exports.MOVE_CANCEL = "move-cancel";
 	exports.CHOOSE = "choose";
 	exports.OPEN = "open";
 	exports.INIT = "init";
@@ -1394,6 +1395,10 @@ var qtk =
 	exports.DEINIT = "deinit";
 	exports.CLOSE = "close";
 	exports.RESIZE = "resize";
+	exports.RESIZING = "resizing";
+	exports.RESIZE_END = "resize-end";
+	exports.RESIZE_BEGIN = "resize-begin";
+	exports.RESIZE_CANCEL = "resize-cancel";
 	exports.READY = "ready";
 	exports.TICK = "tick";
 	exports.PRETICK = "pretick";
@@ -28014,18 +28019,17 @@ var qtk =
 	    __extends(Movable, _super);
 	    function Movable(widget, options) {
 	        _super.call(this, Movable.TYPE, widget, options);
-	        this.moveEvent = { type: Events.MOVE };
 	        this.movingEvent = { type: Events.MOVING };
 	        this.moveEndEvent = { type: Events.MOVE_END };
 	        this.moveBeginEvent = { type: Events.MOVE_BEGIN };
+	        this.moveCancelEvent = { type: Events.MOVE_CANCEL };
 	    }
 	    Movable.prototype.init = function (options) {
 	        this.options = new MovableOptions(options);
 	    };
-	    Movable.prototype.moveWidget = function (x, y, animate, end) {
+	    Movable.prototype.moveWidget = function (x, y, end) {
 	        var options = this.options;
 	        var moveParent = options.moveParent;
-	        var duration = options.animateDuration;
 	        var widget = moveParent ? this.widget.parent : this.widget;
 	        if (!options.xMovable) {
 	            x = widget.x;
@@ -28039,7 +28043,7 @@ var qtk =
 	        if (options.yLimit) {
 	            y = Math.min(options.yMax, Math.max(options.yMin, y));
 	        }
-	        widget.moveTo(x, y, animate ? 500 : 0);
+	        widget.moveTo(x, y);
 	        if (end) {
 	            widget.dispatchEvent(this.moveEndEvent);
 	        }
@@ -28048,9 +28052,22 @@ var qtk =
 	        }
 	    };
 	    Movable.prototype.onCancelled = function () {
-	        this.widget.requestRedraw();
-	        this.moveWidget(this.x, this.y, true, true);
+	        var _this = this;
+	        var animate = true;
+	        var widget = this.widget;
+	        var duration = this.options.animateDuration;
+	        widget.requestRedraw();
 	        document.body.style.cursor = "default";
+	        var tween = widget.moveTo(this.x, this.y, duration);
+	        if (tween) {
+	            tween.onComplete(function (evt) {
+	                widget.dispatchEvent(_this.moveCancelEvent);
+	            });
+	            tween.onUpdate(function (evt) {
+	                widget.dispatchEvent(_this.movingEvent);
+	            });
+	            return;
+	        }
 	    };
 	    Movable.prototype.onKeyDownGlobal = function (evt) {
 	        var keyCode = evt.detail.keyCode;
@@ -28074,14 +28091,14 @@ var qtk =
 	            this.dragging = false;
 	            var dx = evt.x - evt.pointerDownX;
 	            var dy = evt.y - evt.pointerDownY;
-	            this.moveWidget(this.x + dx, this.y + dy, false, true);
+	            this.moveWidget(this.x + dx, this.y + dy, true);
 	        }
 	    };
 	    Movable.prototype.onPointerMove = function (evt) {
 	        if (this.dragging) {
 	            var dx = evt.x - evt.pointerDownX;
 	            var dy = evt.y - evt.pointerDownY;
-	            this.moveWidget(this.x + dx, this.y + dy, false, false);
+	            this.moveWidget(this.x + dx, this.y + dy, false);
 	        }
 	    };
 	    ;
@@ -28241,6 +28258,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var point_1 = __webpack_require__(2);
+	var Events = __webpack_require__(6);
 	var key_event_1 = __webpack_require__(16);
 	var behavior_1 = __webpack_require__(77);
 	/**
@@ -28272,14 +28290,32 @@ var qtk =
 	    __extends(Resizable, _super);
 	    function Resizable(widget, options) {
 	        _super.call(this, Resizable.TYPE, widget, options);
+	        this.resizingEvent = { type: Events.RESIZING };
+	        this.resizeEndEvent = { type: Events.RESIZE_END };
+	        this.resizeBeginEvent = { type: Events.RESIZE_BEGIN };
+	        this.resizeCancelEvent = { type: Events.RESIZE_CANCEL };
 	    }
 	    Resizable.prototype.init = function (options) {
 	        this.options = new ResizableOptions(options);
 	    };
 	    Resizable.prototype.onCancelled = function () {
-	        this.widget.requestRedraw();
+	        var _this = this;
+	        var widget = this.widget;
+	        var duration = this.options.animateDuration;
+	        widget.requestRedraw();
 	        document.body.style.cursor = "default";
-	        this.widget.moveResizeTo(this.x, this.y, this.w, this.h, this.options.animateDuration);
+	        var tween = this.widget.moveResizeTo(this.x, this.y, this.w, this.h, duration);
+	        if (tween) {
+	            tween.onComplete(function (evt) {
+	                widget.dispatchEvent(_this.resizeCancelEvent);
+	            });
+	            tween.onUpdate(function (evt) {
+	                widget.dispatchEvent(_this.resizingEvent);
+	            });
+	        }
+	        else {
+	            widget.dispatchEvent(this.resizeCancelEvent);
+	        }
 	    };
 	    Resizable.prototype.onKeyDownGlobal = function (evt) {
 	        var keyCode = evt.detail.keyCode;
@@ -28291,19 +28327,24 @@ var qtk =
 	    Resizable.prototype.onPointerDown = function (evt) {
 	        var result = this.testPointerPosition(evt);
 	        if (result) {
-	            this.x = this.widget.x;
-	            this.y = this.widget.y;
-	            this.w = this.widget.w;
-	            this.h = this.widget.h;
+	            var widget = this.widget;
+	            this.x = widget.x;
+	            this.y = widget.y;
+	            this.w = widget.w;
+	            this.h = widget.h;
 	            this.resizing = true;
 	            this.pointerDownArea = result;
 	            document.body.style.cursor = result + "-resize";
+	            widget.dispatchEvent(this.resizeBeginEvent);
 	        }
 	        else {
 	            document.body.style.cursor = "default";
 	        }
 	    };
 	    Resizable.prototype.onPointerUp = function (evt) {
+	        if (this.resizing) {
+	            this.widget.dispatchEvent(this.resizeEndEvent);
+	        }
 	        this.resizing = false;
 	        document.body.style.cursor = "default";
 	    };
@@ -28386,6 +28427,7 @@ var qtk =
 	                    break;
 	                }
 	            }
+	            widget.dispatchEvent(this.resizingEvent);
 	        }
 	        else {
 	            var result = this.testPointerPosition(evt);
@@ -57255,6 +57297,18 @@ var qtk =
 	        }
 	        return this;
 	    };
+	    Table.prototype.onHeaderItemResized = function () {
+	        var client = this.client;
+	        var colsWidth = this.headerBar.children.map(function (item) {
+	            return item.w;
+	        });
+	        client.colsWidth = colsWidth;
+	        client.relayoutChildren();
+	        this.headerBar.relayoutChildren();
+	    };
+	    Table.prototype.onHeaderItemResizing = function () {
+	        this.headerBar.relayoutChildren();
+	    };
 	    Table.prototype.prepareUI = function () {
 	        var _this = this;
 	        var itemH = this.rowH;
@@ -57272,6 +57326,15 @@ var qtk =
 	        this._colsInfo.forEach(function (item) {
 	            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
 	            headerBar.addChild(headerItem);
+	            headerItem.on(Events.RESIZE_END, function (evt) {
+	                _this.onHeaderItemResized();
+	            });
+	            headerItem.on(Events.RESIZE_CANCEL, function (evt) {
+	                _this.onHeaderItemResized();
+	            });
+	            headerItem.on(Events.RESIZING, function (evt) {
+	                _this.onHeaderItemResizing();
+	            });
 	        });
 	        var client = this._client;
 	        var indexBar = this._indexBar;
@@ -57449,6 +57512,10 @@ var qtk =
 	        _super.prototype.onReset.call(this);
 	        this._sortStatus = null;
 	        this.on(Events.CLICK, this.triggerSortStatus.bind(this));
+	    };
+	    TableHeaderItem.prototype.onInit = function () {
+	        _super.prototype.onInit.call(this);
+	        this.useBehavior("resizable", { east: true, animateDuration: 0 });
 	    };
 	    TableHeaderItem.prototype.triggerSortStatus = function () {
 	        if (this._sortable) {

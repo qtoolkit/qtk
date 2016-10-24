@@ -60,6 +60,11 @@ export class TableHeaderItem extends Widget {
 		this.on(Events.CLICK, this.triggerSortStatus.bind(this));
 	}
 
+	protected onInit() {
+		super.onInit();
+		this.useBehavior("resizable", {east:true, animateDuration:0});
+	}
+	
 	protected triggerSortStatus() {
 		if(this._sortable) {
 			if(this._sortStatus === TableHeaderItem.SORT_INC) {

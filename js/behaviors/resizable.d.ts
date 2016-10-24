@@ -50,6 +50,18 @@ export declare class ResizableOptions {
  * Resize的过程中，按下ESCAPE键，Widget将恢复原来的位置与大小。
  */
 export declare class Resizable extends Behavior {
+    protected resizingEvent: {
+        type: string;
+    };
+    protected resizeEndEvent: {
+        type: string;
+    };
+    protected resizeBeginEvent: {
+        type: string;
+    };
+    protected resizeCancelEvent: {
+        type: string;
+    };
     constructor(widget: Widget, options: any);
     protected init(options: any): void;
     private onCancelled();

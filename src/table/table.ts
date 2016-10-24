@@ -1,5 +1,6 @@
 
 import {Rect} from "../rect";
+import {Point} from "../point";
 import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
@@ -198,6 +199,21 @@ export class Table extends Widget {
 		return this;
 	}
 
+	protected onHeaderItemResized() {
+		var client = this.client;
+		var colsWidth = this.headerBar.children.map((item:Widget) => {
+			return item.w;
+		});
+		client.colsWidth = colsWidth;
+		client.relayoutChildren();
+
+		this.headerBar.relayoutChildren();
+	}
+	
+	protected onHeaderItemResizing() {
+		this.headerBar.relayoutChildren();
+	}
+
 	protected prepareUI() {
 		var itemH = this.rowH;
 		this.removeAllChildren();
@@ -217,6 +233,15 @@ export class Table extends Widget {
 		this._colsInfo.forEach((item:TableColInfo) => {
 			let headerItem = TableHeaderItem.create({w:item.w, text:item.title, sortable:item.sortable});	
 			headerBar.addChild(headerItem);
+			headerItem.on(Events.RESIZE_END, evt => {
+				this.onHeaderItemResized();
+			});
+			headerItem.on(Events.RESIZE_CANCEL, evt => {
+				this.onHeaderItemResized();
+			});
+			headerItem.on(Events.RESIZING, evt => {
+				this.onHeaderItemResizing();
+			});
 		});
 
 		var client = this._client;

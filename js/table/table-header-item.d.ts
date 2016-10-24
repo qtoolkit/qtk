@@ -21,6 +21,7 @@ export declare class TableHeaderItem extends Widget {
     protected getFgImageRect(style: Style): Rect;
     protected getStyleType(): string;
     protected onReset(): void;
+    protected onInit(): void;
     protected triggerSortStatus(): void;
     static TYPE: string;
     private static recycleBin;

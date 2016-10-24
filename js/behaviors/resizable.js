@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var point_1 = require("../point");
+var Events = require("../events");
 var key_event_1 = require("../key-event");
 var behavior_1 = require("./behavior");
 /**
@@ -36,14 +37,32 @@ var Resizable = (function (_super) {
     __extends(Resizable, _super);
     function Resizable(widget, options) {
         _super.call(this, Resizable.TYPE, widget, options);
+        this.resizingEvent = { type: Events.RESIZING };
+        this.resizeEndEvent = { type: Events.RESIZE_END };
+        this.resizeBeginEvent = { type: Events.RESIZE_BEGIN };
+        this.resizeCancelEvent = { type: Events.RESIZE_CANCEL };
     }
     Resizable.prototype.init = function (options) {
         this.options = new ResizableOptions(options);
     };
     Resizable.prototype.onCancelled = function () {
-        this.widget.requestRedraw();
+        var _this = this;
+        var widget = this.widget;
+        var duration = this.options.animateDuration;
+        widget.requestRedraw();
         document.body.style.cursor = "default";
-        this.widget.moveResizeTo(this.x, this.y, this.w, this.h, this.options.animateDuration);
+        var tween = this.widget.moveResizeTo(this.x, this.y, this.w, this.h, duration);
+        if (tween) {
+            tween.onComplete(function (evt) {
+                widget.dispatchEvent(_this.resizeCancelEvent);
+            });
+            tween.onUpdate(function (evt) {
+                widget.dispatchEvent(_this.resizingEvent);
+            });
+        }
+        else {
+            widget.dispatchEvent(this.resizeCancelEvent);
+        }
     };
     Resizable.prototype.onKeyDownGlobal = function (evt) {
         var keyCode = evt.detail.keyCode;
@@ -55,19 +74,24 @@ var Resizable = (function (_super) {
     Resizable.prototype.onPointerDown = function (evt) {
         var result = this.testPointerPosition(evt);
         if (result) {
-            this.x = this.widget.x;
-            this.y = this.widget.y;
-            this.w = this.widget.w;
-            this.h = this.widget.h;
+            var widget = this.widget;
+            this.x = widget.x;
+            this.y = widget.y;
+            this.w = widget.w;
+            this.h = widget.h;
             this.resizing = true;
             this.pointerDownArea = result;
             document.body.style.cursor = result + "-resize";
+            widget.dispatchEvent(this.resizeBeginEvent);
         }
         else {
             document.body.style.cursor = "default";
         }
     };
     Resizable.prototype.onPointerUp = function (evt) {
+        if (this.resizing) {
+            this.widget.dispatchEvent(this.resizeEndEvent);
+        }
         this.resizing = false;
         document.body.style.cursor = "default";
     };
@@ -150,6 +174,7 @@ var Resizable = (function (_super) {
                     break;
                 }
             }
+            widget.dispatchEvent(this.resizingEvent);
         }
         else {
             var result = this.testPointerPosition(evt);

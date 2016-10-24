@@ -88,6 +88,8 @@ export declare class Table extends Widget {
     constructor();
     protected getTemplateRow(): Widget;
     bindData(viewModal: IViewModal): Widget;
+    protected onHeaderItemResized(): void;
+    protected onHeaderItemResizing(): void;
     protected prepareUI(): void;
     protected onInit(): void;
     relayoutChildren(): Rect;
