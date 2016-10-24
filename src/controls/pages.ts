@@ -4,7 +4,7 @@ import {Style} from "../style";
 import {Widget} from "./widget";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
@@ -66,9 +66,9 @@ export class Pages extends Widget {
 	}
 
 	public static TYPE = "pages";
-	private static recycleBin = new RecyclableCreator<Pages>(function() {return new Pages()});
+	private static recycleBin = WidgetRecyclableCreator.create(Pages);
 	public static create(options?:any) : Pages {
-		return <Pages>Pages.recycleBin.create().reset(Pages.TYPE, options);
+		return <Pages>Pages.recycleBin.create(options);
 	}
 };
 

@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var application_1 = require("../application");
 var property_page_1 = require("./property-page");
 var view_modal_1 = require("../mvvm/view-modal");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var widget_factory_1 = require("../controls/widget-factory");
 var message_box_1 = require("../controls/message-box");
 var simple_layouter_1 = require("../layouters/simple-layouter");
@@ -53,10 +53,10 @@ var PropertyDialog = (function (_super) {
         messageBox.open();
     };
     PropertyDialog.create = function (options) {
-        return PropertyDialog.rb.create().reset(PropertyDialog.TYPE, options);
+        return PropertyDialog.rb.create(options);
     };
     PropertyDialog.TYPE = "property-dialog";
-    PropertyDialog.rb = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyDialog(); });
+    PropertyDialog.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyDialog);
     return PropertyDialog;
 }(message_box_1.MessageBox));
 exports.PropertyDialog = PropertyDialog;

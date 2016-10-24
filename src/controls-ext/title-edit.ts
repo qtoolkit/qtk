@@ -3,7 +3,7 @@ import {Edit} from "../controls/edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleEdit extends TitleValue {
 	protected _inputType : string;
@@ -64,9 +64,9 @@ export class TitleEdit extends TitleValue {
 	}
 
 	public static TYPE = "title-edit";
-	private static recycleBin = new RecyclableCreator<TitleEdit>(function() {return new TitleEdit()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleEdit);
 	public static create(options?:any) : TitleEdit {
-		return <TitleEdit>TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
+		return <TitleEdit>TitleEdit.recycleBin.create(options);
 	}
 };
 

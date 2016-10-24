@@ -11,7 +11,7 @@ import {Widget, WidgetState} from "./widget";
 import {IThemeManager} from "../itheme-manager";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
@@ -242,9 +242,9 @@ export class Edit extends Label {
 	}
 
 	public static TYPE = "edit";
-	private static r = new RecyclableCreator<Edit>(function() {return new Edit()});
+	private static r = WidgetRecyclableCreator.create(Edit);
 	public static create(options?:any) : Edit {
-		return <Edit>Edit.r.create().reset(Edit.TYPE, options);
+		return <Edit>Edit.r.create(options);
 	}
 };
 

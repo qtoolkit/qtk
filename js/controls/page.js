@@ -6,17 +6,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var Page = (function (_super) {
     __extends(Page, _super);
     function Page(type) {
         _super.call(this, type || Page.TYPE);
     }
     Page.create = function (options) {
-        return Page.recycleBin.create().reset(Page.TYPE, options);
+        return Page.recycleBin.create(options);
     };
     Page.TYPE = "page";
-    Page.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Page(); });
+    Page.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Page);
     return Page;
 }(widget_1.Widget));
 exports.Page = Page;

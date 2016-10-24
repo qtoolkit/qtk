@@ -3,7 +3,7 @@ import {Widget} from "./widget";
 import {Window} from "./window";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class WindowNormal extends Window {
 	constructor() {
@@ -11,9 +11,9 @@ export class WindowNormal extends Window {
 	}
 
 	public static TYPE = "window-normal";
-	private static recycleBin = new RecyclableCreator<WindowNormal>(function() {return new WindowNormal()});
+	private static recycleBin = WidgetRecyclableCreator.create(WindowNormal);
 	public static create(options?:any) : Window {
-		return <WindowNormal>WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
+		return <WindowNormal>WindowNormal.recycleBin.create(options);
 	}
 };
 

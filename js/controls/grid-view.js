@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var grid_layouter_1 = require("../layouters/grid-layouter");
 var scroll_view_1 = require("./scroll-view");
 /**
@@ -153,11 +153,11 @@ var GridView = (function (_super) {
         return GridView.defProps;
     };
     GridView.create = function (options) {
-        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
+        return GridView.recycleBinGridView.create(options);
     };
     GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
     GridView.TYPE = "grid-view";
-    GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
+    GridView.recycleBinGridView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(GridView);
     return GridView;
 }(scroll_view_1.ScrollView));
 exports.GridView = GridView;

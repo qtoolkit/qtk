@@ -9,7 +9,7 @@ var button_1 = require("../controls/button");
 var widget_1 = require("../controls/widget");
 var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
  * 编辑器+选择按钮。
  */
@@ -82,12 +82,10 @@ var ChoosableEdit = (function (_super) {
         });
     };
     ChoosableEdit.create = function (options) {
-        return ChoosableEdit.rBin.create().reset(ChoosableEdit.TYPE, options);
+        return ChoosableEdit.rBin.create(options);
     };
     ChoosableEdit.TYPE = "choosable.edit";
-    ChoosableEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
-        return new ChoosableEdit();
-    });
+    ChoosableEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChoosableEdit);
     return ChoosableEdit;
 }(widget_1.Widget));
 exports.ChoosableEdit = ChoosableEdit;

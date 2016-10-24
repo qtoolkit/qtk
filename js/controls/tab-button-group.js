@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabButtonGroup = (function (_super) {
     __extends(TabButtonGroup, _super);
     function TabButtonGroup() {
@@ -91,11 +91,11 @@ var TabButtonGroup = (function (_super) {
         return TabButtonGroup.defProps;
     };
     TabButtonGroup.create = function (options) {
-        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
+        return TabButtonGroup.r.create(options);
     };
     TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
     TabButtonGroup.TYPE = "tab-button-group";
-    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
+    TabButtonGroup.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButtonGroup);
     return TabButtonGroup;
 }(widget_1.Widget));
 exports.TabButtonGroup = TabButtonGroup;

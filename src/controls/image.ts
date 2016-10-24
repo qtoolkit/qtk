@@ -3,7 +3,7 @@ import {Style} from "../style";
 import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 图片控件。 
@@ -75,9 +75,9 @@ export class Image extends Widget {
 	}
 	
 	public static TYPE = "image";
-	private static recycleBin = new RecyclableCreator<Image>(function() {return new Image()});
+	private static recycleBin = WidgetRecyclableCreator.create(Image);
 	public static create(options?:any) : Image{
-		return <Image>Image.recycleBin.create().reset(Image.TYPE, options);
+		return <Image>Image.recycleBin.create(options);
 	}
 };
 

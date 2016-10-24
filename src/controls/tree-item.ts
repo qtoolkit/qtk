@@ -8,7 +8,7 @@ import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";
 
 /**
@@ -219,9 +219,9 @@ export class TreeItem extends Widget {
 	}
 
 	public static TYPE = "tree-item";
-	private static recycleBin = new RecyclableCreator<TreeItem>(function() {return new TreeItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(TreeItem);
 	public static create(options?:any) : TreeItem{
-		return <TreeItem>TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
+		return <TreeItem>TreeItem.recycleBin.create(options);
 	}
 };
 

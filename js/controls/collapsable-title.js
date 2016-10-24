@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var widget_1 = require("./widget");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
  * 只能用于TitleContent的titleWidget。
@@ -70,10 +70,10 @@ var CollapsableTitle = (function (_super) {
         this.onClickTrigger = null;
     };
     CollapsableTitle.create = function (options) {
-        return CollapsableTitle.rBin.create().reset(CollapsableTitle.TYPE, options);
+        return CollapsableTitle.rBin.create(options);
     };
     CollapsableTitle.TYPE = "collapsable-title";
-    CollapsableTitle.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new CollapsableTitle(); });
+    CollapsableTitle.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CollapsableTitle);
     return CollapsableTitle;
 }(widget_1.Widget));
 exports.CollapsableTitle = CollapsableTitle;

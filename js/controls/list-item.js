@@ -8,7 +8,7 @@ var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var image_tile_1 = require("../image-tile");
 (function (ListItemStyle) {
     ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
@@ -110,11 +110,11 @@ var ListItem = (function (_super) {
         return ListItem.defProps;
     };
     ListItem.create = function (options) {
-        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
+        return ListItem.recycleBin.create(options);
     };
     ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _oddEvenStyle: false, _iconURL: null });
     ListItem.TYPE = "list-item";
-    ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
+    ListItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItem);
     return ListItem;
 }(widget_1.Widget));
 exports.ListItem = ListItem;
@@ -163,10 +163,10 @@ var ListItemCheckable = (function (_super) {
         configurable: true
     });
     ListItemCheckable.create = function (options) {
-        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
+        return ListItemCheckable.rBin.create(options);
     };
     ListItemCheckable.TYPE = "list-item.checkable";
-    ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });
+    ListItemCheckable.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItemCheckable);
     return ListItemCheckable;
 }(ListItem));
 exports.ListItemCheckable = ListItemCheckable;

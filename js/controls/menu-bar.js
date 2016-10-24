@@ -10,7 +10,7 @@ var Events = require("../events");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var linear_layouter_1 = require("../layouters/linear-layouter");
 var MenuBar = (function (_super) {
     __extends(MenuBar, _super);
@@ -115,11 +115,11 @@ var MenuBar = (function (_super) {
         return MenuBar.defProps;
     };
     MenuBar.create = function (options) {
-        return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
+        return MenuBar.recycleBin.create(options);
     };
     MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
     MenuBar.TYPE = "menu-bar";
-    MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
+    MenuBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBar);
     return MenuBar;
 }(widget_1.Widget));
 exports.MenuBar = MenuBar;
@@ -204,13 +204,13 @@ var MenuBarItem = (function (_super) {
         return MenuBarItem.defProps;
     };
     MenuBarItem.create = function (options) {
-        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
+        return MenuBarItem.recycleBin.create(options);
     };
     MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
         _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
     });
     MenuBarItem.TYPE = "menu-bar-item";
-    MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });
+    MenuBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBarItem);
     return MenuBarItem;
 }(widget_1.Widget));
 exports.MenuBarItem = MenuBarItem;

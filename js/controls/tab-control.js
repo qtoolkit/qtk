@@ -12,7 +12,7 @@ var Events = require("../events");
 var tab_button_1 = require("./tab-button");
 var tab_button_group_1 = require("./tab-button-group");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabControl = (function (_super) {
     __extends(TabControl, _super);
     function TabControl() {
@@ -145,11 +145,11 @@ var TabControl = (function (_super) {
         return TabControl.defProps;
     };
     TabControl.create = function (options) {
-        return TabControl.r.create().reset(TabControl.TYPE, options);
+        return TabControl.r.create(options);
     };
     TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
     TabControl.TYPE = "tab-control";
-    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
+    TabControl.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabControl);
     return TabControl;
 }(widget_1.Widget));
 exports.TabControl = TabControl;

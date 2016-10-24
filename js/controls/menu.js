@@ -13,7 +13,7 @@ var Events = require("../events");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var list_layouter_1 = require("../layouters/list-layouter");
 var simple_layouter_1 = require("../layouters/simple-layouter");
 var Menu = (function (_super) {
@@ -211,10 +211,10 @@ var Menu = (function (_super) {
         this._openedMenu = null;
     };
     Menu.create = function (options) {
-        return Menu.r.create().reset(Menu.TYPE, options);
+        return Menu.r.create(options);
     };
     Menu.TYPE = "menu";
-    Menu.r = new recyclable_creator_1.RecyclableCreator(function () { return new Menu(); });
+    Menu.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Menu);
     return Menu;
 }(dialog_1.Dialog));
 exports.Menu = Menu;
@@ -345,13 +345,13 @@ var MenuItem = (function (_super) {
         this.onInitSubMenu = null;
     };
     MenuItem.create = function (options) {
-        return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
+        return MenuItem.recycleBin.create(options);
     };
     MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
         checkable: false, shortcut: null, _lp: 2, _rp: 4
     });
     MenuItem.TYPE = "menu-item";
-    MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });
+    MenuItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuItem);
     return MenuItem;
 }(widget_1.Widget));
 exports.MenuItem = MenuItem;

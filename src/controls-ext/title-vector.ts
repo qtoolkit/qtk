@@ -3,7 +3,7 @@ import {VectorEdit}  from "./vector-edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleVector extends TitleValue {
 	protected _d : number;
@@ -27,9 +27,10 @@ export class TitleVector extends TitleValue {
 	}
 	
 	public static TYPE = "title-vector";
-	private static recycleBin = new RecyclableCreator<TitleVector>(function() {return new TitleVector()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleVector);
 	public static create(options?:any) : TitleVector {
-		var widget : TitleVector = TitleVector.recycleBin.create();
+
+		var widget : TitleVector = <TitleVector>TitleVector.recycleBin.create(null);
 		widget.d = options ? (options.d || 2) : 2;
 		widget.reset(TitleVector.TYPE, options);
 

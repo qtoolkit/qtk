@@ -15,7 +15,7 @@ import {IApplication} from "../iapplication";
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {Direction, Orientation} from "../consts";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {ListItem, ListItemCheckable} from "./list-item";
 import {DockLayouter, DockLayouterParam} from "../layouters/dock-layouter";
@@ -424,9 +424,9 @@ export class MessageBox extends Dialog {
 	public static BUTTONS_H = 40;
 	public static MSG_FONT_SIZE = 12;
 	public static TYPE = "messagebox";
-	private static rBin = new RecyclableCreator<MessageBox>(function() {return new MessageBox()});
+	private static rBin = WidgetRecyclableCreator.create(MessageBox);
 	public static create(options?:any) : MessageBox {
-		return <MessageBox>MessageBox.rBin.create().reset(MessageBox.TYPE, options);
+		return <MessageBox>MessageBox.rBin.create(options);
 	}
 };
 

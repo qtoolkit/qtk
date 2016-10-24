@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var title_value_1 = require("./title-value");
 var color_tile_1 = require("../controls/color-tile");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleLine = (function (_super) {
     __extends(TitleLine, _super);
     function TitleLine(type) {
@@ -17,10 +17,10 @@ var TitleLine = (function (_super) {
         return color_tile_1.ColorLine.create({ styleType: "title.line" });
     };
     TitleLine.create = function (options) {
-        return TitleLine.recycleBin.create().reset(TitleLine.TYPE, options);
+        return TitleLine.recycleBin.create(options);
     };
     TitleLine.TYPE = "title-line";
-    TitleLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLine(); });
+    TitleLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLine);
     return TitleLine;
 }(title_value_1.TitleValue));
 exports.TitleLine = TitleLine;

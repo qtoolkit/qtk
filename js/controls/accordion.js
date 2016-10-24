@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var title_content_1 = require("./title-content");
 var collapsable_title_1 = require("./collapsable-title");
 /**
@@ -98,11 +98,11 @@ var Accordion = (function (_super) {
         return Accordion.defProps;
     };
     Accordion.create = function (options) {
-        return Accordion.recycleBin.create().reset(Accordion.TYPE, options);
+        return Accordion.recycleBin.create(options);
     };
     Accordion.defProps = Object.assign({}, widget_1.Widget.defProps, { _titleHeight: 30 });
     Accordion.TYPE = "accordion";
-    Accordion.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Accordion(); });
+    Accordion.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Accordion);
     return Accordion;
 }(widget_1.Widget));
 exports.Accordion = Accordion;

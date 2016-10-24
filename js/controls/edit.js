@@ -12,7 +12,7 @@ var html_edit_1 = require("../html/html-edit");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
  */
@@ -225,11 +225,11 @@ var Edit = (function (_super) {
         return Edit.defProps;
     };
     Edit.create = function (options) {
-        return Edit.r.create().reset(Edit.TYPE, options);
+        return Edit.r.create(options);
     };
     Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
     Edit.TYPE = "edit";
-    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
+    Edit.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Edit);
     return Edit;
 }(label_1.Label));
 exports.Edit = Edit;

@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 文本控件。
  */
@@ -98,11 +98,11 @@ var Label = (function (_super) {
         return Label.defProps;
     };
     Label.create = function (options) {
-        return Label.recycleBin.create().reset(Label.TYPE, options);
+        return Label.recycleBin.create(options);
     };
     Label.defProps = Object.assign({}, widget_1.Widget.defProps, { _mlm: true, _lp: 5, _tp: 5, _rp: 5, _bp: 5 });
     Label.TYPE = "label";
-    Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
+    Label.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Label);
     return Label;
 }(widget_1.Widget));
 exports.Label = Label;

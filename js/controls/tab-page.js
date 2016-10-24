@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var page_1 = require("./page");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabPage = (function (_super) {
     __extends(TabPage, _super);
     function TabPage() {
@@ -27,10 +27,10 @@ var TabPage = (function (_super) {
         this._tabButton = null;
     };
     TabPage.create = function (options) {
-        return TabPage.r.create().reset(TabPage.TYPE, options);
+        return TabPage.r.create(options);
     };
     TabPage.TYPE = "page";
-    TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });
+    TabPage.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabPage);
     return TabPage;
 }(page_1.Page));
 exports.TabPage = TabPage;

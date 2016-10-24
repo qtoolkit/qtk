@@ -8,7 +8,7 @@ var style_1 = require("../style");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 图片控件。
  */
@@ -77,10 +77,10 @@ var Image = (function (_super) {
         return this._style;
     };
     Image.create = function (options) {
-        return Image.recycleBin.create().reset(Image.TYPE, options);
+        return Image.recycleBin.create(options);
     };
     Image.TYPE = "image";
-    Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });
+    Image.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Image);
     return Image;
 }(widget_1.Widget));
 exports.Image = Image;

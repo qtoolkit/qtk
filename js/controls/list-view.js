@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var scroll_view_1 = require("./scroll-view");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var list_layouter_1 = require("../layouters/list-layouter");
 var ListView = (function (_super) {
     __extends(ListView, _super);
@@ -96,11 +96,11 @@ var ListView = (function (_super) {
         return ListView.defProps;
     };
     ListView.create = function (options) {
-        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
+        return ListView.recycleBinListView.create(options);
     };
     ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
     ListView.TYPE = "list-view";
-    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
+    ListView.recycleBinListView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListView);
     return ListView;
 }(scroll_view_1.ScrollView));
 exports.ListView = ListView;

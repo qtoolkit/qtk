@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var scroll_view_1 = require("./scroll-view");
 var carota = require('carota');
 var rect = carota.rect;
@@ -95,10 +95,10 @@ var RichText = (function (_super) {
         _super.prototype.dispose.call(this);
     };
     RichText.create = function (options) {
-        return RichText.reBin.create().reset(RichText.TYPE, options);
+        return RichText.reBin.create(options);
     };
     RichText.TYPE = "rich-text";
-    RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });
+    RichText.reBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichText);
     return RichText;
 }(scroll_view_1.ScrollView));
 exports.RichText = RichText;

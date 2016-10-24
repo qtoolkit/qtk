@@ -12,5 +12,5 @@ export declare class RecyclableCreator<T> {
     /**
      * 创建对象。优先从缓存中取对象，如果缓存中没有对象，则创建新对象。
      */
-    create(): T;
+    create(options?: any): T;
 }

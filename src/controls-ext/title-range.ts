@@ -3,7 +3,7 @@ import {RangeEdit}  from "./range-edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleRange extends TitleValue {
 	constructor(type?:string) {
@@ -15,9 +15,9 @@ export class TitleRange extends TitleValue {
 	}
 
 	public static TYPE = "title-range";
-	private static recycleBin = new RecyclableCreator<TitleRange>(function() {return new TitleRange()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleRange);
 	public static create(options?:any) : TitleRange {
-		return <TitleRange>TitleRange.recycleBin.create().reset(TitleRange.TYPE, options);
+		return <TitleRange>TitleRange.recycleBin.create(options);
 	}
 };
 

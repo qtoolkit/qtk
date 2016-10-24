@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var scroll_view_1 = require("../controls/scroll-view");
 var widget_factory_1 = require("../controls/widget-factory");
 var title_content_1 = require("../controls/title-content");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var collapsable_title_1 = require("../controls/collapsable-title");
 /**
  * 管理多个页面，每个页面可以展开或折叠。
@@ -94,10 +94,10 @@ var PropertySheets = (function (_super) {
         this.scrollerOptions.scrollingX = false;
     };
     PropertySheets.create = function (options) {
-        return PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+        return PropertySheets.rBin.create(options);
     };
     PropertySheets.TYPE = "property-sheets";
-    PropertySheets.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertySheets(); });
+    PropertySheets.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertySheets);
     return PropertySheets;
 }(scroll_view_1.ScrollView));
 exports.PropertySheets = PropertySheets;

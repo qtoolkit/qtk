@@ -15,6 +15,13 @@ var Window = (function (_super) {
     function Window(type) {
         _super.call(this, type);
     }
+    Object.defineProperty(Window.prototype, "grabbed", {
+        get: function () {
+            return this._grabbed;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Window.prototype, "hasOwnCanvas", {
         get: function () {
             return this._hasOwnCanvas;

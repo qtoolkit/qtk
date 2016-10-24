@@ -9,7 +9,7 @@ var point_1 = require("../point");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var widget_1 = require("./widget");
 /**
  * 树形视图中，显示的一个子项。
@@ -234,10 +234,10 @@ var TreeItem = (function (_super) {
         this._childrenItems = [];
     };
     TreeItem.create = function (options) {
-        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
+        return TreeItem.recycleBin.create(options);
     };
     TreeItem.TYPE = "tree-item";
-    TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });
+    TreeItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeItem);
     return TreeItem;
 }(widget_1.Widget));
 exports.TreeItem = TreeItem;

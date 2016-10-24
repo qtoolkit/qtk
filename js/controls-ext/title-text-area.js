@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var edit_1 = require("../controls/edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleTextArea = (function (_super) {
     __extends(TitleTextArea, _super);
     function TitleTextArea(type) {
@@ -35,10 +35,10 @@ var TitleTextArea = (function (_super) {
         return edit_1.Edit.create(opts);
     };
     TitleTextArea.create = function (options) {
-        return TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+        return TitleTextArea.recycleBin.create(options);
     };
     TitleTextArea.TYPE = "title-text-area";
-    TitleTextArea.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleTextArea(); });
+    TitleTextArea.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleTextArea);
     return TitleTextArea;
 }(title_value_1.TitleValue));
 exports.TitleTextArea = TitleTextArea;

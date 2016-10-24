@@ -6,7 +6,7 @@ import {Widget} from "./widget";
 import Events = require("../events");
 import {TitleContent} from "./title-content";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
@@ -80,8 +80,8 @@ export class CollapsableTitle extends Widget {
 	}
 
 	public static TYPE = "collapsable-title";
-	private static rBin = new RecyclableCreator<CollapsableTitle>(function() {return new CollapsableTitle()});
+	private static rBin = WidgetRecyclableCreator.create(CollapsableTitle);
 	public static create(options?:any) : CollapsableTitle {
-		return <CollapsableTitle>CollapsableTitle.rBin.create().reset(CollapsableTitle.TYPE, options);
+		return <CollapsableTitle>CollapsableTitle.rBin.create(options);
 	}
 };

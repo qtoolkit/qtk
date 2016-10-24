@@ -3,7 +3,7 @@ import {Rect} from "../rect";
 import {Widget} from "./widget";
 import {ScrollView} from "./scroll-view";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Layouter} from "../layouters/layouter";
 import {ListLayouter, ListLayouterParam} from "../layouters/list-layouter";
 
@@ -96,9 +96,9 @@ export class ListView extends ScrollView {
 
 
 	public static TYPE = "list-view";
-	private static recycleBinListView = new RecyclableCreator<ListView>(function() {return new ListView()});
+	private static recycleBinListView = WidgetRecyclableCreator.create(ListView);
 	public static create(options?:any) : ListView{
-		return <ListView>ListView.recycleBinListView.create().reset(ListView.TYPE, options);
+		return <ListView>ListView.recycleBinListView.create(options);
 	}
 };
 

@@ -17,7 +17,7 @@ var application_1 = require("../application");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var consts_1 = require("../consts");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var list_item_1 = require("./list-item");
 var dock_layouter_1 = require("../layouters/dock-layouter");
 var linear_layouter_1 = require("../layouters/linear-layouter");
@@ -357,13 +357,13 @@ var MessageBox = (function (_super) {
         messageBox.open();
     };
     MessageBox.create = function (options) {
-        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
+        return MessageBox.rBin.create(options);
     };
     MessageBox.TITLE_H = 25;
     MessageBox.BUTTONS_H = 40;
     MessageBox.MSG_FONT_SIZE = 12;
     MessageBox.TYPE = "messagebox";
-    MessageBox.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new MessageBox(); });
+    MessageBox.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MessageBox);
     return MessageBox;
 }(dialog_1.Dialog));
 exports.MessageBox = MessageBox;

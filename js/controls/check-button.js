@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var CheckButton = (function (_super) {
     __extends(CheckButton, _super);
     function CheckButton(type) {
@@ -101,10 +101,10 @@ var CheckButton = (function (_super) {
         _super.prototype.dispatchClick.call(this, evt);
     };
     CheckButton.create = function (options) {
-        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
+        return CheckButton.recycleBin.create(options);
     };
     CheckButton.TYPE = "check-button";
-    CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });
+    CheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CheckButton);
     return CheckButton;
 }(widget_1.Widget));
 exports.CheckButton = CheckButton;

@@ -10,7 +10,7 @@ import {Orientation} from "../consts";
 import {RadioButton} from "./radio-button";
 import {WidgetFactory} from "./widget-factory";
 import {ImageDrawType, ImageTile} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 标签控件上的标签按钮。
@@ -199,9 +199,9 @@ export class TabButton extends RadioButton {
 	}
 
 	public static TYPE = "tab-button";
-	private static re = new RecyclableCreator<TabButton>(function() {return new TabButton()});
+	private static re = WidgetRecyclableCreator.create(TabButton);
 	public static create(options?:any) : TabButton {
-		return <TabButton>TabButton.re.create().reset(TabButton.TYPE, options);
+		return <TabButton>TabButton.re.create(options);
 	}
 };
 

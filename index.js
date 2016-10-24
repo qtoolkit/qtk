@@ -62,146 +62,146 @@ var qtk =
 	exports.Label = label_1.Label;
 	var emitter_1 = __webpack_require__(4);
 	exports.Emitter = emitter_1.Emitter;
-	var page_1 = __webpack_require__(85);
+	var page_1 = __webpack_require__(86);
 	exports.Page = page_1.Page;
 	var key_event_1 = __webpack_require__(16);
 	exports.KeyEvent = key_event_1.KeyEvent;
-	var view_port_1 = __webpack_require__(86);
+	var view_port_1 = __webpack_require__(87);
 	exports.ViewPort = view_port_1.ViewPort;
-	var pages_1 = __webpack_require__(87);
+	var pages_1 = __webpack_require__(88);
 	exports.Pages = pages_1.Pages;
-	var main_loop_1 = __webpack_require__(88);
+	var main_loop_1 = __webpack_require__(89);
 	exports.MainLoop = main_loop_1.MainLoop;
-	var image_1 = __webpack_require__(89);
+	var image_1 = __webpack_require__(90);
 	exports.Image = image_1.Image;
-	var group_1 = __webpack_require__(90);
+	var group_1 = __webpack_require__(91);
 	exports.Group = group_1.Group;
-	var dialog_1 = __webpack_require__(91);
+	var dialog_1 = __webpack_require__(92);
 	exports.Dialog = dialog_1.Dialog;
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	exports.Button = button_1.Button;
-	var slider_1 = __webpack_require__(94);
+	var slider_1 = __webpack_require__(95);
 	exports.Slider = slider_1.Slider;
-	var switch_1 = __webpack_require__(96);
+	var switch_1 = __webpack_require__(97);
 	exports.Switch = switch_1.Switch;
 	var matrix_stack_1 = __webpack_require__(22);
 	exports.MatrixStack = matrix_stack_1.MatrixStack;
-	var tab_page_1 = __webpack_require__(97);
+	var tab_page_1 = __webpack_require__(98);
 	exports.TabPage = tab_page_1.TabPage;
-	var rich_text_1 = __webpack_require__(98);
+	var rich_text_1 = __webpack_require__(99);
 	exports.RichText = rich_text_1.RichText;
-	var tab_button_1 = __webpack_require__(103);
+	var tab_button_1 = __webpack_require__(104);
 	exports.TabButton = tab_button_1.TabButton;
-	var tab_control_1 = __webpack_require__(107);
+	var tab_control_1 = __webpack_require__(108);
 	exports.TabControl = tab_control_1.TabControl;
 	var image_tile_1 = __webpack_require__(7);
 	exports.ImageDrawType = image_tile_1.ImageDrawType;
 	exports.ImageTile = image_tile_1.ImageTile;
-	var rich_text_edit_1 = __webpack_require__(109);
+	var rich_text_edit_1 = __webpack_require__(110);
 	exports.RichTextEdit = rich_text_edit_1.RichTextEdit;
-	var tab_button_group_1 = __webpack_require__(108);
+	var tab_button_group_1 = __webpack_require__(109);
 	exports.TabButtonGroup = tab_button_group_1.TabButtonGroup;
-	var combo_box_1 = __webpack_require__(110);
+	var combo_box_1 = __webpack_require__(111);
 	exports.ComboBox = combo_box_1.ComboBox;
 	exports.ComboBoxEditable = combo_box_1.ComboBoxEditable;
-	var grid_view_1 = __webpack_require__(115);
+	var grid_view_1 = __webpack_require__(116);
 	exports.GridView = grid_view_1.GridView;
-	var list_view_1 = __webpack_require__(111);
+	var list_view_1 = __webpack_require__(112);
 	exports.ListView = list_view_1.ListView;
-	var tree_item_1 = __webpack_require__(117);
+	var tree_item_1 = __webpack_require__(118);
 	exports.TreeItem = tree_item_1.TreeItem;
-	var tree_view_1 = __webpack_require__(118);
+	var tree_view_1 = __webpack_require__(119);
 	exports.TreeView = tree_view_1.TreeView;
-	var application_1 = __webpack_require__(120);
+	var application_1 = __webpack_require__(121);
 	exports.Application = application_1.Application;
-	var movable_1 = __webpack_require__(161);
+	var movable_1 = __webpack_require__(162);
 	exports.Movable = movable_1.Movable;
-	var theme_manager_1 = __webpack_require__(121);
+	var theme_manager_1 = __webpack_require__(122);
 	exports.ThemeManager = theme_manager_1.ThemeManager;
-	var draggable_1 = __webpack_require__(162);
+	var draggable_1 = __webpack_require__(163);
 	exports.Draggable = draggable_1.Draggable;
-	var droppable_1 = __webpack_require__(163);
+	var droppable_1 = __webpack_require__(164);
 	exports.Droppable = droppable_1.Droppable;
-	var resizable_1 = __webpack_require__(164);
+	var resizable_1 = __webpack_require__(165);
 	exports.Resizable = resizable_1.Resizable;
-	var menu_1 = __webpack_require__(165);
+	var menu_1 = __webpack_require__(166);
 	exports.Menu = menu_1.Menu;
 	exports.MenuItem = menu_1.MenuItem;
-	var radio_button_1 = __webpack_require__(105);
+	var radio_button_1 = __webpack_require__(106);
 	exports.RadioButton = radio_button_1.RadioButton;
-	var tree_item_data_1 = __webpack_require__(119);
+	var tree_item_data_1 = __webpack_require__(120);
 	exports.TreeItemData = tree_item_data_1.TreeItemData;
-	var check_button_1 = __webpack_require__(106);
+	var check_button_1 = __webpack_require__(107);
 	exports.CheckButton = check_button_1.CheckButton;
-	var window_normal_1 = __webpack_require__(166);
+	var window_normal_1 = __webpack_require__(167);
 	exports.WindowNormal = window_normal_1.WindowNormal;
 	var widget_factory_1 = __webpack_require__(23);
 	exports.WidgetFactory = widget_factory_1.WidgetFactory;
-	var menu_bar_1 = __webpack_require__(167);
+	var menu_bar_1 = __webpack_require__(168);
 	exports.MenuBar = menu_bar_1.MenuBar;
 	exports.MenuBarItem = menu_bar_1.MenuBarItem;
-	var color_tile_1 = __webpack_require__(138);
+	var color_tile_1 = __webpack_require__(139);
 	exports.ColorTile = color_tile_1.ColorTile;
 	exports.ColorLine = color_tile_1.ColorLine;
-	var list_item_1 = __webpack_require__(113);
+	var list_item_1 = __webpack_require__(114);
 	exports.ListItem = list_item_1.ListItem;
 	exports.ListItemStyle = list_item_1.ListItemStyle;
-	var chart_view_1 = __webpack_require__(168);
+	var chart_view_1 = __webpack_require__(169);
 	exports.ChartView = chart_view_1.ChartView;
 	var graphics_1 = __webpack_require__(25);
 	exports.RoundType = graphics_1.RoundType;
 	exports.Graphics = graphics_1.Graphics;
-	var accordion_1 = __webpack_require__(321);
+	var accordion_1 = __webpack_require__(322);
 	exports.Accordion = accordion_1.Accordion;
-	var service_locator_1 = __webpack_require__(123);
+	var service_locator_1 = __webpack_require__(124);
 	exports.ServiceLocator = service_locator_1.ServiceLocator;
-	var ruler_1 = __webpack_require__(324);
+	var ruler_1 = __webpack_require__(325);
 	exports.VRuler = ruler_1.VRuler;
 	exports.HRuler = ruler_1.HRuler;
-	var title_content_1 = __webpack_require__(322);
+	var title_content_1 = __webpack_require__(323);
 	exports.TitleContent = title_content_1.TitleContent;
-	var title_label_1 = __webpack_require__(140);
+	var title_label_1 = __webpack_require__(141);
 	exports.TitleLabel = title_label_1.TitleLabel;
-	var title_range_1 = __webpack_require__(142);
+	var title_range_1 = __webpack_require__(143);
 	exports.TitleRange = title_range_1.TitleRange;
-	var title_vector_1 = __webpack_require__(144);
+	var title_vector_1 = __webpack_require__(145);
 	exports.TitleVector = title_vector_1.TitleVector;
-	var title_edit_1 = __webpack_require__(139);
+	var title_edit_1 = __webpack_require__(140);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_slider_1 = __webpack_require__(146);
+	var title_slider_1 = __webpack_require__(147);
 	exports.TitleSlider = title_slider_1.TitleSlider;
-	var property_page_1 = __webpack_require__(134);
+	var property_page_1 = __webpack_require__(135);
 	exports.PropertyPage = property_page_1.PropertyPage;
-	var property_dialog_1 = __webpack_require__(133);
+	var property_dialog_1 = __webpack_require__(134);
 	exports.PropertyDialog = property_dialog_1.PropertyDialog;
-	var range_edit_1 = __webpack_require__(143);
+	var range_edit_1 = __webpack_require__(144);
 	exports.RangeEdit = range_edit_1.RangeEdit;
-	var vector_edit_1 = __webpack_require__(145);
+	var vector_edit_1 = __webpack_require__(146);
 	exports.VectorEdit = vector_edit_1.VectorEdit;
-	var choosable_edit_1 = __webpack_require__(149);
+	var choosable_edit_1 = __webpack_require__(150);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_text_area_1 = __webpack_require__(147);
+	var title_text_area_1 = __webpack_require__(148);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var property_sheets_1 = __webpack_require__(325);
+	var property_sheets_1 = __webpack_require__(326);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
-	var progress_bar_1 = __webpack_require__(95);
+	var progress_bar_1 = __webpack_require__(96);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
 	exports.ProgressBar = progress_bar_1.ProgressBar;
-	var title_choosable_edit_1 = __webpack_require__(148);
+	var title_choosable_edit_1 = __webpack_require__(149);
 	exports.TitleChoosableEdit = title_choosable_edit_1.TitleChoosableEdit;
-	var dock_layouter_1 = __webpack_require__(129);
+	var dock_layouter_1 = __webpack_require__(130);
 	exports.DockLayouter = dock_layouter_1.DockLayouter;
 	exports.DockLayouterParam = dock_layouter_1.DockLayouterParam;
-	var grid_layouter_1 = __webpack_require__(116);
+	var grid_layouter_1 = __webpack_require__(117);
 	exports.GridLayouter = grid_layouter_1.GridLayouter;
 	exports.GridLayouterParam = grid_layouter_1.GridLayouterParam;
-	var list_layouter_1 = __webpack_require__(112);
+	var list_layouter_1 = __webpack_require__(113);
 	exports.ListLayouter = list_layouter_1.ListLayouter;
 	exports.ListLayouterParam = list_layouter_1.ListLayouterParam;
-	var simple_layouter_1 = __webpack_require__(114);
+	var simple_layouter_1 = __webpack_require__(115);
 	exports.SimpleLayouter = simple_layouter_1.SimpleLayouter;
 	exports.SimpleLayouterParam = simple_layouter_1.SimpleLayouterParam;
-	var linear_layouter_1 = __webpack_require__(130);
+	var linear_layouter_1 = __webpack_require__(131);
 	exports.LinearLayouter = linear_layouter_1.LinearLayouter;
 	exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
 	var widget_1 = __webpack_require__(19);
@@ -209,58 +209,58 @@ var qtk =
 	exports.WidgetState = widget_1.WidgetState;
 	exports.WidgetMode = widget_1.WidgetMode;
 	exports.HitTestResult = widget_1.HitTestResult;
-	var consts_1 = __webpack_require__(104);
+	var consts_1 = __webpack_require__(105);
 	exports.Direction = consts_1.Direction;
 	exports.Align = consts_1.Align;
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
 	exports.Services = consts_1.Services;
-	var title_combo_box_1 = __webpack_require__(151);
+	var title_combo_box_1 = __webpack_require__(152);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	exports.ButtonOption = message_box_1.ButtonOption;
 	exports.ButtonsOptions = message_box_1.ButtonsOptions;
 	exports.TitleOptions = message_box_1.TitleOptions;
 	exports.MessageBox = message_box_1.MessageBox;
-	var scroll_view_1 = __webpack_require__(99);
+	var scroll_view_1 = __webpack_require__(100);
 	exports.ScrollerBarVisibility = scroll_view_1.ScrollerBarVisibility;
 	exports.ScrollBarStyle = scroll_view_1.ScrollBarStyle;
 	exports.ScrollView = scroll_view_1.ScrollView;
-	var device_info_1 = __webpack_require__(122);
+	var device_info_1 = __webpack_require__(123);
 	exports.DeviceInfo = device_info_1.DeviceInfo;
-	var view_modal_1 = __webpack_require__(152);
+	var view_modal_1 = __webpack_require__(153);
 	exports.ViewModal = view_modal_1.ViewModal;
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(326);
+	var delegate_command_1 = __webpack_require__(327);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_modal_1 = __webpack_require__(327);
+	var collection_view_modal_1 = __webpack_require__(328);
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
-	var delegate_value_converter_1 = __webpack_require__(328);
+	var delegate_value_converter_1 = __webpack_require__(329);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
-	var ivalidation_rule_1 = __webpack_require__(156);
+	var ivalidation_rule_1 = __webpack_require__(157);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
-	var delegate_validation_rule_1 = __webpack_require__(329);
+	var delegate_validation_rule_1 = __webpack_require__(330);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
 	var binding_rule_1 = __webpack_require__(79);
 	exports.BindingRule = binding_rule_1.BindingRule;
 	exports.BindingDataSource = binding_rule_1.BindingDataSource;
 	exports.BindingCommandSource = binding_rule_1.BindingCommandSource;
 	exports.BindingRuleItem = binding_rule_1.BindingRuleItem;
-	var props_desc_1 = __webpack_require__(150);
+	var props_desc_1 = __webpack_require__(151);
 	exports.PagePropsDesc = props_desc_1.PagePropsDesc;
 	exports.PropsDesc = props_desc_1.PropsDesc;
 	exports.PropDesc = props_desc_1.PropDesc;
 	exports.NumberPropDesc = props_desc_1.NumberPropDesc;
 	exports.SliderPropDesc = props_desc_1.SliderPropDesc;
-	var props_desc_2 = __webpack_require__(150);
+	var props_desc_2 = __webpack_require__(151);
 	exports.TextPropDesc = props_desc_2.TextPropDesc;
 	exports.ReadonlyTextPropDesc = props_desc_2.ReadonlyTextPropDesc;
 	exports.OptionsPropDesc = props_desc_2.OptionsPropDesc;
 	exports.RangePropDesc = props_desc_2.RangePropDesc;
-	var props_desc_3 = __webpack_require__(150);
+	var props_desc_3 = __webpack_require__(151);
 	exports.Vector2PropDesc = props_desc_3.Vector2PropDesc;
 	exports.Vector3PropDesc = props_desc_3.Vector3PropDesc;
 	exports.LinePropDesc = props_desc_3.LinePropDesc;
@@ -273,50 +273,50 @@ var qtk =
 	exports.Assets = Assets;
 	var inputEventAdapter = __webpack_require__(15);
 	exports.inputEventAdapter = inputEventAdapter;
-	var toast_info_1 = __webpack_require__(330);
+	var toast_info_1 = __webpack_require__(331);
 	exports.ToastInfo = toast_info_1.ToastInfo;
-	var input_info_1 = __webpack_require__(331);
+	var input_info_1 = __webpack_require__(332);
 	exports.InputInfo = input_info_1.InputInfo;
-	var props_info_1 = __webpack_require__(332);
+	var props_info_1 = __webpack_require__(333);
 	exports.PropsInfo = props_info_1.PropsInfo;
-	var choice_info_1 = __webpack_require__(333);
+	var choice_info_1 = __webpack_require__(334);
 	exports.ChoiceInfo = choice_info_1.ChoiceInfo;
-	var progress_info_1 = __webpack_require__(334);
+	var progress_info_1 = __webpack_require__(335);
 	exports.ProgressInfo = progress_info_1.ProgressInfo;
-	var confirmation_info_1 = __webpack_require__(335);
+	var confirmation_info_1 = __webpack_require__(336);
 	exports.ConfirmationInfo = confirmation_info_1.ConfirmationInfo;
-	var notification_info_1 = __webpack_require__(336);
+	var notification_info_1 = __webpack_require__(337);
 	exports.NotificationInfo = notification_info_1.NotificationInfo;
-	var interaction_types_1 = __webpack_require__(125);
+	var interaction_types_1 = __webpack_require__(126);
 	exports.InteractionTypes = interaction_types_1.InteractionTypes;
-	var interaction_request_1 = __webpack_require__(124);
+	var interaction_request_1 = __webpack_require__(125);
 	exports.InteractionRequest = interaction_request_1.InteractionRequest;
-	var interaction_service_1 = __webpack_require__(126);
+	var interaction_service_1 = __webpack_require__(127);
 	exports.InteractionService = interaction_service_1.InteractionService;
-	var items_storage_1 = __webpack_require__(337);
+	var items_storage_1 = __webpack_require__(338);
 	exports.ItemsStorage = items_storage_1.ItemsStorage;
-	var table_row_1 = __webpack_require__(338);
+	var table_row_1 = __webpack_require__(339);
 	exports.TableRow = table_row_1.TableRow;
-	var table_client_1 = __webpack_require__(339);
+	var table_client_1 = __webpack_require__(340);
 	exports.TableClient = table_client_1.TableClient;
-	var table_index_1 = __webpack_require__(341);
+	var table_index_1 = __webpack_require__(342);
 	exports.TableIndex = table_index_1.TableIndex;
-	var table_header_1 = __webpack_require__(343);
+	var table_header_1 = __webpack_require__(344);
 	exports.TableHeader = table_header_1.TableHeader;
-	var table_1 = __webpack_require__(344);
+	var table_1 = __webpack_require__(345);
 	exports.Table = table_1.Table;
 	exports.TableColInfo = table_1.TableColInfo;
-	var table_index_item_1 = __webpack_require__(345);
+	var table_index_item_1 = __webpack_require__(346);
 	exports.TableIndexItem = table_index_item_1.TableIndexItem;
-	var table_header_item_1 = __webpack_require__(346);
+	var table_header_item_1 = __webpack_require__(347);
 	exports.TableHeaderItem = table_header_item_1.TableHeaderItem;
-	var range_fixer_1 = __webpack_require__(347);
+	var range_fixer_1 = __webpack_require__(348);
 	exports.RangeFixer = range_fixer_1.RangeFixer;
-	var number_fixer_1 = __webpack_require__(348);
+	var number_fixer_1 = __webpack_require__(349);
 	exports.NumberFixer = number_fixer_1.NumberFixer;
-	var vector2_fixer_1 = __webpack_require__(349);
+	var vector2_fixer_1 = __webpack_require__(350);
 	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
-	var vector3_fixer_1 = __webpack_require__(350);
+	var vector3_fixer_1 = __webpack_require__(351);
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 
 
@@ -4205,11 +4205,11 @@ var qtk =
 	var point_1 = __webpack_require__(2);
 	var label_1 = __webpack_require__(18);
 	var Events = __webpack_require__(6);
-	var html_edit_1 = __webpack_require__(83);
+	var html_edit_1 = __webpack_require__(84);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 编辑器。multiLineMode决定是多行编辑器还是单行编辑器。
 	 */
@@ -4422,11 +4422,11 @@ var qtk =
 	        return Edit.defProps;
 	    };
 	    Edit.create = function (options) {
-	        return Edit.r.create().reset(Edit.TYPE, options);
+	        return Edit.r.create(options);
 	    };
 	    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
 	    Edit.TYPE = "edit";
-	    Edit.r = new recyclable_creator_1.RecyclableCreator(function () { return new Edit(); });
+	    Edit.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Edit);
 	    return Edit;
 	}(label_1.Label));
 	exports.Edit = Edit;
@@ -4447,7 +4447,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 文本控件。
 	 */
@@ -4538,11 +4538,11 @@ var qtk =
 	        return Label.defProps;
 	    };
 	    Label.create = function (options) {
-	        return Label.recycleBin.create().reset(Label.TYPE, options);
+	        return Label.recycleBin.create(options);
 	    };
 	    Label.defProps = Object.assign({}, widget_1.Widget.defProps, { _mlm: true, _lp: 5, _tp: 5, _rp: 5, _bp: 5 });
 	    Label.TYPE = "label";
-	    Label.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Label(); });
+	    Label.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Label);
 	    return Label;
 	}(widget_1.Widget));
 	exports.Label = Label;
@@ -17247,6 +17247,42 @@ var qtk =
 
 /***/ },
 /* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var recyclable_creator_1 = __webpack_require__(83);
+	/**
+	 * 可循环的创建器。
+	 */
+	var WidgetRecyclableCreator = (function (_super) {
+	    __extends(WidgetRecyclableCreator, _super);
+	    function WidgetRecyclableCreator(ctor) {
+	        _super.call(this, function () {
+	            return new ctor;
+	        });
+	        this._type = ctor.TYPE;
+	    }
+	    WidgetRecyclableCreator.prototype.create = function (options) {
+	        var obj = _super.prototype.create.call(this);
+	        obj.reset(this._type, options);
+	        return obj;
+	    };
+	    WidgetRecyclableCreator.create = function (ctor) {
+	        return new WidgetRecyclableCreator(ctor);
+	    };
+	    return WidgetRecyclableCreator;
+	}(recyclable_creator_1.RecyclableCreator));
+	exports.WidgetRecyclableCreator = WidgetRecyclableCreator;
+	;
+
+
+/***/ },
+/* 83 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -17269,7 +17305,7 @@ var qtk =
 	    /**
 	     * 创建对象。优先从缓存中取对象，如果缓存中没有对象，则创建新对象。
 	     */
-	    RecyclableCreator.prototype.create = function () {
+	    RecyclableCreator.prototype.create = function (options) {
 	        var me = this;
 	        if (this.cache.length) {
 	            return this.cache.pop();
@@ -17289,7 +17325,7 @@ var qtk =
 
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17299,7 +17335,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var html_element_1 = __webpack_require__(84);
+	var html_element_1 = __webpack_require__(85);
 	var HtmlEdit = (function (_super) {
 	    __extends(HtmlEdit, _super);
 	    function HtmlEdit() {
@@ -17401,7 +17437,7 @@ var qtk =
 
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17532,7 +17568,7 @@ var qtk =
 
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17543,17 +17579,17 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var Page = (function (_super) {
 	    __extends(Page, _super);
 	    function Page(type) {
 	        _super.call(this, type || Page.TYPE);
 	    }
 	    Page.create = function (options) {
-	        return Page.recycleBin.create().reset(Page.TYPE, options);
+	        return Page.recycleBin.create(options);
 	    };
 	    Page.TYPE = "page";
-	    Page.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Page(); });
+	    Page.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Page);
 	    return Page;
 	}(widget_1.Widget));
 	exports.Page = Page;
@@ -17562,7 +17598,7 @@ var qtk =
 
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
@@ -17663,7 +17699,7 @@ var qtk =
 
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17674,7 +17710,7 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
 	 * value表示该活跃页面的索引。
@@ -17733,10 +17769,10 @@ var qtk =
 	        this.value = 0;
 	    };
 	    Pages.create = function (options) {
-	        return Pages.recycleBin.create().reset(Pages.TYPE, options);
+	        return Pages.recycleBin.create(options);
 	    };
 	    Pages.TYPE = "pages";
-	    Pages.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Pages(); });
+	    Pages.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Pages);
 	    return Pages;
 	}(widget_1.Widget));
 	exports.Pages = Pages;
@@ -17745,7 +17781,7 @@ var qtk =
 
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17806,7 +17842,7 @@ var qtk =
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17819,7 +17855,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 图片控件。
 	 */
@@ -17888,45 +17924,15 @@ var qtk =
 	        return this._style;
 	    };
 	    Image.create = function (options) {
-	        return Image.recycleBin.create().reset(Image.TYPE, options);
+	        return Image.recycleBin.create(options);
 	    };
 	    Image.TYPE = "image";
-	    Image.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Image(); });
+	    Image.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Image);
 	    return Image;
 	}(widget_1.Widget));
 	exports.Image = Image;
 	;
 	widget_factory_1.WidgetFactory.register(Image.TYPE, Image.create);
-
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var widget_1 = __webpack_require__(19);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var Group = (function (_super) {
-	    __extends(Group, _super);
-	    function Group() {
-	        _super.call(this, Group.TYPE);
-	    }
-	    Group.create = function (options) {
-	        return Group.recycleBin.create().reset(Group.TYPE, options);
-	    };
-	    Group.TYPE = "group";
-	    Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });
-	    return Group;
-	}(widget_1.Widget));
-	exports.Group = Group;
-	;
-	widget_factory_1.WidgetFactory.register(Group.TYPE, Group.create);
 
 
 /***/ },
@@ -17939,9 +17945,39 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var window_1 = __webpack_require__(92);
+	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var Group = (function (_super) {
+	    __extends(Group, _super);
+	    function Group() {
+	        _super.call(this, Group.TYPE);
+	    }
+	    Group.create = function (options) {
+	        return Group.recycleBin.create(options);
+	    };
+	    Group.TYPE = "group";
+	    Group.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Group);
+	    return Group;
+	}(widget_1.Widget));
+	exports.Group = Group;
+	;
+	widget_factory_1.WidgetFactory.register(Group.TYPE, Group.create);
+
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var window_1 = __webpack_require__(93);
+	var widget_factory_1 = __webpack_require__(23);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 对话框。
 	 */
@@ -17951,10 +17987,10 @@ var qtk =
 	        _super.call(this, type || Dialog.TYPE);
 	    }
 	    Dialog.create = function (options) {
-	        return Dialog.recycleBin.create().reset(Dialog.TYPE, options);
+	        return Dialog.recycleBin.create(options);
 	    };
 	    Dialog.TYPE = "dialog";
-	    Dialog.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Dialog(); });
+	    Dialog.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Dialog);
 	    return Dialog;
 	}(window_1.Window));
 	exports.Dialog = Dialog;
@@ -17963,7 +17999,7 @@ var qtk =
 
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17983,6 +18019,13 @@ var qtk =
 	    function Window(type) {
 	        _super.call(this, type);
 	    }
+	    Object.defineProperty(Window.prototype, "grabbed", {
+	        get: function () {
+	            return this._grabbed;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Window.prototype, "hasOwnCanvas", {
 	        get: function () {
 	            return this._hasOwnCanvas;
@@ -18162,7 +18205,7 @@ var qtk =
 
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18173,17 +18216,17 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var Button = (function (_super) {
 	    __extends(Button, _super);
 	    function Button() {
 	        _super.call(this, Button.TYPE);
 	    }
 	    Button.create = function (options) {
-	        return Button.recycleBin.create().reset(Button.TYPE, options);
+	        return Button.recycleBin.create(options);
 	    };
 	    Button.TYPE = "button";
-	    Button.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Button(); });
+	    Button.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Button);
 	    return Button;
 	}(widget_1.Widget));
 	exports.Button = Button;
@@ -18192,7 +18235,7 @@ var qtk =
 
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18202,11 +18245,11 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var progress_bar_1 = __webpack_require__(95);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var progress_bar_1 = __webpack_require__(96);
 	/**
 	 * 滑块控件。拖动滑块可以改变它的值。
 	 */
@@ -18340,10 +18383,10 @@ var qtk =
 	        return this;
 	    };
 	    Slider.create = function (options) {
-	        return Slider.r.create().reset(Slider.TYPE, options);
+	        return Slider.r.create(options);
 	    };
 	    Slider.TYPE = "slider";
-	    Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });
+	    Slider.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Slider);
 	    return Slider;
 	}(progress_bar_1.ProgressBar));
 	exports.Slider = Slider;
@@ -18352,7 +18395,7 @@ var qtk =
 
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18364,7 +18407,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 进度条的类型有三种：水平，垂直和圆形。
 	 */
@@ -18454,11 +18497,11 @@ var qtk =
 	        return ProgressBar.defProps;
 	    };
 	    ProgressBar.create = function (options) {
-	        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
+	        return ProgressBar.recycleBin.create(options);
 	    };
 	    ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
 	    ProgressBar.TYPE = "progress-bar";
-	    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
+	    ProgressBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ProgressBar);
 	    return ProgressBar;
 	}(widget_1.Widget));
 	exports.ProgressBar = ProgressBar;
@@ -18467,7 +18510,7 @@ var qtk =
 
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18480,7 +18523,7 @@ var qtk =
 	var TWEEN = __webpack_require__(20);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 开关控件。
 	 */
@@ -18562,10 +18605,10 @@ var qtk =
 	        _super.prototype.dispatchPointerUp.call(this, evt);
 	    };
 	    Switch.create = function (options) {
-	        return Switch.recycleBin.create().reset(Switch.TYPE, options);
+	        return Switch.recycleBin.create(options);
 	    };
 	    Switch.TYPE = "switch";
-	    Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });
+	    Switch.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Switch);
 	    return Switch;
 	}(widget_1.Widget));
 	exports.Switch = Switch;
@@ -18574,7 +18617,7 @@ var qtk =
 
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18583,9 +18626,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var page_1 = __webpack_require__(85);
+	var page_1 = __webpack_require__(86);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TabPage = (function (_super) {
 	    __extends(TabPage, _super);
 	    function TabPage() {
@@ -18606,10 +18649,10 @@ var qtk =
 	        this._tabButton = null;
 	    };
 	    TabPage.create = function (options) {
-	        return TabPage.r.create().reset(TabPage.TYPE, options);
+	        return TabPage.r.create(options);
 	    };
 	    TabPage.TYPE = "page";
-	    TabPage.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabPage(); });
+	    TabPage.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabPage);
 	    return TabPage;
 	}(page_1.Page));
 	exports.TabPage = TabPage;
@@ -18618,7 +18661,7 @@ var qtk =
 
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -18628,8 +18671,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var scroll_view_1 = __webpack_require__(99);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var scroll_view_1 = __webpack_require__(100);
 	var carota = __webpack_require__(26);
 	var rect = carota.rect;
 	var createDoc = carota.document;
@@ -18718,10 +18761,10 @@ var qtk =
 	        _super.prototype.dispose.call(this);
 	    };
 	    RichText.create = function (options) {
-	        return RichText.reBin.create().reset(RichText.TYPE, options);
+	        return RichText.reBin.create(options);
 	    };
 	    RichText.TYPE = "rich-text";
-	    RichText.reBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichText(); });
+	    RichText.reBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichText);
 	    return RichText;
 	}(scroll_view_1.ScrollView));
 	exports.RichText = RichText;
@@ -18730,7 +18773,7 @@ var qtk =
 
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/globals/scroller/index.d.ts"/>
@@ -18743,12 +18786,12 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
-	var scroller_1 = __webpack_require__(100);
+	var scroller_1 = __webpack_require__(101);
 	var TWEEN = __webpack_require__(20);
 	var Events = __webpack_require__(6);
 	var graphics_1 = __webpack_require__(25);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var widget_1 = __webpack_require__(19);
 	/**
 	 * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
@@ -19357,11 +19400,11 @@ var qtk =
 	        return ScrollView.defProps;
 	    };
 	    ScrollView.create = function (options) {
-	        return ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
+	        return ScrollView.recycleBin.create(options);
 	    };
 	    ScrollView.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2 });
 	    ScrollView.TYPE = "scroll-view";
-	    ScrollView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ScrollView(); });
+	    ScrollView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ScrollView);
 	    return ScrollView;
 	}(widget_1.Widget));
 	exports.ScrollView = ScrollView;
@@ -19395,13 +19438,13 @@ var qtk =
 
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(101), __webpack_require__(102)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(102), __webpack_require__(103)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports === 'object') {
 	        // CommonJS
 	        factory(exports, require('./lib/animate'), require('./lib/Scroller'));
@@ -19413,7 +19456,7 @@ var qtk =
 
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19650,7 +19693,7 @@ var qtk =
 
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -19670,7 +19713,7 @@ var qtk =
 	(function (root, factory) {
 	    if (true) {
 	        // AMD
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(101)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(102)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof module === 'object') {
 	        // CommonJS
 	        module.exports = factory(require('./animate'));
@@ -20808,7 +20851,7 @@ var qtk =
 
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20819,13 +20862,13 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(1);
 	var widget_1 = __webpack_require__(19);
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	var graphics_1 = __webpack_require__(25);
-	var consts_1 = __webpack_require__(104);
-	var radio_button_1 = __webpack_require__(105);
+	var consts_1 = __webpack_require__(105);
+	var radio_button_1 = __webpack_require__(106);
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 标签控件上的标签按钮。
 	 */
@@ -21005,12 +21048,12 @@ var qtk =
 	        return TabButton.defProps;
 	    };
 	    TabButton.create = function (options) {
-	        return TabButton.re.create().reset(TabButton.TYPE, options);
+	        return TabButton.re.create(options);
 	    };
 	    TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
 	        _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
 	    TabButton.TYPE = "tab-button";
-	    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
+	    TabButton.re = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButton);
 	    return TabButton;
 	}(radio_button_1.RadioButton));
 	exports.TabButton = TabButton;
@@ -21019,7 +21062,7 @@ var qtk =
 
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21098,7 +21141,7 @@ var qtk =
 
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21107,9 +21150,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var check_button_1 = __webpack_require__(106);
+	var check_button_1 = __webpack_require__(107);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 单选按钮。同一个父控件中，只有一个单选按钮被勾选。被勾选时value为true，否则为false。
 	 */
@@ -21129,10 +21172,10 @@ var qtk =
 	        configurable: true
 	    });
 	    RadioButton.create = function (options) {
-	        return RadioButton.r.create().reset(RadioButton.TYPE, options);
+	        return RadioButton.r.create(options);
 	    };
 	    RadioButton.TYPE = "radio-button";
-	    RadioButton.r = new recyclable_creator_1.RecyclableCreator(function () { return new RadioButton(); });
+	    RadioButton.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RadioButton);
 	    return RadioButton;
 	}(check_button_1.CheckButton));
 	exports.RadioButton = RadioButton;
@@ -21141,7 +21184,7 @@ var qtk =
 
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21153,7 +21196,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var CheckButton = (function (_super) {
 	    __extends(CheckButton, _super);
 	    function CheckButton(type) {
@@ -21247,10 +21290,10 @@ var qtk =
 	        _super.prototype.dispatchClick.call(this, evt);
 	    };
 	    CheckButton.create = function (options) {
-	        return CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
+	        return CheckButton.recycleBin.create(options);
 	    };
 	    CheckButton.TYPE = "check-button";
-	    CheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new CheckButton(); });
+	    CheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CheckButton);
 	    return CheckButton;
 	}(widget_1.Widget));
 	exports.CheckButton = CheckButton;
@@ -21259,7 +21302,7 @@ var qtk =
 
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21269,14 +21312,14 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var rect_1 = __webpack_require__(1);
-	var pages_1 = __webpack_require__(87);
+	var pages_1 = __webpack_require__(88);
 	var widget_1 = __webpack_require__(19);
-	var tab_page_1 = __webpack_require__(97);
+	var tab_page_1 = __webpack_require__(98);
 	var Events = __webpack_require__(6);
-	var tab_button_1 = __webpack_require__(103);
-	var tab_button_group_1 = __webpack_require__(108);
+	var tab_button_1 = __webpack_require__(104);
+	var tab_button_group_1 = __webpack_require__(109);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TabControl = (function (_super) {
 	    __extends(TabControl, _super);
 	    function TabControl() {
@@ -21409,11 +21452,11 @@ var qtk =
 	        return TabControl.defProps;
 	    };
 	    TabControl.create = function (options) {
-	        return TabControl.r.create().reset(TabControl.TYPE, options);
+	        return TabControl.r.create(options);
 	    };
 	    TabControl.defProps = Object.assign({}, widget_1.Widget.defProps, { _bgh: 30, _bgAtTop: false });
 	    TabControl.TYPE = "tab-control";
-	    TabControl.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabControl(); });
+	    TabControl.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabControl);
 	    return TabControl;
 	}(widget_1.Widget));
 	exports.TabControl = TabControl;
@@ -21422,7 +21465,7 @@ var qtk =
 
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21434,7 +21477,7 @@ var qtk =
 	var rect_1 = __webpack_require__(1);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TabButtonGroup = (function (_super) {
 	    __extends(TabButtonGroup, _super);
 	    function TabButtonGroup() {
@@ -21518,11 +21561,11 @@ var qtk =
 	        return TabButtonGroup.defProps;
 	    };
 	    TabButtonGroup.create = function (options) {
-	        return TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
+	        return TabButtonGroup.r.create(options);
 	    };
 	    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
 	    TabButtonGroup.TYPE = "tab-button-group";
-	    TabButtonGroup.r = new recyclable_creator_1.RecyclableCreator(function () { return new TabButtonGroup(); });
+	    TabButtonGroup.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButtonGroup);
 	    return TabButtonGroup;
 	}(widget_1.Widget));
 	exports.TabButtonGroup = TabButtonGroup;
@@ -21531,7 +21574,7 @@ var qtk =
 
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -21540,9 +21583,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var rich_text_1 = __webpack_require__(98);
+	var rich_text_1 = __webpack_require__(99);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var carota = __webpack_require__(26);
 	var createDoc = carota.document;
 	var dom = carota.dom;
@@ -22044,10 +22087,10 @@ var qtk =
 	        return this._selectDragStart || (document.activeElement === this._textArea);
 	    };
 	    RichTextEdit.create = function (options) {
-	        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
+	        return RichTextEdit.rBin.create(options);
 	    };
 	    RichTextEdit.TYPE = "rich-text-edit";
-	    RichTextEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichTextEdit(); });
+	    RichTextEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichTextEdit);
 	    return RichTextEdit;
 	}(rich_text_1.RichText));
 	exports.RichTextEdit = RichTextEdit;
@@ -22056,7 +22099,7 @@ var qtk =
 
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22068,17 +22111,17 @@ var qtk =
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
 	var edit_1 = __webpack_require__(17);
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	var widget_1 = __webpack_require__(19);
-	var dialog_1 = __webpack_require__(91);
+	var dialog_1 = __webpack_require__(92);
 	var graphics_1 = __webpack_require__(25);
 	var Events = __webpack_require__(6);
-	var list_view_1 = __webpack_require__(111);
-	var list_item_1 = __webpack_require__(113);
+	var list_view_1 = __webpack_require__(112);
+	var list_item_1 = __webpack_require__(114);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	var image_tile_1 = __webpack_require__(7);
-	var simple_layouter_1 = __webpack_require__(114);
+	var simple_layouter_1 = __webpack_require__(115);
 	var ComboBoxOption = (function () {
 	    function ComboBoxOption(text, value, imageURL, color) {
 	        this.text = text;
@@ -22488,7 +22531,7 @@ var qtk =
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22498,10 +22541,10 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_1 = __webpack_require__(19);
-	var scroll_view_1 = __webpack_require__(99);
+	var scroll_view_1 = __webpack_require__(100);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var list_layouter_1 = __webpack_require__(112);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var list_layouter_1 = __webpack_require__(113);
 	var ListView = (function (_super) {
 	    __extends(ListView, _super);
 	    function ListView(type) {
@@ -22589,11 +22632,11 @@ var qtk =
 	        return ListView.defProps;
 	    };
 	    ListView.create = function (options) {
-	        return ListView.recycleBinListView.create().reset(ListView.TYPE, options);
+	        return ListView.recycleBinListView.create(options);
 	    };
 	    ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
 	    ListView.TYPE = "list-view";
-	    ListView.recycleBinListView = new recyclable_creator_1.RecyclableCreator(function () { return new ListView(); });
+	    ListView.recycleBinListView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListView);
 	    return ListView;
 	}(scroll_view_1.ScrollView));
 	exports.ListView = ListView;
@@ -22602,7 +22645,7 @@ var qtk =
 
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22704,7 +22747,7 @@ var qtk =
 
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22717,7 +22760,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var image_tile_1 = __webpack_require__(7);
 	(function (ListItemStyle) {
 	    ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
@@ -22819,11 +22862,11 @@ var qtk =
 	        return ListItem.defProps;
 	    };
 	    ListItem.create = function (options) {
-	        return ListItem.recycleBin.create().reset(ListItem.TYPE, options);
+	        return ListItem.recycleBin.create(options);
 	    };
 	    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _oddEvenStyle: false, _iconURL: null });
 	    ListItem.TYPE = "list-item";
-	    ListItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItem(); });
+	    ListItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItem);
 	    return ListItem;
 	}(widget_1.Widget));
 	exports.ListItem = ListItem;
@@ -22872,10 +22915,10 @@ var qtk =
 	        configurable: true
 	    });
 	    ListItemCheckable.create = function (options) {
-	        return ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
+	        return ListItemCheckable.rBin.create(options);
 	    };
 	    ListItemCheckable.TYPE = "list-item.checkable";
-	    ListItemCheckable.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new ListItemCheckable(); });
+	    ListItemCheckable.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItemCheckable);
 	    return ListItemCheckable;
 	}(ListItem));
 	exports.ListItemCheckable = ListItemCheckable;
@@ -22884,7 +22927,7 @@ var qtk =
 
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23004,7 +23047,7 @@ var qtk =
 
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23014,9 +23057,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var grid_layouter_1 = __webpack_require__(116);
-	var scroll_view_1 = __webpack_require__(99);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var grid_layouter_1 = __webpack_require__(117);
+	var scroll_view_1 = __webpack_require__(100);
 	/**
 	 * 网格视图。
 	 */
@@ -23162,11 +23205,11 @@ var qtk =
 	        return GridView.defProps;
 	    };
 	    GridView.create = function (options) {
-	        return GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
+	        return GridView.recycleBinGridView.create(options);
 	    };
 	    GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
 	    GridView.TYPE = "grid-view";
-	    GridView.recycleBinGridView = new recyclable_creator_1.RecyclableCreator(function () { return new GridView(); });
+	    GridView.recycleBinGridView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(GridView);
 	    return GridView;
 	}(scroll_view_1.ScrollView));
 	exports.GridView = GridView;
@@ -23175,7 +23218,7 @@ var qtk =
 
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23315,7 +23358,7 @@ var qtk =
 
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23329,7 +23372,7 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var widget_1 = __webpack_require__(19);
 	/**
 	 * 树形视图中，显示的一个子项。
@@ -23554,10 +23597,10 @@ var qtk =
 	        this._childrenItems = [];
 	    };
 	    TreeItem.create = function (options) {
-	        return TreeItem.recycleBin.create().reset(TreeItem.TYPE, options);
+	        return TreeItem.recycleBin.create(options);
 	    };
 	    TreeItem.TYPE = "tree-item";
-	    TreeItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TreeItem(); });
+	    TreeItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeItem);
 	    return TreeItem;
 	}(widget_1.Widget));
 	exports.TreeItem = TreeItem;
@@ -23566,7 +23609,7 @@ var qtk =
 
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23575,11 +23618,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var tree_item_1 = __webpack_require__(117);
-	var list_view_1 = __webpack_require__(111);
-	var tree_item_data_1 = __webpack_require__(119);
+	var tree_item_1 = __webpack_require__(118);
+	var list_view_1 = __webpack_require__(112);
+	var tree_item_data_1 = __webpack_require__(120);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 树形视图。
 	 */
@@ -23709,10 +23752,10 @@ var qtk =
 	        this._rootData = null;
 	    };
 	    TreeView.create = function (options) {
-	        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
+	        return TreeView.recycleBinTreeView.create(options);
 	    };
 	    TreeView.TYPE = "tree-view";
-	    TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });
+	    TreeView.recycleBinTreeView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeView);
 	    return TreeView;
 	}(list_view_1.ListView));
 	exports.TreeView = TreeView;
@@ -23721,7 +23764,7 @@ var qtk =
 
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23810,7 +23853,7 @@ var qtk =
 
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23823,17 +23866,17 @@ var qtk =
 	var TWEEN = __webpack_require__(20);
 	var Assets = __webpack_require__(11);
 	var Events = __webpack_require__(6);
-	var consts_1 = __webpack_require__(104);
-	var main_loop_1 = __webpack_require__(88);
+	var consts_1 = __webpack_require__(105);
+	var main_loop_1 = __webpack_require__(89);
 	var emitter_1 = __webpack_require__(4);
-	var view_port_1 = __webpack_require__(86);
+	var view_port_1 = __webpack_require__(87);
 	var image_tile_1 = __webpack_require__(7);
-	var theme_manager_1 = __webpack_require__(121);
-	var device_info_1 = __webpack_require__(122);
-	var service_locator_1 = __webpack_require__(123);
+	var theme_manager_1 = __webpack_require__(122);
+	var device_info_1 = __webpack_require__(123);
+	var service_locator_1 = __webpack_require__(124);
 	var inputEventAdapter = __webpack_require__(15);
-	var interaction_request_1 = __webpack_require__(124);
-	var interaction_service_1 = __webpack_require__(126);
+	var interaction_request_1 = __webpack_require__(125);
+	var interaction_service_1 = __webpack_require__(127);
 	/**
 	 * 代表整个应用程序，可以通过Application获取各种服务。
 	 *
@@ -24000,7 +24043,7 @@ var qtk =
 
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24091,7 +24134,7 @@ var qtk =
 
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports) {
 
 	/**
@@ -24125,7 +24168,7 @@ var qtk =
 
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24150,11 +24193,11 @@ var qtk =
 
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var interaction_types_1 = __webpack_require__(125);
+	var interaction_types_1 = __webpack_require__(126);
 	var InteractionRequest = (function () {
 	    function InteractionRequest(service) {
 	        this.service = service;
@@ -24217,7 +24260,7 @@ var qtk =
 
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24238,20 +24281,20 @@ var qtk =
 
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
-	var toast_dialog_1 = __webpack_require__(127);
-	var input_dialog_1 = __webpack_require__(131);
-	var props_dialog_1 = __webpack_require__(132);
-	var choice_dialog_1 = __webpack_require__(157);
-	var progress_dialog_1 = __webpack_require__(158);
-	var confirmation_dialog_1 = __webpack_require__(159);
-	var notification_dialog_1 = __webpack_require__(160);
-	var interaction_types_1 = __webpack_require__(125);
+	var toast_dialog_1 = __webpack_require__(128);
+	var input_dialog_1 = __webpack_require__(132);
+	var props_dialog_1 = __webpack_require__(133);
+	var choice_dialog_1 = __webpack_require__(158);
+	var progress_dialog_1 = __webpack_require__(159);
+	var confirmation_dialog_1 = __webpack_require__(160);
+	var notification_dialog_1 = __webpack_require__(161);
+	var interaction_types_1 = __webpack_require__(126);
 	var InteractionService = (function () {
 	    function InteractionService() {
 	        this._emitter = new emitter_1.Emitter();
@@ -24326,11 +24369,11 @@ var qtk =
 
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var ToastDialog = (function () {
 	    function ToastDialog() {
 	    }
@@ -24344,7 +24387,7 @@ var qtk =
 
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24353,25 +24396,25 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var group_1 = __webpack_require__(90);
-	var dialog_1 = __webpack_require__(91);
+	var group_1 = __webpack_require__(91);
+	var dialog_1 = __webpack_require__(92);
 	var label_1 = __webpack_require__(18);
 	var edit_1 = __webpack_require__(17);
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	var Events = __webpack_require__(6);
 	var graphics_1 = __webpack_require__(25);
-	var list_view_1 = __webpack_require__(111);
-	var progress_bar_1 = __webpack_require__(95);
-	var application_1 = __webpack_require__(120);
+	var list_view_1 = __webpack_require__(112);
+	var progress_bar_1 = __webpack_require__(96);
+	var application_1 = __webpack_require__(121);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var consts_1 = __webpack_require__(104);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var list_item_1 = __webpack_require__(113);
-	var dock_layouter_1 = __webpack_require__(129);
-	var linear_layouter_1 = __webpack_require__(130);
-	var grid_layouter_1 = __webpack_require__(116);
-	var simple_layouter_1 = __webpack_require__(114);
+	var consts_1 = __webpack_require__(105);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var list_item_1 = __webpack_require__(114);
+	var dock_layouter_1 = __webpack_require__(130);
+	var linear_layouter_1 = __webpack_require__(131);
+	var grid_layouter_1 = __webpack_require__(117);
+	var simple_layouter_1 = __webpack_require__(115);
 	var TitleOptions = (function () {
 	    function TitleOptions(text, iconStyleType, hasCloseButton) {
 	        this.h = 0;
@@ -24706,13 +24749,13 @@ var qtk =
 	        messageBox.open();
 	    };
 	    MessageBox.create = function (options) {
-	        return MessageBox.rBin.create().reset(MessageBox.TYPE, options);
+	        return MessageBox.rBin.create(options);
 	    };
 	    MessageBox.TITLE_H = 25;
 	    MessageBox.BUTTONS_H = 40;
 	    MessageBox.MSG_FONT_SIZE = 12;
 	    MessageBox.TYPE = "messagebox";
-	    MessageBox.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new MessageBox(); });
+	    MessageBox.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MessageBox);
 	    return MessageBox;
 	}(dialog_1.Dialog));
 	exports.MessageBox = MessageBox;
@@ -24721,7 +24764,7 @@ var qtk =
 
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24730,7 +24773,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(104);
+	var consts_1 = __webpack_require__(105);
 	var layouter_1 = __webpack_require__(78);
 	var TYPE = "dock";
 	/**
@@ -24847,7 +24890,7 @@ var qtk =
 
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24856,7 +24899,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var consts_1 = __webpack_require__(104);
+	var consts_1 = __webpack_require__(105);
 	var utils_1 = __webpack_require__(21);
 	var layouter_1 = __webpack_require__(78);
 	var TYPE_H = "linear-h";
@@ -25058,11 +25101,11 @@ var qtk =
 
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var InputDialog = (function () {
 	    function InputDialog() {
 	    }
@@ -25079,11 +25122,11 @@ var qtk =
 
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var property_dialog_1 = __webpack_require__(133);
+	var property_dialog_1 = __webpack_require__(134);
 	var PropsDialog = (function () {
 	    function PropsDialog() {
 	    }
@@ -25101,7 +25144,7 @@ var qtk =
 
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25110,13 +25153,13 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var application_1 = __webpack_require__(120);
-	var property_page_1 = __webpack_require__(134);
-	var view_modal_1 = __webpack_require__(152);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var application_1 = __webpack_require__(121);
+	var property_page_1 = __webpack_require__(135);
+	var view_modal_1 = __webpack_require__(153);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var widget_factory_1 = __webpack_require__(23);
-	var message_box_1 = __webpack_require__(128);
-	var simple_layouter_1 = __webpack_require__(114);
+	var message_box_1 = __webpack_require__(129);
+	var simple_layouter_1 = __webpack_require__(115);
 	/**
 	 * 属性对话框。
 	 */
@@ -25159,10 +25202,10 @@ var qtk =
 	        messageBox.open();
 	    };
 	    PropertyDialog.create = function (options) {
-	        return PropertyDialog.rb.create().reset(PropertyDialog.TYPE, options);
+	        return PropertyDialog.rb.create(options);
 	    };
 	    PropertyDialog.TYPE = "property-dialog";
-	    PropertyDialog.rb = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyDialog(); });
+	    PropertyDialog.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyDialog);
 	    return PropertyDialog;
 	}(message_box_1.MessageBox));
 	exports.PropertyDialog = PropertyDialog;
@@ -25170,7 +25213,7 @@ var qtk =
 
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25180,24 +25223,24 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var title_link_1 = __webpack_require__(135);
-	var title_line_1 = __webpack_require__(137);
-	var title_edit_1 = __webpack_require__(139);
-	var title_label_1 = __webpack_require__(140);
-	var title_check_button_1 = __webpack_require__(141);
-	var title_range_1 = __webpack_require__(142);
-	var title_vector_1 = __webpack_require__(144);
+	var title_link_1 = __webpack_require__(136);
+	var title_line_1 = __webpack_require__(138);
+	var title_edit_1 = __webpack_require__(140);
+	var title_label_1 = __webpack_require__(141);
+	var title_check_button_1 = __webpack_require__(142);
+	var title_range_1 = __webpack_require__(143);
+	var title_vector_1 = __webpack_require__(145);
 	var widget_1 = __webpack_require__(19);
-	var title_slider_1 = __webpack_require__(146);
-	var title_text_area_1 = __webpack_require__(147);
+	var title_slider_1 = __webpack_require__(147);
+	var title_text_area_1 = __webpack_require__(148);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var title_choosable_edit_1 = __webpack_require__(148);
-	var props_desc_1 = __webpack_require__(150);
-	var title_combo_box_1 = __webpack_require__(151);
-	var props_desc_2 = __webpack_require__(150);
-	var props_desc_3 = __webpack_require__(150);
-	var props_desc_4 = __webpack_require__(150);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var title_choosable_edit_1 = __webpack_require__(149);
+	var props_desc_1 = __webpack_require__(151);
+	var title_combo_box_1 = __webpack_require__(152);
+	var props_desc_2 = __webpack_require__(151);
+	var props_desc_3 = __webpack_require__(151);
+	var props_desc_4 = __webpack_require__(151);
 	/**
 	 * 属性编辑页，包装了各种TitleValue。
 	 */
@@ -25566,11 +25609,11 @@ var qtk =
 	        return PropertyPage.defProps;
 	    };
 	    PropertyPage.create = function (options) {
-	        return PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
+	        return PropertyPage.rBin.create(options);
 	    };
 	    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
 	    PropertyPage.TYPE = "property-page";
-	    PropertyPage.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyPage(); });
+	    PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
 	    return PropertyPage;
 	}(widget_1.Widget));
 	exports.PropertyPage = PropertyPage;
@@ -25579,7 +25622,7 @@ var qtk =
 
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25590,9 +25633,9 @@ var qtk =
 	};
 	var Events = __webpack_require__(6);
 	var label_1 = __webpack_require__(18);
-	var title_value_1 = __webpack_require__(136);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleLink = (function (_super) {
 	    __extends(TitleLink, _super);
 	    function TitleLink(type) {
@@ -25613,10 +25656,10 @@ var qtk =
 	        return link;
 	    };
 	    TitleLink.create = function (options) {
-	        return TitleLink.recycleBin.create().reset(TitleLink.TYPE, options);
+	        return TitleLink.recycleBin.create(options);
 	    };
 	    TitleLink.TYPE = "title-link";
-	    TitleLink.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLink(); });
+	    TitleLink.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLink);
 	    return TitleLink;
 	}(title_value_1.TitleValue));
 	exports.TitleLink = TitleLink;
@@ -25625,7 +25668,7 @@ var qtk =
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25637,7 +25680,7 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var label_1 = __webpack_require__(18);
 	var widget_1 = __webpack_require__(19);
-	var linear_layouter_1 = __webpack_require__(130);
+	var linear_layouter_1 = __webpack_require__(131);
 	var TitleValue = (function (_super) {
 	    __extends(TitleValue, _super);
 	    function TitleValue(type) {
@@ -25761,7 +25804,7 @@ var qtk =
 
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25770,10 +25813,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(136);
-	var color_tile_1 = __webpack_require__(138);
+	var title_value_1 = __webpack_require__(137);
+	var color_tile_1 = __webpack_require__(139);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleLine = (function (_super) {
 	    __extends(TitleLine, _super);
 	    function TitleLine(type) {
@@ -25783,10 +25826,10 @@ var qtk =
 	        return color_tile_1.ColorLine.create({ styleType: "title.line" });
 	    };
 	    TitleLine.create = function (options) {
-	        return TitleLine.recycleBin.create().reset(TitleLine.TYPE, options);
+	        return TitleLine.recycleBin.create(options);
 	    };
 	    TitleLine.TYPE = "title-line";
-	    TitleLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLine(); });
+	    TitleLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLine);
 	    return TitleLine;
 	}(title_value_1.TitleValue));
 	exports.TitleLine = TitleLine;
@@ -25795,7 +25838,7 @@ var qtk =
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25808,8 +25851,8 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var graphics_1 = __webpack_require__(25);
-	var consts_1 = __webpack_require__(104);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var consts_1 = __webpack_require__(105);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 颜色控件。
 	 */
@@ -25913,10 +25956,10 @@ var qtk =
 	        configurable: true
 	    });
 	    ColorTile.create = function (options) {
-	        return ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
+	        return ColorTile.recycleBin.create(options);
 	    };
 	    ColorTile.TYPE = "color-tile";
-	    ColorTile.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorTile(); });
+	    ColorTile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorTile);
 	    return ColorTile;
 	}(Color));
 	exports.ColorTile = ColorTile;
@@ -26043,10 +26086,10 @@ var qtk =
 	        return this;
 	    };
 	    ColorLine.create = function (options) {
-	        return ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
+	        return ColorLine.recycleBin.create(options);
 	    };
 	    ColorLine.TYPE = "color-tile";
-	    ColorLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorLine(); });
+	    ColorLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorLine);
 	    return ColorLine;
 	}(Color));
 	exports.ColorLine = ColorLine;
@@ -26055,7 +26098,7 @@ var qtk =
 
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26065,9 +26108,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(17);
-	var title_value_1 = __webpack_require__(136);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleEdit = (function (_super) {
 	    __extends(TitleEdit, _super);
 	    function TitleEdit(type) {
@@ -26126,49 +26169,15 @@ var qtk =
 	        return edit_1.Edit.create(opts);
 	    };
 	    TitleEdit.create = function (options) {
-	        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
+	        return TitleEdit.recycleBin.create(options);
 	    };
 	    TitleEdit.TYPE = "title-edit";
-	    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
+	    TitleEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleEdit);
 	    return TitleEdit;
 	}(title_value_1.TitleValue));
 	exports.TitleEdit = TitleEdit;
 	;
 	widget_factory_1.WidgetFactory.register(TitleEdit.TYPE, TitleEdit.create);
-
-
-/***/ },
-/* 140 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var label_1 = __webpack_require__(18);
-	var title_value_1 = __webpack_require__(136);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var TitleLabel = (function (_super) {
-	    __extends(TitleLabel, _super);
-	    function TitleLabel(type) {
-	        _super.call(this, type || TitleLabel.TYPE);
-	    }
-	    TitleLabel.prototype.createValueWidget = function (options) {
-	        return label_1.Label.create(options);
-	    };
-	    TitleLabel.create = function (options) {
-	        return TitleLabel.recycleBin.create().reset(TitleLabel.TYPE, options);
-	    };
-	    TitleLabel.TYPE = "title-label";
-	    TitleLabel.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLabel(); });
-	    return TitleLabel;
-	}(title_value_1.TitleValue));
-	exports.TitleLabel = TitleLabel;
-	;
-	widget_factory_1.WidgetFactory.register(TitleLabel.TYPE, TitleLabel.create);
 
 
 /***/ },
@@ -26181,28 +26190,28 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(136);
-	var check_button_1 = __webpack_require__(106);
+	var label_1 = __webpack_require__(18);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var TitleCheckButton = (function (_super) {
-	    __extends(TitleCheckButton, _super);
-	    function TitleCheckButton(type) {
-	        _super.call(this, type || TitleCheckButton.TYPE);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var TitleLabel = (function (_super) {
+	    __extends(TitleLabel, _super);
+	    function TitleLabel(type) {
+	        _super.call(this, type || TitleLabel.TYPE);
 	    }
-	    TitleCheckButton.prototype.createValueWidget = function (options) {
-	        return check_button_1.CheckButton.create(options);
+	    TitleLabel.prototype.createValueWidget = function (options) {
+	        return label_1.Label.create(options);
 	    };
-	    TitleCheckButton.create = function (options) {
-	        return TitleCheckButton.recycleBin.create().reset(TitleCheckButton.TYPE, options);
+	    TitleLabel.create = function (options) {
+	        return TitleLabel.recycleBin.create(options);
 	    };
-	    TitleCheckButton.TYPE = "title-check-button";
-	    TitleCheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleCheckButton(); });
-	    return TitleCheckButton;
+	    TitleLabel.TYPE = "title-label";
+	    TitleLabel.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLabel);
+	    return TitleLabel;
 	}(title_value_1.TitleValue));
-	exports.TitleCheckButton = TitleCheckButton;
+	exports.TitleLabel = TitleLabel;
 	;
-	widget_factory_1.WidgetFactory.register(TitleCheckButton.TYPE, TitleCheckButton.create);
+	widget_factory_1.WidgetFactory.register(TitleLabel.TYPE, TitleLabel.create);
 
 
 /***/ },
@@ -26215,10 +26224,44 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var range_edit_1 = __webpack_require__(143);
-	var title_value_1 = __webpack_require__(136);
+	var title_value_1 = __webpack_require__(137);
+	var check_button_1 = __webpack_require__(107);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var TitleCheckButton = (function (_super) {
+	    __extends(TitleCheckButton, _super);
+	    function TitleCheckButton(type) {
+	        _super.call(this, type || TitleCheckButton.TYPE);
+	    }
+	    TitleCheckButton.prototype.createValueWidget = function (options) {
+	        return check_button_1.CheckButton.create(options);
+	    };
+	    TitleCheckButton.create = function (options) {
+	        return TitleCheckButton.recycleBin.create(options);
+	    };
+	    TitleCheckButton.TYPE = "title-check-button";
+	    TitleCheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleCheckButton);
+	    return TitleCheckButton;
+	}(title_value_1.TitleValue));
+	exports.TitleCheckButton = TitleCheckButton;
+	;
+	widget_factory_1.WidgetFactory.register(TitleCheckButton.TYPE, TitleCheckButton.create);
+
+
+/***/ },
+/* 143 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var range_edit_1 = __webpack_require__(144);
+	var title_value_1 = __webpack_require__(137);
+	var widget_factory_1 = __webpack_require__(23);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleRange = (function (_super) {
 	    __extends(TitleRange, _super);
 	    function TitleRange(type) {
@@ -26228,10 +26271,10 @@ var qtk =
 	        return range_edit_1.RangeEdit.create(options);
 	    };
 	    TitleRange.create = function (options) {
-	        return TitleRange.recycleBin.create().reset(TitleRange.TYPE, options);
+	        return TitleRange.recycleBin.create(options);
 	    };
 	    TitleRange.TYPE = "title-range";
-	    TitleRange.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleRange(); });
+	    TitleRange.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleRange);
 	    return TitleRange;
 	}(title_value_1.TitleValue));
 	exports.TitleRange = TitleRange;
@@ -26240,7 +26283,7 @@ var qtk =
 
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26254,7 +26297,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 范围编辑器。
 	 */
@@ -26364,12 +26407,10 @@ var qtk =
 	        this.relayoutChildren();
 	    };
 	    RangeEdit.create = function (options) {
-	        return RangeEdit.rBin.create().reset(RangeEdit.TYPE, options);
+	        return RangeEdit.rBin.create(options);
 	    };
 	    RangeEdit.TYPE = "range.edit";
-	    RangeEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
-	        return new RangeEdit();
-	    });
+	    RangeEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RangeEdit);
 	    return RangeEdit;
 	}(widget_1.Widget));
 	exports.RangeEdit = RangeEdit;
@@ -26378,7 +26419,7 @@ var qtk =
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26387,10 +26428,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var vector_edit_1 = __webpack_require__(145);
-	var title_value_1 = __webpack_require__(136);
+	var vector_edit_1 = __webpack_require__(146);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleVector = (function (_super) {
 	    __extends(TitleVector, _super);
 	    function TitleVector(type) {
@@ -26414,13 +26455,13 @@ var qtk =
 	        return vector_edit_1.VectorEdit.create({ d: this.d || 2 });
 	    };
 	    TitleVector.create = function (options) {
-	        var widget = TitleVector.recycleBin.create();
+	        var widget = TitleVector.recycleBin.create(null);
 	        widget.d = options ? (options.d || 2) : 2;
 	        widget.reset(TitleVector.TYPE, options);
 	        return widget;
 	    };
 	    TitleVector.TYPE = "title-vector";
-	    TitleVector.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleVector(); });
+	    TitleVector.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleVector);
 	    return TitleVector;
 	}(title_value_1.TitleValue));
 	exports.TitleVector = TitleVector;
@@ -26429,7 +26470,7 @@ var qtk =
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26443,8 +26484,8 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var grid_layouter_1 = __webpack_require__(116);
+	var recyclable_creator_1 = __webpack_require__(83);
+	var grid_layouter_1 = __webpack_require__(117);
 	/**
 	 * 范围编辑器。
 	 */
@@ -26673,40 +26714,6 @@ var qtk =
 
 
 /***/ },
-/* 146 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var slider_1 = __webpack_require__(94);
-	var title_value_1 = __webpack_require__(136);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var TitleSlider = (function (_super) {
-	    __extends(TitleSlider, _super);
-	    function TitleSlider(type) {
-	        _super.call(this, type || TitleSlider.TYPE);
-	    }
-	    TitleSlider.prototype.createValueWidget = function (options) {
-	        return slider_1.Slider.create(options);
-	    };
-	    TitleSlider.create = function (options) {
-	        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
-	    };
-	    TitleSlider.TYPE = "title-slider";
-	    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
-	    return TitleSlider;
-	}(title_value_1.TitleValue));
-	exports.TitleSlider = TitleSlider;
-	;
-	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
-
-
-/***/ },
 /* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26716,10 +26723,44 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var edit_1 = __webpack_require__(17);
-	var title_value_1 = __webpack_require__(136);
+	var slider_1 = __webpack_require__(95);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var TitleSlider = (function (_super) {
+	    __extends(TitleSlider, _super);
+	    function TitleSlider(type) {
+	        _super.call(this, type || TitleSlider.TYPE);
+	    }
+	    TitleSlider.prototype.createValueWidget = function (options) {
+	        return slider_1.Slider.create(options);
+	    };
+	    TitleSlider.create = function (options) {
+	        return TitleSlider.recycleBin.create(options);
+	    };
+	    TitleSlider.TYPE = "title-slider";
+	    TitleSlider.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleSlider);
+	    return TitleSlider;
+	}(title_value_1.TitleValue));
+	exports.TitleSlider = TitleSlider;
+	;
+	widget_factory_1.WidgetFactory.register(TitleSlider.TYPE, TitleSlider.create);
+
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var edit_1 = __webpack_require__(17);
+	var title_value_1 = __webpack_require__(137);
+	var widget_factory_1 = __webpack_require__(23);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleTextArea = (function (_super) {
 	    __extends(TitleTextArea, _super);
 	    function TitleTextArea(type) {
@@ -26747,10 +26788,10 @@ var qtk =
 	        return edit_1.Edit.create(opts);
 	    };
 	    TitleTextArea.create = function (options) {
-	        return TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+	        return TitleTextArea.recycleBin.create(options);
 	    };
 	    TitleTextArea.TYPE = "title-text-area";
-	    TitleTextArea.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleTextArea(); });
+	    TitleTextArea.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleTextArea);
 	    return TitleTextArea;
 	}(title_value_1.TitleValue));
 	exports.TitleTextArea = TitleTextArea;
@@ -26759,7 +26800,7 @@ var qtk =
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26768,10 +26809,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(136);
-	var choosable_edit_1 = __webpack_require__(149);
+	var title_value_1 = __webpack_require__(137);
+	var choosable_edit_1 = __webpack_require__(150);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var TitleChoosableEdit = (function (_super) {
 	    __extends(TitleChoosableEdit, _super);
 	    function TitleChoosableEdit(type) {
@@ -26806,10 +26847,10 @@ var qtk =
 	        return choosable_edit_1.ChoosableEdit.create();
 	    };
 	    TitleChoosableEdit.create = function (options) {
-	        return TitleChoosableEdit.recycleBin.create().reset(TitleChoosableEdit.TYPE, options);
+	        return TitleChoosableEdit.recycleBin.create(options);
 	    };
 	    TitleChoosableEdit.TYPE = "title-choosable-edit";
-	    TitleChoosableEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleChoosableEdit(); });
+	    TitleChoosableEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleChoosableEdit);
 	    return TitleChoosableEdit;
 	}(title_value_1.TitleValue));
 	exports.TitleChoosableEdit = TitleChoosableEdit;
@@ -26818,7 +26859,7 @@ var qtk =
 
 
 /***/ },
-/* 149 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26828,11 +26869,11 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var edit_1 = __webpack_require__(17);
-	var button_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(94);
 	var widget_1 = __webpack_require__(19);
 	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 编辑器+选择按钮。
 	 */
@@ -26905,12 +26946,10 @@ var qtk =
 	        });
 	    };
 	    ChoosableEdit.create = function (options) {
-	        return ChoosableEdit.rBin.create().reset(ChoosableEdit.TYPE, options);
+	        return ChoosableEdit.rBin.create(options);
 	    };
 	    ChoosableEdit.TYPE = "choosable.edit";
-	    ChoosableEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
-	        return new ChoosableEdit();
-	    });
+	    ChoosableEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChoosableEdit);
 	    return ChoosableEdit;
 	}(widget_1.Widget));
 	exports.ChoosableEdit = ChoosableEdit;
@@ -26919,7 +26958,7 @@ var qtk =
 
 
 /***/ },
-/* 150 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27301,7 +27340,7 @@ var qtk =
 
 
 /***/ },
-/* 151 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27310,10 +27349,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(136);
+	var title_value_1 = __webpack_require__(137);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var combo_box_1 = __webpack_require__(110);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var combo_box_1 = __webpack_require__(111);
 	var TitleComboBoxBase = (function (_super) {
 	    __extends(TitleComboBoxBase, _super);
 	    function TitleComboBoxBase(type) {
@@ -27353,10 +27392,10 @@ var qtk =
 	        return combo_box_1.ComboBox.create(options);
 	    };
 	    TitleComboBox.create = function (options) {
-	        return TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
+	        return TitleComboBox.recycleBin.create(options);
 	    };
 	    TitleComboBox.TYPE = "title-combo-box";
-	    TitleComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBox(); });
+	    TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
 	    return TitleComboBox;
 	}(TitleComboBoxBase));
 	exports.TitleComboBox = TitleComboBox;
@@ -27371,10 +27410,10 @@ var qtk =
 	        return combo_box_1.ComboBoxEditable.create(options);
 	    };
 	    TitleComboBoxEditable.create = function (options) {
-	        return TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
+	        return TitleComboBoxEditable.recycleBin.create(options);
 	    };
 	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
-	    TitleComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBoxEditable(); });
+	    TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
 	    return TitleComboBoxEditable;
 	}(TitleComboBoxBase));
 	exports.TitleComboBoxEditable = TitleComboBoxEditable;
@@ -27383,7 +27422,7 @@ var qtk =
 
 
 /***/ },
-/* 152 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27392,7 +27431,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var view_modal_default_1 = __webpack_require__(153);
+	var view_modal_default_1 = __webpack_require__(154);
 	/**
 	 * IViewModal的基本实现。如果不能满足要求，可以重载部分函数。
 	 */
@@ -27412,7 +27451,7 @@ var qtk =
 
 
 /***/ },
-/* 153 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27421,10 +27460,10 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var pointer = __webpack_require__(154);
+	var pointer = __webpack_require__(155);
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
-	var ivalidation_rule_1 = __webpack_require__(156);
+	var ivalidation_rule_1 = __webpack_require__(157);
 	var iview_modal_1 = __webpack_require__(81);
 	var ViewModalDefault = (function (_super) {
 	    __extends(ViewModalDefault, _super);
@@ -27568,12 +27607,12 @@ var qtk =
 
 
 /***/ },
-/* 154 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var each = __webpack_require__(155);
+	var each = __webpack_require__(156);
 	module.exports = api;
 
 
@@ -27785,7 +27824,7 @@ var qtk =
 
 
 /***/ },
-/* 155 */
+/* 156 */
 /***/ function(module, exports) {
 
 	
@@ -27813,7 +27852,7 @@ var qtk =
 
 
 /***/ },
-/* 156 */
+/* 157 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27846,11 +27885,11 @@ var qtk =
 
 
 /***/ },
-/* 157 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var ChoiceDialog = (function () {
 	    function ChoiceDialog() {
 	    }
@@ -27867,11 +27906,11 @@ var qtk =
 
 
 /***/ },
-/* 158 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var ProgressDialog = (function () {
 	    function ProgressDialog() {
 	    }
@@ -27887,11 +27926,11 @@ var qtk =
 
 
 /***/ },
-/* 159 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var ConfirmationDialog = (function () {
 	    function ConfirmationDialog() {
 	    }
@@ -27911,11 +27950,11 @@ var qtk =
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var message_box_1 = __webpack_require__(128);
+	var message_box_1 = __webpack_require__(129);
 	var NotificationDialog = (function () {
 	    function NotificationDialog() {
 	    }
@@ -27931,7 +27970,7 @@ var qtk =
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28054,7 +28093,7 @@ var qtk =
 
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28139,7 +28178,7 @@ var qtk =
 
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28190,7 +28229,7 @@ var qtk =
 
 
 /***/ },
-/* 164 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28366,7 +28405,7 @@ var qtk =
 
 
 /***/ },
-/* 165 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28377,16 +28416,16 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
-	var dialog_1 = __webpack_require__(91);
+	var dialog_1 = __webpack_require__(92);
 	var graphics_1 = __webpack_require__(25);
-	var list_view_1 = __webpack_require__(111);
+	var list_view_1 = __webpack_require__(112);
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var list_layouter_1 = __webpack_require__(112);
-	var simple_layouter_1 = __webpack_require__(114);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var list_layouter_1 = __webpack_require__(113);
+	var simple_layouter_1 = __webpack_require__(115);
 	var Menu = (function (_super) {
 	    __extends(Menu, _super);
 	    function Menu() {
@@ -28582,10 +28621,10 @@ var qtk =
 	        this._openedMenu = null;
 	    };
 	    Menu.create = function (options) {
-	        return Menu.r.create().reset(Menu.TYPE, options);
+	        return Menu.r.create(options);
 	    };
 	    Menu.TYPE = "menu";
-	    Menu.r = new recyclable_creator_1.RecyclableCreator(function () { return new Menu(); });
+	    Menu.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Menu);
 	    return Menu;
 	}(dialog_1.Dialog));
 	exports.Menu = Menu;
@@ -28716,49 +28755,19 @@ var qtk =
 	        this.onInitSubMenu = null;
 	    };
 	    MenuItem.create = function (options) {
-	        return MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
+	        return MenuItem.recycleBin.create(options);
 	    };
 	    MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
 	        checkable: false, shortcut: null, _lp: 2, _rp: 4
 	    });
 	    MenuItem.TYPE = "menu-item";
-	    MenuItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuItem(); });
+	    MenuItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuItem);
 	    return MenuItem;
 	}(widget_1.Widget));
 	exports.MenuItem = MenuItem;
 	;
 	widget_factory_1.WidgetFactory.register(Menu.TYPE, Menu.create);
 	widget_factory_1.WidgetFactory.register(MenuItem.TYPE, MenuItem.create);
-
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var window_1 = __webpack_require__(92);
-	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var WindowNormal = (function (_super) {
-	    __extends(WindowNormal, _super);
-	    function WindowNormal() {
-	        _super.call(this, WindowNormal.TYPE);
-	    }
-	    WindowNormal.create = function (options) {
-	        return WindowNormal.recycleBin.create().reset(WindowNormal.TYPE, options);
-	    };
-	    WindowNormal.TYPE = "window-normal";
-	    WindowNormal.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new WindowNormal(); });
-	    return WindowNormal;
-	}(window_1.Window));
-	exports.WindowNormal = WindowNormal;
-	;
-	widget_factory_1.WidgetFactory.register(WindowNormal.TYPE, WindowNormal.create);
 
 
 /***/ },
@@ -28771,14 +28780,44 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var menu_1 = __webpack_require__(165);
+	var window_1 = __webpack_require__(93);
+	var widget_factory_1 = __webpack_require__(23);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var WindowNormal = (function (_super) {
+	    __extends(WindowNormal, _super);
+	    function WindowNormal() {
+	        _super.call(this, WindowNormal.TYPE);
+	    }
+	    WindowNormal.create = function (options) {
+	        return WindowNormal.recycleBin.create(options);
+	    };
+	    WindowNormal.TYPE = "window-normal";
+	    WindowNormal.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(WindowNormal);
+	    return WindowNormal;
+	}(window_1.Window));
+	exports.WindowNormal = WindowNormal;
+	;
+	widget_factory_1.WidgetFactory.register(WindowNormal.TYPE, WindowNormal.create);
+
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var menu_1 = __webpack_require__(166);
 	var point_1 = __webpack_require__(2);
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var image_tile_1 = __webpack_require__(7);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var linear_layouter_1 = __webpack_require__(130);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var linear_layouter_1 = __webpack_require__(131);
 	var MenuBar = (function (_super) {
 	    __extends(MenuBar, _super);
 	    function MenuBar() {
@@ -28882,11 +28921,11 @@ var qtk =
 	        return MenuBar.defProps;
 	    };
 	    MenuBar.create = function (options) {
-	        return MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
+	        return MenuBar.recycleBin.create(options);
 	    };
 	    MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
 	    MenuBar.TYPE = "menu-bar";
-	    MenuBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBar(); });
+	    MenuBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBar);
 	    return MenuBar;
 	}(widget_1.Widget));
 	exports.MenuBar = MenuBar;
@@ -28971,13 +29010,13 @@ var qtk =
 	        return MenuBarItem.defProps;
 	    };
 	    MenuBarItem.create = function (options) {
-	        return MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
+	        return MenuBarItem.recycleBin.create(options);
 	    };
 	    MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
 	        _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
 	    });
 	    MenuBarItem.TYPE = "menu-bar-item";
-	    MenuBarItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new MenuBarItem(); });
+	    MenuBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBarItem);
 	    return MenuBarItem;
 	}(widget_1.Widget));
 	exports.MenuBarItem = MenuBarItem;
@@ -28987,7 +29026,7 @@ var qtk =
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28996,12 +29035,12 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	__webpack_require__(169);
+	__webpack_require__(170);
 	var point_1 = __webpack_require__(2);
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	Chart.helpers.getRelativePosition = function (evt, chart) {
 	    return { x: evt.clientX, y: evt.clientY };
 	};
@@ -29114,10 +29153,10 @@ var qtk =
 	        this._chartConfig = null;
 	    };
 	    ChartView.create = function (options) {
-	        return ChartView.recycleBin.create().reset(ChartView.TYPE, options);
+	        return ChartView.recycleBin.create(options);
 	    };
 	    ChartView.TYPE = "chart-view";
-	    ChartView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ChartView(); });
+	    ChartView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChartView);
 	    return ChartView;
 	}(widget_1.Widget));
 	exports.ChartView = ChartView;
@@ -29126,16 +29165,15 @@ var qtk =
 
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * @namespace Chart
 	 */
-	var Chart = __webpack_require__(170)();
+	var Chart = __webpack_require__(171)();
 
-	__webpack_require__(171)(Chart);
-	__webpack_require__(177)(Chart);
+	__webpack_require__(172)(Chart);
 	__webpack_require__(178)(Chart);
 	__webpack_require__(179)(Chart);
 	__webpack_require__(180)(Chart);
@@ -29149,41 +29187,42 @@ var qtk =
 	__webpack_require__(188)(Chart);
 	__webpack_require__(189)(Chart);
 	__webpack_require__(190)(Chart);
-
 	__webpack_require__(191)(Chart);
+
 	__webpack_require__(192)(Chart);
 	__webpack_require__(193)(Chart);
 	__webpack_require__(194)(Chart);
-
 	__webpack_require__(195)(Chart);
+
 	__webpack_require__(196)(Chart);
 	__webpack_require__(197)(Chart);
 	__webpack_require__(198)(Chart);
 	__webpack_require__(199)(Chart);
 	__webpack_require__(200)(Chart);
+	__webpack_require__(201)(Chart);
 
 	// Controllers must be loaded after elements
 	// See Chart.core.datasetController.dataElementType
-	__webpack_require__(308)(Chart);
 	__webpack_require__(309)(Chart);
 	__webpack_require__(310)(Chart);
 	__webpack_require__(311)(Chart);
 	__webpack_require__(312)(Chart);
 	__webpack_require__(313)(Chart);
-
 	__webpack_require__(314)(Chart);
+
 	__webpack_require__(315)(Chart);
 	__webpack_require__(316)(Chart);
 	__webpack_require__(317)(Chart);
 	__webpack_require__(318)(Chart);
 	__webpack_require__(319)(Chart);
 	__webpack_require__(320)(Chart);
+	__webpack_require__(321)(Chart);
 
 	window.Chart = module.exports = Chart;
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29245,14 +29284,14 @@ var qtk =
 
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global window: false */
 	/* global document: false */
 	'use strict';
 
-	var color = __webpack_require__(172);
+	var color = __webpack_require__(173);
 
 	module.exports = function(Chart) {
 		// Global Chart helpers object for utility methods and classes
@@ -30284,12 +30323,12 @@ var qtk =
 
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* MIT license */
-	var convert = __webpack_require__(173);
-	var string = __webpack_require__(175);
+	var convert = __webpack_require__(174);
+	var string = __webpack_require__(176);
 
 	var Color = function (obj) {
 		if (obj instanceof Color) {
@@ -30773,10 +30812,10 @@ var qtk =
 
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var conversions = __webpack_require__(174);
+	var conversions = __webpack_require__(175);
 
 	var convert = function() {
 	   return new Converter();
@@ -30870,7 +30909,7 @@ var qtk =
 	module.exports = convert;
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/* MIT license */
@@ -31574,11 +31613,11 @@ var qtk =
 
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* MIT license */
-	var colorNames = __webpack_require__(176);
+	var colorNames = __webpack_require__(177);
 
 	module.exports = {
 	   getRgba: getRgba,
@@ -31801,7 +31840,7 @@ var qtk =
 
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -31956,7 +31995,7 @@ var qtk =
 	};
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32066,7 +32105,7 @@ var qtk =
 
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32168,7 +32207,7 @@ var qtk =
 
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports) {
 
 	/* global window: false */
@@ -32305,7 +32344,7 @@ var qtk =
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33086,7 +33125,7 @@ var qtk =
 
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33401,7 +33440,7 @@ var qtk =
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33728,7 +33767,7 @@ var qtk =
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33774,7 +33813,7 @@ var qtk =
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33909,7 +33948,7 @@ var qtk =
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34117,7 +34156,7 @@ var qtk =
 
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34874,7 +34913,7 @@ var qtk =
 
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35087,7 +35126,7 @@ var qtk =
 
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35592,7 +35631,7 @@ var qtk =
 
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -35869,7 +35908,7 @@ var qtk =
 
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36732,7 +36771,7 @@ var qtk =
 
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -36842,7 +36881,7 @@ var qtk =
 
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37032,7 +37071,7 @@ var qtk =
 
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37116,7 +37155,7 @@ var qtk =
 
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37298,7 +37337,7 @@ var qtk =
 
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37402,7 +37441,7 @@ var qtk =
 
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37537,7 +37576,7 @@ var qtk =
 
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37711,7 +37750,7 @@ var qtk =
 
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -37943,7 +37982,7 @@ var qtk =
 
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38365,13 +38404,13 @@ var qtk =
 
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global window: false */
 	'use strict';
 
-	var moment = __webpack_require__(201);
+	var moment = __webpack_require__(202);
 	moment = typeof(moment) === 'function' ? moment : window.moment;
 
 	module.exports = function(Chart) {
@@ -38831,7 +38870,7 @@ var qtk =
 
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -40630,7 +40669,7 @@ var qtk =
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(203)("./" + name);
+	                __webpack_require__(204)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -43068,10 +43107,10 @@ var qtk =
 	    return _moment;
 
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(202)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(203)(module)))
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -43087,218 +43126,218 @@ var qtk =
 
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 204,
-		"./af.js": 204,
-		"./ar": 205,
-		"./ar-ly": 206,
-		"./ar-ly.js": 206,
-		"./ar-ma": 207,
-		"./ar-ma.js": 207,
-		"./ar-sa": 208,
-		"./ar-sa.js": 208,
-		"./ar-tn": 209,
-		"./ar-tn.js": 209,
-		"./ar.js": 205,
-		"./az": 210,
-		"./az.js": 210,
-		"./be": 211,
-		"./be.js": 211,
-		"./bg": 212,
-		"./bg.js": 212,
-		"./bn": 213,
-		"./bn.js": 213,
-		"./bo": 214,
-		"./bo.js": 214,
-		"./br": 215,
-		"./br.js": 215,
-		"./bs": 216,
-		"./bs.js": 216,
-		"./ca": 217,
-		"./ca.js": 217,
-		"./cs": 218,
-		"./cs.js": 218,
-		"./cv": 219,
-		"./cv.js": 219,
-		"./cy": 220,
-		"./cy.js": 220,
-		"./da": 221,
-		"./da.js": 221,
-		"./de": 222,
-		"./de-at": 223,
-		"./de-at.js": 223,
-		"./de.js": 222,
-		"./dv": 224,
-		"./dv.js": 224,
-		"./el": 225,
-		"./el.js": 225,
-		"./en-au": 226,
-		"./en-au.js": 226,
-		"./en-ca": 227,
-		"./en-ca.js": 227,
-		"./en-gb": 228,
-		"./en-gb.js": 228,
-		"./en-ie": 229,
-		"./en-ie.js": 229,
-		"./en-nz": 230,
-		"./en-nz.js": 230,
-		"./eo": 231,
-		"./eo.js": 231,
-		"./es": 232,
-		"./es-do": 233,
-		"./es-do.js": 233,
-		"./es.js": 232,
-		"./et": 234,
-		"./et.js": 234,
-		"./eu": 235,
-		"./eu.js": 235,
-		"./fa": 236,
-		"./fa.js": 236,
-		"./fi": 237,
-		"./fi.js": 237,
-		"./fo": 238,
-		"./fo.js": 238,
-		"./fr": 239,
-		"./fr-ca": 240,
-		"./fr-ca.js": 240,
-		"./fr-ch": 241,
-		"./fr-ch.js": 241,
-		"./fr.js": 239,
-		"./fy": 242,
-		"./fy.js": 242,
-		"./gd": 243,
-		"./gd.js": 243,
-		"./gl": 244,
-		"./gl.js": 244,
-		"./he": 245,
-		"./he.js": 245,
-		"./hi": 246,
-		"./hi.js": 246,
-		"./hr": 247,
-		"./hr.js": 247,
-		"./hu": 248,
-		"./hu.js": 248,
-		"./hy-am": 249,
-		"./hy-am.js": 249,
-		"./id": 250,
-		"./id.js": 250,
-		"./is": 251,
-		"./is.js": 251,
-		"./it": 252,
-		"./it.js": 252,
-		"./ja": 253,
-		"./ja.js": 253,
-		"./jv": 254,
-		"./jv.js": 254,
-		"./ka": 255,
-		"./ka.js": 255,
-		"./kk": 256,
-		"./kk.js": 256,
-		"./km": 257,
-		"./km.js": 257,
-		"./ko": 258,
-		"./ko.js": 258,
-		"./ky": 259,
-		"./ky.js": 259,
-		"./lb": 260,
-		"./lb.js": 260,
-		"./lo": 261,
-		"./lo.js": 261,
-		"./lt": 262,
-		"./lt.js": 262,
-		"./lv": 263,
-		"./lv.js": 263,
-		"./me": 264,
-		"./me.js": 264,
-		"./mi": 265,
-		"./mi.js": 265,
-		"./mk": 266,
-		"./mk.js": 266,
-		"./ml": 267,
-		"./ml.js": 267,
-		"./mr": 268,
-		"./mr.js": 268,
-		"./ms": 269,
-		"./ms-my": 270,
-		"./ms-my.js": 270,
-		"./ms.js": 269,
-		"./my": 271,
-		"./my.js": 271,
-		"./nb": 272,
-		"./nb.js": 272,
-		"./ne": 273,
-		"./ne.js": 273,
-		"./nl": 274,
-		"./nl.js": 274,
-		"./nn": 275,
-		"./nn.js": 275,
-		"./pa-in": 276,
-		"./pa-in.js": 276,
-		"./pl": 277,
-		"./pl.js": 277,
-		"./pt": 278,
-		"./pt-br": 279,
-		"./pt-br.js": 279,
-		"./pt.js": 278,
-		"./ro": 280,
-		"./ro.js": 280,
-		"./ru": 281,
-		"./ru.js": 281,
-		"./se": 282,
-		"./se.js": 282,
-		"./si": 283,
-		"./si.js": 283,
-		"./sk": 284,
-		"./sk.js": 284,
-		"./sl": 285,
-		"./sl.js": 285,
-		"./sq": 286,
-		"./sq.js": 286,
-		"./sr": 287,
-		"./sr-cyrl": 288,
-		"./sr-cyrl.js": 288,
-		"./sr.js": 287,
-		"./ss": 289,
-		"./ss.js": 289,
-		"./sv": 290,
-		"./sv.js": 290,
-		"./sw": 291,
-		"./sw.js": 291,
-		"./ta": 292,
-		"./ta.js": 292,
-		"./te": 293,
-		"./te.js": 293,
-		"./th": 294,
-		"./th.js": 294,
-		"./tl-ph": 295,
-		"./tl-ph.js": 295,
-		"./tlh": 296,
-		"./tlh.js": 296,
-		"./tr": 297,
-		"./tr.js": 297,
-		"./tzl": 298,
-		"./tzl.js": 298,
-		"./tzm": 299,
-		"./tzm-latn": 300,
-		"./tzm-latn.js": 300,
-		"./tzm.js": 299,
-		"./uk": 301,
-		"./uk.js": 301,
-		"./uz": 302,
-		"./uz.js": 302,
-		"./vi": 303,
-		"./vi.js": 303,
-		"./x-pseudo": 304,
-		"./x-pseudo.js": 304,
-		"./zh-cn": 305,
-		"./zh-cn.js": 305,
-		"./zh-hk": 306,
-		"./zh-hk.js": 306,
-		"./zh-tw": 307,
-		"./zh-tw.js": 307
+		"./af": 205,
+		"./af.js": 205,
+		"./ar": 206,
+		"./ar-ly": 207,
+		"./ar-ly.js": 207,
+		"./ar-ma": 208,
+		"./ar-ma.js": 208,
+		"./ar-sa": 209,
+		"./ar-sa.js": 209,
+		"./ar-tn": 210,
+		"./ar-tn.js": 210,
+		"./ar.js": 206,
+		"./az": 211,
+		"./az.js": 211,
+		"./be": 212,
+		"./be.js": 212,
+		"./bg": 213,
+		"./bg.js": 213,
+		"./bn": 214,
+		"./bn.js": 214,
+		"./bo": 215,
+		"./bo.js": 215,
+		"./br": 216,
+		"./br.js": 216,
+		"./bs": 217,
+		"./bs.js": 217,
+		"./ca": 218,
+		"./ca.js": 218,
+		"./cs": 219,
+		"./cs.js": 219,
+		"./cv": 220,
+		"./cv.js": 220,
+		"./cy": 221,
+		"./cy.js": 221,
+		"./da": 222,
+		"./da.js": 222,
+		"./de": 223,
+		"./de-at": 224,
+		"./de-at.js": 224,
+		"./de.js": 223,
+		"./dv": 225,
+		"./dv.js": 225,
+		"./el": 226,
+		"./el.js": 226,
+		"./en-au": 227,
+		"./en-au.js": 227,
+		"./en-ca": 228,
+		"./en-ca.js": 228,
+		"./en-gb": 229,
+		"./en-gb.js": 229,
+		"./en-ie": 230,
+		"./en-ie.js": 230,
+		"./en-nz": 231,
+		"./en-nz.js": 231,
+		"./eo": 232,
+		"./eo.js": 232,
+		"./es": 233,
+		"./es-do": 234,
+		"./es-do.js": 234,
+		"./es.js": 233,
+		"./et": 235,
+		"./et.js": 235,
+		"./eu": 236,
+		"./eu.js": 236,
+		"./fa": 237,
+		"./fa.js": 237,
+		"./fi": 238,
+		"./fi.js": 238,
+		"./fo": 239,
+		"./fo.js": 239,
+		"./fr": 240,
+		"./fr-ca": 241,
+		"./fr-ca.js": 241,
+		"./fr-ch": 242,
+		"./fr-ch.js": 242,
+		"./fr.js": 240,
+		"./fy": 243,
+		"./fy.js": 243,
+		"./gd": 244,
+		"./gd.js": 244,
+		"./gl": 245,
+		"./gl.js": 245,
+		"./he": 246,
+		"./he.js": 246,
+		"./hi": 247,
+		"./hi.js": 247,
+		"./hr": 248,
+		"./hr.js": 248,
+		"./hu": 249,
+		"./hu.js": 249,
+		"./hy-am": 250,
+		"./hy-am.js": 250,
+		"./id": 251,
+		"./id.js": 251,
+		"./is": 252,
+		"./is.js": 252,
+		"./it": 253,
+		"./it.js": 253,
+		"./ja": 254,
+		"./ja.js": 254,
+		"./jv": 255,
+		"./jv.js": 255,
+		"./ka": 256,
+		"./ka.js": 256,
+		"./kk": 257,
+		"./kk.js": 257,
+		"./km": 258,
+		"./km.js": 258,
+		"./ko": 259,
+		"./ko.js": 259,
+		"./ky": 260,
+		"./ky.js": 260,
+		"./lb": 261,
+		"./lb.js": 261,
+		"./lo": 262,
+		"./lo.js": 262,
+		"./lt": 263,
+		"./lt.js": 263,
+		"./lv": 264,
+		"./lv.js": 264,
+		"./me": 265,
+		"./me.js": 265,
+		"./mi": 266,
+		"./mi.js": 266,
+		"./mk": 267,
+		"./mk.js": 267,
+		"./ml": 268,
+		"./ml.js": 268,
+		"./mr": 269,
+		"./mr.js": 269,
+		"./ms": 270,
+		"./ms-my": 271,
+		"./ms-my.js": 271,
+		"./ms.js": 270,
+		"./my": 272,
+		"./my.js": 272,
+		"./nb": 273,
+		"./nb.js": 273,
+		"./ne": 274,
+		"./ne.js": 274,
+		"./nl": 275,
+		"./nl.js": 275,
+		"./nn": 276,
+		"./nn.js": 276,
+		"./pa-in": 277,
+		"./pa-in.js": 277,
+		"./pl": 278,
+		"./pl.js": 278,
+		"./pt": 279,
+		"./pt-br": 280,
+		"./pt-br.js": 280,
+		"./pt.js": 279,
+		"./ro": 281,
+		"./ro.js": 281,
+		"./ru": 282,
+		"./ru.js": 282,
+		"./se": 283,
+		"./se.js": 283,
+		"./si": 284,
+		"./si.js": 284,
+		"./sk": 285,
+		"./sk.js": 285,
+		"./sl": 286,
+		"./sl.js": 286,
+		"./sq": 287,
+		"./sq.js": 287,
+		"./sr": 288,
+		"./sr-cyrl": 289,
+		"./sr-cyrl.js": 289,
+		"./sr.js": 288,
+		"./ss": 290,
+		"./ss.js": 290,
+		"./sv": 291,
+		"./sv.js": 291,
+		"./sw": 292,
+		"./sw.js": 292,
+		"./ta": 293,
+		"./ta.js": 293,
+		"./te": 294,
+		"./te.js": 294,
+		"./th": 295,
+		"./th.js": 295,
+		"./tl-ph": 296,
+		"./tl-ph.js": 296,
+		"./tlh": 297,
+		"./tlh.js": 297,
+		"./tr": 298,
+		"./tr.js": 298,
+		"./tzl": 299,
+		"./tzl.js": 299,
+		"./tzm": 300,
+		"./tzm-latn": 301,
+		"./tzm-latn.js": 301,
+		"./tzm.js": 300,
+		"./uk": 302,
+		"./uk.js": 302,
+		"./uz": 303,
+		"./uz.js": 303,
+		"./vi": 304,
+		"./vi.js": 304,
+		"./x-pseudo": 305,
+		"./x-pseudo.js": 305,
+		"./zh-cn": 306,
+		"./zh-cn.js": 306,
+		"./zh-hk": 307,
+		"./zh-hk.js": 307,
+		"./zh-tw": 308,
+		"./zh-tw.js": 308
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -43311,11 +43350,11 @@ var qtk =
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 203;
+	webpackContext.id = 204;
 
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43323,7 +43362,7 @@ var qtk =
 	//! author : Werner Mollentze : https://github.com/wernerm
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43392,7 +43431,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43402,7 +43441,7 @@ var qtk =
 	//! author : forabi https://github.com/forabi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43533,7 +43572,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43541,7 +43580,7 @@ var qtk =
 	//! author : Ali Hmer: https://github.com/kikoanis
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43659,7 +43698,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43668,7 +43707,7 @@ var qtk =
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43723,7 +43762,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43731,7 +43770,7 @@ var qtk =
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43831,7 +43870,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43839,7 +43878,7 @@ var qtk =
 	//! author : Nader Toukabri : https://github.com/naderio
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -43894,7 +43933,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -43902,7 +43941,7 @@ var qtk =
 	//! author : topchiyev : https://github.com/topchiyev
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44003,7 +44042,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44013,7 +44052,7 @@ var qtk =
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44141,7 +44180,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44149,7 +44188,7 @@ var qtk =
 	//! author : Krasen Borisov : https://github.com/kraz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44235,7 +44274,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44243,7 +44282,7 @@ var qtk =
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44358,7 +44397,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44366,7 +44405,7 @@ var qtk =
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44481,7 +44520,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44489,7 +44528,7 @@ var qtk =
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44593,7 +44632,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44602,7 +44641,7 @@ var qtk =
 	//! based on (hr) translation by Bojan Marković
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44740,7 +44779,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44748,7 +44787,7 @@ var qtk =
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -44825,7 +44864,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -44833,7 +44872,7 @@ var qtk =
 	//! author : petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45001,7 +45040,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45009,7 +45048,7 @@ var qtk =
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45068,7 +45107,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45077,7 +45116,7 @@ var qtk =
 	//! author : https://github.com/ryangreaves
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45153,7 +45192,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45161,7 +45200,7 @@ var qtk =
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45217,7 +45256,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45227,7 +45266,7 @@ var qtk =
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45299,7 +45338,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45310,7 +45349,7 @@ var qtk =
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45382,7 +45421,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45390,7 +45429,7 @@ var qtk =
 	//! author : Jawish Hameed : https://github.com/jawish
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45485,7 +45524,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45493,7 +45532,7 @@ var qtk =
 	//! author : Aggelos Karalias : https://github.com/mehiel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45587,7 +45626,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45595,7 +45634,7 @@ var qtk =
 	//! author : Jared Morse : https://github.com/jarcoal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45658,7 +45697,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45666,7 +45705,7 @@ var qtk =
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45725,7 +45764,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45733,7 +45772,7 @@ var qtk =
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45796,7 +45835,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45804,7 +45843,7 @@ var qtk =
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45867,7 +45906,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45875,7 +45914,7 @@ var qtk =
 	//! author : Luke McGregor : https://github.com/lukemcgregor
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -45938,7 +45977,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -45948,7 +45987,7 @@ var qtk =
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46015,7 +46054,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46023,7 +46062,7 @@ var qtk =
 	//! author : Julio Napurí : https://github.com/julionc
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46100,14 +46139,14 @@ var qtk =
 	}));
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46184,7 +46223,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46193,7 +46232,7 @@ var qtk =
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46268,7 +46307,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46276,7 +46315,7 @@ var qtk =
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46338,7 +46377,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46346,7 +46385,7 @@ var qtk =
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46448,7 +46487,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46456,7 +46495,7 @@ var qtk =
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46559,7 +46598,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46567,7 +46606,7 @@ var qtk =
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46623,7 +46662,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46631,7 +46670,7 @@ var qtk =
 	//! author : John Fischer : https://github.com/jfroffice
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46691,7 +46730,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46699,7 +46738,7 @@ var qtk =
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46755,7 +46794,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46763,7 +46802,7 @@ var qtk =
 	//! author : Gaspard Bucher : https://github.com/gaspard
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46823,7 +46862,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46831,7 +46870,7 @@ var qtk =
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46900,7 +46939,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46908,7 +46947,7 @@ var qtk =
 	//! author : Jon Ashdown : https://github.com/jonashdown
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -46980,7 +47019,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -46988,7 +47027,7 @@ var qtk =
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47061,7 +47100,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47071,7 +47110,7 @@ var qtk =
 	//! author : Tal Ater : https://github.com/TalAter
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47164,7 +47203,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47172,7 +47211,7 @@ var qtk =
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47292,7 +47331,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47300,7 +47339,7 @@ var qtk =
 	//! author : Bojan Marković : https://github.com/bmarkovic
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47441,7 +47480,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47449,7 +47488,7 @@ var qtk =
 	//! author : Adam Brunner : https://github.com/adambrunner
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47554,7 +47593,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47562,7 +47601,7 @@ var qtk =
 	//! author : Armendarabyan : https://github.com/armendarabyan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47653,7 +47692,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47662,7 +47701,7 @@ var qtk =
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47740,7 +47779,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47748,7 +47787,7 @@ var qtk =
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47871,7 +47910,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47880,7 +47919,7 @@ var qtk =
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -47945,7 +47984,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47953,7 +47992,7 @@ var qtk =
 	//! author : LI Long : https://github.com/baryon
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48025,7 +48064,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48034,7 +48073,7 @@ var qtk =
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48112,7 +48151,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48120,7 +48159,7 @@ var qtk =
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48205,7 +48244,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48213,7 +48252,7 @@ var qtk =
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48296,7 +48335,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48304,7 +48343,7 @@ var qtk =
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48358,7 +48397,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48367,7 +48406,7 @@ var qtk =
 	//! author : Jeeeyul Lee <jeeeyul@gmail.com>
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48427,7 +48466,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48435,7 +48474,7 @@ var qtk =
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48519,7 +48558,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48528,7 +48567,7 @@ var qtk =
 	//! author : David Raison : https://github.com/kwisatz
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48660,7 +48699,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48668,7 +48707,7 @@ var qtk =
 	//! author : Ryan Hart : https://github.com/ryanhart2
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48734,7 +48773,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48742,7 +48781,7 @@ var qtk =
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48855,7 +48894,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48864,7 +48903,7 @@ var qtk =
 	//! author : Jānis Elmeris : https://github.com/JanisE
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48956,7 +48995,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48964,7 +49003,7 @@ var qtk =
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49071,7 +49110,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49079,7 +49118,7 @@ var qtk =
 	//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49139,7 +49178,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49147,7 +49186,7 @@ var qtk =
 	//! author : Borislav Mickov : https://github.com/B0k0
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49233,7 +49272,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49241,7 +49280,7 @@ var qtk =
 	//! author : Floyd Pink : https://github.com/floydpink
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49318,7 +49357,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49327,7 +49366,7 @@ var qtk =
 	//! author : Vivek Athalye : https://github.com/vnathalye
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49481,7 +49520,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49489,7 +49528,7 @@ var qtk =
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49567,7 +49606,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49576,7 +49615,7 @@ var qtk =
 	//! author : Weldan Jamili : https://github.com/weldan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49654,7 +49693,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49664,7 +49703,7 @@ var qtk =
 	//! author : Tin Aung Lin : https://github.com/thanyawzinmin
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49753,7 +49792,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49762,7 +49801,7 @@ var qtk =
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49820,7 +49859,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49828,7 +49867,7 @@ var qtk =
 	//! author : suvash : https://github.com/suvash
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49947,7 +49986,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49956,7 +49995,7 @@ var qtk =
 	//! author : Jacob Middag : https://github.com/middagj
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50037,7 +50076,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50045,7 +50084,7 @@ var qtk =
 	//! author : https://github.com/mechuwind
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50101,7 +50140,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50109,7 +50148,7 @@ var qtk =
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50229,7 +50268,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50237,7 +50276,7 @@ var qtk =
 	//! author : Rafal Hirsz : https://github.com/evoL
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50338,7 +50377,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50346,7 +50385,7 @@ var qtk =
 	//! author : Jefferson : https://github.com/jalex79
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50407,7 +50446,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50415,7 +50454,7 @@ var qtk =
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50472,7 +50511,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50481,7 +50520,7 @@ var qtk =
 	//! author : Valentin Agachi : https://github.com/avaly
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50551,7 +50590,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50561,7 +50600,7 @@ var qtk =
 	//! author : Коренберг Марк : https://github.com/socketpair
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50738,7 +50777,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50746,7 +50785,7 @@ var qtk =
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50803,7 +50842,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50811,7 +50850,7 @@ var qtk =
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50878,7 +50917,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50887,7 +50926,7 @@ var qtk =
 	//! based on work of petrbela : https://github.com/petrbela
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51032,7 +51071,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51040,7 +51079,7 @@ var qtk =
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51198,7 +51237,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51208,7 +51247,7 @@ var qtk =
 	//! author : Oerd Cukalla : https://github.com/oerd
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51272,7 +51311,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51280,7 +51319,7 @@ var qtk =
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51386,7 +51425,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51394,7 +51433,7 @@ var qtk =
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51500,7 +51539,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51508,7 +51547,7 @@ var qtk =
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51593,7 +51632,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51601,7 +51640,7 @@ var qtk =
 	//! author : Jens Alm : https://github.com/ulmus
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51666,7 +51705,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51674,7 +51713,7 @@ var qtk =
 	//! author : Fahad Kassim : https://github.com/fadsel
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51729,7 +51768,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51737,7 +51776,7 @@ var qtk =
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51862,7 +51901,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51870,7 +51909,7 @@ var qtk =
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51955,7 +51994,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51963,7 +52002,7 @@ var qtk =
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52026,7 +52065,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52034,7 +52073,7 @@ var qtk =
 	//! author : Dan Hagman : https://github.com/hagmandan
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52092,7 +52131,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52100,7 +52139,7 @@ var qtk =
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52216,7 +52255,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52225,7 +52264,7 @@ var qtk =
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52310,7 +52349,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52319,7 +52358,7 @@ var qtk =
 	//! author : Iustì Canun
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52405,7 +52444,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52413,7 +52452,7 @@ var qtk =
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52467,7 +52506,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52475,7 +52514,7 @@ var qtk =
 	//! author : Abdel Said : https://github.com/abdelsaid
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52529,7 +52568,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52538,7 +52577,7 @@ var qtk =
 	//! Author : Menelion Elensúle : https://github.com/Oire
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52679,7 +52718,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52687,7 +52726,7 @@ var qtk =
 	//! author : Sardor Muminov : https://github.com/muminoff
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52741,7 +52780,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52749,7 +52788,7 @@ var qtk =
 	//! author : Bang Nguyen : https://github.com/bangnk
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52824,7 +52863,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52832,7 +52871,7 @@ var qtk =
 	//! author : Andrew Hood : https://github.com/andrewhood125
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52896,7 +52935,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52905,7 +52944,7 @@ var qtk =
 	//! author : Zeno Zeng : https://github.com/zenozeng
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53027,7 +53066,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53037,7 +53076,7 @@ var qtk =
 	//! author : Konstantin : https://github.com/skfd
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53136,7 +53175,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53145,7 +53184,7 @@ var qtk =
 	//! author : Chris Lam : https://github.com/hehachris
 
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(201)) :
+	    true ? factory(__webpack_require__(202)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53244,7 +53283,7 @@ var qtk =
 	}));
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53800,7 +53839,7 @@ var qtk =
 
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -53928,7 +53967,7 @@ var qtk =
 
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -54237,7 +54276,7 @@ var qtk =
 
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -54580,7 +54619,7 @@ var qtk =
 
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -54801,7 +54840,7 @@ var qtk =
 
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -54988,7 +55027,7 @@ var qtk =
 
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55005,7 +55044,7 @@ var qtk =
 
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55021,7 +55060,7 @@ var qtk =
 
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55038,7 +55077,7 @@ var qtk =
 
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55055,7 +55094,7 @@ var qtk =
 
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55072,7 +55111,7 @@ var qtk =
 
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55089,7 +55128,7 @@ var qtk =
 
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -55142,7 +55181,7 @@ var qtk =
 
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55153,9 +55192,9 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var title_content_1 = __webpack_require__(322);
-	var collapsable_title_1 = __webpack_require__(323);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var title_content_1 = __webpack_require__(323);
+	var collapsable_title_1 = __webpack_require__(324);
 	/**
 	 * 手风琴控件。它有多个页面，在每一时刻只展开一个。
 	 */
@@ -55245,11 +55284,11 @@ var qtk =
 	        return Accordion.defProps;
 	    };
 	    Accordion.create = function (options) {
-	        return Accordion.recycleBin.create().reset(Accordion.TYPE, options);
+	        return Accordion.recycleBin.create(options);
 	    };
 	    Accordion.defProps = Object.assign({}, widget_1.Widget.defProps, { _titleHeight: 30 });
 	    Accordion.TYPE = "accordion";
-	    Accordion.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Accordion(); });
+	    Accordion.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Accordion);
 	    return Accordion;
 	}(widget_1.Widget));
 	exports.Accordion = Accordion;
@@ -55258,7 +55297,7 @@ var qtk =
 
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55270,7 +55309,7 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var Events = __webpack_require__(6);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 一个用来显示标题和内容的控件。通常用于Accordion和PropertySheets的子控件。
 	 */
@@ -55476,11 +55515,11 @@ var qtk =
 	        return TitleContent.defProps;
 	    };
 	    TitleContent.create = function (options) {
-	        return TitleContent.rBin.create().reset(TitleContent.TYPE, options);
+	        return TitleContent.rBin.create(options);
 	    };
 	    TitleContent.defProps = Object.assign({}, widget_1.Widget.defProps, { _movable: false, _th: 30, _ch: 0 });
 	    TitleContent.TYPE = "title-content";
-	    TitleContent.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
+	    TitleContent.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleContent);
 	    return TitleContent;
 	}(widget_1.Widget));
 	exports.TitleContent = TitleContent;
@@ -55489,7 +55528,7 @@ var qtk =
 
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55501,7 +55540,7 @@ var qtk =
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
 	var widget_1 = __webpack_require__(19);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 可折叠的标题控件，点击折叠图片或双击时折叠或展开。
 	 * 只能用于TitleContent的titleWidget。
@@ -55564,10 +55603,10 @@ var qtk =
 	        this.onClickTrigger = null;
 	    };
 	    CollapsableTitle.create = function (options) {
-	        return CollapsableTitle.rBin.create().reset(CollapsableTitle.TYPE, options);
+	        return CollapsableTitle.rBin.create(options);
 	    };
 	    CollapsableTitle.TYPE = "collapsable-title";
-	    CollapsableTitle.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new CollapsableTitle(); });
+	    CollapsableTitle.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CollapsableTitle);
 	    return CollapsableTitle;
 	}(widget_1.Widget));
 	exports.CollapsableTitle = CollapsableTitle;
@@ -55575,7 +55614,7 @@ var qtk =
 
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55586,7 +55625,7 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	var Ruler = (function (_super) {
 	    __extends(Ruler, _super);
 	    function Ruler(type) {
@@ -55884,7 +55923,7 @@ var qtk =
 
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -55893,11 +55932,11 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var scroll_view_1 = __webpack_require__(99);
+	var scroll_view_1 = __webpack_require__(100);
 	var widget_factory_1 = __webpack_require__(23);
-	var title_content_1 = __webpack_require__(322);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var collapsable_title_1 = __webpack_require__(323);
+	var title_content_1 = __webpack_require__(323);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	var collapsable_title_1 = __webpack_require__(324);
 	/**
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
@@ -55983,10 +56022,10 @@ var qtk =
 	        this.scrollerOptions.scrollingX = false;
 	    };
 	    PropertySheets.create = function (options) {
-	        return PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+	        return PropertySheets.rBin.create(options);
 	    };
 	    PropertySheets.TYPE = "property-sheets";
-	    PropertySheets.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertySheets(); });
+	    PropertySheets.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertySheets);
 	    return PropertySheets;
 	}(scroll_view_1.ScrollView));
 	exports.PropertySheets = PropertySheets;
@@ -55995,7 +56034,7 @@ var qtk =
 
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56020,7 +56059,7 @@ var qtk =
 
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56030,9 +56069,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var delegate_command_1 = __webpack_require__(326);
-	var ivalidation_rule_1 = __webpack_require__(156);
-	var view_modal_default_1 = __webpack_require__(153);
+	var delegate_command_1 = __webpack_require__(327);
+	var ivalidation_rule_1 = __webpack_require__(157);
+	var view_modal_default_1 = __webpack_require__(154);
 	/**
 	 * 集合ViewModal。delProp/getProp/setProp操作当前的项。
 	 */
@@ -56232,7 +56271,7 @@ var qtk =
 
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56257,7 +56296,7 @@ var qtk =
 
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56278,7 +56317,7 @@ var qtk =
 
 
 /***/ },
-/* 330 */
+/* 331 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56298,7 +56337,7 @@ var qtk =
 
 
 /***/ },
-/* 331 */
+/* 332 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56323,7 +56362,7 @@ var qtk =
 
 
 /***/ },
-/* 332 */
+/* 333 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56344,7 +56383,7 @@ var qtk =
 
 
 /***/ },
-/* 333 */
+/* 334 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56384,7 +56423,7 @@ var qtk =
 
 
 /***/ },
-/* 334 */
+/* 335 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56404,7 +56443,7 @@ var qtk =
 
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56424,7 +56463,7 @@ var qtk =
 
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56443,7 +56482,7 @@ var qtk =
 
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56489,7 +56528,7 @@ var qtk =
 
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56500,7 +56539,7 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	/**
 	 * 表格
 	 */
@@ -56542,7 +56581,7 @@ var qtk =
 
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56553,11 +56592,11 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
-	var range_1 = __webpack_require__(340);
-	var list_view_1 = __webpack_require__(111);
+	var range_1 = __webpack_require__(341);
+	var list_view_1 = __webpack_require__(112);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	/**
 	 * 表格内容区域
 	 */
@@ -56806,7 +56845,7 @@ var qtk =
 
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56833,7 +56872,7 @@ var qtk =
 
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56843,8 +56882,8 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var passive_scrollable_group_1 = __webpack_require__(342);
+	var recyclable_creator_1 = __webpack_require__(83);
+	var passive_scrollable_group_1 = __webpack_require__(343);
 	/**
 	 * 表格左边的索引序数。
 	 */
@@ -56866,7 +56905,7 @@ var qtk =
 
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56997,7 +57036,7 @@ var qtk =
 
 
 /***/ },
-/* 343 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57006,9 +57045,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	var widget_factory_1 = __webpack_require__(23);
-	var passive_scrollable_group_1 = __webpack_require__(342);
+	var passive_scrollable_group_1 = __webpack_require__(343);
 	/**
 	 * 表格头
 	 */
@@ -57030,7 +57069,7 @@ var qtk =
 
 
 /***/ },
-/* 344 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57042,13 +57081,13 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
-	var table_row_1 = __webpack_require__(338);
-	var table_index_1 = __webpack_require__(341);
-	var table_client_1 = __webpack_require__(339);
-	var table_header_1 = __webpack_require__(343);
-	var table_index_item_1 = __webpack_require__(345);
-	var table_header_item_1 = __webpack_require__(346);
+	var recyclable_creator_1 = __webpack_require__(83);
+	var table_row_1 = __webpack_require__(339);
+	var table_index_1 = __webpack_require__(342);
+	var table_client_1 = __webpack_require__(340);
+	var table_header_1 = __webpack_require__(344);
+	var table_index_item_1 = __webpack_require__(346);
+	var table_header_item_1 = __webpack_require__(347);
 	var TableColInfo = (function () {
 	    function TableColInfo(title, widgetType, w, options, sortable) {
 	        this.w = w;
@@ -57250,7 +57289,7 @@ var qtk =
 
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57261,7 +57300,7 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	/**
 	 * 表格左边的序数项。
 	 */
@@ -57286,7 +57325,7 @@ var qtk =
 
 
 /***/ },
-/* 346 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57299,7 +57338,7 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(82);
+	var recyclable_creator_1 = __webpack_require__(83);
 	/**
 	 * 表格头的一项。
 	 */
@@ -57362,7 +57401,7 @@ var qtk =
 
 
 /***/ },
-/* 347 */
+/* 348 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57401,7 +57440,7 @@ var qtk =
 
 
 /***/ },
-/* 348 */
+/* 349 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57425,7 +57464,7 @@ var qtk =
 
 
 /***/ },
-/* 349 */
+/* 350 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57454,7 +57493,7 @@ var qtk =
 
 
 /***/ },
-/* 350 */
+/* 351 */
 /***/ function(module, exports) {
 
 	"use strict";

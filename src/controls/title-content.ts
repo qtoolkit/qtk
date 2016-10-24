@@ -5,7 +5,7 @@ import {Style} from "../style";
 import {Widget} from "./widget";
 import Events = require("../events");
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 一个用来显示标题和内容的控件。通常用于Accordion和PropertySheets的子控件。
@@ -227,9 +227,9 @@ export class TitleContent extends Widget {
 	}
 
 	public static TYPE = "title-content";
-	private static rBin = new RecyclableCreator<TitleContent>(function() {return new TitleContent()});
+	private static rBin = WidgetRecyclableCreator.create(TitleContent);
 	public static create(options?:any) : TitleContent {
-		return <TitleContent>TitleContent.rBin.create().reset(TitleContent.TYPE, options);
+		return <TitleContent>TitleContent.rBin.create(options);
 	}
 };
 

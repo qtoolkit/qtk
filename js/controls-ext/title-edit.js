@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var edit_1 = require("../controls/edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleEdit = (function (_super) {
     __extends(TitleEdit, _super);
     function TitleEdit(type) {
@@ -66,10 +66,10 @@ var TitleEdit = (function (_super) {
         return edit_1.Edit.create(opts);
     };
     TitleEdit.create = function (options) {
-        return TitleEdit.recycleBin.create().reset(TitleEdit.TYPE, options);
+        return TitleEdit.recycleBin.create(options);
     };
     TitleEdit.TYPE = "title-edit";
-    TitleEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleEdit(); });
+    TitleEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleEdit);
     return TitleEdit;
 }(title_value_1.TitleValue));
 exports.TitleEdit = TitleEdit;

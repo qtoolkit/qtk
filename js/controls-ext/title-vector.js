@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var vector_edit_1 = require("./vector-edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleVector = (function (_super) {
     __extends(TitleVector, _super);
     function TitleVector(type) {
@@ -31,13 +31,13 @@ var TitleVector = (function (_super) {
         return vector_edit_1.VectorEdit.create({ d: this.d || 2 });
     };
     TitleVector.create = function (options) {
-        var widget = TitleVector.recycleBin.create();
+        var widget = TitleVector.recycleBin.create(null);
         widget.d = options ? (options.d || 2) : 2;
         widget.reset(TitleVector.TYPE, options);
         return widget;
     };
     TitleVector.TYPE = "title-vector";
-    TitleVector.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleVector(); });
+    TitleVector.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleVector);
     return TitleVector;
 }(title_value_1.TitleValue));
 exports.TitleVector = TitleVector;

@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var label_1 = require("../controls/label");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleLabel = (function (_super) {
     __extends(TitleLabel, _super);
     function TitleLabel(type) {
@@ -17,10 +17,10 @@ var TitleLabel = (function (_super) {
         return label_1.Label.create(options);
     };
     TitleLabel.create = function (options) {
-        return TitleLabel.recycleBin.create().reset(TitleLabel.TYPE, options);
+        return TitleLabel.recycleBin.create(options);
     };
     TitleLabel.TYPE = "title-label";
-    TitleLabel.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLabel(); });
+    TitleLabel.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLabel);
     return TitleLabel;
 }(title_value_1.TitleValue));
 exports.TitleLabel = TitleLabel;

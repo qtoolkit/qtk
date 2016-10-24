@@ -4,7 +4,7 @@ import {Window} from "./window";
 import {IViewPort} from "../iview-port";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 对话框。
@@ -16,9 +16,9 @@ export class Dialog extends Window {
 	}
 
 	public static TYPE = "dialog";
-	private static recycleBin = new RecyclableCreator<Dialog>(function() {return new Dialog()});
+	private static recycleBin = WidgetRecyclableCreator.create(Dialog);
 	public static create(options?:any) : Dialog {
-		return <Dialog>Dialog.recycleBin.create().reset(Dialog.TYPE, options);
+		return <Dialog>Dialog.recycleBin.create(options);
 	}
 };
 

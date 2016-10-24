@@ -4,7 +4,7 @@ import {Style} from "../style";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ImageTile, ImageDrawType} from "../image-tile";
 
 export enum ListItemStyle {
@@ -118,9 +118,9 @@ export class ListItem extends Widget {
 	}
 	
 	public static TYPE = "list-item";
-	private static recycleBin = new RecyclableCreator<ListItem>(function() {return new ListItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(ListItem);
 	public static create(options?:any) : ListItem {
-		return <ListItem>ListItem.recycleBin.create().reset(ListItem.TYPE, options);
+		return <ListItem>ListItem.recycleBin.create(options);
 	}
 };
 
@@ -170,9 +170,9 @@ export class ListItemCheckable extends ListItem {
 	}
 	
 	public static TYPE = "list-item.checkable";
-	private static rBin = new RecyclableCreator<ListItemCheckable>(function() {return new ListItemCheckable()});
+	private static rBin = WidgetRecyclableCreator.create(ListItemCheckable);
 	public static create(options?:any) : ListItemCheckable {
-		return <ListItemCheckable>ListItemCheckable.rBin.create().reset(ListItemCheckable.TYPE, options);
+		return <ListItemCheckable>ListItemCheckable.rBin.create(options);
 	}
 };
 

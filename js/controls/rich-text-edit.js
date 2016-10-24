@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var rich_text_1 = require("./rich-text");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var carota = require('carota');
 var createDoc = carota.document;
 var dom = carota.dom;
@@ -508,10 +508,10 @@ var RichTextEdit = (function (_super) {
         return this._selectDragStart || (document.activeElement === this._textArea);
     };
     RichTextEdit.create = function (options) {
-        return RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
+        return RichTextEdit.rBin.create(options);
     };
     RichTextEdit.TYPE = "rich-text-edit";
-    RichTextEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new RichTextEdit(); });
+    RichTextEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichTextEdit);
     return RichTextEdit;
 }(rich_text_1.RichText));
 exports.RichTextEdit = RichTextEdit;

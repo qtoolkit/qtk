@@ -2,7 +2,7 @@
 import {Rect} from "../rect";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {TitleContent} from "./title-content";
 import {CollapsableTitle} from "./collapsable-title";
 
@@ -103,9 +103,9 @@ export class Accordion extends Widget {
 	}
 
 	public static TYPE = "accordion";
-	private static recycleBin = new RecyclableCreator<Accordion>(function() {return new Accordion()});
+	private static recycleBin = WidgetRecyclableCreator.create(Accordion);
 	public static create(options?:any) : Accordion {
-		return <Accordion>Accordion.recycleBin.create().reset(Accordion.TYPE, options);
+		return <Accordion>Accordion.recycleBin.create(options);
 	}
 };
 

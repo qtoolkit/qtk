@@ -3,7 +3,7 @@ import {Page} from "./page";
 import {Widget} from "./widget";
 import {TabButton} from "./tab-button";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class TabPage extends Page{
 	protected _tabButton : TabButton;
@@ -25,9 +25,9 @@ export class TabPage extends Page{
 	}
 
 	public  static TYPE = "page";
-	private static r = new RecyclableCreator<TabPage>(function() {return new TabPage()});
+	private static r = WidgetRecyclableCreator.create(TabPage);
 	public static create(options?:any) : TabPage {
-		return <TabPage>TabPage.r.create().reset(TabPage.TYPE, options);
+		return <TabPage>TabPage.r.create(options);
 	}
 };
 

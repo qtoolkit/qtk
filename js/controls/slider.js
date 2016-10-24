@@ -8,7 +8,7 @@ var Events = require("../events");
 var button_1 = require("./button");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var progress_bar_1 = require("./progress-bar");
 /**
  * 滑块控件。拖动滑块可以改变它的值。
@@ -143,10 +143,10 @@ var Slider = (function (_super) {
         return this;
     };
     Slider.create = function (options) {
-        return Slider.r.create().reset(Slider.TYPE, options);
+        return Slider.r.create(options);
     };
     Slider.TYPE = "slider";
-    Slider.r = new recyclable_creator_1.RecyclableCreator(function () { return new Slider(); });
+    Slider.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Slider);
     return Slider;
 }(progress_bar_1.ProgressBar));
 exports.Slider = Slider;

@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var title_value_1 = require("./title-value");
 var check_button_1 = require("../controls/check-button");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleCheckButton = (function (_super) {
     __extends(TitleCheckButton, _super);
     function TitleCheckButton(type) {
@@ -17,10 +17,10 @@ var TitleCheckButton = (function (_super) {
         return check_button_1.CheckButton.create(options);
     };
     TitleCheckButton.create = function (options) {
-        return TitleCheckButton.recycleBin.create().reset(TitleCheckButton.TYPE, options);
+        return TitleCheckButton.recycleBin.create(options);
     };
     TitleCheckButton.TYPE = "title-check-button";
-    TitleCheckButton.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleCheckButton(); });
+    TitleCheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleCheckButton);
     return TitleCheckButton;
 }(title_value_1.TitleValue));
 exports.TitleCheckButton = TitleCheckButton;

@@ -5,7 +5,7 @@ import {RichText} from "./rich-text";
 import Events = require("../events");
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 var carota = require('carota');
 
@@ -545,9 +545,9 @@ export class RichTextEdit extends RichText {
 	}
 
 	public static TYPE = "rich-text-edit";
-	private static rBin = new RecyclableCreator<RichTextEdit>(function() {return new RichTextEdit()});
+	private static rBin = WidgetRecyclableCreator.create(RichTextEdit);
 	public static create(options?:any) : RichTextEdit {
-		return <RichTextEdit>RichTextEdit.rBin.create().reset(RichTextEdit.TYPE, options);
+		return <RichTextEdit>RichTextEdit.rBin.create(options);
 	}
 };
 

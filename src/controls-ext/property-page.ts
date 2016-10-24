@@ -14,7 +14,7 @@ import {TitleSlider} from "./title-slider";
 import {ComboBox} from "../controls/combo-box";
 import {TitleTextArea} from "./title-text-area";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {TitleChoosableEdit} from "./title-choosable-edit";
 import {BoolPropDesc, LinePropDesc, LinkPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
@@ -438,9 +438,9 @@ export class PropertyPage extends Widget {
 	}
 
 	public static TYPE = "property-page";
-	private static rBin = new RecyclableCreator<PropertyPage>(function() {return new PropertyPage()});
+	private static rBin = WidgetRecyclableCreator.create(PropertyPage);
 	public static create(options?:any) : PropertyPage {
-		return <PropertyPage>PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
+		return <PropertyPage>PropertyPage.rBin.create(options);
 	}
 };
 

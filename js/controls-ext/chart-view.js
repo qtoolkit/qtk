@@ -9,7 +9,7 @@ var point_1 = require("../point");
 var Events = require("../events");
 var widget_1 = require("../controls/widget");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 Chart.helpers.getRelativePosition = function (evt, chart) {
     return { x: evt.clientX, y: evt.clientY };
 };
@@ -122,10 +122,10 @@ var ChartView = (function (_super) {
         this._chartConfig = null;
     };
     ChartView.create = function (options) {
-        return ChartView.recycleBin.create().reset(ChartView.TYPE, options);
+        return ChartView.recycleBin.create(options);
     };
     ChartView.TYPE = "chart-view";
-    ChartView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ChartView(); });
+    ChartView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChartView);
     return ChartView;
 }(widget_1.Widget));
 exports.ChartView = ChartView;

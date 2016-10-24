@@ -8,7 +8,7 @@ import {Orientation} from "../consts";
 import {TabButton} from "./tab-button";
 import {TabButtonGroup} from "./tab-button-group";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class TabControl extends Widget {
 	protected _pages : Pages;
@@ -154,9 +154,9 @@ export class TabControl extends Widget {
 	}
 
 	public  static TYPE = "tab-control";
-	private static r = new RecyclableCreator<TabControl>(function() {return new TabControl()});
+	private static r = WidgetRecyclableCreator.create(TabControl);
 	public static create(options?:any) : TabControl {
-		return <TabControl>TabControl.r.create().reset(TabControl.TYPE, options);
+		return <TabControl>TabControl.r.create(options);
 	}
 };
 

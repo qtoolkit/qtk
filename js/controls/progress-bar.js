@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 进度条的类型有三种：水平，垂直和圆形。
  */
@@ -97,11 +97,11 @@ var ProgressBar = (function (_super) {
         return ProgressBar.defProps;
     };
     ProgressBar.create = function (options) {
-        return ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
+        return ProgressBar.recycleBin.create(options);
     };
     ProgressBar.defProps = Object.assign({}, widget_1.Widget.defProps, { barType: ProgressBarType.H });
     ProgressBar.TYPE = "progress-bar";
-    ProgressBar.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ProgressBar(); });
+    ProgressBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ProgressBar);
     return ProgressBar;
 }(widget_1.Widget));
 exports.ProgressBar = ProgressBar;

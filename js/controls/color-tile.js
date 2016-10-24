@@ -9,7 +9,7 @@ var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
 var consts_1 = require("../consts");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 颜色控件。
  */
@@ -113,10 +113,10 @@ var ColorTile = (function (_super) {
         configurable: true
     });
     ColorTile.create = function (options) {
-        return ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
+        return ColorTile.recycleBin.create(options);
     };
     ColorTile.TYPE = "color-tile";
-    ColorTile.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorTile(); });
+    ColorTile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorTile);
     return ColorTile;
 }(Color));
 exports.ColorTile = ColorTile;
@@ -243,10 +243,10 @@ var ColorLine = (function (_super) {
         return this;
     };
     ColorLine.create = function (options) {
-        return ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
+        return ColorLine.recycleBin.create(options);
     };
     ColorLine.TYPE = "color-tile";
-    ColorLine.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ColorLine(); });
+    ColorLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorLine);
     return ColorLine;
 }(Color));
 exports.ColorLine = ColorLine;

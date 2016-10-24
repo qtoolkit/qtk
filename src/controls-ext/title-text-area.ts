@@ -3,7 +3,7 @@ import {Edit} from "../controls/edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleTextArea extends TitleValue {
     protected _inputTips : string;
@@ -34,9 +34,9 @@ export class TitleTextArea extends TitleValue {
 	}
 
 	public static TYPE = "title-text-area";
-	private static recycleBin = new RecyclableCreator<TitleTextArea>(function() {return new TitleTextArea()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleTextArea);
 	public static create(options?:any) : TitleTextArea {
-		return <TitleTextArea>TitleTextArea.recycleBin.create().reset(TitleTextArea.TYPE, options);
+		return <TitleTextArea>TitleTextArea.recycleBin.create(options);
 	}
 };
 

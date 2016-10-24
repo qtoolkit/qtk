@@ -3,7 +3,7 @@ import Events = require("../events");
 import {Label} from "../controls/label";
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 
 export abstract class TitleValue extends Widget {

@@ -6,7 +6,7 @@ import Events = require("../events");
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 
 export class MenuBar extends Widget {
@@ -123,9 +123,9 @@ export class MenuBar extends Widget {
 	}
 
 	public static TYPE = "menu-bar";
-	private static recycleBin = new RecyclableCreator<MenuBar>(function() {return new MenuBar()});
+	private static recycleBin = WidgetRecyclableCreator.create(MenuBar);
 	public static create(options?:any) : MenuBar {
-		return <MenuBar>MenuBar.recycleBin.create().reset(MenuBar.TYPE, options);
+		return <MenuBar>MenuBar.recycleBin.create(options);
 	}
 };
 
@@ -233,9 +233,9 @@ export class MenuBarItem extends Widget {
 		return MenuBarItem.defProps;
 	}
 	public static TYPE = "menu-bar-item";
-	private static recycleBin = new RecyclableCreator<MenuBarItem>(function() {return new MenuBarItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(MenuBarItem);
 	public static create(options?:any) : MenuBarItem {
-		return <MenuBarItem>MenuBarItem.recycleBin.create().reset(MenuBarItem.TYPE, options);
+		return <MenuBarItem>MenuBarItem.recycleBin.create(options);
 	}
 };
 

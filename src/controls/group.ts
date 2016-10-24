@@ -2,7 +2,7 @@
 import {Style} from "../style";
 import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class Group extends Widget {
 	constructor() {
@@ -10,9 +10,9 @@ export class Group extends Widget {
 	}
 
 	public static TYPE = "group";
-	private static recycleBin = new RecyclableCreator<Group>(function() {return new Group()});
+	private static recycleBin = WidgetRecyclableCreator.create(Group);
 	public static create(options?:any) : Group {
-		return <Group>Group.recycleBin.create().reset(Group.TYPE, options);
+		return <Group>Group.recycleBin.create(options);
 	}
 };
 

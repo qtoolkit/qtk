@@ -12,6 +12,7 @@ export declare abstract class Window extends Widget {
     private _shouldGrabWhenVisible;
     private _shortcutEvent;
     constructor(type: string);
+    readonly grabbed: boolean;
     /**
      * 是否有自己的Canvas元素(此属性需要在窗口打开之前赋值)。
      * PC上运行时，每个窗口都有自己的Canvas元素。

@@ -16,7 +16,7 @@ var widget_1 = require("../controls/widget");
 var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var title_choosable_edit_1 = require("./title-choosable-edit");
 var props_desc_1 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
@@ -391,11 +391,11 @@ var PropertyPage = (function (_super) {
         return PropertyPage.defProps;
     };
     PropertyPage.create = function (options) {
-        return PropertyPage.rBin.create().reset(PropertyPage.TYPE, options);
+        return PropertyPage.rBin.create(options);
     };
     PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
     PropertyPage.TYPE = "property-page";
-    PropertyPage.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new PropertyPage(); });
+    PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
     return PropertyPage;
 }(widget_1.Widget));
 exports.PropertyPage = PropertyPage;

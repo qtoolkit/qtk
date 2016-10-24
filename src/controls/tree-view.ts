@@ -8,7 +8,7 @@ import {TreeItemData} from "./tree-item-data";
 import {WidgetFactory} from "./widget-factory";
 import {Layouter} from "../layouters/layouter";
 import {ListLayouter} from "../layouters/list-layouter";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 树形视图。
@@ -153,9 +153,9 @@ export class TreeView extends ListView {
 	}
 
 	public static TYPE = "tree-view";
-	private static recycleBinTreeView = new RecyclableCreator<TreeView>(function() {return new TreeView()});
+	private static recycleBinTreeView = WidgetRecyclableCreator.create(TreeView);
 	public static create(options?:any) : TreeView {
-		return <TreeView>TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
+		return <TreeView>TreeView.recycleBinTreeView.create(options);
 	}
 };
 

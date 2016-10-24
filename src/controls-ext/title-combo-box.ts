@@ -1,7 +1,7 @@
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {ComboBox, ComboBoxEditable} from "../controls/combo-box";
 
 export class TitleComboBoxBase extends TitleValue {
@@ -44,9 +44,9 @@ export class TitleComboBox extends TitleComboBoxBase {
 		return ComboBox.create(options);
 	}
 	public static TYPE = "title-combo-box";
-	private static recycleBin = new RecyclableCreator<TitleComboBox>(function() {return new TitleComboBox()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleComboBox);
 	public static create(options?:any) : TitleComboBox {
-		return <TitleComboBox>TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
+		return <TitleComboBox>TitleComboBox.recycleBin.create(options);
 	}
 };
 
@@ -60,9 +60,9 @@ export class TitleComboBoxEditable extends TitleComboBoxBase {
 		return ComboBoxEditable.create(options);
 	}
 	public static TYPE = "title-combo-box-editable";
-	private static recycleBin = new RecyclableCreator<TitleComboBoxEditable>(function() {return new TitleComboBoxEditable()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleComboBoxEditable);
 	public static create(options?:any) : TitleComboBoxEditable {
-		return <TitleComboBoxEditable>TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
+		return <TitleComboBoxEditable>TitleComboBoxEditable.recycleBin.create(options);
 	}
 };
 

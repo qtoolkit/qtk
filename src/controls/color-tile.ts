@@ -4,7 +4,7 @@ import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
 import {AlignH, AlignV, Orientation} from "../consts";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 颜色控件。 
@@ -103,9 +103,9 @@ export class ColorTile extends Color {
 	}
 
 	public static TYPE = "color-tile";
-	private static recycleBin = new RecyclableCreator<ColorTile>(function() {return new ColorTile()});
+	private static recycleBin = WidgetRecyclableCreator.create(ColorTile);
 	public static create(options?:any) : ColorTile {
-		return <ColorTile>ColorTile.recycleBin.create().reset(ColorTile.TYPE, options);
+		return <ColorTile>ColorTile.recycleBin.create(options);
 	}
 };
 
@@ -225,9 +225,9 @@ export class ColorLine extends Color {
 	}
 
 	public static TYPE = "color-tile";
-	private static recycleBin = new RecyclableCreator<ColorLine>(function() {return new ColorLine()});
+	private static recycleBin = WidgetRecyclableCreator.create(ColorLine);
 	public static create(options?:any) : ColorLine {
-		return <ColorLine>ColorLine.recycleBin.create().reset(ColorLine.TYPE, options);
+		return <ColorLine>ColorLine.recycleBin.create(options);
 	}
 };
 

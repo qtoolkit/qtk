@@ -8,7 +8,7 @@ var Events = require("../events");
 var label_1 = require("../controls/label");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleLink = (function (_super) {
     __extends(TitleLink, _super);
     function TitleLink(type) {
@@ -29,10 +29,10 @@ var TitleLink = (function (_super) {
         return link;
     };
     TitleLink.create = function (options) {
-        return TitleLink.recycleBin.create().reset(TitleLink.TYPE, options);
+        return TitleLink.recycleBin.create(options);
     };
     TitleLink.TYPE = "title-link";
-    TitleLink.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleLink(); });
+    TitleLink.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLink);
     return TitleLink;
 }(title_value_1.TitleValue));
 exports.TitleLink = TitleLink;

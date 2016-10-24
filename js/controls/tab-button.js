@@ -12,7 +12,7 @@ var consts_1 = require("../consts");
 var radio_button_1 = require("./radio-button");
 var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 标签控件上的标签按钮。
  */
@@ -192,12 +192,12 @@ var TabButton = (function (_super) {
         return TabButton.defProps;
     };
     TabButton.create = function (options) {
-        return TabButton.re.create().reset(TabButton.TYPE, options);
+        return TabButton.re.create(options);
     };
     TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
         _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
     TabButton.TYPE = "tab-button";
-    TabButton.re = new recyclable_creator_1.RecyclableCreator(function () { return new TabButton(); });
+    TabButton.re = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButton);
     return TabButton;
 }(radio_button_1.RadioButton));
 exports.TabButton = TabButton;

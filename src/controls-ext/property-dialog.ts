@@ -3,7 +3,7 @@ import {Application} from "../application";
 import {PropertyPage} from "./property-page";
 import {ViewModal}  from "../mvvm/view-modal";
 import {PagePropsDesc, PropsDesc} from "./props-desc"
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {Widget, WidgetState} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
 import {MessageBox, TitleOptions, ButtonsOptions} from "../controls/message-box"
@@ -58,9 +58,9 @@ export class PropertyDialog extends MessageBox {
 	}
 	
 	public static TYPE = "property-dialog";
-	private static rb = new RecyclableCreator<PropertyDialog>(function() {return new PropertyDialog()});
+	private static rb = WidgetRecyclableCreator.create(PropertyDialog);
 	public static create(options?:any) : PropertyDialog {
-		return <PropertyDialog>PropertyDialog.rb.create().reset(PropertyDialog.TYPE, options);
+		return <PropertyDialog>PropertyDialog.rb.create(options);
 	}
 }
 

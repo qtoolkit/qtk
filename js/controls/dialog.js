@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var window_1 = require("./window");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 对话框。
  */
@@ -16,10 +16,10 @@ var Dialog = (function (_super) {
         _super.call(this, type || Dialog.TYPE);
     }
     Dialog.create = function (options) {
-        return Dialog.recycleBin.create().reset(Dialog.TYPE, options);
+        return Dialog.recycleBin.create(options);
     };
     Dialog.TYPE = "dialog";
-    Dialog.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Dialog(); });
+    Dialog.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Dialog);
     return Dialog;
 }(window_1.Window));
 exports.Dialog = Dialog;

@@ -7,7 +7,7 @@ import TWEEN = require("tween.js");
 import Events = require("../events");
 import {Graphics} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 开关控件。
@@ -96,9 +96,9 @@ export class Switch extends Widget {
 	}
 
 	public static TYPE = "switch";
-	private static recycleBin = new RecyclableCreator<Switch>(function() {return new Switch()});
+	private static recycleBin = WidgetRecyclableCreator.create(Switch);
 	public static create(options?:any) : Switch{
-		return <Switch>Switch.recycleBin.create().reset(Switch.TYPE, options);
+		return <Switch>Switch.recycleBin.create(options);
 	}
 };
 

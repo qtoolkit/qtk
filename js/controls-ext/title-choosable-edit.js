@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var title_value_1 = require("./title-value");
 var choosable_edit_1 = require("./choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleChoosableEdit = (function (_super) {
     __extends(TitleChoosableEdit, _super);
     function TitleChoosableEdit(type) {
@@ -42,10 +42,10 @@ var TitleChoosableEdit = (function (_super) {
         return choosable_edit_1.ChoosableEdit.create();
     };
     TitleChoosableEdit.create = function (options) {
-        return TitleChoosableEdit.recycleBin.create().reset(TitleChoosableEdit.TYPE, options);
+        return TitleChoosableEdit.recycleBin.create(options);
     };
     TitleChoosableEdit.TYPE = "title-choosable-edit";
-    TitleChoosableEdit.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleChoosableEdit(); });
+    TitleChoosableEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleChoosableEdit);
     return TitleChoosableEdit;
 }(title_value_1.TitleValue));
 exports.TitleChoosableEdit = TitleChoosableEdit;

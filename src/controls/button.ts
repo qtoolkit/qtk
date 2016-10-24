@@ -2,6 +2,7 @@
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class Button extends Widget {
 	constructor() {
@@ -9,9 +10,9 @@ export class Button extends Widget {
 	}
 
 	public static TYPE = "button";
-	private static recycleBin = new RecyclableCreator<Button>(function() {return new Button()});
+	private static recycleBin = WidgetRecyclableCreator.create(Button);
 	public static create(options?:any) : Button {
-		return <Button>Button.recycleBin.create().reset(Button.TYPE, options);
+		return <Button>Button.recycleBin.create(options);
 	}
 };
 

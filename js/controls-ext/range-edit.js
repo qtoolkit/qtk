@@ -9,7 +9,7 @@ var edit_1 = require("../controls/edit");
 var widget_1 = require("../controls/widget");
 var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
  * 范围编辑器。
  */
@@ -119,12 +119,10 @@ var RangeEdit = (function (_super) {
         this.relayoutChildren();
     };
     RangeEdit.create = function (options) {
-        return RangeEdit.rBin.create().reset(RangeEdit.TYPE, options);
+        return RangeEdit.rBin.create(options);
     };
     RangeEdit.TYPE = "range.edit";
-    RangeEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
-        return new RangeEdit();
-    });
+    RangeEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RangeEdit);
     return RangeEdit;
 }(widget_1.Widget));
 exports.RangeEdit = RangeEdit;

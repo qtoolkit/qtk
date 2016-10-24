@@ -4,7 +4,7 @@ import {Widget} from "../controls/widget";
 import {ScrollView} from "../controls/scroll-view";
 import {WidgetFactory} from "../controls/widget-factory";
 import {TitleContent} from "../controls/title-content";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {CollapsableTitle} from "../controls/collapsable-title";
 import {Layouter, LayouterFactory} from '../layouters/layouter';
 
@@ -100,9 +100,9 @@ export class PropertySheets extends ScrollView{
 	}
 
 	public static TYPE = "property-sheets";
-	private static rBin = new RecyclableCreator<PropertySheets>(function() {return new PropertySheets()});
+	private static rBin = WidgetRecyclableCreator.create(PropertySheets);
 	public static create(options?:any) : PropertySheets {
-		return <PropertySheets>PropertySheets.rBin.create().reset(PropertySheets.TYPE, options);
+		return <PropertySheets>PropertySheets.rBin.create(options);
 	}
 };
 

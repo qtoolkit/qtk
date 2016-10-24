@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
  * value表示该活跃页面的索引。
@@ -65,10 +65,10 @@ var Pages = (function (_super) {
         this.value = 0;
     };
     Pages.create = function (options) {
-        return Pages.recycleBin.create().reset(Pages.TYPE, options);
+        return Pages.recycleBin.create(options);
     };
     Pages.TYPE = "pages";
-    Pages.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Pages(); });
+    Pages.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Pages);
     return Pages;
 }(widget_1.Widget));
 exports.Pages = Pages;

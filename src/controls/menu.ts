@@ -10,7 +10,7 @@ import {MatrixStack} from "../matrix-stack";
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ListLayouter, ListLayouterParam} from "../layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
@@ -229,9 +229,9 @@ export class Menu extends Dialog {
 	}
 
 	public static TYPE = "menu";
-	private static r = new RecyclableCreator<Menu>(function() {return new Menu()});
+	private static r = WidgetRecyclableCreator.create(Menu);
 	public static create(options?:any) : Menu {
-		return <Menu>Menu.r.create().reset(Menu.TYPE, options);
+		return <Menu>Menu.r.create(options);
 	}
 };
 
@@ -380,9 +380,9 @@ export class MenuItem extends Widget {
 	}
 
 	public static TYPE = "menu-item";
-	private static recycleBin = new RecyclableCreator<MenuItem>(function() {return new MenuItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(MenuItem);
 	public static create(options?:any) : MenuItem {
-		return <MenuItem>MenuItem.recycleBin.create().reset(MenuItem.TYPE, options);
+		return <MenuItem>MenuItem.recycleBin.create(options);
 	}
 };
 

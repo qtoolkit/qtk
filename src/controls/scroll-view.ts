@@ -11,7 +11,7 @@ import Events = require("../events");
 import {Graphics} from "../graphics";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";
 
 /**
@@ -677,9 +677,9 @@ export class ScrollView extends Widget {
 	}
 
 	public static TYPE = "scroll-view";
-	private static recycleBin = new RecyclableCreator<ScrollView>(function() {return new ScrollView()});
+	private static recycleBin = WidgetRecyclableCreator.create(ScrollView);
 	public static create(options?:any) : ScrollView{
-		return <ScrollView>ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
+		return <ScrollView>ScrollView.recycleBin.create(options);
 	}
 };
 

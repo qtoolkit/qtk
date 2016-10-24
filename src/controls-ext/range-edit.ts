@@ -8,7 +8,7 @@ import {Button} from "../controls/button";
 import {Widget} from "../controls/widget";
 import Events = require("../events");
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
  * 范围编辑器。
@@ -126,10 +126,9 @@ export class RangeEdit extends Widget {
 	}
 
 	public static TYPE = "range.edit";
-	private static rBin = new RecyclableCreator<RangeEdit>(function() {
-		return new RangeEdit()});
+	private static rBin = WidgetRecyclableCreator.create(RangeEdit);
 	public static create(options?:any) : RangeEdit {
-		return <RangeEdit>RangeEdit.rBin.create().reset(RangeEdit.TYPE, options);
+		return <RangeEdit>RangeEdit.rBin.create(options);
 	}
 };
 

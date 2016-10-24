@@ -6,17 +6,17 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var Group = (function (_super) {
     __extends(Group, _super);
     function Group() {
         _super.call(this, Group.TYPE);
     }
     Group.create = function (options) {
-        return Group.recycleBin.create().reset(Group.TYPE, options);
+        return Group.recycleBin.create(options);
     };
     Group.TYPE = "group";
-    Group.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Group(); });
+    Group.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Group);
     return Group;
 }(widget_1.Widget));
 exports.Group = Group;

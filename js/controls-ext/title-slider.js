@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var slider_1 = require("../controls/slider");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleSlider = (function (_super) {
     __extends(TitleSlider, _super);
     function TitleSlider(type) {
@@ -17,10 +17,10 @@ var TitleSlider = (function (_super) {
         return slider_1.Slider.create(options);
     };
     TitleSlider.create = function (options) {
-        return TitleSlider.recycleBin.create().reset(TitleSlider.TYPE, options);
+        return TitleSlider.recycleBin.create(options);
     };
     TitleSlider.TYPE = "title-slider";
-    TitleSlider.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleSlider(); });
+    TitleSlider.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleSlider);
     return TitleSlider;
 }(title_value_1.TitleValue));
 exports.TitleSlider = TitleSlider;

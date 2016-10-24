@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var Events = require("../events");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 一个用来显示标题和内容的控件。通常用于Accordion和PropertySheets的子控件。
  */
@@ -213,11 +213,11 @@ var TitleContent = (function (_super) {
         return TitleContent.defProps;
     };
     TitleContent.create = function (options) {
-        return TitleContent.rBin.create().reset(TitleContent.TYPE, options);
+        return TitleContent.rBin.create(options);
     };
     TitleContent.defProps = Object.assign({}, widget_1.Widget.defProps, { _movable: false, _th: 30, _ch: 0 });
     TitleContent.TYPE = "title-content";
-    TitleContent.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleContent(); });
+    TitleContent.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleContent);
     return TitleContent;
 }(widget_1.Widget));
 exports.TitleContent = TitleContent;

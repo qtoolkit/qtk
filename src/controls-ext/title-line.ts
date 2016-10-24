@@ -4,7 +4,7 @@ import {TitleValue} from "./title-value";
 import {ColorLine} from "../controls/color-tile";
 import {AlignH, AlignV, Orientation} from "../consts";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleLine extends TitleValue {
 	constructor(type?:string) {
@@ -16,9 +16,9 @@ export class TitleLine extends TitleValue {
 	}
 
 	public static TYPE = "title-line";
-	private static recycleBin = new RecyclableCreator<TitleLine>(function() {return new TitleLine()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleLine);
 	public static create(options?:any) : TitleLine {
-		return <TitleLine>TitleLine.recycleBin.create().reset(TitleLine.TYPE, options);
+		return <TitleLine>TitleLine.recycleBin.create(options);
 	}
 };
 

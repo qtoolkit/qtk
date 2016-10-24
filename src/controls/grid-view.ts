@@ -3,7 +3,7 @@ import {Rect} from "../rect";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {Layouter} from "../layouters/layouter";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {GridLayouter} from "../layouters/grid-layouter";
 import {ScrollView, ScrollerBarVisibility} from "./scroll-view";
 
@@ -154,9 +154,9 @@ export class GridView extends ScrollView {
 	}
 
 	public static TYPE = "grid-view";
-	private static recycleBinGridView = new RecyclableCreator<GridView>(function() {return new GridView()});
+	private static recycleBinGridView = WidgetRecyclableCreator.create(GridView);
 	public static create(options?:any) : GridView {
-		return <GridView>GridView.recycleBinGridView.create().reset(GridView.TYPE, options);
+		return <GridView>GridView.recycleBinGridView.create(options);
 	}
 };
 

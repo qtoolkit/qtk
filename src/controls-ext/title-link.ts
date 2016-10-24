@@ -4,7 +4,7 @@ import {Label} from "../controls/label";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 export class TitleLink extends TitleValue {
 	constructor(type?:string) {
@@ -31,9 +31,9 @@ export class TitleLink extends TitleValue {
 	}
 
 	public static TYPE = "title-link";
-	private static recycleBin = new RecyclableCreator<TitleLink>(function() {return new TitleLink()});
+	private static recycleBin = WidgetRecyclableCreator.create(TitleLink);
 	public static create(options?:any) : TitleLink {
-		return <TitleLink>TitleLink.recycleBin.create().reset(TitleLink.TYPE, options);
+		return <TitleLink>TitleLink.recycleBin.create(options);
 	}
 };
 

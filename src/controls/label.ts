@@ -3,7 +3,7 @@ import {Style} from "../style";
 import {Widget, WidgetState} from "./widget";
 import {Graphics, TextLine} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 文本控件。
@@ -106,9 +106,9 @@ export class Label extends Widget {
 	}
 
 	public static TYPE = "label";
-	private static recycleBin = new RecyclableCreator<Label>(function() {return new Label()});
+	private static recycleBin = WidgetRecyclableCreator.create(Label);
 	public static create(options?:any) : Label {
-		return <Label>Label.recycleBin.create().reset(Label.TYPE, options);
+		return <Label>Label.recycleBin.create(options);
 	}
 };
 

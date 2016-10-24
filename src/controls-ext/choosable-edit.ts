@@ -7,7 +7,7 @@ import {Button} from "../controls/button";
 import {Widget} from "../controls/widget";
 import Events = require("../events");
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
  * 编辑器+选择按钮。
@@ -88,10 +88,9 @@ export class ChoosableEdit extends Widget {
 	}
 
 	public static TYPE = "choosable.edit";
-	private static rBin = new RecyclableCreator<ChoosableEdit>(function() {
-		return new ChoosableEdit()});
+	private static rBin = WidgetRecyclableCreator.create(ChoosableEdit);
 	public static create(options?:any) : ChoosableEdit {
-		return <ChoosableEdit>ChoosableEdit.rBin.create().reset(ChoosableEdit.TYPE, options);
+		return <ChoosableEdit>ChoosableEdit.rBin.create(options);
 	}
 };
 

@@ -4,7 +4,7 @@ import {Widget} from "./widget";
 import Events = require("../events");
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ScrollView, ScrollerBarVisibility} from "./scroll-view";
 
 var carota = require('carota');
@@ -110,9 +110,9 @@ export class RichText extends ScrollView {
 	}
 
 	public static TYPE = "rich-text";
-	private static reBin = new RecyclableCreator<RichText>(function() {return new RichText()});
+	private static reBin = WidgetRecyclableCreator.create(RichText);
 	public static create(options?:any) : RichText {
-		return <RichText>RichText.reBin.create().reset(RichText.TYPE, options);
+		return <RichText>RichText.reBin.create(options);
 	}
 };
 

@@ -13,7 +13,7 @@ var TWEEN = require("tween.js");
 var Events = require("../events");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var widget_1 = require("./widget");
 /**
  * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
@@ -622,11 +622,11 @@ var ScrollView = (function (_super) {
         return ScrollView.defProps;
     };
     ScrollView.create = function (options) {
-        return ScrollView.recycleBin.create().reset(ScrollView.TYPE, options);
+        return ScrollView.recycleBin.create(options);
     };
     ScrollView.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2 });
     ScrollView.TYPE = "scroll-view";
-    ScrollView.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ScrollView(); });
+    ScrollView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ScrollView);
     return ScrollView;
 }(widget_1.Widget));
 exports.ScrollView = ScrollView;

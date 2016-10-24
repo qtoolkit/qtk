@@ -7,7 +7,7 @@ import {IMainLoop} from "../imain-loop";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 declare var Chart : any;
 
@@ -145,9 +145,9 @@ export class ChartView extends Widget {
 	}
 
 	public static TYPE = "chart-view";
-	private static recycleBin = new RecyclableCreator<ChartView>(function() {return new ChartView()});
+	private static recycleBin = WidgetRecyclableCreator.create(ChartView);
 	public static create(options?:any) : ChartView {
-		return <ChartView>ChartView.recycleBin.create().reset(ChartView.TYPE, options);
+		return <ChartView>ChartView.recycleBin.create(options);
 	}
 };
 

@@ -4,7 +4,7 @@ import {Style} from "../style";
 import {Graphics} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * 进度条的类型有三种：水平，垂直和圆形。
@@ -97,9 +97,9 @@ export class ProgressBar extends Widget {
 	}
 	
 	public static TYPE = "progress-bar";
-	private static recycleBin = new RecyclableCreator<ProgressBar>(function() {return new ProgressBar()});
+	private static recycleBin = WidgetRecyclableCreator.create(ProgressBar);
 	public static create(options?:any) : ProgressBar{
-		return <ProgressBar>ProgressBar.recycleBin.create().reset(ProgressBar.TYPE, options);
+		return <ProgressBar>ProgressBar.recycleBin.create(options);
 	}
 };
 

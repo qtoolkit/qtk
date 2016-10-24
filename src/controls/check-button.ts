@@ -4,7 +4,7 @@ import {Style} from "../style";
 import Events = require("../events");
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class CheckButton extends Widget {
 	constructor(type?:string) {
@@ -105,9 +105,9 @@ export class CheckButton extends Widget {
 	}
 
 	public static TYPE = "check-button";
-	private static recycleBin = new RecyclableCreator<CheckButton>(function() {return new CheckButton()});
+	private static recycleBin = WidgetRecyclableCreator.create(CheckButton);
 	public static create(options?:any) : CheckButton {
-		return <CheckButton>CheckButton.recycleBin.create().reset(CheckButton.TYPE, options);
+		return <CheckButton>CheckButton.recycleBin.create(options);
 	}
 };
 

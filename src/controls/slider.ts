@@ -7,7 +7,7 @@ import {Button} from "./button";
 import {Graphics} from "../graphics";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ProgressBarType, ProgressBar} from "./progress-bar";
 
 /**
@@ -145,9 +145,9 @@ export class Slider extends ProgressBar {
 	}
 
 	public static TYPE = "slider";
-	private static r = new RecyclableCreator<Slider>(function() {return new Slider()});
+	private static r = WidgetRecyclableCreator.create(Slider);
 	public static create(options?:any) : Slider {
-		return <Slider>Slider.r.create().reset(Slider.TYPE, options);
+		return <Slider>Slider.r.create(options);
 	}
 };
 

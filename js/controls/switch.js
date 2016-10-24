@@ -8,7 +8,7 @@ var widget_1 = require("./widget");
 var TWEEN = require("tween.js");
 var graphics_1 = require("../graphics");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 开关控件。
  */
@@ -90,10 +90,10 @@ var Switch = (function (_super) {
         _super.prototype.dispatchPointerUp.call(this, evt);
     };
     Switch.create = function (options) {
-        return Switch.recycleBin.create().reset(Switch.TYPE, options);
+        return Switch.recycleBin.create(options);
     };
     Switch.TYPE = "switch";
-    Switch.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Switch(); });
+    Switch.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Switch);
     return Switch;
 }(widget_1.Widget));
 exports.Switch = Switch;

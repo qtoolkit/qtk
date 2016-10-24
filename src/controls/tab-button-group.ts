@@ -7,7 +7,7 @@ import {Orientation} from "../consts";
 import {RadioButton} from "./radio-button";
 import {WidgetFactory} from "./widget-factory";
 import {ImageDrawType, ImageTile} from "../image-tile";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 export class TabButtonGroup extends Widget {
 	protected _ae : boolean;
@@ -97,9 +97,9 @@ export class TabButtonGroup extends Widget {
 		return TabButtonGroup.defProps;
 	}
 	public static TYPE = "tab-button-group";
-	private static r = new RecyclableCreator<TabButtonGroup>(function() {return new TabButtonGroup()});
+	private static r = WidgetRecyclableCreator.create(TabButtonGroup);
 	public static create(options?:any) : TabButtonGroup {
-		return <TabButtonGroup>TabButtonGroup.r.create().reset(TabButtonGroup.TYPE, options);
+		return <TabButtonGroup>TabButtonGroup.r.create(options);
 	}
 };
 

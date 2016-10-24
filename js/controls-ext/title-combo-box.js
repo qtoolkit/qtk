@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var combo_box_1 = require("../controls/combo-box");
 var TitleComboBoxBase = (function (_super) {
     __extends(TitleComboBoxBase, _super);
@@ -47,10 +47,10 @@ var TitleComboBox = (function (_super) {
         return combo_box_1.ComboBox.create(options);
     };
     TitleComboBox.create = function (options) {
-        return TitleComboBox.recycleBin.create().reset(TitleComboBox.TYPE, options);
+        return TitleComboBox.recycleBin.create(options);
     };
     TitleComboBox.TYPE = "title-combo-box";
-    TitleComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBox(); });
+    TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
     return TitleComboBox;
 }(TitleComboBoxBase));
 exports.TitleComboBox = TitleComboBox;
@@ -65,10 +65,10 @@ var TitleComboBoxEditable = (function (_super) {
         return combo_box_1.ComboBoxEditable.create(options);
     };
     TitleComboBoxEditable.create = function (options) {
-        return TitleComboBoxEditable.recycleBin.create().reset(TitleComboBoxEditable.TYPE, options);
+        return TitleComboBoxEditable.recycleBin.create(options);
     };
     TitleComboBoxEditable.TYPE = "title-combo-box-editable";
-    TitleComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleComboBoxEditable(); });
+    TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
     return TitleComboBoxEditable;
 }(TitleComboBoxBase));
 exports.TitleComboBoxEditable = TitleComboBoxEditable;

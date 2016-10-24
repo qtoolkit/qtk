@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var range_edit_1 = require("./range-edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var TitleRange = (function (_super) {
     __extends(TitleRange, _super);
     function TitleRange(type) {
@@ -17,10 +17,10 @@ var TitleRange = (function (_super) {
         return range_edit_1.RangeEdit.create(options);
     };
     TitleRange.create = function (options) {
-        return TitleRange.recycleBin.create().reset(TitleRange.TYPE, options);
+        return TitleRange.recycleBin.create(options);
     };
     TitleRange.TYPE = "title-range";
-    TitleRange.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TitleRange(); });
+    TitleRange.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleRange);
     return TitleRange;
 }(title_value_1.TitleValue));
 exports.TitleRange = TitleRange;

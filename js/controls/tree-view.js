@@ -8,7 +8,7 @@ var tree_item_1 = require("./tree-item");
 var list_view_1 = require("./list-view");
 var tree_item_data_1 = require("./tree-item-data");
 var widget_factory_1 = require("./widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
  * 树形视图。
  */
@@ -138,10 +138,10 @@ var TreeView = (function (_super) {
         this._rootData = null;
     };
     TreeView.create = function (options) {
-        return TreeView.recycleBinTreeView.create().reset(TreeView.TYPE, options);
+        return TreeView.recycleBinTreeView.create(options);
     };
     TreeView.TYPE = "tree-view";
-    TreeView.recycleBinTreeView = new recyclable_creator_1.RecyclableCreator(function () { return new TreeView(); });
+    TreeView.recycleBinTreeView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeView);
     return TreeView;
 }(list_view_1.ListView));
 exports.TreeView = TreeView;
