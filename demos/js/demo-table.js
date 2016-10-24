@@ -25,7 +25,8 @@ function onReady(app) {
 	
 	win.childrenLayouter = qtk.SimpleLayouter.create();
 
-	var table = qtk.Table.create({indexBarW:80});
+	var indexBarW = 80;
+	var table = qtk.Table.create({indexBarW:indexBarW});
 	table.layoutParam = qtk.SimpleLayouterParam.create({w:"100%", h:"100%"});
 	
 	win.addChild(table);
@@ -35,7 +36,8 @@ function onReady(app) {
 	table.addColumn(qtk.TableColInfo.create("Gender", "combo-box", 100, {dataBindingRule:"gender",
 		options:[{text:"Male"}, {text:"Female"}]
 	}));
-	table.addColumn(qtk.TableColInfo.create("Address", "edit", table.w-320, {dataBindingRule:"address"}));
+	var w = table.w - 310 - indexBarW;
+	table.addColumn(qtk.TableColInfo.create("Address", "edit", w, {dataBindingRule:"address"}));
 	
 	var viewModal = createViewModal();
 	table.bindData(viewModal);
