@@ -107,15 +107,15 @@ var Movable = (function (_super) {
         document.body.style.cursor = "default";
         if (this.dragging) {
             this.dragging = false;
-            var dx = evt.x - evt.pointerDownX;
-            var dy = evt.y - evt.pointerDownY;
+            var dx = evt.dx;
+            var dy = evt.dy;
             this.moveWidget(this.x + dx, this.y + dy, true);
         }
     };
     Movable.prototype.onPointerMove = function (evt) {
         if (this.dragging) {
-            var dx = evt.x - evt.pointerDownX;
-            var dy = evt.y - evt.pointerDownY;
+            var dx = evt.dx;
+            var dy = evt.dy;
             this.moveWidget(this.x + dx, this.y + dy, false);
         }
     };

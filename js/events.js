@@ -207,6 +207,8 @@ var PointerEvent = (function (_super) {
         this.pointerDownX = detail.pointerDownX;
         this.pointerDownY = detail.pointerDownY;
         this.pointerDownTime = detail.pointerDownTime;
+        this.dx = detail.x - detail.pointerDownX;
+        this.dy = detail.y - detail.pointerDownY;
         return this;
     };
     PointerEvent.create = function (type, detail) {

@@ -155,6 +155,14 @@ export declare class PointerEvent extends InputEvent {
      * 如果指针按下，按下时的时间。
      */
     pointerDownTime: number;
+    /**
+     * 指针事件的x变化量。
+     */
+    dx: number;
+    /**
+     * 指针事件的y变化量。
+     */
+    dy: number;
     init(type: string, detail: PointerEventDetail | PointerEvent): any;
     static create(type: string, detail: PointerEventDetail | PointerEvent): PointerEvent;
 }

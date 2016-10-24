@@ -1557,6 +1557,8 @@ var qtk =
 	        this.pointerDownX = detail.pointerDownX;
 	        this.pointerDownY = detail.pointerDownY;
 	        this.pointerDownTime = detail.pointerDownTime;
+	        this.dx = detail.x - detail.pointerDownX;
+	        this.dy = detail.y - detail.pointerDownY;
 	        return this;
 	    };
 	    PointerEvent.create = function (type, detail) {
@@ -28089,15 +28091,15 @@ var qtk =
 	        document.body.style.cursor = "default";
 	        if (this.dragging) {
 	            this.dragging = false;
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
+	            var dx = evt.dx;
+	            var dy = evt.dy;
 	            this.moveWidget(this.x + dx, this.y + dy, true);
 	        }
 	    };
 	    Movable.prototype.onPointerMove = function (evt) {
 	        if (this.dragging) {
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
+	            var dx = evt.dx;
+	            var dy = evt.dy;
 	            this.moveWidget(this.x + dx, this.y + dy, false);
 	        }
 	    };
@@ -28390,9 +28392,9 @@ var qtk =
 	    };
 	    Resizable.prototype.onPointerMove = function (evt) {
 	        if (this.resizing) {
+	            var dx = evt.dx;
+	            var dy = evt.dy;
 	            var widget = this.widget;
-	            var dx = evt.x - evt.pointerDownX;
-	            var dy = evt.y - evt.pointerDownY;
 	            switch (this.pointerDownArea) {
 	                case "n": {
 	                    widget.moveResizeTo(this.x, this.y + dy, this.w, this.h - dy);

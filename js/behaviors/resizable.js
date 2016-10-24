@@ -137,9 +137,9 @@ var Resizable = (function (_super) {
     };
     Resizable.prototype.onPointerMove = function (evt) {
         if (this.resizing) {
+            var dx = evt.dx;
+            var dy = evt.dy;
             var widget = this.widget;
-            var dx = evt.x - evt.pointerDownX;
-            var dy = evt.y - evt.pointerDownY;
             switch (this.pointerDownArea) {
                 case "n": {
                     widget.moveResizeTo(this.x, this.y + dy, this.w, this.h - dy);

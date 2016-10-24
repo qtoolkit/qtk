@@ -242,6 +242,15 @@ export class PointerEvent extends InputEvent {
 	 */
 	public pointerDownTime : number;
 
+	/**
+	 * 指针事件的x变化量。
+	 */
+	public dx : number;
+	/**
+	 * 指针事件的y变化量。
+	 */
+	public dy : number;
+
 	public init(type:string, detail:PointerEventDetail|PointerEvent) : any{
 		super.init(type, detail);
 
@@ -253,6 +262,8 @@ export class PointerEvent extends InputEvent {
 		this.pointerDownX = detail.pointerDownX;
 		this.pointerDownY = detail.pointerDownY;
 		this.pointerDownTime = detail.pointerDownTime;
+		this.dx = detail.x - detail.pointerDownX;
+		this.dy = detail.y - detail.pointerDownY;
 
 		return this;
 	}

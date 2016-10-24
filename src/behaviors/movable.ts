@@ -157,16 +157,16 @@ export class Movable extends Behavior {
 		document.body.style.cursor = "default"; 
 		if(this.dragging) {
 			this.dragging = false;
-			var dx = evt.x - evt.pointerDownX;
-			var dy = evt.y - evt.pointerDownY;
+			var dx = evt.dx;
+			var dy = evt.dy;
 			this.moveWidget(this.x+dx, this.y+dy, true);
 		}
 	}
 
 	protected onPointerMove(evt:Events.PointerEvent){
 		if(this.dragging) {
-			var dx = evt.x - evt.pointerDownX;
-			var dy = evt.y - evt.pointerDownY;
+			var dx = evt.dx;
+			var dy = evt.dy;
 			this.moveWidget(this.x+dx, this.y+dy, false);
 		}
 	}
