@@ -266,6 +266,11 @@ var Table = (function (_super) {
         }
         return this.getLayoutRect();
     };
+    Table.prototype.dispatchWheel = function (evt) {
+        if (this.client) {
+            this.client.dispatchWheel(evt);
+        }
+    };
     Table.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
         this._templateRow = null;

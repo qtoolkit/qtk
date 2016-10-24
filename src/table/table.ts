@@ -304,6 +304,12 @@ export class Table extends Widget {
 
 		return this.getLayoutRect();
 	}
+	
+	public dispatchWheel(evt:any) {
+		if(this.client) {
+			this.client.dispatchWheel(evt);
+		}
+	}
 
 	public dispose() {
 		super.dispose();

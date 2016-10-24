@@ -93,6 +93,7 @@ export declare class Table extends Widget {
     protected prepareUI(): void;
     protected onInit(): void;
     relayoutChildren(): Rect;
+    dispatchWheel(evt: any): void;
     dispose(): void;
     protected onReset(): void;
     private _colsInfo;

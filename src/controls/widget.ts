@@ -458,7 +458,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	protected dispatchWheel(evt:any) {
+	public dispatchWheel(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}

@@ -40,5 +40,6 @@ function onReady(app) {
 	var viewModal = createViewModal();
 	table.bindData(viewModal);
 
+	win.target = table;
 	win.open();
 }

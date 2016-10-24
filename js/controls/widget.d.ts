@@ -111,7 +111,7 @@ export declare class Widget extends Emitter {
     protected dispatchDblClick(evt: any): void;
     protected dispatchKeyDown(evt: any): void;
     protected dispatchKeyUp(evt: any): void;
-    protected dispatchWheel(evt: any): void;
+    dispatchWheel(evt: any): void;
     protected applyTransform(ctx: MatrixStack): Widget;
     protected findEventTargetChild(x: number, y: number, ctx: MatrixStack): Widget;
     animate(): TWEEN.Tween;
