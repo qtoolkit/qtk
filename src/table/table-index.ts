@@ -5,11 +5,11 @@ import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
 import {PassiveScrollableGroup} from "./passive-scrollable-group";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
- * 表格左边的索引序数。
+ * 表格左边的行序数。
  */
 export class TableIndex extends PassiveScrollableGroup {
 	constructor() {
@@ -17,9 +17,9 @@ export class TableIndex extends PassiveScrollableGroup {
 	}
 
 	public static TYPE = "table-index";
-	private static recycleBin = new RecyclableCreator<TableIndex>(function() {return new TableIndex()});
+	private static recycleBin = WidgetRecyclableCreator.create(TableIndex);
 	public static create(options?:any) : TableIndex {
-		return <TableIndex>TableIndex.recycleBin.create().reset(TableIndex.TYPE, options);
+		return <TableIndex>TableIndex.recycleBin.create(options);
 	}
 };
 

@@ -4,9 +4,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var recyclable_creator_1 = require("../recyclable-creator");
 var widget_factory_1 = require("../controls/widget-factory");
 var passive_scrollable_group_1 = require("./passive-scrollable-group");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
  * 表格头
  */
@@ -16,10 +16,10 @@ var TableHeader = (function (_super) {
         _super.call(this, TableHeader.TYPE);
     }
     TableHeader.create = function (options) {
-        return TableHeader.recycleBin.create().reset(TableHeader.TYPE, options);
+        return TableHeader.recycleBin.create(options);
     };
     TableHeader.TYPE = "table-header";
-    TableHeader.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeader(); });
+    TableHeader.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeader);
     return TableHeader;
 }(passive_scrollable_group_1.PassiveScrollableGroup));
 exports.TableHeader = TableHeader;

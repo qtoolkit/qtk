@@ -85,6 +85,7 @@ export { IValueConverter } from "./mvvm/ivalue-converter";
 export { DelegateCommand } from "./mvvm/delegate-command";
 export { CollectionViewModal } from "./mvvm/collection-view-modal";
 export { DelegateValueConverter } from "./mvvm/delegate-value-converter";
+export { WidgetRecyclableCreator } from "./controls/widget-recyclable-creator";
 export { IValidationRule, ValidationResult } from "./mvvm/ivalidation-rule";
 export { DelegateValidationRule } from "./mvvm/delegate-validation-rule";
 export { BindingRule, IBindingSource, BindingDataSource, BindingCommandSource, BindingRuleItem } from "./mvvm/binding-rule";

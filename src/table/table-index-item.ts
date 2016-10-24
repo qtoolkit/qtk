@@ -4,24 +4,20 @@ import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
- * 表格左边的序数项。
+ * 表格左边的行序数项。
  */
 export class TableIndexItem extends Widget {
-	protected onReset() {
-		super.onReset();
-	}
-
 	constructor() {
 		super(TableIndexItem.TYPE);
 	}
 
 	public static TYPE = "table-index-item";
-	private static recycleBin = new RecyclableCreator<TableIndexItem>(function() {return new TableIndexItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(TableIndexItem);
 	public static create(options?:any) : TableIndexItem {
-		return <TableIndexItem>TableIndexItem.recycleBin.create().reset(TableIndexItem.TYPE, options);
+		return <TableIndexItem>TableIndexItem.recycleBin.create(options);
 	}
 };
 

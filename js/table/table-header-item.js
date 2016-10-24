@@ -8,7 +8,7 @@ var rect_1 = require("../rect");
 var Events = require("../events");
 var widget_1 = require("../controls/widget");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
  * 表格头的一项。
  */
@@ -21,8 +21,21 @@ var TableHeaderItem = (function (_super) {
         get: function () {
             return this._sortable;
         },
+        /**
+         * 是否点击时按该列排序。
+         */
         set: function (value) {
             this._sortable = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableHeaderItem.prototype, "sortStatus", {
+        /**
+         * 当前的排序状态。
+         */
+        get: function () {
+            return this._sortStatus;
         },
         enumerable: true,
         configurable: true
@@ -57,12 +70,12 @@ var TableHeaderItem = (function (_super) {
         }
     };
     TableHeaderItem.create = function (options) {
-        return TableHeaderItem.recycleBin.create().reset(TableHeaderItem.TYPE, options);
+        return TableHeaderItem.recycleBin.create(options);
     };
     TableHeaderItem.SORT_INC = "inc";
     TableHeaderItem.SORT_DEC = "dec";
     TableHeaderItem.TYPE = "table-header-item";
-    TableHeaderItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeaderItem(); });
+    TableHeaderItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeaderItem);
     return TableHeaderItem;
 }(widget_1.Widget));
 exports.TableHeaderItem = TableHeaderItem;

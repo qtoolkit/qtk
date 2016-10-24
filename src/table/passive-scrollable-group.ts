@@ -5,31 +5,38 @@ import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
- * 可滚的分组。 
+ * 被动式可滚分组。滚动区域由外面设置。 
  */
 export abstract class PassiveScrollableGroup extends Widget {
-	protected _ox : number;
-	protected _oy : number;
-
+	/**
+	 * X的偏移。
+	 */
 	public set offsetX(value:number) {
 		this._ox = value;
 	}
-	
 	public get offsetX() {
 		return this._ox;
 	}
+	protected _ox : number;
 	
+	/**
+	 * Y的偏移。
+	 */
 	public set offsetY(value:number) {
 		this._oy = value;
 	}
-	
 	public get offsetY() {
 		return this._oy;
 	}
+	protected _oy : number;
 	
+	constructor(type:string) {
+		super(type);
+	}
+
 	public relayoutChildren() : Rect {
 		if(!this.w || !this.h) {
 			return null;
@@ -100,10 +107,6 @@ export abstract class PassiveScrollableGroup extends Widget {
 		super.onReset();
 		this._ox = 0;
 		this._oy = 0;
-	}
-
-	constructor(type:string) {
-		super(type);
 	}
 
 	protected dispatchClick(evt:any) {

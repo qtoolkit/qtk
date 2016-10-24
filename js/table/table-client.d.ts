@@ -8,21 +8,22 @@ import { ListView } from "../controls/list-view";
  * 表格内容区域
  */
 export declare class TableClient extends ListView {
-    protected _colsWidth: Array<number>;
-    protected _selectedCols: Range;
-    protected _selectedRows: Range;
     /**
      * 记录每一列的宽度，从TableHeader获取。
      */
     colsWidth: Array<number>;
+    protected _colsWidth: Array<number>;
     /**
      * 当前选择的行的范围。
      */
     selectedRows: Range;
+    protected _selectedCols: Range;
     /**
      * 当前选择的列的范围。
      */
     selectedCols: Range;
+    protected _selectedRows: Range;
+    constructor();
     protected xToCol(x: number): number;
     protected yToRow(y: number): number;
     /**
@@ -41,7 +42,6 @@ export declare class TableClient extends ListView {
     protected drawSelection(ctx: any, style: Style): void;
     protected afterDrawChildren(ctx: any): void;
     protected getLayoutWidth(): number;
-    constructor();
     protected onReset(): void;
     static TYPE: string;
     private static rBin;

@@ -240,6 +240,8 @@ var qtk =
 	exports.CollectionViewModal = collection_view_modal_1.CollectionViewModal;
 	var delegate_value_converter_1 = __webpack_require__(329);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
+	var widget_recyclable_creator_1 = __webpack_require__(82);
+	exports.WidgetRecyclableCreator = widget_recyclable_creator_1.WidgetRecyclableCreator;
 	var ivalidation_rule_1 = __webpack_require__(157);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
 	var delegate_validation_rule_1 = __webpack_require__(330);
@@ -56539,27 +56541,24 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
-	 * 表格
+	 * 表格中的一行。
 	 */
 	var TableRow = (function (_super) {
 	    __extends(TableRow, _super);
 	    function TableRow() {
 	        _super.call(this, TableRow.TYPE);
 	    }
-	    TableRow.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	    };
 	    TableRow.prototype.relayoutChildren = function () {
 	        var tableClient = (this.parent);
 	        if (!this.w || !this.h || !tableClient) {
 	            return;
 	        }
-	        var colsWidth = tableClient.colsWidth;
 	        var h = this.clientH;
 	        var x = this.leftPadding;
 	        var y = this.rightPadding;
+	        var colsWidth = tableClient.colsWidth;
 	        this.children.forEach(function (child, index) {
 	            var w = colsWidth[index] || 100;
 	            child.moveResizeTo(x, y, w, h);
@@ -56569,10 +56568,10 @@ var qtk =
 	        return null;
 	    };
 	    TableRow.create = function (options) {
-	        return TableRow.recycleBin.create().reset(TableRow.TYPE, options);
+	        return TableRow.recycleBin.create(options);
 	    };
 	    TableRow.TYPE = "table-row";
-	    TableRow.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableRow(); });
+	    TableRow.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableRow);
 	    return TableRow;
 	}(widget_1.Widget));
 	exports.TableRow = TableRow;
@@ -56596,7 +56595,7 @@ var qtk =
 	var list_view_1 = __webpack_require__(112);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 表格内容区域
 	 */
@@ -56833,10 +56832,10 @@ var qtk =
 	        this._selectedRows = range_1.Range.create(0, 0);
 	    };
 	    TableClient.create = function (options) {
-	        return TableClient.rBin.create().reset(TableClient.TYPE, options);
+	        return TableClient.rBin.create(options);
 	    };
 	    TableClient.TYPE = "table-client";
-	    TableClient.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableClient(); });
+	    TableClient.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableClient);
 	    return TableClient;
 	}(list_view_1.ListView));
 	exports.TableClient = TableClient;
@@ -56882,10 +56881,10 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
 	var passive_scrollable_group_1 = __webpack_require__(343);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
-	 * 表格左边的索引序数。
+	 * 表格左边的行序数。
 	 */
 	var TableIndex = (function (_super) {
 	    __extends(TableIndex, _super);
@@ -56893,10 +56892,10 @@ var qtk =
 	        _super.call(this, TableIndex.TYPE);
 	    }
 	    TableIndex.create = function (options) {
-	        return TableIndex.recycleBin.create().reset(TableIndex.TYPE, options);
+	        return TableIndex.recycleBin.create(options);
 	    };
 	    TableIndex.TYPE = "table-index";
-	    TableIndex.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableIndex(); });
+	    TableIndex.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableIndex);
 	    return TableIndex;
 	}(passive_scrollable_group_1.PassiveScrollableGroup));
 	exports.TableIndex = TableIndex;
@@ -56916,7 +56915,7 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	/**
-	 * 可滚的分组。
+	 * 被动式可滚分组。滚动区域由外面设置。
 	 */
 	var PassiveScrollableGroup = (function (_super) {
 	    __extends(PassiveScrollableGroup, _super);
@@ -56927,6 +56926,9 @@ var qtk =
 	        get: function () {
 	            return this._ox;
 	        },
+	        /**
+	         * X的偏移。
+	         */
 	        set: function (value) {
 	            this._ox = value;
 	        },
@@ -56937,6 +56939,9 @@ var qtk =
 	        get: function () {
 	            return this._oy;
 	        },
+	        /**
+	         * Y的偏移。
+	         */
 	        set: function (value) {
 	            this._oy = value;
 	        },
@@ -57045,9 +57050,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var recyclable_creator_1 = __webpack_require__(83);
 	var widget_factory_1 = __webpack_require__(23);
 	var passive_scrollable_group_1 = __webpack_require__(343);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 表格头
 	 */
@@ -57057,10 +57062,10 @@ var qtk =
 	        _super.call(this, TableHeader.TYPE);
 	    }
 	    TableHeader.create = function (options) {
-	        return TableHeader.recycleBin.create().reset(TableHeader.TYPE, options);
+	        return TableHeader.recycleBin.create(options);
 	    };
 	    TableHeader.TYPE = "table-header";
-	    TableHeader.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeader(); });
+	    TableHeader.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeader);
 	    return TableHeader;
 	}(passive_scrollable_group_1.PassiveScrollableGroup));
 	exports.TableHeader = TableHeader;
@@ -57081,20 +57086,23 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	var table_row_1 = __webpack_require__(339);
 	var table_index_1 = __webpack_require__(342);
 	var table_client_1 = __webpack_require__(340);
 	var table_header_1 = __webpack_require__(344);
 	var table_index_item_1 = __webpack_require__(346);
 	var table_header_item_1 = __webpack_require__(347);
+	/**
+	 * 描述表格中某列的信息。
+	 */
 	var TableColInfo = (function () {
 	    function TableColInfo(title, widgetType, w, options, sortable) {
 	        this.w = w;
 	        this.title = title;
 	        this.sortable = sortable;
-	        this.widgetType = widgetType;
 	        this.options = options || {};
+	        this.widgetType = widgetType || "label";
 	    }
 	    TableColInfo.create = function (title, widgetType, w, options, sortable) {
 	        return new TableColInfo(title, widgetType, w, options, sortable);
@@ -57104,67 +57112,121 @@ var qtk =
 	exports.TableColInfo = TableColInfo;
 	;
 	/**
-	 * 表格
+	 * 表格。表格由三部分组成：
+	 * 1.表头(TableHeader):  在最上方，显示每一列的标题，可以点击触发按该列进行排序。
+	 * 2.行序号(TableIndex): 在左边，显示每一行的序号。
+	 * 3.客户区(TableClient):占据表的主体部分，显示表格的内容。
 	 */
 	var Table = (function (_super) {
 	    __extends(Table, _super);
 	    function Table() {
 	        _super.call(this, Table.TYPE);
 	    }
-	    Object.defineProperty(Table.prototype, "itemH", {
+	    Object.defineProperty(Table.prototype, "headerBar", {
+	        /**
+	         * 表头
+	         */
 	        get: function () {
-	            return this._itemH;
+	            return this._headerBar;
 	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "indexBar", {
+	        /**
+	         * 行序号
+	         */
+	        get: function () {
+	            return this._indexBar;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "client", {
+	        /**
+	         * 客户区
+	         */
+	        get: function () {
+	            return this._client;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(Table.prototype, "rowH", {
+	        get: function () {
+	            return this._rowH;
+	        },
+	        /**
+	         * 每行的高度(在绑定数据之前设置才有效)。
+	         */
 	        set: function (value) {
-	            this._itemH = value;
+	            this._rowH = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Table.prototype, "indexBarW", {
 	        get: function () {
-	            return this._indexBarW;
+	            return this._ibW;
 	        },
+	        /**
+	         * 行序号的宽度(在绑定数据之前设置才有效)。
+	         */
 	        set: function (value) {
-	            this._indexBarW = value;
+	            this._ibW = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Table.prototype, "headerBarH", {
 	        get: function () {
-	            return this._headerBarH;
+	            return this._hbH;
 	        },
+	        /**
+	         * 表头的高度(在绑定数据之前设置才有效)。
+	         */
 	        set: function (value) {
-	            this._headerBarH = value;
+	            this._hbH = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
 	    Object.defineProperty(Table.prototype, "showIndexBar", {
 	        get: function () {
-	            return this._showIndexBar;
+	            return this._siB;
 	        },
+	        /**
+	         * 是否显示行序号(在绑定数据之前设置才有效)。
+	         */
 	        set: function (value) {
-	            this._showIndexBar = value;
+	            this._siB = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * 清除所有列。
+	     */
 	    Table.prototype.resetColumns = function () {
 	        this._colsInfo = [];
 	        return this;
 	    };
+	    /**
+	     * 增加一列。
+	     */
 	    Table.prototype.addColumn = function (colInfo) {
 	        this._colsInfo.push(colInfo);
 	        return this;
 	    };
+	    /**
+	     * 获取所有列。
+	     */
 	    Table.prototype.getColumns = function () {
 	        return this._colsInfo;
 	    };
 	    Table.prototype.getTemplateRow = function () {
 	        if (!this._templateRow) {
-	            var row = table_row_1.TableRow.create({ w: this.w, h: this.itemH, app: this.app });
+	            var row = table_row_1.TableRow.create({ w: this.w, h: this.rowH, app: this.app });
 	            this._colsInfo.forEach(function (item) {
 	                var widget = widget_factory_1.WidgetFactory.create(item.widgetType, item.options);
 	                widget.styleType = widget.type + ".table";
@@ -57179,11 +57241,12 @@ var qtk =
 	        var client = this._client;
 	        if (client) {
 	            client.templateItem = this.getTemplateRow();
+	            client.removeAllChildren();
 	            client.bindData(viewModal);
 	        }
+	        var itemH = this.rowH;
 	        var indexBar = this._indexBar;
 	        if (indexBar) {
-	            var itemH = this.itemH;
 	            indexBar.removeAllChildren();
 	            client.children.forEach(function (item, index) {
 	                indexBar.addChild(table_index_item_1.TableIndexItem.create({ text: index, h: itemH }), true);
@@ -57194,15 +57257,17 @@ var qtk =
 	    };
 	    Table.prototype.prepareUI = function () {
 	        var _this = this;
-	        var itemH = this.itemH;
+	        var itemH = this.rowH;
 	        this.removeAllChildren();
 	        var showIndexBar = this.showIndexBar;
 	        this._headerBar = table_header_1.TableHeader.create({ h: this.headerBarH, w: this.w });
-	        this._indexBar = table_index_1.TableIndex.create({ w: this.indexBarW, h: this.h });
 	        this._client = table_client_1.TableClient.create({ itemH: itemH, w: this.w - this.indexBarW, h: this.h - this.headerBarH });
 	        this.addChild(this._client, false);
 	        this.addChild(this._headerBar, false);
-	        this.addChild(this._indexBar, false);
+	        if (showIndexBar) {
+	            this._indexBar = table_index_1.TableIndex.create({ w: this.indexBarW, h: this.h });
+	            this.addChild(this._indexBar, false);
+	        }
 	        var headerBar = this._headerBar;
 	        this._colsInfo.forEach(function (item) {
 	            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
@@ -57212,7 +57277,9 @@ var qtk =
 	        var indexBar = this._indexBar;
 	        var headerBar = this._headerBar;
 	        client.on(Events.SCROLL, function (evt) {
-	            indexBar.offsetY = evt.offsetY;
+	            if (indexBar) {
+	                indexBar.offsetY = evt.offsetY;
+	            }
 	            headerBar.offsetX = evt.offsetX;
 	            _this.requestRedraw();
 	        });
@@ -57220,9 +57287,6 @@ var qtk =
 	    };
 	    Table.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
-	        if (!this._headerBar) {
-	            this.prepareUI();
-	        }
 	    };
 	    Table.prototype.relayoutChildren = function () {
 	        if (!this.w || !this.h) {
@@ -57235,10 +57299,10 @@ var qtk =
 	        var client = this._client;
 	        var indexBar = this._indexBar;
 	        var headerBar = this._headerBar;
-	        var indexBarW = this._indexBarW;
-	        var headerBarH = this._headerBarH;
+	        var indexBarW = this.indexBarW;
+	        var headerBarH = this.headerBarH;
 	        var yy = y + headerBarH;
-	        var xx = this.showIndexBar ? x + this._indexBarW : x;
+	        var xx = this.showIndexBar ? x + indexBarW : x;
 	        w = this.w - xx - this.rightPadding;
 	        h = this.h - yy - this.bottomPadding;
 	        var colsWidth = null;
@@ -57270,17 +57334,17 @@ var qtk =
 	    };
 	    Table.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this._itemH = 30;
 	        this.resetColumns();
-	        this._indexBarW = 30;
-	        this._headerBarH = 30;
-	        this._showIndexBar = true;
+	    };
+	    Table.prototype.getDefProps = function () {
+	        return Table.defProps;
 	    };
 	    Table.create = function (options) {
-	        return Table.recycleBin.create().reset(Table.TYPE, options);
+	        return Table.recycleBin.create(options);
 	    };
+	    Table.defProps = Object.assign({}, widget_1.Widget.defProps, { _rowH: 30, _ibW: 30, _hbH: 30, _siB: true });
 	    Table.TYPE = "table";
-	    Table.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new Table(); });
+	    Table.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Table);
 	    return Table;
 	}(widget_1.Widget));
 	exports.Table = Table;
@@ -57300,23 +57364,20 @@ var qtk =
 	};
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
-	 * 表格左边的序数项。
+	 * 表格左边的行序数项。
 	 */
 	var TableIndexItem = (function (_super) {
 	    __extends(TableIndexItem, _super);
 	    function TableIndexItem() {
 	        _super.call(this, TableIndexItem.TYPE);
 	    }
-	    TableIndexItem.prototype.onReset = function () {
-	        _super.prototype.onReset.call(this);
-	    };
 	    TableIndexItem.create = function (options) {
-	        return TableIndexItem.recycleBin.create().reset(TableIndexItem.TYPE, options);
+	        return TableIndexItem.recycleBin.create(options);
 	    };
 	    TableIndexItem.TYPE = "table-index-item";
-	    TableIndexItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableIndexItem(); });
+	    TableIndexItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableIndexItem);
 	    return TableIndexItem;
 	}(widget_1.Widget));
 	exports.TableIndexItem = TableIndexItem;
@@ -57338,7 +57399,7 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
-	var recyclable_creator_1 = __webpack_require__(83);
+	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 表格头的一项。
 	 */
@@ -57351,8 +57412,21 @@ var qtk =
 	        get: function () {
 	            return this._sortable;
 	        },
+	        /**
+	         * 是否点击时按该列排序。
+	         */
 	        set: function (value) {
 	            this._sortable = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TableHeaderItem.prototype, "sortStatus", {
+	        /**
+	         * 当前的排序状态。
+	         */
+	        get: function () {
+	            return this._sortStatus;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -57387,12 +57461,12 @@ var qtk =
 	        }
 	    };
 	    TableHeaderItem.create = function (options) {
-	        return TableHeaderItem.recycleBin.create().reset(TableHeaderItem.TYPE, options);
+	        return TableHeaderItem.recycleBin.create(options);
 	    };
 	    TableHeaderItem.SORT_INC = "inc";
 	    TableHeaderItem.SORT_DEC = "dec";
 	    TableHeaderItem.TYPE = "table-header-item";
-	    TableHeaderItem.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableHeaderItem(); });
+	    TableHeaderItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeaderItem);
 	    return TableHeaderItem;
 	}(widget_1.Widget));
 	exports.TableHeaderItem = TableHeaderItem;

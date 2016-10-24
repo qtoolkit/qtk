@@ -4,23 +4,38 @@ import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
  * 表格头的一项。
  */
 export class TableHeaderItem extends Widget {
-	protected _sortable : boolean;
-	protected _sortStatus : string;
-
+	/**
+	 * 是否点击时按该列排序。
+	 */
 	public set sortable(value:boolean) {
 		this._sortable = value;
 	}
-	
 	public get sortable() : boolean {
 		return this._sortable;
 	}
+	protected _sortable : boolean;
+
+	/**
+	 * 当前的排序状态。
+	 */
+	public get sortStatus() : string {
+		return this._sortStatus;
+	}
+	protected _sortStatus : string;
 	
+	public static SORT_INC = "inc";
+	public static SORT_DEC = "dec";
+	
+	constructor() {
+		super(TableHeaderItem.TYPE);
+	}
+
 	protected getFgImageRect(style:Style) : Rect {
 		var x = this.w - this.h;
 		var y = this.topPadding;
@@ -55,17 +70,10 @@ export class TableHeaderItem extends Widget {
 		}
 	}
 
-	constructor() {
-		super(TableHeaderItem.TYPE);
-	}
-
-	public static SORT_INC = "inc";
-	public static SORT_DEC = "dec";
-
 	public static TYPE = "table-header-item";
-	private static recycleBin = new RecyclableCreator<TableHeaderItem>(function() {return new TableHeaderItem()});
+	private static recycleBin = WidgetRecyclableCreator.create(TableHeaderItem);
 	public static create(options?:any) : TableHeaderItem {
-		return <TableHeaderItem>TableHeaderItem.recycleBin.create().reset(TableHeaderItem.TYPE, options);
+		return <TableHeaderItem>TableHeaderItem.recycleBin.create(options);
 	}
 };
 

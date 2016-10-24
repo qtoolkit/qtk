@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("../controls/widget");
 /**
- * 可滚的分组。
+ * 被动式可滚分组。滚动区域由外面设置。
  */
 var PassiveScrollableGroup = (function (_super) {
     __extends(PassiveScrollableGroup, _super);
@@ -17,6 +17,9 @@ var PassiveScrollableGroup = (function (_super) {
         get: function () {
             return this._ox;
         },
+        /**
+         * X的偏移。
+         */
         set: function (value) {
             this._ox = value;
         },
@@ -27,6 +30,9 @@ var PassiveScrollableGroup = (function (_super) {
         get: function () {
             return this._oy;
         },
+        /**
+         * Y的偏移。
+         */
         set: function (value) {
             this._oy = value;
         },

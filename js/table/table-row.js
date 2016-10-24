@@ -6,27 +6,24 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var widget_1 = require("../controls/widget");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
- * 表格
+ * 表格中的一行。
  */
 var TableRow = (function (_super) {
     __extends(TableRow, _super);
     function TableRow() {
         _super.call(this, TableRow.TYPE);
     }
-    TableRow.prototype.onReset = function () {
-        _super.prototype.onReset.call(this);
-    };
     TableRow.prototype.relayoutChildren = function () {
         var tableClient = (this.parent);
         if (!this.w || !this.h || !tableClient) {
             return;
         }
-        var colsWidth = tableClient.colsWidth;
         var h = this.clientH;
         var x = this.leftPadding;
         var y = this.rightPadding;
+        var colsWidth = tableClient.colsWidth;
         this.children.forEach(function (child, index) {
             var w = colsWidth[index] || 100;
             child.moveResizeTo(x, y, w, h);
@@ -36,10 +33,10 @@ var TableRow = (function (_super) {
         return null;
     };
     TableRow.create = function (options) {
-        return TableRow.recycleBin.create().reset(TableRow.TYPE, options);
+        return TableRow.recycleBin.create(options);
     };
     TableRow.TYPE = "table-row";
-    TableRow.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableRow(); });
+    TableRow.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableRow);
     return TableRow;
 }(widget_1.Widget));
 exports.TableRow = TableRow;

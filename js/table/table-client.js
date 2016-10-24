@@ -10,7 +10,7 @@ var range_1 = require("../range");
 var list_view_1 = require("../controls/list-view");
 var widget_1 = require("../controls/widget");
 var widget_factory_1 = require("../controls/widget-factory");
-var recyclable_creator_1 = require("../recyclable-creator");
+var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
  * 表格内容区域
  */
@@ -247,10 +247,10 @@ var TableClient = (function (_super) {
         this._selectedRows = range_1.Range.create(0, 0);
     };
     TableClient.create = function (options) {
-        return TableClient.rBin.create().reset(TableClient.TYPE, options);
+        return TableClient.rBin.create(options);
     };
     TableClient.TYPE = "table-client";
-    TableClient.rBin = new recyclable_creator_1.RecyclableCreator(function () { return new TableClient(); });
+    TableClient.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableClient);
     return TableClient;
 }(list_view_1.ListView));
 exports.TableClient = TableClient;

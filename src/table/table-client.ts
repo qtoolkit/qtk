@@ -8,26 +8,22 @@ import {MatrixStack} from "../matrix-stack";
 import {ListView} from "../controls/list-view";
 import {Widget, WidgetState} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
  * 表格内容区域
  */
 export class TableClient extends ListView {
-	protected _colsWidth : Array<number>;
-	protected _selectedCols : Range;
-	protected _selectedRows : Range;
-
 	/**
 	 * 记录每一列的宽度，从TableHeader获取。
 	 */
 	public set colsWidth(value:Array<number>) {
 		this._colsWidth = value;
 	}
-
 	public get colsWidth() : Array<number> {
 		return this._colsWidth;
 	}
+	protected _colsWidth : Array<number>;
 
 	/**
 	 * 当前选择的行的范围。
@@ -36,10 +32,10 @@ export class TableClient extends ListView {
 		this._selectedRows.first = value.first;
 		this._selectedRows.second = value.second;
 	}
-
 	public get selectedRows() : Range {
 		return this._selectedRows;
 	}
+	protected _selectedCols : Range;
 	
 	/**
 	 * 当前选择的列的范围。
@@ -48,11 +44,15 @@ export class TableClient extends ListView {
 		this._selectedCols.first = value.first;
 		this._selectedCols.second = value.second;
 	}
-
 	public get selectedCols() : Range {
 		return this._selectedCols;
 	}
+	protected _selectedRows : Range;
 
+
+	constructor() {
+		super(TableClient.TYPE);
+	}
 	/*
 	 * 把X坐标转换成对应的列数。
 	 */
@@ -265,10 +265,6 @@ export class TableClient extends ListView {
 		return Math.max(w, this.clientW);
 	}
 
-	constructor() {
-		super(TableClient.TYPE);
-	}
-
 	protected onReset() {
 		super.onReset();
 		this.dragToScroll = true;
@@ -278,9 +274,9 @@ export class TableClient extends ListView {
 	}
 
 	public static TYPE = "table-client";
-	private static rBin = new RecyclableCreator<TableClient>(function() {return new TableClient()});
+	private static rBin = WidgetRecyclableCreator.create(TableClient);
 	public static create(options?:any) : TableClient {
-		return <TableClient>TableClient.rBin.create().reset(TableClient.TYPE, options);
+		return <TableClient>TableClient.rBin.create(options);
 	}
 };
 

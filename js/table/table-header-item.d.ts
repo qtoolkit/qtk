@@ -5,16 +5,23 @@ import { Widget } from "../controls/widget";
  * 表格头的一项。
  */
 export declare class TableHeaderItem extends Widget {
-    protected _sortable: boolean;
-    protected _sortStatus: string;
+    /**
+     * 是否点击时按该列排序。
+     */
     sortable: boolean;
+    protected _sortable: boolean;
+    /**
+     * 当前的排序状态。
+     */
+    readonly sortStatus: string;
+    protected _sortStatus: string;
+    static SORT_INC: string;
+    static SORT_DEC: string;
+    constructor();
     protected getFgImageRect(style: Style): Rect;
     protected getStyleType(): string;
     protected onReset(): void;
     protected triggerSortStatus(): void;
-    constructor();
-    static SORT_INC: string;
-    static SORT_DEC: string;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): TableHeaderItem;
