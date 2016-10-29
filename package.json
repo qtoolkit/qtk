@@ -26,7 +26,6 @@
   "homepage": "https://github.com/qtoolkit/qtk#readme",
   "devDependencies": {
     "express": "^4.14.0",
-    "json-pointer": "^0.5.0",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.1.1",
@@ -40,6 +39,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "json-pointer": "^0.5.0",
     "carota": "git+https://github.com/qtoolkit/carota.git",
     "chart.js": "git+https://github.com/chartjs/Chart.js.git",
     "eventemitter3": "^1.2.0",

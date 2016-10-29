@@ -78,7 +78,7 @@ export { ButtonOption, ButtonsOptions, TitleOptions, MessageBox } from "./contro
 export { ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView } from "./controls/scroll-view";
 export { DeviceInfo } from "./device-info";
 export { ViewModal } from "./mvvm/view-modal";
-export { IViewModal } from "./mvvm/iview-modal";
+export { IViewModal, ICollectionViewModal } from "./mvvm/iview-modal";
 export { ICommand, IUndoCommand } from "./mvvm/icommand";
 export { RecyclableCreator } from "./recyclable-creator";
 export { IValueConverter } from "./mvvm/ivalue-converter";
