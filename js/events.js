@@ -25,8 +25,7 @@ exports.PROGRESS = "progress";
 exports.CHANGING = "changing";
 exports.PROP_CHANGE = "prop-change";
 exports.PROP_DELETE = "prop-delete";
-exports.ITEM_ADD = "item-add";
-exports.ITEM_DELETE = "item-delete";
+exports.ITEMS_CHANGE = "items-change";
 exports.DISPOSE = "dispose";
 exports.RUN = "run";
 exports.QUIT = "quit";
@@ -60,6 +59,7 @@ exports.BEFORE_DRAW = "before-draw";
 exports.AFTER_DRAW = "after-draw";
 exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
 exports.AFTER_APPLY_TRANSFORM = "after-apply-transform";
+exports.SORT = "sort";
 exports.SCROLL = "scroll";
 exports.SCROLL_DONE = "scroll-done";
 exports.DRAG = "drag";
@@ -463,6 +463,28 @@ var ProgressEvent = (function (_super) {
     return ProgressEvent;
 }(Event));
 exports.ProgressEvent = ProgressEvent;
+;
+/**
+ * 排序事件
+ */
+var SortEvent = (function (_super) {
+    __extends(SortEvent, _super);
+    function SortEvent() {
+        _super.apply(this, arguments);
+    }
+    SortEvent.prototype.init = function (key, isDec) {
+        _super.prototype.init.call(this, exports.SORT);
+        this.key = key;
+        this.isDec = isDec;
+        return this;
+    };
+    SortEvent.create = function (key, isDec) {
+        var e = new SortEvent();
+        return e.init(key, isDec);
+    };
+    return SortEvent;
+}(Event));
+exports.SortEvent = SortEvent;
 ;
 function createAnyEvent(type, payload) {
     return AnyEvent.create(type, payload);

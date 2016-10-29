@@ -36,25 +36,25 @@ export class TableColInfo {
 	public options : any;
 
 	/**
-	 * 本列是否启用点击排序功能。
+	 * 本列是否启用点击排序功能，如果启用，请指定sortKey。
 	 */
-	public sortable : boolean;
+	public sortKey : string;
 
 	/**
 	 * 控件的类型。
 	 */
 	public widgetType : string;
 
-	constructor(title:string, widgetType:string, w:number, options:any, sortable?:boolean) {
+	constructor(title:string, widgetType:string, w:number, options:any, sortKey?:string) {
 		this.w = w;
 		this.title = title;
-		this.sortable = sortable;
+		this.sortKey = sortKey;
 		this.options = options || {};
 		this.widgetType = widgetType || "label" ;
 	}
 	
-	public static create(title:string, widgetType:string, w:number, options:any, sortable?:boolean) {
-		return new TableColInfo(title, widgetType, w, options, sortable);
+	public static create(title:string, widgetType:string, w:number, options:any, sortKey?:string) {
+		return new TableColInfo(title, widgetType, w, options, sortKey);
 	}
 };
 
@@ -231,7 +231,7 @@ export class Table extends Widget {
 	
 		var headerBar = this._headerBar;
 		this._colsInfo.forEach((item:TableColInfo) => {
-			let headerItem = TableHeaderItem.create({w:item.w, text:item.title, sortable:item.sortable});	
+			let headerItem = TableHeaderItem.create({w:item.w, text:item.title, sortKey:item.sortKey});	
 			headerBar.addChild(headerItem);
 			headerItem.on(Events.RESIZE_END, evt => {
 				this.onHeaderItemResized();
@@ -241,6 +241,9 @@ export class Table extends Widget {
 			});
 			headerItem.on(Events.RESIZING, evt => {
 				this.onHeaderItemResizing();
+			});
+			headerItem.on(Events.SORT, evt => {
+				this.dispatchEvent(evt);
 			});
 		});
 

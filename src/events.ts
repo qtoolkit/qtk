@@ -21,8 +21,7 @@ export const PROGRESS = "progress"
 export const CHANGING = "changing"
 export const PROP_CHANGE = "prop-change"
 export const PROP_DELETE = "prop-delete"
-export const ITEM_ADD = "item-add"
-export const ITEM_DELETE = "item-delete"
+export const ITEMS_CHANGE = "items-change"
 export const DISPOSE = "dispose"
 export const RUN = "run"
 export const QUIT = "quit"
@@ -57,6 +56,7 @@ export const AFTER_DRAW = "after-draw";
 export const BEFORE_APPLY_TRANSFORM = "before-apply-transform";
 export const AFTER_APPLY_TRANSFORM = "after-apply-transform";
 
+export const SORT = "sort";
 export const SCROLL = "scroll";
 export const SCROLL_DONE = "scroll-done";
 
@@ -555,6 +555,36 @@ export class ProgressEvent extends Event {
 
 	public static create() : ProgressEvent  {
 		return new ProgressEvent();
+	}
+};
+
+/**
+ * 排序事件
+ */
+export class SortEvent extends Event {
+	/**
+	 * 排序的关键字
+	 */
+	public key : string;
+	
+	/**
+	 * 是否是降序排序
+	 */
+	public isDec : boolean;
+
+	public init(key:string, isDec:boolean) : any {
+		super.init(SORT);
+
+		this.key = key;
+		this.isDec = isDec;
+
+		return this;
+	}
+
+	public static create(key:string, isDec:boolean) : SortEvent {
+		var e = new SortEvent();
+
+		return e.init(key, isDec);
 	}
 };
 

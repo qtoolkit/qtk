@@ -18,15 +18,15 @@ var table_header_item_1 = require("./table-header-item");
  * 描述表格中某列的信息。
  */
 var TableColInfo = (function () {
-    function TableColInfo(title, widgetType, w, options, sortable) {
+    function TableColInfo(title, widgetType, w, options, sortKey) {
         this.w = w;
         this.title = title;
-        this.sortable = sortable;
+        this.sortKey = sortKey;
         this.options = options || {};
         this.widgetType = widgetType || "label";
     }
-    TableColInfo.create = function (title, widgetType, w, options, sortable) {
-        return new TableColInfo(title, widgetType, w, options, sortable);
+    TableColInfo.create = function (title, widgetType, w, options, sortKey) {
+        return new TableColInfo(title, widgetType, w, options, sortKey);
     };
     return TableColInfo;
 }());
@@ -203,7 +203,7 @@ var Table = (function (_super) {
         }
         var headerBar = this._headerBar;
         this._colsInfo.forEach(function (item) {
-            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
+            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortKey: item.sortKey });
             headerBar.addChild(headerItem);
             headerItem.on(Events.RESIZE_END, function (evt) {
                 _this.onHeaderItemResized();
@@ -213,6 +213,9 @@ var Table = (function (_super) {
             });
             headerItem.on(Events.RESIZING, function (evt) {
                 _this.onHeaderItemResizing();
+            });
+            headerItem.on(Events.SORT, function (evt) {
+                _this.dispatchEvent(evt);
             });
         });
         var client = this._client;

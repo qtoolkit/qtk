@@ -101,16 +101,14 @@ var CollectionViewModal = (function (_super) {
      * 注册子项的增加删除的变化事件。
      */
     CollectionViewModal.prototype.onItemsChange = function (callback) {
-        this.on(Events.ITEM_ADD, callback);
-        this.on(Events.ITEM_DELETE, callback);
+        this.on(Events.ITEMS_CHANGE, callback);
         return this;
     };
     /**
      * 注销子项的增加删除的变化事件。
      */
     CollectionViewModal.prototype.offItemsChange = function (callback) {
-        this.off(Events.ITEM_ADD, callback);
-        this.off(Events.ITEM_DELETE, callback);
+        this.off(Events.ITEMS_CHANGE, callback);
         return this;
     };
     /**
@@ -121,7 +119,6 @@ var CollectionViewModal = (function (_super) {
         var index = index < n ? index : n;
         this._collection.splice(index, 0, data);
         this.updateViewModalItems(true);
-        this.notifyChange(Events.ITEM_ADD, "/", index);
         return this;
     };
     /**
@@ -130,7 +127,6 @@ var CollectionViewModal = (function (_super) {
     CollectionViewModal.prototype.removeItem = function (index) {
         this._collection.splice(index, 1);
         this.updateViewModalItems(true);
-        this.notifyChange(Events.ITEM_DELETE, "/", index);
         return this;
     };
     /**
@@ -192,6 +188,8 @@ var CollectionViewModal = (function (_super) {
     CollectionViewModal.prototype.updateViewModalItems = function (force) {
         var _this = this;
         if (force || this.needUpdateViewModalItems) {
+            this.needUpdateViewModalItems = false;
+            console.time("filter and sort");
             var collection = this.getFilteredSortedCollection();
             var n = collection.length;
             if (this.current >= n) {
@@ -205,7 +203,12 @@ var CollectionViewModal = (function (_super) {
             this._viewModalItems = collection.map(function (data, i) {
                 return _this.createItemViewModal(i, data);
             });
-            this.needUpdateViewModalItems = false;
+            console.timeEnd("filter and sort");
+            setTimeout(function (evt) {
+                console.time("notify ITEMS_CHANGE");
+                _this.notifyChange(Events.ITEMS_CHANGE, "/", null);
+                console.timeEnd("notify ITEMS_CHANGE");
+            }, 0);
         }
     };
     /**
@@ -232,6 +235,7 @@ var CollectionViewModal = (function (_super) {
         set: function (name) {
             this._filter = name;
             this.needUpdateViewModalItems = true;
+            this.updateViewModalItems();
         },
         enumerable: true,
         configurable: true
@@ -260,6 +264,7 @@ var CollectionViewModal = (function (_super) {
         set: function (name) {
             this._comparator = name;
             this.needUpdateViewModalItems = true;
+            this.updateViewModalItems();
         },
         enumerable: true,
         configurable: true

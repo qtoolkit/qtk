@@ -85,8 +85,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 * 注册子项的增加删除的变化事件。
 	 */
 	public onItemsChange(callback:Function) : ICollectionViewModal {
-		this.on(Events.ITEM_ADD, callback);
-		this.on(Events.ITEM_DELETE, callback);
+		this.on(Events.ITEMS_CHANGE, callback);
 
 		return this;
 	}
@@ -94,8 +93,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 * 注销子项的增加删除的变化事件。
 	 */
 	public offItemsChange(callback:Function) : ICollectionViewModal {
-		this.off(Events.ITEM_ADD, callback);
-		this.off(Events.ITEM_DELETE, callback);
+		this.off(Events.ITEMS_CHANGE, callback);
 
 		return this;
 	}
@@ -108,7 +106,6 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 		var index = index < n ? index : n;
 		this._collection.splice(index, 0, data);
 		this.updateViewModalItems(true);
-		this.notifyChange(Events.ITEM_ADD, "/", index);
 		
 		return this;
 	}
@@ -119,7 +116,6 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	public removeItem(index:number) : ICollectionViewModal {
 		this._collection.splice(index, 1);
 		this.updateViewModalItems(true);
-		this.notifyChange(Events.ITEM_DELETE, "/", index);
 		
 		return this;
 	}
@@ -190,6 +186,9 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 */
 	protected updateViewModalItems(force?:boolean) {
 		if(force || this.needUpdateViewModalItems) {
+			this.needUpdateViewModalItems = false;
+			
+			console.time("filter and sort");
 			var collection = this.getFilteredSortedCollection();
 			
 			var n = collection.length;
@@ -206,7 +205,13 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 			this._viewModalItems = <any>collection.map((data:any, i:number) => {
 				return this.createItemViewModal(i, data);
 			})
-			this.needUpdateViewModalItems = false;
+			console.timeEnd("filter and sort");
+
+			setTimeout(evt => {
+				console.time("notify ITEMS_CHANGE");
+				this.notifyChange(Events.ITEMS_CHANGE, "/", null);
+				console.timeEnd("notify ITEMS_CHANGE");
+			}, 0);
 		}
 	}
 	protected needUpdateViewModalItems : boolean;
@@ -233,6 +238,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	public set filter(name:string) {
 		this._filter = name;
 		this.needUpdateViewModalItems = true;
+		this.updateViewModalItems();
 	}
 	public get filter() : string {
 		return this._filter;
@@ -261,6 +267,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	public set comparator(name:string) {
 		this._comparator = name;
 		this.needUpdateViewModalItems = true;
+		this.updateViewModalItems();
 	}
 	public get comparator() : string {
 		return this._comparator;

@@ -21,15 +21,15 @@ export declare class TableColInfo {
      */
     options: any;
     /**
-     * 本列是否启用点击排序功能。
+     * 本列是否启用点击排序功能，如果启用，请指定sortKey。
      */
-    sortable: boolean;
+    sortKey: string;
     /**
      * 控件的类型。
      */
     widgetType: string;
-    constructor(title: string, widgetType: string, w: number, options: any, sortable?: boolean);
-    static create(title: string, widgetType: string, w: number, options: any, sortable?: boolean): TableColInfo;
+    constructor(title: string, widgetType: string, w: number, options: any, sortKey?: string);
+    static create(title: string, widgetType: string, w: number, options: any, sortKey?: string): TableColInfo;
 }
 /**
  * 表格。表格由三部分组成：

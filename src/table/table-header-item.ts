@@ -13,13 +13,13 @@ export class TableHeaderItem extends Widget {
 	/**
 	 * 是否点击时按该列排序。
 	 */
-	public set sortable(value:boolean) {
-		this._sortable = value;
+	public set sortKey(value:string) {
+		this._sortKey = value;
 	}
-	public get sortable() : boolean {
-		return this._sortable;
+	public get sortKey() : string{
+		return this._sortKey;
 	}
-	protected _sortable : boolean;
+	protected _sortKey : string;
 
 	/**
 	 * 当前的排序状态。
@@ -47,7 +47,7 @@ export class TableHeaderItem extends Widget {
 	
 	protected getStyleType() : string {
 		var styleType = this._styleType || this.type;
-		if(!this._sortable || !this._sortStatus) {
+		if(!this._sortKey || !this._sortStatus) {
 			return styleType;
 		}
 
@@ -64,14 +64,24 @@ export class TableHeaderItem extends Widget {
 		super.onInit();
 		this.useBehavior("resizable", {east:true, animateDuration:0});
 	}
-	
+
+	private _sortEvent = Events.SortEvent.create(null, false);
 	protected triggerSortStatus() {
-		if(this._sortable) {
+		var isDec = false;
+		if(this._sortKey) {
 			if(this._sortStatus === TableHeaderItem.SORT_INC) {
+				isDec = true;
 				this._sortStatus = TableHeaderItem.SORT_DEC;
 			}else{
 				this._sortStatus = TableHeaderItem.SORT_INC;
 			}
+			this.dispatchEvent(this._sortEvent.init(this._sortKey, isDec));
+
+			this.parent.children.forEach((child:TableHeaderItem) => {
+				if(child !== this && child.type === this.type) {
+					child._sortStatus = null;
+				}
+			});
 		}
 	}
 

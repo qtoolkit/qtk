@@ -1380,8 +1380,7 @@ var qtk =
 	exports.CHANGING = "changing";
 	exports.PROP_CHANGE = "prop-change";
 	exports.PROP_DELETE = "prop-delete";
-	exports.ITEM_ADD = "item-add";
-	exports.ITEM_DELETE = "item-delete";
+	exports.ITEMS_CHANGE = "items-change";
 	exports.DISPOSE = "dispose";
 	exports.RUN = "run";
 	exports.QUIT = "quit";
@@ -1415,6 +1414,7 @@ var qtk =
 	exports.AFTER_DRAW = "after-draw";
 	exports.BEFORE_APPLY_TRANSFORM = "before-apply-transform";
 	exports.AFTER_APPLY_TRANSFORM = "after-apply-transform";
+	exports.SORT = "sort";
 	exports.SCROLL = "scroll";
 	exports.SCROLL_DONE = "scroll-done";
 	exports.DRAG = "drag";
@@ -1818,6 +1818,28 @@ var qtk =
 	    return ProgressEvent;
 	}(Event));
 	exports.ProgressEvent = ProgressEvent;
+	;
+	/**
+	 * 排序事件
+	 */
+	var SortEvent = (function (_super) {
+	    __extends(SortEvent, _super);
+	    function SortEvent() {
+	        _super.apply(this, arguments);
+	    }
+	    SortEvent.prototype.init = function (key, isDec) {
+	        _super.prototype.init.call(this, exports.SORT);
+	        this.key = key;
+	        this.isDec = isDec;
+	        return this;
+	    };
+	    SortEvent.create = function (key, isDec) {
+	        var e = new SortEvent();
+	        return e.init(key, isDec);
+	    };
+	    return SortEvent;
+	}(Event));
+	exports.SortEvent = SortEvent;
 	;
 	function createAnyEvent(type, payload) {
 	    return AnyEvent.create(type, payload);
@@ -56216,16 +56238,14 @@ var qtk =
 	     * 注册子项的增加删除的变化事件。
 	     */
 	    CollectionViewModal.prototype.onItemsChange = function (callback) {
-	        this.on(Events.ITEM_ADD, callback);
-	        this.on(Events.ITEM_DELETE, callback);
+	        this.on(Events.ITEMS_CHANGE, callback);
 	        return this;
 	    };
 	    /**
 	     * 注销子项的增加删除的变化事件。
 	     */
 	    CollectionViewModal.prototype.offItemsChange = function (callback) {
-	        this.off(Events.ITEM_ADD, callback);
-	        this.off(Events.ITEM_DELETE, callback);
+	        this.off(Events.ITEMS_CHANGE, callback);
 	        return this;
 	    };
 	    /**
@@ -56236,7 +56256,6 @@ var qtk =
 	        var index = index < n ? index : n;
 	        this._collection.splice(index, 0, data);
 	        this.updateViewModalItems(true);
-	        this.notifyChange(Events.ITEM_ADD, "/", index);
 	        return this;
 	    };
 	    /**
@@ -56245,7 +56264,6 @@ var qtk =
 	    CollectionViewModal.prototype.removeItem = function (index) {
 	        this._collection.splice(index, 1);
 	        this.updateViewModalItems(true);
-	        this.notifyChange(Events.ITEM_DELETE, "/", index);
 	        return this;
 	    };
 	    /**
@@ -56307,6 +56325,8 @@ var qtk =
 	    CollectionViewModal.prototype.updateViewModalItems = function (force) {
 	        var _this = this;
 	        if (force || this.needUpdateViewModalItems) {
+	            this.needUpdateViewModalItems = false;
+	            console.time("filter and sort");
 	            var collection = this.getFilteredSortedCollection();
 	            var n = collection.length;
 	            if (this.current >= n) {
@@ -56320,7 +56340,12 @@ var qtk =
 	            this._viewModalItems = collection.map(function (data, i) {
 	                return _this.createItemViewModal(i, data);
 	            });
-	            this.needUpdateViewModalItems = false;
+	            console.timeEnd("filter and sort");
+	            setTimeout(function (evt) {
+	                console.time("notify ITEMS_CHANGE");
+	                _this.notifyChange(Events.ITEMS_CHANGE, "/", null);
+	                console.timeEnd("notify ITEMS_CHANGE");
+	            }, 0);
 	        }
 	    };
 	    /**
@@ -56347,6 +56372,7 @@ var qtk =
 	        set: function (name) {
 	            this._filter = name;
 	            this.needUpdateViewModalItems = true;
+	            this.updateViewModalItems();
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -56375,6 +56401,7 @@ var qtk =
 	        set: function (name) {
 	            this._comparator = name;
 	            this.needUpdateViewModalItems = true;
+	            this.updateViewModalItems();
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -57305,15 +57332,15 @@ var qtk =
 	 * 描述表格中某列的信息。
 	 */
 	var TableColInfo = (function () {
-	    function TableColInfo(title, widgetType, w, options, sortable) {
+	    function TableColInfo(title, widgetType, w, options, sortKey) {
 	        this.w = w;
 	        this.title = title;
-	        this.sortable = sortable;
+	        this.sortKey = sortKey;
 	        this.options = options || {};
 	        this.widgetType = widgetType || "label";
 	    }
-	    TableColInfo.create = function (title, widgetType, w, options, sortable) {
-	        return new TableColInfo(title, widgetType, w, options, sortable);
+	    TableColInfo.create = function (title, widgetType, w, options, sortKey) {
+	        return new TableColInfo(title, widgetType, w, options, sortKey);
 	    };
 	    return TableColInfo;
 	}());
@@ -57490,7 +57517,7 @@ var qtk =
 	        }
 	        var headerBar = this._headerBar;
 	        this._colsInfo.forEach(function (item) {
-	            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortable: item.sortable });
+	            var headerItem = table_header_item_1.TableHeaderItem.create({ w: item.w, text: item.title, sortKey: item.sortKey });
 	            headerBar.addChild(headerItem);
 	            headerItem.on(Events.RESIZE_END, function (evt) {
 	                _this.onHeaderItemResized();
@@ -57500,6 +57527,9 @@ var qtk =
 	            });
 	            headerItem.on(Events.RESIZING, function (evt) {
 	                _this.onHeaderItemResizing();
+	            });
+	            headerItem.on(Events.SORT, function (evt) {
+	                _this.dispatchEvent(evt);
 	            });
 	        });
 	        var client = this._client;
@@ -57641,16 +57671,17 @@ var qtk =
 	    __extends(TableHeaderItem, _super);
 	    function TableHeaderItem() {
 	        _super.call(this, TableHeaderItem.TYPE);
+	        this._sortEvent = Events.SortEvent.create(null, false);
 	    }
-	    Object.defineProperty(TableHeaderItem.prototype, "sortable", {
+	    Object.defineProperty(TableHeaderItem.prototype, "sortKey", {
 	        get: function () {
-	            return this._sortable;
+	            return this._sortKey;
 	        },
 	        /**
 	         * 是否点击时按该列排序。
 	         */
 	        set: function (value) {
-	            this._sortable = value;
+	            this._sortKey = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -57674,7 +57705,7 @@ var qtk =
 	    };
 	    TableHeaderItem.prototype.getStyleType = function () {
 	        var styleType = this._styleType || this.type;
-	        if (!this._sortable || !this._sortStatus) {
+	        if (!this._sortKey || !this._sortStatus) {
 	            return styleType;
 	        }
 	        return styleType + "." + this._sortStatus;
@@ -57689,13 +57720,22 @@ var qtk =
 	        this.useBehavior("resizable", { east: true, animateDuration: 0 });
 	    };
 	    TableHeaderItem.prototype.triggerSortStatus = function () {
-	        if (this._sortable) {
+	        var _this = this;
+	        var isDec = false;
+	        if (this._sortKey) {
 	            if (this._sortStatus === TableHeaderItem.SORT_INC) {
+	                isDec = true;
 	                this._sortStatus = TableHeaderItem.SORT_DEC;
 	            }
 	            else {
 	                this._sortStatus = TableHeaderItem.SORT_INC;
 	            }
+	            this.dispatchEvent(this._sortEvent.init(this._sortKey, isDec));
+	            this.parent.children.forEach(function (child) {
+	                if (child !== _this && child.type === _this.type) {
+	                    child._sortStatus = null;
+	                }
+	            });
 	        }
 	    };
 	    TableHeaderItem.create = function (options) {

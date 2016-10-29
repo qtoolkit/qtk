@@ -8,8 +8,8 @@ export declare class TableHeaderItem extends Widget {
     /**
      * 是否点击时按该列排序。
      */
-    sortable: boolean;
-    protected _sortable: boolean;
+    sortKey: string;
+    protected _sortKey: string;
     /**
      * 当前的排序状态。
      */
@@ -22,6 +22,7 @@ export declare class TableHeaderItem extends Widget {
     protected getStyleType(): string;
     protected onReset(): void;
     protected onInit(): void;
+    private _sortEvent;
     protected triggerSortStatus(): void;
     static TYPE: string;
     private static recycleBin;

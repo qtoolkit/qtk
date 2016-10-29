@@ -16,16 +16,17 @@ var TableHeaderItem = (function (_super) {
     __extends(TableHeaderItem, _super);
     function TableHeaderItem() {
         _super.call(this, TableHeaderItem.TYPE);
+        this._sortEvent = Events.SortEvent.create(null, false);
     }
-    Object.defineProperty(TableHeaderItem.prototype, "sortable", {
+    Object.defineProperty(TableHeaderItem.prototype, "sortKey", {
         get: function () {
-            return this._sortable;
+            return this._sortKey;
         },
         /**
          * 是否点击时按该列排序。
          */
         set: function (value) {
-            this._sortable = value;
+            this._sortKey = value;
         },
         enumerable: true,
         configurable: true
@@ -49,7 +50,7 @@ var TableHeaderItem = (function (_super) {
     };
     TableHeaderItem.prototype.getStyleType = function () {
         var styleType = this._styleType || this.type;
-        if (!this._sortable || !this._sortStatus) {
+        if (!this._sortKey || !this._sortStatus) {
             return styleType;
         }
         return styleType + "." + this._sortStatus;
@@ -64,13 +65,22 @@ var TableHeaderItem = (function (_super) {
         this.useBehavior("resizable", { east: true, animateDuration: 0 });
     };
     TableHeaderItem.prototype.triggerSortStatus = function () {
-        if (this._sortable) {
+        var _this = this;
+        var isDec = false;
+        if (this._sortKey) {
             if (this._sortStatus === TableHeaderItem.SORT_INC) {
+                isDec = true;
                 this._sortStatus = TableHeaderItem.SORT_DEC;
             }
             else {
                 this._sortStatus = TableHeaderItem.SORT_INC;
             }
+            this.dispatchEvent(this._sortEvent.init(this._sortKey, isDec));
+            this.parent.children.forEach(function (child) {
+                if (child !== _this && child.type === _this.type) {
+                    child._sortStatus = null;
+                }
+            });
         }
     };
     TableHeaderItem.create = function (options) {

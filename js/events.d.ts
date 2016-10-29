@@ -20,8 +20,7 @@ export declare const PROGRESS: string;
 export declare const CHANGING: string;
 export declare const PROP_CHANGE: string;
 export declare const PROP_DELETE: string;
-export declare const ITEM_ADD: string;
-export declare const ITEM_DELETE: string;
+export declare const ITEMS_CHANGE: string;
 export declare const DISPOSE: string;
 export declare const RUN: string;
 export declare const QUIT: string;
@@ -55,6 +54,7 @@ export declare const BEFORE_DRAW: string;
 export declare const AFTER_DRAW: string;
 export declare const BEFORE_APPLY_TRANSFORM: string;
 export declare const AFTER_APPLY_TRANSFORM: string;
+export declare const SORT: string;
 export declare const SCROLL: string;
 export declare const SCROLL_DONE: string;
 export declare const DRAG: string;
@@ -271,5 +271,20 @@ export declare class ProgressEvent extends Event {
     progress: number;
     reset(progress: number, total?: number, done?: number): ProgressEvent;
     static create(): ProgressEvent;
+}
+/**
+ * 排序事件
+ */
+export declare class SortEvent extends Event {
+    /**
+     * 排序的关键字
+     */
+    key: string;
+    /**
+     * 是否是降序排序
+     */
+    isDec: boolean;
+    init(key: string, isDec: boolean): any;
+    static create(key: string, isDec: boolean): SortEvent;
 }
 export declare function createAnyEvent(type: string, payload?: any): AnyEvent;
