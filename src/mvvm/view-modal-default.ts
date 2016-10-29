@@ -133,7 +133,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 
 		return this;
 	}
-	public unregisterCommand(name:string, cmd:ICommand) : IViewModal {
+	public unregisterCommand(name:string) : IViewModal {
 		this._commands[name] = null;
 	
 		return this;
@@ -147,7 +147,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 
 		return this;
 	}
-	public unregisterValueConverter(name:string, converter:IValueConverter) : IViewModal {
+	public unregisterValueConverter(name:string) : IViewModal {
 		this._converters[name] = null;
 	
 		return this;
@@ -171,7 +171,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 
 		return this;
 	}
-	public unregisterValidationRule(name:string, validationRule:IValidationRule) : IViewModal {
+	public unregisterValidationRule(name:string) : IViewModal {
 		this._validationRules[name] = null;
 	
 		return this;

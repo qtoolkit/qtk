@@ -26,14 +26,14 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     canExecute(name: string): boolean;
     execCommand(name: string, args: any): boolean;
     registerCommand(name: string, cmd: ICommand): IViewModal;
-    unregisterCommand(name: string, cmd: ICommand): IViewModal;
+    unregisterCommand(name: string): IViewModal;
     getValueConverter(name: string): IValueConverter;
     registerValueConverter(name: string, converter: IValueConverter): IViewModal;
-    unregisterValueConverter(name: string, converter: IValueConverter): IViewModal;
+    unregisterValueConverter(name: string): IViewModal;
     convert(converterName: string, value: any): any;
     convertBack(converterName: string, value: any): any;
     getValidationRule(name: string): IValidationRule;
     registerValidationRule(name: string, validationRule: IValidationRule): IViewModal;
-    unregisterValidationRule(name: string, validationRule: IValidationRule): IViewModal;
+    unregisterValidationRule(name: string): IViewModal;
     isValueValid(ruleName: string, value: any): ValidationResult;
 }

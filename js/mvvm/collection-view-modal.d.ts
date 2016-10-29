@@ -1,4 +1,6 @@
 import { ICommand } from "./icommand";
+import { IFilter } from "./ifilter";
+import { IComparator } from "./icomparator";
 import { IValueConverter } from "./ivalue-converter";
 import { IValidationRule, ValidationResult } from "./ivalidation-rule";
 import { IViewModal, ICollectionViewModal } from "./iview-modal";
@@ -7,25 +9,92 @@ import { ViewModalDefault } from "./view-modal-default";
  * 集合ViewModal。delProp/getProp/setProp操作当前的项。
  */
 export declare class CollectionViewModal extends ViewModalDefault implements ICollectionViewModal {
-    protected _current: number;
-    protected _collection: Array<any>;
-    protected _viewModalItems: Array<IViewModal>;
     isCollection: boolean;
+    /**
+     * 原始的数据。
+     */
+    readonly collection: Array<any>;
+    protected _collection: Array<any>;
+    /**
+     * 当前数据项的序号。
+     */
+    current: number;
+    protected _current: number;
+    /**
+     * 过滤之后总的项数。
+     */
+    total: number;
+    /**
+     * 子项目的ViewModal
+     */
+    protected readonly viewModalItems: Array<ItemViewModal>;
+    protected _viewModalItems: Array<ItemViewModal>;
     getProp(path: string, converterName?: string): any;
     delProp(path: string): IViewModal;
     setProp(path: string, value: any, converterName?: string, validationRule?: string): ValidationResult;
-    onItemsChange(callback: Function): ICollectionViewModal;
-    offItemsChange(callback: Function): ICollectionViewModal;
-    protected fixState(): void;
-    addItem(data: any, index?: number): ICollectionViewModal;
-    removeItem(index: number): ICollectionViewModal;
-    readonly collection: Array<any>;
+    /**
+     * 当前项的ViewModal
+     */
     readonly currentViewModal: IViewModal;
-    total: number;
-    current: number;
+    /**
+     * 注册子项的增加删除的变化事件。
+     */
+    onItemsChange(callback: Function): ICollectionViewModal;
+    /**
+     * 注销子项的增加删除的变化事件。
+     */
+    offItemsChange(callback: Function): ICollectionViewModal;
+    /**
+     * 增加一个数据项。
+     */
+    addItem(data: any, index?: number): ICollectionViewModal;
+    /**
+     * 删除一个数据项。
+     */
+    removeItem(index: number): ICollectionViewModal;
+    /**
+     * 获取指定序号的子ViewModal
+     */
     getItemViewModal(index: number): IViewModal;
+    getItemData(index: number): any;
+    protected getFilteredSortedCollection(): Array<any>;
+    protected _filteredSortedCollection: Array<any>;
+    /**
+     * 获取排序过滤集合中的序数对应于原始集合中的序数。
+     */
+    getRawIndexOf(index: number): number;
+    protected createItemViewModal(index: number, data: any): ItemViewModal;
+    protected updateViewModalItems(force?: boolean): void;
+    protected needUpdateViewModalItems: boolean;
+    /**
+     * 注册过滤器。
+     */
+    registerFilter(name: string, filter: IFilter): CollectionViewModal;
+    /**
+     * 注销过滤器。
+     */
+    unregisterFilter(name: string): CollectionViewModal;
+    protected filters: any;
+    /**
+     * 当前的过滤器器。
+     */
+    filter: string;
+    protected _filter: string;
+    /**
+     * 注册排序用的比较器。
+     */
+    registerComparator(name: string, comparator: IComparator): CollectionViewModal;
+    /**
+     * 注销排序用的比较器。
+     */
+    unregisterComparator(name: string): CollectionViewModal;
+    protected comparators: any;
+    /**
+     * 设置当前的比较器。
+     */
+    comparator: string;
+    protected _comparator: string;
     constructor(data: Array<any>);
-    protected createItemViewModal(index: number): IViewModal;
     static create(data: Array<any>): IViewModal;
 }
 /**
@@ -47,6 +116,9 @@ export declare class ItemViewModal extends ViewModalDefault implements IViewModa
     isCurrent(): boolean;
     notifyChange(type: string, path: string, value: any): void;
     protected initCommands(): void;
-    constructor(collectionViewModal: CollectionViewModal, index: number);
-    static create(collectionViewModal: CollectionViewModal, index: number): ItemViewModal;
+    constructor();
+    init(collectionViewModal: CollectionViewModal, index: number, data: any): ItemViewModal;
+    dispose(): void;
+    static cache: Array<ItemViewModal>;
+    static create(collectionViewModal: CollectionViewModal, index: number, data: any): ItemViewModal;
 }

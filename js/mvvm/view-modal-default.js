@@ -106,7 +106,7 @@ var ViewModalDefault = (function (_super) {
         this._commands[name] = cmd;
         return this;
     };
-    ViewModalDefault.prototype.unregisterCommand = function (name, cmd) {
+    ViewModalDefault.prototype.unregisterCommand = function (name) {
         this._commands[name] = null;
         return this;
     };
@@ -117,7 +117,7 @@ var ViewModalDefault = (function (_super) {
         this._converters[name] = converter;
         return this;
     };
-    ViewModalDefault.prototype.unregisterValueConverter = function (name, converter) {
+    ViewModalDefault.prototype.unregisterValueConverter = function (name) {
         this._converters[name] = null;
         return this;
     };
@@ -136,7 +136,7 @@ var ViewModalDefault = (function (_super) {
         this._validationRules[name] = validationRule;
         return this;
     };
-    ViewModalDefault.prototype.unregisterValidationRule = function (name, validationRule) {
+    ViewModalDefault.prototype.unregisterValidationRule = function (name) {
         this._validationRules[name] = null;
         return this;
     };
