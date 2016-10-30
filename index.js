@@ -56332,6 +56332,13 @@ var qtk =
 	        return this;
 	    };
 	    /**
+	     * 是否存在指定条件的项。
+	     */
+	    CollectionViewModal.prototype.hasItems = function (func, filtered) {
+	        var arr = filtered ? this._filteredSortedCollection : this._collection;
+	        return arr.some(func);
+	    };
+	    /**
 	     * 获取指定序号的子ViewModal
 	     */
 	    CollectionViewModal.prototype.getItemViewModal = function (index) {

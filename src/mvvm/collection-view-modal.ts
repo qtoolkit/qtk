@@ -138,6 +138,15 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	}
 
 	/**
+	 * 是否存在指定条件的项。
+	 */
+	public hasItems(func:Function, filtered?:boolean) : boolean {
+		var arr = filtered ? this._filteredSortedCollection : this._collection;
+
+		return arr.some(<any>func);
+	}
+
+	/**
 	 * 获取指定序号的子ViewModal
 	 */
 	public getItemViewModal(index:number) : IViewModal {

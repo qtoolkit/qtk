@@ -57,6 +57,10 @@ export declare class CollectionViewModal extends ViewModalDefault implements ICo
      */
     removeItems(func: Function): ICollectionViewModal;
     /**
+     * 是否存在指定条件的项。
+     */
+    hasItems(func: Function, filtered?: boolean): boolean;
+    /**
      * 获取指定序号的子ViewModal
      */
     getItemViewModal(index: number): IViewModal;
