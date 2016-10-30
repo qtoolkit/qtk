@@ -209,6 +209,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 
 			setTimeout(evt => {
 				console.time("notify ITEMS_CHANGE");
+				this.notifyChange(Events.PROP_CHANGE, "/", null);
 				this.notifyChange(Events.ITEMS_CHANGE, "/", null);
 				console.timeEnd("notify ITEMS_CHANGE");
 			}, 0);

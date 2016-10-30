@@ -56353,6 +56353,7 @@ var qtk =
 	            console.timeEnd("filter and sort");
 	            setTimeout(function (evt) {
 	                console.time("notify ITEMS_CHANGE");
+	                _this.notifyChange(Events.PROP_CHANGE, "/", null);
 	                _this.notifyChange(Events.ITEMS_CHANGE, "/", null);
 	                console.timeEnd("notify ITEMS_CHANGE");
 	            }, 0);
