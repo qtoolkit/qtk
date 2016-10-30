@@ -56421,12 +56421,10 @@ var qtk =
 	                return _this.createItemViewModal(i, data);
 	            });
 	            console.timeEnd("filter and sort");
-	            setTimeout(function (evt) {
-	                console.time("notify ITEMS_CHANGE");
-	                _this.notifyChange(Events.PROP_CHANGE, "/", null);
-	                _this.notifyChange(Events.ITEMS_CHANGE, "/", null);
-	                console.timeEnd("notify ITEMS_CHANGE");
-	            }, 0);
+	            console.time("notify ITEMS_CHANGE");
+	            this.notifyChange(Events.PROP_CHANGE, "/", null);
+	            this.notifyChange(Events.ITEMS_CHANGE, "/", null);
+	            console.timeEnd("notify ITEMS_CHANGE");
 	        }
 	    };
 	    /**
