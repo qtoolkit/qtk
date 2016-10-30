@@ -1,5 +1,35 @@
 
-var imageURL = "/demos/assets/test.jpg";
+function hookEvents(edit) {
+	var Events = qtk.Events;
+	edit.on(Events.CHANGING, function(evt) {
+		console.log("Changing:" + evt.value);
+	});
+	
+	edit.on(Events.CHANGE, function(evt) {
+		console.log("Change:" + evt.value);
+	});
+	
+	edit.on(Events.FOCUS, function(evt) {
+		console.log("Focus:" + this.value);
+	});
+	
+	edit.on(Events.BLUR, function(evt) {
+		console.log("Blur:" + this.value);
+	});
+	
+	edit.on(Events.KEYDOWN, function(evt) {
+		console.log("KeyDown:" + evt.keyCode);
+	});
+	
+	edit.on(Events.KEYUP, function(evt) {
+		console.log("KeyUp:" + evt.keyCode);
+	});
+	
+	edit.on(Events.CONFIRM, function(evt) {
+		console.log("CONFIRM");
+	});
+}
+
 function onReady(app) {
 	var Edit = qtk.Edit;
 	var TWEEN = qtk.TWEEN;
@@ -20,7 +50,6 @@ function onReady(app) {
 	var SimpleLayouterParam= qtk.SimpleLayouterParam;
 	var DockLayouter = qtk.DockLayouter;
 	var DockLayouterParam = qtk.DockLayouterParam;
-	var Events = qtk.Events;
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
@@ -31,43 +60,14 @@ function onReady(app) {
 	edit.childrenLayouter = SimpleLayouter.create();
 	win.addChild(edit);
 
-	edit.on(Events.CHANGING, function(evt) {
-		console.log("Changing:" + evt.value);
-	});
-	
-	edit.on(Events.CHANGE, function(evt) {
-		console.log("Change:" + evt.value);
-	});
-	
-	edit.on(Events.FOCUS, function(evt) {
-		console.log("Focus:" + this.value);
-	});
-	
-	edit.on(Events.BLUR, function(evt) {
-		console.log("Blur:" + this.value);
-	});
-	
 	var mlEdit = Edit.create({inputTips:"Content"});
 	mlEdit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
 	mlEdit.childrenLayouter = SimpleLayouter.create();
 	mlEdit.multiLineMode = true;
 	win.addChild(mlEdit);
 
-	mlEdit.on(Events.CHANGING, function(evt) {
-		console.log("Changing:" + evt.value);
-	});
+	hookEvents(edit);
+	hookEvents(mlEdit);
 	
-	mlEdit.on(Events.CHANGE, function(evt) {
-		console.log("Change:" + evt.value);
-	});
-	
-	mlEdit.on(Events.FOCUS, function(evt) {
-		console.log("Focus:" + this.value);
-	});
-	
-	mlEdit.on(Events.BLUR, function(evt) {
-		console.log("Blur:" + this.value);
-	});
-
 	win.open();
 }

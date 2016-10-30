@@ -4,6 +4,7 @@ import {Point} from "../point";
 import {Style} from "../style";
 import {Label} from "./label";
 import Events = require("../events");
+import {KeyEvent} from "../key-event";
 import {HtmlEdit} from "../html/html-edit";
 import {IViewPort} from "../iview-port";
 import {IApplication} from "../iapplication";
@@ -113,6 +114,7 @@ export class Edit extends Label {
 			this.dispatchEvent({type:Events.BLUR});
 			this.win.off(Events.WHEEL, this.onWheel);
 		}
+		this.requestRedraw();
 	}
 
 	protected showEditor() {
@@ -160,6 +162,17 @@ export class Edit extends Label {
 			
 			e.init(Events.CHANGE, {value:value, oldValue:oldValue});;
 			this.dispatchEvent(e);
+		});
+		
+		input.on(Events.KEYDOWN, evt => {
+			this.dispatchEvent(evt);
+		});
+		
+		input.on(Events.KEYUP, evt => {
+			if(!this.multiLineMode && evt.keyCode === KeyEvent.VK_RETURN) {
+				this.dispatchEvent({type:Events.CONFIRM});
+			}
+			this.dispatchEvent(evt);
 		});
 	}
 

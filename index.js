@@ -1369,6 +1369,7 @@ var qtk =
 	exports.WHEEL = "qtk-wheel";
 	exports.KEYUP = "qtk-keyup";
 	exports.KEYDOWN = "qtk-keydown";
+	exports.CONFIRM = "confirm";
 	exports.CONTEXT_MENU = "qtk-context-menu";
 	exports.POINTER_DOWN = "qtk-pointer-down";
 	exports.POINTER_MOVE = "qtk-pointer-move";
@@ -1853,6 +1854,7 @@ var qtk =
 	    click: exports.CLICK,
 	    keydown: exports.KEYDOWN,
 	    keyup: exports.KEYUP,
+	    confirm: exports.CONFIRM,
 	    change: exports.CHANGE,
 	    chaning: exports.CHANGING,
 	    dblclick: exports.DBLCLICK,
@@ -4262,6 +4264,7 @@ var qtk =
 	var point_1 = __webpack_require__(2);
 	var label_1 = __webpack_require__(18);
 	var Events = __webpack_require__(6);
+	var key_event_1 = __webpack_require__(16);
 	var html_edit_1 = __webpack_require__(84);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
@@ -4399,6 +4402,7 @@ var qtk =
 	            this.dispatchEvent({ type: Events.BLUR });
 	            this.win.off(Events.WHEEL, this.onWheel);
 	        }
+	        this.requestRedraw();
 	    };
 	    Edit.prototype.showEditor = function () {
 	        var _this = this;
@@ -4442,6 +4446,15 @@ var qtk =
 	            e.init(Events.CHANGE, { value: value, oldValue: oldValue });
 	            ;
 	            _this.dispatchEvent(e);
+	        });
+	        input.on(Events.KEYDOWN, function (evt) {
+	            _this.dispatchEvent(evt);
+	        });
+	        input.on(Events.KEYUP, function (evt) {
+	            if (!_this.multiLineMode && evt.keyCode === key_event_1.KeyEvent.VK_RETURN) {
+	                _this.dispatchEvent({ type: Events.CONFIRM });
+	            }
+	            _this.dispatchEvent(evt);
 	        });
 	    };
 	    Object.defineProperty(Edit.prototype, "validationTips", {
@@ -17398,11 +17411,13 @@ var qtk =
 	};
 	var Events = __webpack_require__(6);
 	var html_element_1 = __webpack_require__(85);
+	var event_detail_1 = __webpack_require__(14);
 	var HtmlEdit = (function (_super) {
 	    __extends(HtmlEdit, _super);
 	    function HtmlEdit() {
 	        _super.apply(this, arguments);
-	        this.e = Events.ChangeEvent.create();
+	        this.changeEvent = Events.ChangeEvent.create();
+	        this.keyEvent = Events.KeyEvent.create(null, event_detail_1.KeyEventDetail.create(0));
 	    }
 	    Object.defineProperty(HtmlEdit.prototype, "inputType", {
 	        set: function (value) {
@@ -17444,25 +17459,28 @@ var qtk =
 	        var me = this;
 	        var element = this.element;
 	        element.onkeyup = function (e) {
+	            var evt = me.changeEvent;
 	            var detail = { oldValue: this.value, newValue: this.value };
+	            me.dispatchEvent(me.keyEvent.init(Events.KEYUP, event_detail_1.KeyEventDetail.create(e.keyCode)));
 	            if (e.keyCode === 13 && tag === "input") {
+	                me.dispatchEvent(evt.init(Events.CHANGE, detail));
 	                this.blur();
-	                me.e.init(Events.CHANGE, detail);
 	            }
 	            else {
-	                me.e.init(Events.CHANGING, detail);
+	                me.dispatchEvent(evt.init(Events.CHANGING, detail));
 	            }
-	            me.dispatchEvent(me.e);
+	        };
+	        element.onkeydown = function (e) {
+	            me.dispatchEvent(me.keyEvent.init(Events.KEYDOWN, event_detail_1.KeyEventDetail.create(e.keyCode)));
 	        };
 	        element.oninput = function (evt) {
 	            var detail = { oldValue: this.value, newValue: this.value };
-	            me.e.init(Events.CHANGING, detail);
-	            me.dispatchEvent(me.e);
+	            me.dispatchEvent(me.changeEvent.init(Events.CHANGING, detail));
 	        };
 	        element.onchange = function (evt) {
 	            var detail = { oldValue: this.value, newValue: this.value };
-	            me.e.init(Events.CHANGE, detail);
-	            me.dispatchEvent(me.e);
+	            me.changeEvent.init(Events.CHANGE, detail);
+	            me.dispatchEvent(me.changeEvent);
 	        };
 	        element.onblur = function (evt) {
 	            me.hide();

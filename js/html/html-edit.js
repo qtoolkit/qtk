@@ -6,11 +6,13 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Events = require("../events");
 var html_element_1 = require("./html-element");
+var event_detail_1 = require("../event-detail");
 var HtmlEdit = (function (_super) {
     __extends(HtmlEdit, _super);
     function HtmlEdit() {
         _super.apply(this, arguments);
-        this.e = Events.ChangeEvent.create();
+        this.changeEvent = Events.ChangeEvent.create();
+        this.keyEvent = Events.KeyEvent.create(null, event_detail_1.KeyEventDetail.create(0));
     }
     Object.defineProperty(HtmlEdit.prototype, "inputType", {
         set: function (value) {
@@ -52,25 +54,28 @@ var HtmlEdit = (function (_super) {
         var me = this;
         var element = this.element;
         element.onkeyup = function (e) {
+            var evt = me.changeEvent;
             var detail = { oldValue: this.value, newValue: this.value };
+            me.dispatchEvent(me.keyEvent.init(Events.KEYUP, event_detail_1.KeyEventDetail.create(e.keyCode)));
             if (e.keyCode === 13 && tag === "input") {
+                me.dispatchEvent(evt.init(Events.CHANGE, detail));
                 this.blur();
-                me.e.init(Events.CHANGE, detail);
             }
             else {
-                me.e.init(Events.CHANGING, detail);
+                me.dispatchEvent(evt.init(Events.CHANGING, detail));
             }
-            me.dispatchEvent(me.e);
+        };
+        element.onkeydown = function (e) {
+            me.dispatchEvent(me.keyEvent.init(Events.KEYDOWN, event_detail_1.KeyEventDetail.create(e.keyCode)));
         };
         element.oninput = function (evt) {
             var detail = { oldValue: this.value, newValue: this.value };
-            me.e.init(Events.CHANGING, detail);
-            me.dispatchEvent(me.e);
+            me.dispatchEvent(me.changeEvent.init(Events.CHANGING, detail));
         };
         element.onchange = function (evt) {
             var detail = { oldValue: this.value, newValue: this.value };
-            me.e.init(Events.CHANGE, detail);
-            me.dispatchEvent(me.e);
+            me.changeEvent.init(Events.CHANGE, detail);
+            me.dispatchEvent(me.changeEvent);
         };
         element.onblur = function (evt) {
             me.hide();

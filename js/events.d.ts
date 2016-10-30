@@ -5,6 +5,7 @@ import { InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail 
 export declare const WHEEL: string;
 export declare const KEYUP: string;
 export declare const KEYDOWN: string;
+export declare const CONFIRM: string;
 export declare const CONTEXT_MENU: string;
 export declare const POINTER_DOWN: string;
 export declare const POINTER_MOVE: string;

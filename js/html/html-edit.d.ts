@@ -2,7 +2,8 @@ import Events = require("../events");
 import { HtmlElement } from "./html-element";
 export declare class HtmlEdit extends HtmlElement {
     protected _visible: boolean;
-    protected e: Events.ChangeEvent;
+    protected changeEvent: Events.ChangeEvent;
+    protected keyEvent: Events.KeyEvent;
     inputType: string;
     text: string;
     show(): HtmlElement;

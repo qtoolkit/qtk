@@ -6,6 +6,7 @@ import {InputEventDetail, KeyEventDetail, PointerEventDetail, WheelEventDetail} 
 export const WHEEL = "qtk-wheel";
 export const KEYUP = "qtk-keyup";
 export const KEYDOWN = "qtk-keydown";
+export const CONFIRM = "confirm";
 export const CONTEXT_MENU = "qtk-context-menu";
 export const POINTER_DOWN = "qtk-pointer-down";
 export const POINTER_MOVE = "qtk-pointer-move";
@@ -596,6 +597,7 @@ const eventsMapToType = {
 	click:CLICK,
 	keydown:KEYDOWN,
 	keyup:KEYUP,
+	confirm:CONFIRM,
 	change:CHANGE,
 	chaning:CHANGING,
 	dblclick:DBLCLICK,

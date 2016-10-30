@@ -8,6 +8,7 @@ var rect_1 = require("../rect");
 var point_1 = require("../point");
 var label_1 = require("./label");
 var Events = require("../events");
+var key_event_1 = require("../key-event");
 var html_edit_1 = require("../html/html-edit");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
@@ -145,6 +146,7 @@ var Edit = (function (_super) {
             this.dispatchEvent({ type: Events.BLUR });
             this.win.off(Events.WHEEL, this.onWheel);
         }
+        this.requestRedraw();
     };
     Edit.prototype.showEditor = function () {
         var _this = this;
@@ -188,6 +190,15 @@ var Edit = (function (_super) {
             e.init(Events.CHANGE, { value: value, oldValue: oldValue });
             ;
             _this.dispatchEvent(e);
+        });
+        input.on(Events.KEYDOWN, function (evt) {
+            _this.dispatchEvent(evt);
+        });
+        input.on(Events.KEYUP, function (evt) {
+            if (!_this.multiLineMode && evt.keyCode === key_event_1.KeyEvent.VK_RETURN) {
+                _this.dispatchEvent({ type: Events.CONFIRM });
+            }
+            _this.dispatchEvent(evt);
         });
     };
     Object.defineProperty(Edit.prototype, "validationTips", {

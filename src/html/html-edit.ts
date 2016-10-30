@@ -1,10 +1,12 @@
 
 import Events = require("../events");
 import {HtmlElement} from "./html-element";
+import {KeyEventDetail} from "../event-detail";
 
 export class HtmlEdit extends HtmlElement {
 	protected _visible : boolean;	
-	protected e : Events.ChangeEvent = Events.ChangeEvent.create();
+	protected changeEvent : Events.ChangeEvent = Events.ChangeEvent.create();
+	protected keyEvent : Events.KeyEvent = Events.KeyEvent.create(null, KeyEventDetail.create(0));
 	
 	public set inputType(value:string) {
 		if(this.tag === "input") {
@@ -46,26 +48,31 @@ export class HtmlEdit extends HtmlElement {
 		var me = this;
 		var element = this.element;
 		element.onkeyup = function(e) {
+			var evt = me.changeEvent;
 			var detail = {oldValue:this.value, newValue:this.value};
+			me.dispatchEvent(me.keyEvent.init(Events.KEYUP, KeyEventDetail.create(e.keyCode)));
+			
 			if(e.keyCode === 13 && tag === "input") {
+				me.dispatchEvent(evt.init(Events.CHANGE, detail));
 				this.blur();
-				me.e.init(Events.CHANGE, detail);
 			}else{
-				me.e.init(Events.CHANGING, detail);
+				me.dispatchEvent(evt.init(Events.CHANGING, detail));
 			}
-			me.dispatchEvent(me.e);
 		}
 		
+		element.onkeydown = function(e) {
+			me.dispatchEvent(me.keyEvent.init(Events.KEYDOWN, KeyEventDetail.create(e.keyCode)));
+		}
+
 		element.oninput = function(evt) {
 			var detail = {oldValue:this.value, newValue:this.value};
-			me.e.init(Events.CHANGING, detail);
-			me.dispatchEvent(me.e);
+			me.dispatchEvent(me.changeEvent.init(Events.CHANGING, detail));
 		}
 
 		element.onchange = function(evt) {
 			var detail = {oldValue:this.value, newValue:this.value};
-			me.e.init(Events.CHANGE, detail);
-			me.dispatchEvent(me.e);
+			me.changeEvent.init(Events.CHANGE, detail);
+			me.dispatchEvent(me.changeEvent);
 		}
 		
 		element.onblur = function(evt) {

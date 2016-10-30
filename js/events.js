@@ -10,6 +10,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 exports.WHEEL = "qtk-wheel";
 exports.KEYUP = "qtk-keyup";
 exports.KEYDOWN = "qtk-keydown";
+exports.CONFIRM = "confirm";
 exports.CONTEXT_MENU = "qtk-context-menu";
 exports.POINTER_DOWN = "qtk-pointer-down";
 exports.POINTER_MOVE = "qtk-pointer-move";
@@ -494,6 +495,7 @@ var eventsMapToType = {
     click: exports.CLICK,
     keydown: exports.KEYDOWN,
     keyup: exports.KEYUP,
+    confirm: exports.CONFIRM,
     change: exports.CHANGE,
     chaning: exports.CHANGING,
     dblclick: exports.DBLCLICK,
