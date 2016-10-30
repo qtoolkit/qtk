@@ -23,7 +23,12 @@ var Label = (function (_super) {
         if (this._inited) {
             var style = this.getStyle();
             var text = this.getLocaleText();
-            this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
+            if (text && style) {
+                this._textLines = graphics_1.Graphics.layoutText(text, this.w, style.font);
+            }
+            else {
+                this._textLines = [];
+            }
         }
         return this;
     };

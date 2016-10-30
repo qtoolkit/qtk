@@ -19,7 +19,11 @@ export class Label extends Widget {
 		if(this._inited) {
 			var style = this.getStyle();
 			var text = this.getLocaleText();
-			this._textLines = Graphics.layoutText(text, this.w, style.font);
+			if(text && style) {
+				this._textLines = Graphics.layoutText(text, this.w, style.font);
+			}else{
+				this._textLines = [];
+			}
 		}
 
 		return this;
