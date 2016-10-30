@@ -27521,12 +27521,18 @@ var qtk =
 	            return this._data;
 	        },
 	        set: function (value) {
-	            this._data = value;
-	            this.notifyChange(Events.PROP_CHANGE, "/", null);
+	            this.setData(value, true);
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    ViewModalDefault.prototype.setData = function (value, notify) {
+	        this._data = value;
+	        if (notify) {
+	            this.notifyChange(Events.PROP_CHANGE, "/", null);
+	        }
+	        return this;
+	    };
 	    ViewModalDefault.prototype.getBindingMode = function () {
 	        return iview_modal_1.BindingMode.TWO_WAY;
 	    };
@@ -56495,7 +56501,7 @@ var qtk =
 	    ItemViewModal.prototype.init = function (collectionViewModal, index, data) {
 	        this.collectionViewModal = collectionViewModal;
 	        this.index = index;
-	        this.data = data;
+	        this.setData(data, false);
 	        return this;
 	    };
 	    ItemViewModal.prototype.dispose = function () {

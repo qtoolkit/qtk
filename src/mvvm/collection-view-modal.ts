@@ -379,7 +379,7 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	public init(collectionViewModal:CollectionViewModal, index:number, data:any) : ItemViewModal {
 		this.collectionViewModal = collectionViewModal;
 		this.index = index;
-		this.data = data;
+		this.setData(data, false);
 
 		return this;
 	}

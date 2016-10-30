@@ -22,8 +22,16 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	}
 
 	public set data(value:any) {
+		this.setData(value, true);
+	}
+
+	public setData(value:any, notify:boolean) : IViewModal {
 		this._data = value;
-		this.notifyChange(Events.PROP_CHANGE, "/", null);
+		if(notify) {
+			this.notifyChange(Events.PROP_CHANGE, "/", null);
+		}
+
+		return this;
 	}
 
 	constructor(data:any) {

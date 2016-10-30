@@ -354,7 +354,7 @@ var ItemViewModal = (function (_super) {
     ItemViewModal.prototype.init = function (collectionViewModal, index, data) {
         this.collectionViewModal = collectionViewModal;
         this.index = index;
-        this.data = data;
+        this.setData(data, false);
         return this;
     };
     ItemViewModal.prototype.dispose = function () {

@@ -12,6 +12,7 @@ export declare class ViewModalDefault extends Emitter implements IViewModal {
     private _ePropChange;
     isCollection: boolean;
     data: any;
+    setData(value: any, notify: boolean): IViewModal;
     constructor(data: any);
     getBindingMode(): BindingMode;
     onChange(callback: Function): IViewModal;
