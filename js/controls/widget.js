@@ -1734,13 +1734,16 @@ var Widget = (function (_super) {
             }
             this._isEnableFunc = function () {
                 var enable = true;
-                dataBindingRule.forEach(function (prop, item) {
-                    var source = item.source;
-                    if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
-                        var commandSource = source;
-                        enable = enable && viewModal.canExecute(commandSource.command);
-                    }
-                });
+                var vm = this._viewModal;
+                if (vm) {
+                    dataBindingRule.forEach(function (prop, item) {
+                        var source = item.source;
+                        if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
+                            var commandSource = source;
+                            enable = enable && vm.canExecute(commandSource.command);
+                        }
+                    });
+                }
                 return enable;
             };
         }

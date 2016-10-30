@@ -1919,14 +1919,17 @@ export class Widget extends Emitter {
 
 			this._isEnableFunc = function() {
 				var enable = true;
-
-				dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
-					var source = item.source;
-					if(source.type === BindingCommandSource.TYPE) {
-						var commandSource = <BindingCommandSource>source;
-						enable = enable && viewModal.canExecute(commandSource.command)	
-					}
-				});
+				var vm = this._viewModal;
+				
+				if(vm) {
+					dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
+						var source = item.source;
+						if(source.type === BindingCommandSource.TYPE) {
+							var commandSource = <BindingCommandSource>source;
+							enable = enable && vm.canExecute(commandSource.command)	
+						}
+					});
+				}
 
 				return enable;
 			}
