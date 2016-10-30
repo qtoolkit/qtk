@@ -2,8 +2,8 @@
 import {IValueConverter} from "./ivalue-converter";
 
 export class DelegateValueConverter implements IValueConverter {
-	public _convert : Function;
-	public _convertBack : Function;
+	protected _convert : Function;
+	protected _convertBack : Function;
 
 	public convert(data:any) : any {
 		return this._convert(data);

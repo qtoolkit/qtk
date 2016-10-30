@@ -312,18 +312,22 @@ var qtk =
 	exports.TableIndexItem = table_index_item_1.TableIndexItem;
 	var table_header_item_1 = __webpack_require__(347);
 	exports.TableHeaderItem = table_header_item_1.TableHeaderItem;
-	var comparators_1 = __webpack_require__(348);
+	var delegate_filter_1 = __webpack_require__(348);
+	exports.DelegateFilter = delegate_filter_1.DelegateFilter;
+	var delegate_comparator_1 = __webpack_require__(349);
+	exports.DelegateComparator = delegate_comparator_1.DelegateComparator;
+	var comparators_1 = __webpack_require__(350);
 	exports.NumberComparator = comparators_1.NumberComparator;
 	exports.StringComparator = comparators_1.StringComparator;
 	exports.RevertComparator = comparators_1.RevertComparator;
 	exports.ObjectPropComparator = comparators_1.ObjectPropComparator;
-	var range_fixer_1 = __webpack_require__(349);
+	var range_fixer_1 = __webpack_require__(351);
 	exports.RangeFixer = range_fixer_1.RangeFixer;
-	var number_fixer_1 = __webpack_require__(350);
+	var number_fixer_1 = __webpack_require__(352);
 	exports.NumberFixer = number_fixer_1.NumberFixer;
-	var vector2_fixer_1 = __webpack_require__(351);
+	var vector2_fixer_1 = __webpack_require__(353);
 	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
-	var vector3_fixer_1 = __webpack_require__(352);
+	var vector3_fixer_1 = __webpack_require__(354);
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 
 
@@ -57757,6 +57761,48 @@ var qtk =
 /***/ function(module, exports) {
 
 	"use strict";
+	var DelegateFilter = (function () {
+	    function DelegateFilter(check) {
+	        this._check = check;
+	    }
+	    DelegateFilter.prototype.check = function (data) {
+	        return this._check(data);
+	    };
+	    DelegateFilter.create = function (check) {
+	        return new DelegateFilter(check);
+	    };
+	    return DelegateFilter;
+	}());
+	exports.DelegateFilter = DelegateFilter;
+	;
+
+
+/***/ },
+/* 349 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var DelegateComparator = (function () {
+	    function DelegateComparator(compare) {
+	        this._compare = compare;
+	    }
+	    DelegateComparator.prototype.compare = function (a, b) {
+	        return this._compare(a, b);
+	    };
+	    DelegateComparator.create = function (compare) {
+	        return new DelegateComparator(compare);
+	    };
+	    return DelegateComparator;
+	}());
+	exports.DelegateComparator = DelegateComparator;
+	;
+
+
+/***/ },
+/* 350 */
+/***/ function(module, exports) {
+
+	"use strict";
 	/**
 	 * 数值比较器。
 	 */
@@ -57840,7 +57886,7 @@ var qtk =
 
 
 /***/ },
-/* 349 */
+/* 351 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57879,7 +57925,7 @@ var qtk =
 
 
 /***/ },
-/* 350 */
+/* 352 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57903,7 +57949,7 @@ var qtk =
 
 
 /***/ },
-/* 351 */
+/* 353 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57932,7 +57978,7 @@ var qtk =
 
 
 /***/ },
-/* 352 */
+/* 354 */
 /***/ function(module, exports) {
 
 	"use strict";

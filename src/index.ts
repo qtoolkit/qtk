@@ -129,6 +129,8 @@ export {TableHeaderItem} from "./table/table-header-item";
 
 export {IFilter} from "./mvvm/ifilter";
 export {IComparator} from "./mvvm/icomparator";
+export {DelegateFilter} from "./mvvm/delegate-filter";
+export {DelegateComparator} from "./mvvm/delegate-comparator";
 export {NumberComparator, StringComparator, RevertComparator, ObjectPropComparator} from "./mvvm/comparators";
 
 export {RangeFixer} from "./mvvm/range-fixer";
