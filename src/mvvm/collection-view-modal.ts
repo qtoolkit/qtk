@@ -385,6 +385,9 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	}
 
 	public dispose() {
+		this.index = -1;
+		this.removeAllListeners();
+		this.collectionViewModal = null;
 		ItemViewModal.cache.push(this);
 	}
 	

@@ -358,6 +358,9 @@ var ItemViewModal = (function (_super) {
         return this;
     };
     ItemViewModal.prototype.dispose = function () {
+        this.index = -1;
+        this.removeAllListeners();
+        this.collectionViewModal = null;
         ItemViewModal.cache.push(this);
     };
     ItemViewModal.create = function (collectionViewModal, index, data) {
