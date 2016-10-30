@@ -1978,14 +1978,18 @@ export class Widget extends Emitter {
 			var source = item.source;
 			if(source.type === BindingCommandSource.TYPE) {
 				var commandSource = <BindingCommandSource>source;
-				if(prop === "click") {
+				var type = Events.mapToEvent(prop);
+				if(type) {
 					if(commandSource.eventHandler) {
-						this.off(Events.CLICK, commandSource.eventHandler);
+						this.off(type, commandSource.eventHandler);
 					}
 					commandSource.eventHandler = function(evt:any) {
-						viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+						var args = commandSource.commandArgs || evt;
+						viewModal.execCommand(commandSource.command, args);
 					}
-					this.on(Events.CLICK, commandSource.eventHandler);
+					this.on(type, commandSource.eventHandler);
+				}else{
+					console.log(prop+" is not supported yet.");
 				}
 			}
 		});

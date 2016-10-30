@@ -288,3 +288,4 @@ export declare class SortEvent extends Event {
     static create(key: string, isDec: boolean): SortEvent;
 }
 export declare function createAnyEvent(type: string, payload?: any): AnyEvent;
+export declare function mapToEvent(name: string): any;

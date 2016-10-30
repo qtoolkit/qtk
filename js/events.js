@@ -490,3 +490,20 @@ function createAnyEvent(type, payload) {
     return AnyEvent.create(type, payload);
 }
 exports.createAnyEvent = createAnyEvent;
+var eventsMapToType = {
+    click: exports.CLICK,
+    keydown: exports.KEYDOWN,
+    keyup: exports.KEYUP,
+    change: exports.CHANGE,
+    chaning: exports.CHANGING,
+    dblclick: exports.DBLCLICK,
+    pointerup: exports.POINTER_UP,
+    pointermove: exports.POINTER_MOVE,
+    pointerdown: exports.POINTER_DOWN,
+    pointerenter: exports.POINTER_ENTER,
+    pointerleave: exports.POINTER_LEAVE
+};
+function mapToEvent(name) {
+    return eventsMapToType[name];
+}
+exports.mapToEvent = mapToEvent;

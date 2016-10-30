@@ -591,3 +591,22 @@ export class SortEvent extends Event {
 export function createAnyEvent(type:string, payload?:any) : AnyEvent {
 	return AnyEvent.create(type, payload);
 }
+
+const eventsMapToType = {
+	click:CLICK,
+	keydown:KEYDOWN,
+	keyup:KEYUP,
+	change:CHANGE,
+	chaning:CHANGING,
+	dblclick:DBLCLICK,
+	pointerup:POINTER_UP,
+	pointermove:POINTER_MOVE,
+	pointerdown:POINTER_DOWN,
+	pointerenter:POINTER_ENTER,
+	pointerleave:POINTER_LEAVE
+};
+
+export function mapToEvent(name:string) {
+	return eventsMapToType[name];
+}
+

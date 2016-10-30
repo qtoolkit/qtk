@@ -1789,14 +1789,19 @@ var Widget = (function (_super) {
             var source = item.source;
             if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
                 var commandSource = source;
-                if (prop === "click") {
+                var type = Events.mapToEvent(prop);
+                if (type) {
                     if (commandSource.eventHandler) {
-                        _this.off(Events.CLICK, commandSource.eventHandler);
+                        _this.off(type, commandSource.eventHandler);
                     }
                     commandSource.eventHandler = function (evt) {
-                        viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+                        var args = commandSource.commandArgs || evt;
+                        viewModal.execCommand(commandSource.command, args);
                     };
-                    _this.on(Events.CLICK, commandSource.eventHandler);
+                    _this.on(type, commandSource.eventHandler);
+                }
+                else {
+                    console.log(prop + " is not supported yet.");
                 }
             }
         });

@@ -1849,6 +1849,23 @@ var qtk =
 	    return AnyEvent.create(type, payload);
 	}
 	exports.createAnyEvent = createAnyEvent;
+	var eventsMapToType = {
+	    click: exports.CLICK,
+	    keydown: exports.KEYDOWN,
+	    keyup: exports.KEYUP,
+	    change: exports.CHANGE,
+	    chaning: exports.CHANGING,
+	    dblclick: exports.DBLCLICK,
+	    pointerup: exports.POINTER_UP,
+	    pointermove: exports.POINTER_MOVE,
+	    pointerdown: exports.POINTER_DOWN,
+	    pointerenter: exports.POINTER_ENTER,
+	    pointerleave: exports.POINTER_LEAVE
+	};
+	function mapToEvent(name) {
+	    return eventsMapToType[name];
+	}
+	exports.mapToEvent = mapToEvent;
 
 
 /***/ },
@@ -6385,14 +6402,19 @@ var qtk =
 	            var source = item.source;
 	            if (source.type === binding_rule_1.BindingCommandSource.TYPE) {
 	                var commandSource = source;
-	                if (prop === "click") {
+	                var type = Events.mapToEvent(prop);
+	                if (type) {
 	                    if (commandSource.eventHandler) {
-	                        _this.off(Events.CLICK, commandSource.eventHandler);
+	                        _this.off(type, commandSource.eventHandler);
 	                    }
 	                    commandSource.eventHandler = function (evt) {
-	                        viewModal.execCommand(commandSource.command, commandSource.commandArgs);
+	                        var args = commandSource.commandArgs || evt;
+	                        viewModal.execCommand(commandSource.command, args);
 	                    };
-	                    _this.on(Events.CLICK, commandSource.eventHandler);
+	                    _this.on(type, commandSource.eventHandler);
+	                }
+	                else {
+	                    console.log(prop + " is not supported yet.");
 	                }
 	            }
 	        });
