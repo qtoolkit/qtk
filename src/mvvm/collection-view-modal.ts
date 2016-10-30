@@ -219,7 +219,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 			
 			var n = collection.length;
 			if(this.current >= n) {
-				this.current = n-1;
+				this._current = n-1;
 			}
 
 			if(this._viewModalItems) {

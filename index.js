@@ -56402,7 +56402,7 @@ var qtk =
 	            var collection = this.getFilteredSortedCollection();
 	            var n = collection.length;
 	            if (this.current >= n) {
-	                this.current = n - 1;
+	                this._current = n - 1;
 	            }
 	            if (this._viewModalItems) {
 	                this._viewModalItems.forEach(function (item) {
