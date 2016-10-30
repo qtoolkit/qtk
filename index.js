@@ -56277,6 +56277,21 @@ var qtk =
 	        return this;
 	    };
 	    /**
+	     * 删除指定规则的数据项。
+	     */
+	    CollectionViewModal.prototype.removeItems = function (func) {
+	        var _this = this;
+	        var collection = this._collection.filter(function (item, index, arr) {
+	            return !func(item, index, arr);
+	        });
+	        this._collection.length = 0;
+	        collection.forEach(function (item) {
+	            _this._collection.push(item);
+	        });
+	        this.updateViewModalItems(true);
+	        return this;
+	    };
+	    /**
 	     * 获取指定序号的子ViewModal
 	     */
 	    CollectionViewModal.prototype.getItemViewModal = function (index) {

@@ -53,6 +53,10 @@ export declare class CollectionViewModal extends ViewModalDefault implements ICo
      */
     removeItem(index: number): ICollectionViewModal;
     /**
+     * 删除指定规则的数据项。
+     */
+    removeItems(func: Function): ICollectionViewModal;
+    /**
      * 获取指定序号的子ViewModal
      */
     getItemViewModal(index: number): IViewModal;

@@ -39,4 +39,14 @@ describe('ViewModal', function() {
 
 		done(result ? null : new Error("sort failed."));
 	});
+    
+    it("remove", (done) => {
+		var data = [{name:"jim"}, {name:"jim.li"}, {name:"jim.q"}, {name:"abc"}, {name:"qtk"}, {name:"qtoolkit"}];
+		var vm = qtk.CollectionViewModal.create(data);
+		vm.removeItems(function(item) {
+			return item.name === "abc";
+		});
+		var result = vm.total === 5;
+		done(result ? null : new Error("removeItems failed."));
+	});
 })

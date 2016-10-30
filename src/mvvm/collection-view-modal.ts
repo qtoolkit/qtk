@@ -119,6 +119,23 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 		
 		return this;
 	}
+	
+	/**
+	 * 删除指定规则的数据项。
+	 */
+	public removeItems(func:Function) : ICollectionViewModal {
+		var collection = this._collection.filter(function(item, index, arr) {
+			return !func(item, index, arr);
+		});
+		
+		this._collection.length = 0;
+		collection.forEach((item) => {
+			this._collection.push(item);
+		});
+		this.updateViewModalItems(true);
+
+		return this;
+	}
 
 	/**
 	 * 获取指定序号的子ViewModal
