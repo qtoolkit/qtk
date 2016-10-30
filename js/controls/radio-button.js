@@ -20,7 +20,7 @@ var RadioButton = (function (_super) {
             return this._value;
         },
         set: function (value) {
-            this.setValue(value, true, true);
+            this.setValue(value, false, true);
         },
         enumerable: true,
         configurable: true

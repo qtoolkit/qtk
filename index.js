@@ -5752,7 +5752,7 @@ var qtk =
 	            return this._value;
 	        },
 	        set: function (value) {
-	            this.setValue(value, true, false);
+	            this.setValue(value, false, false);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -21251,7 +21251,7 @@ var qtk =
 	            return this._value;
 	        },
 	        set: function (value) {
-	            this.setValue(value, true, true);
+	            this.setValue(value, false, true);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -21299,8 +21299,7 @@ var qtk =
 	            return this._value;
 	        },
 	        set: function (value) {
-	            this.setProp("value", value, true);
-	            this.notifyChange();
+	            this.setValue(value, false, false);
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -21372,6 +21371,7 @@ var qtk =
 	    };
 	    CheckButton.prototype.dispatchClick = function (evt) {
 	        this.value = !this.value;
+	        this.notifyChange();
 	        _super.prototype.dispatchClick.call(this, evt);
 	    };
 	    CheckButton.create = function (options) {

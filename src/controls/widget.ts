@@ -1237,7 +1237,7 @@ export class Widget extends Emitter {
 		return this._value;
 	}
 	public set value(value) {
-		this.setValue(value, true, false);
+		this.setValue(value, false, false);
 	}
 
 	public get selected() {

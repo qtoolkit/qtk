@@ -1121,7 +1121,7 @@ var Widget = (function (_super) {
             return this._value;
         },
         set: function (value) {
-            this.setValue(value, true, false);
+            this.setValue(value, false, false);
         },
         enumerable: true,
         configurable: true

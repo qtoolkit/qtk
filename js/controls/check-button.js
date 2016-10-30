@@ -25,8 +25,7 @@ var CheckButton = (function (_super) {
             return this._value;
         },
         set: function (value) {
-            this.setProp("value", value, true);
-            this.notifyChange();
+            this.setValue(value, false, false);
         },
         enumerable: true,
         configurable: true
@@ -98,6 +97,7 @@ var CheckButton = (function (_super) {
     };
     CheckButton.prototype.dispatchClick = function (evt) {
         this.value = !this.value;
+        this.notifyChange();
         _super.prototype.dispatchClick.call(this, evt);
     };
     CheckButton.create = function (options) {

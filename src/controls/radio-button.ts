@@ -17,7 +17,7 @@ export class RadioButton extends CheckButton {
 	}
 
 	public set value(value:boolean) {
-		this.setValue(value, true, true);
+		this.setValue(value, false, true);
 	}
 
 	public static TYPE = "radio-button";

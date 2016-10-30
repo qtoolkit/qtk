@@ -20,8 +20,7 @@ export class CheckButton extends Widget {
 	}
 
 	public set value(value:boolean) {
-		this.setProp("value", value, true);
-		this.notifyChange();	
+		this.setValue(value, false, false);
 	}
 
 	protected getStyleType() : string {
@@ -101,6 +100,7 @@ export class CheckButton extends Widget {
 	
 	protected dispatchClick(evt:any) {
 		this.value = !this.value;	
+		this.notifyChange();	
 		super.dispatchClick(evt);
 	}
 
