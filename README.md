@@ -23,11 +23,11 @@ QTK主要特色如下：
 
 1.[BLOG](https://qtoolkit.github.io/)
 
-2.[基本控件DEMO](https://qtoolkit.github.io/demos/index.html)
+2.基本控件DEMO [在线演示](https://qtoolkit.github.io/demos/index.html)
 
-3.[Proton粒子编辑器](https://qtoolkit.github.io/qtk-proton-editor/index.html)
+3.Proton粒子编辑器[在线演示](https://qtoolkit.github.io/qtk-proton-editor/index.html) [项目源码](https://github.com/qtoolkit/qtk-proton-editor)
 
-4.[Todo MVC](https://qtoolkit.github.io/qtk-todo-mvc/index.html)
+4.Todo MVC [在线演示](https://qtoolkit.github.io/qtk-todo-mvc/index.html) [项目源码](https://github.com/qtoolkit/qtk-todo-mvc)
 
 ------------------------------
 
