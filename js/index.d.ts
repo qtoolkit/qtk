@@ -78,7 +78,6 @@ export { ButtonOption, ButtonsOptions, TitleOptions, MessageBox } from "./contro
 export { ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView } from "./controls/scroll-view";
 export { DeviceInfo } from "./device-info";
 export { ViewModal } from "./mvvm/view-modal";
-export { IViewModal, ICollectionViewModal } from "./mvvm/iview-modal";
 export { ICommand, IUndoCommand } from "./mvvm/icommand";
 export { RecyclableCreator } from "./recyclable-creator";
 export { IValueConverter } from "./mvvm/ivalue-converter";
@@ -89,6 +88,7 @@ export { WidgetRecyclableCreator } from "./controls/widget-recyclable-creator";
 export { IValidationRule, ValidationResult } from "./mvvm/ivalidation-rule";
 export { DelegateValidationRule } from "./mvvm/delegate-validation-rule";
 export { BindingRule, IBindingSource, BindingDataSource, BindingCommandSource, BindingRuleItem } from "./mvvm/binding-rule";
+export { BindingMode, IViewModal, ICollectionViewModal } from "./mvvm/iview-modal";
 export { PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc } from "./controls-ext/props-desc";
 export { TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc } from "./controls-ext/props-desc";
 export { Vector2PropDesc, Vector3PropDesc, LinePropDesc } from "./controls-ext/props-desc";

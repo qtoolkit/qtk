@@ -380,7 +380,10 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	
 	public notifyChange(type:string, path:string, value:any) {
 		var collectionViewModal = this.collectionViewModal;
-		
+		if(collectionViewModal.bindingMode === BindingMode.ONE_WAY) {
+			return;
+		}
+
 		if(collectionViewModal.comparator || collectionViewModal.filter) {
 			collectionViewModal.updateViewModalItems(true);
 		}else{
@@ -410,6 +413,7 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 		this.collectionViewModal = collectionViewModal;
 		this.index = index;
 		this.setData(data, false);
+		this.bindingMode = collectionViewModal.bindingMode;
 
 		return this;
 	}

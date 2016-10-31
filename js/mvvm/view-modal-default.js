@@ -18,6 +18,7 @@ var ViewModalDefault = (function (_super) {
         this._data = data || {};
         this._validationRules = {};
         this.isCollection = false;
+        this._bindingMode = iview_modal_1.BindingMode.TWO_WAY;
         this._ePropChange = Events.PropChangeEvent.create();
     }
     Object.defineProperty(ViewModalDefault.prototype, "data", {
@@ -37,9 +38,16 @@ var ViewModalDefault = (function (_super) {
         }
         return this;
     };
-    ViewModalDefault.prototype.getBindingMode = function () {
-        return iview_modal_1.BindingMode.TWO_WAY;
-    };
+    Object.defineProperty(ViewModalDefault.prototype, "bindingMode", {
+        get: function () {
+            return this._bindingMode;
+        },
+        set: function (value) {
+            this._bindingMode = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ViewModalDefault.prototype.onChange = function (callback) {
         this.on(Events.PROP_DELETE, callback);
         this.on(Events.PROP_CHANGE, callback);

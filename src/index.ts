@@ -81,7 +81,6 @@ export {ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView} from
 
 export {DeviceInfo} from "./device-info";
 export {ViewModal} from "./mvvm/view-modal";
-export {IViewModal, ICollectionViewModal} from "./mvvm/iview-modal";
 export {ICommand, IUndoCommand} from "./mvvm/icommand";
 export {RecyclableCreator} from "./recyclable-creator";
 export {IValueConverter} from "./mvvm/ivalue-converter";
@@ -93,6 +92,7 @@ export {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
 export {DelegateValidationRule} from "./mvvm/delegate-validation-rule";
 export {BindingRule, IBindingSource, BindingDataSource,
 	BindingCommandSource, BindingRuleItem} from "./mvvm/binding-rule";
+export {BindingMode, IViewModal, ICollectionViewModal} from "./mvvm/iview-modal";
 
 export {PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc} from "./controls-ext/props-desc";
 export {TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc} from "./controls-ext/props-desc";

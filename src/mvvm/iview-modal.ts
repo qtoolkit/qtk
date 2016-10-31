@@ -16,7 +16,7 @@ export interface IViewModal {
 	/**
 	 * 绑定的模式。
 	 */
-	getBindingMode() : BindingMode;
+	bindingMode : BindingMode;
 
 	/**
 	 * 获取属性的值。

@@ -7,6 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Events = require("../events");
 var delegate_command_1 = require("./delegate-command");
 var ivalidation_rule_1 = require("./ivalidation-rule");
+var iview_modal_1 = require("./iview-modal");
 var view_modal_default_1 = require("./view-modal-default");
 /**
  * 集合ViewModal。delProp/getProp/setProp操作当前的项。
@@ -359,6 +360,9 @@ var ItemViewModal = (function (_super) {
     };
     ItemViewModal.prototype.notifyChange = function (type, path, value) {
         var collectionViewModal = this.collectionViewModal;
+        if (collectionViewModal.bindingMode === iview_modal_1.BindingMode.ONE_WAY) {
+            return;
+        }
         if (collectionViewModal.comparator || collectionViewModal.filter) {
             collectionViewModal.updateViewModalItems(true);
         }
@@ -382,6 +386,7 @@ var ItemViewModal = (function (_super) {
         this.collectionViewModal = collectionViewModal;
         this.index = index;
         this.setData(data, false);
+        this.bindingMode = collectionViewModal.bindingMode;
         return this;
     };
     ItemViewModal.prototype.dispose = function () {

@@ -14,7 +14,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	private _converters : any;
 	private _validationRules : any;
 	private _ePropChange : Events.PropChangeEvent;
-	
+
 	public isCollection : boolean;
 
 	public get data() : any {
@@ -42,12 +42,17 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		this._data = data || {};
 		this._validationRules = {};
 		this.isCollection = false;
+		this._bindingMode = BindingMode.TWO_WAY;
 		this._ePropChange = Events.PropChangeEvent.create();
 	}
 	
-	public getBindingMode() : BindingMode {
-		return BindingMode.TWO_WAY;
+	public get bindingMode() : BindingMode {
+		return this._bindingMode;
 	}
+	public set bindingMode(value:BindingMode){
+		this._bindingMode = value;
+	}
+	private _bindingMode:BindingMode;
 
 	public onChange(callback:Function) : IViewModal {
 		this.on(Events.PROP_DELETE, callback);

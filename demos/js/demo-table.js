@@ -16,6 +16,7 @@ function genData() {
 function createViewModal(table) {
 	var viewModal = qtk.CollectionViewModal.create(genData());
 	
+	viewModal.bindingMode = qtk.BindingMode.ONE_WAY;
 	var nameInc = qtk.ObjectPropComparator.create(qtk.StringComparator.create(), "name");
 	var nameDec = qtk.RevertComparator.create(nameInc);
 	viewModal.registerComparator("name.inc", nameInc);
@@ -26,7 +27,6 @@ function createViewModal(table) {
 	viewModal.registerComparator("age.inc", ageInc);
 	viewModal.registerComparator("age.dec", ageDec);
 	viewModal.comparator = "age.dec";
-
 	table.on(qtk.Events.SORT, function(evt) {
 		var comparator = evt.key + (evt.isDec ? ".dec" : ".inc");
 		viewModal.comparator = comparator;

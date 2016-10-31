@@ -12,7 +12,7 @@ export interface IViewModal {
     /**
      * 绑定的模式。
      */
-    getBindingMode(): BindingMode;
+    bindingMode: BindingMode;
     /**
      * 获取属性的值。
      * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer

@@ -1902,7 +1902,7 @@ export class Widget extends Emitter {
 		this.onBeforeBindData();
 
 		if(dataBindingRule && viewModal) {
-			var bindingMode = viewModal.getBindingMode();
+			var bindingMode = viewModal.bindingMode;
 			
 			this.onBindCommand(viewModal, dataBindingRule);
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {

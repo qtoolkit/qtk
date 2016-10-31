@@ -251,6 +251,8 @@ var qtk =
 	exports.BindingDataSource = binding_rule_1.BindingDataSource;
 	exports.BindingCommandSource = binding_rule_1.BindingCommandSource;
 	exports.BindingRuleItem = binding_rule_1.BindingRuleItem;
+	var iview_modal_1 = __webpack_require__(81);
+	exports.BindingMode = iview_modal_1.BindingMode;
 	var props_desc_1 = __webpack_require__(151);
 	exports.PagePropsDesc = props_desc_1.PagePropsDesc;
 	exports.PropsDesc = props_desc_1.PropsDesc;
@@ -6352,7 +6354,7 @@ var qtk =
 	        this._viewModal = viewModal;
 	        this.onBeforeBindData();
 	        if (dataBindingRule && viewModal) {
-	            var bindingMode = viewModal.getBindingMode();
+	            var bindingMode = viewModal.bindingMode;
 	            this.onBindCommand(viewModal, dataBindingRule);
 	            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
 	                this.onBindData(viewModal, dataBindingRule);
@@ -27562,6 +27564,7 @@ var qtk =
 	        this._data = data || {};
 	        this._validationRules = {};
 	        this.isCollection = false;
+	        this._bindingMode = iview_modal_1.BindingMode.TWO_WAY;
 	        this._ePropChange = Events.PropChangeEvent.create();
 	    }
 	    Object.defineProperty(ViewModalDefault.prototype, "data", {
@@ -27581,9 +27584,16 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    ViewModalDefault.prototype.getBindingMode = function () {
-	        return iview_modal_1.BindingMode.TWO_WAY;
-	    };
+	    Object.defineProperty(ViewModalDefault.prototype, "bindingMode", {
+	        get: function () {
+	            return this._bindingMode;
+	        },
+	        set: function (value) {
+	            this._bindingMode = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    ViewModalDefault.prototype.onChange = function (callback) {
 	        this.on(Events.PROP_DELETE, callback);
 	        this.on(Events.PROP_CHANGE, callback);
@@ -56202,6 +56212,7 @@ var qtk =
 	var Events = __webpack_require__(6);
 	var delegate_command_1 = __webpack_require__(327);
 	var ivalidation_rule_1 = __webpack_require__(157);
+	var iview_modal_1 = __webpack_require__(81);
 	var view_modal_default_1 = __webpack_require__(154);
 	/**
 	 * 集合ViewModal。delProp/getProp/setProp操作当前的项。
@@ -56554,6 +56565,9 @@ var qtk =
 	    };
 	    ItemViewModal.prototype.notifyChange = function (type, path, value) {
 	        var collectionViewModal = this.collectionViewModal;
+	        if (collectionViewModal.bindingMode === iview_modal_1.BindingMode.ONE_WAY) {
+	            return;
+	        }
 	        if (collectionViewModal.comparator || collectionViewModal.filter) {
 	            collectionViewModal.updateViewModalItems(true);
 	        }
@@ -56577,6 +56591,7 @@ var qtk =
 	        this.collectionViewModal = collectionViewModal;
 	        this.index = index;
 	        this.setData(data, false);
+	        this.bindingMode = collectionViewModal.bindingMode;
 	        return this;
 	    };
 	    ItemViewModal.prototype.dispose = function () {
