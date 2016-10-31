@@ -66,7 +66,7 @@ export class ListLayouter extends Layouter {
 			y += h;
 		}
 
-		this.rect.init(rect.x, rect.y, w, y);
+		this.rect.init(rect.x, rect.y, w, y-rect.y);
 
 		return this.rect;
 	}

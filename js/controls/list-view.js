@@ -84,7 +84,7 @@ var ListView = (function (_super) {
     ListView.prototype.relayoutChildren = function () {
         var r = _super.prototype.relayoutChildren.call(this);
         this.contentW = r.w + this.leftPadding + this.rightPadding;
-        this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
+        this.contentH = r.h + this.topPadding + this.bottomPadding;
         return r;
     };
     ListView.prototype.onReset = function () {

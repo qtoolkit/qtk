@@ -618,7 +618,7 @@ export class Widget extends Emitter {
 	public relayoutChildren() : Rect {
 		this.requestRedraw();
 
-		if(this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
+		if(this.children.length > 0 && this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
 			var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
 
 			return this.layoutRect.copy(ret);

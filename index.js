@@ -5182,7 +5182,7 @@ var qtk =
 	     */
 	    Widget.prototype.relayoutChildren = function () {
 	        this.requestRedraw();
-	        if (this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
+	        if (this.children.length > 0 && this.childrenLayouter && ((this.w > 0 && this.h > 0) || this._inited)) {
 	            var ret = this.childrenLayouter.layoutChildren(this, this.children, this.getLayoutRect());
 	            return this.layoutRect.copy(ret);
 	        }
@@ -22710,7 +22710,7 @@ var qtk =
 	    ListView.prototype.relayoutChildren = function () {
 	        var r = _super.prototype.relayoutChildren.call(this);
 	        this.contentW = r.w + this.leftPadding + this.rightPadding;
-	        this.contentH = r.h + this.topPadding + this.bottomPadding + 10;
+	        this.contentH = r.h + this.topPadding + this.bottomPadding;
 	        return r;
 	    };
 	    ListView.prototype.onReset = function () {
@@ -22797,7 +22797,7 @@ var qtk =
 	            child.relayoutChildren();
 	            y += h;
 	        }
-	        this.rect.init(rect.x, rect.y, w, y);
+	        this.rect.init(rect.x, rect.y, w, y - rect.y);
 	        return this.rect;
 	    };
 	    ListLayouter.prototype.createParam = function (options) {
