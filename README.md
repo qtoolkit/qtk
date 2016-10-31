@@ -19,13 +19,13 @@ QTK主要特色如下：
 
 7.**完整的文档和示例**。确保已经实现的控件，对使用者都是友好的，你可以无障碍的使用它们，请告诉我们任何让你产生挫折的地方，一定会得到优先解决。在开发的过程中我们也会在博客中写出QTK内部实现原理，以及做出某些决策的原因。
 
-[BLOG](https://qtoolkit.github.io/)
+1.[BLOG](https://qtoolkit.github.io/)
 
-[基本控件DEMO](https://qtoolkit.github.io/demos/index.html)
+2.[基本控件DEMO](https://qtoolkit.github.io/demos/index.html)
 
-[Proton粒子编辑器](https://qtoolkit.github.io/qtk-proton-editor/index.html)
+3.[Proton粒子编辑器](https://qtoolkit.github.io/qtk-proton-editor/index.html)
 
-[Todo MVC](https://qtoolkit.github.io/qtk-todo-mvc/index.html)
+4.[Todo MVC](https://qtoolkit.github.io/qtk-todo-mvc/index.html)
 
 
 ### 编译
