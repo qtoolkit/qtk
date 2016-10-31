@@ -367,9 +367,9 @@
 	"combo-box-popup": {
 		"extends": "widget",
 		"common" : {
-			"lineWidth":1,
-			"roundRadius":0,
-			"lineColor":"#CCCCCC"
+			"lineWidth":2,
+			"lineColor":"#AAAAAA",
+			"backGroundColor" : "#F8F8F8"
 		}
 	},
 	"table-header-item": {
