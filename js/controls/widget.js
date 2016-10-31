@@ -271,6 +271,26 @@ var Widget = (function (_super) {
         }
         this.dispatchEvent(evt, false);
     };
+    Widget.prototype.dispatchPointerLeave = function (evt) {
+        if (this.state === WidgetState.OVER || this.state === WidgetState.ACTIVE) {
+            var e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
+            this.dispatchEvent(e, false);
+            this.state = WidgetState.NORMAL;
+            e.dispose();
+        }
+        if (this.target) {
+            this.target.dispatchPointerLeave(evt);
+        }
+        if (this._lastOverWidget) {
+            this._lastOverWidget.dispatchPointerLeave(evt);
+            this._lastOverWidget = null;
+        }
+    };
+    Widget.prototype.dispatchPointerEnter = function (evt) {
+        var e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
+        this.dispatchEvent(e, false);
+        e.dispose();
+    };
     Widget.prototype.dispatchPointerMoveToUnder = function (evt, ctx) {
         ctx.save();
         this.applyTransform(ctx);
@@ -283,15 +303,10 @@ var Widget = (function (_super) {
                 var e = null;
                 if (_lastOverWidget) {
                     _lastOverWidget.dispatchPointerMove(evt, ctx);
-                    e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
-                    _lastOverWidget.dispatchEvent(e, false);
-                    e.dispose();
-                    _lastOverWidget.state = WidgetState.NORMAL;
+                    _lastOverWidget.dispatchPointerLeave(evt);
                 }
                 if (overWidget) {
-                    e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
-                    overWidget.dispatchEvent(e, false);
-                    e.dispose();
+                    overWidget.dispatchPointerEnter(evt);
                 }
                 this._lastOverWidget = overWidget;
             }

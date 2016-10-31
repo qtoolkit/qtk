@@ -103,6 +103,8 @@ export declare class Widget extends Emitter {
     protected selfHitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
     protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected dispatchPointerMoveToTarget(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    protected dispatchPointerLeave(evt: Events.PointerEvent): void;
+    protected dispatchPointerEnter(evt: Events.PointerEvent): void;
     protected dispatchPointerMoveToUnder(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected dispatchPointerUp(evt: Events.PointerEvent): void;

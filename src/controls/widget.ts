@@ -296,6 +296,28 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
+	protected dispatchPointerLeave(evt:Events.PointerEvent) {
+		if(this.state === WidgetState.OVER || this.state === WidgetState.ACTIVE) {
+			var e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
+			this.dispatchEvent(e, false);
+			this.state = WidgetState.NORMAL;
+			e.dispose();
+		}
+		if(this.target) {
+			this.target.dispatchPointerLeave(evt);
+		}
+		if(this._lastOverWidget) {
+			this._lastOverWidget.dispatchPointerLeave(evt);
+			this._lastOverWidget = null;
+		}
+	}
+	
+	protected dispatchPointerEnter(evt:Events.PointerEvent) {
+		var e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
+		this.dispatchEvent(e, false);
+		e.dispose();
+	}
+
 	protected dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
 		ctx.save();
 		this.applyTransform(ctx);
@@ -309,17 +331,11 @@ export class Widget extends Emitter {
 				var e = null;
 				if(_lastOverWidget) {
 					_lastOverWidget.dispatchPointerMove(evt, ctx);
-
-					e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
-					_lastOverWidget.dispatchEvent(e, false);
-					e.dispose();
-					_lastOverWidget.state = WidgetState.NORMAL;
+					_lastOverWidget.dispatchPointerLeave(evt);
 				}
 			
 				if(overWidget) {
-					e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
-					overWidget.dispatchEvent(e, false);
-					e.dispose();
+					overWidget.dispatchPointerEnter(evt);
 				}
 
 				this._lastOverWidget = overWidget;
