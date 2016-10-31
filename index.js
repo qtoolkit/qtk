@@ -56553,10 +56553,16 @@ var qtk =
 	        return this.collectionViewModal.current === this.index;
 	    };
 	    ItemViewModal.prototype.notifyChange = function (type, path, value) {
-	        if (this.isCurrent) {
-	            this.collectionViewModal.notifyChange(type, path, value);
+	        var collectionViewModal = this.collectionViewModal;
+	        if (collectionViewModal.comparator || collectionViewModal.filter) {
+	            collectionViewModal.updateViewModalItems(true);
 	        }
-	        _super.prototype.notifyChange.call(this, type, path, value);
+	        else {
+	            if (this.isCurrent) {
+	                collectionViewModal.notifyChange(type, path, value);
+	            }
+	            _super.prototype.notifyChange.call(this, type, path, value);
+	        }
 	    };
 	    ItemViewModal.prototype.initCommands = function () {
 	        var _this = this;

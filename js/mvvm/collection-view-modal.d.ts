@@ -72,7 +72,7 @@ export declare class CollectionViewModal extends ViewModalDefault implements ICo
      */
     getRawIndexOf(index: number): number;
     protected createItemViewModal(index: number, data: any): ItemViewModal;
-    protected updateViewModalItems(force?: boolean): void;
+    updateViewModalItems(force?: boolean): void;
     protected needUpdateViewModalItems: boolean;
     /**
      * 注册过滤器。

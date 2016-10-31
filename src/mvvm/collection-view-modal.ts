@@ -210,7 +210,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/*
 	 * 重新创建ViewModalItems。
 	 */
-	protected updateViewModalItems(force?:boolean) {
+	public updateViewModalItems(force?:boolean) {
 		if(force || this.needUpdateViewModalItems) {
 			this.needUpdateViewModalItems = false;
 			
@@ -379,11 +379,16 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	}
 	
 	public notifyChange(type:string, path:string, value:any) {
-		if(this.isCurrent) {
-			this.collectionViewModal.notifyChange(type, path, value);
+		var collectionViewModal = this.collectionViewModal;
+		
+		if(collectionViewModal.comparator || collectionViewModal.filter) {
+			collectionViewModal.updateViewModalItems(true);
+		}else{
+			if(this.isCurrent) {
+				collectionViewModal.notifyChange(type, path, value);
+			}
+			super.notifyChange(type, path, value);
 		}
-
-		super.notifyChange(type, path, value);
 	}
 
 	protected initCommands() {
