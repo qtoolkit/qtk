@@ -3865,6 +3865,7 @@ var qtk =
 	var pointerDownX = 0;
 	var pointerDownY = 0;
 	var pointerDownTime = 0;
+	var pointerMoved = false;
 	var globalInputEmitter = new emitter_1.Emitter();
 	function dispatchEvent(target, type, detail) {
 	    var realTarget = target;
@@ -3896,18 +3897,18 @@ var qtk =
 	        pointerDownX = detail.x;
 	        pointerDownY = detail.y;
 	        pointerDownTime = Date.now();
+	        pointerMoved = false;
 	    }
 	    else if (type === Events.POINTER_UP) {
 	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
-	        var dx = Math.abs(detail.x - pointerDownX);
-	        var dy = Math.abs(detail.y - pointerDownY);
-	        var isClick = dx < 5 && dy < 5;
 	        pointerDown = false;
-	        if (isClick) {
+	        pointerMoved = false;
+	        if (!pointerMoved) {
 	            dispatchEvent(target, Events.CLICK, detail);
 	        }
 	    }
 	    else {
+	        pointerMoved = true;
 	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
 	    }
 	    dispatchEvent(target, type, detail);
@@ -3946,14 +3947,17 @@ var qtk =
 	function onTouchStart(evt) {
 	    var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, detail);
+	    evt.preventDefault();
 	}
 	function onTouchMove(evt) {
 	    var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	    dispatchPointerEvent(Events.POINTER_MOVE, evt.target, detail);
+	    evt.preventDefault();
 	}
 	function onTouchEnd(evt) {
 	    var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	    dispatchPointerEvent(Events.POINTER_UP, evt.target, detail);
+	    evt.preventDefault();
 	}
 	function onPointerDown(evt) {
 	    dispatchPointerEvent(Events.POINTER_DOWN, evt.target, getPointerDetail(evt));
