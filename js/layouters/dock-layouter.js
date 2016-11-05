@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
 var consts_1 = require('../consts');
 var layouter_1 = require('./layouter');
 var TYPE = "dock";
@@ -109,6 +110,30 @@ var DockLayouterParam = (function (_super) {
         this.size = size;
         this.position = position;
     }
+    Object.defineProperty(DockLayouterParam.prototype, "widget", {
+        set: function (widget) {
+            var _this = this;
+            this._widget = widget;
+            widget.on(Events.RESIZING, function (evt) { return _this.onWidgetResized(); });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * 对应的Widget被用户RESIZE之后，重排兄弟控件。
+     */
+    DockLayouterParam.prototype.onWidgetResized = function () {
+        var widget = this._widget;
+        if (this.position === consts_1.Direction.LEFT || this.position === consts_1.Direction.RIGHT) {
+            var w = widget.w;
+            this.size = w.toString();
+        }
+        else if (this.position === consts_1.Direction.TOP || this.position === consts_1.Direction.BOTTOM) {
+            var h = widget.h;
+            this.size = h.toString();
+        }
+        widget.parent.relayoutChildren();
+    };
     DockLayouterParam.create = function (opts) {
         var options = opts || {};
         return new DockLayouterParam(options.position, options.size || "");

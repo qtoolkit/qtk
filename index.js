@@ -124,6 +124,7 @@ var qtk =
 	exports.Droppable = droppable_1.Droppable;
 	var resizable_1 = __webpack_require__(165);
 	exports.Resizable = resizable_1.Resizable;
+	exports.ResizableOptions = resizable_1.ResizableOptions;
 	var menu_1 = __webpack_require__(166);
 	exports.Menu = menu_1.Menu;
 	exports.MenuItem = menu_1.MenuItem;
@@ -5259,6 +5260,9 @@ var qtk =
 	         */
 	        set: function (param) {
 	            this._layoutParam = param;
+	            if (param) {
+	                param.widget = this;
+	            }
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -17031,10 +17035,27 @@ var qtk =
 	    return LayouterFactory;
 	}(factory_1.Factory));
 	exports.LayouterFactory = LayouterFactory;
+	/**
+	 * 布局参数。
+	 * 如果父控件有指定childrenLayouter，那么其中的子控件需要有与之对应的LayouterParam。
+	 */
 	var LayouterParam = (function () {
 	    function LayouterParam(type) {
 	        this.type = type;
 	    }
+	    Object.defineProperty(LayouterParam.prototype, "widget", {
+	        get: function () {
+	            return this._widget;
+	        },
+	        /**
+	         * 与之关联的Widget。
+	         */
+	        set: function (value) {
+	            this._widget = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    /**
 	     * 从JSON数据创建。
 	     */
@@ -24884,6 +24905,7 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var Events = __webpack_require__(6);
 	var consts_1 = __webpack_require__(105);
 	var layouter_1 = __webpack_require__(78);
 	var TYPE = "dock";
@@ -24989,6 +25011,30 @@ var qtk =
 	        this.size = size;
 	        this.position = position;
 	    }
+	    Object.defineProperty(DockLayouterParam.prototype, "widget", {
+	        set: function (widget) {
+	            var _this = this;
+	            this._widget = widget;
+	            widget.on(Events.RESIZING, function (evt) { return _this.onWidgetResized(); });
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * 对应的Widget被用户RESIZE之后，重排兄弟控件。
+	     */
+	    DockLayouterParam.prototype.onWidgetResized = function () {
+	        var widget = this._widget;
+	        if (this.position === consts_1.Direction.LEFT || this.position === consts_1.Direction.RIGHT) {
+	            var w = widget.w;
+	            this.size = w.toString();
+	        }
+	        else if (this.position === consts_1.Direction.TOP || this.position === consts_1.Direction.BOTTOM) {
+	            var h = widget.h;
+	            this.size = h.toString();
+	        }
+	        widget.parent.relayoutChildren();
+	    };
 	    DockLayouterParam.create = function (opts) {
 	        var options = opts || {};
 	        return new DockLayouterParam(options.position, options.size || "");
@@ -28474,8 +28520,10 @@ var qtk =
 	        var right = w - delta;
 	        var bottom = h - delta;
 	        var options = this.options;
+	        var southResizable = options.southWest || options.southEast || options.south;
+	        var northResizable = options.northWest || options.northEast || options.north;
 	        if (p.y >= 0 && p.y <= delta) {
-	            if (p.x >= 0 && p.x <= delta && options.northWest) {
+	            if (p.x >= 0 && p.x <= delta && northResizable) {
 	                return "nw";
 	            }
 	            else if (p.x > delta && p.x < right && options.north) {
@@ -28493,7 +28541,7 @@ var qtk =
 	                return "e";
 	            }
 	        }
-	        else if (p.y >= bottom && p.y <= h && options.southWest) {
+	        else if (p.y >= bottom && p.y <= h && southResizable) {
 	            if (p.x >= 0 && p.x <= delta) {
 	                return "sw";
 	            }

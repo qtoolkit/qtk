@@ -40,8 +40,17 @@ export declare class LayouterFactory extends Factory<Layouter> {
     static create(type: string, options?: any): Layouter;
     static createWithJson(json: any): Layouter;
 }
+/**
+ * 布局参数。
+ * 如果父控件有指定childrenLayouter，那么其中的子控件需要有与之对应的LayouterParam。
+ */
 export declare class LayouterParam {
     type: string;
+    /**
+     * 与之关联的Widget。
+     */
+    widget: Widget;
+    protected _widget: Widget;
     constructor(type: string);
     /**
      * 从JSON数据创建。

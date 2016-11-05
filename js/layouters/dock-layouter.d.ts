@@ -25,6 +25,11 @@ export declare class DockLayouter extends Layouter {
 export declare class DockLayouterParam extends LayouterParam {
     size: string;
     position: Direction;
+    widget: Widget;
     constructor(position: Direction, size: string);
+    /**
+     * 对应的Widget被用户RESIZE之后，重排兄弟控件。
+     */
+    protected onWidgetResized(): void;
     static create(opts: any): DockLayouterParam;
 }

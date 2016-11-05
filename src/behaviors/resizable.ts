@@ -141,9 +141,10 @@ export class Resizable extends Behavior {
 		var right = w - delta;
 		var bottom = h - delta;
 		var options = this.options;
-
+		var southResizable = options.southWest || options.southEast || options.south;
+		var northResizable = options.northWest || options.northEast || options.north;
 		if(p.y >= 0 && p.y <= delta) {
-			if(p.x >= 0 && p.x <= delta && options.northWest) {
+			if(p.x >= 0 && p.x <= delta && northResizable) {
 				return "nw";
 			}else if(p.x > delta && p.x < right && options.north)  {
 				return "n"; 
@@ -156,7 +157,7 @@ export class Resizable extends Behavior {
 			}else if(p.x >= right && p.x <= w && options.east) {
 				return "e"; 
 			}
-		}else if(p.y >= bottom && p.y <= h && options.southWest) {
+		}else if(p.y >= bottom && p.y <= h && southResizable) {
 			if(p.x >= 0 && p.x <= delta) {
 				return "sw";
 			}else if(p.x > delta && p.x < right && options.south)  {

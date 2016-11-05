@@ -620,6 +620,9 @@ var Widget = (function (_super) {
          */
         set: function (param) {
             this._layoutParam = param;
+            if (param) {
+                param.widget = this;
+            }
         },
         enumerable: true,
         configurable: true

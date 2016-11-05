@@ -106,8 +106,23 @@ export class LayouterFactory extends Factory<Layouter> {
 	}
 }
 
+/**
+ * 布局参数。
+ * 如果父控件有指定childrenLayouter，那么其中的子控件需要有与之对应的LayouterParam。
+ */
 export class LayouterParam {
 	public type : string;
+
+	/**
+	 * 与之关联的Widget。
+	 */
+	public set widget(value:Widget) {
+		this._widget = value;
+	}
+	public get widget() : Widget {
+		return this._widget;
+	}
+	protected _widget : Widget;
 
 	public constructor(type:string) {
 		this.type = type;

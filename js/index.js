@@ -77,6 +77,7 @@ var droppable_1 = require("./behaviors/droppable");
 exports.Droppable = droppable_1.Droppable;
 var resizable_1 = require("./behaviors/resizable");
 exports.Resizable = resizable_1.Resizable;
+exports.ResizableOptions = resizable_1.ResizableOptions;
 var menu_1 = require("./controls/menu");
 exports.Menu = menu_1.Menu;
 exports.MenuItem = menu_1.MenuItem;

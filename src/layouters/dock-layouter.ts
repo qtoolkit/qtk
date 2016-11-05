@@ -1,4 +1,5 @@
 import {Rect} from '../rect';
+import Events = require("../events");
 import {Direction} from '../consts';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
@@ -102,11 +103,32 @@ export class DockLayouterParam extends LayouterParam {
 	public size : string;
 	public position : Direction;
 
+	public set widget(widget:Widget) {
+		this._widget = widget;
+		widget.on(Events.RESIZING, evt => this.onWidgetResized());
+	}
+
 	constructor(position:Direction, size:string) {
 		super(TYPE);
 
 		this.size = size;
 		this.position = position;
+	}
+
+	/**
+	 * 对应的Widget被用户RESIZE之后，重排兄弟控件。
+	 */
+	protected onWidgetResized() {
+		var widget = this._widget;
+		if(this.position === Direction.LEFT || this.position === Direction.RIGHT) {
+			var w = widget.w;
+			this.size = w.toString();
+		}else if(this.position === Direction.TOP || this.position === Direction.BOTTOM) {
+			var h = widget.h;
+			this.size = h.toString();
+		}
+
+		widget.parent.relayoutChildren();
 	}
 
 	static create(opts:any) {

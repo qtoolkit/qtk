@@ -37,7 +37,7 @@ export {Movable} from "./behaviors/movable";
 export {ThemeManager} from "./theme-manager";
 export {Draggable} from "./behaviors/draggable";
 export {Droppable} from "./behaviors/droppable";
-export {Resizable} from "./behaviors/resizable";
+export {Resizable, ResizableOptions} from "./behaviors/resizable";
 export {Menu, MenuItem} from "./controls/menu";
 export {RadioButton} from "./controls/radio-button";
 export {TreeItemData} from "./controls/tree-item-data";

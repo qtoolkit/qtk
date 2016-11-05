@@ -28,6 +28,12 @@ describe('Resizable', function() {
     	e = Events.PointerEvent.create(Events.POINTER_UP, detail);
 		widget.dispatchPointerMove(e, matrixStack);
 	}
+    it('test ResizableOptions', (done) => {
+    	var options = new qtk.ResizableOptions({all:true});
+    	var result = options.north && options.south && options.east && options.west 
+    		&& options.northWest && options.northEast && options.southWest && options.southEast
+    	done(result ? null : new Error("ResizableOptions failed"));
+    });
     it('test Resizable', (done) => {
     	testResize("nw", done, 0, 0, 10, 10, 10, 10, 90, 90);
     });

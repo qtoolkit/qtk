@@ -693,6 +693,9 @@ export class Widget extends Emitter {
 	 */
 	public set layoutParam(param:any) {
 		this._layoutParam = param;
+		if(param) {
+			param.widget = this;
+		}
 	}
 
 	public get layoutParam() : any {

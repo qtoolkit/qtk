@@ -105,10 +105,27 @@ var LayouterFactory = (function (_super) {
     return LayouterFactory;
 }(factory_1.Factory));
 exports.LayouterFactory = LayouterFactory;
+/**
+ * 布局参数。
+ * 如果父控件有指定childrenLayouter，那么其中的子控件需要有与之对应的LayouterParam。
+ */
 var LayouterParam = (function () {
     function LayouterParam(type) {
         this.type = type;
     }
+    Object.defineProperty(LayouterParam.prototype, "widget", {
+        get: function () {
+            return this._widget;
+        },
+        /**
+         * 与之关联的Widget。
+         */
+        set: function (value) {
+            this._widget = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * 从JSON数据创建。
      */
