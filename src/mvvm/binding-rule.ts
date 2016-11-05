@@ -1,6 +1,6 @@
 import {JsonSerializer} from "../json-serializer"
-import {toUpdateTiming, toBindingMode} from "../mvvm/iview-modal";
-import {IViewModal, ICollectionViewModal, UpdateTiming, BindingMode} from "../mvvm/iview-modal";
+import {toUpdateTiming, toBindingMode} from "../mvvm/iview-model";
+import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
 
 export type DataSourceType = "data" | "command";
 
@@ -18,16 +18,16 @@ export interface IBindingSource {
 };
 
 /**
- * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModal中获取数据。
+ * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModel中获取数据。
  */
 export class BindingDataSource extends JsonSerializer implements IBindingSource{
 	/**
-	 * 常量数据。如果存在则优先使用此值，否则通过path从ViewModal中获取。
+	 * 常量数据。如果存在则优先使用此值，否则通过path从ViewModel中获取。
 	 */
 	public value : any;
 	
 	/**
-	 * 路径。通过path从ViewModal中获取数据。
+	 * 路径。通过path从ViewModel中获取数据。
 	 */
 	public path : string;
 	
@@ -45,7 +45,7 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
 	 */
 	public validationRule : string;
 	/**
-	 * 更新ViewModal的时机。
+	 * 更新ViewModel的时机。
 	 */
 	public updateTiming : UpdateTiming;
 

@@ -7,23 +7,23 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Events = require("../events");
 var delegate_command_1 = require("./delegate-command");
 var ivalidation_rule_1 = require("./ivalidation-rule");
-var iview_modal_1 = require("./iview-modal");
-var view_modal_default_1 = require("./view-modal-default");
+var iview_model_1 = require("./iview-model");
+var view_model_default_1 = require("./view-model-default");
 /**
- * 集合ViewModal。delProp/getProp/setProp操作当前的项。
+ * 集合ViewModel。delProp/getProp/setProp操作当前的项。
  */
-var CollectionViewModal = (function (_super) {
-    __extends(CollectionViewModal, _super);
-    function CollectionViewModal(data) {
+var CollectionViewModel = (function (_super) {
+    __extends(CollectionViewModel, _super);
+    function CollectionViewModel(data) {
         _super.call(this, data);
         this.isCollection = true;
         this.filters = {};
         this.comparators = {};
         this._current = 0;
         this._collection = data;
-        this.needUpdateViewModalItems = true;
+        this.needUpdateViewModelItems = true;
     }
-    Object.defineProperty(CollectionViewModal.prototype, "collection", {
+    Object.defineProperty(CollectionViewModel.prototype, "collection", {
         /**
          * 原始的数据。
          */
@@ -33,7 +33,7 @@ var CollectionViewModal = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CollectionViewModal.prototype, "current", {
+    Object.defineProperty(CollectionViewModel.prototype, "current", {
         get: function () {
             return this._current;
         },
@@ -41,16 +41,16 @@ var CollectionViewModal = (function (_super) {
          * 当前数据项的序号。
          */
         set: function (value) {
-            var viewModalItems = this.viewModalItems;
-            this._current = Math.min(viewModalItems.length - 1, Math.max(0, value));
+            var viewModelItems = this.viewModelItems;
+            this._current = Math.min(viewModelItems.length - 1, Math.max(0, value));
             this.notifyChange(Events.PROP_CHANGE, "/", value);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CollectionViewModal.prototype, "total", {
+    Object.defineProperty(CollectionViewModel.prototype, "total", {
         get: function () {
-            return this.viewModalItems.length;
+            return this.viewModelItems.length;
         },
         /**
          * 过滤之后总的项数。
@@ -60,40 +60,40 @@ var CollectionViewModal = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CollectionViewModal.prototype, "viewModalItems", {
+    Object.defineProperty(CollectionViewModel.prototype, "viewModelItems", {
         /**
-         * 子项目的ViewModal
+         * 子项目的ViewModel
          */
         get: function () {
-            if (this.needUpdateViewModalItems) {
-                this.updateViewModalItems();
+            if (this.needUpdateViewModelItems) {
+                this.updateViewModelItems();
             }
-            return this._viewModalItems;
+            return this._viewModelItems;
         },
         enumerable: true,
         configurable: true
     });
     /*
-     * 对于属性操作，都是针对当前项的ViewModal的操作。
+     * 对于属性操作，都是针对当前项的ViewModel的操作。
      */
-    CollectionViewModal.prototype.getProp = function (path, converterName) {
-        var vm = this.currentViewModal;
+    CollectionViewModel.prototype.getProp = function (path, converterName) {
+        var vm = this.currentViewModel;
         return vm ? vm.getProp(path, converterName) : null;
     };
-    CollectionViewModal.prototype.delProp = function (path) {
-        var vm = this.currentViewModal;
+    CollectionViewModel.prototype.delProp = function (path) {
+        var vm = this.currentViewModel;
         return vm ? vm.delProp(path) : this;
     };
-    CollectionViewModal.prototype.setProp = function (path, value, converterName, validationRule) {
-        var vm = this.currentViewModal;
+    CollectionViewModel.prototype.setProp = function (path, value, converterName, validationRule) {
+        var vm = this.currentViewModel;
         return vm ? vm.setProp(path, value, converterName, validationRule) : ivalidation_rule_1.ValidationResult.invalidResult;
     };
-    Object.defineProperty(CollectionViewModal.prototype, "currentViewModal", {
+    Object.defineProperty(CollectionViewModel.prototype, "currentViewModel", {
         /**
-         * 当前项的ViewModal
+         * 当前项的ViewModel
          */
         get: function () {
-            return this.viewModalItems[this._current];
+            return this.viewModelItems[this._current];
         },
         enumerable: true,
         configurable: true
@@ -101,39 +101,39 @@ var CollectionViewModal = (function (_super) {
     /**
      * 注册子项的增加删除的变化事件。
      */
-    CollectionViewModal.prototype.onItemsChange = function (callback) {
+    CollectionViewModel.prototype.onItemsChange = function (callback) {
         this.on(Events.ITEMS_CHANGE, callback);
         return this;
     };
     /**
      * 注销子项的增加删除的变化事件。
      */
-    CollectionViewModal.prototype.offItemsChange = function (callback) {
+    CollectionViewModel.prototype.offItemsChange = function (callback) {
         this.off(Events.ITEMS_CHANGE, callback);
         return this;
     };
     /**
      * 增加一个数据项。
      */
-    CollectionViewModal.prototype.addItem = function (data, index) {
+    CollectionViewModel.prototype.addItem = function (data, index) {
         var n = this._collection.length;
         var index = index < n ? index : n;
         this._collection.splice(index, 0, data);
-        this.updateViewModalItems(true);
+        this.updateViewModelItems(true);
         return this;
     };
     /**
      * 删除一个数据项。
      */
-    CollectionViewModal.prototype.removeItem = function (index) {
+    CollectionViewModel.prototype.removeItem = function (index) {
         this._collection.splice(index, 1);
-        this.updateViewModalItems(true);
+        this.updateViewModelItems(true);
         return this;
     };
     /**
      * 删除指定规则的数据项。
      */
-    CollectionViewModal.prototype.removeItems = function (func) {
+    CollectionViewModel.prototype.removeItems = function (func) {
         var _this = this;
         var collection = this._collection.filter(function (item, index, arr) {
             return !func(item, index, arr);
@@ -142,31 +142,31 @@ var CollectionViewModal = (function (_super) {
         collection.forEach(function (item) {
             _this._collection.push(item);
         });
-        this.updateViewModalItems(true);
+        this.updateViewModelItems(true);
         return this;
     };
     /**
      * 是否存在指定条件的项。
      */
-    CollectionViewModal.prototype.hasItems = function (func, filtered) {
+    CollectionViewModel.prototype.hasItems = function (func, filtered) {
         var arr = filtered ? this._filteredSortedCollection : this._collection;
         return arr.some(func);
     };
     /**
-     * 获取指定序号的子ViewModal
+     * 获取指定序号的子ViewModel
      */
-    CollectionViewModal.prototype.getItemViewModal = function (index) {
+    CollectionViewModel.prototype.getItemViewModel = function (index) {
         var i = (index >= 0 && index < this.total) ? index : this._current;
-        return this.viewModalItems[i];
+        return this.viewModelItems[i];
     };
-    CollectionViewModal.prototype.getItemData = function (index) {
+    CollectionViewModel.prototype.getItemData = function (index) {
         var i = (index >= 0 && index < this.total) ? index : this._current;
         return this._filteredSortedCollection[i];
     };
     /*
      * 获取过滤并排序之后的集合。
      */
-    CollectionViewModal.prototype.getFilteredSortedCollection = function () {
+    CollectionViewModel.prototype.getFilteredSortedCollection = function () {
         var collection = this._collection;
         var filteredSortedCollection = null;
         var filter = this.filters && this.filter ? this.filters[this.filter] : null;
@@ -190,7 +190,7 @@ var CollectionViewModal = (function (_super) {
     /**
      * 获取排序过滤集合中的序数对应于原始集合中的序数。
      */
-    CollectionViewModal.prototype.getRawIndexOf = function (index) {
+    CollectionViewModel.prototype.getRawIndexOf = function (index) {
         if ((this.comparators && this.comparator) || (this.filters && this.filter)) {
             var obj = this._filteredSortedCollection[index];
             return this.collection.indexOf(obj);
@@ -200,31 +200,31 @@ var CollectionViewModal = (function (_super) {
         }
     };
     /*
-     * 创建一个子ViewModal。
+     * 创建一个子ViewModel。
      */
-    CollectionViewModal.prototype.createItemViewModal = function (index, data) {
-        return ItemViewModal.create(this, index, data);
+    CollectionViewModel.prototype.createItemViewModel = function (index, data) {
+        return ItemViewModel.create(this, index, data);
     };
     /*
-     * 重新创建ViewModalItems。
+     * 重新创建ViewModelItems。
      */
-    CollectionViewModal.prototype.updateViewModalItems = function (force) {
+    CollectionViewModel.prototype.updateViewModelItems = function (force) {
         var _this = this;
-        if (force || this.needUpdateViewModalItems) {
-            this.needUpdateViewModalItems = false;
+        if (force || this.needUpdateViewModelItems) {
+            this.needUpdateViewModelItems = false;
             console.time("filter and sort");
             var collection = this.getFilteredSortedCollection();
             var n = collection.length;
             if (this.current >= n) {
                 this._current = n - 1;
             }
-            if (this._viewModalItems) {
-                this._viewModalItems.forEach(function (item) {
+            if (this._viewModelItems) {
+                this._viewModelItems.forEach(function (item) {
                     item.dispose();
                 });
             }
-            this._viewModalItems = collection.map(function (data, i) {
-                return _this.createItemViewModal(i, data);
+            this._viewModelItems = collection.map(function (data, i) {
+                return _this.createItemViewModel(i, data);
             });
             console.timeEnd("filter and sort");
             console.time("notify ITEMS_CHANGE");
@@ -236,18 +236,18 @@ var CollectionViewModal = (function (_super) {
     /**
      * 注册过滤器。
      */
-    CollectionViewModal.prototype.registerFilter = function (name, filter) {
+    CollectionViewModel.prototype.registerFilter = function (name, filter) {
         this.filters[name] = filter;
         return this;
     };
     /**
      * 注销过滤器。
      */
-    CollectionViewModal.prototype.unregisterFilter = function (name) {
+    CollectionViewModel.prototype.unregisterFilter = function (name) {
         delete this.filters[name];
         return this;
     };
-    Object.defineProperty(CollectionViewModal.prototype, "filter", {
+    Object.defineProperty(CollectionViewModel.prototype, "filter", {
         get: function () {
             return this._filter;
         },
@@ -256,8 +256,8 @@ var CollectionViewModal = (function (_super) {
          */
         set: function (name) {
             this._filter = name;
-            this.needUpdateViewModalItems = true;
-            this.updateViewModalItems();
+            this.needUpdateViewModelItems = true;
+            this.updateViewModelItems();
         },
         enumerable: true,
         configurable: true
@@ -265,18 +265,18 @@ var CollectionViewModal = (function (_super) {
     /**
      * 注册排序用的比较器。
      */
-    CollectionViewModal.prototype.registerComparator = function (name, comparator) {
+    CollectionViewModel.prototype.registerComparator = function (name, comparator) {
         this.comparators[name] = comparator;
         return this;
     };
     /**
      * 注销排序用的比较器。
      */
-    CollectionViewModal.prototype.unregisterComparator = function (name) {
+    CollectionViewModel.prototype.unregisterComparator = function (name) {
         delete this.comparators[name];
         return this;
     };
-    Object.defineProperty(CollectionViewModal.prototype, "comparator", {
+    Object.defineProperty(CollectionViewModel.prototype, "comparator", {
         get: function () {
             return this._comparator;
         },
@@ -285,47 +285,47 @@ var CollectionViewModal = (function (_super) {
          */
         set: function (name) {
             this._comparator = name;
-            this.needUpdateViewModalItems = true;
-            this.updateViewModalItems();
+            this.needUpdateViewModelItems = true;
+            this.updateViewModelItems();
         },
         enumerable: true,
         configurable: true
     });
-    CollectionViewModal.create = function (data) {
-        var viewModal = new CollectionViewModal(data);
-        return viewModal;
+    CollectionViewModel.create = function (data) {
+        var viewModel = new CollectionViewModel(data);
+        return viewModel;
     };
-    return CollectionViewModal;
-}(view_modal_default_1.ViewModalDefault));
-exports.CollectionViewModal = CollectionViewModal;
+    return CollectionViewModel;
+}(view_model_default_1.ViewModelDefault));
+exports.CollectionViewModel = CollectionViewModel;
 ;
 /**
- * 表示集合ViewModal中的单项ViewModal。
+ * 表示集合ViewModel中的单项ViewModel。
  *
  */
-var ItemViewModal = (function (_super) {
-    __extends(ItemViewModal, _super);
-    function ItemViewModal() {
+var ItemViewModel = (function (_super) {
+    __extends(ItemViewModel, _super);
+    function ItemViewModel() {
         _super.call(this, null);
         this.isCollection = false;
         this.initCommands();
     }
-    ItemViewModal.prototype.getCommand = function (name) {
+    ItemViewModel.prototype.getCommand = function (name) {
         var cmd = _super.prototype.getCommand.call(this, name);
         if (!cmd) {
-            cmd = this.collectionViewModal.getCommand(name);
+            cmd = this.collectionViewModel.getCommand(name);
         }
         return cmd;
     };
-    ItemViewModal.prototype.canExecute = function (name) {
+    ItemViewModel.prototype.canExecute = function (name) {
         if (_super.prototype.canExecute.call(this, name)) {
             return true;
         }
         else {
-            return this.collectionViewModal.canExecute(name);
+            return this.collectionViewModel.canExecute(name);
         }
     };
-    ItemViewModal.prototype.execCommand = function (name, args) {
+    ItemViewModel.prototype.execCommand = function (name, args) {
         var cmd = _super.prototype.getCommand.call(this, name);
         if (cmd) {
             return _super.prototype.execCommand.call(this, name, args);
@@ -337,69 +337,69 @@ var ItemViewModal = (function (_super) {
             else {
                 args = { $index: this.index };
             }
-            return this.collectionViewModal.execCommand(name, args);
+            return this.collectionViewModel.execCommand(name, args);
         }
     };
-    ItemViewModal.prototype.convert = function (converterName, value) {
-        return this.collectionViewModal.convert(converterName, value);
+    ItemViewModel.prototype.convert = function (converterName, value) {
+        return this.collectionViewModel.convert(converterName, value);
     };
-    ItemViewModal.prototype.convertBack = function (converterName, value) {
-        return this.collectionViewModal.convertBack(converterName, value);
+    ItemViewModel.prototype.convertBack = function (converterName, value) {
+        return this.collectionViewModel.convertBack(converterName, value);
     };
-    ItemViewModal.prototype.isValueValid = function (ruleName, value) {
-        return this.collectionViewModal.isValueValid(ruleName, value);
+    ItemViewModel.prototype.isValueValid = function (ruleName, value) {
+        return this.collectionViewModel.isValueValid(ruleName, value);
     };
-    ItemViewModal.prototype.getValueConverter = function (name) {
-        return this.collectionViewModal.getValueConverter(name);
+    ItemViewModel.prototype.getValueConverter = function (name) {
+        return this.collectionViewModel.getValueConverter(name);
     };
-    ItemViewModal.prototype.getValidationRule = function (name) {
-        return this.collectionViewModal.getValidationRule(name);
+    ItemViewModel.prototype.getValidationRule = function (name) {
+        return this.collectionViewModel.getValidationRule(name);
     };
-    ItemViewModal.prototype.isCurrent = function () {
-        return this.collectionViewModal.current === this.index;
+    ItemViewModel.prototype.isCurrent = function () {
+        return this.collectionViewModel.current === this.index;
     };
-    ItemViewModal.prototype.notifyChange = function (type, path, value) {
-        var collectionViewModal = this.collectionViewModal;
-        if (collectionViewModal.bindingMode === iview_modal_1.BindingMode.ONE_WAY) {
+    ItemViewModel.prototype.notifyChange = function (type, path, value) {
+        var collectionViewModel = this.collectionViewModel;
+        if (collectionViewModel.bindingMode === iview_model_1.BindingMode.ONE_WAY) {
             return;
         }
-        if (collectionViewModal.comparator || collectionViewModal.filter) {
-            collectionViewModal.updateViewModalItems(true);
+        if (collectionViewModel.comparator || collectionViewModel.filter) {
+            collectionViewModel.updateViewModelItems(true);
         }
         else {
             if (this.isCurrent) {
-                collectionViewModal.notifyChange(type, path, value);
+                collectionViewModel.notifyChange(type, path, value);
             }
             _super.prototype.notifyChange.call(this, type, path, value);
         }
     };
-    ItemViewModal.prototype.initCommands = function () {
+    ItemViewModel.prototype.initCommands = function () {
         var _this = this;
         this.registerCommand("activate", delegate_command_1.DelegateCommand.create(function (args) {
-            _this.collectionViewModal.current = _this.index;
+            _this.collectionViewModel.current = _this.index;
         }));
         this.registerCommand("remove", delegate_command_1.DelegateCommand.create(function (args) {
-            _this.collectionViewModal.removeItem(_this.collectionViewModal.getRawIndexOf(_this.index));
+            _this.collectionViewModel.removeItem(_this.collectionViewModel.getRawIndexOf(_this.index));
         }));
     };
-    ItemViewModal.prototype.init = function (collectionViewModal, index, data) {
-        this.collectionViewModal = collectionViewModal;
+    ItemViewModel.prototype.init = function (collectionViewModel, index, data) {
+        this.collectionViewModel = collectionViewModel;
         this.index = index;
         this.setData(data, false);
-        this.bindingMode = collectionViewModal.bindingMode;
+        this.bindingMode = collectionViewModel.bindingMode;
         return this;
     };
-    ItemViewModal.prototype.dispose = function () {
+    ItemViewModel.prototype.dispose = function () {
         this.index = -1;
         this.removeAllListeners();
-        this.collectionViewModal = null;
-        ItemViewModal.cache.push(this);
+        this.collectionViewModel = null;
+        ItemViewModel.cache.push(this);
     };
-    ItemViewModal.create = function (collectionViewModal, index, data) {
-        var vm = ItemViewModal.cache.length > 0 ? ItemViewModal.cache.pop() : (new ItemViewModal());
-        return vm.init(collectionViewModal, index, data);
+    ItemViewModel.create = function (collectionViewModel, index, data) {
+        var vm = ItemViewModel.cache.length > 0 ? ItemViewModel.cache.pop() : (new ItemViewModel());
+        return vm.init(collectionViewModel, index, data);
     };
-    ItemViewModal.cache = [];
-    return ItemViewModal;
-}(view_modal_default_1.ViewModalDefault));
-exports.ItemViewModal = ItemViewModal;
+    ItemViewModel.cache = [];
+    return ItemViewModel;
+}(view_model_default_1.ViewModelDefault));
+exports.ItemViewModel = ItemViewModel;

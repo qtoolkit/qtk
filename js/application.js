@@ -16,6 +16,7 @@ var image_tile_1 = require("./image-tile");
 var theme_manager_1 = require("./theme-manager");
 var device_info_1 = require("./device-info");
 var service_locator_1 = require("./service-locator");
+var window_manager_1 = require("./controls/window-manager");
 var inputEventAdapter = require("./input-event-adapter");
 var interaction_request_1 = require("./interaction-request/interaction-request");
 var interaction_service_1 = require("./interaction-request/interaction-service");
@@ -144,6 +145,9 @@ var Application = (function (_super) {
             var time = evt.deltaTime;
             TWEEN.update(time);
         });
+        if (device_info_1.DeviceInfo.isMobile || this.options.isMobile) {
+            this._windwManager = window_manager_1.WindowManager.create({ app: this });
+        }
         return this;
     };
     Application.prototype.getService = function (name) {

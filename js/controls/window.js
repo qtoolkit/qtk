@@ -14,6 +14,7 @@ var Window = (function (_super) {
     __extends(Window, _super);
     function Window(type) {
         _super.call(this, type);
+        this._windowEvent = Events.WindowEvent.create();
     }
     Object.defineProperty(Window.prototype, "grabbed", {
         get: function () {
@@ -108,9 +109,16 @@ var Window = (function (_super) {
             this._canvas.grabKey();
         }
         this.init();
-        this.dispatchEvent({ type: Events.OPEN });
         this.relayoutChildren();
+        this.dispatchWindowEvent(Events.WINDOW_OPEN);
         return this;
+    };
+    Window.prototype.dispatchWindowEvent = function (type) {
+        var e = this._windowEvent.reset(type, this);
+        this.dispatchEvent(e);
+        if (this.app) {
+            this.app.dispatchEvent(e);
+        }
     };
     /**
      * 关闭窗口。
@@ -119,7 +127,7 @@ var Window = (function (_super) {
         if (this._hasOwnCanvas) {
             this._canvas.ungrabKey();
         }
-        this.dispatchEvent({ type: Events.CLOSE });
+        this.dispatchWindowEvent(Events.WINDOW_CLOSE);
         this.ungrab();
         this.deinit();
         this.dispose();
@@ -187,12 +195,21 @@ var Window = (function (_super) {
             }
         });
     };
+    Window.prototype.onCreated = function () {
+        _super.prototype.onCreated.call(this);
+        this.dispatchWindowEvent(Events.WINDOW_CREATED);
+    };
     Window.prototype.onReset = function () {
         this._isWindow = true;
         this._grabbed = false;
         this.hasOwnCanvas = true;
         this._pointerPosition = point_1.Point.create(0, 0);
         this._shortcutEvent = Events.ShortcutEvent.create(null, null);
+    };
+    Window.prototype.reset = function (type, options) {
+        this._app = options ? options.app : null;
+        this.dispatchWindowEvent(Events.WINDOW_CREATE);
+        return _super.prototype.reset.call(this, type, options);
     };
     return Window;
 }(widget_1.Widget));

@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var application_1 = require("../application");
 var property_page_1 = require("./property-page");
-var view_modal_1 = require("../mvvm/view-modal");
+var view_model_1 = require("../mvvm/view-model");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var widget_factory_1 = require("../controls/widget-factory");
 var message_box_1 = require("../controls/message-box");
@@ -48,7 +48,7 @@ var PropertyDialog = (function (_super) {
         messageBox.createChildren(titleOptions, buttonsOption, null);
         var group = messageBox.content.set({ padding: 5, childrenLayouter: simple_layouter_1.SimpleLayouter.create() });
         group.addChild(page);
-        var vm = view_modal_1.ViewModal.create(dataCopy);
+        var vm = view_model_1.ViewModel.create(dataCopy);
         page.bindData(vm);
         messageBox.open();
     };

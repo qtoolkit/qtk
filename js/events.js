@@ -38,12 +38,14 @@ exports.MOVE_END = "move-end";
 exports.MOVE_BEGIN = "move-begin";
 exports.MOVE_CANCEL = "move-cancel";
 exports.CHOOSE = "choose";
-exports.OPEN = "open";
+exports.WINDOW_OPEN = "window-open";
+exports.WINDOW_CLOSE = "window-close";
+exports.WINDOW_CREATE = "window-create";
+exports.WINDOW_CREATED = "window-created";
 exports.INIT = "init";
 exports.FOCUS = "focus";
 exports.BLUR = "blur";
 exports.DEINIT = "deinit";
-exports.CLOSE = "close";
 exports.RESIZE = "resize";
 exports.RESIZING = "resizing";
 exports.RESIZE_END = "resize-end";
@@ -148,7 +150,7 @@ var AnyEvent = (function (_super) {
 exports.AnyEvent = AnyEvent;
 ;
 /**
- * View Modal请求显示指定的视图或跳转到指定的视图。
+ * View Model请求显示指定的视图或跳转到指定的视图。
  */
 var InteractionRequestEvent = (function (_super) {
     __extends(InteractionRequestEvent, _super);
@@ -445,6 +447,23 @@ var ScrollEvent = (function (_super) {
     return ScrollEvent;
 }(Event));
 exports.ScrollEvent = ScrollEvent;
+;
+var WindowEvent = (function (_super) {
+    __extends(WindowEvent, _super);
+    function WindowEvent() {
+        _super.apply(this, arguments);
+    }
+    WindowEvent.prototype.reset = function (type, widget) {
+        _super.prototype.init.call(this, type);
+        this.widget = widget;
+        return this;
+    };
+    WindowEvent.create = function () {
+        return new WindowEvent();
+    };
+    return WindowEvent;
+}(Event));
+exports.WindowEvent = WindowEvent;
 ;
 var ProgressEvent = (function (_super) {
     __extends(ProgressEvent, _super);

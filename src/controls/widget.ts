@@ -26,7 +26,7 @@ import {IValueConverter} from "../mvvm/ivalue-converter";
 import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource, 
 	BindingCommandSource} from "../mvvm/binding-rule";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
-import {IViewModal, ICollectionViewModal, UpdateTiming, BindingMode} from "../mvvm/iview-modal";
+import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
 
 export enum WidgetMode {
 	RUNTIME = 0,
@@ -1030,7 +1030,7 @@ export class Widget extends Emitter {
 		this._children = [];
 		this._layoutParam = null;
 		this._childrenLayouter = null;
-		this._viewModal = null;
+		this._viewModel = null;
 		this._dataBindingRule = null;
 		this.removeBinding();
 
@@ -1710,7 +1710,7 @@ export class Widget extends Emitter {
 		this.onkeydown = null;
 		this.onkeyup = null;
 		this._behaviors = {};
-		this._viewModal = null;
+		this._viewModel = null;
 		this._dataBindingRule = null;
 
 		this.onReset();
@@ -1860,7 +1860,7 @@ export class Widget extends Emitter {
 	}
 
 	protected _dataBindingRule : BindingRule;
-	protected _viewModal : IViewModal;
+	protected _viewModel : IViewModel;
 
 	/**
 	 * 数据绑定规则。
@@ -1874,7 +1874,7 @@ export class Widget extends Emitter {
 	}
 	
 	/**
-	 * 显式的更新ViewModal。
+	 * 显式的更新ViewModel。
 	 */
 	public updateExplicit() {
 		if(this._dataBindingRule) {
@@ -1886,23 +1886,23 @@ export class Widget extends Emitter {
 		});
 	}
 
-	protected viewModalChangeFunc = function(evt) {
-		var viewModal = this._viewModal;
+	protected viewModelChangeFunc = function(evt) {
+		var viewModel = this._viewModel;
 		var dataBindingRule = this._dataBindingRule;
 		
-		if(dataBindingRule && viewModal) {
-			this.onBindData(viewModal, dataBindingRule);
+		if(dataBindingRule && viewModel) {
+			this.onBindData(viewModel, dataBindingRule);
 		}
 	}.bind(this);
 
 	protected removeBinding() {
-		var viewModal = this._viewModal;
+		var viewModel = this._viewModel;
 		var dataBindingRule = this._dataBindingRule;
 		
-		if(dataBindingRule && viewModal) {
-			viewModal.offChange(this.viewModalChangeFunc);
+		if(dataBindingRule && viewModel) {
+			viewModel.offChange(this.viewModelChangeFunc);
 		}
-		this._viewModal = null;
+		this._viewModel = null;
 		this._dataBindingRule = null;
 	}
 
@@ -1915,17 +1915,17 @@ export class Widget extends Emitter {
 	/**
 	 * 绑定数据。
 	 */
-	public bindData(viewModal:IViewModal) : Widget {
+	public bindData(viewModel:IViewModel) : Widget {
 		var dataBindingRule = this._dataBindingRule;
-		this._viewModal = viewModal;
+		this._viewModel = viewModel;
 		this.onBeforeBindData();
 
-		if(dataBindingRule && viewModal) {
-			var bindingMode = viewModal.bindingMode;
+		if(dataBindingRule && viewModel) {
+			var bindingMode = viewModel.bindingMode;
 			
-			this.onBindCommand(viewModal, dataBindingRule);
+			this.onBindCommand(viewModel, dataBindingRule);
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-				this.onBindData(viewModal, dataBindingRule);
+				this.onBindData(viewModel, dataBindingRule);
 			}
 
 			if(bindingMode === BindingMode.TWO_WAY || bindingMode === BindingMode.ONE_WAY_TO_SOURCE) {
@@ -1933,12 +1933,12 @@ export class Widget extends Emitter {
 			}
 
 			if(bindingMode !== BindingMode.ONE_TIME && bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
-				viewModal.onChange(this.viewModalChangeFunc);
+				viewModel.onChange(this.viewModelChangeFunc);
 			}
 
 			this._isEnableFunc = function() {
 				var enable = true;
-				var vm = this._viewModal;
+				var vm = this._viewModel;
 				
 				if(vm) {
 					dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
@@ -1954,11 +1954,11 @@ export class Widget extends Emitter {
 			}
 		}
 
-		this.bindChildren(viewModal);
-		if(viewModal.isCollection && this._templateItemJson) {
-			var collectionViewModal = <ICollectionViewModal>viewModal;
-			collectionViewModal.onItemsChange((evt:Events.ChangeEvent) => {
-				this.bindChildren(viewModal);
+		this.bindChildren(viewModel);
+		if(viewModel.isCollection && this._templateItemJson) {
+			var collectionViewModel = <ICollectionViewModel>viewModel;
+			collectionViewModel.onItemsChange((evt:Events.ChangeEvent) => {
+				this.bindChildren(viewModel);
 			});
 		}
 		this.onAfterBindData();
@@ -1966,36 +1966,36 @@ export class Widget extends Emitter {
 		return this;
 	}
 	
-	protected bindChildren(viewModal:IViewModal) {
-		if(viewModal.isCollection) {
+	protected bindChildren(viewModel:IViewModel) {
+		if(viewModel.isCollection) {
 			if(this._templateItemJson) {	
-				//对于集合viewModal，如果有模板项存在，则动态生成子控件。
+				//对于集合viewModel，如果有模板项存在，则动态生成子控件。
 				var json = this._templateItemJson;
-				var collectionViewModal = <ICollectionViewModal>viewModal;
-				var n = collectionViewModal.total;
+				var collectionViewModel = <ICollectionViewModel>viewModel;
+				var n = collectionViewModel.total;
 
 				this.removeAllChildren();
 				for(var i = 0; i < n; i++) {
-					var itemViewModal = collectionViewModal.getItemViewModal(i);
+					var itemViewModel = collectionViewModel.getItemViewModel(i);
 					var child = this.addChildWithTemplate(true);
-					child.bindData(itemViewModal);
+					child.bindData(itemViewModel);
 				}
 				this.relayoutChildren();
 			}else{
-				//对于集合viewModal，如果没有模板项存在，则绑定集合viewModal当前项到子控件。
+				//对于集合viewModel，如果没有模板项存在，则绑定集合viewModel当前项到子控件。
 				this._children.forEach((child:Widget) => {
-					child.bindData(viewModal);
+					child.bindData(viewModel);
 				});
 			}
 		}else{
-			//对于非集合viewModal，按正常绑定子控件。
+			//对于非集合viewModel，按正常绑定子控件。
 			this._children.forEach((child:Widget) => {
-				child.bindData(viewModal);
+				child.bindData(viewModel);
 			});
 		}
 	}
 
-	protected onBindCommand(viewModal:IViewModal, dataBindingRule:any) {
+	protected onBindCommand(viewModel:IViewModel, dataBindingRule:any) {
 		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
 			var source = item.source;
 			if(source.type === BindingCommandSource.TYPE) {
@@ -2007,7 +2007,7 @@ export class Widget extends Emitter {
 					}
 					commandSource.eventHandler = function(evt:any) {
 						var args = commandSource.commandArgs || evt;
-						viewModal.execCommand(commandSource.command, args);
+						viewModel.execCommand(commandSource.command, args);
 					}
 					this.on(type, commandSource.eventHandler);
 				}else{
@@ -2020,7 +2020,7 @@ export class Widget extends Emitter {
 	/*
 	 * 把数据显示到界面上。
 	 */
-	protected onBindData(viewModal:IViewModal, dataBindingRule:any) {
+	protected onBindData(viewModel:IViewModel, dataBindingRule:any) {
 		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
 			var source = item.source;
 			if(source.type === BindingDataSource.TYPE) {
@@ -2029,7 +2029,7 @@ export class Widget extends Emitter {
 				var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
 				
 				if(value === undefined && dataSource.path) {
-					value = viewModal.getProp(dataSource.path, dataSource.converter);
+					value = viewModel.getProp(dataSource.path, dataSource.converter);
 				}
 				
 				if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
@@ -2065,7 +2065,7 @@ export class Widget extends Emitter {
 	}
 
 	protected updateValueToSource(value:any, dataSource:BindingDataSource, oldValue?:any) {
-		var result = this._viewModal.setPropEx(dataSource, value, oldValue);
+		var result = this._viewModel.setPropEx(dataSource, value, oldValue);
 		if(result.code) {
 			this.onInvalidInput(result.message);
 		}else{

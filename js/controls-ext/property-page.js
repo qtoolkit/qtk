@@ -349,10 +349,10 @@ var PropertyPage = (function (_super) {
             console.log("reload changed");
             _this.initWithPropsDesc(propsDesc);
         });
-        var viewModal = this._viewModal;
-        if (viewModal) {
+        var viewModel = this._viewModel;
+        if (viewModel) {
             this.children.forEach(function (child) {
-                child.bindData(viewModal);
+                child.bindData(viewModel);
             });
         }
         this.relayoutChildren();

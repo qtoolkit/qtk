@@ -3,7 +3,7 @@ import { Widget } from "../controls/widget";
 import { TableIndex } from "./table-index";
 import { TableClient } from "./table-client";
 import { TableHeader } from "./table-header";
-import { IViewModal } from "../mvvm/iview-modal";
+import { IViewModel } from "../mvvm/iview-model";
 /**
  * 描述表格中某列的信息。
  */
@@ -87,7 +87,7 @@ export declare class Table extends Widget {
     getColumns(): Array<TableColInfo>;
     constructor();
     protected getTemplateRow(): Widget;
-    bindData(viewModal: IViewModal): Widget;
+    bindData(viewModel: IViewModel): Widget;
     protected onHeaderItemResized(): void;
     protected onHeaderItemResizing(): void;
     protected prepareUI(): void;

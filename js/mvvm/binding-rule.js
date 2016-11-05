@@ -5,11 +5,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var json_serializer_1 = require("../json-serializer");
-var iview_modal_1 = require("../mvvm/iview-modal");
-var iview_modal_2 = require("../mvvm/iview-modal");
+var iview_model_1 = require("../mvvm/iview-model");
+var iview_model_2 = require("../mvvm/iview-model");
 ;
 /**
- * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModal中获取数据。
+ * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModel中获取数据。
  */
 var BindingDataSource = (function (_super) {
     __extends(BindingDataSource, _super);
@@ -18,8 +18,8 @@ var BindingDataSource = (function (_super) {
         this.converter = converter;
         this.type = BindingDataSource.TYPE;
         this.validationRule = validationRule;
-        this.mode = mode || iview_modal_2.BindingMode.TWO_WAY;
-        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_modal_2.UpdateTiming.CHANGING;
+        this.mode = mode || iview_model_2.BindingMode.TWO_WAY;
+        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_model_2.UpdateTiming.CHANGING;
         if (path !== undefined) {
             this.path = path;
         }
@@ -140,11 +140,11 @@ var BindingRule = (function () {
             }
             var mode = dataSource.mode;
             if (mode && typeof mode === "string") {
-                dataSource.mode = iview_modal_1.toBindingMode(mode);
+                dataSource.mode = iview_model_1.toBindingMode(mode);
             }
             var updateTiming = dataSource.updateTiming;
             if (updateTiming && typeof updateTiming === "string") {
-                dataSource.updateTiming = iview_modal_1.toUpdateTiming(updateTiming);
+                dataSource.updateTiming = iview_model_1.toUpdateTiming(updateTiming);
             }
         }
         return rule;

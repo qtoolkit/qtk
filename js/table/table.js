@@ -157,13 +157,13 @@ var Table = (function (_super) {
         }
         return this._templateRow;
     };
-    Table.prototype.bindData = function (viewModal) {
+    Table.prototype.bindData = function (viewModel) {
         this.prepareUI();
         var client = this._client;
         if (client) {
             client.templateItem = this.getTemplateRow();
             client.removeAllChildren();
-            client.bindData(viewModal);
+            client.bindData(viewModel);
         }
         var itemH = this.rowH;
         var indexBar = this._indexBar;

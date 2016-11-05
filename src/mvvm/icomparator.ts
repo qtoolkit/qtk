@@ -1,5 +1,5 @@
 /**
- * CollectionViewModal的比较器，用于排序。
+ * CollectionViewModel的比较器，用于排序。
  */
 export interface  IComparator {
 	/**

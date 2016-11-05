@@ -1,7 +1,7 @@
 
 import {Application} from "../application";
 import {PropertyPage} from "./property-page";
-import {ViewModal}  from "../mvvm/view-modal";
+import {ViewModel}  from "../mvvm/view-model";
 import {PagePropsDesc, PropsDesc} from "./props-desc"
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {Widget, WidgetState} from "../controls/widget";
@@ -51,7 +51,7 @@ export class PropertyDialog extends MessageBox {
 		var group = messageBox.content.set({padding:5, childrenLayouter:SimpleLayouter.create()});
 		group.addChild(page);
 
-		var vm = ViewModal.create(dataCopy);
+		var vm = ViewModel.create(dataCopy);
 		page.bindData(vm);
 
 		messageBox.open();

@@ -18,7 +18,7 @@ var ageValidationRule = {
 	}
 };
 
-function createViewModal() {
+function createViewModel() {
 	var data = {
 		name:"QTK",
 		age:100,
@@ -34,16 +34,16 @@ function createViewModal() {
 		commandEnable = true;
 	}, 3000);
 
-	var viewModal = qtk.ViewModal.create(data);
-	viewModal.registerValueConverter("gender", genderConverter);
-	viewModal.registerValidationRule("age", ageValidationRule);
-	viewModal.registerCommand("dummy", qtk.DelegateCommand.create(function execute(args) {
+	var viewModel = qtk.ViewModel.create(data);
+	viewModel.registerValueConverter("gender", genderConverter);
+	viewModel.registerValidationRule("age", ageValidationRule);
+	viewModel.registerCommand("dummy", qtk.DelegateCommand.create(function execute(args) {
 		console.log("dummy");
 	}, function() {
 		return commandEnable;
 	}));
 
-	return viewModal;
+	return viewModel;
 }
 
 function onReady(app) {
@@ -154,9 +154,9 @@ function onReady(app) {
 		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
 	}));
 
-	var viewModal = createViewModal();
-	listView.bindData(viewModal);
-	viewModal.on(Events.PROP_CHANGE, function(evt) {
+	var viewModel = createViewModel();
+	listView.bindData(viewModel);
+	viewModel.on(Events.PROP_CHANGE, function(evt) {
 		summary.text = "change: " + evt.prop + " = " + evt.value;
 	});
 

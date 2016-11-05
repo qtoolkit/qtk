@@ -14,6 +14,7 @@ import {IApplication} from "./iapplication";
 import {DeviceInfo} from "./device-info";
 import {IThemeManager} from "./itheme-manager";
 import {ServiceLocator} from  "./service-locator";
+import {WindowManager} from "./controls/window-manager";
 import inputEventAdapter = require("./input-event-adapter");
 import {InteractionRequest} from "./interaction-request/interaction-request";
 import {InteractionService} from "./interaction-request/interaction-service";
@@ -29,6 +30,7 @@ export class Application extends Emitter implements IApplication {
 	private _viewPort : IViewPort; 
 	private _mainLoop : MainLoop;
 	private servicesManager : ServiceLocator;
+	private _windwManager : WindowManager;
 
 	constructor(name:string) {
 		super();
@@ -152,6 +154,10 @@ export class Application extends Emitter implements IApplication {
 			var time = evt.deltaTime;
 			TWEEN.update(time);
 		});
+
+		if(DeviceInfo.isMobile || this.options.isMobile) {
+			this._windwManager = WindowManager.create({app:this});
+		}
 
 		return this;
 	}

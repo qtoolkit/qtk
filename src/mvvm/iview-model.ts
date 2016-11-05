@@ -5,11 +5,11 @@ import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 
 /**
- * ViewModal的接口定义。
+ * ViewModel的接口定义。
  */
-export interface IViewModal {
+export interface IViewModel {
 	/**
-	 * 当前ViewModal是否集合。
+	 * 当前ViewModel是否集合。
 	 */
 	isCollection : boolean;
 
@@ -30,7 +30,7 @@ export interface IViewModal {
 	 * 删除属性。
 	 * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer
 	 */
-	delProp(path:string) : IViewModal;
+	delProp(path:string) : IViewModel;
 	
 	/**
 	 * 设置属性的值。
@@ -54,16 +54,16 @@ export interface IViewModal {
 	/**
 	 * 注册数据改变事件。
 	 * @param callback 事件处理函数。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	onChange(callback:Function) : IViewModal;
+	onChange(callback:Function) : IViewModel;
 	
 	/**
 	 * 注销数据改变事件。
 	 * @param callback 事件处理函数。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	offChange(callback:Function) : IViewModal;
+	offChange(callback:Function) : IViewModel;
 
 	/**
 	 * 判断指定的命令能否执行。
@@ -89,9 +89,9 @@ export interface IViewModal {
 };
 
 /**
- * 集合的ViewModal。
+ * 集合的ViewModel。
  */
-export interface ICollectionViewModal extends IViewModal {
+export interface ICollectionViewModel extends IViewModel {
 	/**
 	 * 集合中数据项的总数。
 	 */
@@ -102,38 +102,38 @@ export interface ICollectionViewModal extends IViewModal {
 	current : number;
 
 	/**
-	 * 获取指定索引的数据项的ViewModal。
+	 * 获取指定索引的数据项的ViewModel。
 	 */
-	getItemViewModal(index:number) : IViewModal;
+	getItemViewModel(index:number) : IViewModel;
 	
 	/**
 	 * 注册数据项改变事件。
 	 * @param callback 事件处理函数。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	onItemsChange(callback:Function) : ICollectionViewModal;
+	onItemsChange(callback:Function) : ICollectionViewModel;
 	
 	/**
 	 * 注销数据项改变事件。
 	 * @param callback 事件处理函数。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	offItemsChange(callback:Function) : ICollectionViewModal;
+	offItemsChange(callback:Function) : ICollectionViewModel;
 
 	/**
 	 * 删除指定的项。
 	 * @param index 指定项的索引。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	removeItem(index:number) : ICollectionViewModal;
+	removeItem(index:number) : ICollectionViewModel;
 
 	/**
 	 * 增加一项数据。
 	 * @param data 指定项的数据。
 	 * @param index 指定项的索引。
-	 * @returns 返回IViewModal本身。
+	 * @returns 返回IViewModel本身。
 	 */
-	addItem(data:any, index?:number) : ICollectionViewModal;
+	addItem(data:any, index?:number) : ICollectionViewModel;
 };
 
 /**
@@ -142,22 +142,22 @@ export interface ICollectionViewModal extends IViewModal {
 export enum BindingMode {
 	/**
 	 * 双向数据绑定。
-	 * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时自动更新界面。
+	 * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时自动更新界面。
 	 */
 	TWO_WAY = 0,
 	/**
 	 * 单向数据绑定。
-	 * 界面数据变化时不更新ViewModal，ViewModal数据有变化时自动更新界面。
+	 * 界面数据变化时不更新ViewModel，ViewModel数据有变化时自动更新界面。
 	 */
 	ONE_WAY,
 	/**
 	 * 只在初始化时绑定。
-	 * 界面数据变化时不更新ViewModal，ViewModal数据有变化时不更新界面。
+	 * 界面数据变化时不更新ViewModel，ViewModel数据有变化时不更新界面。
 	 */
 	ONE_TIME,
 	/**
 	 * 单向数据绑定。
-	 * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时不更新界面。
+	 * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时不更新界面。
 	 */
 	ONE_WAY_TO_SOURCE
 };
@@ -167,7 +167,7 @@ export function toBindingMode(name:string) : BindingMode {
 }
 
 /**
- * 更新ViewModal的时机。
+ * 更新ViewModel的时机。
  */
 export enum UpdateTiming {
 	/**

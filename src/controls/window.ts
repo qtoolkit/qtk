@@ -14,6 +14,8 @@ export abstract class Window extends Widget {
 	private _pointerPosition : Point;
 	private _shouldGrabWhenVisible : boolean;
 	private _shortcutEvent : Events.ShortcutEvent;
+	private _windowEvent = Events.WindowEvent.create();
+
 	constructor(type:string) {
 		super(type);
 	}
@@ -111,10 +113,18 @@ export abstract class Window extends Widget {
 		}
 
 		this.init();
-		this.dispatchEvent({type:Events.OPEN});
 		this.relayoutChildren();
+		this.dispatchWindowEvent(Events.WINDOW_OPEN);
 
 		return this;
+	}
+	
+	public dispatchWindowEvent(type:string) {
+		var e = this._windowEvent.reset(type, this);
+		this.dispatchEvent(e);
+		if(this.app) {
+			this.app.dispatchEvent(e);
+		}
 	}
 
 	/**
@@ -125,7 +135,7 @@ export abstract class Window extends Widget {
 			this._canvas.ungrabKey();
 		}
 
-		this.dispatchEvent({type:Events.CLOSE});
+		this.dispatchWindowEvent(Events.WINDOW_CLOSE);
 		this.ungrab();
 		this.deinit();
 		this.dispose();
@@ -205,6 +215,11 @@ export abstract class Window extends Widget {
 		});
 	}
 
+	protected onCreated() {
+		super.onCreated();
+		this.dispatchWindowEvent(Events.WINDOW_CREATED);
+	}
+
 	protected onReset() {
 		this._isWindow = true;
 		this._grabbed = false;
@@ -212,5 +227,11 @@ export abstract class Window extends Widget {
 		this._pointerPosition = Point.create(0, 0);
 		this._shortcutEvent = Events.ShortcutEvent.create(null, null);
 	}
+	
+	public reset(type:string, options:any) : Widget {
+		this._app = options ? options.app : null;
+		this.dispatchWindowEvent(Events.WINDOW_CREATE);
 
+		return super.reset(type, options);
+	}
 };

@@ -34,12 +34,14 @@ export const MOVE_END = "move-end";
 export const MOVE_BEGIN = "move-begin";
 export const MOVE_CANCEL = "move-cancel";
 export const CHOOSE = "choose";
-export const OPEN = "open"
+export const WINDOW_OPEN = "window-open"
+export const WINDOW_CLOSE = "window-close"
+export const WINDOW_CREATE = "window-create"
+export const WINDOW_CREATED = "window-created"
 export const INIT = "init"
 export const FOCUS = "focus"
 export const BLUR  = "blur"
 export const DEINIT = "deinit"
-export const CLOSE = "close"
 export const RESIZE = "resize";
 export const RESIZING = "resizing";
 export const RESIZE_END = "resize-end";
@@ -146,7 +148,7 @@ export class AnyEvent extends Event {
 };
 
 /**
- * View Modal请求显示指定的视图或跳转到指定的视图。
+ * View Model请求显示指定的视图或跳转到指定的视图。
  */
 export class InteractionRequestEvent extends Event {
 	/**
@@ -536,6 +538,22 @@ export class ScrollEvent extends Event {
 
 	public static create() : ScrollEvent  {
 		return new ScrollEvent();
+	}
+};
+
+export class WindowEvent extends Event {
+	public widget : any;
+
+	public reset(type:string, widget:any) : any {
+		super.init(type);
+
+		this.widget = widget;
+
+		return this;
+	}
+
+	public static create() : WindowEvent  {
+		return new WindowEvent();
 	}
 };
 

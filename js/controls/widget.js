@@ -21,7 +21,7 @@ var image_tile_1 = require("../image-tile");
 var behavior_1 = require("../behaviors/behavior");
 var layouter_1 = require('../layouters/layouter');
 var binding_rule_1 = require("../mvvm/binding-rule");
-var iview_modal_1 = require("../mvvm/iview-modal");
+var iview_model_1 = require("../mvvm/iview-model");
 (function (WidgetMode) {
     WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
     WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
@@ -63,11 +63,11 @@ var Widget = (function (_super) {
         this.layoutRect = rect_1.Rect.create(0, 0, 0, 0);
         this.eChangeEvent = Events.ChangeEvent.create();
         this.ePropChangeEvent = Events.PropChangeEvent.create();
-        this.viewModalChangeFunc = function (evt) {
-            var viewModal = this._viewModal;
+        this.viewModelChangeFunc = function (evt) {
+            var viewModel = this._viewModel;
             var dataBindingRule = this._dataBindingRule;
-            if (dataBindingRule && viewModal) {
-                this.onBindData(viewModal, dataBindingRule);
+            if (dataBindingRule && viewModel) {
+                this.onBindData(viewModel, dataBindingRule);
             }
         }.bind(this);
         this.type = type;
@@ -901,7 +901,7 @@ var Widget = (function (_super) {
         this._children = [];
         this._layoutParam = null;
         this._childrenLayouter = null;
-        this._viewModal = null;
+        this._viewModel = null;
         this._dataBindingRule = null;
         this.removeBinding();
         if (this.recycle) {
@@ -1571,7 +1571,7 @@ var Widget = (function (_super) {
         this.onkeydown = null;
         this.onkeyup = null;
         this._behaviors = {};
-        this._viewModal = null;
+        this._viewModel = null;
         this._dataBindingRule = null;
         this.onReset();
         this.set(options);
@@ -1707,7 +1707,7 @@ var Widget = (function (_super) {
         configurable: true
     });
     /**
-     * 显式的更新ViewModal。
+     * 显式的更新ViewModel。
      */
     Widget.prototype.updateExplicit = function () {
         if (this._dataBindingRule) {
@@ -1718,12 +1718,12 @@ var Widget = (function (_super) {
         });
     };
     Widget.prototype.removeBinding = function () {
-        var viewModal = this._viewModal;
+        var viewModel = this._viewModel;
         var dataBindingRule = this._dataBindingRule;
-        if (dataBindingRule && viewModal) {
-            viewModal.offChange(this.viewModalChangeFunc);
+        if (dataBindingRule && viewModel) {
+            viewModel.offChange(this.viewModelChangeFunc);
         }
-        this._viewModal = null;
+        this._viewModel = null;
         this._dataBindingRule = null;
     };
     Widget.prototype.onBeforeBindData = function () {
@@ -1733,26 +1733,26 @@ var Widget = (function (_super) {
     /**
      * 绑定数据。
      */
-    Widget.prototype.bindData = function (viewModal) {
+    Widget.prototype.bindData = function (viewModel) {
         var _this = this;
         var dataBindingRule = this._dataBindingRule;
-        this._viewModal = viewModal;
+        this._viewModel = viewModel;
         this.onBeforeBindData();
-        if (dataBindingRule && viewModal) {
-            var bindingMode = viewModal.bindingMode;
-            this.onBindCommand(viewModal, dataBindingRule);
-            if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                this.onBindData(viewModal, dataBindingRule);
+        if (dataBindingRule && viewModel) {
+            var bindingMode = viewModel.bindingMode;
+            this.onBindCommand(viewModel, dataBindingRule);
+            if (bindingMode !== iview_model_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                this.onBindData(viewModel, dataBindingRule);
             }
-            if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+            if (bindingMode === iview_model_1.BindingMode.TWO_WAY || bindingMode === iview_model_1.BindingMode.ONE_WAY_TO_SOURCE) {
                 this.watchTargetChange(dataBindingRule);
             }
-            if (bindingMode !== iview_modal_1.BindingMode.ONE_TIME && bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
-                viewModal.onChange(this.viewModalChangeFunc);
+            if (bindingMode !== iview_model_1.BindingMode.ONE_TIME && bindingMode !== iview_model_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                viewModel.onChange(this.viewModelChangeFunc);
             }
             this._isEnableFunc = function () {
                 var enable = true;
-                var vm = this._viewModal;
+                var vm = this._viewModel;
                 if (vm) {
                     dataBindingRule.forEach(function (prop, item) {
                         var source = item.source;
@@ -1765,46 +1765,46 @@ var Widget = (function (_super) {
                 return enable;
             };
         }
-        this.bindChildren(viewModal);
-        if (viewModal.isCollection && this._templateItemJson) {
-            var collectionViewModal = viewModal;
-            collectionViewModal.onItemsChange(function (evt) {
-                _this.bindChildren(viewModal);
+        this.bindChildren(viewModel);
+        if (viewModel.isCollection && this._templateItemJson) {
+            var collectionViewModel = viewModel;
+            collectionViewModel.onItemsChange(function (evt) {
+                _this.bindChildren(viewModel);
             });
         }
         this.onAfterBindData();
         return this;
     };
-    Widget.prototype.bindChildren = function (viewModal) {
-        if (viewModal.isCollection) {
+    Widget.prototype.bindChildren = function (viewModel) {
+        if (viewModel.isCollection) {
             if (this._templateItemJson) {
-                //对于集合viewModal，如果有模板项存在，则动态生成子控件。
+                //对于集合viewModel，如果有模板项存在，则动态生成子控件。
                 var json = this._templateItemJson;
-                var collectionViewModal = viewModal;
-                var n = collectionViewModal.total;
+                var collectionViewModel = viewModel;
+                var n = collectionViewModel.total;
                 this.removeAllChildren();
                 for (var i = 0; i < n; i++) {
-                    var itemViewModal = collectionViewModal.getItemViewModal(i);
+                    var itemViewModel = collectionViewModel.getItemViewModel(i);
                     var child = this.addChildWithTemplate(true);
-                    child.bindData(itemViewModal);
+                    child.bindData(itemViewModel);
                 }
                 this.relayoutChildren();
             }
             else {
-                //对于集合viewModal，如果没有模板项存在，则绑定集合viewModal当前项到子控件。
+                //对于集合viewModel，如果没有模板项存在，则绑定集合viewModel当前项到子控件。
                 this._children.forEach(function (child) {
-                    child.bindData(viewModal);
+                    child.bindData(viewModel);
                 });
             }
         }
         else {
-            //对于非集合viewModal，按正常绑定子控件。
+            //对于非集合viewModel，按正常绑定子控件。
             this._children.forEach(function (child) {
-                child.bindData(viewModal);
+                child.bindData(viewModel);
             });
         }
     };
-    Widget.prototype.onBindCommand = function (viewModal, dataBindingRule) {
+    Widget.prototype.onBindCommand = function (viewModel, dataBindingRule) {
         var _this = this;
         dataBindingRule.forEach(function (prop, item) {
             var source = item.source;
@@ -1817,7 +1817,7 @@ var Widget = (function (_super) {
                     }
                     commandSource.eventHandler = function (evt) {
                         var args = commandSource.commandArgs || evt;
-                        viewModal.execCommand(commandSource.command, args);
+                        viewModel.execCommand(commandSource.command, args);
                     };
                     _this.on(type, commandSource.eventHandler);
                 }
@@ -1830,25 +1830,25 @@ var Widget = (function (_super) {
     /*
      * 把数据显示到界面上。
      */
-    Widget.prototype.onBindData = function (viewModal, dataBindingRule) {
+    Widget.prototype.onBindData = function (viewModel, dataBindingRule) {
         var _this = this;
         dataBindingRule.forEach(function (prop, item) {
             var source = item.source;
             if (source.type === binding_rule_1.BindingDataSource.TYPE) {
                 var dataSource = source;
                 var value = dataSource.value;
-                var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
+                var bindingMode = dataSource.mode || iview_model_1.BindingMode.TWO_WAY;
                 if (value === undefined && dataSource.path) {
-                    value = viewModal.getProp(dataSource.path, dataSource.converter);
+                    value = viewModel.getProp(dataSource.path, dataSource.converter);
                 }
-                if (bindingMode !== iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+                if (bindingMode !== iview_model_1.BindingMode.ONE_WAY_TO_SOURCE) {
                     _this.onBindProp(prop, value);
                 }
             }
         });
     };
     Widget.prototype.getPropDefaultBindMode = function (prop) {
-        return (prop === "value" && this.inputable) ? iview_modal_1.BindingMode.TWO_WAY : iview_modal_1.BindingMode.ONE_WAY;
+        return (prop === "value" && this.inputable) ? iview_model_1.BindingMode.TWO_WAY : iview_model_1.BindingMode.ONE_WAY;
     };
     /*
      * 子控件重载此函数向用户提示数据无效。
@@ -1864,14 +1864,14 @@ var Widget = (function (_super) {
         dataBindingRule.forEach(function (prop, item) {
             if (item.source.type === binding_rule_1.BindingDataSource.TYPE) {
                 var dataSource = item.source;
-                if (dataSource.updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+                if (dataSource.updateTiming === iview_model_1.UpdateTiming.EXPLICIT) {
                     _this.updateValueToSource(_this.value, dataSource);
                 }
             }
         });
     };
     Widget.prototype.updateValueToSource = function (value, dataSource, oldValue) {
-        var result = this._viewModal.setPropEx(dataSource, value, oldValue);
+        var result = this._viewModel.setPropEx(dataSource, value, oldValue);
         if (result.code) {
             this.onInvalidInput(result.message);
         }
@@ -1885,15 +1885,15 @@ var Widget = (function (_super) {
     Widget.prototype.watchTargetValueChange = function (dataSource) {
         var _this = this;
         var updateTiming = dataSource.updateTiming;
-        var bindingMode = dataSource.mode || iview_modal_1.BindingMode.TWO_WAY;
-        if (updateTiming === iview_modal_1.UpdateTiming.EXPLICIT) {
+        var bindingMode = dataSource.mode || iview_model_1.BindingMode.TWO_WAY;
+        if (updateTiming === iview_model_1.UpdateTiming.EXPLICIT) {
             return;
         }
-        if (bindingMode === iview_modal_1.BindingMode.TWO_WAY || bindingMode === iview_modal_1.BindingMode.ONE_WAY_TO_SOURCE) {
+        if (bindingMode === iview_model_1.BindingMode.TWO_WAY || bindingMode === iview_model_1.BindingMode.ONE_WAY_TO_SOURCE) {
             this.on(Events.CHANGE, function (evt) {
                 _this.updateValueToSource(evt.value, dataSource, evt.oldValue);
             });
-            if (updateTiming === iview_modal_1.UpdateTiming.CHANGING) {
+            if (updateTiming === iview_model_1.UpdateTiming.CHANGING) {
                 this.on(Events.CHANGING, function (evt) {
                     _this.updateValueToSource(evt.value, dataSource);
                 });
@@ -1910,7 +1910,7 @@ var Widget = (function (_super) {
             if (source.type === binding_rule_1.BindingDataSource.TYPE) {
                 var dataSource = source;
                 var bindingMode = _this.getPropDefaultBindMode(prop);
-                if (bindingMode === iview_modal_1.BindingMode.TWO_WAY) {
+                if (bindingMode === iview_model_1.BindingMode.TWO_WAY) {
                     _this.watchTargetValueChange(dataSource);
                 }
             }

@@ -75,7 +75,7 @@ function addPageFromJsonWatch(propertySheets, title) {
 		}
 	}
 
-	var vm = qtk.ViewModal.create(data);
+	var vm = qtk.ViewModel.create(data);
 
 	vm.registerValueConverter("object", objectConverter);
 	var json = [
@@ -140,7 +140,7 @@ function addPageDataBinding(propertySheets, title) {
 		}
 	}
 
-	var vm = qtk.ViewModal.create(data);
+	var vm = qtk.ViewModel.create(data);
 
 	vm.registerValueConverter("object", objectConverter);
 	var json = [

@@ -29,7 +29,7 @@ var Menu = (function (_super) {
             var _this = this;
             this._openedMenu = value;
             if (value) {
-                value.on(Events.CLOSE, function (evt) {
+                value.on(Events.WINDOW_CLOSE, function (evt) {
                     _this._openedMenu = null;
                 });
             }

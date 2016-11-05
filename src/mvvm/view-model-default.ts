@@ -6,9 +6,9 @@ import {ICommand} from "./icommand";
 import {BindingDataSource} from "./binding-rule";
 import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule, ValidationResult} from "./ivalidation-rule";
-import {IViewModal, BindingMode,ICollectionViewModal} from "./iview-modal";
+import {IViewModel, BindingMode,ICollectionViewModel} from "./iview-model";
 
-export class ViewModalDefault extends Emitter implements IViewModal {
+export class ViewModelDefault extends Emitter implements IViewModel {
 	private _data : any;
 	private _commands : any;
 	private _converters : any;
@@ -25,7 +25,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		this.setData(value, true);
 	}
 
-	public setData(value:any, notify:boolean) : IViewModal {
+	public setData(value:any, notify:boolean) : IViewModel {
 		this._data = value;
 		if(notify) {
 			this.notifyChange(Events.PROP_CHANGE, "/", null);
@@ -54,14 +54,14 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	}
 	private _bindingMode:BindingMode;
 
-	public onChange(callback:Function) : IViewModal {
+	public onChange(callback:Function) : IViewModel {
 		this.on(Events.PROP_DELETE, callback);
 		this.on(Events.PROP_CHANGE, callback);
 
 		return this;
 	}
 
-	public offChange(callback:Function) : IViewModal {
+	public offChange(callback:Function) : IViewModel {
 		this.off(Events.PROP_DELETE, callback);
 		this.off(Events.PROP_CHANGE, callback);
 
@@ -86,7 +86,7 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		return this.convert(converterName, value);
 	}
 
-	public delProp(path:string) : IViewModal {
+	public delProp(path:string) : IViewModel {
 		pointer.remove(this._data, path);
 		this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
 
@@ -141,12 +141,12 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 		return ret;
 	}
 
-	public registerCommand(name:string, cmd:ICommand) : IViewModal {
+	public registerCommand(name:string, cmd:ICommand) : IViewModel {
 		this._commands[name] = cmd;
 
 		return this;
 	}
-	public unregisterCommand(name:string) : IViewModal {
+	public unregisterCommand(name:string) : IViewModel {
 		this._commands[name] = null;
 	
 		return this;
@@ -155,12 +155,12 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	public getValueConverter(name:string) : IValueConverter {
 		return this._converters[name];
 	}
-	public registerValueConverter(name:string, converter:IValueConverter) : IViewModal {
+	public registerValueConverter(name:string, converter:IValueConverter) : IViewModel {
 		this._converters[name] = converter;
 
 		return this;
 	}
-	public unregisterValueConverter(name:string) : IViewModal {
+	public unregisterValueConverter(name:string) : IViewModel {
 		this._converters[name] = null;
 	
 		return this;
@@ -179,12 +179,12 @@ export class ViewModalDefault extends Emitter implements IViewModal {
 	public getValidationRule(name:string) : IValidationRule {
 		return this._validationRules[name];
 	}
-	public registerValidationRule(name:string, validationRule:IValidationRule) : IViewModal {
+	public registerValidationRule(name:string, validationRule:IValidationRule) : IViewModel {
 		this._validationRules[name] = validationRule;
 
 		return this;
 	}
-	public unregisterValidationRule(name:string) : IViewModal {
+	public unregisterValidationRule(name:string) : IViewModel {
 		this._validationRules[name] = null;
 	
 		return this;

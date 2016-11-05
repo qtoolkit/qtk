@@ -7,13 +7,13 @@ import {IComparator} from "./icomparator";
 import {DelegateCommand} from "./delegate-command";
 import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule, ValidationResult} from "./ivalidation-rule";
-import {IViewModal, BindingMode, ICollectionViewModal} from "./iview-modal";
-import {ViewModalDefault} from "./view-modal-default"
+import {IViewModel, BindingMode, ICollectionViewModel} from "./iview-model";
+import {ViewModelDefault} from "./view-model-default"
 
 /**
- * 集合ViewModal。delProp/getProp/setProp操作当前的项。 
+ * 集合ViewModel。delProp/getProp/setProp操作当前的项。 
  */
-export class CollectionViewModal extends ViewModalDefault implements ICollectionViewModal {
+export class CollectionViewModel extends ViewModelDefault implements ICollectionViewModel {
 	public isCollection = true;
 
 	/**
@@ -28,8 +28,8 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 * 当前数据项的序号。
 	 */
 	public set current(value:number) {
-		var viewModalItems = this.viewModalItems;
-		this._current = Math.min(viewModalItems.length-1, Math.max(0, value));
+		var viewModelItems = this.viewModelItems;
+		this._current = Math.min(viewModelItems.length-1, Math.max(0, value));
 		this.notifyChange(Events.PROP_CHANGE, "/", value);
 	}
 	public get current() : number {
@@ -43,48 +43,48 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	public set total(value:number) {
 	}
 	public get total() : number {
-		return this.viewModalItems.length;
+		return this.viewModelItems.length;
 	}
 
 	/**
-	 * 子项目的ViewModal
+	 * 子项目的ViewModel
 	 */
-	protected get viewModalItems() : Array<ItemViewModal>{
-		if(this.needUpdateViewModalItems) {
-			this.updateViewModalItems();
+	protected get viewModelItems() : Array<ItemViewModel>{
+		if(this.needUpdateViewModelItems) {
+			this.updateViewModelItems();
 		}
 
-		return this._viewModalItems;
+		return this._viewModelItems;
 	}
-	protected _viewModalItems : Array<ItemViewModal>;
+	protected _viewModelItems : Array<ItemViewModel>;
 
 	/*
-	 * 对于属性操作，都是针对当前项的ViewModal的操作。
+	 * 对于属性操作，都是针对当前项的ViewModel的操作。
 	 */
 	public getProp(path:string, converterName?:string) : any {
-		var vm = this.currentViewModal;
+		var vm = this.currentViewModel;
 
 		return vm ? vm.getProp(path, converterName) : null;
 	}
-	public delProp(path:string) : IViewModal {
-		var vm = this.currentViewModal;
+	public delProp(path:string) : IViewModel {
+		var vm = this.currentViewModel;
 		return vm ? vm.delProp(path) : this;
 	}
 	public setProp(path:string, value:any, converterName?:string, validationRule?:string) : ValidationResult {
-		var vm = this.currentViewModal;
+		var vm = this.currentViewModel;
 		return vm ? vm.setProp(path, value, converterName, validationRule) : ValidationResult.invalidResult;
 	}
 	/**
-	 * 当前项的ViewModal
+	 * 当前项的ViewModel
 	 */
-	public get currentViewModal() : IViewModal {
-		return this.viewModalItems[this._current];
+	public get currentViewModel() : IViewModel {
+		return this.viewModelItems[this._current];
 	}
 
 	/**
 	 * 注册子项的增加删除的变化事件。
 	 */
-	public onItemsChange(callback:Function) : ICollectionViewModal {
+	public onItemsChange(callback:Function) : ICollectionViewModel {
 		this.on(Events.ITEMS_CHANGE, callback);
 
 		return this;
@@ -92,7 +92,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/**
 	 * 注销子项的增加删除的变化事件。
 	 */
-	public offItemsChange(callback:Function) : ICollectionViewModal {
+	public offItemsChange(callback:Function) : ICollectionViewModel {
 		this.off(Events.ITEMS_CHANGE, callback);
 
 		return this;
@@ -101,11 +101,11 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/**
 	 * 增加一个数据项。
 	 */
-	public addItem(data:any, index?:number) : ICollectionViewModal {
+	public addItem(data:any, index?:number) : ICollectionViewModel {
 		var n = this._collection.length;
 		var index = index < n ? index : n;
 		this._collection.splice(index, 0, data);
-		this.updateViewModalItems(true);
+		this.updateViewModelItems(true);
 		
 		return this;
 	}
@@ -113,9 +113,9 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/**
 	 * 删除一个数据项。
 	 */
-	public removeItem(index:number) : ICollectionViewModal {
+	public removeItem(index:number) : ICollectionViewModel {
 		this._collection.splice(index, 1);
-		this.updateViewModalItems(true);
+		this.updateViewModelItems(true);
 		
 		return this;
 	}
@@ -123,7 +123,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/**
 	 * 删除指定规则的数据项。
 	 */
-	public removeItems(func:Function) : ICollectionViewModal {
+	public removeItems(func:Function) : ICollectionViewModel {
 		var collection = this._collection.filter(function(item, index, arr) {
 			return !func(item, index, arr);
 		});
@@ -132,7 +132,7 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 		collection.forEach((item) => {
 			this._collection.push(item);
 		});
-		this.updateViewModalItems(true);
+		this.updateViewModelItems(true);
 
 		return this;
 	}
@@ -147,11 +147,11 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	}
 
 	/**
-	 * 获取指定序号的子ViewModal
+	 * 获取指定序号的子ViewModel
 	 */
-	public getItemViewModal(index:number) : IViewModal {
+	public getItemViewModel(index:number) : IViewModel {
 		var i = (index >= 0 && index < this.total) ? index : this._current;
-		return this.viewModalItems[i];
+		return this.viewModelItems[i];
 	}
 	
 	public getItemData(index:number) : any{
@@ -201,18 +201,18 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	}
 
 	/*
-	 * 创建一个子ViewModal。
+	 * 创建一个子ViewModel。
 	 */
-	protected createItemViewModal(index:number, data:any) : ItemViewModal{
-		return ItemViewModal.create(this, index, data);
+	protected createItemViewModel(index:number, data:any) : ItemViewModel{
+		return ItemViewModel.create(this, index, data);
 	}
 
 	/*
-	 * 重新创建ViewModalItems。
+	 * 重新创建ViewModelItems。
 	 */
-	public updateViewModalItems(force?:boolean) {
-		if(force || this.needUpdateViewModalItems) {
-			this.needUpdateViewModalItems = false;
+	public updateViewModelItems(force?:boolean) {
+		if(force || this.needUpdateViewModelItems) {
+			this.needUpdateViewModelItems = false;
 			
 			console.time("filter and sort");
 			var collection = this.getFilteredSortedCollection();
@@ -222,14 +222,14 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 				this._current = n-1;
 			}
 
-			if(this._viewModalItems) {
-				this._viewModalItems.forEach((item:ItemViewModal) => {
+			if(this._viewModelItems) {
+				this._viewModelItems.forEach((item:ItemViewModel) => {
 					item.dispose();
 				});
 			}
 
-			this._viewModalItems = <any>collection.map((data:any, i:number) => {
-				return this.createItemViewModal(i, data);
+			this._viewModelItems = <any>collection.map((data:any, i:number) => {
+				return this.createItemViewModel(i, data);
 			})
 			console.timeEnd("filter and sort");
 
@@ -239,19 +239,19 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 			console.timeEnd("notify ITEMS_CHANGE");
 		}
 	}
-	protected needUpdateViewModalItems : boolean;
+	protected needUpdateViewModelItems : boolean;
 
 	/**
 	 * 注册过滤器。
 	 */
-	public registerFilter(name:string, filter:IFilter) : CollectionViewModal {
+	public registerFilter(name:string, filter:IFilter) : CollectionViewModel {
 		this.filters[name] = filter;
 		return this;
 	}
 	/**
 	 * 注销过滤器。
 	 */
-	public unregisterFilter(name:string) : CollectionViewModal {
+	public unregisterFilter(name:string) : CollectionViewModel {
 		delete this.filters[name];
 		return this;
 	}
@@ -262,8 +262,8 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 */
 	public set filter(name:string) {
 		this._filter = name;
-		this.needUpdateViewModalItems = true;
-		this.updateViewModalItems();
+		this.needUpdateViewModelItems = true;
+		this.updateViewModelItems();
 	}
 	public get filter() : string {
 		return this._filter;
@@ -273,14 +273,14 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	/**
 	 * 注册排序用的比较器。 
 	 */
-	public registerComparator(name:string, comparator:IComparator) : CollectionViewModal {
+	public registerComparator(name:string, comparator:IComparator) : CollectionViewModel {
 		this.comparators[name] = comparator;
 		return this;
 	}
 	/**
 	 * 注销排序用的比较器。 
 	 */
-	public unregisterComparator(name:string) : CollectionViewModal {
+	public unregisterComparator(name:string) : CollectionViewModel {
 		delete this.comparators[name];
 		return this;
 	}
@@ -291,8 +291,8 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 	 */
 	public set comparator(name:string) {
 		this._comparator = name;
-		this.needUpdateViewModalItems = true;
-		this.updateViewModalItems();
+		this.needUpdateViewModelItems = true;
+		this.updateViewModelItems();
 	}
 	public get comparator() : string {
 		return this._comparator;
@@ -303,29 +303,29 @@ export class CollectionViewModal extends ViewModalDefault implements ICollection
 		super(data);
 		this._current = 0;
 		this._collection = data;
-		this.needUpdateViewModalItems = true;
+		this.needUpdateViewModelItems = true;
 	}
 
-	public static create(data:Array<any>) : IViewModal {
-		var viewModal = new CollectionViewModal(data);
+	public static create(data:Array<any>) : IViewModel {
+		var viewModel = new CollectionViewModel(data);
 
-		return viewModal;
+		return viewModel;
 	}
 };
 
 /**
- * 表示集合ViewModal中的单项ViewModal。
+ * 表示集合ViewModel中的单项ViewModel。
  * 
  */
-export class ItemViewModal extends ViewModalDefault implements IViewModal {
+export class ItemViewModel extends ViewModelDefault implements IViewModel {
 	public index : number;
 	public isCollection = false;
-	public collectionViewModal : CollectionViewModal;
+	public collectionViewModel : CollectionViewModel;
 
 	public getCommand(name:string) : ICommand {
 		var cmd = super.getCommand(name);
 		if(!cmd) {
-			cmd = this.collectionViewModal.getCommand(name);
+			cmd = this.collectionViewModel.getCommand(name);
 		}
 
 		return cmd;
@@ -335,7 +335,7 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 		if(super.canExecute(name)) {
 			return true;
 		}else{
-			return this.collectionViewModal.canExecute(name);
+			return this.collectionViewModel.canExecute(name);
 		}
 	}
 
@@ -350,45 +350,45 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 				args = {$index:this.index};
 			}
 
-			return this.collectionViewModal.execCommand(name, args);
+			return this.collectionViewModel.execCommand(name, args);
 		}
 	}
 
 	public convert(converterName:string, value:any) : any {
-		return this.collectionViewModal.convert(converterName, value);	
+		return this.collectionViewModel.convert(converterName, value);	
 	}
 
 	public convertBack(converterName:string, value:any) : any {
-		return this.collectionViewModal.convertBack(converterName, value);
+		return this.collectionViewModel.convertBack(converterName, value);
 	}
 
 	public isValueValid(ruleName:string, value:any) : ValidationResult {
-		return this.collectionViewModal.isValueValid(ruleName, value);
+		return this.collectionViewModel.isValueValid(ruleName, value);
 	}
 
 	public getValueConverter(name:string) : IValueConverter {
-		return this.collectionViewModal.getValueConverter(name);
+		return this.collectionViewModel.getValueConverter(name);
 	}
 
 	public getValidationRule(name:string) : IValidationRule {
-		return this.collectionViewModal.getValidationRule(name);
+		return this.collectionViewModel.getValidationRule(name);
 	}
 
 	public isCurrent() : boolean {
-		return this.collectionViewModal.current === this.index; 
+		return this.collectionViewModel.current === this.index; 
 	}
 	
 	public notifyChange(type:string, path:string, value:any) {
-		var collectionViewModal = this.collectionViewModal;
-		if(collectionViewModal.bindingMode === BindingMode.ONE_WAY) {
+		var collectionViewModel = this.collectionViewModel;
+		if(collectionViewModel.bindingMode === BindingMode.ONE_WAY) {
 			return;
 		}
 
-		if(collectionViewModal.comparator || collectionViewModal.filter) {
-			collectionViewModal.updateViewModalItems(true);
+		if(collectionViewModel.comparator || collectionViewModel.filter) {
+			collectionViewModel.updateViewModelItems(true);
 		}else{
 			if(this.isCurrent) {
-				collectionViewModal.notifyChange(type, path, value);
+				collectionViewModel.notifyChange(type, path, value);
 			}
 			super.notifyChange(type, path, value);
 		}
@@ -396,11 +396,11 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 
 	protected initCommands() {
 		this.registerCommand("activate", DelegateCommand.create(args => {
-			this.collectionViewModal.current = this.index;
+			this.collectionViewModel.current = this.index;
 		}));
 
 		this.registerCommand("remove", DelegateCommand.create(args => {
-			this.collectionViewModal.removeItem(this.collectionViewModal.getRawIndexOf(this.index));
+			this.collectionViewModel.removeItem(this.collectionViewModel.getRawIndexOf(this.index));
 		}));
 	}
 	
@@ -409,11 +409,11 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 		this.initCommands();
 	}
 	
-	public init(collectionViewModal:CollectionViewModal, index:number, data:any) : ItemViewModal {
-		this.collectionViewModal = collectionViewModal;
+	public init(collectionViewModel:CollectionViewModel, index:number, data:any) : ItemViewModel {
+		this.collectionViewModel = collectionViewModel;
 		this.index = index;
 		this.setData(data, false);
-		this.bindingMode = collectionViewModal.bindingMode;
+		this.bindingMode = collectionViewModel.bindingMode;
 
 		return this;
 	}
@@ -421,13 +421,13 @@ export class ItemViewModal extends ViewModalDefault implements IViewModal {
 	public dispose() {
 		this.index = -1;
 		this.removeAllListeners();
-		this.collectionViewModal = null;
-		ItemViewModal.cache.push(this);
+		this.collectionViewModel = null;
+		ItemViewModel.cache.push(this);
 	}
 	
-	public static cache : Array<ItemViewModal> = [];
-	public static create(collectionViewModal:CollectionViewModal, index:number, data:any) { 
-		var vm = ItemViewModal.cache.length > 0 ? ItemViewModal.cache.pop() : (new ItemViewModal());
-		return vm.init(collectionViewModal, index, data);
+	public static cache : Array<ItemViewModel> = [];
+	public static create(collectionViewModel:CollectionViewModel, index:number, data:any) { 
+		var vm = ItemViewModel.cache.length > 0 ? ItemViewModel.cache.pop() : (new ItemViewModel());
+		return vm.init(collectionViewModel, index, data);
 	}
 }

@@ -14,7 +14,7 @@ import {TableClient} from "./table-client";
 import {TableHeader} from "./table-header";
 import {TableIndexItem} from "./table-index-item";
 import {TableHeaderItem} from "./table-header-item";
-import {IViewModal, ICollectionViewModal, UpdateTiming, BindingMode} from "../mvvm/iview-modal";
+import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
 
 /**
  * 描述表格中某列的信息。
@@ -176,14 +176,14 @@ export class Table extends Widget {
 		return this._templateRow;
 	}
 
-	public bindData(viewModal:IViewModal) : Widget {
+	public bindData(viewModel:IViewModel) : Widget {
 		this.prepareUI();
 		var client = this._client;
 		
 		if(client) {
 			client.templateItem = this.getTemplateRow();
 			client.removeAllChildren();
-			client.bindData(viewModal);
+			client.bindData(viewModel);
 		}
 		
 		var itemH = this.rowH;

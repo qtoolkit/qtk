@@ -23,7 +23,7 @@ export class Menu extends Dialog {
 	public set openedMenu(value:Menu) {
 		this._openedMenu = value;
 		if(value) {
-			value.on(Events.CLOSE, evt => {
+			value.on(Events.WINDOW_CLOSE, evt => {
 				this._openedMenu = null;
 			});
 		}

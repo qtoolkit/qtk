@@ -15,6 +15,7 @@ export declare class Application extends Emitter implements IApplication {
     private _viewPort;
     private _mainLoop;
     private servicesManager;
+    private _windwManager;
     constructor(name: string);
     readonly assets: typeof Assets;
     readonly isReady: boolean;

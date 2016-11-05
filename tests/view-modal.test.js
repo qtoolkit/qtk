@@ -1,16 +1,16 @@
-describe('ViewModal', function() {
+describe('ViewModel', function() {
 	this.timeout(3000);
 	var data = {
 		name:"qtk",
 		age:100
 	};
 
-	var viewModal = qtk.ViewModal.create(data);
+	var viewModel = qtk.ViewModel.create(data);
 
-    it('get/set', viewModalTestGetSet.bind(viewModal));
-    it('change', viewModalTestOnChange.bind(viewModal));
-    it('remove', viewModalTestRemove.bind(viewModal));
-    it('command', viewModalTestCommand.bind(viewModal));
-    it('converter', viewModalTestConverter.bind(viewModal));
-    it('validation', viewModalTestValidationRule.bind(viewModal));
+    it('get/set', viewModelTestGetSet.bind(viewModel));
+    it('change', viewModelTestOnChange.bind(viewModel));
+    it('remove', viewModelTestRemove.bind(viewModel));
+    it('command', viewModelTestCommand.bind(viewModel));
+    it('converter', viewModelTestConverter.bind(viewModel));
+    it('validation', viewModelTestValidationRule.bind(viewModel));
 })

@@ -16,7 +16,7 @@ import {RecyclableCreator} from "../recyclable-creator";
 import {ImageTile, ImageDrawType} from "../image-tile";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
-import {IViewModal, BindingMode} from "../mvvm/iview-modal";
+import {IViewModel, BindingMode} from "../mvvm/iview-model";
 
 export class ComboBoxOption {
 	public value : any;

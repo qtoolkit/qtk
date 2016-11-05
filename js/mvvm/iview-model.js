@@ -7,22 +7,22 @@
 (function (BindingMode) {
     /**
      * 双向数据绑定。
-     * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时自动更新界面。
+     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时自动更新界面。
      */
     BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
     /**
      * 单向数据绑定。
-     * 界面数据变化时不更新ViewModal，ViewModal数据有变化时自动更新界面。
+     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时自动更新界面。
      */
     BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
     /**
      * 只在初始化时绑定。
-     * 界面数据变化时不更新ViewModal，ViewModal数据有变化时不更新界面。
+     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时不更新界面。
      */
     BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
     /**
      * 单向数据绑定。
-     * 界面数据变化时自动更新ViewModal，ViewModal数据有变化时不更新界面。
+     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时不更新界面。
      */
     BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
 })(exports.BindingMode || (exports.BindingMode = {}));
@@ -34,7 +34,7 @@ function toBindingMode(name) {
 }
 exports.toBindingMode = toBindingMode;
 /**
- * 更新ViewModal的时机。
+ * 更新ViewModel的时机。
  */
 (function (UpdateTiming) {
     /**

@@ -1,5 +1,5 @@
 /**
- * CollectionViewModal的过滤器。
+ * CollectionViewModel的过滤器。
  */
 export interface IFilter {
     /**

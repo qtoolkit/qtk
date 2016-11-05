@@ -8,20 +8,20 @@ var pointer = require('json-pointer');
 var emitter_1 = require("../emitter");
 var Events = require("../events");
 var ivalidation_rule_1 = require("./ivalidation-rule");
-var iview_modal_1 = require("./iview-modal");
-var ViewModalDefault = (function (_super) {
-    __extends(ViewModalDefault, _super);
-    function ViewModalDefault(data) {
+var iview_model_1 = require("./iview-model");
+var ViewModelDefault = (function (_super) {
+    __extends(ViewModelDefault, _super);
+    function ViewModelDefault(data) {
         _super.call(this);
         this._commands = {};
         this._converters = {};
         this._data = data || {};
         this._validationRules = {};
         this.isCollection = false;
-        this._bindingMode = iview_modal_1.BindingMode.TWO_WAY;
+        this._bindingMode = iview_model_1.BindingMode.TWO_WAY;
         this._ePropChange = Events.PropChangeEvent.create();
     }
-    Object.defineProperty(ViewModalDefault.prototype, "data", {
+    Object.defineProperty(ViewModelDefault.prototype, "data", {
         get: function () {
             return this._data;
         },
@@ -31,14 +31,14 @@ var ViewModalDefault = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ViewModalDefault.prototype.setData = function (value, notify) {
+    ViewModelDefault.prototype.setData = function (value, notify) {
         this._data = value;
         if (notify) {
             this.notifyChange(Events.PROP_CHANGE, "/", null);
         }
         return this;
     };
-    Object.defineProperty(ViewModalDefault.prototype, "bindingMode", {
+    Object.defineProperty(ViewModelDefault.prototype, "bindingMode", {
         get: function () {
             return this._bindingMode;
         },
@@ -48,20 +48,20 @@ var ViewModalDefault = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ViewModalDefault.prototype.onChange = function (callback) {
+    ViewModelDefault.prototype.onChange = function (callback) {
         this.on(Events.PROP_DELETE, callback);
         this.on(Events.PROP_CHANGE, callback);
         return this;
     };
-    ViewModalDefault.prototype.offChange = function (callback) {
+    ViewModelDefault.prototype.offChange = function (callback) {
         this.off(Events.PROP_DELETE, callback);
         this.off(Events.PROP_CHANGE, callback);
         return this;
     };
-    ViewModalDefault.prototype.notifyChange = function (type, path, value) {
+    ViewModelDefault.prototype.notifyChange = function (type, path, value) {
         this.dispatchEvent(this._ePropChange.init(type, { prop: path, value: value }));
     };
-    ViewModalDefault.prototype.fixPath = function (path) {
+    ViewModelDefault.prototype.fixPath = function (path) {
         if (path && path.charAt(0) !== '/') {
             return '/' + path;
         }
@@ -69,22 +69,22 @@ var ViewModalDefault = (function (_super) {
             return path;
         }
     };
-    ViewModalDefault.prototype.getProp = function (path, converterName) {
+    ViewModelDefault.prototype.getProp = function (path, converterName) {
         var value = pointer.get(this._data, this.fixPath(path));
         return this.convert(converterName, value);
     };
-    ViewModalDefault.prototype.delProp = function (path) {
+    ViewModelDefault.prototype.delProp = function (path) {
         pointer.remove(this._data, path);
         this.notifyChange(Events.PROP_DELETE, this.fixPath(path), null);
         return this;
     };
-    ViewModalDefault.prototype.setPropEx = function (source, value, oldValue) {
+    ViewModelDefault.prototype.setPropEx = function (source, value, oldValue) {
         var path = source.path;
         var converterName = source.converter;
         var validationRule = source.validationRule;
         return this.setProp(path, value, converterName, validationRule);
     };
-    ViewModalDefault.prototype.setProp = function (path, v, converterName, validationRule) {
+    ViewModelDefault.prototype.setProp = function (path, v, converterName, validationRule) {
         var value = this.convertBack(converterName, v);
         var validateResult = this.isValueValid(validationRule, value);
         if (!validateResult.code) {
@@ -97,10 +97,10 @@ var ViewModalDefault = (function (_super) {
         return validateResult;
         ;
     };
-    ViewModalDefault.prototype.getCommand = function (name) {
+    ViewModelDefault.prototype.getCommand = function (name) {
         return this._commands[name];
     };
-    ViewModalDefault.prototype.canExecute = function (name) {
+    ViewModelDefault.prototype.canExecute = function (name) {
         var ret = false;
         var cmd = this.getCommand(name);
         if (cmd && cmd.canExecute()) {
@@ -108,7 +108,7 @@ var ViewModalDefault = (function (_super) {
         }
         return ret;
     };
-    ViewModalDefault.prototype.execCommand = function (name, args) {
+    ViewModelDefault.prototype.execCommand = function (name, args) {
         var ret = false;
         var cmd = this.getCommand(name);
         if (cmd && cmd.canExecute()) {
@@ -116,49 +116,49 @@ var ViewModalDefault = (function (_super) {
         }
         return ret;
     };
-    ViewModalDefault.prototype.registerCommand = function (name, cmd) {
+    ViewModelDefault.prototype.registerCommand = function (name, cmd) {
         this._commands[name] = cmd;
         return this;
     };
-    ViewModalDefault.prototype.unregisterCommand = function (name) {
+    ViewModelDefault.prototype.unregisterCommand = function (name) {
         this._commands[name] = null;
         return this;
     };
-    ViewModalDefault.prototype.getValueConverter = function (name) {
+    ViewModelDefault.prototype.getValueConverter = function (name) {
         return this._converters[name];
     };
-    ViewModalDefault.prototype.registerValueConverter = function (name, converter) {
+    ViewModelDefault.prototype.registerValueConverter = function (name, converter) {
         this._converters[name] = converter;
         return this;
     };
-    ViewModalDefault.prototype.unregisterValueConverter = function (name) {
+    ViewModelDefault.prototype.unregisterValueConverter = function (name) {
         this._converters[name] = null;
         return this;
     };
-    ViewModalDefault.prototype.convert = function (converterName, value) {
+    ViewModelDefault.prototype.convert = function (converterName, value) {
         var converter = converterName ? this.getValueConverter(converterName) : null;
         return converter ? converter.convert(value) : value;
     };
-    ViewModalDefault.prototype.convertBack = function (converterName, value) {
+    ViewModelDefault.prototype.convertBack = function (converterName, value) {
         var converter = converterName ? this.getValueConverter(converterName) : null;
         return converter ? converter.convertBack(value) : value;
     };
-    ViewModalDefault.prototype.getValidationRule = function (name) {
+    ViewModelDefault.prototype.getValidationRule = function (name) {
         return this._validationRules[name];
     };
-    ViewModalDefault.prototype.registerValidationRule = function (name, validationRule) {
+    ViewModelDefault.prototype.registerValidationRule = function (name, validationRule) {
         this._validationRules[name] = validationRule;
         return this;
     };
-    ViewModalDefault.prototype.unregisterValidationRule = function (name) {
+    ViewModelDefault.prototype.unregisterValidationRule = function (name) {
         this._validationRules[name] = null;
         return this;
     };
-    ViewModalDefault.prototype.isValueValid = function (ruleName, value) {
+    ViewModelDefault.prototype.isValueValid = function (ruleName, value) {
         var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
         return validationRule ? validationRule.validate(value) : ivalidation_rule_1.ValidationResult.validResult;
     };
-    return ViewModalDefault;
+    return ViewModelDefault;
 }(emitter_1.Emitter));
-exports.ViewModalDefault = ViewModalDefault;
+exports.ViewModelDefault = ViewModelDefault;
 ;

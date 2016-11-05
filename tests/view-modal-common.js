@@ -1,63 +1,63 @@
-function viewModalTestGetSet(done) {
+function viewModelTestGetSet(done) {
 	var result = true;
-	var viewModal = this;
-	viewModal.setProp("/address", "ShenZhen, China");
-	result = viewModal.getProp("/address") === "ShenZhen, China";
-	done(result ? null : new Error("viewModalTestGetSet"));
+	var viewModel = this;
+	viewModel.setProp("/address", "ShenZhen, China");
+	result = viewModel.getProp("/address") === "ShenZhen, China";
+	done(result ? null : new Error("viewModelTestGetSet"));
 }
 
-function viewModalTestOnChange(done) {
-	var viewModal = this;
-	viewModal.onChange(function(evt) {
+function viewModelTestOnChange(done) {
+	var viewModel = this;
+	viewModel.onChange(function(evt) {
 		var result = evt.prop === "/address";
 		done(result ? null : new Error("test on change"));
 	});
-	viewModal.setProp("/address", "ShenZhen, China");
+	viewModel.setProp("/address", "ShenZhen, China");
 }
 
-function viewModalTestRemove(done) {
-	var viewModal = this;
-	viewModal.onChange(function(evt) {
+function viewModelTestRemove(done) {
+	var viewModel = this;
+	viewModel.onChange(function(evt) {
 		var result = evt.prop === "/address";
 		done(result ? null : new Error("test on remove"));
 	});
-	viewModal.delProp("/address");
+	viewModel.delProp("/address");
 }
 
-function viewModalTestCommand(done) {
-	var viewModal = this;
+function viewModelTestCommand(done) {
+	var viewModel = this;
 	var cmd = qtk.DelegateCommand.create(function(args) {
 		var result = args.value === 100;
 		done(result ? null : new Error("test command"));
 	});
 
-	viewModal.registerCommand("dummy", cmd);
-	viewModal.execCommand("dummy", {value:100});
+	viewModel.registerCommand("dummy", cmd);
+	viewModel.execCommand("dummy", {value:100});
 }
 
-function viewModalTestConverter(done) {
-	var viewModal = this;
+function viewModelTestConverter(done) {
+	var viewModel = this;
 	var converter = qtk.DelegateValueConverter.create(function(value) {
 		return value.toLowerCase();
 	}, function(value) {
 		return value.toUpperCase();
 	});
 
-	viewModal.registerValueConverter("dummy", converter);
-	var c = viewModal.getValueConverter("dummy");
+	viewModel.registerValueConverter("dummy", converter);
+	var c = viewModel.getValueConverter("dummy");
 	
 	var result = c === converter;
 	done(result ? null : new Error("test converter"));
 }
 
-function viewModalTestValidationRule(done) {
-	var viewModal = this;
+function viewModelTestValidationRule(done) {
+	var viewModel = this;
 	var validationRule = qtk.DelegateValidationRule.create(function(value) {
 		return qtk.ValidationResult.validResult;
 	});
 
-	viewModal.registerValidationRule("dummy", validationRule);
-	var v = viewModal.getValidationRule("dummy");
+	viewModel.registerValidationRule("dummy", validationRule);
+	var v = viewModel.getValidationRule("dummy");
 	
 	var result = v === validationRule;
 	done(result ? null : new Error("test validationRule"));

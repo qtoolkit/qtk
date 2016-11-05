@@ -1,5 +1,5 @@
 /**
- * ViewModal的命令。
+ * ViewModel的命令。
  */
 export interface  ICommand {
 	/**

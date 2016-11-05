@@ -26,6 +26,12 @@ export interface IApplication {
      */
     getMainLoop(): IMainLoop;
     /**
+     * 分发应用级的事件。
+     */
+    dispatchEvent(evt: any): any;
+    on(type: string, callback: Function, useCapture?: boolean): any;
+    off(type: string, callback: Function, useCapture?: boolean): any;
+    /**
      * 获取App的参数。
      */
     options: any;

@@ -13,26 +13,26 @@ function genData() {
 	return data;
 }
 
-function createViewModal(table) {
-	var viewModal = qtk.CollectionViewModal.create(genData());
+function createViewModel(table) {
+	var viewModel = qtk.CollectionViewModel.create(genData());
 	
-	viewModal.bindingMode = qtk.BindingMode.ONE_WAY;
+	viewModel.bindingMode = qtk.BindingMode.ONE_WAY;
 	var nameInc = qtk.ObjectPropComparator.create(qtk.StringComparator.create(), "name");
 	var nameDec = qtk.RevertComparator.create(nameInc);
-	viewModal.registerComparator("name.inc", nameInc);
-	viewModal.registerComparator("name.dec", nameDec);
+	viewModel.registerComparator("name.inc", nameInc);
+	viewModel.registerComparator("name.dec", nameDec);
 	
 	var ageInc = qtk.ObjectPropComparator.create(qtk.NumberComparator.create(), "age");
 	var ageDec = qtk.RevertComparator.create(ageInc);
-	viewModal.registerComparator("age.inc", ageInc);
-	viewModal.registerComparator("age.dec", ageDec);
-	viewModal.comparator = "age.dec";
+	viewModel.registerComparator("age.inc", ageInc);
+	viewModel.registerComparator("age.dec", ageDec);
+	viewModel.comparator = "age.dec";
 	table.on(qtk.Events.SORT, function(evt) {
 		var comparator = evt.key + (evt.isDec ? ".dec" : ".inc");
-		viewModal.comparator = comparator;
+		viewModel.comparator = comparator;
 	});
 
-	return viewModal;
+	return viewModel;
 }
 
 function onReady(app) {
@@ -56,9 +56,9 @@ function onReady(app) {
 	var w = table.w - 310 - indexBarW;
 	table.addColumn(qtk.TableColInfo.create("Address", "edit", w, {dataBindingRule:"address"}));
 	
-	var viewModal = createViewModal(table);
+	var viewModel = createViewModel(table);
 	
-	table.bindData(viewModal);
+	table.bindData(viewModel);
 
 	win.target = table;
 	win.open();

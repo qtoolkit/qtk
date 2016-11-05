@@ -25,17 +25,17 @@ function createTemplateItem() {
 	return templateItem;
 }
 
-function createViewModal() {
-	var viewModal = qtk.CollectionViewModal.create(genData());
-	viewModal.registerCommand("add", qtk.DelegateCommand.create(function() {
-		viewModal.addItem({name:"jim"+Date.now(), photo:imageURL});
+function createViewModel() {
+	var viewModel = qtk.CollectionViewModel.create(genData());
+	viewModel.registerCommand("add", qtk.DelegateCommand.create(function() {
+		viewModel.addItem({name:"jim"+Date.now(), photo:imageURL});
 	}));;
 	
-	viewModal.registerCommand("remove", qtk.DelegateCommand.create(function() {
-		viewModal.removeItem(viewModal.current);
+	viewModel.registerCommand("remove", qtk.DelegateCommand.create(function() {
+		viewModel.removeItem(viewModel.current);
 	}));;
 
-	return viewModal;
+	return viewModel;
 }
 
 function onReady(app) {
@@ -56,27 +56,27 @@ function onReady(app) {
 	});
 	win.addChild(group);
 
-	var viewModal = createViewModal();
+	var viewModel = createViewModel();
 	var addButton = qtk.Button.create({text:"Add",
 		dataBindingRule : {click:{command:"add"}},
 		layoutParam : qtk.GridLayouterParam.create({margin:2})
-	}).bindData(viewModal);
+	}).bindData(viewModel);
 
 	var removeButton = qtk.Button.create({text:"Remove",
 		dataBindingRule : {click:{command:"remove"}},
 		layoutParam : qtk.GridLayouterParam.create({margin:2})
-	}).bindData(viewModal);
+	}).bindData(viewModel);
 	
 	var currentName = qtk.Label.create({text:"current",
 		dataBindingRule : "name",
 		layoutParam : qtk.GridLayouterParam.create({margin:2})
-	}).bindData(viewModal);
+	}).bindData(viewModel);
 	
 	group.addChild(addButton);
 	group.addChild(removeButton);
 	group.addChild(currentName);
 
-	listView.bindData(viewModal);
+	listView.bindData(viewModel);
 	
 	win.open();
 }

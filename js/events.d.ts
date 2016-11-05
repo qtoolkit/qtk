@@ -33,12 +33,14 @@ export declare const MOVE_END: string;
 export declare const MOVE_BEGIN: string;
 export declare const MOVE_CANCEL: string;
 export declare const CHOOSE: string;
-export declare const OPEN: string;
+export declare const WINDOW_OPEN: string;
+export declare const WINDOW_CLOSE: string;
+export declare const WINDOW_CREATE: string;
+export declare const WINDOW_CREATED: string;
 export declare const INIT: string;
 export declare const FOCUS: string;
 export declare const BLUR: string;
 export declare const DEINIT: string;
-export declare const CLOSE: string;
 export declare const RESIZE: string;
 export declare const RESIZING: string;
 export declare const RESIZE_END: string;
@@ -92,7 +94,7 @@ export declare class AnyEvent extends Event {
     static create(type: string, payload?: any): AnyEvent;
 }
 /**
- * View Modal请求显示指定的视图或跳转到指定的视图。
+ * View Model请求显示指定的视图或跳转到指定的视图。
  */
 export declare class InteractionRequestEvent extends Event {
     /**
@@ -265,6 +267,11 @@ export declare class ScrollEvent extends Event {
     widget: any;
     reset(type: string, widget: any, offsetX: number, offsetY: number): any;
     static create(): ScrollEvent;
+}
+export declare class WindowEvent extends Event {
+    widget: any;
+    reset(type: string, widget: any): any;
+    static create(): WindowEvent;
 }
 export declare class ProgressEvent extends Event {
     done: number;

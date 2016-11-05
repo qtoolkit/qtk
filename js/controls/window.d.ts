@@ -11,6 +11,7 @@ export declare abstract class Window extends Widget {
     private _pointerPosition;
     private _shouldGrabWhenVisible;
     private _shortcutEvent;
+    private _windowEvent;
     constructor(type: string);
     readonly grabbed: boolean;
     /**
@@ -41,6 +42,7 @@ export declare abstract class Window extends Widget {
      * 打开窗口。创建窗口的Canvas元素，初始化窗口内的控件，布局窗口内的控件。
      */
     open(): Widget;
+    dispatchWindowEvent(type: string): void;
     /**
      * 关闭窗口。
      */
@@ -56,5 +58,7 @@ export declare abstract class Window extends Widget {
     protected dispatchKeyDown(evt: any): void;
     protected dispatchShortcut(e: Events.ShortcutEvent): void;
     registerShortcut(keys: string, func: Function): void;
+    protected onCreated(): void;
     protected onReset(): void;
+    reset(type: string, options: any): Widget;
 }

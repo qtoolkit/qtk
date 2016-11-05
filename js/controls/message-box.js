@@ -221,7 +221,7 @@ var MessageBox = (function (_super) {
         buttonsOption.buttons.push({ styleType: "button.ok", text: "Close", onClick: null });
         var titleOptions = new TitleOptions("Infomation", "messagebox.info.icon", true);
         messageBox.createChildren(titleOptions, buttonsOption, msg);
-        messageBox.on(Events.CLOSE, onClose);
+        messageBox.on(Events.WINDOW_CLOSE, onClose);
         messageBox.open();
     };
     MessageBox.showConfirm = function (msg, onYes, onNo, w) {

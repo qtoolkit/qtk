@@ -378,10 +378,10 @@ export class PropertyPage extends Widget {
 			this.initWithPropsDesc(propsDesc);
 		});
 		
-		var viewModal = this._viewModal;
-		if(viewModal) {
+		var viewModel = this._viewModel;
+		if(viewModel) {
 			this.children.forEach((child:Widget) => {
-				child.bindData(viewModal);
+				child.bindData(viewModel);
 			});
 		}
 
