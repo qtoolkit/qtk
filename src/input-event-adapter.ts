@@ -33,13 +33,13 @@ function dispatchEvent(target:any, type:string, detail:any) {
 	realTarget.dispatchEvent(event);
 }
 
-function getPointerDetail(e) : PointerEventDetail {
+function getPointerDetail(e, timeStamp?:number) : PointerEventDetail {
 	if(e) {
 		var id = e.identifier||0;
 		var x = Math.max(e.pageX||0, e.x || e.clientX);
 		var y = Math.max(e.pageY||0, e.y || e.clientY);
 		lastDetail = PointerEventDetail.create(id, x, y, altKey, ctrlKey, shiftKey, commandKey);
-		lastDetail.timeStamp = e.timeStamp;
+		lastDetail.timeStamp = e.timeStamp || timeStamp;
 	}
 
 	return lastDetail;
@@ -93,12 +93,13 @@ function onMouseOver(evt) {
 }
 
 function getTouchPoints(evt) {
-	var touches = evt.touches || evt.changedTouches || evt.touchList;
+	var touches = evt.touches || evt.changedTouches || evt.touchList || evt.targetTouches;
+	var n = touches.length;
+	var ret = [];
 	
-	var ret = touches.map(touch => {
-		return getPointerDetail(touch);
-	});
-
+	for(var i = 0; i < n; i++) {
+		ret.push(getPointerDetail(touches[i]));
+	}
 	if(ret.length < 1) {
 		ret.push(getPointerDetail(null));
 	}
@@ -107,17 +108,17 @@ function getTouchPoints(evt) {
 }
 
 function onTouchStart(evt) {
-	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	dispatchPointerEvent(Events.POINTER_DOWN, evt.target, detail);
 }
 
 function onTouchMove(evt) {
-	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	dispatchPointerEvent(Events.POINTER_MOVE, evt.target, detail);
 }
 
 function onTouchEnd(evt) {
-	var detail = getPointerDetail(getTouchPoints(evt)[0]);
+	var detail = getPointerDetail(getTouchPoints(evt)[0], evt.timeStamp);
 	dispatchPointerEvent(Events.POINTER_UP, evt.target, detail);
 }
 
