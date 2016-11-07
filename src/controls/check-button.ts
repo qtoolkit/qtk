@@ -98,7 +98,7 @@ export class CheckButton extends Widget {
 		return this;
 	}
 	
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		this.value = !this.value;	
 		this.notifyChange();	
 		super.dispatchClick(evt);

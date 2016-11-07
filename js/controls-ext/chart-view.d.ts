@@ -22,9 +22,9 @@ export declare class ChartView extends Widget {
      * 把事件转发给隐藏的Canvas处理。
      */
     protected forwardPointerEvent(type: string, x: number, y: number): void;
-    protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerUp(evt: Events.PointerEvent): void;
+    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerUp(evt: Events.PointerEvent): void;
     protected syncCavnas(): void;
     protected drawImage(ctx: any, style: Style): Widget;
     onInit(): void;

@@ -49,7 +49,7 @@ export class CollapsableTitle extends Widget {
 		return this._styleType || this.collapsed ? "collapsable-title.collapsed":"collapsable-title.expanded";
 	}
 
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
 		super.dispatchDblClick(evt);
 		if(!this._enable || !this._sensitive) {
 			return;
@@ -57,7 +57,7 @@ export class CollapsableTitle extends Widget {
 		this.trigger();	
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 
 		if(!this._enable || !this._sensitive) {

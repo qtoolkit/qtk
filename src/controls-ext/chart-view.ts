@@ -64,17 +64,17 @@ export class ChartView extends Widget {
 		this._chartCanvas.dispatchEvent(e);
 	}
 
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		super.dispatchPointerDown(evt, ctx);
     	this.forwardPointerEvent("mousedown", evt.x, evt.y); 
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		super.dispatchPointerMove(evt, ctx);
     	this.forwardPointerEvent("mousemove", evt.x, evt.y); 
 	}
 	
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
 		super.dispatchPointerUp(evt);
     	this.forwardPointerEvent("mouseup", evt.x, evt.y); 
 	}

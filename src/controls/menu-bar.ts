@@ -211,7 +211,7 @@ export class MenuBarItem extends Widget {
 		}
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(this.onInitSubMenu) {
 			this.openMenu();

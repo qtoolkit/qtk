@@ -4,6 +4,7 @@ import { IViewPort } from "./iview-port";
 import { IMainLoop } from "./imain-loop";
 import { IApplication } from "./iapplication";
 import { IThemeManager } from "./itheme-manager";
+import { IWindowManager } from "./controls/iwindow-manager";
 /**
  * 代表整个应用程序，可以通过Application获取各种服务。
  *
@@ -16,6 +17,7 @@ export declare class Application extends Emitter implements IApplication {
     private _mainLoop;
     private servicesManager;
     private _windwManager;
+    windowManager: IWindowManager;
     constructor(name: string);
     readonly assets: typeof Assets;
     readonly isReady: boolean;

@@ -11,6 +11,7 @@ var WindowNormal = (function (_super) {
     __extends(WindowNormal, _super);
     function WindowNormal() {
         _super.call(this, WindowNormal.TYPE);
+        this._windowType = window_1.WindowType.NORMAL;
     }
     WindowNormal.create = function (options) {
         return WindowNormal.recycleBin.create(options);

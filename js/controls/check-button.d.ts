@@ -7,7 +7,7 @@ export declare class CheckButton extends Widget {
     protected getStyleType(): string;
     protected drawText(ctx: any, style: Style): Widget;
     protected drawImage(ctx: any, style: Style): Widget;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): CheckButton;

@@ -752,10 +752,13 @@ var Widget = (function (_super) {
         ctx.save();
         this.applyTransform(ctx);
         this.computeDirtyRectSelf(ctx);
+        this.computeChildrenDirtyRect(ctx);
+        ctx.restore();
+    };
+    Widget.prototype.computeChildrenDirtyRect = function (ctx) {
         this.children.forEach(function (child) {
             child.computeDirtyRect(ctx);
         });
-        ctx.restore();
     };
     Widget.prototype.doDraw = function (ctx, style) {
         if (style) {
@@ -964,7 +967,21 @@ var Widget = (function (_super) {
             this.computeDirtyRect(dirtyRectContext);
             var dirtyRect = dirtyRectContext.getRect();
             var r = lastDirtyRect.merge(dirtyRect);
+            if (r.x < 0)
+                r.x = 0;
+            if (r.y < 0)
+                r.y = 0;
+            if ((r.x + r.w) > this.w) {
+                r.w = this.w - r.x;
+            }
+            if ((r.y + r.h) > this.h) {
+                r.h = this.h - r.y;
+            }
             if (r.w > 0 && r.h > 0) {
+                r.x = r.x >> 0;
+                r.y = r.y >> 0;
+                r.w = (r.w + 1) >> 0;
+                r.h = (r.h + 2) >> 0;
                 ctx.save();
                 ctx.beginPath();
                 ctx.clearRect(r.x, r.y, r.w, r.h);

@@ -152,7 +152,7 @@ export class ListItemCheckable extends ListItem {
 		return super.drawImage(ctx, style);
 	}
 	
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		this.value = !this.value;	
 		super.dispatchClick(evt);
 	}

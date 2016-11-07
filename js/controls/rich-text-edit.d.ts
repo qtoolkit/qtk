@@ -48,11 +48,11 @@ export declare class RichTextEdit extends RichText {
     protected endOfline(ordinal: any, direction: any): any;
     protected handleKey(key: any, selecting: any, ctrlKey: any): boolean;
     protected findNodeByEvent(evt: any): any;
-    protected dispatchDblClick(evt: any): void;
+    dispatchDblClick(evt: any): void;
     protected updateTextArea(): void;
-    protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerUp(evt: Events.PointerEvent): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerUp(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected onInit(): void;
     dispose(): void;
     protected focused: boolean;

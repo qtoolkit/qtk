@@ -33,8 +33,8 @@ export declare class TableClient extends ListView {
     protected setSelectedRows(first: number, second: number): TableClient;
     protected setSelectedCols(first: number, second: number): TableClient;
     protected updateSelection(x: number, y: number, updateFirst: boolean, updateSecond: boolean): void;
-    protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
     protected drawVLine(ctx: any, x: number, yStart: number, yEnd: number): void;
     protected drawVLines(ctx: any): void;
     protected drawHLines(ctx: any): void;

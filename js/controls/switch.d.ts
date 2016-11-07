@@ -11,7 +11,7 @@ export declare class Switch extends Widget {
     protected readonly minOffset: number;
     protected readonly maxOffset: number;
     protected drawColorBackground(ctx: any, style: Style): Widget;
-    protected dispatchPointerUp(evt: Events.PointerEvent): void;
+    dispatchPointerUp(evt: Events.PointerEvent): void;
     constructor();
     static TYPE: string;
     private static recycleBin;

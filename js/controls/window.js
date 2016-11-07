@@ -7,6 +7,12 @@ var __extends = (this && this.__extends) || function (d, b) {
 var point_1 = require("../point");
 var widget_1 = require("./widget");
 var Events = require("../events");
+(function (WindowType) {
+    WindowType[WindowType["NORMAL"] = 0] = "NORMAL";
+    WindowType[WindowType["POPUP"] = 1] = "POPUP";
+})(exports.WindowType || (exports.WindowType = {}));
+var WindowType = exports.WindowType;
+;
 /**
  * 窗口的基类。
  */
@@ -16,6 +22,13 @@ var Window = (function (_super) {
         _super.call(this, type);
         this._windowEvent = Events.WindowEvent.create();
     }
+    Object.defineProperty(Window.prototype, "windowType", {
+        get: function () {
+            return this._windowType;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Window.prototype, "grabbed", {
         get: function () {
             return this._grabbed;

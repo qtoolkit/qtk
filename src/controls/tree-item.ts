@@ -171,7 +171,7 @@ export class TreeItem extends Widget {
 		return this;
 	}
 	
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
 		super.dispatchDblClick(evt);
 		if(!this.isLeaf) {
 			this.expanded = !this.expanded;
@@ -179,7 +179,7 @@ export class TreeItem extends Widget {
 		}
 	}
 	
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		if(!this.isLeaf) {
 			var p = this.toLocalPoint(Point.point.copy(evt));
 			var y = 0

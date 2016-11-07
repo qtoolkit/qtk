@@ -66,7 +66,7 @@ export class Switch extends Widget {
 		return this;
 	}
 
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
 		var dx = evt.x - evt.pointerDownX;
 		
 		if(dx > 5 && this.value || dx < -5 && !this.value) { 

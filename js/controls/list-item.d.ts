@@ -71,7 +71,7 @@ export declare class ListItemCheckable extends ListItem {
     protected _multiCheckable: boolean;
     multiCheckable: boolean;
     protected drawImage(ctx: any, style: Style): Widget;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     value: boolean;
     constructor(type?: string);
     static TYPE: string;

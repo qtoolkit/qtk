@@ -215,7 +215,7 @@ var ComboBoxBase = (function (_super) {
         var scrollable = false;
         var itemH = this.itemH;
         var options = this._options;
-        var dialog = dialog_1.Dialog.create();
+        var dialog = dialog_1.Dialog.create({ app: this.app, hasOwnCanvas: true });
         var n = this._options.length || 1;
         var h = n * itemH + padding + padding;
         var halfH = vp.h >> 1;
@@ -231,7 +231,7 @@ var ComboBoxBase = (function (_super) {
                 scrollable = true;
             }
         }
-        dialog.set({ x: x, y: y, w: w, h: h, hasOwnCanvas: true, app: this.app });
+        dialog.set({ x: x, y: y, w: w, h: h });
         dialog.styleType = "widget.transparent";
         dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
         var listView = list_view_1.ListView.create();

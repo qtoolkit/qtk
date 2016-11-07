@@ -357,7 +357,7 @@ export class RichTextEdit extends RichText {
         return node;
     }
 
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
         var node = this.findNodeByEvent(evt).parent();
         if (node) {
             this._doc.select(node.ordinal, node.ordinal +
@@ -408,7 +408,7 @@ export class RichTextEdit extends RichText {
     	return;
     };
 
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
         this._selectDragStart = node.ordinal;
@@ -417,7 +417,7 @@ export class RichTextEdit extends RichText {
         this.requestRedraw();
 	}
 
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
         var node = this.findNodeByEvent(evt);
         this._selectDragStart = null;
         this._keyboardX = null;
@@ -426,7 +426,7 @@ export class RichTextEdit extends RichText {
         this._textArea.focus();
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
 

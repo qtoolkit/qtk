@@ -109,31 +109,31 @@ export abstract class PassiveScrollableGroup extends Widget {
 		this._oy = 0;
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		this.offsetPointerEvent(evt);
 		super.dispatchClick(evt);
 		this.unOffsetPointerEvent(evt);
 	}
 	
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
 		this.offsetPointerEvent(evt);
 		super.dispatchDblClick(evt);
 		this.unOffsetPointerEvent(evt);
 	}
 	
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this.offsetPointerEvent(evt);
 		super.dispatchPointerDown(evt, ctx);
 		this.unOffsetPointerEvent(evt);
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this.offsetPointerEvent(evt);
 		super.dispatchPointerMove(evt, ctx);
 		this.unOffsetPointerEvent(evt);
 	}
 
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
 		this.offsetPointerEvent(evt);
 		super.dispatchPointerUp(evt);
 		this.unOffsetPointerEvent(evt);

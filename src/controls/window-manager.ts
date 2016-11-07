@@ -1,45 +1,58 @@
 
 import {Widget} from "./widget";
+import {Window} from "./window";
 import Events = require("../events");
-import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
-import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
+/**
+ * 实现窗口管理器的基本功能。
+ */
 export class WindowManager extends Widget {
-	constructor() {
-		super(WindowManager.TYPE);
+	/**
+	 * 窗口列表。
+	 */
+	public get windows() : Array<Window> {
+		return this._windows;
+	}
+	public set windows(value:Array<Window>) {
+	}
+	protected _windows : Array<Window>;
+
+	public addWindow(win:Window) {
+		this._windows.push(win);
 	}
 
-	public onWindowCreate(evt:Events.WindowEvent) {
-		console.log("onWindowCreate");
+	public removeWindow(win:Window) {
+		this._windows.remove(win);
 	}
-	public onWindowCreated(evt:Events.WindowEvent) {
-		console.log("onWindowCreated");
-	}
-	public onWindowOpen(evt:Events.WindowEvent) {
-		console.log("onWindowOpen");
-	}
-	public onWindowClose(evt:Events.WindowEvent) {
-		console.log("onWindowClose");
+	
+	protected onWindowCreate(evt:Events.WindowEvent) {
+		var win = evt.widget;
+		this.addWindow(win);
 	}
 
+	protected onWindowCreated(evt:Events.WindowEvent) {
+	}
+
+	protected onWindowOpen(evt:Events.WindowEvent) {
+	}
+
+	protected onWindowClose(evt:Events.WindowEvent) {
+		var win:Window = evt.widget;
+		this.removeWindow(win);
+	}
+
+	/**
+	 * 向APP注册窗口的事件。
+	 */
 	public onCreated() {
 		super.onCreated();
-		var app = this.app;
 		this.createCanvas();
-	
+
+		this._windows = [];
+		var app = this.app;
 		app.on(Events.WINDOW_OPEN, evt => this.onWindowOpen(evt));
 		app.on(Events.WINDOW_CLOSE, evt => this.onWindowClose(evt));
 		app.on(Events.WINDOW_CREATE, evt => this.onWindowCreate(evt));
 		app.on(Events.WINDOW_CREATED, evt => this.onWindowCreated(evt));
 	}
-
-	public static TYPE = "window-manager";
-	private static recycleBin = WidgetRecyclableCreator.create(WindowManager);
-	public static create(options?:any) : WindowManager {
-		return <WindowManager>WindowManager.recycleBin.create(options);
-	}
-};
-
-WidgetFactory.register(WindowManager.TYPE, WindowManager.create);
-
+}

@@ -1,6 +1,6 @@
 
 import {Widget} from "./widget";
-import {Window} from "./window";
+import {Window, WindowType} from "./window";
 import {IViewPort} from "../iview-port";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
@@ -13,6 +13,7 @@ export class Dialog extends Window {
 	
 	constructor(type?:string) {
 		super(type||Dialog.TYPE);
+		this._windowType = WindowType.POPUP;	
 	}
 
 	public static TYPE = "dialog";

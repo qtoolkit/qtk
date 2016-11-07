@@ -41,8 +41,8 @@ export declare class TreeItem extends Widget {
     protected getStyleType(): string;
     protected drawImage(ctx: any, style: Style): Widget;
     protected drawText(ctx: any, style: Style): Widget;
-    protected dispatchDblClick(evt: any): void;
-    protected dispatchClick(evt: any): void;
+    dispatchDblClick(evt: any): void;
+    dispatchClick(evt: any): void;
     dispose(): void;
     protected onReset(): void;
     static TYPE: string;

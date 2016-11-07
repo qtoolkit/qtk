@@ -253,7 +253,7 @@ export class Widget extends Emitter {
 		return this.hitTest(x, y, ctx);	
 	}
 
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -285,7 +285,7 @@ export class Widget extends Emitter {
 		this.hitTestResult = hitTestResult;
 	}
 
-	protected dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this.dispatchEvent(evt, true);
 		if(this.target) {
 			this.target.dispatchPointerMove(evt, ctx);
@@ -296,7 +296,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	protected dispatchPointerLeave(evt:Events.PointerEvent) {
+	public dispatchPointerLeave(evt:Events.PointerEvent) {
 		if(this.state === WidgetState.OVER || this.state === WidgetState.ACTIVE) {
 			var e = Events.PointerEvent.create(Events.POINTER_LEAVE, evt);
 			this.dispatchEvent(e, false);
@@ -312,13 +312,13 @@ export class Widget extends Emitter {
 		}
 	}
 	
-	protected dispatchPointerEnter(evt:Events.PointerEvent) {
+	public dispatchPointerEnter(evt:Events.PointerEvent) {
 		var e = Events.PointerEvent.create(Events.POINTER_ENTER, evt);
 		this.dispatchEvent(e, false);
 		e.dispose();
 	}
 
-	protected dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
 		ctx.save();
 		this.applyTransform(ctx);
 		var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
@@ -366,7 +366,7 @@ export class Widget extends Emitter {
 		ctx.restore();
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -378,7 +378,7 @@ export class Widget extends Emitter {
 		this.dispatchPointerMoveToUnder(evt, ctx);
 	}
 
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -399,7 +399,7 @@ export class Widget extends Emitter {
 		this.state = WidgetState.NORMAL;
 	}
 	
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -414,7 +414,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	protected dispatchContextMenu(evt:any) {
+	public dispatchContextMenu(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -429,7 +429,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -444,7 +444,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	protected dispatchKeyDown(evt:any) {
+	public dispatchKeyDown(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -459,7 +459,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	protected dispatchKeyUp(evt:any) {
+	public dispatchKeyUp(evt:any) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -848,10 +848,14 @@ export class Widget extends Emitter {
 		ctx.save();
 		this.applyTransform(ctx);
 		this.computeDirtyRectSelf(ctx);
+		this.computeChildrenDirtyRect(ctx);
+		ctx.restore();
+	}
+
+	public computeChildrenDirtyRect(ctx:DirtyRectContext) {
 		this.children.forEach(function(child) {
 			child.computeDirtyRect(ctx);
 		});
-		ctx.restore();
 	}
 
 	protected doDraw(ctx:any, style:Style) {
@@ -1110,7 +1114,21 @@ export class Widget extends Emitter {
 			var dirtyRect = dirtyRectContext.getRect();
 			var r = lastDirtyRect.merge(dirtyRect);
 
+			if(r.x < 0) r.x = 0;
+			if(r.y < 0) r.y = 0;
+			if((r.x + r.w) > this.w) {
+				r.w = this.w - r.x;
+			}
+			if((r.y + r.h) > this.h) {
+				r.h = this.h - r.y;
+			}
+
 			if(r.w > 0 && r.h > 0) {
+				r.x = r.x >> 0;
+				r.y = r.y >> 0;
+				r.w = (r.w + 1) >> 0;
+				r.h = (r.h + 2) >> 0;
+
 				ctx.save();
 				ctx.beginPath();
 				ctx.clearRect(r.x, r.y, r.w, r.h);

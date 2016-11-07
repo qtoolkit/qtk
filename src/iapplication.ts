@@ -1,6 +1,7 @@
 import {IViewPort} from "./iview-port";
 import {IMainLoop} from "./imain-loop";
 import {IThemeManager} from "./itheme-manager";
+import {IWindowManager} from "./controls/iwindow-manager";
 
 /**
  * 代表整个应用程序。 
@@ -37,6 +38,11 @@ export interface IApplication {
 	dispatchEvent(evt:any);
 	on(type:string, callback:Function, useCapture?:boolean);
 	off(type:string, callback:Function, useCapture?:boolean);
+
+	/**
+	 * 窗口管理器。
+	 */
+	windowManager : IWindowManager;
 
 	/**
 	 * 获取App的参数。

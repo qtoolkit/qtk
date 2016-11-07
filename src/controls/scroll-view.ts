@@ -196,7 +196,7 @@ export class ScrollView extends Widget {
 	/*
 	 * 先处理滚动条的事件，再处理Scroller事件，最后发给子控件。
 	 */
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this._pointerInBar = false;
 		if(this.dragToScroll) {
 			this._saveOX = this._ox;
@@ -244,7 +244,7 @@ export class ScrollView extends Widget {
 		}
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		if(evt.pointerDown) {
 			var offsetX = this.offsetX;
 			var offsetY = this.offsetY;
@@ -284,7 +284,7 @@ export class ScrollView extends Widget {
 		this.requestRedraw();
 	}
 
-	protected dispatchPointerUp(evt:Events.PointerEvent) {
+	public dispatchPointerUp(evt:Events.PointerEvent) {
 		if(this.dragToScroll) {
 			if(this._pointerInVScrollBarRectUp) {
 				this.validOffsetY = this.offsetY - this.h;
@@ -323,7 +323,7 @@ export class ScrollView extends Widget {
 		this._pointerInBar = false;
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		if(!this._pointerInBar) {
 			this.offsetPointerEvent(evt);
 			super.dispatchClick(evt);
@@ -331,7 +331,7 @@ export class ScrollView extends Widget {
 		}
 	}
 
-	protected dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:any) {
 		if(!this._pointerInBar) {
 			this.offsetPointerEvent(evt);
 			super.dispatchDblClick(evt);

@@ -101,18 +101,18 @@ export declare class Widget extends Emitter {
     protected hitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
     protected doHitTest(x: number, y: number, r: Rect, ctx: MatrixStack): HitTestResult;
     protected selfHitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
-    protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerMoveToTarget(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerLeave(evt: Events.PointerEvent): void;
-    protected dispatchPointerEnter(evt: Events.PointerEvent): void;
-    protected dispatchPointerMoveToUnder(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerUp(evt: Events.PointerEvent): void;
-    protected dispatchClick(evt: any): void;
-    protected dispatchContextMenu(evt: any): void;
-    protected dispatchDblClick(evt: any): void;
-    protected dispatchKeyDown(evt: any): void;
-    protected dispatchKeyUp(evt: any): void;
+    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMoveToTarget(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerLeave(evt: Events.PointerEvent): void;
+    dispatchPointerEnter(evt: Events.PointerEvent): void;
+    dispatchPointerMoveToUnder(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerUp(evt: Events.PointerEvent): void;
+    dispatchClick(evt: any): void;
+    dispatchContextMenu(evt: any): void;
+    dispatchDblClick(evt: any): void;
+    dispatchKeyDown(evt: any): void;
+    dispatchKeyUp(evt: any): void;
     dispatchWheel(evt: any): void;
     protected applyTransform(ctx: MatrixStack): Widget;
     protected findEventTargetChild(x: number, y: number, ctx: MatrixStack): Widget;
@@ -180,6 +180,7 @@ export declare class Widget extends Emitter {
      * 计算脏矩形。
      */
     computeDirtyRect(ctx: DirtyRectContext): void;
+    computeChildrenDirtyRect(ctx: DirtyRectContext): void;
     protected doDraw(ctx: any, style: Style): void;
     draw(ctx: any): void;
     stateToString(state: WidgetState): string;

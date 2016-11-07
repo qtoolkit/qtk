@@ -22,12 +22,12 @@ export declare class Menu extends Dialog {
      */
     trigger: Widget;
     onItemEnter(child: MenuItem): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
     constructor();
     clearContent(): Widget;
     resizeToContent(): Widget;
     open(): Widget;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     addSpace(): Widget;
     addCheckableItem(text: string, onClick: Function, value?: boolean, shortcut?: string): Widget;
     addItem(text: string, onClick: Function, iconURL?: string, shortcut?: string): Widget;
@@ -47,7 +47,7 @@ export declare class MenuItem extends Widget {
     checkable: boolean;
     onInitSubMenu: Function;
     iconURL: string;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     protected drawImage(ctx: any, style: Style): Widget;
     protected drawText(ctx: any, style: Style): Widget;
     reopenSubMenu(menu: Menu): void;

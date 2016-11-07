@@ -214,7 +214,7 @@ export abstract class ComboBoxBase extends Widget {
 		var scrollable = false;	
 		var itemH = this.itemH;
 		var options = this._options;
-		var dialog = <Dialog>Dialog.create();
+		var dialog = <Dialog>Dialog.create({app:this.app, hasOwnCanvas:true});
 		var n = this._options.length || 1;
 		var h = n * itemH + padding + padding;
 
@@ -231,7 +231,7 @@ export abstract class ComboBoxBase extends Widget {
 			}
 		}
 
-		dialog.set({x:x, y:y, w:w, h:h, hasOwnCanvas:true, app:this.app});
+		dialog.set({x:x, y:y, w:w, h:h});
 		dialog.styleType = "widget.transparent";
 		dialog.childrenLayouter = SimpleLayouter.create();
 		
@@ -345,7 +345,7 @@ export class ComboBox extends ComboBoxBase {
 		return this;
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this._isPopupOpened) {
 			this.showPopup();

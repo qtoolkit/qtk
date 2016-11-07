@@ -38,7 +38,7 @@ export declare class Edit extends Label {
     protected onInvalidInput(message: string): void;
     constructor();
     dispose(): void;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     protected static defProps: {} & {} & {
         _x: number;
         _y: number;

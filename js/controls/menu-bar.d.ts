@@ -71,7 +71,7 @@ export declare class MenuBarItem extends Widget {
     protected drawImage(ctx: any, style: Style): Widget;
     reopenMenu(menu: Menu): void;
     protected openMenu(): void;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     constructor();
     dispose(): void;
     protected static defProps: {} & {

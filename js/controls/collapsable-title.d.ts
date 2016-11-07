@@ -13,8 +13,8 @@ export declare class CollapsableTitle extends Widget {
     protected getFgImageRect(style: Style): Rect;
     protected getTextRect(style: Style): Rect;
     protected getStyleType(): string;
-    protected dispatchDblClick(evt: any): void;
-    protected dispatchClick(evt: any): void;
+    dispatchDblClick(evt: any): void;
+    dispatchClick(evt: any): void;
     dispose(): void;
     constructor();
     static TYPE: string;

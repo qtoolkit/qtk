@@ -93,7 +93,7 @@ export declare class ComboBox extends ComboBoxBase {
     readonly text: string;
     protected getFgImageRect(style: Style): Rect;
     protected drawText(ctx: any, style: Style): Widget;
-    protected dispatchClick(evt: any): void;
+    dispatchClick(evt: any): void;
     constructor();
     static TYPE: string;
     private static recycleBin;

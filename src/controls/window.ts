@@ -5,6 +5,11 @@ import {IApplication} from "../iapplication";
 import {MatrixStack} from "../matrix-stack";
 import inputEventAdapter = require("../input-event-adapter");
 
+export enum WindowType {
+	NORMAL,
+	POPUP
+};
+
 /**
  * 窗口的基类。
  */
@@ -15,6 +20,11 @@ export abstract class Window extends Widget {
 	private _shouldGrabWhenVisible : boolean;
 	private _shortcutEvent : Events.ShortcutEvent;
 	private _windowEvent = Events.WindowEvent.create();
+
+	public get windowType() : WindowType {
+		return this._windowType;
+	}
+	protected _windowType : WindowType;
 
 	constructor(type:string) {
 		super(type);
@@ -49,12 +59,12 @@ export abstract class Window extends Widget {
 		return this._pointerPosition;
 	}
 
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this._pointerPosition.init(evt.x, evt.y);
 		super.dispatchPointerDown(evt, ctx);
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		this._pointerPosition.init(evt.x, evt.y);
 		super.dispatchPointerMove(evt, ctx);
 	}
@@ -176,7 +186,7 @@ export abstract class Window extends Widget {
 		return this;
 	}
 
-	protected dispatchKeyDown(evt:any) {
+	public dispatchKeyDown(evt:any) {
 		super.dispatchKeyDown(evt);
 		var keys = "";
 		if(evt.ctrlKey) {
@@ -202,7 +212,7 @@ export abstract class Window extends Widget {
 		}
 	}
 
-	protected dispatchShortcut(e:Events.ShortcutEvent) {
+	public dispatchShortcut(e:Events.ShortcutEvent) {
 		this.dispatchEvent(e);
 	}
 

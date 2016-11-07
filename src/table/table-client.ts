@@ -160,7 +160,7 @@ export class TableClient extends ListView {
 		this.setSelectedRows(firstRow, secondRow);
 	}
 
-	protected dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
 		super.dispatchPointerDown(evt, ctx);
 
 		if(!this._pointerInBar) {
@@ -168,7 +168,7 @@ export class TableClient extends ListView {
 		}
 	}
 	
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		super.dispatchPointerMove(evt, ctx);
 
 		if(!this._pointerInBar && evt.pointerDown) {

@@ -241,7 +241,7 @@ export class Edit extends Label {
 		this._inputFilter = null;
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this._isEditing) {
 			this._isEditing = true;

@@ -2,6 +2,10 @@ import { Point } from "../point";
 import { Widget } from "./widget";
 import Events = require("../events");
 import { MatrixStack } from "../matrix-stack";
+export declare enum WindowType {
+    NORMAL = 0,
+    POPUP = 1,
+}
 /**
  * 窗口的基类。
  */
@@ -12,6 +16,8 @@ export declare abstract class Window extends Widget {
     private _shouldGrabWhenVisible;
     private _shortcutEvent;
     private _windowEvent;
+    readonly windowType: WindowType;
+    protected _windowType: WindowType;
     constructor(type: string);
     readonly grabbed: boolean;
     /**
@@ -24,8 +30,8 @@ export declare abstract class Window extends Widget {
      * 获取鼠标在当前窗口上的位置。
      */
     readonly pointerPosition: Point;
-    protected dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    protected dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
     /**
      * 抓住事件，让输入事件始终发到当前窗口，直到ungrab为止。
      */
@@ -55,8 +61,8 @@ export declare abstract class Window extends Widget {
      * 将对话框移动到屏幕中间。
      */
     moveToCenter(): Widget;
-    protected dispatchKeyDown(evt: any): void;
-    protected dispatchShortcut(e: Events.ShortcutEvent): void;
+    dispatchKeyDown(evt: any): void;
+    dispatchShortcut(e: Events.ShortcutEvent): void;
     registerShortcut(keys: string, func: Function): void;
     protected onCreated(): void;
     protected onReset(): void;

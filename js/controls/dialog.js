@@ -14,6 +14,7 @@ var Dialog = (function (_super) {
     __extends(Dialog, _super);
     function Dialog(type) {
         _super.call(this, type || Dialog.TYPE);
+        this._windowType = window_1.WindowType.POPUP;
     }
     Dialog.create = function (options) {
         return Dialog.recycleBin.create(options);

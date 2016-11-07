@@ -78,7 +78,7 @@ export class Menu extends Dialog {
 		}
 	}
 
-	protected dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
 		var owner:any = this.owner;
 		/*
 		 * 如果事件在当前菜单外，把事件转发给owner处理。
@@ -135,7 +135,7 @@ export class Menu extends Dialog {
 		return this;
 	}
 	
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this.hitTestResult) {
 			this.close();
@@ -254,7 +254,7 @@ export class MenuItem extends Widget {
 		this._iconURL = value;
 	}
 
-	protected dispatchClick(evt:any) {
+	public dispatchClick(evt:any) {
 		super.dispatchClick(evt);
 		if(!this.onInitSubMenu) {
 			this.closeMenu();

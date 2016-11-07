@@ -14,7 +14,9 @@ import {IApplication} from "./iapplication";
 import {DeviceInfo} from "./device-info";
 import {IThemeManager} from "./itheme-manager";
 import {ServiceLocator} from  "./service-locator";
-import {WindowManager} from "./controls/window-manager";
+import {IWindowManager} from "./controls/iwindow-manager";
+import {WindowManagerMobile} from "./controls/window-manager-mobile";
+import {WindowManagerDesktop} from "./controls/window-manager-desktop";
 import inputEventAdapter = require("./input-event-adapter");
 import {InteractionRequest} from "./interaction-request/interaction-request";
 import {InteractionService} from "./interaction-request/interaction-service";
@@ -30,7 +32,13 @@ export class Application extends Emitter implements IApplication {
 	private _viewPort : IViewPort; 
 	private _mainLoop : MainLoop;
 	private servicesManager : ServiceLocator;
-	private _windwManager : WindowManager;
+	private _windwManager : IWindowManager;
+
+	public get windowManager() : IWindowManager {
+		return this._windwManager;
+	}
+	public set windowManager(value:IWindowManager) {
+	}
 
 	constructor(name:string) {
 		super();
@@ -155,8 +163,11 @@ export class Application extends Emitter implements IApplication {
 			TWEEN.update(time);
 		});
 
+		var vp = this._viewPort;
 		if(DeviceInfo.isMobile || this.options.isMobile) {
-			this._windwManager = WindowManager.create({app:this});
+			this._windwManager = WindowManagerMobile.create({app:this, x:0, y:0, w:vp.w, h:vp.h});
+		}else{
+			this._windwManager = WindowManagerDesktop.create({app:this, x:0, y:0, w:vp.w, h:vp.h});
 		}
 
 		return this;
