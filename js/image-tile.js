@@ -9,7 +9,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 require("whatwg-fetch");
 var path = require("path");
 var emitter_1 = require("./emitter");
-var Assets = require("./assets");
+var assets_1 = require("./assets");
 var Events = require("./events");
 (function (ImageDrawType) {
     /**
@@ -155,7 +155,7 @@ var ImageTile = (function (_super) {
     });
     ImageTile.prototype.createNormal = function (src) {
         var _this = this;
-        Assets.loadImage(src).then(function (img) {
+        assets_1.AssetManager.loadImage(src).then(function (img) {
             _this.init(img, 0, 0, img.width, img.height);
         }).catch(function (err) {
             _this.init(null, 0, 0, 0, 0);
@@ -168,7 +168,7 @@ var ImageTile = (function (_super) {
         var y = parseInt(xywh[2]);
         var w = parseInt(xywh[3]);
         var h = parseInt(xywh[4]);
-        Assets.loadImage(base).then(function (img) {
+        assets_1.AssetManager.loadImage(base).then(function (img) {
             _this.init(img, x, y, w, h);
         }).catch(function (err) {
             _this.init(null, 0, 0, 0, 0);
@@ -180,7 +180,7 @@ var ImageTile = (function (_super) {
         var rows = parseInt(rowcolIndex[1]);
         var cols = parseInt(rowcolIndex[2]);
         var index = parseInt(rowcolIndex[3]);
-        Assets.loadImage(base).then(function (img) {
+        assets_1.AssetManager.loadImage(base).then(function (img) {
             var w = img.width / cols;
             var h = img.height / rows;
             var r = (index / cols) >> 0;
@@ -194,10 +194,10 @@ var ImageTile = (function (_super) {
     };
     ImageTile.prototype.createTexturePacker = function (jsonURL, name) {
         var _this = this;
-        Assets.loadJSON(jsonURL).then(function (json) {
+        assets_1.AssetManager.loadJson(jsonURL).then(function (json) {
             var info = json.frames[name];
             var imgSRC = path.dirname(jsonURL) + "/" + (json.file || json.meta.image);
-            Assets.loadImage(imgSRC).then(function (img) {
+            assets_1.AssetManager.loadImage(imgSRC).then(function (img) {
                 var rect = info.frame || info;
                 var x = rect.x;
                 var y = rect.y;

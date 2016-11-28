@@ -11,11 +11,6 @@ require("whatwg-fetch");
 var path = require("path");
 var Events = require("./events");
 var emitter_1 = require("./emitter");
-exports.AUDIO = "audio";
-exports.IMAGE = "image";
-exports.BLOB = "blob";
-exports.JSON = "json";
-exports.TEXT = "text";
 ;
 var assetsCache = {};
 function load(url, type) {
@@ -25,10 +20,10 @@ function load(url, type) {
             if (response.status !== 200) {
                 return Promise.reject(null);
             }
-            if (type === exports.JSON) {
+            if (type === AssetType.JSON) {
                 return response.json();
             }
-            else if (type === exports.BLOB) {
+            else if (type === AssetType.BLOB) {
                 return response.blob();
             }
             else {
@@ -42,156 +37,199 @@ function load(url, type) {
     return item;
 }
 /**
- * Load JSON Data and Cache It.
- * @param url URL Of JSON.
- * @returns Promise
+ * @enum AssetType
+ * 资源类型。
  */
-function loadJSON(url) {
-    return load(url, exports.JSON);
-}
-exports.loadJSON = loadJSON;
+(function (AssetType) {
+    /**
+     * @property {number} [AUDIO=1]
+     * 音频资源。
+     */
+    AssetType[AssetType["AUDIO"] = 1] = "AUDIO";
+    /**
+     * @property {number} [IMAGE]
+     * 图像资源。
+     */
+    AssetType[AssetType["IMAGE"] = 2] = "IMAGE";
+    /**
+     * @property {number} [BLOB]
+     * 二进制资源。
+     */
+    AssetType[AssetType["BLOB"] = 3] = "BLOB";
+    /**
+     * @property {number} [JSON]
+     * JSON资源。
+     */
+    AssetType[AssetType["JSON"] = 4] = "JSON";
+    /**
+     * @property {number} [TEXT]
+     * 文本资源。
+     */
+    AssetType[AssetType["TEXT"] = 5] = "TEXT";
+})(exports.AssetType || (exports.AssetType = {}));
+var AssetType = exports.AssetType;
+;
 /**
- * Load Text Data and Cache It.
- * @param url URL Of Text.
- * @returns Promise
+ * @class AssetManager
+ * 资源管理类，用于加载各种资源。
  */
-function loadText(url) {
-    return load(url, exports.TEXT);
-}
-exports.loadText = loadText;
-/**
- * Load Blob Data and Cache It.
- * @param url URL Of Blob.
- * @returns Promise
- */
-function loadBlob(url) {
-    return load(url, exports.BLOB);
-}
-exports.loadBlob = loadBlob;
-/**
- * Load Image and Cache It.
- * @param url URL Of Image.
- * @returns Promise
- */
-function loadImage(url) {
-    var item = assetsCache[url];
-    if (!item) {
-        item = new Promise(function (resolve, reject) {
-            var image = new Image();
-            image.onload = function () {
-                resolve(image);
+var AssetManager = (function () {
+    function AssetManager() {
+    }
+    /**
+     * @method loadJson
+     * 加载JSON资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadJson = function (url) {
+        return load(url, AssetType.JSON);
+    };
+    /**
+     * @method loadText
+     * 加载文本数据资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadText = function (url) {
+        return load(url, AssetType.TEXT);
+    };
+    /**
+     * @method loadBlob
+     * 加载二进制数据资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadBlob = function (url) {
+        return load(url, AssetType.BLOB);
+    };
+    /**
+     * @method loadImage
+     * 加载图片资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadImage = function (url) {
+        var item = assetsCache[url];
+        if (!item) {
+            item = new Promise(function (resolve, reject) {
+                var image = new Image();
+                image.onload = function () {
+                    resolve(image);
+                };
+                image.onerror = function (err) {
+                    reject(err);
+                };
+                image.src = url;
+            });
+        }
+        assetsCache[url] = item;
+        return item;
+    };
+    /**
+     * @method loadScript
+     * 加载脚本资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadScript = function (url) {
+        var item = new Promise(function (resolve, reject) {
+            var node = document.head ? document.head : document.body;
+            var script = document.createElement("script");
+            script.onload = function () {
+                resolve(script);
             };
-            image.onerror = function (err) {
+            script.onerror = function (err) {
                 reject(err);
             };
-            image.src = url;
+            script.src = url;
+            node.appendChild(script);
         });
-    }
-    assetsCache[url] = item;
-    return item;
-}
-exports.loadImage = loadImage;
+        return item;
+    };
+    /**
+     * @method loadAudio
+     * 加载音频资源。
+     * @static
+     * @param {String} url 资源URL。
+     * @return {Promise}
+     */
+    AssetManager.loadAudio = function (url) {
+        var item = assetsCache[url];
+        if (!item) {
+            item = new Promise(function (resolve, reject) {
+                var audio = new Audio();
+                audio.onload = function () {
+                    resolve(audio);
+                };
+                audio.onerror = function (err) {
+                    reject(err);
+                };
+                audio.src = url;
+            });
+        }
+        assetsCache[url] = item;
+        return item;
+    };
+    /**
+     * @method clear
+     * 清除指定URL资源的缓存。
+     * @static
+     * @param {String} url 资源URL。
+     */
+    AssetManager.clear = function (url) {
+        delete assetsCache[url];
+    };
+    return AssetManager;
+}());
+exports.AssetManager = AssetManager;
 /**
- * Load Script
- * @param url URL Of Script.
- * @returns Promise
+ * @class AssetItem
+ *
+ * 表示一个资源项, 用于预加载资源。
+ *
  */
-function loadScript(url) {
-    var item = new Promise(function (resolve, reject) {
-        var node = document.head ? document.head : document.body;
-        var script = document.createElement("script");
-        script.onload = function () {
-            resolve(script);
-        };
-        script.onerror = function (err) {
-            reject(err);
-        };
-        script.src = url;
-        node.appendChild(script);
-    });
-    return item;
-}
-exports.loadScript = loadScript;
-/**
- * Load Audio and Cache It.
- * @param url URL Of Audio.
- * @returns Promise
- */
-function loadAudio(url) {
-    var item = assetsCache[url];
-    if (!item) {
-        item = new Promise(function (resolve, reject) {
-            var audio = new Audio();
-            audio.onload = function () {
-                resolve(audio);
-            };
-            audio.onerror = function (err) {
-                reject(err);
-            };
-            audio.src = url;
-        });
-    }
-    assetsCache[url] = item;
-    return item;
-}
-exports.loadAudio = loadAudio;
-/**
- * Clear asset cache
- * @param url URL Of asset.
- */
-function clear(url) {
-    delete assetsCache[url];
-}
-exports.clear = clear;
-/**
- * Present one asset.
- */
-var Item = (function () {
-    function Item(src, type) {
+var AssetItem = (function () {
+    function AssetItem(src, type) {
         if (!type) {
             var name = path.extname(src).toLowerCase();
             if (name === ".json") {
-                type = exports.JSON;
+                type = AssetType.JSON;
             }
             else if (name === ".jpg" || name === ".png" || name === ".svg") {
-                type = exports.IMAGE;
+                type = AssetType.IMAGE;
             }
-            else if (type === ".txt") {
-                type = exports.TEXT;
+            else if (name === ".txt") {
+                type = AssetType.TEXT;
             }
             else {
-                type = exports.BLOB;
+                type = AssetType.BLOB;
             }
         }
         this.src = src;
         this.type = type;
     }
-    Item.create = function (src, type) {
-        return new Item(src, type);
+    AssetItem.create = function (src, type) {
+        return new AssetItem(src, type);
     };
-    return Item;
+    return AssetItem;
 }());
-exports.Item = Item;
+exports.AssetItem = AssetItem;
 ;
 /**
- * Assets group to preload
- * Example:
- * ```
- *  var items = [
- *    {type:qtk.Assets.TEXT, src:"http://localhost:9876/base/www/test.txt"},
- *    {type:qtk.Assets.JSON, src:"http://localhost:9876/base/www/test.json"},
- *    {type:qtk.Assets.IMAGE, src:"http://localhost:9876/base/www/test.jpg"},
- *    {type:qtk.Assets.BLOB, src:"http://localhost:9876/base/www/test.blob"}
- * ];
- * var assets = new qtk.Assets.Group(items);
- * assets.onProgress(function(info) {
- *   console.log(info.loaded + "/" + info.total);
- * });
- * ```
+ * @class AssetGroup
+ *
+ * 表示一个资源分组, 用于预加载资源。
+ *
  */
-var Group = (function (_super) {
-    __extends(Group, _super);
-    function Group(items, onProgress) {
+var AssetGroup = (function (_super) {
+    __extends(AssetGroup, _super);
+    function AssetGroup(items, onProgress) {
         _super.call(this);
         this.event = {
             total: 0,
@@ -211,41 +249,41 @@ var Group = (function (_super) {
     /**
      * Register of a progress callback function
      */
-    Group.prototype.onProgress = function (callback) {
+    AssetGroup.prototype.onProgress = function (callback) {
         this.on(Events.PROGRESS, callback);
     };
-    Group.prototype.addLoaded = function () {
+    AssetGroup.prototype.addLoaded = function () {
         this.loaded++;
         this.event.loaded = this.loaded;
         this.dispatchEvent(this.event);
     };
-    Group.prototype.loadOne = function (item) {
+    AssetGroup.prototype.loadOne = function (item) {
         var src = item.src;
         var type = item.type;
         var addLoaded = this.addLoaded.bind(this);
         var name = path.extname(src).toLowerCase();
-        if (type === exports.JSON || (!type && name === '.json')) {
-            loadJSON(src).then(addLoaded, addLoaded);
+        if (type === AssetType.JSON || (!type && name === '.json')) {
+            AssetManager.loadJson(src).then(addLoaded, addLoaded);
         }
-        else if (type === exports.IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
-            loadImage(src).then(addLoaded, addLoaded);
+        else if (type === AssetType.IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
+            AssetManager.loadImage(src).then(addLoaded, addLoaded);
         }
-        else if (type === exports.BLOB) {
-            loadBlob(src).then(addLoaded, addLoaded);
+        else if (type === AssetType.BLOB) {
+            AssetManager.loadBlob(src).then(addLoaded, addLoaded);
         }
         else {
-            loadText(src).then(addLoaded, addLoaded);
+            AssetManager.loadText(src).then(addLoaded, addLoaded);
         }
     };
-    Group.create = function (items, onProgress) {
-        return new Group(items, onProgress);
+    AssetGroup.create = function (items, onProgress) {
+        return new AssetGroup(items, onProgress);
     };
-    Group.preload = function (assetsURLS, onProgress) {
+    AssetGroup.preload = function (assetsURLS, onProgress) {
         var arr = assetsURLS.map(function (iter) {
-            return Item.create(iter);
+            return AssetItem.create(iter);
         });
-        return Group.create(arr, onProgress);
+        return AssetGroup.create(arr, onProgress);
     };
-    return Group;
+    return AssetGroup;
 }(emitter_1.Emitter));
-exports.Group = Group;
+exports.AssetGroup = AssetGroup;

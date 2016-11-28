@@ -1,8 +1,7 @@
 import path = require("path");
 import TWEEN = require("tween.js");
-import Assets = require("./assets");
 import Events = require("./events");
-import {Services} from "./consts";
+import {AssetManager, AssetGroup} from "./assets";
 import {MainLoop} from "./main-loop";
 import {Emitter} from "./emitter";
 import {ViewPort} from "./view-port";
@@ -77,7 +76,7 @@ export class Application extends Emitter implements IApplication {
 	 * @param {string} src 脚本URL。
 	 */
 	public loadScript(src:string) {
-		Assets.loadScript(src);
+		AssetManager.loadScript(src);
 	}
 
 	/**
@@ -86,15 +85,16 @@ export class Application extends Emitter implements IApplication {
 	 * @param {Function} onDone 加载完成时的回调函数。
 	 * @param {Function} onProgress 每加载一个资源时的回调函数。
 	 * 
-	 *    @example
-	 *
-	 *    app.preload(assetsURLs, function onLoad() {
+     * 示例：
+     *
+     *     @example
+	 *     app.preload(assetsURLs, function onLoad() {
      *        app.init({sysThemeDataURL:themeURL, appThemeDataURL:appThemeURL});
      *        app.run();
-     *    });
-	 */
+     *     });
+     */
 	public preload(assetsURLS:Array<string>, onDone:Function, onProgress?:Function) {
-		Assets.Group.preload(assetsURLS, function(evt) {
+		AssetGroup.preload(assetsURLS, function(evt) {
 			if(evt.loaded === evt.total) {
 				if(onDone) {
 					onDone(evt);
@@ -127,14 +127,14 @@ export class Application extends Emitter implements IApplication {
 		InteractionRequest.init(InteractionService.init());
 
 		if(sysThemeDataURL) {
-			Assets.loadJSON(sysThemeDataURL).then(json => {
+			AssetManager.loadJson(sysThemeDataURL).then(json => {
 				var baseURL = path.dirname(sysThemeDataURL);
 				themeManager.load(json, baseURL);
 				
 				return appThemeDataURL;
 			}).then(url => {
 				if(url) {
-					Assets.loadJSON(url).then(json => {
+					AssetManager.loadJson(url).then(json => {
 						var baseURL = path.dirname(url);
 						themeManager.load(json, baseURL);
 						this.dispatchEventAsync({type:Events.READY});
@@ -212,7 +212,7 @@ export class Application extends Emitter implements IApplication {
 
 	/**
 	 * 子类可以重载此函数，做App的初始化工作。
-	 */
+	 */ 
 	public onReady(app:IApplication) {
 	}
 

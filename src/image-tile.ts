@@ -4,7 +4,7 @@
 import "whatwg-fetch";
 import path = require("path");
 import {Emitter} from "./emitter";
-import Assets = require("./assets");
+import {AssetManager} from "./assets";
 import Events = require("./events");
 
 export enum ImageDrawType {
@@ -164,7 +164,7 @@ export class ImageTile extends Emitter {
     }
 
 	private createNormal(src:string) {
-		Assets.loadImage(src).then(img => {
+		AssetManager.loadImage(src).then(img => {
 			this.init(img, 0, 0, img.width, img.height);	
 		}).catch(err => {
 			this.init(null, 0, 0, 0, 0);	
@@ -177,7 +177,7 @@ export class ImageTile extends Emitter {
 		var y = parseInt(xywh[2]);
 		var w = parseInt(xywh[3]);
 		var h = parseInt(xywh[4]);
-		Assets.loadImage(base).then(img => {
+		AssetManager.loadImage(base).then(img => {
 			this.init(img, x, y, w, h);	
 		}).catch(err => {
 			this.init(null, 0, 0, 0, 0);	
@@ -190,7 +190,7 @@ export class ImageTile extends Emitter {
 		var cols = parseInt(rowcolIndex[2]);
 		var index = parseInt(rowcolIndex[3]);
 
-		Assets.loadImage(base).then(img => {
+		AssetManager.loadImage(base).then(img => {
 			var w = img.width/cols;
 			var h = img.height/rows;
 			var r = (index/cols) >> 0;
@@ -204,10 +204,10 @@ export class ImageTile extends Emitter {
 	}	
 
 	private createTexturePacker(jsonURL:string, name:string){
-		Assets.loadJSON(jsonURL).then(json => {
+		AssetManager.loadJson(jsonURL).then(json => {
 			var info = json.frames[name];
 			var imgSRC = path.dirname(jsonURL) + "/" + (json.file || json.meta.image);
-			Assets.loadImage(imgSRC).then(img => {
+			AssetManager.loadImage(imgSRC).then(img => {
 				var rect = info.frame || info;
 				var x = rect.x;
 				var y = rect.y;

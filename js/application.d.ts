@@ -43,12 +43,13 @@ export declare class Application extends Emitter implements IApplication {
      * @param {Function} onDone 加载完成时的回调函数。
      * @param {Function} onProgress 每加载一个资源时的回调函数。
      *
-     *    @example
+     * 示例：
      *
-     *    app.preload(assetsURLs, function onLoad() {
+     *     @example
+     *     app.preload(assetsURLs, function onLoad() {
      *        app.init({sysThemeDataURL:themeURL, appThemeDataURL:appThemeURL});
      *        app.run();
-     *    });
+     *     });
      */
     preload(assetsURLS: Array<string>, onDone: Function, onProgress?: Function): this;
     /**

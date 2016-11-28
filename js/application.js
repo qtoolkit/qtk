@@ -6,8 +6,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var path = require("path");
 var TWEEN = require("tween.js");
-var Assets = require("./assets");
 var Events = require("./events");
+var assets_1 = require("./assets");
 var main_loop_1 = require("./main-loop");
 var emitter_1 = require("./emitter");
 var view_port_1 = require("./view-port");
@@ -75,7 +75,7 @@ var Application = (function (_super) {
      * @param {string} src 脚本URL。
      */
     Application.prototype.loadScript = function (src) {
-        Assets.loadScript(src);
+        assets_1.AssetManager.loadScript(src);
     };
     /**
      * 预加载指定的资源。
@@ -83,15 +83,16 @@ var Application = (function (_super) {
      * @param {Function} onDone 加载完成时的回调函数。
      * @param {Function} onProgress 每加载一个资源时的回调函数。
      *
-     *    @example
+     * 示例：
      *
-     *    app.preload(assetsURLs, function onLoad() {
+     *     @example
+     *     app.preload(assetsURLs, function onLoad() {
      *        app.init({sysThemeDataURL:themeURL, appThemeDataURL:appThemeURL});
      *        app.run();
-     *    });
+     *     });
      */
     Application.prototype.preload = function (assetsURLS, onDone, onProgress) {
-        Assets.Group.preload(assetsURLS, function (evt) {
+        assets_1.AssetGroup.preload(assetsURLS, function (evt) {
             if (evt.loaded === evt.total) {
                 if (onDone) {
                     onDone(evt);
@@ -121,13 +122,13 @@ var Application = (function (_super) {
         var appThemeDataURL = this._options.appThemeDataURL;
         interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
         if (sysThemeDataURL) {
-            Assets.loadJSON(sysThemeDataURL).then(function (json) {
+            assets_1.AssetManager.loadJson(sysThemeDataURL).then(function (json) {
                 var baseURL = path.dirname(sysThemeDataURL);
                 themeManager.load(json, baseURL);
                 return appThemeDataURL;
             }).then(function (url) {
                 if (url) {
-                    Assets.loadJSON(url).then(function (json) {
+                    assets_1.AssetManager.loadJson(url).then(function (json) {
                         var baseURL = path.dirname(url);
                         themeManager.load(json, baseURL);
                         _this.dispatchEventAsync({ type: Events.READY });

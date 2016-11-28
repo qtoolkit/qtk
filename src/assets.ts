@@ -7,12 +7,6 @@ import path = require("path");
 import Events = require("./events");
 import {Emitter} from "./emitter";
 
-export const AUDIO = "audio";
-export const IMAGE = "image";
-export const BLOB = "blob";
-export const JSON = "json";
-export const TEXT = "text";
-
 export declare class Image {
     public width : number;
     public height : number;
@@ -23,7 +17,7 @@ export declare class Image {
 };
 
 var assetsCache = {};
-function load(url:string, type:string) : Promise<any> {
+function load(url:string, type:AssetType) : Promise<any> {
     var item = assetsCache[url];
 
     if(!item) {
@@ -32,9 +26,9 @@ function load(url:string, type:string) : Promise<any> {
 				return Promise.reject(null);
 			}
 
-            if(type === JSON) {
+            if(type === AssetType.JSON) {
                 return response.json();
-            }else if(type === BLOB) {
+            }else if(type === AssetType.BLOB) {
                 return response.blob();
             }else{
                 return response.text();
@@ -49,138 +43,193 @@ function load(url:string, type:string) : Promise<any> {
     return item;
 }
 
-/**
- * Load JSON Data and Cache It.
- * @param url URL Of JSON.
- * @returns Promise
+/** 
+ * @enum AssetType 
+ * 资源类型。
  */
-export function loadJSON(url:string) : Promise<any> {
-    return load(url, JSON);
-}
-
-/**
- * Load Text Data and Cache It.
- * @param url URL Of Text.
- * @returns Promise
- */
-export function loadText(url:string) : Promise<string> {
-    return load(url, TEXT);
-}
-
-/**
- * Load Blob Data and Cache It.
- * @param url URL Of Blob.
- * @returns Promise
- */
-export function loadBlob(url:string) : Promise<Blob> {
-    return load(url, BLOB);
-}
-
-/**
- * Load Image and Cache It.
- * @param url URL Of Image.
- * @returns Promise
- */
-export function loadImage(url:string) : Promise<Image> {
-    var item = assetsCache[url];
-
-    if(!item) {
-        item = new Promise ((resolve: (img: any)=>void, reject: (err: any)=>void) => {
-            var image = new Image();
-            image.onload = function (){
-                resolve(image);
-            }
-            image.onerror = function(err) {
-                reject(err);
-            }
-            image.src = url
-        });
-    }
-    assetsCache[url] = item;
-
-    return item;
-}
+export enum AssetType {
+	/** 
+	 * @property {number} [AUDIO=1]
+	 * 音频资源。
+	 */
+	AUDIO = 1,
+	/** 
+	 * @property {number} [IMAGE]
+	 * 图像资源。
+	 */
+	IMAGE,
+	/** 
+	 * @property {number} [BLOB]
+	 * 二进制资源。
+	 */
+	BLOB,
+	/** 
+	 * @property {number} [JSON]
+	 * JSON资源。
+	 */
+	JSON,
+	/** 
+	 * @property {number} [TEXT]
+	 * 文本资源。
+	 */
+	TEXT
+};
 
 /**
- * Load Script
- * @param url URL Of Script.
- * @returns Promise
+ * @class AssetManager
+ * 资源管理类，用于加载各种资源。
  */
-export function loadScript(url:string) : Promise<any> {
-	var item = new Promise ((resolve: (script: any)=>void, reject: (err: any)=>void) => {
-		var node = document.head ? document.head : document.body;
-		var script = document.createElement("script");
-		script.onload = function (){
-			resolve(script);
+export class AssetManager {
+	/**
+	 * @method loadJson
+	 * 加载JSON资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadJson(url:string) : Promise<any> {
+    	return load(url, AssetType.JSON);
+	}
+
+	/**
+	 * @method loadText
+	 * 加载文本数据资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadText(url:string) : Promise<string> {
+		return load(url, AssetType.TEXT);
+	}
+
+	/**
+	 * @method loadBlob
+	 * 加载二进制数据资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadBlob(url:string) : Promise<Blob> {
+		return load(url, AssetType.BLOB);
+	}
+
+	/**
+	 * @method loadImage
+	 * 加载图片资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadImage(url:string) : Promise<Image> {
+		var item = assetsCache[url];
+
+		if(!item) {
+			item = new Promise ((resolve: (img: any)=>void, reject: (err: any)=>void) => {
+				var image = new Image();
+				image.onload = function (){
+					resolve(image);
+				}
+				image.onerror = function(err) {
+					reject(err);
+				}
+				image.src = url
+			});
 		}
-		script.onerror = function(err) {
-			reject(err);
+		assetsCache[url] = item;
+
+		return item;
+	}
+
+	/**
+	 * @method loadScript
+	 * 加载脚本资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadScript(url:string) : Promise<any> {
+		var item = new Promise ((resolve: (script: any)=>void, reject: (err: any)=>void) => {
+			var node = document.head ? document.head : document.body;
+			var script = document.createElement("script");
+			script.onload = function (){
+				resolve(script);
+			}
+			script.onerror = function(err) {
+				reject(err);
+			}
+			script.src = url;
+			node.appendChild(script);
+		});
+
+		return item;
+	}
+
+	/**
+	 * @method loadAudio
+	 * 加载音频资源。
+	 * @static
+	 * @param {String} url 资源URL。
+	 * @return {Promise}
+	 */
+	public static loadAudio(url:string) : Promise<any> {
+		var item = assetsCache[url];
+
+		if(!item) {
+			item = new Promise ((resolve: (img: any)=>void, reject: (err: any)=>void) => {
+				var audio = new Audio();
+				audio.onload = function (){
+					resolve(audio);
+				}
+				audio.onerror = function(err) {
+					reject(err);
+				}
+				audio.src = url
+			});
 		}
-		script.src = url;
-		node.appendChild(script);
-	});
+		assetsCache[url] = item;
 
-    return item;
+		return item;
+	}
+
+	/**
+	 * @method clear
+	 * 清除指定URL资源的缓存。
+	 * @static
+	 * @param {String} url 资源URL。
+	 */
+	public static clear(url:string) {
+		delete assetsCache[url];
+	}
 }
 
 /**
- * Load Audio and Cache It.
- * @param url URL Of Audio.
- * @returns Promise
+ * @class AssetItem
+ *
+ * 表示一个资源项, 用于预加载资源。
+ *
  */
-export function loadAudio(url:string) : Promise<any> {
-    var item = assetsCache[url];
-
-    if(!item) {
-        item = new Promise ((resolve: (img: any)=>void, reject: (err: any)=>void) => {
-            var audio = new Audio();
-            audio.onload = function (){
-                resolve(audio);
-            }
-            audio.onerror = function(err) {
-                reject(err);
-            }
-            audio.src = url
-        });
-    }
-    assetsCache[url] = item;
-
-    return item;
-}
-
-
-/**
- * Clear asset cache
- * @param url URL Of asset.
- */
-export function clear(url:string) {
-	delete assetsCache[url];
-}
-
-/**
- * Present one asset.
- */
-export class Item {
+export class AssetItem {
     /**
-     * The URL of asset.
+     * 资源的URL。
      */
     public src : string;
+    
     /**
-     * The type of asset, options are TEXT, JSON, BLOB, IMAGE, AUDIO. 
+     * 资源的类型。
      */
-    public type : string;
+    public type : AssetType;
 
-    constructor(src:string, type?:string) {
+    constructor(src:string, type?:AssetType) {
     	if(!type) {
         	var name = path.extname(src).toLowerCase();
     		if(name === ".json") {
-    			type = JSON;
+    			type = AssetType.JSON;
 			}else if(name === ".jpg" || name === ".png" || name === ".svg") {
-				type = IMAGE;
-			}else if(type === ".txt") {
-				type = TEXT;
+				type = AssetType.IMAGE;
+			}else if(name === ".txt") {
+				type = AssetType.TEXT;
 			}else{
-				type = BLOB;
+				type = AssetType.BLOB;
 			}
 		}
 
@@ -188,28 +237,18 @@ export class Item {
 		this.type = type;
 	}
 
-	public static create(src:string, type?:string) : Item {
-		return new Item(src, type);
+	public static create(src:string, type?:AssetType) : AssetItem {
+		return new AssetItem(src, type);
 	}
 };
 
 /**
- * Assets group to preload
- * Example:
- * ```
- *  var items = [
- *    {type:qtk.Assets.TEXT, src:"http://localhost:9876/base/www/test.txt"},
- *    {type:qtk.Assets.JSON, src:"http://localhost:9876/base/www/test.json"},
- *    {type:qtk.Assets.IMAGE, src:"http://localhost:9876/base/www/test.jpg"},
- *    {type:qtk.Assets.BLOB, src:"http://localhost:9876/base/www/test.blob"}
- * ];
- * var assets = new qtk.Assets.Group(items);
- * assets.onProgress(function(info) {
- *   console.log(info.loaded + "/" + info.total);
- * });
- * ```
+ * @class AssetGroup
+ *
+ * 表示一个资源分组, 用于预加载资源。
+ *
  */
-export class Group extends Emitter {
+export class AssetGroup extends Emitter {
     public total : number;
     public loaded : number;
     public event = {
@@ -218,7 +257,7 @@ export class Group extends Emitter {
         type:Events.PROGRESS
     };
 
-    constructor(items:Array<Item>, onProgress?:Function) {
+    constructor(items:Array<AssetItem>, onProgress?:Function) {
         super();
         var i = 0;
         var n = items.length;
@@ -236,7 +275,7 @@ export class Group extends Emitter {
     /**
      * Register of a progress callback function
      */
-    onProgress(callback:Function) {
+    public onProgress(callback:Function) {
         this.on(Events.PROGRESS, callback);
     }
 
@@ -246,32 +285,32 @@ export class Group extends Emitter {
         this.dispatchEvent(this.event);
     }
 
-    private loadOne(item:Item) : void {
+    private loadOne(item:AssetItem) : void {
         var src = item.src;
         var type = item.type;
         var addLoaded = this.addLoaded.bind(this);
         var name = path.extname(src).toLowerCase();
         
-        if(type === JSON || (!type && name === '.json')) {
-            loadJSON(src).then(addLoaded, addLoaded);
-        }else if(type === IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
-            loadImage(src).then(addLoaded, addLoaded);
-        }else if(type === BLOB) {
-            loadBlob(src).then(addLoaded, addLoaded);
+        if(type === AssetType.JSON || (!type && name === '.json')) {
+            AssetManager.loadJson(src).then(addLoaded, addLoaded);
+        }else if(type === AssetType.IMAGE || (!type && (name === ".jpg" || name === ".png" || name === ".svg"))) {
+            AssetManager.loadImage(src).then(addLoaded, addLoaded);
+        }else if(type === AssetType.BLOB) {
+            AssetManager.loadBlob(src).then(addLoaded, addLoaded);
         }else{
-            loadText(src).then(addLoaded, addLoaded);
+            AssetManager.loadText(src).then(addLoaded, addLoaded);
         }
     }
 	
-	public static create(items:Array<Item>, onProgress?:Function) {
-		return new Group(items, onProgress);
+	public static create(items:Array<AssetItem>, onProgress?:Function) {
+		return new AssetGroup(items, onProgress);
 	}
 
-	public static preload(assetsURLS:Array<string>, onProgress:Function) : Group {
+	public static preload(assetsURLS:Array<string>, onProgress:Function) : AssetGroup {
 		var arr = assetsURLS.map((iter:string) => {
-			return Item.create(iter);
+			return AssetItem.create(iter);
 		});
 
-		return Group.create(arr, onProgress);
+		return AssetGroup.create(arr, onProgress);
 	}
 }
