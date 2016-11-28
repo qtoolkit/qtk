@@ -6,10 +6,10 @@
   "types": "js/index.d.ts",
   "scripts": {
     "start": "node app.js",
-    "clean": "rm -rf doc index.js coverage/ src/*.js",
+    "clean": "rm -rf docs index.js coverage/ src/*.js",
     "test": "tsc && webpack && ./node_modules/karma/bin/karma start",
     "build": "tsc  && webpack",
-    "gendoc": "./node_modules/typedoc/bin/typedoc --mode modules --out doc src/"
+    "docs": "jsduck js/application.js --output docs"
   },
   "repository": {
     "type": "git",

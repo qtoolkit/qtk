@@ -4,6 +4,9 @@ import { MatrixStack } from "../matrix-stack";
 import { WindowManager } from "./window-manager";
 import { IWindowManager } from "./iwindow-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
+/**
+ * 移动应用程序的窗口管理器，所有窗口共享一个Canvas，NormalWindow总是最大化显示。
+ */
 export declare class WindowManagerMobile extends WindowManager implements IWindowManager {
     constructor();
     readonly target: Widget;

@@ -7,14 +7,6 @@ import { IWindowManager } from "./controls/iwindow-manager";
  */
 export interface IApplication {
     /**
-     * 获取指定名称的服务。
-     */
-    getService(name: string): any;
-    /**
-     * 注册一个服务。指定服务的名称和对象。
-     */
-    registerService(name: string, service: any): IApplication;
-    /**
      * 获取主题管理器。
      */
     getThemeManager(): IThemeManager;
@@ -27,15 +19,15 @@ export interface IApplication {
      */
     getMainLoop(): IMainLoop;
     /**
+     * 获取窗口管理器。
+     */
+    getWindowManager(): IWindowManager;
+    /**
      * 分发应用级的事件。
      */
     dispatchEvent(evt: any): any;
     on(type: string, callback: Function, useCapture?: boolean): any;
     off(type: string, callback: Function, useCapture?: boolean): any;
-    /**
-     * 窗口管理器。
-     */
-    windowManager: IWindowManager;
     /**
      * 获取App的参数。
      */

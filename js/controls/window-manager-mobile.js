@@ -8,6 +8,9 @@ var window_1 = require("./window");
 var window_manager_1 = require("./window-manager");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
+/**
+ * 移动应用程序的窗口管理器，所有窗口共享一个Canvas，NormalWindow总是最大化显示。
+ */
 var WindowManagerMobile = (function (_super) {
     __extends(WindowManagerMobile, _super);
     function WindowManagerMobile() {

@@ -47,10 +47,9 @@ var app = new qtk.Application.create("test");
 app.loadScript("js/demo-"+(app.options["demo"] || "main")+".js");
 
 window.onload = function() {
+	app.onReady = onReady;
 	app.preload(assetsURLs, function onLoad() {
-		app.onReady = onReady;
 		app.init({sysThemeDataURL:themeURL, appThemeDataURL:appThemeURL});
-		
 		app.run();
 	});
 }
