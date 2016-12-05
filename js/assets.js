@@ -190,7 +190,6 @@ var AssetManager = (function () {
 exports.AssetManager = AssetManager;
 /**
  * @class AssetItem
- *
  * 表示一个资源项, 用于预加载资源。
  *
  */
@@ -247,7 +246,7 @@ var AssetGroup = (function (_super) {
         items.forEach(this.loadOne.bind(this));
     }
     /**
-     * Register of a progress callback function
+     * 注册加载进度的回调函数。
      */
     AssetGroup.prototype.onProgress = function (callback) {
         this.on(Events.PROGRESS, callback);
@@ -278,6 +277,14 @@ var AssetGroup = (function (_super) {
     AssetGroup.create = function (items, onProgress) {
         return new AssetGroup(items, onProgress);
     };
+    /**
+     * @method preload
+     * 预加载指定的资源。
+     * @static
+     * @param {Array<string>} assetsURLS 资源URL列表。
+     * @param {Function} onProgress 资源进度回调函数。
+     * @return {AssetGroup} 资源分组对象。
+     */
     AssetGroup.preload = function (assetsURLS, onProgress) {
         var arr = assetsURLS.map(function (iter) {
             return AssetItem.create(iter);

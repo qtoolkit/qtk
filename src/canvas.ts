@@ -5,6 +5,8 @@ import {PointerEventDetail} from "./event-detail";
 import inputEventAdapter = require("./input-event-adapter");
 
 /**
+ *
+ * @class Canvas
  * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
  *
  * 1.对指针事件坐标的转换，让绝对坐标变成相对与Canvas左上角的坐标。
@@ -13,30 +15,11 @@ import inputEventAdapter = require("./input-event-adapter");
  *
  */
 export class Canvas extends Emitter {
-	private _x : number;
-	private _y : number;
-	private _z : number;
-	private _w: number;
-	private _h: number;
-	private _id : string;
-	private _offline : boolean;
-	private _devicePixelRatio : number;
 	public canvas : HTMLCanvasElement;
-	private onWheelEvent : any;
-	private onKeyEvent : any;
-	private onPointerEvent : any;
-
-	private transformXY(detail:any) {
-		detail.x -= this.x;
-		detail.y -= this.y;
-		detail.pointerDownX -= this.x;
-		detail.pointerDownY -= this.y;
-	}
 
 	constructor(x?:number, y?:number, w?:number, h?:number,devicePixelRatio?:number, offline?:boolean) {
 		super();
 
-		this._id = "canvas";
 		this._x = x || 0;
 		this._y = y || 0;
 		this._w = w || 0;
@@ -64,56 +47,138 @@ export class Canvas extends Emitter {
 			e.dispose();
 		};
 	}
+	private onWheelEvent : any;
+	private onKeyEvent : any;
+	private onPointerEvent : any;
+	private _offline : boolean;
+	private _devicePixelRatio : number;
 
-	public get id() {
-		return this._id;
-	}
-
+	/**
+	 * @property {number} x 
+	 * X 坐标
+	 */
 	public  get x() {
 		return this._x;
 	}
+	public set x(value) {
+		this._x = value;
+		this.moveCanvas(this.canvas);
+	}
+	private _x : number;
 	
+	/**
+	 * @property {number} y 
+	 * Y 坐标
+	 */
 	public get y() {
 		return this._y;
 	}
-
+	public set y(value) {
+		this._y = value;
+		this.moveCanvas(this.canvas);
+	}
+	private _y : number;
+	
+	/**
+	 * @property {number} z 
+	 * Z 坐标
+	 */
+	public set z(value) {
+		this._z = value;
+		this.canvas.style.zIndex = value;
+	}
+	private _z : number;
+	
+	/**
+	 * @property {number} w 
+	 * 宽度
+	 */
+	public set w(value) {
+		this._w = value;
+		this.resizeCanvas(this.canvas);
+	}
 	public get w() {
 		return this._w; 
 	}
-	
-	public get h() {
-		return this._h; 
+	public set width(value) {
+		this.w = value;
 	}
-
 	public get width() {
 		return this._w; 
 	}
+	private _w: number;
 	
+	/**
+	 * @property {number} h 
+	 * 高度
+	 */
+	public get h() {
+		return this._h; 
+	}
 	public get height() {
 		return this._h; 
 	}
+	public set h(value) {
+		this._h = value;
+		this.resizeCanvas(this.canvas);
+	}
+	public set height(value) {
+		this.h = value;
+	}
+	private _h: number;
 
+	/**
+	 * @property {string} id 
+	 * ID
+	 */
 	public set id(value) {
 		this._id = value;
 		if(this.canvas) {
 			this.canvas.id = value;
 		}
 	}
-	
+	public get id() {
+		return this._id;
+	}
+	private _id : string;
+
+	/**
+	 * @method grabKey
+	 * Grab Key事件。
+	 */
 	public grabKey() {
 		inputEventAdapter.grabKey(this.canvas);
 	}
 
+	/**
+	 * @method ungrabKey
+	 * ungrabKey Key事件。
+	 */
 	public ungrabKey() {
 		inputEventAdapter.ungrabKey(this.canvas);
 	}
 
+	/**
+	 * @method grab
+	 * grab事件。
+	 */
 	public grab() {
 		inputEventAdapter.grab(this.canvas);
 	}
 
+	/**
+	 * @method ungrab
+	 * ungrab事件。
+	 */
 	public ungrab() {
 		inputEventAdapter.ungrab(this.canvas);
+	}
+
+	private transformXY(detail:any) {
+		detail.x -= this.x;
+		detail.y -= this.y;
+		detail.pointerDownX -= this.x;
+		detail.pointerDownY -= this.y;
 	}
 
 	private moveCanvas(canvas:HTMLCanvasElement) {
@@ -137,39 +202,6 @@ export class Canvas extends Emitter {
 		}
 	}
 
-	public set x(value) {
-		this._x = value;
-		this.moveCanvas(this.canvas);
-	}
-	
-	public set y(value) {
-		this._y = value;
-		this.moveCanvas(this.canvas);
-	}
-	
-	public set z(value) {
-		this._z = value;
-		this.canvas.style.zIndex = value;
-	}
-
-	public set w(value) {
-		this._w = value;
-		this.resizeCanvas(this.canvas);
-	}
-	
-	public set h(value) {
-		this._h = value;
-		this.resizeCanvas(this.canvas);
-	}
-	
-	public set width(value) {
-		this.w = value;
-	}
-	
-	public set height(value) {
-		this.h = value;
-	}
-
 	public dispose() {
 		var canvas = this.canvas;
 		if(!this._offline) {
@@ -184,7 +216,7 @@ export class Canvas extends Emitter {
 		canvas.removeEventListener(Events.KEYUP, this.onKeyEvent);
 	}
 
-	public createCanvas() {
+	public createCanvas() : HTMLCanvasElement {
 		var canvas = document.createElement("canvas");
 		canvas.id = this._id;
 		this.moveCanvas(canvas);
@@ -220,6 +252,10 @@ export class Canvas extends Emitter {
 		}
 	}
 
+	/**
+	 * @method getContext
+	 * 获取Canvas的绘图Context。
+	 */
 	public getContext(type:string) {
 		if(!this.canvas) {
 			this.canvas = this.createCanvas();
@@ -232,7 +268,19 @@ export class Canvas extends Emitter {
 		return ctx;
 	}
 
+	/**
+	 * @method create
+	 * @static
+	 * 创建一个Canvas对象。
+	 * @param {number} x X坐标。
+	 * @param {number} y Y坐标。
+	 * @param {number} w 宽度。
+	 * @param {number} h 高度。
+	 * @param {number} devicePixelRatio 屏幕密度。
+	 * @param {boolean} offline 是否是离线Canvas。 
+	 */
 	public static create(x?:number, y?:number, w?:number, h?:number, devicePixelRatio?:number, offline?:boolean) {
 		return new Canvas(x, y, w, h, devicePixelRatio, offline);
 	}
 }
+

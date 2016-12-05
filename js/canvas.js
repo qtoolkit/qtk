@@ -9,6 +9,8 @@ var Events = require("./events");
 var event_detail_1 = require("./event-detail");
 var inputEventAdapter = require("./input-event-adapter");
 /**
+ *
+ * @class Canvas
  * Canvas是对HTMLCanvasElement的包装，主要解决两个问题：
  *
  * 1.对指针事件坐标的转换，让绝对坐标变成相对与Canvas左上角的坐标。
@@ -20,7 +22,6 @@ var Canvas = (function (_super) {
     __extends(Canvas, _super);
     function Canvas(x, y, w, h, devicePixelRatio, offline) {
         _super.call(this);
-        this._id = "canvas";
         this._x = x || 0;
         this._y = y || 0;
         this._w = w || 0;
@@ -45,26 +46,11 @@ var Canvas = (function (_super) {
             e.dispose();
         };
     }
-    Canvas.prototype.transformXY = function (detail) {
-        detail.x -= this.x;
-        detail.y -= this.y;
-        detail.pointerDownX -= this.x;
-        detail.pointerDownY -= this.y;
-    };
-    Object.defineProperty(Canvas.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (value) {
-            this._id = value;
-            if (this.canvas) {
-                this.canvas.id = value;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(Canvas.prototype, "x", {
+        /**
+         * @property {number} x
+         * X 坐标
+         */
         get: function () {
             return this._x;
         },
@@ -76,6 +62,10 @@ var Canvas = (function (_super) {
         configurable: true
     });
     Object.defineProperty(Canvas.prototype, "y", {
+        /**
+         * @property {number} y
+         * Y 坐标
+         */
         get: function () {
             return this._y;
         },
@@ -86,23 +76,28 @@ var Canvas = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Canvas.prototype, "w", {
-        get: function () {
-            return this._w;
-        },
+    Object.defineProperty(Canvas.prototype, "z", {
+        /**
+         * @property {number} z
+         * Z 坐标
+         */
         set: function (value) {
-            this._w = value;
-            this.resizeCanvas(this.canvas);
+            this._z = value;
+            this.canvas.style.zIndex = value;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Canvas.prototype, "h", {
+    Object.defineProperty(Canvas.prototype, "w", {
         get: function () {
-            return this._h;
+            return this._w;
         },
+        /**
+         * @property {number} w
+         * 宽度
+         */
         set: function (value) {
-            this._h = value;
+            this._w = value;
             this.resizeCanvas(this.canvas);
         },
         enumerable: true,
@@ -118,6 +113,21 @@ var Canvas = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Canvas.prototype, "h", {
+        /**
+         * @property {number} h
+         * 高度
+         */
+        get: function () {
+            return this._h;
+        },
+        set: function (value) {
+            this._h = value;
+            this.resizeCanvas(this.canvas);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Canvas.prototype, "height", {
         get: function () {
             return this._h;
@@ -128,17 +138,56 @@ var Canvas = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Canvas.prototype, "id", {
+        get: function () {
+            return this._id;
+        },
+        /**
+         * @property {string} id
+         * ID
+         */
+        set: function (value) {
+            this._id = value;
+            if (this.canvas) {
+                this.canvas.id = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @method grabKey
+     * Grab Key事件。
+     */
     Canvas.prototype.grabKey = function () {
         inputEventAdapter.grabKey(this.canvas);
     };
+    /**
+     * @method ungrabKey
+     * ungrabKey Key事件。
+     */
     Canvas.prototype.ungrabKey = function () {
         inputEventAdapter.ungrabKey(this.canvas);
     };
+    /**
+     * @method grab
+     * grab事件。
+     */
     Canvas.prototype.grab = function () {
         inputEventAdapter.grab(this.canvas);
     };
+    /**
+     * @method ungrab
+     * ungrab事件。
+     */
     Canvas.prototype.ungrab = function () {
         inputEventAdapter.ungrab(this.canvas);
+    };
+    Canvas.prototype.transformXY = function (detail) {
+        detail.x -= this.x;
+        detail.y -= this.y;
+        detail.pointerDownX -= this.x;
+        detail.pointerDownY -= this.y;
     };
     Canvas.prototype.moveCanvas = function (canvas) {
         if (canvas) {
@@ -159,14 +208,6 @@ var Canvas = (function (_super) {
             canvas.style.height = h + "px";
         }
     };
-    Object.defineProperty(Canvas.prototype, "z", {
-        set: function (value) {
-            this._z = value;
-            this.canvas.style.zIndex = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Canvas.prototype.dispose = function () {
         var canvas = this.canvas;
         if (!this._offline) {
@@ -210,6 +251,10 @@ var Canvas = (function (_super) {
             this.canvas = this.createCanvas();
         }
     };
+    /**
+     * @method getContext
+     * 获取Canvas的绘图Context。
+     */
     Canvas.prototype.getContext = function (type) {
         if (!this.canvas) {
             this.canvas = this.createCanvas();
@@ -219,6 +264,17 @@ var Canvas = (function (_super) {
         ctx.scale(this._devicePixelRatio, this._devicePixelRatio);
         return ctx;
     };
+    /**
+     * @method create
+     * @static
+     * 创建一个Canvas对象。
+     * @param {number} x X坐标。
+     * @param {number} y Y坐标。
+     * @param {number} w 宽度。
+     * @param {number} h 高度。
+     * @param {number} devicePixelRatio 屏幕密度。
+     * @param {boolean} offline 是否是离线Canvas。
+     */
     Canvas.create = function (x, y, w, h, devicePixelRatio, offline) {
         return new Canvas(x, y, w, h, devicePixelRatio, offline);
     };

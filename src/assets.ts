@@ -204,17 +204,18 @@ export class AssetManager {
 
 /**
  * @class AssetItem
- *
  * 表示一个资源项, 用于预加载资源。
  *
  */
 export class AssetItem {
     /**
+	 * @property {string} src
      * 资源的URL。
      */
     public src : string;
     
     /**
+	 * @property {AssetType} type 
      * 资源的类型。
      */
     public type : AssetType;
@@ -273,7 +274,7 @@ export class AssetGroup extends Emitter {
     }
 
     /**
-     * Register of a progress callback function
+     * 注册加载进度的回调函数。
      */
     public onProgress(callback:Function) {
         this.on(Events.PROGRESS, callback);
@@ -306,6 +307,14 @@ export class AssetGroup extends Emitter {
 		return new AssetGroup(items, onProgress);
 	}
 
+	/**
+	 * @method preload
+	 * 预加载指定的资源。
+	 * @static
+	 * @param {Array<string>} assetsURLS 资源URL列表。
+	 * @param {Function} onProgress 资源进度回调函数。
+	 * @return {AssetGroup} 资源分组对象。
+	 */
 	public static preload(assetsURLS:Array<string>, onProgress:Function) : AssetGroup {
 		var arr = assetsURLS.map((iter:string) => {
 			return AssetItem.create(iter);
