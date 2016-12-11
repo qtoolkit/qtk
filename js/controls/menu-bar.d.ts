@@ -33,12 +33,10 @@ export declare class MenuBar extends Widget {
         _pivotX: number;
         _pivotY: number;
         _rotation: number;
-        _focusable: boolean;
         _sensitive: boolean;
         _tips: any;
         _text: any;
         _name: any;
-        _tag: any;
         _hitTestResult: number;
         _isWindow: boolean;
         _mode: number;
@@ -91,12 +89,10 @@ export declare class MenuBarItem extends Widget {
         _pivotX: number;
         _pivotY: number;
         _rotation: number;
-        _focusable: boolean;
         _sensitive: boolean;
         _tips: any;
         _text: any;
         _name: any;
-        _tag: any;
         _hitTestResult: number;
         _isWindow: boolean;
         _mode: number;

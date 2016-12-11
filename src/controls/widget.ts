@@ -23,40 +23,119 @@ import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '..
 
 import {ICommand} from "../mvvm/icommand";
 import {IValueConverter} from "../mvvm/ivalue-converter";
-import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource, 
-	BindingCommandSource} from "../mvvm/binding-rule";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
 import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
+import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource,BindingCommandSource} from "../mvvm/binding-rule";
 
+
+/** 
+ * @enum WidgetMode
+ * 控件当前的运行模式。
+ */
 export enum WidgetMode {
+	/** 
+	 * @property {number} 
+	 * 运行模式
+	 */
 	RUNTIME = 0,
+	/** 
+	 * @property {number} 
+	 * 设计模式
+	 */
 	DESIGN
 };
 	
+/** 
+ * @enum WidgetState
+ * 控件的状态
+ */
 export enum WidgetState {
+	/** 
+	 * @property {number} 
+	 * 正常状态。
+	 */
 	NORMAL = 0,
+	/** 
+	 * @property {number} 
+	 * Pointer在控件上。
+	 */
 	OVER,
+	/** 
+	 * @property {number} 
+	 * Pointer按下的状态。
+	 */
 	ACTIVE,
+	/** 
+	 * @property {number} 
+	 * 禁用状态。
+	 */
 	DISABLE,
+	/** 
+	 * @property {number} 
+	 * 选中状态。只对部分设备有效。
+	 */
 	SELECTED
 };
 
+/** 
+ * @enum HitTestResult
+ * 点击测试结果。
+ */
 export enum HitTestResult {
+	/** 
+	 * @property {number} 
+	 * 点击在控件之外。
+	 */
 	NONE = 0,
+	/** 
+	 * @property {number} 
+	 * 点击在控件左上角。
+	 */
 	TL = 1,
+	/** 
+	 * @property {number} 
+	 * 点击在控件上面中间。
+	 */
 	TM,
+	/** 
+	 * @property {number} 
+	 * 点击在控件右上角。
+	 */
 	TR,
+	/** 
+	 * @property {number} 
+	 * 点击在控件左边中间。
+	 */
 	ML,
+	/** 
+	 * @property {number} 
+	 * 点击在控件中间区域。
+	 */
 	MM,
+	/** 
+	 * @property {number} 
+	 * 点击在控件右边中间。
+	 */
 	MR,
-	RL,
-	RM,
-	RR,
+	/** 
+	 * @property {number} 
+	 * 点击在控件左下角。
+	 */
+	BL,
+	/** 
+	 * @property {number} 
+	 * 点击在控件下面中间。
+	 */
+	BM,
+	/** 
+	 * @property {number} 
+	 * 点击在控件右下角。
+	 */
+	BR
 };
 
-const states = ["normal", "over", "active", "disable", "selected"];
-
 /**
+ * @class Widget
  * Widget是所有控件的基类。
  */
 export class Widget extends Emitter {
@@ -66,6 +145,7 @@ export class Widget extends Emitter {
 	}
 
 	/**
+	 * @method set 
 	 * 同时设置多个属性。
 	 */
 	public set(props?:any) : Widget {
@@ -82,21 +162,9 @@ export class Widget extends Emitter {
 	}
 
 	/**
-	 * 同时获取多个属性。
-	 */
-	public get(props:any) : any {
-		if(props) {
-			for(var key in props) {
-				props[key] = this[key];
-			}
-		}
-		return props;
-	}
-
-	/**
 	 * 把全局的坐标转换成相对于当前控件左上角的坐标。
-	 * @param p 全局坐标。
-	 * @returns 相对于当前控件左上角的坐标。
+	 * @param {Pointer} p 全局坐标。
+	 * @return {Pointer} 相对于当前控件左上角的坐标。
 	 */
 	public toLocalPoint(p:Point) : Point {
 		p.x -= this.x;
@@ -114,8 +182,8 @@ export class Widget extends Emitter {
 	
 	/**
 	 * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
-	 * @param p Pointer事件的坐标。
-	 * @returns 相对于当前控件左上角的坐标。
+	 * @param {Pointer} p Pointer事件的坐标。
+	 * @return {Pointer} 相对于当前控件左上角的坐标。
 	 */
 	public eventPointToLocal(p:Point) : Point {
 		if(this._canvas) {
@@ -140,8 +208,8 @@ export class Widget extends Emitter {
 	
 	/**
 	 * 把相对于当前控件左上角的坐标转换成全局坐标。
-	 * @param p 相对于当前控件左上角的坐标。
-	 * @returns 全局坐标。
+	 * @param {Point} p 相对于当前控件左上角的坐标。
+	 * @return {Point} 全局坐标。
 	 */
 	public toGlobalPoint(p:Point) : Point {
 		p.x += this.x;
@@ -159,8 +227,8 @@ export class Widget extends Emitter {
 	
 	/**
 	 * 把相对于当前控件左上角的坐标转换成屏幕上的坐标。
-	 * @param p 相对于当前控件左上角的坐标。
-	 * @returns 屏幕上的坐标。
+	 * @param {Point} p 相对于当前控件左上角的坐标。
+	 * @return {Point}  屏幕上的坐标。
 	 */
 	public toViewPoint(p:Point) : Point {
 		p.x += this.x;
@@ -190,9 +258,6 @@ export class Widget extends Emitter {
 		}
 	}
 
-	/**
-	 * 初始化。在窗口打开后，对窗口上所有控件调用，或者在窗口打开后，对新创建的控件调用。
-	 */
 	public init() : Widget {
 		this.onInit();
 		this.children.forEach(child => {
@@ -206,7 +271,7 @@ export class Widget extends Emitter {
 		this._inited = false;
 	}
 
-	/**
+	/*
 	 * ~初始化。在窗口关闭后，对窗口上所有控件调用，或者对被移出的控件调用。
 	 */
 	public deinit(){
@@ -214,43 +279,6 @@ export class Widget extends Emitter {
 			child.deinit();
 		});
 		this.onDeinit();
-	}
-
-	/**
-	 * 分发一个事件到当前控件及其子控件。
-	 */
-	public dispatchEventToAll(evt:any) {
-		this.dispatchEvent(evt);
-		this.children.forEach(child => {
-			child.dispatchEvent(evt);
-		});
-	}
-
-	/**
-	 * 测试点是否落在当前控件中。
-	 * @param x X坐标，相对于全局原点的坐标。
-	 * @param y Y坐标，相对于全局原点的坐标。
-	 * @param ctx 矩阵变换上下文。ctx包含了从顶级父控件到当前控件的变化。
-	 * @returns 测试结果HitTestResult。
-	 */
-	protected hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
-		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h), ctx);
-	}
-	
-	protected doHitTest(x:number, y:number, r:Rect, ctx:MatrixStack) : HitTestResult {
-		var m = ctx.invert();
-		if(m) {
-			var p = m.transformPoint(x, y);
-			if(p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
-				return HitTestResult.MM;
-			}
-		}
-
-		return HitTestResult.NONE;
-	}
-	
-	protected selfHitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
-		return this.hitTest(x, y, ctx);	
 	}
 
 	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
@@ -279,7 +307,6 @@ export class Widget extends Emitter {
 			}
 			this.state = WidgetState.NORMAL;
 		}
-
 		ctx.restore();
 
 		this.hitTestResult = hitTestResult;
@@ -537,6 +564,14 @@ export class Widget extends Emitter {
 		return tween;
 	}
 
+	/**
+	 * @method scaleTo
+	 * 设置控件的缩放比例到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} sx 宽度缩放比例。
+	 * @param {number} sy 高度缩放比例。
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public scaleTo(sx:number, sy:number, duration?:number) : TWEEN.Tween {
 		this.requestRedraw();
 		if(duration > 0) {
@@ -551,6 +586,13 @@ export class Widget extends Emitter {
 		}
 	}
 	
+	/**
+	 * @method opacityTo
+	 * 设置控件的透明度到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} opacity 不透明度[0-1]
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public opacityTo(opacity:number, duration?:number) : TWEEN.Tween {
 		this.requestRedraw();
 		if(duration > 0) {
@@ -563,6 +605,13 @@ export class Widget extends Emitter {
 		}
 	}
 	
+	/**
+	 * @method rotateTo
+	 * 设置控件的旋转角度到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} rotation 旋转角度，单位为弧度。
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public rotateTo(rotation:number, duration?:number) : TWEEN.Tween {
 		this.requestRedraw();
 		if(duration > 0) {
@@ -577,6 +626,14 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/**
+	 * @method moveTo
+	 * 设置控件的位置到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} x X 坐标。
+	 * @param {number} y Y 坐标。
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public moveTo(x:number, y:number, duration?:number) : TWEEN.Tween {
 		this.requestRedraw();
 		if(duration > 0) {
@@ -591,6 +648,16 @@ export class Widget extends Emitter {
 		}
 	}
 	
+	/**
+	 * @method moveResizeTo
+	 * 设置控件的位置和大小到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} x X 坐标。
+	 * @param {number} y Y 坐标。
+	 * @param {number} w 宽度。
+	 * @param {number} h 高度。
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public moveResizeTo(x:number, y:number, w:number, h:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
@@ -606,6 +673,14 @@ export class Widget extends Emitter {
 		}
 	}
 	
+	/**
+	 * @method resizeTo
+	 * 设置控件的大小到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	 * @param {number} w 宽度。
+	 * @param {number} h 高度。
+	 * @param {number} duration 动画时间。
+	 * @return {TWEEN.Tween}
+	 */
 	public resizeTo(w:number, h:number, duration?:number) : TWEEN.Tween {
 		if(duration > 0) {
 			var tween = new TWEEN.Tween(this);
@@ -654,7 +729,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	/**
+	/*
 	 * 根据当前的childrenLayouter创建子控件的布局参数。
 	 */
 	public createChildLayoutParam(options:any) : any {
@@ -672,8 +747,9 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	/**
-	 * 设置childrenLayouter。
+	/** 
+	 * @property {Layouter} childrenLayouter 
+	 * 用于子控件布局的Layouter。
 	 */
 	public set childrenLayouter(layouter:Layouter) {
 		if(typeof layouter === "string") {
@@ -689,7 +765,8 @@ export class Widget extends Emitter {
 	}
 
 	/**
-	 * 布局参数是父控件在布局当前控件时使用的。
+	 * @property {Object} layoutParam
+	 * 布局参数是父控件在布局当前控件时使用的参数。
 	 */
 	public set layoutParam(param:any) {
 		this._layoutParam = param;
@@ -703,10 +780,22 @@ export class Widget extends Emitter {
 	}
 
 ///////////////////////////////////////////
+	/**
+	 * @method indexOfChild
+	 * 获取指定子控件的位置序数。
+	 * @param {Widget} child 子控件
+	 * @return {number} 位置序数。
+	 */
 	public indexOfChild(child:Widget) : number {
 		return this.children.indexOf(child);
 	}
 
+	/**
+	 * @method findChild
+	 * 查找满足指定条件的子控件。
+	 * @param {Function} func 比较函数。
+	 * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	 */
 	public findChild(func:Function) : Widget {
 		var i = 0;
 		var arr = this._children;
@@ -721,6 +810,12 @@ export class Widget extends Emitter {
 		return null;
 	}
 
+	/**
+	 * @method findChildByName
+	 * 按名称查找子控件。
+	 * @param {string} name 子控件的名称。
+	 * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	 */
 	public findChildByName(name:string) : Widget {
 		var ret = this.findChild(function(child) {
 			return child.name === name;
@@ -729,24 +824,17 @@ export class Widget extends Emitter {
 		return ret;
 	}
 
+	/**
+	 * @method findChildByID
+	 * 按ID查找子控件。
+	 * @param {string} id 子控件的ID。
+	 * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	 */
 	public findChildByID(id:string) : Widget {
 		var ret = this.findChild(function(child) {
 			return child.id === id;
 		});
 		
-		return ret;
-	}
-
-	public find(path:string) : Widget {
-		var items = path.split("/");
-		var n = items.length;
-
-		var ret : Widget = this;
-		for(var i = 0; i < n; i++) {
-			var name = items[i];
-			ret = ret.findChildByName(name); 
-		}
-
 		return ret;
 	}
 
@@ -781,22 +869,17 @@ export class Widget extends Emitter {
 	}
 
 	/**
+	 * @method getLocaleText
 	 * 获取本地化后的文本。
 	 */
 	public getLocaleText() : string {
 		return this.text;
 	}
 
-	/**
-	 * 获取前景图片区域。
-	 */
 	protected getFgImageRect(style:Style) : Rect {
 		return Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	}
 
-	/**
-	 * 绘制前景图片，子控件根据需要重载。
-	 */
 	protected drawImage(ctx:any, style:Style) : Widget {
 		if(style.foreGroundImage) {
 			var r = this.getFgImageRect(style);
@@ -805,9 +888,6 @@ export class Widget extends Emitter {
 		return this;
 	}
 
-	/**
-	 * 获取文本显示区域。
-	 */
 	protected getTextRect(style:Style) : Rect {
 		return Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	}
@@ -841,9 +921,6 @@ export class Widget extends Emitter {
 		}
 	}
 
-	/**
-	 * 计算脏矩形。
-	 */
 	public computeDirtyRect(ctx:DirtyRectContext) {
 		ctx.save();
 		this.applyTransform(ctx);
@@ -893,9 +970,13 @@ export class Widget extends Emitter {
 	}
 
 	public stateToString(state:WidgetState) : string {
-		return states[state];
-	};
+		return WidgetState[state].toLowerCase();
+	}
 
+	/**
+	 * @property {string} styleType
+	 * 用于从主题中获取style数据。
+	 */
 	public set styleType(styleType:string){
 		this._styleType = styleType;
 	}
@@ -903,7 +984,14 @@ export class Widget extends Emitter {
 	public get styleType() : string{
 		return this._styleType;
 	}
-	
+
+	/**
+	 * @method setStyle
+	 * 设置控件的Style。
+	 * @param {WidgetState} state 状态。
+	 * @param {Style} style 控件的Style。
+	 * return {Widget} 控件本身。
+	 */
 	public setStyle(state:WidgetState, style:Style):Widget{
 		if(!this._styles) {
 			this._styles = {};
@@ -957,6 +1045,11 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	/**
+	 * @method removeAllChildren 
+	 * 移出并销毁所有的子控件。
+	 * return {Widget} 控件本身。
+	 */
 	public removeAllChildren() : Widget {
 		this.children.forEach(child => {
 			child.deinit();
@@ -973,6 +1066,14 @@ export class Widget extends Emitter {
 	protected onRemoveChild(child:Widget) {
 	}
 
+	/**
+	 * @method removeChild
+	 * 移出子控件。批量删除时，请使用快速模式，并在完成时调用relayoutChildren。
+	 * @param {Widget} child 子控件。
+	 * @param {boolean} fastMode 快速模式下，不重新布局子控件。
+	 * @param {boolean} destroy 是否销毁子控件。
+	 * return {Widget} 控件本身。
+	 */
 	public removeChild(child:Widget, fastMode?:boolean, destroy?:boolean) : Widget {
 		var arr = this._children;
 		var index = arr.indexOf(child);
@@ -997,6 +1098,13 @@ export class Widget extends Emitter {
 	protected onAddChild(child:Widget) {
 	}
 
+	/**
+	 * @method addChild 
+	 * 增加子控件。批量增加时，请使用快速模式，并在完成时调用relayoutChildren。
+	 * @param {Widget} child 子控件。
+	 * @param {boolean} fastMode 快速模式下，不重新布局子控件。
+	 * return {Widget} 控件本身。
+	 */
 	public addChild(child:Widget, fastMode?:boolean) : Widget {
 		var arr = this._children;
 		
@@ -1017,6 +1125,10 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	/**
+	 * @method dispose
+	 * 销毁控件及其全部子控件。
+	 */
 	public dispose(){
 		this.dispatchEvent({type:Events.DISPOSE});
 
@@ -1043,6 +1155,10 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/**
+	 * @method requestRedraw
+	 * 请求重绘。
+	 */
 	public requestRedraw() : Widget {
 		var app = this._app;
 		this._dirty = true;
@@ -1198,6 +1314,10 @@ export class Widget extends Emitter {
 		return this._dirty;
 	}
 
+	/**
+	 * @property {number} x
+	 * 控件的X坐标。
+	 */
 	public get x() {
 		return this._x;
 	}
@@ -1205,6 +1325,10 @@ export class Widget extends Emitter {
 		this.setProp("x", value, true);
 	}
 
+	/**
+	 * @property {number} y
+	 * 控件的Y坐标。
+	 */
 	public get y() {
 		return this._y;
 	}
@@ -1212,6 +1336,10 @@ export class Widget extends Emitter {
 		this.setProp("y", value, true);
 	}
 
+	/**
+	 * @property {number} z 
+	 * 控件的位置序数。
+	 */
 	public get z() {
 		return this._z;
 	}
@@ -1222,6 +1350,10 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/**
+	 * @property {number} w 
+	 * 控件的宽度。
+	 */
 	public get desireWidth() {
 		return this._w;
 	}
@@ -1248,6 +1380,10 @@ export class Widget extends Emitter {
 		return this._h - this.topPadding - this.bottomPadding;
 	}
 
+	/**
+	 * @property {number} h 
+	 * 控件的高度。
+	 */
 	public get height() {
 		return this._h;
 	}
@@ -1261,7 +1397,11 @@ export class Widget extends Emitter {
 		this.setProp("h", value, true);
 	}
 
-	public get state() {
+	/**
+	 * @property {WidgetState} state 
+	 * 控件的状态。
+	 */
+	public get state() : WidgetState {
 		return this._state;
 	}
 	public set state(value) {
@@ -1270,6 +1410,10 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/**
+	 * @property {any} value
+	 * 控件的值。不同的控件，值的定义不一样。
+	 */
 	public get value() {
 		return this._value;
 	}
@@ -1277,6 +1421,10 @@ export class Widget extends Emitter {
 		this.setValue(value, false, false);
 	}
 
+	/**
+	 * @property {boolean} selected 
+	 * 控件是否被选中。
+	 */
 	public get selected() {
 		return this._selected;
 	}
@@ -1293,6 +1441,10 @@ export class Widget extends Emitter {
 		this._isEnableFunc = value;
 	}
 
+	/**
+	 * @property {boolean} enable
+	 * 控件是否处于enable状态。
+	 */
 	public get enable() {
 		if(this.isEnableFunc) {
 			return this.isEnableFunc();
@@ -1304,17 +1456,21 @@ export class Widget extends Emitter {
 		this.setProp("enable", value, true);
 	}
 
-	public get visible() {
-		return this._visible;
-	}
-
 	/**
-	 * 用户是否可以通过本控件输入/选择数据。
+	 * @property {boolean} inputable
+	 * [只读] 控件是否可输入，也就是是否可以通过界面修改它的值。
 	 */
 	public get inputable() {
 		return false;
 	}
 
+	/**
+	 * @property {boolean} visible
+	 * 控件是否可见。
+	 */
+	public get visible() {
+		return this._visible;
+	}
 	public setVisible(value) {
 		this.setProp("visible", value, true);
 		this.dispatchEvent({type:value ? Events.SHOW : Events.HIDE});
@@ -1328,6 +1484,10 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/**
+	 * @property {number} opacity
+	 * 控件的不透明度(0-1)。
+	 */
 	public get opacity() {
 		return this._opacity;
 	}
@@ -1335,7 +1495,10 @@ export class Widget extends Emitter {
 		this.setProp("opacity", value, true);
 	}
 
-
+	/**
+	 * @property {number} scaleX
+	 * 控件的宽度缩放比例。
+	 */
 	public get scaleX() {
 		return this._scaleX;
 	}
@@ -1343,7 +1506,10 @@ export class Widget extends Emitter {
 		this.setProp("scaleX", value, true);
 	}
 
-
+	/**
+	 * @property {number} scaleY
+	 * 控件的高度缩放比例。
+	 */
 	public get scaleY() {
 		return this._scaleY;
 	}
@@ -1352,6 +1518,10 @@ export class Widget extends Emitter {
 	}
 
 
+	/**
+	 * @property {number} rotation
+	 * 控件的旋转角度。
+	 */
 	public get rotation() {
 		return this._rotation;
 	}
@@ -1359,13 +1529,10 @@ export class Widget extends Emitter {
 		this.setProp("rotation", value, true);
 	}
 
-	public get focusable() {
-		return this._focusable;
-	}
-	public set focusable(value) {
-		this.setProp("focusable", value, true);
-	}
-
+	/**
+	 * @property {number} sensitive
+	 * 控件是否接受用户事件。
+	 */
 	public get sensitive() {
 		return this._sensitive;
 	}
@@ -1373,6 +1540,10 @@ export class Widget extends Emitter {
 		this.setProp("sensitive", value, true);
 	}
 
+	/**
+	 * @property {number} pivotX
+	 * 控件的X轴点，也就旋转点的X坐标。
+	 */
 	public get pivotX() {
 		return this._pivotX;
 	}
@@ -1380,7 +1551,10 @@ export class Widget extends Emitter {
 		this.setProp("pivotX", value, true);
 	}
 
-
+	/**
+	 * @property {number} pivotY
+	 * 控件的Y轴点，也就旋转点的Y坐标。
+	 */
 	public get pivotY() {
 		return this._pivotY;
 	}
@@ -1388,6 +1562,10 @@ export class Widget extends Emitter {
 		this.setProp("pivotY", value, true);
 	}
 
+	/**
+	 * @property {string} tips
+	 * 控件的提示文本。
+	 */
 	public get tips() {
 		return this._tips;
 	}
@@ -1395,7 +1573,10 @@ export class Widget extends Emitter {
 		this.setProp("tips", value, true);
 	}
 
-
+	/**
+	 * @property {string} text
+	 * 控件的文本。
+	 */
 	public get text() {
 		return this._text;
 	}
@@ -1403,7 +1584,10 @@ export class Widget extends Emitter {
 		this.setProp("text", (value || value === 0) ? value.toString() : "", true);
 	}
 
-
+	/**
+	 * @property {string} name
+	 * 控件的名称。
+	 */
 	public get name() {
 		return this._name;
 	}
@@ -1411,6 +1595,10 @@ export class Widget extends Emitter {
 		this.setProp("name", value, true);
 	}
 	
+	/**
+	 * @property {string} type 
+	 * 控件的类型。
+	 */
 	public get type() {
 		return this._type;
 	}
@@ -1418,17 +1606,18 @@ export class Widget extends Emitter {
 		this.setProp("type", value, true);
 	}
 
+	/**
+	 * @property {string} id
+	 * 控件的ID。
+	 */
 	public get id() {
 		return this._id;
 	}
 
-	public get tag() {
-		return this._tag;
-	}
-	public set tag(value) {
-		this.setProp("tag", value, true);
-	}
-
+	/**
+	 * @property {any} userData
+	 * 控件的应用数据。
+	 */
 	public get userData() {
 		return this._userData;
 	}
@@ -1450,6 +1639,10 @@ export class Widget extends Emitter {
 		this._hitTestResult = value;
 	}
 
+	/**
+	 * @property {Widget} parent
+	 * 控件的父控件。
+	 */
 	public get parent() {
 		return this._parent;
 	}
@@ -1457,6 +1650,10 @@ export class Widget extends Emitter {
 		this._parent = value;
 	}
 	
+	/**
+	 * @property {IApplication} app 
+	 * 应用程序。
+	 */
 	public get app() {
 		return this._app;
 	}
@@ -1472,6 +1669,10 @@ export class Widget extends Emitter {
 		});
 	}
 
+	/**
+	 * @property {Window} win 
+	 * 控件所在的窗口。
+	 */
 	public get win() : Window {
 		for(var iter:Widget = this; iter !== null; iter = iter._parent) {
 			if(iter._isWindow) {
@@ -1482,6 +1683,10 @@ export class Widget extends Emitter {
 		return null;
 	}
 
+	/**
+	 * @property {Array<Widget>} children
+	 * 控件的全部子控件。
+	 */
 	public get children() : Array<Widget> {
 		return this._children;
 	}
@@ -1494,6 +1699,10 @@ export class Widget extends Emitter {
 		return this._isWindow;
 	}
 
+	/**
+	 * @property {number} leftPadding
+	 * 控件的左边界。
+	 */
 	public get leftPadding() {
 		return this._lp;
 	}
@@ -1501,6 +1710,10 @@ export class Widget extends Emitter {
 		this.setProp("lp", value, true);
 	}
 
+	/**
+	 * @property {number} rightPadding
+	 * 控件的右边界。
+	 */
 	public get rightPadding() {
 		return this._rp;
 	}
@@ -1508,6 +1721,10 @@ export class Widget extends Emitter {
 		this.setProp("rp", value, true);
 	}
 
+	/**
+	 * @property {number} topPadding
+	 * 控件的上边界。
+	 */
 	public get topPadding() {
 		return this._tp;
 	}
@@ -1515,7 +1732,10 @@ export class Widget extends Emitter {
 		this.setProp("tp", value, true);
 	}
 
-
+	/**
+	 * @property {number} bottomPadding
+	 * 控件的下边界。
+	 */
 	public get bottomPadding() {
 		return this._bp;
 	}
@@ -1523,7 +1743,10 @@ export class Widget extends Emitter {
 		this.setProp("bp", value, true);
 	}
 
-
+	/**
+	 * @property {number} padding
+	 * 控件的边界。
+	 */
 	public get padding() {
 		return this._tp;
 	}
@@ -1556,13 +1779,20 @@ export class Widget extends Emitter {
 		return this.setProp("text", text, notify);
 	}
 
-	public useBehavior(type:string, options:any) : Behavior {
+	/**
+	 * @method useBehavior
+	 * 启用指定名称的Behavior
+	 * @param {string} name Behavior的名称。 
+	 * @param {any} options 选项。
+	 * @return {Behavior}
+	 */
+	public useBehavior(name:string, options:any) : Behavior {
 		var behavior : Behavior;
-		if(!this._behaviors[type]) {
-			behavior = BehaviorFactory.create(type, this, options);
-			this._behaviors[type] = behavior;
+		if(!this._behaviors[name]) {
+			behavior = BehaviorFactory.create(name, this, options);
+			this._behaviors[name] = behavior;
 		}else{
-			behavior = this._behaviors[type];
+			behavior = this._behaviors[name];
 			behavior.setOptions(options);
 		}
 
@@ -1586,14 +1816,12 @@ export class Widget extends Emitter {
 	protected _pivotX   : number;
 	protected _pivotY   : number;
 	protected _rotation : number;
-	protected _focusable : boolean;
 	protected _sensitive : boolean;
 	protected _tips : string;
 	protected _text : string;
 	protected _dirty : boolean;
 	protected _name : string;
 	protected _id : string;
-	protected _tag : string;
 	protected _type : string;
 	protected _userData : any;
 	protected _target : Widget;
@@ -1614,6 +1842,7 @@ export class Widget extends Emitter {
 	private _rp : number;
 	private _tp : number;
 	private _bp : number;
+
 	public onclick : Function;
 	public ondblclick : Function;
 	public oncontextmenu: Function;
@@ -1683,12 +1912,10 @@ export class Widget extends Emitter {
 			_pivotX    : 0.5,
 			_pivotY    : 0.5,
 			_rotation  : 0,
-			_focusable  : false,
 			_sensitive  : true,
 			_tips : null,
 			_text : null,
 			_name : null,
-			_tag : null,
 			_hitTestResult : 0,
 			_isWindow  : false,
 			_mode : 0,
@@ -1741,6 +1968,11 @@ export class Widget extends Emitter {
 	protected onFromJson(json:any) {
 	}
 
+	/**
+	 * @method fromJson 
+	 * 用JSON数据初始化当前控件。
+	 * @param {any} json 数据。
+	 */
 	public fromJson(json:any) : Widget{
 		var defProps = this.getDefProps();
 		for(var key in defProps) {
@@ -1788,6 +2020,11 @@ export class Widget extends Emitter {
 		return this;
 	}
 
+	/**
+	 * @method clone
+	 * CLONE当前控件。
+	 * @return {Widget} 新对象。
+	 */
 	public clone() : Widget {
 		var json = this.toJson();
 		var widget = WidgetFactory.createWithJson(json);
@@ -1798,6 +2035,11 @@ export class Widget extends Emitter {
 	protected onToJson(json:any) {
 	}
 
+	/**
+	 * @method toJson
+	 * 序列化当前的控件到JSON数据。 
+	 * @return {any} JSON数据。
+	 */
 	public toJson() : any {
 		var json:any = {};
 	
@@ -1847,11 +2089,14 @@ export class Widget extends Emitter {
 	protected _templateItem : Widget;
 	protected _templateItemJson : Widget;
 
+	/**
+	 * @property {Widget} templateItem
+	 * 模板项。用于在数据绑定时，自动生成子控件的模板。
+	 */
 	public set templateItem(value:Widget) {
 		this._templateItem = value;
 		this._templateItemJson = value ? value.toJson() : null;
 	}
-
 	public get templateItem() : Widget {
 		return this._templateItem;
 	}
@@ -1876,25 +2121,25 @@ export class Widget extends Emitter {
 			this.value = value;
 		}
 	}
-
 	protected _dataBindingRule : BindingRule;
 	protected _viewModel : IViewModel;
 
 	/**
+	 * @property {any} dataBindingRule
 	 * 数据绑定规则。
 	 */
 	public set dataBindingRule(dataBindingRule:any) {
 		this._dataBindingRule = BindingRule.create(dataBindingRule);
 	}
-
 	public get dataBindingRule() : any {
 		return this._dataBindingRule;
 	}
 	
 	/**
+	 * @method updateExplicit
 	 * 显式的更新ViewModel。
 	 */
-	public updateExplicit() {
+	public updateExplicit() : Widget {
 		if(this._dataBindingRule) {
 			this.onUpdateToDataSource();
 		}
@@ -1902,6 +2147,8 @@ export class Widget extends Emitter {
 		this.children.forEach((child:Widget) => {
 			child.updateExplicit();
 		});
+
+		return this;
 	}
 
 	protected viewModelChangeFunc = function(evt) {
@@ -1931,13 +2178,16 @@ export class Widget extends Emitter {
 	}
 
 	/**
+	 * @method bindData
 	 * 绑定数据。
+	 * @param {IViewModel} viewModel View Model。 
+	 * @return {Widget} 控件本身。
 	 */
 	public bindData(viewModel:IViewModel) : Widget {
 		var dataBindingRule = this._dataBindingRule;
 		this._viewModel = viewModel;
-		this.onBeforeBindData();
 
+		this.onBeforeBindData();
 		if(dataBindingRule && viewModel) {
 			var bindingMode = viewModel.bindingMode;
 			
@@ -1972,11 +2222,11 @@ export class Widget extends Emitter {
 			}
 		}
 
-		this.bindChildren(viewModel);
+		this.bindDataToChildren(viewModel);
 		if(viewModel.isCollection && this._templateItemJson) {
 			var collectionViewModel = <ICollectionViewModel>viewModel;
 			collectionViewModel.onItemsChange((evt:Events.ChangeEvent) => {
-				this.bindChildren(viewModel);
+				this.bindDataToChildren(viewModel);
 			});
 		}
 		this.onAfterBindData();
@@ -1984,7 +2234,7 @@ export class Widget extends Emitter {
 		return this;
 	}
 	
-	protected bindChildren(viewModel:IViewModel) {
+	protected bindDataToChildren(viewModel:IViewModel) {
 		if(viewModel.isCollection) {
 			if(this._templateItemJson) {	
 				//对于集合viewModel，如果有模板项存在，则动态生成子控件。
@@ -2013,6 +2263,9 @@ export class Widget extends Emitter {
 		}
 	}
 
+	/*
+	 * 绑定命令，注册相应的事件处理函数。
+	 */
 	protected onBindCommand(viewModel:IViewModel, dataBindingRule:any) {
 		dataBindingRule.forEach((prop:string, item:BindingRuleItem) => {
 			var source = item.source;
@@ -2082,13 +2335,12 @@ export class Widget extends Emitter {
 		});
 	}
 
+	/*
+	 * 把界面数据更新到模型。
+	 */
 	protected updateValueToSource(value:any, dataSource:BindingDataSource, oldValue?:any) {
 		var result = this._viewModel.setPropEx(dataSource, value, oldValue);
-		if(result.code) {
-			this.onInvalidInput(result.message);
-		}else{
-			this.onInvalidInput(null);
-		}
+		this.onInvalidInput(result.code ? result.message : null);
 	}
 
 	/*
@@ -2128,6 +2380,26 @@ export class Widget extends Emitter {
 				}
 			}
 		});
+	}
+
+	protected hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h), ctx);
+	}
+	
+	protected doHitTest(x:number, y:number, r:Rect, ctx:MatrixStack) : HitTestResult {
+		var m = ctx.invert();
+		if(m) {
+			var p = m.transformPoint(x, y);
+			if(p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
+				return HitTestResult.MM;
+			}
+		}
+
+		return HitTestResult.NONE;
+	}
+	
+	protected selfHitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
+		return this.hitTest(x, y, ctx);	
 	}
 
 	private static ID = 10000;

@@ -154,9 +154,7 @@ var qtk =
 	exports.Graphics = graphics_1.Graphics;
 	var accordion_1 = __webpack_require__(324);
 	exports.Accordion = accordion_1.Accordion;
-	var service_locator_1 = __webpack_require__(327);
-	exports.ServiceLocator = service_locator_1.ServiceLocator;
-	var ruler_1 = __webpack_require__(328);
+	var ruler_1 = __webpack_require__(327);
 	exports.VRuler = ruler_1.VRuler;
 	exports.HRuler = ruler_1.HRuler;
 	var title_content_1 = __webpack_require__(325);
@@ -183,7 +181,7 @@ var qtk =
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
 	var title_text_area_1 = __webpack_require__(150);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
-	var property_sheets_1 = __webpack_require__(329);
+	var property_sheets_1 = __webpack_require__(328);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
 	var progress_bar_1 = __webpack_require__(96);
 	exports.ProgressBarType = progress_bar_1.ProgressBarType;
@@ -216,7 +214,6 @@ var qtk =
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
-	exports.Services = consts_1.Services;
 	var title_combo_box_1 = __webpack_require__(154);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
@@ -235,24 +232,24 @@ var qtk =
 	exports.ViewModel = view_model_1.ViewModel;
 	var recyclable_creator_1 = __webpack_require__(83);
 	exports.RecyclableCreator = recyclable_creator_1.RecyclableCreator;
-	var delegate_command_1 = __webpack_require__(330);
+	var delegate_command_1 = __webpack_require__(329);
 	exports.DelegateCommand = delegate_command_1.DelegateCommand;
-	var collection_view_model_1 = __webpack_require__(331);
+	var collection_view_model_1 = __webpack_require__(330);
 	exports.CollectionViewModel = collection_view_model_1.CollectionViewModel;
-	var delegate_value_converter_1 = __webpack_require__(332);
+	var delegate_value_converter_1 = __webpack_require__(331);
 	exports.DelegateValueConverter = delegate_value_converter_1.DelegateValueConverter;
 	var widget_recyclable_creator_1 = __webpack_require__(82);
 	exports.WidgetRecyclableCreator = widget_recyclable_creator_1.WidgetRecyclableCreator;
 	var ivalidation_rule_1 = __webpack_require__(159);
 	exports.ValidationResult = ivalidation_rule_1.ValidationResult;
-	var delegate_validation_rule_1 = __webpack_require__(333);
+	var delegate_validation_rule_1 = __webpack_require__(332);
 	exports.DelegateValidationRule = delegate_validation_rule_1.DelegateValidationRule;
-	var binding_rule_1 = __webpack_require__(79);
+	var binding_rule_1 = __webpack_require__(80);
 	exports.BindingRule = binding_rule_1.BindingRule;
 	exports.BindingDataSource = binding_rule_1.BindingDataSource;
 	exports.BindingCommandSource = binding_rule_1.BindingCommandSource;
 	exports.BindingRuleItem = binding_rule_1.BindingRuleItem;
-	var iview_model_1 = __webpack_require__(81);
+	var iview_model_1 = __webpack_require__(79);
 	exports.BindingMode = iview_model_1.BindingMode;
 	var props_desc_1 = __webpack_require__(153);
 	exports.PagePropsDesc = props_desc_1.PagePropsDesc;
@@ -278,19 +275,19 @@ var qtk =
 	exports.Assets = Assets;
 	var inputEventAdapter = __webpack_require__(15);
 	exports.inputEventAdapter = inputEventAdapter;
-	var toast_info_1 = __webpack_require__(334);
+	var toast_info_1 = __webpack_require__(333);
 	exports.ToastInfo = toast_info_1.ToastInfo;
-	var input_info_1 = __webpack_require__(335);
+	var input_info_1 = __webpack_require__(334);
 	exports.InputInfo = input_info_1.InputInfo;
-	var props_info_1 = __webpack_require__(336);
+	var props_info_1 = __webpack_require__(335);
 	exports.PropsInfo = props_info_1.PropsInfo;
-	var choice_info_1 = __webpack_require__(337);
+	var choice_info_1 = __webpack_require__(336);
 	exports.ChoiceInfo = choice_info_1.ChoiceInfo;
-	var progress_info_1 = __webpack_require__(338);
+	var progress_info_1 = __webpack_require__(337);
 	exports.ProgressInfo = progress_info_1.ProgressInfo;
-	var confirmation_info_1 = __webpack_require__(339);
+	var confirmation_info_1 = __webpack_require__(338);
 	exports.ConfirmationInfo = confirmation_info_1.ConfirmationInfo;
-	var notification_info_1 = __webpack_require__(340);
+	var notification_info_1 = __webpack_require__(339);
 	exports.NotificationInfo = notification_info_1.NotificationInfo;
 	var interaction_types_1 = __webpack_require__(128);
 	exports.InteractionTypes = interaction_types_1.InteractionTypes;
@@ -298,39 +295,39 @@ var qtk =
 	exports.InteractionRequest = interaction_request_1.InteractionRequest;
 	var interaction_service_1 = __webpack_require__(129);
 	exports.InteractionService = interaction_service_1.InteractionService;
-	var items_storage_1 = __webpack_require__(341);
+	var items_storage_1 = __webpack_require__(340);
 	exports.ItemsStorage = items_storage_1.ItemsStorage;
-	var table_row_1 = __webpack_require__(342);
+	var table_row_1 = __webpack_require__(341);
 	exports.TableRow = table_row_1.TableRow;
-	var table_client_1 = __webpack_require__(343);
+	var table_client_1 = __webpack_require__(342);
 	exports.TableClient = table_client_1.TableClient;
-	var table_index_1 = __webpack_require__(345);
+	var table_index_1 = __webpack_require__(344);
 	exports.TableIndex = table_index_1.TableIndex;
-	var table_header_1 = __webpack_require__(347);
+	var table_header_1 = __webpack_require__(346);
 	exports.TableHeader = table_header_1.TableHeader;
-	var table_1 = __webpack_require__(348);
+	var table_1 = __webpack_require__(347);
 	exports.Table = table_1.Table;
 	exports.TableColInfo = table_1.TableColInfo;
-	var table_index_item_1 = __webpack_require__(349);
+	var table_index_item_1 = __webpack_require__(348);
 	exports.TableIndexItem = table_index_item_1.TableIndexItem;
-	var table_header_item_1 = __webpack_require__(350);
+	var table_header_item_1 = __webpack_require__(349);
 	exports.TableHeaderItem = table_header_item_1.TableHeaderItem;
-	var delegate_filter_1 = __webpack_require__(351);
+	var delegate_filter_1 = __webpack_require__(350);
 	exports.DelegateFilter = delegate_filter_1.DelegateFilter;
-	var delegate_comparator_1 = __webpack_require__(352);
+	var delegate_comparator_1 = __webpack_require__(351);
 	exports.DelegateComparator = delegate_comparator_1.DelegateComparator;
-	var comparators_1 = __webpack_require__(353);
+	var comparators_1 = __webpack_require__(352);
 	exports.NumberComparator = comparators_1.NumberComparator;
 	exports.StringComparator = comparators_1.StringComparator;
 	exports.RevertComparator = comparators_1.RevertComparator;
 	exports.ObjectPropComparator = comparators_1.ObjectPropComparator;
-	var range_fixer_1 = __webpack_require__(354);
+	var range_fixer_1 = __webpack_require__(353);
 	exports.RangeFixer = range_fixer_1.RangeFixer;
-	var number_fixer_1 = __webpack_require__(355);
+	var number_fixer_1 = __webpack_require__(354);
 	exports.NumberFixer = number_fixer_1.NumberFixer;
-	var vector2_fixer_1 = __webpack_require__(356);
+	var vector2_fixer_1 = __webpack_require__(355);
 	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
-	var vector3_fixer_1 = __webpack_require__(357);
+	var vector3_fixer_1 = __webpack_require__(356);
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 
 
@@ -4780,39 +4777,119 @@ var qtk =
 	var image_tile_1 = __webpack_require__(7);
 	var behavior_1 = __webpack_require__(77);
 	var layouter_1 = __webpack_require__(78);
-	var binding_rule_1 = __webpack_require__(79);
-	var iview_model_1 = __webpack_require__(81);
+	var iview_model_1 = __webpack_require__(79);
+	var binding_rule_1 = __webpack_require__(80);
+	/**
+	 * @enum WidgetMode
+	 * 控件当前的运行模式。
+	 */
 	(function (WidgetMode) {
+	    /**
+	     * @property {number}
+	     * 运行模式
+	     */
 	    WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
+	    /**
+	     * @property {number}
+	     * 设计模式
+	     */
 	    WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
 	})(exports.WidgetMode || (exports.WidgetMode = {}));
 	var WidgetMode = exports.WidgetMode;
 	;
+	/**
+	 * @enum WidgetState
+	 * 控件的状态
+	 */
 	(function (WidgetState) {
+	    /**
+	     * @property {number}
+	     * 正常状态。
+	     */
 	    WidgetState[WidgetState["NORMAL"] = 0] = "NORMAL";
+	    /**
+	     * @property {number}
+	     * Pointer在控件上。
+	     */
 	    WidgetState[WidgetState["OVER"] = 1] = "OVER";
+	    /**
+	     * @property {number}
+	     * Pointer按下的状态。
+	     */
 	    WidgetState[WidgetState["ACTIVE"] = 2] = "ACTIVE";
+	    /**
+	     * @property {number}
+	     * 禁用状态。
+	     */
 	    WidgetState[WidgetState["DISABLE"] = 3] = "DISABLE";
+	    /**
+	     * @property {number}
+	     * 选中状态。只对部分设备有效。
+	     */
 	    WidgetState[WidgetState["SELECTED"] = 4] = "SELECTED";
 	})(exports.WidgetState || (exports.WidgetState = {}));
 	var WidgetState = exports.WidgetState;
 	;
+	/**
+	 * @enum HitTestResult
+	 * 点击测试结果。
+	 */
 	(function (HitTestResult) {
+	    /**
+	     * @property {number}
+	     * 点击在控件之外。
+	     */
 	    HitTestResult[HitTestResult["NONE"] = 0] = "NONE";
+	    /**
+	     * @property {number}
+	     * 点击在控件左上角。
+	     */
 	    HitTestResult[HitTestResult["TL"] = 1] = "TL";
+	    /**
+	     * @property {number}
+	     * 点击在控件上面中间。
+	     */
 	    HitTestResult[HitTestResult["TM"] = 2] = "TM";
+	    /**
+	     * @property {number}
+	     * 点击在控件右上角。
+	     */
 	    HitTestResult[HitTestResult["TR"] = 3] = "TR";
+	    /**
+	     * @property {number}
+	     * 点击在控件左边中间。
+	     */
 	    HitTestResult[HitTestResult["ML"] = 4] = "ML";
+	    /**
+	     * @property {number}
+	     * 点击在控件中间区域。
+	     */
 	    HitTestResult[HitTestResult["MM"] = 5] = "MM";
+	    /**
+	     * @property {number}
+	     * 点击在控件右边中间。
+	     */
 	    HitTestResult[HitTestResult["MR"] = 6] = "MR";
-	    HitTestResult[HitTestResult["RL"] = 7] = "RL";
-	    HitTestResult[HitTestResult["RM"] = 8] = "RM";
-	    HitTestResult[HitTestResult["RR"] = 9] = "RR";
+	    /**
+	     * @property {number}
+	     * 点击在控件左下角。
+	     */
+	    HitTestResult[HitTestResult["BL"] = 7] = "BL";
+	    /**
+	     * @property {number}
+	     * 点击在控件下面中间。
+	     */
+	    HitTestResult[HitTestResult["BM"] = 8] = "BM";
+	    /**
+	     * @property {number}
+	     * 点击在控件右下角。
+	     */
+	    HitTestResult[HitTestResult["BR"] = 9] = "BR";
 	})(exports.HitTestResult || (exports.HitTestResult = {}));
 	var HitTestResult = exports.HitTestResult;
 	;
-	var states = ["normal", "over", "active", "disable", "selected"];
 	/**
+	 * @class Widget
 	 * Widget是所有控件的基类。
 	 */
 	var Widget = (function (_super) {
@@ -4833,6 +4910,7 @@ var qtk =
 	        this.type = type;
 	    }
 	    /**
+	     * @method set
 	     * 同时设置多个属性。
 	     */
 	    Widget.prototype.set = function (props) {
@@ -4847,20 +4925,9 @@ var qtk =
 	        return this;
 	    };
 	    /**
-	     * 同时获取多个属性。
-	     */
-	    Widget.prototype.get = function (props) {
-	        if (props) {
-	            for (var key in props) {
-	                props[key] = this[key];
-	            }
-	        }
-	        return props;
-	    };
-	    /**
 	     * 把全局的坐标转换成相对于当前控件左上角的坐标。
-	     * @param p 全局坐标。
-	     * @returns 相对于当前控件左上角的坐标。
+	     * @param {Pointer} p 全局坐标。
+	     * @return {Pointer} 相对于当前控件左上角的坐标。
 	     */
 	    Widget.prototype.toLocalPoint = function (p) {
 	        p.x -= this.x;
@@ -4875,8 +4942,8 @@ var qtk =
 	    };
 	    /**
 	     * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
-	     * @param p Pointer事件的坐标。
-	     * @returns 相对于当前控件左上角的坐标。
+	     * @param {Pointer} p Pointer事件的坐标。
+	     * @return {Pointer} 相对于当前控件左上角的坐标。
 	     */
 	    Widget.prototype.eventPointToLocal = function (p) {
 	        if (this._canvas) {
@@ -4897,8 +4964,8 @@ var qtk =
 	    };
 	    /**
 	     * 把相对于当前控件左上角的坐标转换成全局坐标。
-	     * @param p 相对于当前控件左上角的坐标。
-	     * @returns 全局坐标。
+	     * @param {Point} p 相对于当前控件左上角的坐标。
+	     * @return {Point} 全局坐标。
 	     */
 	    Widget.prototype.toGlobalPoint = function (p) {
 	        p.x += this.x;
@@ -4913,8 +4980,8 @@ var qtk =
 	    };
 	    /**
 	     * 把相对于当前控件左上角的坐标转换成屏幕上的坐标。
-	     * @param p 相对于当前控件左上角的坐标。
-	     * @returns 屏幕上的坐标。
+	     * @param {Point} p 相对于当前控件左上角的坐标。
+	     * @return {Point}  屏幕上的坐标。
 	     */
 	    Widget.prototype.toViewPoint = function (p) {
 	        p.x += this.x;
@@ -4939,9 +5006,6 @@ var qtk =
 	            this.app = this.parent.app;
 	        }
 	    };
-	    /**
-	     * 初始化。在窗口打开后，对窗口上所有控件调用，或者在窗口打开后，对新创建的控件调用。
-	     */
 	    Widget.prototype.init = function () {
 	        this.onInit();
 	        this.children.forEach(function (child) {
@@ -4952,7 +5016,7 @@ var qtk =
 	    Widget.prototype.onDeinit = function () {
 	        this._inited = false;
 	    };
-	    /**
+	    /*
 	     * ~初始化。在窗口关闭后，对窗口上所有控件调用，或者对被移出的控件调用。
 	     */
 	    Widget.prototype.deinit = function () {
@@ -4960,38 +5024,6 @@ var qtk =
 	            child.deinit();
 	        });
 	        this.onDeinit();
-	    };
-	    /**
-	     * 分发一个事件到当前控件及其子控件。
-	     */
-	    Widget.prototype.dispatchEventToAll = function (evt) {
-	        this.dispatchEvent(evt);
-	        this.children.forEach(function (child) {
-	            child.dispatchEvent(evt);
-	        });
-	    };
-	    /**
-	     * 测试点是否落在当前控件中。
-	     * @param x X坐标，相对于全局原点的坐标。
-	     * @param y Y坐标，相对于全局原点的坐标。
-	     * @param ctx 矩阵变换上下文。ctx包含了从顶级父控件到当前控件的变化。
-	     * @returns 测试结果HitTestResult。
-	     */
-	    Widget.prototype.hitTest = function (x, y, ctx) {
-	        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w, this.h), ctx);
-	    };
-	    Widget.prototype.doHitTest = function (x, y, r, ctx) {
-	        var m = ctx.invert();
-	        if (m) {
-	            var p = m.transformPoint(x, y);
-	            if (p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
-	                return HitTestResult.MM;
-	            }
-	        }
-	        return HitTestResult.NONE;
-	    };
-	    Widget.prototype.selfHitTest = function (x, y, ctx) {
-	        return this.hitTest(x, y, ctx);
 	    };
 	    Widget.prototype.dispatchPointerDown = function (evt, ctx) {
 	        if (!this._enable || !this._sensitive) {
@@ -5239,6 +5271,14 @@ var qtk =
 	        this.requestRedraw();
 	        return tween;
 	    };
+	    /**
+	     * @method scaleTo
+	     * 设置控件的缩放比例到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} sx 宽度缩放比例。
+	     * @param {number} sy 高度缩放比例。
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.scaleTo = function (sx, sy, duration) {
 	        this.requestRedraw();
 	        if (duration > 0) {
@@ -5252,6 +5292,13 @@ var qtk =
 	            return null;
 	        }
 	    };
+	    /**
+	     * @method opacityTo
+	     * 设置控件的透明度到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} opacity 不透明度[0-1]
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.opacityTo = function (opacity, duration) {
 	        this.requestRedraw();
 	        if (duration > 0) {
@@ -5265,6 +5312,13 @@ var qtk =
 	            return null;
 	        }
 	    };
+	    /**
+	     * @method rotateTo
+	     * 设置控件的旋转角度到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} rotation 旋转角度，单位为弧度。
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.rotateTo = function (rotation, duration) {
 	        this.requestRedraw();
 	        if (duration > 0) {
@@ -5277,6 +5331,14 @@ var qtk =
 	            return null;
 	        }
 	    };
+	    /**
+	     * @method moveTo
+	     * 设置控件的位置到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} x X 坐标。
+	     * @param {number} y Y 坐标。
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.moveTo = function (x, y, duration) {
 	        this.requestRedraw();
 	        if (duration > 0) {
@@ -5290,6 +5352,16 @@ var qtk =
 	            return null;
 	        }
 	    };
+	    /**
+	     * @method moveResizeTo
+	     * 设置控件的位置和大小到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} x X 坐标。
+	     * @param {number} y Y 坐标。
+	     * @param {number} w 宽度。
+	     * @param {number} h 高度。
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.moveResizeTo = function (x, y, w, h, duration) {
 	        if (duration > 0) {
 	            var tween = new TWEEN.Tween(this);
@@ -5304,6 +5376,14 @@ var qtk =
 	            return null;
 	        }
 	    };
+	    /**
+	     * @method resizeTo
+	     * 设置控件的大小到指定的值。如果duration > 0则启用动画，并返回TWEEN.Tween，否则返回null。
+	     * @param {number} w 宽度。
+	     * @param {number} h 高度。
+	     * @param {number} duration 动画时间。
+	     * @return {TWEEN.Tween}
+	     */
 	    Widget.prototype.resizeTo = function (w, h, duration) {
 	        if (duration > 0) {
 	            var tween = new TWEEN.Tween(this);
@@ -5339,7 +5419,7 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    /**
+	    /*
 	     * 根据当前的childrenLayouter创建子控件的布局参数。
 	     */
 	    Widget.prototype.createChildLayoutParam = function (options) {
@@ -5358,7 +5438,8 @@ var qtk =
 	            return this._childrenLayouter;
 	        },
 	        /**
-	         * 设置childrenLayouter。
+	         * @property {Layouter} childrenLayouter
+	         * 用于子控件布局的Layouter。
 	         */
 	        set: function (layouter) {
 	            if (typeof layouter === "string") {
@@ -5376,7 +5457,8 @@ var qtk =
 	            return this._layoutParam;
 	        },
 	        /**
-	         * 布局参数是父控件在布局当前控件时使用的。
+	         * @property {Object} layoutParam
+	         * 布局参数是父控件在布局当前控件时使用的参数。
 	         */
 	        set: function (param) {
 	            this._layoutParam = param;
@@ -5388,9 +5470,21 @@ var qtk =
 	        configurable: true
 	    });
 	    ///////////////////////////////////////////
+	    /**
+	     * @method indexOfChild
+	     * 获取指定子控件的位置序数。
+	     * @param {Widget} child 子控件
+	     * @return {number} 位置序数。
+	     */
 	    Widget.prototype.indexOfChild = function (child) {
 	        return this.children.indexOf(child);
 	    };
+	    /**
+	     * @method findChild
+	     * 查找满足指定条件的子控件。
+	     * @param {Function} func 比较函数。
+	     * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	     */
 	    Widget.prototype.findChild = function (func) {
 	        var i = 0;
 	        var arr = this._children;
@@ -5403,26 +5497,28 @@ var qtk =
 	        }
 	        return null;
 	    };
+	    /**
+	     * @method findChildByName
+	     * 按名称查找子控件。
+	     * @param {string} name 子控件的名称。
+	     * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	     */
 	    Widget.prototype.findChildByName = function (name) {
 	        var ret = this.findChild(function (child) {
 	            return child.name === name;
 	        });
 	        return ret;
 	    };
+	    /**
+	     * @method findChildByID
+	     * 按ID查找子控件。
+	     * @param {string} id 子控件的ID。
+	     * @return {Widget} 如果找到，返回该子控件，否则返回null。
+	     */
 	    Widget.prototype.findChildByID = function (id) {
 	        var ret = this.findChild(function (child) {
 	            return child.id === id;
 	        });
-	        return ret;
-	    };
-	    Widget.prototype.find = function (path) {
-	        var items = path.split("/");
-	        var n = items.length;
-	        var ret = this;
-	        for (var i = 0; i < n; i++) {
-	            var name = items[i];
-	            ret = ret.findChildByName(name);
-	        }
 	        return ret;
 	    };
 	    Widget.prototype.drawColorBackground = function (ctx, style) {
@@ -5455,20 +5551,15 @@ var qtk =
 	        return this;
 	    };
 	    /**
+	     * @method getLocaleText
 	     * 获取本地化后的文本。
 	     */
 	    Widget.prototype.getLocaleText = function () {
 	        return this.text;
 	    };
-	    /**
-	     * 获取前景图片区域。
-	     */
 	    Widget.prototype.getFgImageRect = function (style) {
 	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	    };
-	    /**
-	     * 绘制前景图片，子控件根据需要重载。
-	     */
 	    Widget.prototype.drawImage = function (ctx, style) {
 	        if (style.foreGroundImage) {
 	            var r = this.getFgImageRect(style);
@@ -5476,9 +5567,6 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    /**
-	     * 获取文本显示区域。
-	     */
 	    Widget.prototype.getTextRect = function (style) {
 	        return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
 	    };
@@ -5505,9 +5593,6 @@ var qtk =
 	            ctx.addRect(-5, -5, this.w + 10, this.h + 10);
 	        }
 	    };
-	    /**
-	     * 计算脏矩形。
-	     */
 	    Widget.prototype.computeDirtyRect = function (ctx) {
 	        ctx.save();
 	        this.applyTransform(ctx);
@@ -5549,19 +5634,29 @@ var qtk =
 	        return;
 	    };
 	    Widget.prototype.stateToString = function (state) {
-	        return states[state];
+	        return WidgetState[state].toLowerCase();
 	    };
-	    ;
 	    Object.defineProperty(Widget.prototype, "styleType", {
 	        get: function () {
 	            return this._styleType;
 	        },
+	        /**
+	         * @property {string} styleType
+	         * 用于从主题中获取style数据。
+	         */
 	        set: function (styleType) {
 	            this._styleType = styleType;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * @method setStyle
+	     * 设置控件的Style。
+	     * @param {WidgetState} state 状态。
+	     * @param {Style} style 控件的Style。
+	     * return {Widget} 控件本身。
+	     */
 	    Widget.prototype.setStyle = function (state, style) {
 	        if (!this._styles) {
 	            this._styles = {};
@@ -5604,6 +5699,11 @@ var qtk =
 	        });
 	        return this;
 	    };
+	    /**
+	     * @method removeAllChildren
+	     * 移出并销毁所有的子控件。
+	     * return {Widget} 控件本身。
+	     */
 	    Widget.prototype.removeAllChildren = function () {
 	        this.children.forEach(function (child) {
 	            child.deinit();
@@ -5616,6 +5716,14 @@ var qtk =
 	    };
 	    Widget.prototype.onRemoveChild = function (child) {
 	    };
+	    /**
+	     * @method removeChild
+	     * 移出子控件。批量删除时，请使用快速模式，并在完成时调用relayoutChildren。
+	     * @param {Widget} child 子控件。
+	     * @param {boolean} fastMode 快速模式下，不重新布局子控件。
+	     * @param {boolean} destroy 是否销毁子控件。
+	     * return {Widget} 控件本身。
+	     */
 	    Widget.prototype.removeChild = function (child, fastMode, destroy) {
 	        var arr = this._children;
 	        var index = arr.indexOf(child);
@@ -5634,6 +5742,13 @@ var qtk =
 	    };
 	    Widget.prototype.onAddChild = function (child) {
 	    };
+	    /**
+	     * @method addChild
+	     * 增加子控件。批量增加时，请使用快速模式，并在完成时调用relayoutChildren。
+	     * @param {Widget} child 子控件。
+	     * @param {boolean} fastMode 快速模式下，不重新布局子控件。
+	     * return {Widget} 控件本身。
+	     */
 	    Widget.prototype.addChild = function (child, fastMode) {
 	        var arr = this._children;
 	        arr.push(child);
@@ -5649,6 +5764,10 @@ var qtk =
 	        this.onAddChild(child);
 	        return this;
 	    };
+	    /**
+	     * @method dispose
+	     * 销毁控件及其全部子控件。
+	     */
 	    Widget.prototype.dispose = function () {
 	        this.dispatchEvent({ type: Events.DISPOSE });
 	        if (this._canvas) {
@@ -5671,6 +5790,10 @@ var qtk =
 	            this.recycle();
 	        }
 	    };
+	    /**
+	     * @method requestRedraw
+	     * 请求重绘。
+	     */
 	    Widget.prototype.requestRedraw = function () {
 	        var app = this._app;
 	        this._dirty = true;
@@ -5806,6 +5929,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "x", {
+	        /**
+	         * @property {number} x
+	         * 控件的X坐标。
+	         */
 	        get: function () {
 	            return this._x;
 	        },
@@ -5816,6 +5943,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "y", {
+	        /**
+	         * @property {number} y
+	         * 控件的Y坐标。
+	         */
 	        get: function () {
 	            return this._y;
 	        },
@@ -5826,6 +5957,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "z", {
+	        /**
+	         * @property {number} z
+	         * 控件的位置序数。
+	         */
 	        get: function () {
 	            return this._z;
 	        },
@@ -5839,6 +5974,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "desireWidth", {
+	        /**
+	         * @property {number} w
+	         * 控件的宽度。
+	         */
 	        get: function () {
 	            return this._w;
 	        },
@@ -5880,6 +6019,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "height", {
+	        /**
+	         * @property {number} h
+	         * 控件的高度。
+	         */
 	        get: function () {
 	            return this._h;
 	        },
@@ -5900,6 +6043,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "state", {
+	        /**
+	         * @property {WidgetState} state
+	         * 控件的状态。
+	         */
 	        get: function () {
 	            return this._state;
 	        },
@@ -5912,6 +6059,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "value", {
+	        /**
+	         * @property {any} value
+	         * 控件的值。不同的控件，值的定义不一样。
+	         */
 	        get: function () {
 	            return this._value;
 	        },
@@ -5922,6 +6073,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "selected", {
+	        /**
+	         * @property {boolean} selected
+	         * 控件是否被选中。
+	         */
 	        get: function () {
 	            return this._selected;
 	        },
@@ -5942,6 +6097,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "enable", {
+	        /**
+	         * @property {boolean} enable
+	         * 控件是否处于enable状态。
+	         */
 	        get: function () {
 	            if (this.isEnableFunc) {
 	                return this.isEnableFunc();
@@ -5954,7 +6113,22 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(Widget.prototype, "inputable", {
+	        /**
+	         * @property {boolean} inputable
+	         * [只读] 控件是否可输入，也就是是否可以通过界面修改它的值。
+	         */
+	        get: function () {
+	            return false;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Widget.prototype, "visible", {
+	        /**
+	         * @property {boolean} visible
+	         * 控件是否可见。
+	         */
 	        get: function () {
 	            return this._visible;
 	        },
@@ -5967,22 +6141,16 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Widget.prototype, "inputable", {
-	        /**
-	         * 用户是否可以通过本控件输入/选择数据。
-	         */
-	        get: function () {
-	            return false;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
 	    Widget.prototype.setVisible = function (value) {
 	        this.setProp("visible", value, true);
 	        this.dispatchEvent({ type: value ? Events.SHOW : Events.HIDE });
 	        this.requestRedraw();
 	    };
 	    Object.defineProperty(Widget.prototype, "opacity", {
+	        /**
+	         * @property {number} opacity
+	         * 控件的不透明度(0-1)。
+	         */
 	        get: function () {
 	            return this._opacity;
 	        },
@@ -5993,6 +6161,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "scaleX", {
+	        /**
+	         * @property {number} scaleX
+	         * 控件的宽度缩放比例。
+	         */
 	        get: function () {
 	            return this._scaleX;
 	        },
@@ -6003,6 +6175,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "scaleY", {
+	        /**
+	         * @property {number} scaleY
+	         * 控件的高度缩放比例。
+	         */
 	        get: function () {
 	            return this._scaleY;
 	        },
@@ -6013,6 +6189,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "rotation", {
+	        /**
+	         * @property {number} rotation
+	         * 控件的旋转角度。
+	         */
 	        get: function () {
 	            return this._rotation;
 	        },
@@ -6022,17 +6202,11 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Widget.prototype, "focusable", {
-	        get: function () {
-	            return this._focusable;
-	        },
-	        set: function (value) {
-	            this.setProp("focusable", value, true);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
 	    Object.defineProperty(Widget.prototype, "sensitive", {
+	        /**
+	         * @property {number} sensitive
+	         * 控件是否接受用户事件。
+	         */
 	        get: function () {
 	            return this._sensitive;
 	        },
@@ -6043,6 +6217,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "pivotX", {
+	        /**
+	         * @property {number} pivotX
+	         * 控件的X轴点，也就旋转点的X坐标。
+	         */
 	        get: function () {
 	            return this._pivotX;
 	        },
@@ -6053,6 +6231,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "pivotY", {
+	        /**
+	         * @property {number} pivotY
+	         * 控件的Y轴点，也就旋转点的Y坐标。
+	         */
 	        get: function () {
 	            return this._pivotY;
 	        },
@@ -6063,6 +6245,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "tips", {
+	        /**
+	         * @property {string} tips
+	         * 控件的提示文本。
+	         */
 	        get: function () {
 	            return this._tips;
 	        },
@@ -6073,6 +6259,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "text", {
+	        /**
+	         * @property {string} text
+	         * 控件的文本。
+	         */
 	        get: function () {
 	            return this._text;
 	        },
@@ -6083,6 +6273,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "name", {
+	        /**
+	         * @property {string} name
+	         * 控件的名称。
+	         */
 	        get: function () {
 	            return this._name;
 	        },
@@ -6093,6 +6287,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "type", {
+	        /**
+	         * @property {string} type
+	         * 控件的类型。
+	         */
 	        get: function () {
 	            return this._type;
 	        },
@@ -6103,23 +6301,21 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "id", {
+	        /**
+	         * @property {string} id
+	         * 控件的ID。
+	         */
 	        get: function () {
 	            return this._id;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(Widget.prototype, "tag", {
-	        get: function () {
-	            return this._tag;
-	        },
-	        set: function (value) {
-	            this.setProp("tag", value, true);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
 	    Object.defineProperty(Widget.prototype, "userData", {
+	        /**
+	         * @property {any} userData
+	         * 控件的应用数据。
+	         */
 	        get: function () {
 	            return this._userData;
 	        },
@@ -6150,6 +6346,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "parent", {
+	        /**
+	         * @property {Widget} parent
+	         * 控件的父控件。
+	         */
 	        get: function () {
 	            return this._parent;
 	        },
@@ -6160,6 +6360,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "app", {
+	        /**
+	         * @property {IApplication} app
+	         * 应用程序。
+	         */
 	        get: function () {
 	            return this._app;
 	        },
@@ -6177,6 +6381,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "win", {
+	        /**
+	         * @property {Window} win
+	         * 控件所在的窗口。
+	         */
 	        get: function () {
 	            for (var iter = this; iter !== null; iter = iter._parent) {
 	                if (iter._isWindow) {
@@ -6189,6 +6397,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "children", {
+	        /**
+	         * @property {Array<Widget>} children
+	         * 控件的全部子控件。
+	         */
 	        get: function () {
 	            return this._children;
 	        },
@@ -6206,6 +6418,10 @@ var qtk =
 	        return this._isWindow;
 	    };
 	    Object.defineProperty(Widget.prototype, "leftPadding", {
+	        /**
+	         * @property {number} leftPadding
+	         * 控件的左边界。
+	         */
 	        get: function () {
 	            return this._lp;
 	        },
@@ -6216,6 +6432,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "rightPadding", {
+	        /**
+	         * @property {number} rightPadding
+	         * 控件的右边界。
+	         */
 	        get: function () {
 	            return this._rp;
 	        },
@@ -6226,6 +6446,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "topPadding", {
+	        /**
+	         * @property {number} topPadding
+	         * 控件的上边界。
+	         */
 	        get: function () {
 	            return this._tp;
 	        },
@@ -6236,6 +6460,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "bottomPadding", {
+	        /**
+	         * @property {number} bottomPadding
+	         * 控件的下边界。
+	         */
 	        get: function () {
 	            return this._bp;
 	        },
@@ -6246,6 +6474,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(Widget.prototype, "padding", {
+	        /**
+	         * @property {number} padding
+	         * 控件的边界。
+	         */
 	        get: function () {
 	            return this._tp;
 	        },
@@ -6275,14 +6507,21 @@ var qtk =
 	    Widget.prototype.setText = function (text, notify) {
 	        return this.setProp("text", text, notify);
 	    };
-	    Widget.prototype.useBehavior = function (type, options) {
+	    /**
+	     * @method useBehavior
+	     * 启用指定名称的Behavior
+	     * @param {string} name Behavior的名称。
+	     * @param {any} options 选项。
+	     * @return {Behavior}
+	     */
+	    Widget.prototype.useBehavior = function (name, options) {
 	        var behavior;
-	        if (!this._behaviors[type]) {
-	            behavior = behavior_1.BehaviorFactory.create(type, this, options);
-	            this._behaviors[type] = behavior;
+	        if (!this._behaviors[name]) {
+	            behavior = behavior_1.BehaviorFactory.create(name, this, options);
+	            this._behaviors[name] = behavior;
 	        }
 	        else {
-	            behavior = this._behaviors[type];
+	            behavior = this._behaviors[name];
 	            behavior.setOptions(options);
 	        }
 	        return behavior;
@@ -6357,6 +6596,11 @@ var qtk =
 	    };
 	    Widget.prototype.onFromJson = function (json) {
 	    };
+	    /**
+	     * @method fromJson
+	     * 用JSON数据初始化当前控件。
+	     * @param {any} json 数据。
+	     */
 	    Widget.prototype.fromJson = function (json) {
 	        var _this = this;
 	        var defProps = this.getDefProps();
@@ -6397,6 +6641,11 @@ var qtk =
 	        this.onFromJson(json);
 	        return this;
 	    };
+	    /**
+	     * @method clone
+	     * CLONE当前控件。
+	     * @return {Widget} 新对象。
+	     */
 	    Widget.prototype.clone = function () {
 	        var json = this.toJson();
 	        var widget = widget_factory_1.WidgetFactory.createWithJson(json);
@@ -6404,6 +6653,11 @@ var qtk =
 	    };
 	    Widget.prototype.onToJson = function (json) {
 	    };
+	    /**
+	     * @method toJson
+	     * 序列化当前的控件到JSON数据。
+	     * @return {any} JSON数据。
+	     */
 	    Widget.prototype.toJson = function () {
 	        var json = {};
 	        json.type = this._type;
@@ -6444,6 +6698,10 @@ var qtk =
 	        get: function () {
 	            return this._templateItem;
 	        },
+	        /**
+	         * @property {Widget} templateItem
+	         * 模板项。用于在数据绑定时，自动生成子控件的模板。
+	         */
 	        set: function (value) {
 	            this._templateItem = value;
 	            this._templateItemJson = value ? value.toJson() : null;
@@ -6475,6 +6733,7 @@ var qtk =
 	            return this._dataBindingRule;
 	        },
 	        /**
+	         * @property {any} dataBindingRule
 	         * 数据绑定规则。
 	         */
 	        set: function (dataBindingRule) {
@@ -6484,6 +6743,7 @@ var qtk =
 	        configurable: true
 	    });
 	    /**
+	     * @method updateExplicit
 	     * 显式的更新ViewModel。
 	     */
 	    Widget.prototype.updateExplicit = function () {
@@ -6493,6 +6753,7 @@ var qtk =
 	        this.children.forEach(function (child) {
 	            child.updateExplicit();
 	        });
+	        return this;
 	    };
 	    Widget.prototype.removeBinding = function () {
 	        var viewModel = this._viewModel;
@@ -6508,7 +6769,10 @@ var qtk =
 	    Widget.prototype.onAfterBindData = function () {
 	    };
 	    /**
+	     * @method bindData
 	     * 绑定数据。
+	     * @param {IViewModel} viewModel View Model。
+	     * @return {Widget} 控件本身。
 	     */
 	    Widget.prototype.bindData = function (viewModel) {
 	        var _this = this;
@@ -6542,17 +6806,17 @@ var qtk =
 	                return enable;
 	            };
 	        }
-	        this.bindChildren(viewModel);
+	        this.bindDataToChildren(viewModel);
 	        if (viewModel.isCollection && this._templateItemJson) {
 	            var collectionViewModel = viewModel;
 	            collectionViewModel.onItemsChange(function (evt) {
-	                _this.bindChildren(viewModel);
+	                _this.bindDataToChildren(viewModel);
 	            });
 	        }
 	        this.onAfterBindData();
 	        return this;
 	    };
-	    Widget.prototype.bindChildren = function (viewModel) {
+	    Widget.prototype.bindDataToChildren = function (viewModel) {
 	        if (viewModel.isCollection) {
 	            if (this._templateItemJson) {
 	                //对于集合viewModel，如果有模板项存在，则动态生成子控件。
@@ -6581,6 +6845,9 @@ var qtk =
 	            });
 	        }
 	    };
+	    /*
+	     * 绑定命令，注册相应的事件处理函数。
+	     */
 	    Widget.prototype.onBindCommand = function (viewModel, dataBindingRule) {
 	        var _this = this;
 	        dataBindingRule.forEach(function (prop, item) {
@@ -6647,14 +6914,12 @@ var qtk =
 	            }
 	        });
 	    };
+	    /*
+	     * 把界面数据更新到模型。
+	     */
 	    Widget.prototype.updateValueToSource = function (value, dataSource, oldValue) {
 	        var result = this._viewModel.setPropEx(dataSource, value, oldValue);
-	        if (result.code) {
-	            this.onInvalidInput(result.message);
-	        }
-	        else {
-	            this.onInvalidInput(null);
-	        }
+	        this.onInvalidInput(result.code ? result.message : null);
 	    };
 	    /*
 	     * 监控控件单个属性的变化。
@@ -6693,6 +6958,22 @@ var qtk =
 	            }
 	        });
 	    };
+	    Widget.prototype.hitTest = function (x, y, ctx) {
+	        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w, this.h), ctx);
+	    };
+	    Widget.prototype.doHitTest = function (x, y, r, ctx) {
+	        var m = ctx.invert();
+	        if (m) {
+	            var p = m.transformPoint(x, y);
+	            if (p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
+	                return HitTestResult.MM;
+	            }
+	        }
+	        return HitTestResult.NONE;
+	    };
+	    Widget.prototype.selfHitTest = function (x, y, ctx) {
+	        return this.hitTest(x, y, ctx);
+	    };
 	    Widget.defProps = {
 	        _x: 0,
 	        _y: 0,
@@ -6710,12 +6991,10 @@ var qtk =
 	        _pivotX: 0.5,
 	        _pivotY: 0.5,
 	        _rotation: 0,
-	        _focusable: false,
 	        _sensitive: true,
 	        _tips: null,
 	        _text: null,
 	        _name: null,
-	        _tag: null,
 	        _hitTestResult: 0,
 	        _isWindow: false,
 	        _mode: 0,
@@ -17251,6 +17530,71 @@ var qtk =
 
 /***/ },
 /* 79 */
+/***/ function(module, exports) {
+
+	"use strict";
+	;
+	;
+	/**
+	 * 数据绑定模式。
+	 */
+	(function (BindingMode) {
+	    /**
+	     * 双向数据绑定。
+	     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时自动更新界面。
+	     */
+	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
+	    /**
+	     * 单向数据绑定。
+	     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时自动更新界面。
+	     */
+	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
+	    /**
+	     * 只在初始化时绑定。
+	     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时不更新界面。
+	     */
+	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
+	    /**
+	     * 单向数据绑定。
+	     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时不更新界面。
+	     */
+	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
+	})(exports.BindingMode || (exports.BindingMode = {}));
+	var BindingMode = exports.BindingMode;
+	;
+	var BindingModeNames = ["two-way", "one-way", "one-time", "one-way-to-source"];
+	function toBindingMode(name) {
+	    return Math.max(0, BindingModeNames.indexOf(name));
+	}
+	exports.toBindingMode = toBindingMode;
+	/**
+	 * 更新ViewModel的时机。
+	 */
+	(function (UpdateTiming) {
+	    /**
+	     * 有变化时立即更新(如编辑器正在输入)。
+	     */
+	    UpdateTiming[UpdateTiming["CHANGING"] = 0] = "CHANGING";
+	    /**
+	     * 变化完成时才更新(如编辑器失去焦点时)。
+	     */
+	    UpdateTiming[UpdateTiming["CHANGED"] = 1] = "CHANGED";
+	    /**
+	     * 手动更新。
+	     */
+	    UpdateTiming[UpdateTiming["EXPLICIT"] = 2] = "EXPLICIT";
+	})(exports.UpdateTiming || (exports.UpdateTiming = {}));
+	var UpdateTiming = exports.UpdateTiming;
+	;
+	var UpdateTimingNames = ["changing", "changed", "explicit"];
+	function toUpdateTiming(name) {
+	    return Math.max(0, UpdateTimingNames.indexOf(name));
+	}
+	exports.toUpdateTiming = toUpdateTiming;
+
+
+/***/ },
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17259,9 +17603,9 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var json_serializer_1 = __webpack_require__(80);
-	var iview_model_1 = __webpack_require__(81);
-	var iview_model_2 = __webpack_require__(81);
+	var json_serializer_1 = __webpack_require__(81);
+	var iview_model_1 = __webpack_require__(79);
+	var iview_model_2 = __webpack_require__(79);
 	;
 	/**
 	 * 数据源。如果指定了value，直接从value获取数据。否则通过path从ViewModel中获取数据。
@@ -17414,7 +17758,7 @@ var qtk =
 
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -17442,71 +17786,6 @@ var qtk =
 	    return JsonSerializer;
 	}());
 	exports.JsonSerializer = JsonSerializer;
-
-
-/***/ },
-/* 81 */
-/***/ function(module, exports) {
-
-	"use strict";
-	;
-	;
-	/**
-	 * 数据绑定模式。
-	 */
-	(function (BindingMode) {
-	    /**
-	     * 双向数据绑定。
-	     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时自动更新界面。
-	     */
-	    BindingMode[BindingMode["TWO_WAY"] = 0] = "TWO_WAY";
-	    /**
-	     * 单向数据绑定。
-	     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时自动更新界面。
-	     */
-	    BindingMode[BindingMode["ONE_WAY"] = 1] = "ONE_WAY";
-	    /**
-	     * 只在初始化时绑定。
-	     * 界面数据变化时不更新ViewModel，ViewModel数据有变化时不更新界面。
-	     */
-	    BindingMode[BindingMode["ONE_TIME"] = 2] = "ONE_TIME";
-	    /**
-	     * 单向数据绑定。
-	     * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时不更新界面。
-	     */
-	    BindingMode[BindingMode["ONE_WAY_TO_SOURCE"] = 3] = "ONE_WAY_TO_SOURCE";
-	})(exports.BindingMode || (exports.BindingMode = {}));
-	var BindingMode = exports.BindingMode;
-	;
-	var BindingModeNames = ["two-way", "one-way", "one-time", "one-way-to-source"];
-	function toBindingMode(name) {
-	    return Math.max(0, BindingModeNames.indexOf(name));
-	}
-	exports.toBindingMode = toBindingMode;
-	/**
-	 * 更新ViewModel的时机。
-	 */
-	(function (UpdateTiming) {
-	    /**
-	     * 有变化时立即更新(如编辑器正在输入)。
-	     */
-	    UpdateTiming[UpdateTiming["CHANGING"] = 0] = "CHANGING";
-	    /**
-	     * 变化完成时才更新(如编辑器失去焦点时)。
-	     */
-	    UpdateTiming[UpdateTiming["CHANGED"] = 1] = "CHANGED";
-	    /**
-	     * 手动更新。
-	     */
-	    UpdateTiming[UpdateTiming["EXPLICIT"] = 2] = "EXPLICIT";
-	})(exports.UpdateTiming || (exports.UpdateTiming = {}));
-	var UpdateTiming = exports.UpdateTiming;
-	;
-	var UpdateTimingNames = ["changing", "changed", "explicit"];
-	function toUpdateTiming(name) {
-	    return Math.max(0, UpdateTimingNames.indexOf(name));
-	}
-	exports.toUpdateTiming = toUpdateTiming;
 
 
 /***/ },
@@ -21430,14 +21709,6 @@ var qtk =
 	})(exports.Align || (exports.Align = {}));
 	var Align = exports.Align;
 	;
-	var Services = (function () {
-	    function Services() {
-	    }
-	    Services.THEME_MANAGER = "qtk-theme-manager";
-	    return Services;
-	}());
-	exports.Services = Services;
-	;
 
 
 /***/ },
@@ -24464,10 +24735,11 @@ var qtk =
 /* 123 */
 /***/ function(module, exports) {
 
+	"use strict";
 	/**
+	 * @class DeviceInfo
 	 * 设备信息。可以获取语言，操作系统和浏览器等相关信息(单例对象，直接调用)。
 	 */
-	"use strict";
 	var DeviceInfo = (function () {
 	    function DeviceInfo() {
 	    }
@@ -28029,7 +28301,7 @@ var qtk =
 	var emitter_1 = __webpack_require__(4);
 	var Events = __webpack_require__(6);
 	var ivalidation_rule_1 = __webpack_require__(159);
-	var iview_model_1 = __webpack_require__(81);
+	var iview_model_1 = __webpack_require__(79);
 	var ViewModelDefault = (function (_super) {
 	    __extends(ViewModelDefault, _super);
 	    function ViewModelDefault(data) {
@@ -56234,31 +56506,6 @@ var qtk =
 
 /***/ },
 /* 327 */
-/***/ function(module, exports) {
-
-	"use strict";
-	/**
-	 * 管理各种服务。
-	 */
-	var ServiceLocator = (function () {
-	    function ServiceLocator() {
-	        this.services = {};
-	    }
-	    ServiceLocator.prototype.register = function (name, service) {
-	        this.services[name] = service;
-	        return this;
-	    };
-	    ServiceLocator.prototype.get = function (name) {
-	        return this.services[name];
-	    };
-	    return ServiceLocator;
-	}());
-	exports.ServiceLocator = ServiceLocator;
-	;
-
-
-/***/ },
-/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56567,7 +56814,7 @@ var qtk =
 
 
 /***/ },
-/* 329 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56678,7 +56925,7 @@ var qtk =
 
 
 /***/ },
-/* 330 */
+/* 329 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -56703,7 +56950,7 @@ var qtk =
 
 
 /***/ },
-/* 331 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -56713,9 +56960,9 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
-	var delegate_command_1 = __webpack_require__(330);
+	var delegate_command_1 = __webpack_require__(329);
 	var ivalidation_rule_1 = __webpack_require__(159);
-	var iview_model_1 = __webpack_require__(81);
+	var iview_model_1 = __webpack_require__(79);
 	var view_model_default_1 = __webpack_require__(156);
 	/**
 	 * 集合ViewModel。delProp/getProp/setProp操作当前的项。
@@ -57114,7 +57361,7 @@ var qtk =
 
 
 /***/ },
-/* 332 */
+/* 331 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57139,7 +57386,7 @@ var qtk =
 
 
 /***/ },
-/* 333 */
+/* 332 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57160,7 +57407,7 @@ var qtk =
 
 
 /***/ },
-/* 334 */
+/* 333 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57180,7 +57427,7 @@ var qtk =
 
 
 /***/ },
-/* 335 */
+/* 334 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57205,7 +57452,7 @@ var qtk =
 
 
 /***/ },
-/* 336 */
+/* 335 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57226,7 +57473,7 @@ var qtk =
 
 
 /***/ },
-/* 337 */
+/* 336 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57266,7 +57513,7 @@ var qtk =
 
 
 /***/ },
-/* 338 */
+/* 337 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57286,7 +57533,7 @@ var qtk =
 
 
 /***/ },
-/* 339 */
+/* 338 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57306,7 +57553,7 @@ var qtk =
 
 
 /***/ },
-/* 340 */
+/* 339 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57325,7 +57572,7 @@ var qtk =
 
 
 /***/ },
-/* 341 */
+/* 340 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57371,7 +57618,7 @@ var qtk =
 
 
 /***/ },
-/* 342 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57421,7 +57668,7 @@ var qtk =
 
 
 /***/ },
-/* 343 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57432,7 +57679,7 @@ var qtk =
 	};
 	var rect_1 = __webpack_require__(1);
 	var point_1 = __webpack_require__(2);
-	var range_1 = __webpack_require__(344);
+	var range_1 = __webpack_require__(343);
 	var list_view_1 = __webpack_require__(112);
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
@@ -57685,7 +57932,7 @@ var qtk =
 
 
 /***/ },
-/* 344 */
+/* 343 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -57712,7 +57959,7 @@ var qtk =
 
 
 /***/ },
-/* 345 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57722,7 +57969,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var passive_scrollable_group_1 = __webpack_require__(346);
+	var passive_scrollable_group_1 = __webpack_require__(345);
 	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 表格左边的行序数。
@@ -57745,7 +57992,7 @@ var qtk =
 
 
 /***/ },
-/* 346 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57882,7 +58129,7 @@ var qtk =
 
 
 /***/ },
-/* 347 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57892,7 +58139,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var widget_factory_1 = __webpack_require__(23);
-	var passive_scrollable_group_1 = __webpack_require__(346);
+	var passive_scrollable_group_1 = __webpack_require__(345);
 	var widget_recyclable_creator_1 = __webpack_require__(82);
 	/**
 	 * 表格头
@@ -57915,7 +58162,7 @@ var qtk =
 
 
 /***/ },
-/* 348 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -57928,12 +58175,12 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(23);
 	var widget_recyclable_creator_1 = __webpack_require__(82);
-	var table_row_1 = __webpack_require__(342);
-	var table_index_1 = __webpack_require__(345);
-	var table_client_1 = __webpack_require__(343);
-	var table_header_1 = __webpack_require__(347);
-	var table_index_item_1 = __webpack_require__(349);
-	var table_header_item_1 = __webpack_require__(350);
+	var table_row_1 = __webpack_require__(341);
+	var table_index_1 = __webpack_require__(344);
+	var table_client_1 = __webpack_require__(342);
+	var table_header_1 = __webpack_require__(346);
+	var table_index_item_1 = __webpack_require__(348);
+	var table_header_item_1 = __webpack_require__(349);
 	/**
 	 * 描述表格中某列的信息。
 	 */
@@ -58223,7 +58470,7 @@ var qtk =
 
 
 /***/ },
-/* 349 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58256,7 +58503,7 @@ var qtk =
 
 
 /***/ },
-/* 350 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58359,7 +58606,7 @@ var qtk =
 
 
 /***/ },
-/* 351 */
+/* 350 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58380,7 +58627,7 @@ var qtk =
 
 
 /***/ },
-/* 352 */
+/* 351 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58401,7 +58648,7 @@ var qtk =
 
 
 /***/ },
-/* 353 */
+/* 352 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58488,7 +58735,7 @@ var qtk =
 
 
 /***/ },
-/* 354 */
+/* 353 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58527,7 +58774,7 @@ var qtk =
 
 
 /***/ },
-/* 355 */
+/* 354 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58551,7 +58798,7 @@ var qtk =
 
 
 /***/ },
-/* 356 */
+/* 355 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58580,7 +58827,7 @@ var qtk =
 
 
 /***/ },
-/* 357 */
+/* 356 */
 /***/ function(module, exports) {
 
 	"use strict";

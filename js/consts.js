@@ -63,11 +63,3 @@ var AlignV = exports.AlignV;
 })(exports.Align || (exports.Align = {}));
 var Align = exports.Align;
 ;
-var Services = (function () {
-    function Services() {
-    }
-    Services.THEME_MANAGER = "qtk-theme-manager";
-    return Services;
-}());
-exports.Services = Services;
-;

@@ -52,6 +52,3 @@ export declare enum Align {
     B = 3,
     BOTTOM = 3,
 }
-export declare class Services {
-    static THEME_MANAGER: string;
-}

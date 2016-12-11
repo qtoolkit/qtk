@@ -1,10 +1,18 @@
 
 /**
+ * @class DeviceInfo
  * 设备信息。可以获取语言，操作系统和浏览器等相关信息(单例对象，直接调用)。
  */
-
 export class DeviceInfo {
+	/**
+	 * @property {string} locale
+	 * 浏览器的locale(语言+国家)。
+	 */
 	public static locale : string;
+	/**
+	 * @property {string} locale
+	 * 浏览器的语言。
+	 */
 	public static language : string;
 	public static isMacOS : boolean;
 	public static isLinux : boolean;
