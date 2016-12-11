@@ -82,9 +82,9 @@ describe('Widget', function() {
 			
 			widget.addChild(child);
 			var result = widget.children.length == 1
-				&& widget.find(child.name) === child
-				&& widget.find(child.name) === widget.findChildByID(child.id)
-				&& widget.find(child.name) === widget.findChildByName(child.name)
+				&& widget.findChildByName(child.name) === child
+				&& widget.findChildByName(child.name) === widget.findChildByID(child.id)
+				&& widget.findChildByName(child.name) === widget.findChildByName(child.name)
 			widget.removeChild(child);
 
 			result = result && widget.children.length === 0;

@@ -271,10 +271,12 @@ var qtk =
 	exports.TWEEN = TWEEN;
 	var Events = __webpack_require__(6);
 	exports.Events = Events;
-	var Assets = __webpack_require__(11);
-	exports.Assets = Assets;
 	var inputEventAdapter = __webpack_require__(15);
 	exports.inputEventAdapter = inputEventAdapter;
+	var assets_1 = __webpack_require__(11);
+	exports.AssetManager = assets_1.AssetManager;
+	exports.AssetGroup = assets_1.AssetGroup;
+	exports.AssetItem = assets_1.AssetItem;
 	var toast_info_1 = __webpack_require__(333);
 	exports.ToastInfo = toast_info_1.ToastInfo;
 	var input_info_1 = __webpack_require__(334);
@@ -4919,6 +4921,17 @@ var qtk =
 	                var value = props[key];
 	                if (value !== undefined) {
 	                    this[key] = value;
+	                }
+	            }
+	        }
+	        return this;
+	    };
+	    Widget.prototype.get = function (props) {
+	        if (props) {
+	            for (var key in props) {
+	                var value = this[key];
+	                if (value !== undefined) {
+	                    props[key] = value;
 	                }
 	            }
 	        }

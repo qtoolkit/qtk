@@ -167,6 +167,17 @@ var Widget = (function (_super) {
         }
         return this;
     };
+    Widget.prototype.get = function (props) {
+        if (props) {
+            for (var key in props) {
+                var value = this[key];
+                if (value !== undefined) {
+                    props[key] = value;
+                }
+            }
+        }
+        return this;
+    };
     /**
      * 把全局的坐标转换成相对于当前控件左上角的坐标。
      * @param {Pointer} p 全局坐标。

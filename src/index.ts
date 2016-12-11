@@ -102,10 +102,10 @@ export {Vector2PropDesc, Vector3PropDesc, LinePropDesc} from "./controls-ext/pro
 
 var TWEEN = require("tween.js");
 import * as Events from "./events";
-import * as Assets from "./assets";
 import * as inputEventAdapter from "./input-event-adapter";
+import {AssetManager, AssetGroup, AssetItem} from "./assets";
 
-export {TWEEN, Events, Assets, inputEventAdapter};
+export {TWEEN, Events, AssetManager, AssetGroup, AssetItem, inputEventAdapter};
 
 export {ToastInfo} from "./interaction-request/toast-info";
 export {InputInfo} from "./interaction-request/input-info";

@@ -13,7 +13,7 @@ describe('WindowNormal And Widget', function() {
 			win.w = vp.width;
 			win.h = vp.height;
 
-			app.mainLoop.requestRedraw();
+			app.getMainLoop().requestRedraw();
 			result = true;
 			done(result ? null : "Application.");
 		});

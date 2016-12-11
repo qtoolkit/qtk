@@ -160,6 +160,19 @@ export class Widget extends Emitter {
 
 		return this;
 	}
+	
+	public get(props?:any) : Widget {
+		if(props) {
+			for(var key in props) {
+				var value = this[key];
+				if(value !== undefined) {
+					props[key] = value;
+				}
+			}
+		}
+
+		return this;
+	}
 
 	/**
 	 * 把全局的坐标转换成相对于当前控件左上角的坐标。

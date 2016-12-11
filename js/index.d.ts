@@ -93,9 +93,9 @@ export { TextPropDesc, ReadonlyTextPropDesc, OptionsPropDesc, RangePropDesc } fr
 export { Vector2PropDesc, Vector3PropDesc, LinePropDesc } from "./controls-ext/props-desc";
 declare var TWEEN: any;
 import * as Events from "./events";
-import * as Assets from "./assets";
 import * as inputEventAdapter from "./input-event-adapter";
-export { TWEEN, Events, Assets, inputEventAdapter };
+import { AssetManager, AssetGroup, AssetItem } from "./assets";
+export { TWEEN, Events, AssetManager, AssetGroup, AssetItem, inputEventAdapter };
 export { ToastInfo } from "./interaction-request/toast-info";
 export { InputInfo } from "./interaction-request/input-info";
 export { PropsInfo } from "./interaction-request/props-info";

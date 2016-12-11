@@ -131,6 +131,7 @@ export declare class Widget extends Emitter {
      * 同时设置多个属性。
      */
     set(props?: any): Widget;
+    get(props?: any): Widget;
     /**
      * 把全局的坐标转换成相对于当前控件左上角的坐标。
      * @param {Pointer} p 全局坐标。
