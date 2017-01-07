@@ -69,6 +69,11 @@ export enum AssetType {
 	 */
 	JSON,
 	/** 
+	 * @property {number} [SCRIPT]
+	 * SCRIPT资源。
+	 */
+	SCRIPT,
+	/** 
 	 * @property {number} [TEXT]
 	 * 文本资源。
 	 */
@@ -229,6 +234,8 @@ export class AssetItem {
 				type = AssetType.IMAGE;
 			}else if(name === ".txt") {
 				type = AssetType.TEXT;
+			}else if(name === ".js") {
+				type = AssetType.SCRIPT;
 			}else{
 				type = AssetType.BLOB;
 			}
@@ -298,6 +305,8 @@ export class AssetGroup extends Emitter {
             AssetManager.loadImage(src).then(addLoaded, addLoaded);
         }else if(type === AssetType.BLOB) {
             AssetManager.loadBlob(src).then(addLoaded, addLoaded);
+        }else if(type === AssetType.SCRIPT) {
+            AssetManager.loadScript(src).then(addLoaded, addLoaded);
         }else{
             AssetManager.loadText(src).then(addLoaded, addLoaded);
         }
