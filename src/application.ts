@@ -20,6 +20,9 @@ import inputEventAdapter = require("./input-event-adapter");
 import {InteractionRequest} from "./interaction-request/interaction-request";
 import {InteractionService} from "./interaction-request/interaction-service";
 
+declare var sysThemeJson : any;
+declare var appThemeJson : any;
+
 /**
  * @class Application 
  * @extends IApplication
@@ -122,31 +125,16 @@ export class Application extends Emitter implements IApplication {
 	public init(args:any) {
 		this.initOptions(args);
 		var themeManager = new ThemeManager();
-		var sysThemeDataURL = this._options.sysThemeDataURL;
-		var appThemeDataURL = this._options.appThemeDataURL;
 		InteractionRequest.init(InteractionService.init());
 
-		if(sysThemeDataURL) {
-			AssetManager.loadJson(sysThemeDataURL).then(json => {
-				var baseURL = path.dirname(sysThemeDataURL);
-				themeManager.load(json, baseURL);
-				
-				return appThemeDataURL;
-			}).then(url => {
-				if(url) {
-					AssetManager.loadJson(url).then(json => {
-						var baseURL = path.dirname(url);
-						themeManager.load(json, baseURL);
-						this.dispatchEventAsync({type:Events.READY});
-						this.onReady(this);
-					});
-				}else{
-					this.dispatchEventAsync({type:Events.READY});
-					this.onReady(this);
-				}
-			});
+		var sysThemePath = path.dirname(this._options.sysThemeDataURL);
+		var appThemePath = path.dirname(this._options.appThemeDataURL);
+		if(sysThemeJson) {
+			themeManager.load(sysThemeJson, sysThemePath);
 		}
-
+		if(appThemeJson) {
+			themeManager.load(appThemeJson, appThemePath);
+		}
 		this._themeManager = themeManager;
 		this._viewPort = ViewPort.create(0, 0, 0);
 		this._mainLoop = MainLoop.create();
@@ -172,6 +160,9 @@ export class Application extends Emitter implements IApplication {
 		}else{
 			this._windwManager = WindowManagerDesktop.create({app:this, x:0, y:0, w:vp.w, h:vp.h});
 		}
+
+		this.dispatchEventAsync({type:Events.READY});
+		this.onReady(this);
 
 		return this;
 	}

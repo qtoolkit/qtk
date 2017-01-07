@@ -1903,6 +1903,8 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	//force to use polyfill
+	window.fetch = null;
 	__webpack_require__(8);
 	var path = __webpack_require__(9);
 	var emitter_1 = __webpack_require__(4);
@@ -2334,6 +2336,28 @@ var qtk =
 	    arrayBuffer: 'ArrayBuffer' in self
 	  }
 
+	  if (support.arrayBuffer) {
+	    var viewClasses = [
+	      '[object Int8Array]',
+	      '[object Uint8Array]',
+	      '[object Uint8ClampedArray]',
+	      '[object Int16Array]',
+	      '[object Uint16Array]',
+	      '[object Int32Array]',
+	      '[object Uint32Array]',
+	      '[object Float32Array]',
+	      '[object Float64Array]'
+	    ]
+
+	    var isDataView = function(obj) {
+	      return obj && DataView.prototype.isPrototypeOf(obj)
+	    }
+
+	    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+	      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+	    }
+	  }
+
 	  function normalizeName(name) {
 	    if (typeof name !== 'string') {
 	      name = String(name)
@@ -2466,14 +2490,36 @@ var qtk =
 
 	  function readBlobAsArrayBuffer(blob) {
 	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
 	    reader.readAsArrayBuffer(blob)
-	    return fileReaderReady(reader)
+	    return promise
 	  }
 
 	  function readBlobAsText(blob) {
 	    var reader = new FileReader()
+	    var promise = fileReaderReady(reader)
 	    reader.readAsText(blob)
-	    return fileReaderReady(reader)
+	    return promise
+	  }
+
+	  function readArrayBufferAsText(buf) {
+	    var view = new Uint8Array(buf)
+	    var chars = new Array(view.length)
+
+	    for (var i = 0; i < view.length; i++) {
+	      chars[i] = String.fromCharCode(view[i])
+	    }
+	    return chars.join('')
+	  }
+
+	  function bufferClone(buf) {
+	    if (buf.slice) {
+	      return buf.slice(0)
+	    } else {
+	      var view = new Uint8Array(buf.byteLength)
+	      view.set(new Uint8Array(buf))
+	      return view.buffer
+	    }
 	  }
 
 	  function Body() {
@@ -2481,7 +2527,9 @@ var qtk =
 
 	    this._initBody = function(body) {
 	      this._bodyInit = body
-	      if (typeof body === 'string') {
+	      if (!body) {
+	        this._bodyText = ''
+	      } else if (typeof body === 'string') {
 	        this._bodyText = body
 	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
 	        this._bodyBlob = body
@@ -2489,11 +2537,12 @@ var qtk =
 	        this._bodyFormData = body
 	      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
 	        this._bodyText = body.toString()
-	      } else if (!body) {
-	        this._bodyText = ''
-	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
-	        // Only support ArrayBuffers for POST method.
-	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+	        this._bodyArrayBuffer = bufferClone(body.buffer)
+	        // IE 10-11 can't handle a DataView body.
+	        this._bodyInit = new Blob([this._bodyArrayBuffer])
+	      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+	        this._bodyArrayBuffer = bufferClone(body)
 	      } else {
 	        throw new Error('unsupported BodyInit type')
 	      }
@@ -2518,6 +2567,8 @@ var qtk =
 
 	        if (this._bodyBlob) {
 	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyArrayBuffer) {
+	          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
 	        } else if (this._bodyFormData) {
 	          throw new Error('could not read FormData body as blob')
 	        } else {
@@ -2526,27 +2577,28 @@ var qtk =
 	      }
 
 	      this.arrayBuffer = function() {
-	        return this.blob().then(readBlobAsArrayBuffer)
-	      }
-
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        if (rejected) {
-	          return rejected
-	        }
-
-	        if (this._bodyBlob) {
-	          return readBlobAsText(this._bodyBlob)
-	        } else if (this._bodyFormData) {
-	          throw new Error('could not read FormData body as text')
+	        if (this._bodyArrayBuffer) {
+	          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
 	        } else {
-	          return Promise.resolve(this._bodyText)
+	          return this.blob().then(readBlobAsArrayBuffer)
 	        }
 	      }
-	    } else {
-	      this.text = function() {
-	        var rejected = consumed(this)
-	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	    }
+
+	    this.text = function() {
+	      var rejected = consumed(this)
+	      if (rejected) {
+	        return rejected
+	      }
+
+	      if (this._bodyBlob) {
+	        return readBlobAsText(this._bodyBlob)
+	      } else if (this._bodyArrayBuffer) {
+	        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+	      } else if (this._bodyFormData) {
+	        throw new Error('could not read FormData body as text')
+	      } else {
+	        return Promise.resolve(this._bodyText)
 	      }
 	    }
 
@@ -2574,7 +2626,10 @@ var qtk =
 	  function Request(input, options) {
 	    options = options || {}
 	    var body = options.body
-	    if (Request.prototype.isPrototypeOf(input)) {
+
+	    if (typeof input === 'string') {
+	      this.url = input
+	    } else {
 	      if (input.bodyUsed) {
 	        throw new TypeError('Already read')
 	      }
@@ -2585,12 +2640,10 @@ var qtk =
 	      }
 	      this.method = input.method
 	      this.mode = input.mode
-	      if (!body) {
+	      if (!body && input._bodyInit != null) {
 	        body = input._bodyInit
 	        input.bodyUsed = true
 	      }
-	    } else {
-	      this.url = input
 	    }
 
 	    this.credentials = options.credentials || this.credentials || 'omit'
@@ -2608,7 +2661,7 @@ var qtk =
 	  }
 
 	  Request.prototype.clone = function() {
-	    return new Request(this)
+	    return new Request(this, { body: this._bodyInit })
 	  }
 
 	  function decode(body) {
@@ -2624,16 +2677,17 @@ var qtk =
 	    return form
 	  }
 
-	  function headers(xhr) {
-	    var head = new Headers()
-	    var pairs = (xhr.getAllResponseHeaders() || '').trim().split('\n')
-	    pairs.forEach(function(header) {
-	      var split = header.trim().split(':')
-	      var key = split.shift().trim()
-	      var value = split.join(':').trim()
-	      head.append(key, value)
+	  function parseHeaders(rawHeaders) {
+	    var headers = new Headers()
+	    rawHeaders.split('\r\n').forEach(function(line) {
+	      var parts = line.split(':')
+	      var key = parts.shift().trim()
+	      if (key) {
+	        var value = parts.join(':').trim()
+	        headers.append(key, value)
+	      }
 	    })
-	    return head
+	    return headers
 	  }
 
 	  Body.call(Request.prototype)
@@ -2644,10 +2698,10 @@ var qtk =
 	    }
 
 	    this.type = 'default'
-	    this.status = options.status
+	    this.status = 'status' in options ? options.status : 200
 	    this.ok = this.status >= 200 && this.status < 300
-	    this.statusText = options.statusText
-	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.statusText = 'statusText' in options ? options.statusText : 'OK'
+	    this.headers = new Headers(options.headers)
 	    this.url = options.url || ''
 	    this._initBody(bodyInit)
 	  }
@@ -2685,35 +2739,16 @@ var qtk =
 
 	  self.fetch = function(input, init) {
 	    return new Promise(function(resolve, reject) {
-	      var request
-	      if (Request.prototype.isPrototypeOf(input) && !init) {
-	        request = input
-	      } else {
-	        request = new Request(input, init)
-	      }
-
+	      var request = new Request(input, init)
 	      var xhr = new XMLHttpRequest()
-
-	      function responseURL() {
-	        if ('responseURL' in xhr) {
-	          return xhr.responseURL
-	        }
-
-	        // Avoid security warnings on getResponseHeader when not allowed by CORS
-	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-	          return xhr.getResponseHeader('X-Request-URL')
-	        }
-
-	        return
-	      }
 
 	      xhr.onload = function() {
 	        var options = {
 	          status: xhr.status,
 	          statusText: xhr.statusText,
-	          headers: headers(xhr),
-	          url: responseURL()
+	          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
 	        }
+	        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
 	        var body = 'response' in xhr ? xhr.response : xhr.responseText
 	        resolve(new Response(body, options))
 	      }
@@ -3212,10 +3247,15 @@ var qtk =
 	     */
 	    AssetType[AssetType["JSON"] = 4] = "JSON";
 	    /**
+	     * @property {number} [SCRIPT]
+	     * SCRIPT资源。
+	     */
+	    AssetType[AssetType["SCRIPT"] = 5] = "SCRIPT";
+	    /**
 	     * @property {number} [TEXT]
 	     * 文本资源。
 	     */
-	    AssetType[AssetType["TEXT"] = 5] = "TEXT";
+	    AssetType[AssetType["TEXT"] = 6] = "TEXT";
 	})(exports.AssetType || (exports.AssetType = {}));
 	var AssetType = exports.AssetType;
 	;
@@ -3356,6 +3396,9 @@ var qtk =
 	            else if (name === ".txt") {
 	                type = AssetType.TEXT;
 	            }
+	            else if (name === ".js") {
+	                type = AssetType.SCRIPT;
+	            }
 	            else {
 	                type = AssetType.BLOB;
 	            }
@@ -3419,6 +3462,9 @@ var qtk =
 	        }
 	        else if (type === AssetType.BLOB) {
 	            AssetManager.loadBlob(src).then(addLoaded, addLoaded);
+	        }
+	        else if (type === AssetType.SCRIPT) {
+	            AssetManager.loadScript(src).then(addLoaded, addLoaded);
 	        }
 	        else {
 	            AssetManager.loadText(src).then(addLoaded, addLoaded);
@@ -24560,28 +24606,14 @@ var qtk =
 	        var _this = this;
 	        this.initOptions(args);
 	        var themeManager = new theme_manager_1.ThemeManager();
-	        var sysThemeDataURL = this._options.sysThemeDataURL;
-	        var appThemeDataURL = this._options.appThemeDataURL;
 	        interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
-	        if (sysThemeDataURL) {
-	            assets_1.AssetManager.loadJson(sysThemeDataURL).then(function (json) {
-	                var baseURL = path.dirname(sysThemeDataURL);
-	                themeManager.load(json, baseURL);
-	                return appThemeDataURL;
-	            }).then(function (url) {
-	                if (url) {
-	                    assets_1.AssetManager.loadJson(url).then(function (json) {
-	                        var baseURL = path.dirname(url);
-	                        themeManager.load(json, baseURL);
-	                        _this.dispatchEventAsync({ type: Events.READY });
-	                        _this.onReady(_this);
-	                    });
-	                }
-	                else {
-	                    _this.dispatchEventAsync({ type: Events.READY });
-	                    _this.onReady(_this);
-	                }
-	            });
+	        var sysThemePath = path.dirname(this._options.sysThemeDataURL);
+	        var appThemePath = path.dirname(this._options.appThemeDataURL);
+	        if (sysThemeJson) {
+	            themeManager.load(sysThemeJson, sysThemePath);
+	        }
+	        if (appThemeJson) {
+	            themeManager.load(appThemeJson, appThemePath);
 	        }
 	        this._themeManager = themeManager;
 	        this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
@@ -24605,6 +24637,8 @@ var qtk =
 	        else {
 	            this._windwManager = window_manager_desktop_1.WindowManagerDesktop.create({ app: this, x: 0, y: 0, w: vp.w, h: vp.h });
 	        }
+	        this.dispatchEventAsync({ type: Events.READY });
+	        this.onReady(this);
 	        return this;
 	    };
 	    /**

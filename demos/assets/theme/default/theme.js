@@ -1,4 +1,4 @@
-{
+window.sysThemeJson = {
 	"widget" : {
 		"common" : {
 			"lineWidth" : 1,

@@ -36,10 +36,15 @@ export declare enum AssetType {
      */
     JSON = 4,
     /**
+     * @property {number} [SCRIPT]
+     * SCRIPT资源。
+     */
+    SCRIPT = 5,
+    /**
      * @property {number} [TEXT]
      * 文本资源。
      */
-    TEXT = 5,
+    TEXT = 6,
 }
 /**
  * @class AssetManager

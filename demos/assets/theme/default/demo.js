@@ -1,5 +1,5 @@
 
-{
+window.appThemeJson = {
 	"button-red" : {
 		"common" : {
 			"lineWidth" : 1,

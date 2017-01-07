@@ -62,10 +62,15 @@ function load(url, type) {
      */
     AssetType[AssetType["JSON"] = 4] = "JSON";
     /**
+     * @property {number} [SCRIPT]
+     * SCRIPT资源。
+     */
+    AssetType[AssetType["SCRIPT"] = 5] = "SCRIPT";
+    /**
      * @property {number} [TEXT]
      * 文本资源。
      */
-    AssetType[AssetType["TEXT"] = 5] = "TEXT";
+    AssetType[AssetType["TEXT"] = 6] = "TEXT";
 })(exports.AssetType || (exports.AssetType = {}));
 var AssetType = exports.AssetType;
 ;
@@ -206,6 +211,9 @@ var AssetItem = (function () {
             else if (name === ".txt") {
                 type = AssetType.TEXT;
             }
+            else if (name === ".js") {
+                type = AssetType.SCRIPT;
+            }
             else {
                 type = AssetType.BLOB;
             }
@@ -269,6 +277,9 @@ var AssetGroup = (function (_super) {
         }
         else if (type === AssetType.BLOB) {
             AssetManager.loadBlob(src).then(addLoaded, addLoaded);
+        }
+        else if (type === AssetType.SCRIPT) {
+            AssetManager.loadScript(src).then(addLoaded, addLoaded);
         }
         else {
             AssetManager.loadText(src).then(addLoaded, addLoaded);

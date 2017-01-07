@@ -118,28 +118,14 @@ var Application = (function (_super) {
         var _this = this;
         this.initOptions(args);
         var themeManager = new theme_manager_1.ThemeManager();
-        var sysThemeDataURL = this._options.sysThemeDataURL;
-        var appThemeDataURL = this._options.appThemeDataURL;
         interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
-        if (sysThemeDataURL) {
-            assets_1.AssetManager.loadJson(sysThemeDataURL).then(function (json) {
-                var baseURL = path.dirname(sysThemeDataURL);
-                themeManager.load(json, baseURL);
-                return appThemeDataURL;
-            }).then(function (url) {
-                if (url) {
-                    assets_1.AssetManager.loadJson(url).then(function (json) {
-                        var baseURL = path.dirname(url);
-                        themeManager.load(json, baseURL);
-                        _this.dispatchEventAsync({ type: Events.READY });
-                        _this.onReady(_this);
-                    });
-                }
-                else {
-                    _this.dispatchEventAsync({ type: Events.READY });
-                    _this.onReady(_this);
-                }
-            });
+        var sysThemePath = path.dirname(this._options.sysThemeDataURL);
+        var appThemePath = path.dirname(this._options.appThemeDataURL);
+        if (sysThemeJson) {
+            themeManager.load(sysThemeJson, sysThemePath);
+        }
+        if (appThemeJson) {
+            themeManager.load(appThemeJson, appThemePath);
         }
         this._themeManager = themeManager;
         this._viewPort = view_port_1.ViewPort.create(0, 0, 0);
@@ -163,6 +149,8 @@ var Application = (function (_super) {
         else {
             this._windwManager = window_manager_desktop_1.WindowManagerDesktop.create({ app: this, x: 0, y: 0, w: vp.w, h: vp.h });
         }
+        this.dispatchEventAsync({ type: Events.READY });
+        this.onReady(this);
         return this;
     };
     /**
