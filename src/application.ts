@@ -20,9 +20,12 @@ import inputEventAdapter = require("./input-event-adapter");
 import {InteractionRequest} from "./interaction-request/interaction-request";
 import {InteractionService} from "./interaction-request/interaction-service";
 
-declare var sysThemeJson : any;
-declare var appThemeJson : any;
-
+declare global {
+	interface Window {
+		sysThemeJson : any;
+		appThemeJson : any;
+	}
+}
 /**
  * @class Application 
  * @extends IApplication
@@ -127,8 +130,12 @@ export class Application extends Emitter implements IApplication {
 		var themeManager = new ThemeManager();
 		InteractionRequest.init(InteractionService.init());
 
+		var sysThemeJson = window.sysThemeJson;
+		var appThemeJson = window.appThemeJson;
+
 		var sysThemePath = path.dirname(this._options.sysThemeDataURL);
 		var appThemePath = path.dirname(this._options.appThemeDataURL);
+
 		if(sysThemeJson) {
 			themeManager.load(sysThemeJson, sysThemePath);
 		}

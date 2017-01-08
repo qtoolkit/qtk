@@ -119,6 +119,8 @@ var Application = (function (_super) {
         this.initOptions(args);
         var themeManager = new theme_manager_1.ThemeManager();
         interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
+        var sysThemeJson = window.sysThemeJson;
+        var appThemeJson = window.appThemeJson;
         var sysThemePath = path.dirname(this._options.sysThemeDataURL);
         var appThemePath = path.dirname(this._options.appThemeDataURL);
         if (sysThemeJson) {

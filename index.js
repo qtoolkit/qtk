@@ -1903,8 +1903,6 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	//force to use polyfill
-	window.fetch = null;
 	__webpack_require__(8);
 	var path = __webpack_require__(9);
 	var emitter_1 = __webpack_require__(4);
@@ -24607,6 +24605,8 @@ var qtk =
 	        this.initOptions(args);
 	        var themeManager = new theme_manager_1.ThemeManager();
 	        interaction_request_1.InteractionRequest.init(interaction_service_1.InteractionService.init());
+	        var sysThemeJson = window.sysThemeJson;
+	        var appThemeJson = window.appThemeJson;
 	        var sysThemePath = path.dirname(this._options.sysThemeDataURL);
 	        var appThemePath = path.dirname(this._options.appThemeDataURL);
 	        if (sysThemeJson) {

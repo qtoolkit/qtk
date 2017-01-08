@@ -4,6 +4,12 @@ import { IMainLoop } from "./imain-loop";
 import { IApplication } from "./iapplication";
 import { IThemeManager } from "./itheme-manager";
 import { IWindowManager } from "./controls/iwindow-manager";
+declare global  {
+    interface Window {
+        sysThemeJson: any;
+        appThemeJson: any;
+    }
+}
 /**
  * @class Application
  * @extends IApplication
