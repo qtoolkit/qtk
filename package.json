@@ -9,7 +9,7 @@
     "clean": "rm -rf docs index.js coverage/ src/*.js",
     "test": "tsc && webpack && ./node_modules/karma/bin/karma start",
     "build": "tsc  && webpack",
-    "docs": "jsduck js/controls/widget.js --output docs"
+    "docs": "jsduck js/interaction-request --output docs"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,8 @@
+
+/**
+ * @class ConfirmationInfo
+ * InteractionRequest.confirm的参数。
+ */
 export class ConfirmationInfo {
 	public w : number;
 	public content : string;
@@ -9,7 +14,17 @@ export class ConfirmationInfo {
 		this.confirmed = false;
 	}
 
-	public static create(content:string, w?:number) {
+	/**
+	 * @method create
+	 * @static
+	 * 创建ConfirmationInfo对象。
+	 *
+     * @param {string} content 要显示的文本信息。
+     * @param {number} w 宽度（单位为像素）。
+     *
+     * @return {ConfirmationInfo}
+	 */
+	public static create(content:string, w?:number) : ConfirmationInfo{
 		return new ConfirmationInfo(content, w);
 	}
 };
