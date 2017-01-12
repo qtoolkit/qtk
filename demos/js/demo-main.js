@@ -1,3 +1,7 @@
+var zhStrTable = {
+	"Edit":"编辑器",
+	"Menu":"菜单"
+};
 
 function onReady(app) {
 	var Events = qtk.Events;
@@ -5,6 +9,7 @@ function onReady(app) {
 	var ListView = qtk.ListView;
 	var WindowNormal = qtk.WindowNormal;
 
+	qtk.StringTable.add(zhStrTable);
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.w, h:vp.h, childrenLayouter:"simple"});
 	

@@ -11,6 +11,7 @@ export {KeyEvent} from "./key-event";
 export {ViewPort} from "./view-port";
 export {Pages} from "./controls/pages";
 export {MainLoop} from "./main-loop";
+export {StringTable} from "./string-table";
 export {Image} from "./controls/image";
 export {Group} from "./controls/group";
 export {Dialog} from "./controls/dialog";

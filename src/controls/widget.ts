@@ -11,6 +11,7 @@ import {Emitter} from "../emitter";
 import {stableSort} from "../utils";
 import Events = require("../events");
 import {IMainLoop} from "../imain-loop";
+import {StringTable} from "../string-table";
 import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
@@ -886,7 +887,7 @@ export class Widget extends Emitter {
 	 * 获取本地化后的文本。
 	 */
 	public getLocaleText() : string {
-		return this.text;
+		return StringTable.tr(this.text);
 	}
 
 	protected getFgImageRect(style:Style) : Rect {

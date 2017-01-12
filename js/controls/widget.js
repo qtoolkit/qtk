@@ -13,6 +13,7 @@ var TWEEN = require("tween.js");
 var emitter_1 = require("../emitter");
 var utils_1 = require("../utils");
 var Events = require("../events");
+var string_table_1 = require("../string-table");
 var matrix_stack_1 = require("../matrix-stack");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
@@ -809,7 +810,7 @@ var Widget = (function (_super) {
      * 获取本地化后的文本。
      */
     Widget.prototype.getLocaleText = function () {
-        return this.text;
+        return string_table_1.StringTable.tr(this.text);
     };
     Widget.prototype.getFgImageRect = function (style) {
         return rect_1.Rect.rect.init(this.leftPadding, this.topPadding, this.clientW, this.clientH);
