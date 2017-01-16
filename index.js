@@ -6921,7 +6921,11 @@ var qtk =
 	                    }
 	                    commandSource.eventHandler = function (evt) {
 	                        var args = commandSource.commandArgs || evt;
-	                        viewModel.execCommand(commandSource.command, args);
+	                        var command = commandSource.command;
+	                        if (typeof command == "object" && command.path) {
+	                            command = viewModel.getProp(command.path);
+	                        }
+	                        viewModel.execCommand(command, args);
 	                    };
 	                    _this.on(type, commandSource.eventHandler);
 	                }

@@ -2290,10 +2290,17 @@ export class Widget extends Emitter {
 					if(commandSource.eventHandler) {
 						this.off(type, commandSource.eventHandler);
 					}
+
 					commandSource.eventHandler = function(evt:any) {
 						var args = commandSource.commandArgs || evt;
-						viewModel.execCommand(commandSource.command, args);
+						var command = <any>commandSource.command;
+
+						if(typeof command == "object" && command.path) {
+							command = viewModel.getProp(command.path); 		
+						}
+						viewModel.execCommand(command, args);
 					}
+
 					this.on(type, commandSource.eventHandler);
 				}else{
 					console.log(prop+" is not supported yet.");
