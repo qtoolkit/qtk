@@ -2026,7 +2026,7 @@ export class Widget extends Emitter {
 		}
 
 		if(json._dataBindingRule) {
-			this._dataBindingRule = json._dataBindingRule;
+			this._dataBindingRule = BindingRule.createFromJson(json._dataBindingRule);
 		}
 
 		this.onFromJson(json);
@@ -2091,7 +2091,7 @@ export class Widget extends Emitter {
 		}
 
 		if(this._dataBindingRule) {
-			json._dataBindingRule = this._dataBindingRule;
+			json._dataBindingRule = this._dataBindingRule.toJson();
 		}
 
 		this.onToJson(json);
@@ -2287,18 +2287,18 @@ export class Widget extends Emitter {
 				var commandSource = <BindingCommandSource>source;
 				var type = Events.mapToEvent(prop);
 				if(type) {
+					var command = <any>commandSource.command;
+					if(typeof command == "object" && command.path) {
+						commandSource.command = viewModel.getProp(command.path); 		
+					}
+
 					if(commandSource.eventHandler) {
 						this.off(type, commandSource.eventHandler);
 					}
 
 					commandSource.eventHandler = function(evt:any) {
 						var args = commandSource.commandArgs || evt;
-						var command = <any>commandSource.command;
-
-						if(typeof command == "object" && command.path) {
-							command = viewModel.getProp(command.path); 		
-						}
-						viewModel.execCommand(command, args);
+						viewModel.execCommand(commandSource.command, args);
 					}
 
 					this.on(type, commandSource.eventHandler);

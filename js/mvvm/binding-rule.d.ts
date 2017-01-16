@@ -88,11 +88,13 @@ export declare class BindingRuleItem {
  */
 export declare class BindingRule {
     protected _items: any;
+    constructor();
     getSource(prop: string): BindingRuleItem;
     forEach(func: (prop: string, item: BindingRuleItem) => void): void;
-    constructor(json: any);
+    fromData(json: any): BindingRule;
     fromJson(json: any): BindingRule;
     toJson(): any;
     static parse(rule: any): any;
-    static create(rule: any): BindingRule;
+    static create(data: any): BindingRule;
+    static createFromJson(json: any): BindingRule;
 }

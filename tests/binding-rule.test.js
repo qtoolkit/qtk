@@ -28,4 +28,13 @@ describe('BindingRule', function() {
 		var result = item.prop === "click" && item.source.command === "dummy" 
         done(result ? null : new Error("test command"));
 	});
+    
+    it('json', function(done) {
+    	var rule = qtk.BindingRule.create({click: {command:"dummy"}});
+    	var ruleClone = qtk.BindingRule.createFromJson(rule.toJson());
+    	var item = ruleClone.getSource("click");
+
+		var result = item.prop === "click" && item.source.command === "dummy" 
+        done(result ? null : new Error("test command"));
+	});
 })

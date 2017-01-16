@@ -1891,7 +1891,7 @@ var Widget = (function (_super) {
             });
         }
         if (json._dataBindingRule) {
-            this._dataBindingRule = json._dataBindingRule;
+            this._dataBindingRule = binding_rule_1.BindingRule.createFromJson(json._dataBindingRule);
         }
         this.onFromJson(json);
         return this;
@@ -1944,7 +1944,7 @@ var Widget = (function (_super) {
             });
         }
         if (this._dataBindingRule) {
-            json._dataBindingRule = this._dataBindingRule;
+            json._dataBindingRule = this._dataBindingRule.toJson();
         }
         this.onToJson(json);
         return json;
@@ -2111,16 +2111,16 @@ var Widget = (function (_super) {
                 var commandSource = source;
                 var type = Events.mapToEvent(prop);
                 if (type) {
+                    var command = commandSource.command;
+                    if (typeof command == "object" && command.path) {
+                        commandSource.command = viewModel.getProp(command.path);
+                    }
                     if (commandSource.eventHandler) {
                         _this.off(type, commandSource.eventHandler);
                     }
                     commandSource.eventHandler = function (evt) {
                         var args = commandSource.commandArgs || evt;
-                        var command = commandSource.command;
-                        if (typeof command == "object" && command.path) {
-                            command = viewModel.getProp(command.path);
-                        }
-                        viewModel.execCommand(command, args);
+                        viewModel.execCommand(commandSource.command, args);
                     };
                     _this.on(type, commandSource.eventHandler);
                 }

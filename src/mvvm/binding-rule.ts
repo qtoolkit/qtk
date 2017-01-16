@@ -152,6 +152,9 @@ export class BindingRuleItem {
 export class BindingRule {
 	protected _items : any;
 
+	constructor() {
+	}
+
 	public getSource(prop:string) : BindingRuleItem {
 		return this._items[prop];
 	}
@@ -164,11 +167,7 @@ export class BindingRule {
 		}
 	}
 
-	constructor(json:any) {
-		this.fromJson(json);
-	}
-
-	public fromJson (json:any) : BindingRule {
+	public fromData(json:any) : BindingRule {
 		this._items = {};
 		for(var prop in json) {
 			var source = null;
@@ -180,6 +179,26 @@ export class BindingRule {
 				source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, 
 												  sJson.validationRule, sJson.converter); 
 			}
+			this._items[prop] = BindingRuleItem.create(prop, source);
+		}
+
+		return this;
+	}
+	
+	public fromJson(json:any) : BindingRule {
+		this._items = {};
+		for(var prop in json) {
+			var source = null;
+			var propJson = json[prop];
+			var sourceJson = propJson.source;
+			
+			if(sourceJson.command) {
+				source = BindingCommandSource.create(sourceJson.command, sourceJson.commandArgs) 
+			}else{
+				source = BindingDataSource.create(sourceJson.path, sourceJson.value, sourceJson.mode, 
+								sourceJson.updateTiming, sourceJson.validationRule, sourceJson.converter); 
+			}
+
 			this._items[prop] = BindingRuleItem.create(prop, source);
 		}
 
@@ -229,10 +248,16 @@ export class BindingRule {
 		return rule;
 	}
 
-	public static create(rule:any) : BindingRule {
-		var json = BindingRule.parse(rule);
-
-		return new BindingRule(json);
+	public static create(data:any) : BindingRule {
+		var rule = new BindingRule();
+		
+		return rule.fromData(BindingRule.parse(data));
+	}
+	
+	public static createFromJson(json:any) : BindingRule {
+		var rule = new BindingRule();
+		
+		return rule.fromJson(json);
 	}
 }
 

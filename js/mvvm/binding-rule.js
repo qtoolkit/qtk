@@ -87,8 +87,7 @@ exports.BindingRuleItem = BindingRuleItem;
  * 数据绑定规则。
  */
 var BindingRule = (function () {
-    function BindingRule(json) {
-        this.fromJson(json);
+    function BindingRule() {
     }
     BindingRule.prototype.getSource = function (prop) {
         return this._items[prop];
@@ -100,7 +99,7 @@ var BindingRule = (function () {
             func(prop, item);
         }
     };
-    BindingRule.prototype.fromJson = function (json) {
+    BindingRule.prototype.fromData = function (json) {
         this._items = {};
         for (var prop in json) {
             var source = null;
@@ -110,6 +109,22 @@ var BindingRule = (function () {
             }
             else {
                 source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, sJson.validationRule, sJson.converter);
+            }
+            this._items[prop] = BindingRuleItem.create(prop, source);
+        }
+        return this;
+    };
+    BindingRule.prototype.fromJson = function (json) {
+        this._items = {};
+        for (var prop in json) {
+            var source = null;
+            var propJson = json[prop];
+            var sourceJson = propJson.source;
+            if (sourceJson.command) {
+                source = BindingCommandSource.create(sourceJson.command, sourceJson.commandArgs);
+            }
+            else {
+                source = BindingDataSource.create(sourceJson.path, sourceJson.value, sourceJson.mode, sourceJson.updateTiming, sourceJson.validationRule, sourceJson.converter);
             }
             this._items[prop] = BindingRuleItem.create(prop, source);
         }
@@ -149,9 +164,13 @@ var BindingRule = (function () {
         }
         return rule;
     };
-    BindingRule.create = function (rule) {
-        var json = BindingRule.parse(rule);
-        return new BindingRule(json);
+    BindingRule.create = function (data) {
+        var rule = new BindingRule();
+        return rule.fromData(BindingRule.parse(data));
+    };
+    BindingRule.createFromJson = function (json) {
+        var rule = new BindingRule();
+        return rule.fromJson(json);
     };
     return BindingRule;
 }());
