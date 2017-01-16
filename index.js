@@ -6920,6 +6920,10 @@ var qtk =
 	                    if (typeof command == "object" && command.path) {
 	                        commandSource.command = viewModel.getProp(command.path);
 	                    }
+	                    var commandArgs = commandSource.commandArgs;
+	                    if (typeof commandArgs == "object" && commandArgs.path) {
+	                        commandSource.commandArgs = viewModel.getProp(commandArgs.path);
+	                    }
 	                    if (commandSource.eventHandler) {
 	                        _this.off(type, commandSource.eventHandler);
 	                    }
@@ -57474,11 +57478,8 @@ var qtk =
 	            return _super.prototype.execCommand.call(this, name, args);
 	        }
 	        else {
-	            if (args) {
-	                args.$index = this.index;
-	            }
-	            else {
-	                args = { $index: this.index };
+	            if (args == undefined) {
+	                args = this.index;
 	            }
 	            return this.collectionViewModel.execCommand(name, args);
 	        }

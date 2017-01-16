@@ -331,11 +331,8 @@ var ItemViewModel = (function (_super) {
             return _super.prototype.execCommand.call(this, name, args);
         }
         else {
-            if (args) {
-                args.$index = this.index;
-            }
-            else {
-                args = { $index: this.index };
+            if (args == undefined) {
+                args = this.index;
             }
             return this.collectionViewModel.execCommand(name, args);
         }

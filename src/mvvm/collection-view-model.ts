@@ -344,12 +344,9 @@ export class ItemViewModel extends ViewModelDefault implements IViewModel {
 		if(cmd) {
 			return super.execCommand(name, args);
 		}else{
-			if(args) {
-				args.$index = this.index;
-			}else {
-				args = {$index:this.index};
+			if(args == undefined) {
+				args = this.index;
 			}
-
 			return this.collectionViewModel.execCommand(name, args);
 		}
 	}

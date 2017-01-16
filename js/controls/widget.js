@@ -2115,6 +2115,10 @@ var Widget = (function (_super) {
                     if (typeof command == "object" && command.path) {
                         commandSource.command = viewModel.getProp(command.path);
                     }
+                    var commandArgs = commandSource.commandArgs;
+                    if (typeof commandArgs == "object" && commandArgs.path) {
+                        commandSource.commandArgs = viewModel.getProp(commandArgs.path);
+                    }
                     if (commandSource.eventHandler) {
                         _this.off(type, commandSource.eventHandler);
                     }
