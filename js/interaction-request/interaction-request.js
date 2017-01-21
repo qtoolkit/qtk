@@ -44,7 +44,10 @@ var InteractionRequest = (function () {
      * 显示一段文本提示，在指定的时间后自动关闭。
      * @static
      * @param {ToastInfo} info 参数信息。
-     * @return void
+     *
+     *     @example
+     *     InteractionRequest.toast(ToastInfo.create("hello qtk", 500, 128));
+     *
      */
     InteractionRequest.toast = function (info) {
         InteractionRequest.instance.toast(info);
@@ -54,7 +57,9 @@ var InteractionRequest = (function () {
      * 显示一段文本提示，在用户点击『关闭』按钮之后才关闭。
      * @static
      * @param {NotificationInfo} info 参数信息。
-     * @return void
+     *
+     *     @example
+     *     InteractionRequest.notify(NotificationInfo.create("Hello QToolKit", 200));
      */
     InteractionRequest.notify = function (info) {
         InteractionRequest.instance.notify(info);
@@ -65,7 +70,13 @@ var InteractionRequest = (function () {
      * @static
      * @param {Function} callback 关闭确认对话框时的回调函数，可以通过ConfirmationInfo的confirmed成员区分用户选择了『是』或『取消』。
      * @param {ConfirmationInfo} info 参数信息。
-     * @return void
+     *
+     *     @example
+     *     InteractionRequest.confirm(ConfirmationInfo.create("Are you sure to quit?", 200),
+     *         function(info) {
+     *         	console.dir(info);
+     *     });
+     *
      */
     InteractionRequest.confirm = function (info, callback) {
         InteractionRequest.instance.confirm(info, callback);
@@ -76,7 +87,17 @@ var InteractionRequest = (function () {
      * @static
      * @param {Function} callback 用户选择『确定』时的回调函数，可以通过InputInfo的value成员获取用户的输入。
      * @param {InputInfo} info 参数信息。
-     * @return void
+     *
+     *      @example
+     *		var value = "Jim";
+     *		var inputType = "text";
+     *		var inputTips = "Name";
+     *      var title = "Please input your name:"
+     *
+     *		InteractionRequest.input(InputInfo.create(title, value, inputTips, inputType, 300),
+     *			function(info) {
+     * 			console.dir(info);
+     *		});
      */
     InteractionRequest.input = function (info, callback) {
         InteractionRequest.instance.input(info, callback);
@@ -87,7 +108,27 @@ var InteractionRequest = (function () {
      * @static
      * @param {Function} callback 用户选择『确定』时的回调函数，可以通过InputInfo的value获取用户的输入。
      * @param {ChoiceInfo} info 参数信息。
-     * @return void
+     *
+     *      @example
+     *      var iconURL = multiple ? null : '/demos/assets/icons/@density/favor.normal.png';
+     *      var data = [
+     *              {text:"Red", iconURL:iconURL},
+     *              {text:"Green", iconURL:iconURL},
+     *              {text:"Blue", iconURL:iconURL},
+     *              {text:"Yellow", iconURL:iconURL},
+     *              {text:"Gold", iconURL:iconURL},
+     *              {text:"Orange", iconURL:iconURL},
+     *          ];
+     *
+     *       var choiceInfo = ChoiceInfo.create("Please Choose", multiple, 300, 240);
+     *       data.forEach(function(item) {
+     *          choiceInfo.addOption(item.text, item.iconURL);
+     *       });
+     *
+     *       InteractionRequest.choice(choiceInfo, function(ret) {
+     *           console.dir(ret);
+     *       });
+     *
      */
     InteractionRequest.choice = function (info, callback) {
         InteractionRequest.instance.choice(info, callback);
@@ -98,7 +139,35 @@ var InteractionRequest = (function () {
      * @static
      * @param {Function} callback 用户选择『确定』时的回调函数，可以通过ProgressInfo的data获取用户的输入。
      * @param {PropsInfo} info 参数信息。
-     * @return void
+     *
+     *     @example
+     *     var data = {
+     *         name:"QTK",
+     *         age:100,
+     *         desc:"QToolKit",
+     *         point:{x:100, y:200},
+     *         point3d:{x:1, y:2, z:3},
+     *         range:{first:100, second:200},
+     *         color:"Red",
+     *         opacity:0.5
+     *     };
+     *
+     *     var json = [
+     *         {type:"number", name:"Age", desc:"age", path:"age"},
+     *         {type:"text", name:"Name", desc:"name", path:"name"},
+     *         {type:"text-readonly", name:"Desc", path:"desc"},
+     *         {type:"line", name:"Point"},
+     *         {type:"vector2", name:"Point", path:"point"},
+     *         {type:"vector3", name:"Point3D", path:"point3d"},
+     *         {type:"line", name:""},
+     *         {type:"range", name:"Range", path:"range"},
+     *         {type:"options", name:"Color", path:"color", options:["Green", "Red", "Blue"]},
+     *         {type:"slider", name:"Opacity", path:"opacity"},
+     *     ];
+     *     var propsDesc = PagePropsDesc.create("Property", json);
+     *     InteractionRequest.props(PropsInfo.create(propsDesc, data, true, 300), function(ret) {
+     *         console.dir(ret);
+     *   });
      */
     InteractionRequest.props = function (info, callback) {
         InteractionRequest.instance.props(info, callback);
@@ -109,7 +178,25 @@ var InteractionRequest = (function () {
      * @static
      * @param {Function} callback 关闭对话框时的回调函数。
      * @param {ProgressInfo} info 参数信息。
-     * @return void
+     *
+     *     @example
+     *     function download(onProgress) {
+     *			var progress = 0;
+     *			function updateProgress() {
+     *				progress += 0.1;
+     *				onProgress(progress);
+     *				if(progress < 1) {
+     *					setTimeout(updateProgress, 200);
+     *				}
+     *			}
+     *			updateProgress();
+     *		}
+     *
+     *		var info = ProgressInfo.create("Downloading...", download, 300);
+     *
+     *		InteractionRequest.progress(info, function(ret) {
+     *			console.dir(ret);
+     *		});
      */
     InteractionRequest.progress = function (info, callback) {
         InteractionRequest.instance.progress(info, callback);
@@ -120,8 +207,7 @@ var InteractionRequest = (function () {
      * @static
      * @param {string} name 关闭对话框时的回调函数。
      * @param {Function} callback View关闭时的回调函数。
-     * @param {any} 附加数据。
-     * @return void
+     * @param {any} 传递给目标View的参数信息。
      */
     InteractionRequest.request = function (name, callback, payload) {
         InteractionRequest.instance.request(name, callback, payload);

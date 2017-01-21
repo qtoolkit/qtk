@@ -11,6 +11,10 @@ var ChoiceOption = (function () {
 }());
 exports.ChoiceOption = ChoiceOption;
 ;
+/**
+ * @class ChoiceInfo
+ * InteractionRequest.choice 的参数。
+ */
 var ChoiceInfo = (function () {
     function ChoiceInfo(title, multiple, w, h) {
         this.w = w;
@@ -25,6 +29,18 @@ var ChoiceInfo = (function () {
     ChoiceInfo.prototype.addOption = function (text, iconURL) {
         this.options.push(ChoiceOption.create(text, iconURL));
     };
+    /**
+     * @method create
+     * @static
+     * 创建ChoiceInfo对象。
+     *
+     * @param {string} title 标题
+     * @param {boolean} multiple 是否多选。
+     * @param {number} w 宽度（单位为像素）。
+     * @param {number} h 高度（单位为像素）。
+     *
+     * @return {ToastInfo}
+     */
     ChoiceInfo.create = function (title, multiple, w, h) {
         return new ChoiceInfo(title, multiple, w, h);
     };
