@@ -651,6 +651,8 @@ export declare class Widget extends Emitter {
      */
     clone(): Widget;
     protected onToJson(json: any): void;
+    private behaviorsToJson();
+    private behaviorsFromJson(json);
     /**
      * @method toJson
      * 序列化当前的控件到JSON数据。

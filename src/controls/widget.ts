@@ -2025,8 +2025,11 @@ export class Widget extends Emitter {
 			});
 		}
 
-		if(json._dataBindingRule) {
-			this._dataBindingRule = BindingRule.createFromJson(json._dataBindingRule);
+		if(json.dataBindingRule) {
+			this._dataBindingRule = BindingRule.createFromJson(json.dataBindingRule);
+		}
+		if(json.behaviors) {
+			this.behaviorsFromJson(json.behaviors);
 		}
 
 		this.onFromJson(json);
@@ -2047,6 +2050,38 @@ export class Widget extends Emitter {
 	}
 
 	protected onToJson(json:any) {
+	}
+
+	private behaviorsToJson() {
+		var json = {};
+		var behaviors = this._behaviors;
+
+		if(behaviors) {	
+			for(var key in behaviors) {
+				var value = behaviors[key];
+				json[key] = value.toJson();
+			}
+		}
+		
+		return json;
+	}
+	
+	private behaviorsFromJson(json) {
+		var behaviors = this._behaviors;
+
+		if(behaviors) {	
+			for(var key in behaviors) {
+				var value = behaviors[key];
+				value.dispose();
+			}
+		}
+		if(json) {
+			for(var key in json) {
+				this.useBehavior(key, json.options);
+			}
+		}
+
+		return ;
 	}
 
 	/**
@@ -2091,7 +2126,11 @@ export class Widget extends Emitter {
 		}
 
 		if(this._dataBindingRule) {
-			json._dataBindingRule = this._dataBindingRule.toJson();
+			json.dataBindingRule = this._dataBindingRule.toJson();
+		}
+
+		if(this._behaviors) {
+			json.behaviors = this.behaviorsToJson();
 		}
 
 		this.onToJson(json);
@@ -2129,12 +2168,9 @@ export class Widget extends Emitter {
 ////////////////////////////////////////////	
 	//绑定单个属性，子控件可以重载本函数去支持其它属性。
 	protected onBindProp(prop:string, value:any) {
-		if(prop === "text") {
-			this.text = value;
-		} else if(prop === "value") {
-			this.value = value;
-		}
+		this[prop] = value;
 	}
+
 	protected _dataBindingRule : BindingRule;
 	protected _viewModel : IViewModel;
 

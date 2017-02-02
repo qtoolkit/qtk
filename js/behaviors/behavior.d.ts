@@ -36,6 +36,8 @@ export declare class Behavior {
      * 析构函数。 主要是注销事件的处理函数。
      */
     protected dispose(): void;
+    private _json;
+    toJson(): any;
     /**
      * 子类重载此函数，可以处理Widget的按键按下事件。
      */

@@ -22,7 +22,7 @@ export class Behavior {
 	 * Behavior作用的Widget。
 	 */
 	public widget : Widget;
-	
+
 	/**
 	 * 构造函数。主要是注册一些事件，把这些事件映射在成员函数上，子类只需要重载这些成员函数即可。
 	 * @param type 类型名。
@@ -55,6 +55,7 @@ export class Behavior {
 		widget.on(Events.KEYUP, this.keyUpFunc);
 
 		this.init(options || {});
+		this._json = {type:type, options:options};
 	}
 
 	/**
@@ -84,6 +85,11 @@ export class Behavior {
 		widget.off(Events.KEYDOWN, this.keyDownFunc);
 		widget.off(Events.KEYUP, this.keyUpFunc);
 		this.widget = null;
+	}
+	
+	private _json : any;
+	public toJson() : any {
+		this._json;
 	}
 
 	/**

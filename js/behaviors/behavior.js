@@ -41,6 +41,7 @@ var Behavior = (function () {
         widget.on(Events.KEYDOWN, this.keyDownFunc);
         widget.on(Events.KEYUP, this.keyUpFunc);
         this.init(options || {});
+        this._json = { type: type, options: options };
     }
     /**
      * 初始化。在具体的Behavior的实现中，可以重载此函数做些初始化的工作。
@@ -67,6 +68,9 @@ var Behavior = (function () {
         widget.off(Events.KEYDOWN, this.keyDownFunc);
         widget.off(Events.KEYUP, this.keyUpFunc);
         this.widget = null;
+    };
+    Behavior.prototype.toJson = function () {
+        this._json;
     };
     /**
      * 子类重载此函数，可以处理Widget的按键按下事件。

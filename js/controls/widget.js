@@ -1890,8 +1890,11 @@ var Widget = (function (_super) {
                 _this._children.push(child);
             });
         }
-        if (json._dataBindingRule) {
-            this._dataBindingRule = binding_rule_1.BindingRule.createFromJson(json._dataBindingRule);
+        if (json.dataBindingRule) {
+            this._dataBindingRule = binding_rule_1.BindingRule.createFromJson(json.dataBindingRule);
+        }
+        if (json.behaviors) {
+            this.behaviorsFromJson(json.behaviors);
         }
         this.onFromJson(json);
         return this;
@@ -1907,6 +1910,32 @@ var Widget = (function (_super) {
         return widget;
     };
     Widget.prototype.onToJson = function (json) {
+    };
+    Widget.prototype.behaviorsToJson = function () {
+        var json = {};
+        var behaviors = this._behaviors;
+        if (behaviors) {
+            for (var key in behaviors) {
+                var value = behaviors[key];
+                json[key] = value.toJson();
+            }
+        }
+        return json;
+    };
+    Widget.prototype.behaviorsFromJson = function (json) {
+        var behaviors = this._behaviors;
+        if (behaviors) {
+            for (var key in behaviors) {
+                var value = behaviors[key];
+                value.dispose();
+            }
+        }
+        if (json) {
+            for (var key in json) {
+                this.useBehavior(key, json.options);
+            }
+        }
+        return;
     };
     /**
      * @method toJson
@@ -1944,7 +1973,10 @@ var Widget = (function (_super) {
             });
         }
         if (this._dataBindingRule) {
-            json._dataBindingRule = this._dataBindingRule.toJson();
+            json.dataBindingRule = this._dataBindingRule.toJson();
+        }
+        if (this._behaviors) {
+            json.behaviors = this.behaviorsToJson();
         }
         this.onToJson(json);
         return json;
@@ -1976,12 +2008,7 @@ var Widget = (function (_super) {
     ////////////////////////////////////////////	
     //绑定单个属性，子控件可以重载本函数去支持其它属性。
     Widget.prototype.onBindProp = function (prop, value) {
-        if (prop === "text") {
-            this.text = value;
-        }
-        else if (prop === "value") {
-            this.value = value;
-        }
+        this[prop] = value;
     };
     Object.defineProperty(Widget.prototype, "dataBindingRule", {
         get: function () {
