@@ -13,7 +13,6 @@ var behavior_1 = require("./behavior");
  */
 var ResizableOptions = (function () {
     function ResizableOptions(options) {
-        this.movable = options.movable || false;
         this.north = options.north || options.all || false;
         this.south = options.south || options.all || false;
         this.west = options.west || options.all || false;
@@ -36,12 +35,13 @@ exports.ResizableOptions = ResizableOptions;
  */
 var Resizable = (function (_super) {
     __extends(Resizable, _super);
-    function Resizable(widget, options) {
-        _super.call(this, Resizable.TYPE, widget, options);
+    function Resizable(widget, options, type) {
+        _super.call(this, type || Resizable.TYPE, widget, options);
         this.resizingEvent = { type: Events.RESIZING };
         this.resizeEndEvent = { type: Events.RESIZE_END };
         this.resizeBeginEvent = { type: Events.RESIZE_BEGIN };
         this.resizeCancelEvent = { type: Events.RESIZE_CANCEL };
+        this.border = 5;
     }
     Resizable.prototype.init = function (options) {
         this.options = new ResizableOptions(options);
@@ -94,31 +94,32 @@ var Resizable = (function (_super) {
             this.widget.dispatchEvent(this.resizeEndEvent);
         }
         this.resizing = false;
+        this.pointerDownArea = null;
         document.body.style.cursor = "default";
     };
     Resizable.prototype.testPointerPosition = function (evt) {
-        var delta = 3;
+        var border = this.border;
         var w = this.widget.w;
         var h = this.widget.h;
-        var p = this.widget.toLocalPoint(point_1.Point.point.init(evt.x, evt.y));
-        var right = w - delta;
-        var bottom = h - delta;
+        var right = w - border;
+        var bottom = h - border;
         var options = this.options;
+        var p = this.widget.toLocalPoint(point_1.Point.point.init(evt.x, evt.y));
         var southResizable = options.southWest || options.southEast || options.south;
         var northResizable = options.northWest || options.northEast || options.north;
-        if (p.y >= 0 && p.y <= delta) {
-            if (p.x >= 0 && p.x <= delta && northResizable) {
+        if (p.y >= 0 && p.y <= border) {
+            if (p.x >= 0 && p.x <= border && northResizable) {
                 return "nw";
             }
-            else if (p.x > delta && p.x < right && options.north) {
+            else if (p.x > border && p.x < right && options.north) {
                 return "n";
             }
             else if (p.x >= right && p.x <= w && options.northEast) {
                 return "ne";
             }
         }
-        else if (p.y > delta && p.y < bottom) {
-            if (p.x >= 0 && p.x <= delta && options.west) {
+        else if (p.y > border && p.y < bottom) {
+            if (p.x >= 0 && p.x <= border && options.west) {
                 return "w";
             }
             else if (p.x >= right && p.x <= w && options.east) {
@@ -126,18 +127,15 @@ var Resizable = (function (_super) {
             }
         }
         else if (p.y >= bottom && p.y <= h && southResizable) {
-            if (p.x >= 0 && p.x <= delta) {
+            if (p.x >= 0 && p.x <= border) {
                 return "sw";
             }
-            else if (p.x > delta && p.x < right && options.south) {
+            else if (p.x > border && p.x < right && options.south) {
                 return "s";
             }
             else if (p.x >= right && p.x <= w && options.southEast) {
                 return "se";
             }
-        }
-        else if (options.movable) {
-            return "move";
         }
         return null;
     };
@@ -178,9 +176,6 @@ var Resizable = (function (_super) {
                 case "sw": {
                     widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h + dy);
                     break;
-                }
-                case "move": {
-                    widget.moveTo(this.x + dx, this.y + dy);
                 }
             }
             widget.dispatchEvent(this.resizingEvent);

@@ -41,7 +41,6 @@ export declare class ResizableOptions {
      * 取消时，恢复原位的动画时间，0表示无动画。
      */
     animateDuration: number;
-    movable: boolean;
     constructor(options: any);
 }
 /**
@@ -63,7 +62,7 @@ export declare class Resizable extends Behavior {
     protected resizeCancelEvent: {
         type: string;
     };
-    constructor(widget: Widget, options: any);
+    constructor(widget: Widget, options: any, type?: string);
     protected init(options: any): void;
     private onCancelled();
     protected onKeyDownGlobal(evt: CustomEvent): void;
@@ -71,12 +70,13 @@ export declare class Resizable extends Behavior {
     protected onPointerUp(evt: Events.PointerEvent): void;
     protected testPointerPosition(evt: Events.PointerEvent): string;
     protected onPointerMove(evt: Events.PointerEvent): void;
-    private x;
-    private y;
-    private w;
-    private h;
-    private resizing;
-    private options;
-    private pointerDownArea;
+    protected x: number;
+    protected y: number;
+    protected w: number;
+    protected h: number;
+    protected resizing: boolean;
+    protected options: ResizableOptions;
+    protected pointerDownArea: string;
+    protected border: number;
     static TYPE: string;
 }

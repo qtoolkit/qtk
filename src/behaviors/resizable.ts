@@ -72,8 +72,8 @@ export class Resizable extends Behavior {
 	protected resizeBeginEvent = {type:Events.RESIZE_BEGIN};
 	protected resizeCancelEvent = {type:Events.RESIZE_CANCEL};
 	
-	constructor(widget:Widget, options:any) {
-		super(Resizable.TYPE, widget, options);
+	constructor(widget:Widget, options:any, type?:string) {
+		super(type || Resizable.TYPE, widget, options);
 	}
 
 	protected init(options:any) {
@@ -130,37 +130,39 @@ export class Resizable extends Behavior {
 			this.widget.dispatchEvent(this.resizeEndEvent);
 		}
 		this.resizing = false;
+		this.pointerDownArea = null;
 		document.body.style.cursor = "default"; 
 	}
 
 	protected testPointerPosition(evt:Events.PointerEvent){
-		var delta = 3;
+		var border = this.border;
 		var w = this.widget.w;
 		var h = this.widget.h;
-		var p = this.widget.toLocalPoint(Point.point.init(evt.x, evt.y));
-		var right = w - delta;
-		var bottom = h - delta;
+		var right = w - border;
+		var bottom = h - border;
 		var options = this.options;
+		var p = this.widget.toLocalPoint(Point.point.init(evt.x, evt.y));
 		var southResizable = options.southWest || options.southEast || options.south;
 		var northResizable = options.northWest || options.northEast || options.north;
-		if(p.y >= 0 && p.y <= delta) {
-			if(p.x >= 0 && p.x <= delta && northResizable) {
+
+		if(p.y >= 0 && p.y <= border) {
+			if(p.x >= 0 && p.x <= border && northResizable) {
 				return "nw";
-			}else if(p.x > delta && p.x < right && options.north)  {
+			}else if(p.x > border && p.x < right && options.north)  {
 				return "n"; 
 			}else if(p.x >= right && p.x <= w && options.northEast) {
 				return "ne"; 
 			}
-		}else if(p.y > delta && p.y < bottom) {
-			if(p.x >= 0 && p.x <= delta && options.west) {
+		}else if(p.y > border && p.y < bottom) {
+			if(p.x >= 0 && p.x <= border && options.west) {
 				return "w";
 			}else if(p.x >= right && p.x <= w && options.east) {
 				return "e"; 
 			}
 		}else if(p.y >= bottom && p.y <= h && southResizable) {
-			if(p.x >= 0 && p.x <= delta) {
+			if(p.x >= 0 && p.x <= border) {
 				return "sw";
-			}else if(p.x > delta && p.x < right && options.south)  {
+			}else if(p.x > border && p.x < right && options.south)  {
 				return "s"; 
 			}else if(p.x >= right && p.x <= w && options.southEast) {
 				return "se"; 
@@ -214,13 +216,14 @@ export class Resizable extends Behavior {
 		}
 	}
 
-	private x : number;
-	private y : number;
-	private w : number;
-	private h : number;
-	private resizing : boolean;
-	private options : ResizableOptions;
-	private pointerDownArea : string;
+	protected x : number;
+	protected y : number;
+	protected w : number;
+	protected h : number;
+	protected resizing : boolean;
+	protected options : ResizableOptions;
+	protected pointerDownArea : string;
+	protected border = 5;
 
 	public static TYPE = "resizable";
 }
