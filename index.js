@@ -1732,6 +1732,8 @@ var qtk =
 	    }
 	    DragEvent.prototype.init = function (type, detail) {
 	        _super.prototype.init.call(this, type, detail);
+	        this.x = detail.x;
+	        this.y = detail.y;
 	        return this;
 	    };
 	    Object.defineProperty(DragEvent, "isDragging", {
@@ -1744,9 +1746,9 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    DragEvent.get = function (type) {
+	    DragEvent.get = function (type, x, y) {
 	        var e = DragEvent.event;
-	        return e.init(type);
+	        return e.init(type, { x: x, y: y });
 	    };
 	    DragEvent._isDragging = false;
 	    DragEvent.event = new DragEvent();
@@ -29291,7 +29293,7 @@ var qtk =
 	            var ctx = evt.ctx;
 	            var win = evt.widget;
 	            var p = win.pointerPosition;
-	            var e = Events.DragEvent.get(Events.DRAGSTART);
+	            var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
 	            var image = e.dataTransfer.dragImage;
 	            if (image) {
 	                if (image.draw) {
@@ -29306,10 +29308,11 @@ var qtk =
 	    };
 	    Draggable.prototype.onCancelled = function () {
 	        var widget = this.widget;
+	        var p = widget.win.pointerPosition;
 	        widget.win.requestRedraw();
 	        Events.DragEvent.isDragging = false;
 	        widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, p.x, p.y));
 	    };
 	    Draggable.prototype.onKeyDownGlobal = function (evt) {
 	        var keyCode = evt.detail.keyCode;
@@ -29325,7 +29328,7 @@ var qtk =
 	        if (this.dragging) {
 	            this.dragging = false;
 	            Events.DragEvent.isDragging = false;
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
 	            this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
 	        }
 	    };
@@ -29333,7 +29336,7 @@ var qtk =
 	        if (evt.pointerDown && !this.dragging) {
 	            this.dragging = true;
 	            Events.DragEvent.isDragging = true;
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART, evt.x, evt.y));
 	        }
 	        if (evt.pointerDown) {
 	            this.widget.win.requestRedraw();
@@ -29372,22 +29375,22 @@ var qtk =
 	    }
 	    Droppable.prototype.onPointerEnter = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.x, evt.y));
 	        }
 	    };
 	    Droppable.prototype.onPointerLeave = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.x, evt.y));
 	        }
 	    };
 	    Droppable.prototype.onPointerUp = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.x, evt.y));
 	        }
 	    };
 	    Droppable.prototype.onPointerMove = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.x, evt.y));
 	        }
 	    };
 	    ;
@@ -29419,6 +29422,7 @@ var qtk =
 	 */
 	var ResizableOptions = (function () {
 	    function ResizableOptions(options) {
+	        this.movable = options.movable || false;
 	        this.north = options.north || options.all || false;
 	        this.south = options.south || options.all || false;
 	        this.west = options.west || options.all || false;
@@ -29541,6 +29545,9 @@ var qtk =
 	                return "se";
 	            }
 	        }
+	        else if (options.movable) {
+	            return "move";
+	        }
 	        return null;
 	    };
 	    Resizable.prototype.onPointerMove = function (evt) {
@@ -29580,6 +29587,9 @@ var qtk =
 	                case "sw": {
 	                    widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h + dy);
 	                    break;
+	                }
+	                case "move": {
+	                    widget.moveTo(this.x + dx, this.y + dy);
 	                }
 	            }
 	            widget.dispatchEvent(this.resizingEvent);

@@ -369,6 +369,8 @@ var DragEvent = (function (_super) {
     }
     DragEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
+        this.x = detail.x;
+        this.y = detail.y;
         return this;
     };
     Object.defineProperty(DragEvent, "isDragging", {
@@ -381,9 +383,9 @@ var DragEvent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    DragEvent.get = function (type) {
+    DragEvent.get = function (type, x, y) {
         var e = DragEvent.event;
-        return e.init(type);
+        return e.init(type, { x: x, y: y });
     };
     DragEvent._isDragging = false;
     DragEvent.event = new DragEvent();

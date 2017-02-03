@@ -13,6 +13,7 @@ var behavior_1 = require("./behavior");
  */
 var ResizableOptions = (function () {
     function ResizableOptions(options) {
+        this.movable = options.movable || false;
         this.north = options.north || options.all || false;
         this.south = options.south || options.all || false;
         this.west = options.west || options.all || false;
@@ -135,6 +136,9 @@ var Resizable = (function (_super) {
                 return "se";
             }
         }
+        else if (options.movable) {
+            return "move";
+        }
         return null;
     };
     Resizable.prototype.onPointerMove = function (evt) {
@@ -174,6 +178,9 @@ var Resizable = (function (_super) {
                 case "sw": {
                     widget.moveResizeTo(this.x + dx, this.y, this.w - dx, this.h + dy);
                     break;
+                }
+                case "move": {
+                    widget.moveTo(this.x + dx, this.y + dy);
                 }
             }
             widget.dispatchEvent(this.resizingEvent);

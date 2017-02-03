@@ -11,25 +11,25 @@ import {Behavior, BehaviorFactory} from "./behavior";
 export class Droppable extends Behavior {
 	protected onPointerEnter(evt:Events.PointerEvent){
 		if(Events.DragEvent.isDragging) {
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.x, evt.y));
 		}
 	}
 	
 	protected onPointerLeave(evt:Events.PointerEvent){
 		if(Events.DragEvent.isDragging) {
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.x, evt.y));
 		}
 	}
 	
 	protected onPointerUp(evt:Events.PointerEvent){
 		if(Events.DragEvent.isDragging) {
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.x, evt.y));
 		}
 	}
 
 	protected onPointerMove(evt:Events.PointerEvent){
 		if(Events.DragEvent.isDragging) {
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.x, evt.y));
 		}
 	}
 

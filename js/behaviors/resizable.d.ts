@@ -41,6 +41,7 @@ export declare class ResizableOptions {
      * 取消时，恢复原位的动画时间，0表示无动画。
      */
     animateDuration: number;
+    movable: boolean;
     constructor(options: any);
 }
 /**

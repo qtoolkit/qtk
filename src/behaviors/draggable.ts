@@ -18,7 +18,7 @@ export class Draggable extends Behavior {
 			var ctx = evt.ctx;
 			var win = evt.widget;
 			var p = win.pointerPosition;
-			var e = Events.DragEvent.get(Events.DRAGSTART);
+			var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
 			var image = e.dataTransfer.dragImage;
 			
 			if(image) {
@@ -34,10 +34,11 @@ export class Draggable extends Behavior {
 
 	protected onCancelled() {
 		var widget = this.widget;
+		var p = widget.win.pointerPosition;
 		widget.win.requestRedraw();
 		Events.DragEvent.isDragging = false;
 		widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-		widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+		widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, p.x, p.y));
 	}
 
 	protected onKeyDownGlobal(evt:CustomEvent) {
@@ -56,7 +57,7 @@ export class Draggable extends Behavior {
 		if(this.dragging) {
 			this.dragging = false;
 			Events.DragEvent.isDragging = false;
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
 			this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
 		}
 	}
@@ -65,7 +66,7 @@ export class Draggable extends Behavior {
 		if(evt.pointerDown && !this.dragging) {
 			this.dragging = true;
 			Events.DragEvent.isDragging = true;
-			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART));
+			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART, evt.x, evt.y));
 		}
 
 		if(evt.pointerDown) {

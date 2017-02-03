@@ -451,6 +451,8 @@ export class DataTransfer {
 };
 
 export class DragEvent extends Event {
+	public x : number;
+	public y : number;
 	public dataTransfer : DataTransfer;
 
 	constructor() {
@@ -460,6 +462,8 @@ export class DragEvent extends Event {
 
 	public init(type:string, detail?:any) : any{
 		super.init(type, detail);
+		this.x = detail.x;
+		this.y = detail.y;
 
 		return this;
 	}
@@ -474,10 +478,10 @@ export class DragEvent extends Event {
 	}
 
 	public static event = new DragEvent();
-	public static get(type:string) : DragEvent {
+	public static get(type:string, x:number, y:number) : DragEvent {
 		var e = DragEvent.event;
 
-		return e.init(type);
+		return e.init(type, {x:x, y:y});
 	}
 };
 

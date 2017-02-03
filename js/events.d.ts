@@ -239,13 +239,15 @@ export declare class DataTransfer {
     setDragImage(dragImage: any): void;
 }
 export declare class DragEvent extends Event {
+    x: number;
+    y: number;
     dataTransfer: DataTransfer;
     constructor();
     init(type: string, detail?: any): any;
     private static _isDragging;
     static isDragging: boolean;
     static event: DragEvent;
-    static get(type: string): DragEvent;
+    static get(type: string, x: number, y: number): DragEvent;
 }
 export declare class DrawEvent extends Event {
     widget: any;

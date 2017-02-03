@@ -17,22 +17,22 @@ var Droppable = (function (_super) {
     }
     Droppable.prototype.onPointerEnter = function (evt) {
         if (Events.DragEvent.isDragging) {
-            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER));
+            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.x, evt.y));
         }
     };
     Droppable.prototype.onPointerLeave = function (evt) {
         if (Events.DragEvent.isDragging) {
-            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE));
+            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.x, evt.y));
         }
     };
     Droppable.prototype.onPointerUp = function (evt) {
         if (Events.DragEvent.isDragging) {
-            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP));
+            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.x, evt.y));
         }
     };
     Droppable.prototype.onPointerMove = function (evt) {
         if (Events.DragEvent.isDragging) {
-            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER));
+            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.x, evt.y));
         }
     };
     ;
