@@ -25,27 +25,10 @@ import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '..
 import {ICommand} from "../mvvm/icommand";
 import {IValueConverter} from "../mvvm/ivalue-converter";
 import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
+import {BindingDataSource, BindingCommandSource} from "../mvvm/binding-rule";
+import {BindingRule, BindingRuleItem, IBindingSource} from "../mvvm/binding-rule";
 import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
-import {BindingRule, BindingRuleItem, IBindingSource, BindingDataSource,BindingCommandSource} from "../mvvm/binding-rule";
 
-
-/** 
- * @enum WidgetMode
- * 控件当前的运行模式。
- */
-export enum WidgetMode {
-	/** 
-	 * @property {number} 
-	 * 运行模式
-	 */
-	RUNTIME = 0,
-	/** 
-	 * @property {number} 
-	 * 设计模式
-	 */
-	DESIGN
-};
-	
 /** 
  * @enum WidgetState
  * 控件的状态
@@ -162,6 +145,10 @@ export class Widget extends Emitter {
 		return this;
 	}
 	
+	/**
+	 * @method get 
+	 * 同时获取多个属性。
+	 */
 	public get(props?:any) : Widget {
 		if(props) {
 			for(var key in props) {
@@ -186,32 +173,6 @@ export class Widget extends Emitter {
 		
 		var iter:Widget = this.parent;
 		while(iter) {
-			p.x -= iter.x;
-			p.y -= iter.y;
-			iter = iter.parent;
-		}
-
-		return p;
-	}
-	
-	/**
-	 * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
-	 * @param {Pointer} p Pointer事件的坐标。
-	 * @return {Pointer} 相对于当前控件左上角的坐标。
-	 */
-	public eventPointToLocal(p:Point) : Point {
-		if(this._canvas) {
-			return p;
-		}
-
-		p.x -= this.x;
-		p.y -= this.y;
-		
-		var iter:Widget = this.parent;
-		while(iter) {
-			if(iter._canvas) {
-				break;
-			}
 			p.x -= iter.x;
 			p.y -= iter.y;
 			iter = iter.parent;
@@ -285,9 +246,6 @@ export class Widget extends Emitter {
 		this._inited = false;
 	}
 
-	/*
-	 * ~初始化。在窗口关闭后，对窗口上所有控件调用，或者对被移出的控件调用。
-	 */
 	public deinit(){
 		this.children.forEach(child => {
 			child.deinit();
@@ -295,20 +253,32 @@ export class Widget extends Emitter {
 		this.onDeinit();
 	}
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	protected translatePointerEvent(evt:Events.PointerEvent) {
+		evt.localX -= this.x;
+		evt.localY -= this.y;
+	}
+	
+	protected untranslatePointerEvent(evt:Events.PointerEvent) {
+		evt.localX += this.x;
+		evt.localY += this.y;
+	}
+
+	public dispatchPointerDown(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
+		
+		this.translatePointerEvent(evt);
 
-		ctx.save();
-		this.applyTransform(ctx);
-		var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
+		var x = evt.localX;
+		var y = evt.localY;
+		var hitTestResult = this.selfHitTest(x, y);
 
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
-			this.target = this.findEventTargetChild(evt.x, evt.y, ctx);
+			this.target = this.findEventTargetChild(x, y);
 			if(this.target) {
-				this.target.dispatchPointerDown(evt, ctx);
+				this.target.dispatchPointerDown(evt);
 			}
 			if(this.onpointerdown) {
 				this.onpointerdown(evt);
@@ -321,15 +291,15 @@ export class Widget extends Emitter {
 			}
 			this.state = WidgetState.NORMAL;
 		}
-		ctx.restore();
+		this.untranslatePointerEvent(evt);
 
 		this.hitTestResult = hitTestResult;
 	}
 
-	public dispatchPointerMoveToTarget(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMoveToTarget(evt:Events.PointerEvent) {
 		this.dispatchEvent(evt, true);
 		if(this.target) {
-			this.target.dispatchPointerMove(evt, ctx);
+			this.target.dispatchPointerMove(evt);
 		}
 		if(this.onpointermove) {
 			this.onpointermove(evt);
@@ -359,19 +329,19 @@ export class Widget extends Emitter {
 		e.dispose();
 	}
 
-	public dispatchPointerMoveToUnder(evt:Events.PointerEvent, ctx:MatrixStack) {
-		ctx.save();
-		this.applyTransform(ctx);
-		var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
+	public dispatchPointerMoveToUnder(evt:Events.PointerEvent) {
+		var x = evt.localX;
+		var y = evt.localY;
+		var hitTestResult = this.selfHitTest(x, y);
 	
 		if(hitTestResult) {
 			this.dispatchEvent(evt, true);
 			var _lastOverWidget = this._lastOverWidget;
-			var overWidget  = this.findEventTargetChild(evt.x, evt.y, ctx);
+			var overWidget  = this.findEventTargetChild(x, y);
 			if(_lastOverWidget !== overWidget) {
 				var e = null;
 				if(_lastOverWidget) {
-					_lastOverWidget.dispatchPointerMove(evt, ctx);
+					_lastOverWidget.dispatchPointerMove(evt);
 					_lastOverWidget.dispatchPointerLeave(evt);
 				}
 			
@@ -382,7 +352,7 @@ export class Widget extends Emitter {
 				this._lastOverWidget = overWidget;
 			}
 			if(overWidget) {
-				overWidget.dispatchPointerMove(evt, ctx);
+				overWidget.dispatchPointerMove(evt);
 			}
 
 			if(this.onpointermove) {
@@ -403,20 +373,21 @@ export class Widget extends Emitter {
 			this.dispatchEvent(evt, false);
 			this.state = WidgetState.NORMAL;
 		}
-
-		ctx.restore();
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
 		
+		this.translatePointerEvent(evt);
+
 		if(evt.pointerDown) {
-			this.dispatchPointerMoveToTarget(evt, ctx);
+			this.dispatchPointerMoveToTarget(evt);
 		}
-		
-		this.dispatchPointerMoveToUnder(evt, ctx);
+		this.dispatchPointerMoveToUnder(evt);
+
+		this.untranslatePointerEvent(evt);
 	}
 
 	public dispatchPointerUp(evt:Events.PointerEvent) {
@@ -424,6 +395,8 @@ export class Widget extends Emitter {
 			return;
 		}
 		
+		this.translatePointerEvent(evt);
+
 		this.dispatchEvent(evt, true);
 		if(this._lastOverWidget && this.target !== this._lastOverWidget) {
 			this._lastOverWidget.dispatchPointerUp(evt);
@@ -438,6 +411,8 @@ export class Widget extends Emitter {
 
 		this.dispatchEvent(evt, false);
 		this.state = WidgetState.NORMAL;
+
+		this.untranslatePointerEvent(evt);
 	}
 	
 	public dispatchClick(evt:any) {
@@ -550,20 +525,16 @@ export class Widget extends Emitter {
 		return this;
 	}
 	
-	protected findEventTargetChild(x:number, y:number, ctx:MatrixStack) : Widget {
+	protected findEventTargetChild(x:number, y:number) : Widget {
 		var arr = this._children;
 		var n = arr.length;
+
 		for(var i = n-1; i >= 0; i--) {
 			var iter = arr[i];
 			if(iter._enable && iter._sensitive) {
-				ctx.save();
-				iter.applyTransform(ctx);
-				var hitTestResult = iter.hitTest(x, y, ctx);
-				if(hitTestResult) {
-					ctx.restore();
+				if(Rect.rect.init(iter.x, iter.y, iter.w, iter.h).containsPoint(x, y)) {
 					return iter;
 				}
-				ctx.restore();
 			}
 		}
 
@@ -1189,16 +1160,13 @@ export class Widget extends Emitter {
 		var density = app.getViewPort().density;
 		var canvas = Canvas.create(this.x, this.y, this.w, this.h, density);
 		
-		var matrixStack = MatrixStack.create();
 		canvas.ensureCanvas();
 		canvas.on(Events.POINTER_DOWN, evt => {
-			matrixStack.identity();
-			this.dispatchPointerDown(evt, matrixStack);
+			this.dispatchPointerDown(evt);
 		});
 
 		canvas.on(Events.POINTER_MOVE, evt => {
-			matrixStack.identity();
-			this.dispatchPointerMove(evt, matrixStack);
+			this.dispatchPointerMove(evt);
 		});
 
 		canvas.on(Events.POINTER_UP, evt => {
@@ -1846,7 +1814,6 @@ export class Widget extends Emitter {
 	protected _children : Array<Widget>;
 	protected _mainLoop : IMainLoop;
 	protected _themeManager : IThemeManager;
-	protected _mode : WidgetMode;
 	protected _canvas : Canvas;
 	protected _styles : any;
 	protected _styleType : string;
@@ -2444,24 +2411,16 @@ export class Widget extends Emitter {
 		});
 	}
 
-	protected hitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
-		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h), ctx);
+	protected hitTest(x:number, y:number) : HitTestResult {
+		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h));
 	}
 	
-	protected doHitTest(x:number, y:number, r:Rect, ctx:MatrixStack) : HitTestResult {
-		var m = ctx.invert();
-		if(m) {
-			var p = m.transformPoint(x, y);
-			if(p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
-				return HitTestResult.MM;
-			}
-		}
-
-		return HitTestResult.NONE;
+	protected doHitTest(x:number, y:number, r:Rect) : HitTestResult {
+		return r.containsPoint(x, y) ? HitTestResult.MM : HitTestResult.NONE;
 	}
 	
-	protected selfHitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
-		return this.hitTest(x, y, ctx);	
+	protected selfHitTest(x:number, y:number) : HitTestResult {
+		return this.hitTest(x, y);	
 	}
 
 	private static ID = 10000;

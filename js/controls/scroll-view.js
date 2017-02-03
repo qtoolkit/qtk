@@ -189,22 +189,22 @@ var ScrollView = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    ScrollView.prototype.selfHitTest = function (x, y, ctx) {
-        return _super.prototype.selfHitTest.call(this, x - this._ox, y - this._oy, ctx);
+    ScrollView.prototype.selfHitTest = function (x, y) {
+        return _super.prototype.selfHitTest.call(this, x - this._ox, y - this._oy);
     };
     /*
      * 在处理指针事件前，先加上滚动的偏移。
      */
     ScrollView.prototype.offsetPointerEvent = function (evt) {
-        evt.x += this._ox;
-        evt.y += this._oy;
+        evt.localX += this._ox;
+        evt.localY += this._oy;
     };
     /*
      * 在处理指针事件后，再减去滚动的偏移。
      */
     ScrollView.prototype.unOffsetPointerEvent = function (evt) {
-        evt.x -= this._ox;
-        evt.y -= this._oy;
+        evt.localX -= this._ox;
+        evt.localY -= this._oy;
     };
     /*
      * 把指针事件转换成touch，以便Scroller可以处理。
@@ -219,13 +219,13 @@ var ScrollView = (function (_super) {
     /*
      * 先处理滚动条的事件，再处理Scroller事件，最后发给子控件。
      */
-    ScrollView.prototype.dispatchPointerDown = function (evt, ctx) {
+    ScrollView.prototype.dispatchPointerDown = function (evt) {
         this._pointerInBar = false;
         if (this.dragToScroll) {
             this._saveOX = this._ox;
             this._saveOY = this._oy;
             var win = this.win;
-            var p = this.eventPointToLocal(point_1.Point.point.copy(win.pointerPosition));
+            var p = point_1.Point.point.init(evt.localX - this.x, evt.localY - this.y);
             if (p.isInRect(this._vScrollBarRect)) {
                 if (p.isInRect(this._vScrollDraggerRect)) {
                     this._pointerInVScrollDraggerRect = true;
@@ -263,11 +263,11 @@ var ScrollView = (function (_super) {
         }
         if (!this._pointerInBar) {
             this.offsetPointerEvent(evt);
-            _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+            _super.prototype.dispatchPointerDown.call(this, evt);
             this.unOffsetPointerEvent(evt);
         }
     };
-    ScrollView.prototype.dispatchPointerMove = function (evt, ctx) {
+    ScrollView.prototype.dispatchPointerMove = function (evt) {
         if (evt.pointerDown) {
             var offsetX = this.offsetX;
             var offsetY = this.offsetY;
@@ -296,7 +296,7 @@ var ScrollView = (function (_super) {
         }
         if (!this._pointerInBar) {
             this.offsetPointerEvent(evt);
-            _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+            _super.prototype.dispatchPointerMove.call(this, evt);
             this.unOffsetPointerEvent(evt);
         }
         else {

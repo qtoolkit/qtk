@@ -4,7 +4,6 @@ import {Point} from "../point";
 import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 

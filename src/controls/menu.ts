@@ -6,7 +6,6 @@ import {Dialog} from "./dialog";
 import {Graphics} from "../graphics";
 import {ListView} from "./list-view";
 import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {ImageTile, ImageDrawType} from "../image-tile";
@@ -78,32 +77,29 @@ export class Menu extends Dialog {
 		}
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		var owner:any = this.owner;
 		/*
 		 * 如果事件在当前菜单外，把事件转发给owner处理。
 		 */
 		if(!evt.pointerDown && owner) {
-			var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
+			var hitTestResult = this.selfHitTest(evt.x, evt.y);
 			if(!hitTestResult) {
-				ctx.save();
-				ctx.identity();
 				var x = this.x;
 				var y = this.y;
 				evt.x += x;
 				evt.y += y;
 				evt.x -= owner.x;
 				evt.y -= owner.y;
-				owner.dispatchPointerMove(evt, ctx);
+				owner.dispatchPointerMove(evt);
 				evt.x += owner.x;
 				evt.y += owner.y;
 				evt.x -= x;
 				evt.y -= y;
-				ctx.restore();
 			}
 		}
 
-		super.dispatchPointerMove(evt, ctx);
+		super.dispatchPointerMove(evt);
 	}
 
 	constructor() {

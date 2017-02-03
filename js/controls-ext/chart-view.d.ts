@@ -2,7 +2,6 @@ import "chart.js";
 import { Style } from "../style";
 import Events = require("../events");
 import { Widget } from "../controls/widget";
-import { MatrixStack } from "../matrix-stack";
 /**
  * 图表视图。对chart.js的封装。
  */
@@ -22,8 +21,8 @@ export declare class ChartView extends Widget {
      * 把事件转发给隐藏的Canvas处理。
      */
     protected forwardPointerEvent(type: string, x: number, y: number): void;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
     protected syncCavnas(): void;
     protected drawImage(ctx: any, style: Style): Widget;

@@ -15,24 +15,9 @@ import { IThemeManager } from "../itheme-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
 import { Behavior } from "../behaviors/behavior";
 import { Layouter } from '../layouters/layouter';
+import { BindingDataSource } from "../mvvm/binding-rule";
+import { BindingRule } from "../mvvm/binding-rule";
 import { IViewModel, BindingMode } from "../mvvm/iview-model";
-import { BindingRule, BindingDataSource } from "../mvvm/binding-rule";
-/**
- * @enum WidgetMode
- * 控件当前的运行模式。
- */
-export declare enum WidgetMode {
-    /**
-     * @property {number}
-     * 运行模式
-     */
-    RUNTIME = 0,
-    /**
-     * @property {number}
-     * 设计模式
-     */
-    DESIGN = 1,
-}
 /**
  * @enum WidgetState
  * 控件的状态
@@ -131,6 +116,10 @@ export declare class Widget extends Emitter {
      * 同时设置多个属性。
      */
     set(props?: any): Widget;
+    /**
+     * @method get
+     * 同时获取多个属性。
+     */
     get(props?: any): Widget;
     /**
      * 把全局的坐标转换成相对于当前控件左上角的坐标。
@@ -138,12 +127,6 @@ export declare class Widget extends Emitter {
      * @return {Pointer} 相对于当前控件左上角的坐标。
      */
     toLocalPoint(p: Point): Point;
-    /**
-     * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
-     * @param {Pointer} p Pointer事件的坐标。
-     * @return {Pointer} 相对于当前控件左上角的坐标。
-     */
-    eventPointToLocal(p: Point): Point;
     /**
      * 把相对于当前控件左上角的坐标转换成全局坐标。
      * @param {Point} p 相对于当前控件左上角的坐标。
@@ -160,12 +143,14 @@ export declare class Widget extends Emitter {
     init(): Widget;
     protected onDeinit(): void;
     deinit(): void;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMoveToTarget(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    protected translatePointerEvent(evt: Events.PointerEvent): void;
+    protected untranslatePointerEvent(evt: Events.PointerEvent): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMoveToTarget(evt: Events.PointerEvent): void;
     dispatchPointerLeave(evt: Events.PointerEvent): void;
     dispatchPointerEnter(evt: Events.PointerEvent): void;
-    dispatchPointerMoveToUnder(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMoveToUnder(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
     dispatchClick(evt: any): void;
     dispatchContextMenu(evt: any): void;
@@ -174,7 +159,7 @@ export declare class Widget extends Emitter {
     dispatchKeyUp(evt: any): void;
     dispatchWheel(evt: any): void;
     protected applyTransform(ctx: MatrixStack): Widget;
-    protected findEventTargetChild(x: number, y: number, ctx: MatrixStack): Widget;
+    protected findEventTargetChild(x: number, y: number): Widget;
     animate(): TWEEN.Tween;
     /**
      * @method scaleTo
@@ -577,7 +562,6 @@ export declare class Widget extends Emitter {
     protected _children: Array<Widget>;
     protected _mainLoop: IMainLoop;
     protected _themeManager: IThemeManager;
-    protected _mode: WidgetMode;
     protected _canvas: Canvas;
     protected _styles: any;
     protected _styleType: string;
@@ -700,8 +684,8 @@ export declare class Widget extends Emitter {
     protected updateValueToSource(value: any, dataSource: BindingDataSource, oldValue?: any): void;
     protected watchTargetValueChange(dataSource: BindingDataSource): void;
     protected watchTargetChange(dataBindingRule: BindingRule): void;
-    protected hitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
-    protected doHitTest(x: number, y: number, r: Rect, ctx: MatrixStack): HitTestResult;
-    protected selfHitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
+    protected hitTest(x: number, y: number): HitTestResult;
+    protected doHitTest(x: number, y: number, r: Rect): HitTestResult;
+    protected selfHitTest(x: number, y: number): HitTestResult;
     private static ID;
 }

@@ -25,16 +25,16 @@ var WindowManagerMobile = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    WindowManagerMobile.prototype.dispatchPointerDown = function (evt, ctx) {
+    WindowManagerMobile.prototype.dispatchPointerDown = function (evt) {
         var target = this.target;
         if (target) {
-            target.dispatchPointerDown(evt, ctx);
+            target.dispatchPointerDown(evt);
         }
     };
-    WindowManagerMobile.prototype.dispatchPointerMove = function (evt, ctx) {
+    WindowManagerMobile.prototype.dispatchPointerMove = function (evt) {
         var target = this.target;
         if (target) {
-            target.dispatchPointerMove(evt, ctx);
+            target.dispatchPointerMove(evt);
         }
     };
     WindowManagerMobile.prototype.dispatchPointerUp = function (evt) {

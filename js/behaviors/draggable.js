@@ -57,8 +57,8 @@ var Draggable = (function (_super) {
             this.dragging = false;
             Events.DragEvent.isDragging = false;
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
-            this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
         }
+        this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
     };
     Draggable.prototype.onPointerMove = function (evt) {
         if (evt.pointerDown && !this.dragging) {

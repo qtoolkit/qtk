@@ -2,7 +2,6 @@
 import {Rect} from "../rect";
 import {Style} from "../style";
 import {Widget} from "./widget";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
@@ -53,7 +52,7 @@ export class Pages extends Widget {
 		return this;
 	}
 
-	protected findEventTargetChild(x:number, y:number, ctx:MatrixStack) : Widget {
+	protected findEventTargetChild(x:number, y:number) : Widget {
 		return this.target;
 	}
 

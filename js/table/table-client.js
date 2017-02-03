@@ -150,14 +150,14 @@ var TableClient = (function (_super) {
         this.setSelectedCols(firstCol, secondCol);
         this.setSelectedRows(firstRow, secondRow);
     };
-    TableClient.prototype.dispatchPointerDown = function (evt, ctx) {
-        _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+    TableClient.prototype.dispatchPointerDown = function (evt) {
+        _super.prototype.dispatchPointerDown.call(this, evt);
         if (!this._pointerInBar) {
             this.updateSelection(evt.x, evt.y, true, true);
         }
     };
-    TableClient.prototype.dispatchPointerMove = function (evt, ctx) {
-        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+    TableClient.prototype.dispatchPointerMove = function (evt) {
+        _super.prototype.dispatchPointerMove.call(this, evt);
         if (!this._pointerInBar && evt.pointerDown) {
             this.updateSelection(evt.x, evt.y, false, true);
         }

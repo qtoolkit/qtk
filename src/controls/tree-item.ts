@@ -4,7 +4,6 @@ import {Point} from "../point";
 import {Style} from "../style";
 import {TreeView} from "./tree-view";
 import {TreeItemData} from "./tree-item-data";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {RoundType, Graphics} from "../graphics";
 import {ImageTile, ImageDrawType} from "../image-tile";

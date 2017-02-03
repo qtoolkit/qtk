@@ -143,6 +143,14 @@ export declare class PointerEvent extends InputEvent {
      */
     y: number;
     /**
+     * 指针事件相对于当前控件左上角的x坐标。
+     */
+    localX: number;
+    /**
+     * 指针事件相对于当前控件左上角的y坐标。
+     */
+    localY: number;
+    /**
      * 指针是否按下。
      */
     pointerDown: boolean;

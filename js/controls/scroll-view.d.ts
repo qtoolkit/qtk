@@ -4,7 +4,6 @@ import { Rect } from "../rect";
 import { Scroller } from "scroller";
 import TWEEN = require("tween.js");
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 import { Widget, HitTestResult } from "./widget";
 /**
  * 滚动视图，同时支持PC和Mobile风格，通过dragToScroll和slideToScroll参数控制。
@@ -58,12 +57,12 @@ export declare class ScrollView extends Widget {
      * 滚动视图所包含内容的高度。
      */
     contentH: number;
-    protected selfHitTest(x: number, y: number, ctx: MatrixStack): HitTestResult;
+    protected selfHitTest(x: number, y: number): HitTestResult;
     protected offsetPointerEvent(evt: Events.PointerEvent): void;
     protected unOffsetPointerEvent(evt: Events.PointerEvent): void;
     protected pointerEventToTouches(evt: Events.PointerEvent): any;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
     dispatchClick(evt: any): void;
     dispatchDblClick(evt: any): void;

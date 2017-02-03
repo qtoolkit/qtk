@@ -9,7 +9,6 @@ import {Scroller} from "scroller";
 import TWEEN = require("tween.js");
 import Events = require("../events");
 import {Graphics} from "../graphics";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";
@@ -161,24 +160,24 @@ export class ScrollView extends Widget {
 		return this._ch;
 	}
 
-	protected selfHitTest(x:number, y:number, ctx:MatrixStack) : HitTestResult {
-		return super.selfHitTest(x-this._ox, y-this._oy, ctx);
+	protected selfHitTest(x:number, y:number) : HitTestResult {
+		return super.selfHitTest(x-this._ox, y-this._oy);
 	}
 
 	/*
 	 * 在处理指针事件前，先加上滚动的偏移。
 	 */
 	protected offsetPointerEvent(evt:Events.PointerEvent) {
-		evt.x += this._ox;
-		evt.y += this._oy;
+		evt.localX += this._ox;
+		evt.localY += this._oy;
 	}
 	
 	/*
 	 * 在处理指针事件后，再减去滚动的偏移。
 	 */
 	protected unOffsetPointerEvent(evt:Events.PointerEvent) {
-		evt.x -= this._ox;
-		evt.y -= this._oy;
+		evt.localX -= this._ox;
+		evt.localY -= this._oy;
 	}
 
 	/*
@@ -196,13 +195,13 @@ export class ScrollView extends Widget {
 	/*
 	 * 先处理滚动条的事件，再处理Scroller事件，最后发给子控件。
 	 */
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent) {
 		this._pointerInBar = false;
 		if(this.dragToScroll) {
 			this._saveOX = this._ox;
 			this._saveOY = this._oy;
 			var win = this.win;
-			var p = this.eventPointToLocal(Point.point.copy(win.pointerPosition));
+			var p = Point.point.init(evt.localX-this.x, evt.localY-this.y);
 			if(p.isInRect(this._vScrollBarRect)) {
 				if(p.isInRect(this._vScrollDraggerRect)) {
 					this._pointerInVScrollDraggerRect = true;
@@ -239,12 +238,12 @@ export class ScrollView extends Widget {
 
 		if(!this._pointerInBar) {
 			this.offsetPointerEvent(evt);
-			super.dispatchPointerDown(evt, ctx);
+			super.dispatchPointerDown(evt);
 			this.unOffsetPointerEvent(evt);
 		}
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		if(evt.pointerDown) {
 			var offsetX = this.offsetX;
 			var offsetY = this.offsetY;
@@ -275,7 +274,7 @@ export class ScrollView extends Widget {
 
 		if(!this._pointerInBar) {
 			this.offsetPointerEvent(evt);
-			super.dispatchPointerMove(evt, ctx);
+			super.dispatchPointerMove(evt);
 			this.unOffsetPointerEvent(evt);
 		}else{
 			this.dispatchEvent(this._scrollEvent.reset(Events.SCROLL, this, this.offsetX, this.offsetY));

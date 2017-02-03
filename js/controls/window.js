@@ -65,13 +65,13 @@ var Window = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Window.prototype.dispatchPointerDown = function (evt, ctx) {
+    Window.prototype.dispatchPointerDown = function (evt) {
         this._pointerPosition.init(evt.x, evt.y);
-        _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+        _super.prototype.dispatchPointerDown.call(this, evt);
     };
-    Window.prototype.dispatchPointerMove = function (evt, ctx) {
+    Window.prototype.dispatchPointerMove = function (evt) {
         this._pointerPosition.init(evt.x, evt.y);
-        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+        _super.prototype.dispatchPointerMove.call(this, evt);
     };
     /**
      * 抓住事件，让输入事件始终发到当前窗口，直到ungrab为止。
@@ -218,6 +218,18 @@ var Window = (function (_super) {
         this.hasOwnCanvas = true;
         this._pointerPosition = point_1.Point.create(0, 0);
         this._shortcutEvent = Events.ShortcutEvent.create(null, null);
+    };
+    Window.prototype.translatePointerEvent = function (evt) {
+        if (!this.hasOwnCanvas) {
+            evt.localX -= this.x;
+            evt.localY -= this.y;
+        }
+    };
+    Window.prototype.untranslatePointerEvent = function (evt) {
+        if (!this.hasOwnCanvas) {
+            evt.localX += this.x;
+            evt.localY += this.y;
+        }
     };
     Window.prototype.reset = function (type, options) {
         this._app = options ? options.app : null;

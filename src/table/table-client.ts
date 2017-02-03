@@ -4,7 +4,6 @@ import {Point} from "../point";
 import {Range} from "../range";
 import {Style} from "../style";
 import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
 import {ListView} from "../controls/list-view";
 import {Widget, WidgetState} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
@@ -160,16 +159,16 @@ export class TableClient extends ListView {
 		this.setSelectedRows(firstRow, secondRow);
 	}
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
-		super.dispatchPointerDown(evt, ctx);
+	public dispatchPointerDown(evt:Events.PointerEvent) {
+		super.dispatchPointerDown(evt);
 
 		if(!this._pointerInBar) {
 			this.updateSelection(evt.x, evt.y, true, true);
 		}
 	}
 	
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
-		super.dispatchPointerMove(evt, ctx);
+	public dispatchPointerMove(evt:Events.PointerEvent) {
+		super.dispatchPointerMove(evt);
 
 		if(!this._pointerInBar && evt.pointerDown) {
 			this.updateSelection(evt.x, evt.y, false, true);

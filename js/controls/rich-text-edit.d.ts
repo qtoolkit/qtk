@@ -1,7 +1,6 @@
 import { Widget } from "./widget";
 import { RichText } from "./rich-text";
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 /**
  * 富文本编辑器。
  */
@@ -50,9 +49,9 @@ export declare class RichTextEdit extends RichText {
     protected findNodeByEvent(evt: any): any;
     dispatchDblClick(evt: any): void;
     protected updateTextArea(): void;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     protected onInit(): void;
     dispose(): void;
     protected focused: boolean;

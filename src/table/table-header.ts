@@ -3,7 +3,6 @@ import {Rect} from "../rect";
 import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "../controls/widget-factory";
 import {PassiveScrollableGroup} from "./passive-scrollable-group";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";

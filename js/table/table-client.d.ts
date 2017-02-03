@@ -2,7 +2,6 @@ import { Rect } from "../rect";
 import { Range } from "../range";
 import { Style } from "../style";
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 import { ListView } from "../controls/list-view";
 /**
  * 表格内容区域
@@ -33,8 +32,8 @@ export declare class TableClient extends ListView {
     protected setSelectedRows(first: number, second: number): TableClient;
     protected setSelectedCols(first: number, second: number): TableClient;
     protected updateSelection(x: number, y: number, updateFirst: boolean, updateSecond: boolean): void;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     protected drawVLine(ctx: any, x: number, yStart: number, yEnd: number): void;
     protected drawVLines(ctx: any): void;
     protected drawHLines(ctx: any): void;

@@ -2,7 +2,6 @@ import {Point} from "../point";
 import {Widget} from "./widget";
 import Events = require("../events");
 import {IApplication} from "../iapplication";
-import {MatrixStack} from "../matrix-stack";
 import inputEventAdapter = require("../input-event-adapter");
 
 export enum WindowType {
@@ -59,14 +58,14 @@ export abstract class Window extends Widget {
 		return this._pointerPosition;
 	}
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent) {
 		this._pointerPosition.init(evt.x, evt.y);
-		super.dispatchPointerDown(evt, ctx);
+		super.dispatchPointerDown(evt);
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		this._pointerPosition.init(evt.x, evt.y);
-		super.dispatchPointerMove(evt, ctx);
+		super.dispatchPointerMove(evt);
 	}
 
 	/**
@@ -236,6 +235,20 @@ export abstract class Window extends Widget {
 		this.hasOwnCanvas = true;
 		this._pointerPosition = Point.create(0, 0);
 		this._shortcutEvent = Events.ShortcutEvent.create(null, null);
+	}
+	
+	protected translatePointerEvent(evt:Events.PointerEvent) {
+		if(!this.hasOwnCanvas) {
+			evt.localX -= this.x;
+			evt.localY -= this.y;
+		}
+	}
+	
+	protected untranslatePointerEvent(evt:Events.PointerEvent) {
+		if(!this.hasOwnCanvas) {
+			evt.localX += this.x;
+			evt.localY += this.y;
+		}
 	}
 	
 	public reset(type:string, options:any) : Widget {

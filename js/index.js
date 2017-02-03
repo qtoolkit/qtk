@@ -164,7 +164,6 @@ exports.LinearLayouterParam = linear_layouter_1.LinearLayouterParam;
 var widget_1 = require("./controls/widget");
 exports.Widget = widget_1.Widget;
 exports.WidgetState = widget_1.WidgetState;
-exports.WidgetMode = widget_1.WidgetMode;
 exports.HitTestResult = widget_1.HitTestResult;
 var consts_1 = require("./consts");
 exports.Direction = consts_1.Direction;

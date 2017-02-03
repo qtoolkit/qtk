@@ -59,12 +59,12 @@ var ChartView = (function (_super) {
         e.initMouseEvent(type, true, true, window, 0, 0, 0, p.x, p.y, false, false, false, false, 0, null);
         this._chartCanvas.dispatchEvent(e);
     };
-    ChartView.prototype.dispatchPointerDown = function (evt, ctx) {
-        _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+    ChartView.prototype.dispatchPointerDown = function (evt) {
+        _super.prototype.dispatchPointerDown.call(this, evt);
         this.forwardPointerEvent("mousedown", evt.x, evt.y);
     };
-    ChartView.prototype.dispatchPointerMove = function (evt, ctx) {
-        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+    ChartView.prototype.dispatchPointerMove = function (evt) {
+        _super.prototype.dispatchPointerMove.call(this, evt);
         this.forwardPointerEvent("mousemove", evt.x, evt.y);
     };
     ChartView.prototype.dispatchPointerUp = function (evt) {

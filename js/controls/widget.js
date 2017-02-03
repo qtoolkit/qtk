@@ -14,33 +14,15 @@ var emitter_1 = require("../emitter");
 var utils_1 = require("../utils");
 var Events = require("../events");
 var string_table_1 = require("../string-table");
-var matrix_stack_1 = require("../matrix-stack");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
 var dirty_rect_context_1 = require("../dirty-rect-context");
 var image_tile_1 = require("../image-tile");
 var behavior_1 = require("../behaviors/behavior");
 var layouter_1 = require('../layouters/layouter');
-var iview_model_1 = require("../mvvm/iview-model");
 var binding_rule_1 = require("../mvvm/binding-rule");
-/**
- * @enum WidgetMode
- * 控件当前的运行模式。
- */
-(function (WidgetMode) {
-    /**
-     * @property {number}
-     * 运行模式
-     */
-    WidgetMode[WidgetMode["RUNTIME"] = 0] = "RUNTIME";
-    /**
-     * @property {number}
-     * 设计模式
-     */
-    WidgetMode[WidgetMode["DESIGN"] = 1] = "DESIGN";
-})(exports.WidgetMode || (exports.WidgetMode = {}));
-var WidgetMode = exports.WidgetMode;
-;
+var binding_rule_2 = require("../mvvm/binding-rule");
+var iview_model_1 = require("../mvvm/iview-model");
 /**
  * @enum WidgetState
  * 控件的状态
@@ -168,6 +150,10 @@ var Widget = (function (_super) {
         }
         return this;
     };
+    /**
+     * @method get
+     * 同时获取多个属性。
+     */
     Widget.prototype.get = function (props) {
         if (props) {
             for (var key in props) {
@@ -189,28 +175,6 @@ var Widget = (function (_super) {
         p.y -= this.y;
         var iter = this.parent;
         while (iter) {
-            p.x -= iter.x;
-            p.y -= iter.y;
-            iter = iter.parent;
-        }
-        return p;
-    };
-    /**
-     * 把Pointer事件的坐标转换成相对于当前控件左上角的坐标。
-     * @param {Pointer} p Pointer事件的坐标。
-     * @return {Pointer} 相对于当前控件左上角的坐标。
-     */
-    Widget.prototype.eventPointToLocal = function (p) {
-        if (this._canvas) {
-            return p;
-        }
-        p.x -= this.x;
-        p.y -= this.y;
-        var iter = this.parent;
-        while (iter) {
-            if (iter._canvas) {
-                break;
-            }
             p.x -= iter.x;
             p.y -= iter.y;
             iter = iter.parent;
@@ -271,27 +235,33 @@ var Widget = (function (_super) {
     Widget.prototype.onDeinit = function () {
         this._inited = false;
     };
-    /*
-     * ~初始化。在窗口关闭后，对窗口上所有控件调用，或者对被移出的控件调用。
-     */
     Widget.prototype.deinit = function () {
         this.children.forEach(function (child) {
             child.deinit();
         });
         this.onDeinit();
     };
-    Widget.prototype.dispatchPointerDown = function (evt, ctx) {
+    Widget.prototype.translatePointerEvent = function (evt) {
+        evt.localX -= this.x;
+        evt.localY -= this.y;
+    };
+    Widget.prototype.untranslatePointerEvent = function (evt) {
+        evt.localX += this.x;
+        evt.localY += this.y;
+    };
+    Widget.prototype.dispatchPointerDown = function (evt) {
         if (!this._enable || !this._sensitive) {
             return;
         }
-        ctx.save();
-        this.applyTransform(ctx);
-        var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
+        this.translatePointerEvent(evt);
+        var x = evt.localX;
+        var y = evt.localY;
+        var hitTestResult = this.selfHitTest(x, y);
         if (hitTestResult) {
             this.dispatchEvent(evt, true);
-            this.target = this.findEventTargetChild(evt.x, evt.y, ctx);
+            this.target = this.findEventTargetChild(x, y);
             if (this.target) {
-                this.target.dispatchPointerDown(evt, ctx);
+                this.target.dispatchPointerDown(evt);
             }
             if (this.onpointerdown) {
                 this.onpointerdown(evt);
@@ -305,13 +275,13 @@ var Widget = (function (_super) {
             }
             this.state = WidgetState.NORMAL;
         }
-        ctx.restore();
+        this.untranslatePointerEvent(evt);
         this.hitTestResult = hitTestResult;
     };
-    Widget.prototype.dispatchPointerMoveToTarget = function (evt, ctx) {
+    Widget.prototype.dispatchPointerMoveToTarget = function (evt) {
         this.dispatchEvent(evt, true);
         if (this.target) {
-            this.target.dispatchPointerMove(evt, ctx);
+            this.target.dispatchPointerMove(evt);
         }
         if (this.onpointermove) {
             this.onpointermove(evt);
@@ -338,18 +308,18 @@ var Widget = (function (_super) {
         this.dispatchEvent(e, false);
         e.dispose();
     };
-    Widget.prototype.dispatchPointerMoveToUnder = function (evt, ctx) {
-        ctx.save();
-        this.applyTransform(ctx);
-        var hitTestResult = this.selfHitTest(evt.x, evt.y, ctx);
+    Widget.prototype.dispatchPointerMoveToUnder = function (evt) {
+        var x = evt.localX;
+        var y = evt.localY;
+        var hitTestResult = this.selfHitTest(x, y);
         if (hitTestResult) {
             this.dispatchEvent(evt, true);
             var _lastOverWidget = this._lastOverWidget;
-            var overWidget = this.findEventTargetChild(evt.x, evt.y, ctx);
+            var overWidget = this.findEventTargetChild(x, y);
             if (_lastOverWidget !== overWidget) {
                 var e = null;
                 if (_lastOverWidget) {
-                    _lastOverWidget.dispatchPointerMove(evt, ctx);
+                    _lastOverWidget.dispatchPointerMove(evt);
                     _lastOverWidget.dispatchPointerLeave(evt);
                 }
                 if (overWidget) {
@@ -358,7 +328,7 @@ var Widget = (function (_super) {
                 this._lastOverWidget = overWidget;
             }
             if (overWidget) {
-                overWidget.dispatchPointerMove(evt, ctx);
+                overWidget.dispatchPointerMove(evt);
             }
             if (this.onpointermove) {
                 this.onpointermove(evt);
@@ -379,21 +349,23 @@ var Widget = (function (_super) {
             this.dispatchEvent(evt, false);
             this.state = WidgetState.NORMAL;
         }
-        ctx.restore();
     };
-    Widget.prototype.dispatchPointerMove = function (evt, ctx) {
+    Widget.prototype.dispatchPointerMove = function (evt) {
         if (!this._enable || !this._sensitive) {
             return;
         }
+        this.translatePointerEvent(evt);
         if (evt.pointerDown) {
-            this.dispatchPointerMoveToTarget(evt, ctx);
+            this.dispatchPointerMoveToTarget(evt);
         }
-        this.dispatchPointerMoveToUnder(evt, ctx);
+        this.dispatchPointerMoveToUnder(evt);
+        this.untranslatePointerEvent(evt);
     };
     Widget.prototype.dispatchPointerUp = function (evt) {
         if (!this._enable || !this._sensitive) {
             return;
         }
+        this.translatePointerEvent(evt);
         this.dispatchEvent(evt, true);
         if (this._lastOverWidget && this.target !== this._lastOverWidget) {
             this._lastOverWidget.dispatchPointerUp(evt);
@@ -406,6 +378,7 @@ var Widget = (function (_super) {
         }
         this.dispatchEvent(evt, false);
         this.state = WidgetState.NORMAL;
+        this.untranslatePointerEvent(evt);
     };
     Widget.prototype.dispatchClick = function (evt) {
         if (!this._enable || !this._sensitive) {
@@ -502,20 +475,15 @@ var Widget = (function (_super) {
         this.dispatchEvent(e.reset(Events.AFTER_APPLY_TRANSFORM, ctx, this));
         return this;
     };
-    Widget.prototype.findEventTargetChild = function (x, y, ctx) {
+    Widget.prototype.findEventTargetChild = function (x, y) {
         var arr = this._children;
         var n = arr.length;
         for (var i = n - 1; i >= 0; i--) {
             var iter = arr[i];
             if (iter._enable && iter._sensitive) {
-                ctx.save();
-                iter.applyTransform(ctx);
-                var hitTestResult = iter.hitTest(x, y, ctx);
-                if (hitTestResult) {
-                    ctx.restore();
+                if (rect_1.Rect.rect.init(iter.x, iter.y, iter.w, iter.h).containsPoint(x, y)) {
                     return iter;
                 }
-                ctx.restore();
             }
         }
         return null;
@@ -1063,15 +1031,12 @@ var Widget = (function (_super) {
         var app = this.app;
         var density = app.getViewPort().density;
         var canvas = canvas_1.Canvas.create(this.x, this.y, this.w, this.h, density);
-        var matrixStack = matrix_stack_1.MatrixStack.create();
         canvas.ensureCanvas();
         canvas.on(Events.POINTER_DOWN, function (evt) {
-            matrixStack.identity();
-            _this.dispatchPointerDown(evt, matrixStack);
+            _this.dispatchPointerDown(evt);
         });
         canvas.on(Events.POINTER_MOVE, function (evt) {
-            matrixStack.identity();
-            _this.dispatchPointerMove(evt, matrixStack);
+            _this.dispatchPointerMove(evt);
         });
         canvas.on(Events.POINTER_UP, function (evt) {
             _this.dispatchPointerUp(evt);
@@ -1891,7 +1856,7 @@ var Widget = (function (_super) {
             });
         }
         if (json.dataBindingRule) {
-            this._dataBindingRule = binding_rule_1.BindingRule.createFromJson(json.dataBindingRule);
+            this._dataBindingRule = binding_rule_2.BindingRule.createFromJson(json.dataBindingRule);
         }
         if (json.behaviors) {
             this.behaviorsFromJson(json.behaviors);
@@ -2019,7 +1984,7 @@ var Widget = (function (_super) {
          * 数据绑定规则。
          */
         set: function (dataBindingRule) {
-            this._dataBindingRule = binding_rule_1.BindingRule.create(dataBindingRule);
+            this._dataBindingRule = binding_rule_2.BindingRule.create(dataBindingRule);
         },
         enumerable: true,
         configurable: true
@@ -2248,21 +2213,14 @@ var Widget = (function (_super) {
             }
         });
     };
-    Widget.prototype.hitTest = function (x, y, ctx) {
-        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w, this.h), ctx);
+    Widget.prototype.hitTest = function (x, y) {
+        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w, this.h));
     };
-    Widget.prototype.doHitTest = function (x, y, r, ctx) {
-        var m = ctx.invert();
-        if (m) {
-            var p = m.transformPoint(x, y);
-            if (p.x >= r.x && p.x <= (r.x + r.w) && p.y >= r.y && p.y <= (r.y + r.h)) {
-                return HitTestResult.MM;
-            }
-        }
-        return HitTestResult.NONE;
+    Widget.prototype.doHitTest = function (x, y, r) {
+        return r.containsPoint(x, y) ? HitTestResult.MM : HitTestResult.NONE;
     };
-    Widget.prototype.selfHitTest = function (x, y, ctx) {
-        return this.hitTest(x, y, ctx);
+    Widget.prototype.selfHitTest = function (x, y) {
+        return this.hitTest(x, y);
     };
     Widget.defProps = {
         _x: 0,

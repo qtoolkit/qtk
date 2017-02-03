@@ -3,7 +3,6 @@ import {Style} from "../style";
 import {Widget} from "./widget";
 import {RichText} from "./rich-text";
 import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
@@ -408,7 +407,7 @@ export class RichTextEdit extends RichText {
     	return;
     };
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
         this._selectDragStart = node.ordinal;
@@ -426,7 +425,7 @@ export class RichTextEdit extends RichText {
         this._textArea.focus();
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
 

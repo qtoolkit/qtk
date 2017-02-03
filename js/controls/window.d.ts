@@ -1,7 +1,6 @@
 import { Point } from "../point";
 import { Widget } from "./widget";
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 export declare enum WindowType {
     NORMAL = 0,
     POPUP = 1,
@@ -30,8 +29,8 @@ export declare abstract class Window extends Widget {
      * 获取鼠标在当前窗口上的位置。
      */
     readonly pointerPosition: Point;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     /**
      * 抓住事件，让输入事件始终发到当前窗口，直到ungrab为止。
      */
@@ -66,5 +65,7 @@ export declare abstract class Window extends Widget {
     registerShortcut(keys: string, func: Function): void;
     protected onCreated(): void;
     protected onReset(): void;
+    protected translatePointerEvent(evt: Events.PointerEvent): void;
+    protected untranslatePointerEvent(evt: Events.PointerEvent): void;
     reset(type: string, options: any): Widget;
 }

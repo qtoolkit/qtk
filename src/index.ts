@@ -75,7 +75,7 @@ export {GridLayouter, GridLayouterParam} from "./layouters/grid-layouter";
 export {ListLayouter, ListLayouterParam} from "./layouters/list-layouter";
 export {SimpleLayouter, SimpleLayouterParam} from "./layouters/simple-layouter";
 export {LinearLayouter, LinearLayouterParam} from "./layouters/linear-layouter";
-export {Widget, WidgetState, WidgetMode, HitTestResult} from "./controls/widget";
+export {Widget, WidgetState, HitTestResult} from "./controls/widget";
 export {Direction, Align, AlignH, AlignV, Orientation} from "./consts";
 export {TitleComboBox, TitleComboBoxEditable} from "./controls-ext/title-combo-box";
 export {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls/message-box";

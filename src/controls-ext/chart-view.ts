@@ -4,7 +4,6 @@ import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {IMainLoop} from "../imain-loop";
-import {MatrixStack} from "../matrix-stack";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
@@ -64,13 +63,13 @@ export class ChartView extends Widget {
 		this._chartCanvas.dispatchEvent(e);
 	}
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
-		super.dispatchPointerDown(evt, ctx);
+	public dispatchPointerDown(evt:Events.PointerEvent) {
+		super.dispatchPointerDown(evt);
     	this.forwardPointerEvent("mousedown", evt.x, evt.y); 
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
-		super.dispatchPointerMove(evt, ctx);
+	public dispatchPointerMove(evt:Events.PointerEvent) {
+		super.dispatchPointerMove(evt);
     	this.forwardPointerEvent("mousemove", evt.x, evt.y); 
 	}
 	

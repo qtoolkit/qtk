@@ -229,6 +229,14 @@ export class PointerEvent extends InputEvent {
 	 */
 	public y : number;
 	/**
+	 * 指针事件相对于当前控件左上角的x坐标。
+	 */
+	public localX : number;
+	/**
+	 * 指针事件相对于当前控件左上角的y坐标。
+	 */
+	public localY : number;
+	/**
 	 * 指针是否按下。
 	 */
 	public pointerDown : boolean;
@@ -260,6 +268,8 @@ export class PointerEvent extends InputEvent {
 		this.id = detail.id;
 		this.x = detail.x;
 		this.y = detail.y;
+		this.localX = detail.x;
+		this.localY = detail.y;
 		this.timeStamp = detail.timeStamp;
 		this.pointerDown = detail.pointerDown;
 		this.pointerDownX = detail.pointerDownX;

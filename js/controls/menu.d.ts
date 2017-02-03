@@ -2,7 +2,6 @@ import { Style } from "../style";
 import { Dialog } from "./dialog";
 import { ListView } from "./list-view";
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 import { Widget } from "./widget";
 import { ImageTile } from "../image-tile";
 export declare class Menu extends Dialog {
@@ -22,7 +21,7 @@ export declare class Menu extends Dialog {
      */
     trigger: Widget;
     onItemEnter(child: MenuItem): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     constructor();
     clearContent(): Widget;
     resizeToContent(): Widget;

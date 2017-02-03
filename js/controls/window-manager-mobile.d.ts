@@ -1,6 +1,5 @@
 import { Widget } from "./widget";
 import Events = require("../events");
-import { MatrixStack } from "../matrix-stack";
 import { WindowManager } from "./window-manager";
 import { IWindowManager } from "./iwindow-manager";
 import { DirtyRectContext } from "../dirty-rect-context";
@@ -10,8 +9,8 @@ import { DirtyRectContext } from "../dirty-rect-context";
 export declare class WindowManagerMobile extends WindowManager implements IWindowManager {
     constructor();
     readonly target: Widget;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
     dispatchKeyDown(evt: any): void;
     dispatchClick(evt: any): void;

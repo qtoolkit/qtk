@@ -30,6 +30,9 @@ var Rect = (function () {
         this.y = y;
         return this;
     };
+    Rect.prototype.containsPoint = function (x, y) {
+        return x >= this.x && x < (this.x + this.w) && y >= this.y && y < (this.y + this.h);
+    };
     Rect.create = function (x, y, w, h) {
         var r = new Rect(x || 0, y || 0, w || 0, h || 0);
         return r;

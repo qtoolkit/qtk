@@ -1,7 +1,6 @@
 import { Rect } from "../rect";
 import Events = require("../events");
 import { Widget } from "../controls/widget";
-import { MatrixStack } from "../matrix-stack";
 /**
  * 被动式可滚分组。滚动区域由外面设置。
  */
@@ -25,7 +24,7 @@ export declare abstract class PassiveScrollableGroup extends Widget {
     protected onReset(): void;
     dispatchClick(evt: any): void;
     dispatchDblClick(evt: any): void;
-    dispatchPointerDown(evt: Events.PointerEvent, ctx: MatrixStack): void;
-    dispatchPointerMove(evt: Events.PointerEvent, ctx: MatrixStack): void;
+    dispatchPointerDown(evt: Events.PointerEvent): void;
+    dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
 }

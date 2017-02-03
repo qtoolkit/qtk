@@ -110,14 +110,14 @@ var PassiveScrollableGroup = (function (_super) {
         _super.prototype.dispatchDblClick.call(this, evt);
         this.unOffsetPointerEvent(evt);
     };
-    PassiveScrollableGroup.prototype.dispatchPointerDown = function (evt, ctx) {
+    PassiveScrollableGroup.prototype.dispatchPointerDown = function (evt) {
         this.offsetPointerEvent(evt);
-        _super.prototype.dispatchPointerDown.call(this, evt, ctx);
+        _super.prototype.dispatchPointerDown.call(this, evt);
         this.unOffsetPointerEvent(evt);
     };
-    PassiveScrollableGroup.prototype.dispatchPointerMove = function (evt, ctx) {
+    PassiveScrollableGroup.prototype.dispatchPointerMove = function (evt) {
         this.offsetPointerEvent(evt);
-        _super.prototype.dispatchPointerMove.call(this, evt, ctx);
+        _super.prototype.dispatchPointerMove.call(this, evt);
         this.unOffsetPointerEvent(evt);
     };
     PassiveScrollableGroup.prototype.dispatchPointerUp = function (evt) {

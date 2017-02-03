@@ -3,7 +3,6 @@ import {Rect} from "../rect";
 import {Style} from "../style";
 import Events = require("../events");
 import {Widget} from "../controls/widget";
-import {MatrixStack} from "../matrix-stack";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
@@ -121,15 +120,15 @@ export abstract class PassiveScrollableGroup extends Widget {
 		this.unOffsetPointerEvent(evt);
 	}
 	
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent) {
 		this.offsetPointerEvent(evt);
-		super.dispatchPointerDown(evt, ctx);
+		super.dispatchPointerDown(evt);
 		this.unOffsetPointerEvent(evt);
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		this.offsetPointerEvent(evt);
-		super.dispatchPointerMove(evt, ctx);
+		super.dispatchPointerMove(evt);
 		this.unOffsetPointerEvent(evt);
 	}
 

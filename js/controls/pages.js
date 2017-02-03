@@ -58,7 +58,7 @@ var Pages = (function (_super) {
         }
         return this;
     };
-    Pages.prototype.findEventTargetChild = function (x, y, ctx) {
+    Pages.prototype.findEventTargetChild = function (x, y) {
         return this.target;
     };
     Pages.prototype.onReset = function () {

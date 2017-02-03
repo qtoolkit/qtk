@@ -391,7 +391,7 @@ var RichTextEdit = (function (_super) {
         return;
     };
     ;
-    RichTextEdit.prototype.dispatchPointerDown = function (evt, ctx) {
+    RichTextEdit.prototype.dispatchPointerDown = function (evt) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
         this._selectDragStart = node.ordinal;
@@ -407,7 +407,7 @@ var RichTextEdit = (function (_super) {
         this.requestRedraw();
         this._textArea.focus();
     };
-    RichTextEdit.prototype.dispatchPointerMove = function (evt, ctx) {
+    RichTextEdit.prototype.dispatchPointerMove = function (evt) {
         var doc = this._doc;
         var node = this.findNodeByEvent(evt);
         if (this._selectDragStart !== null) {

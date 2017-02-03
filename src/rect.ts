@@ -21,19 +21,19 @@ export class Rect {
 	public dispose() {
 	}
 
-	clone() : Rect {
+	public clone() : Rect {
 		return Rect.create(this.x, this.y, this.w, this.h);
 	}
 
-	equal(other:Rect) : boolean {
+	public equal(other:Rect) : boolean {
 		return this.x === other.x && this.y === other.y && this.w === other.w && this.h === other.h;
 	}
 
-	copy(other:Rect) : Rect {
+	public copy(other:Rect) : Rect {
 		return this.init(other.x, other.y, other.w, other.h);
 	}
 	
-	merge(other:Rect) : Rect {
+	public merge(other:Rect) : Rect {
 		var x = Math.min(this.x, other.x);
 		var y = Math.min(this.y, other.y);
 
@@ -43,6 +43,10 @@ export class Rect {
 		this.y = y;
 
 		return this;
+	}
+
+	public containsPoint(x:number, y:number) : boolean {
+		return x >= this.x && x < (this.x + this.w) && y >= this.y && y < (this.y + this.h); 
 	}
 
 	public static create(x?:number, y?:number, w?:number, h?:number) {

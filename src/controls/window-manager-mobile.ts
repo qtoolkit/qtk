@@ -2,7 +2,6 @@
 import {Widget} from "./widget";
 import {Window, WindowType} from "./window";
 import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
 import {WindowManager} from "./window-manager";
 import {IWindowManager} from "./iwindow-manager";
 import {WidgetFactory} from "./widget-factory";
@@ -25,17 +24,17 @@ export class WindowManagerMobile extends WindowManager implements IWindowManager
 		return win;
 	}
 
-	public dispatchPointerDown(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerDown(evt:Events.PointerEvent) {
 		var target = this.target;
 		if(target) {
-			target.dispatchPointerDown(evt, ctx);
+			target.dispatchPointerDown(evt);
 		}
 	}
 
-	public dispatchPointerMove(evt:Events.PointerEvent, ctx:MatrixStack) {
+	public dispatchPointerMove(evt:Events.PointerEvent) {
 		var target = this.target;
 		if(target) {
-			target.dispatchPointerMove(evt, ctx);
+			target.dispatchPointerMove(evt);
 		}
 	}
 	

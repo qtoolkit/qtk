@@ -2,7 +2,6 @@
 import {Widget} from "./widget";
 import {Window, WindowType} from "./window";
 import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
 import {WindowManager} from "./window-manager";
 import {IWindowManager} from "./iwindow-manager";
 import {WidgetFactory} from "./widget-factory";
