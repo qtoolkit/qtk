@@ -58,8 +58,8 @@ export class Draggable extends Behavior {
 			this.dragging = false;
 			Events.DragEvent.isDragging = false;
 			this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
-			this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
 		}
+		this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
 	}
 
 	protected onPointerMove(evt:Events.PointerEvent){
