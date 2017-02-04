@@ -152,12 +152,12 @@ export declare class Widget extends Emitter {
     dispatchPointerMoveToUnder(evt: Events.PointerEvent): void;
     dispatchPointerMove(evt: Events.PointerEvent): void;
     dispatchPointerUp(evt: Events.PointerEvent): void;
-    dispatchClick(evt: any): void;
-    dispatchContextMenu(evt: any): void;
-    dispatchDblClick(evt: any): void;
-    dispatchKeyDown(evt: any): void;
-    dispatchKeyUp(evt: any): void;
-    dispatchWheel(evt: any): void;
+    dispatchClick(evt: Events.PointerEvent): void;
+    dispatchContextMenu(evt: Events.PointerEvent): void;
+    dispatchDblClick(evt: Events.PointerEvent): void;
+    dispatchKeyDown(evt: Events.KeyEvent): void;
+    dispatchKeyUp(evt: Events.KeyEvent): void;
+    dispatchWheel(evt: Events.WheelEvent): void;
     protected applyTransform(ctx: MatrixStack): Widget;
     protected findEventTargetChild(x: number, y: number): Widget;
     animate(): TWEEN.Tween;

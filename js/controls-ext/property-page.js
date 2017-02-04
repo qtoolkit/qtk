@@ -337,6 +337,12 @@ var PropertyPage = (function (_super) {
                 }
             };
             valueWidget.dataBindingRule = bindRule;
+            if (item.titleW) {
+                titleValue.titleW = item.titleW;
+            }
+            if (item.valueW) {
+                titleValue.valueW = item.valueW;
+            }
         }
     };
     PropertyPage.prototype.initWithPropsDesc = function (propsDesc) {

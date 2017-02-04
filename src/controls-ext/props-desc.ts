@@ -7,6 +7,8 @@ export class PropDesc {
 	public name : string;
 	public desc : string;
 	public value : any;
+	public titleW : string;
+	public valueW : string;
 
 	public static keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
 	
@@ -36,10 +38,12 @@ export class PropDesc {
 		this.type = type;
 	}
 
-	public setBasic(name:string, value:any, desc?:string) {
+	public setBasic(name:string, value:any, desc?:string, titleW?:string, valueW?:string) {
 		this.name = name;
 		this.desc = desc;
 		this.value = value;
+		this.titleW = titleW;
+		this.valueW = valueW;
 	}
 
 	/**
@@ -360,7 +364,7 @@ export class PropsDesc extends Emitter {
 			}
 			
 			items.push(desc);
-			desc.setBasic(data.name, data.value, data.desc);
+			desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
 			desc.setDataBindingRule(data.path, data.converter, data.validationRule);
 		});
 	

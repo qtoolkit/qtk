@@ -114,7 +114,7 @@ export abstract class TitleValue extends Widget {
 	}
 
 	protected static defProps = Object.assign({}, Widget.defProps, {_lp:2, _tp:2, _rp:2, _bp:2,
-		_title:null, _titleW:60, _valueW:60});
+		_title:null, _titleW:80, _valueW:60});
 
 	protected getDefProps() : any {
 		return TitleValue.defProps;

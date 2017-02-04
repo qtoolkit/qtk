@@ -30,10 +30,12 @@ var PropDesc = (function () {
             }
         });
     };
-    PropDesc.prototype.setBasic = function (name, value, desc) {
+    PropDesc.prototype.setBasic = function (name, value, desc, titleW, valueW) {
         this.name = name;
         this.desc = desc;
         this.value = value;
+        this.titleW = titleW;
+        this.valueW = valueW;
     };
     PropDesc.prototype.setDataBindingRule = function (path, converter, validationRule) {
         this.path = path;
@@ -336,7 +338,7 @@ var PropsDesc = (function (_super) {
                 return;
             }
             items.push(desc);
-            desc.setBasic(data.name, data.value, data.desc);
+            desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
             desc.setDataBindingRule(data.path, data.converter, data.validationRule);
         });
         this._items = items;

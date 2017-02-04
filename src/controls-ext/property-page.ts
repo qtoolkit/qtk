@@ -365,6 +365,13 @@ export class PropertyPage extends Widget {
 				}
 			};
 			valueWidget.dataBindingRule = bindRule;
+			if(item.titleW) {
+				titleValue.titleW = item.titleW;
+			}
+
+			if(item.valueW) {
+				titleValue.valueW = item.valueW;
+			}
 		}
 	}
 

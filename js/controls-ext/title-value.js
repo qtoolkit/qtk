@@ -123,7 +123,7 @@ var TitleValue = (function (_super) {
         this._valueWidget = null;
     };
     TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-        _title: null, _titleW: 60, _valueW: 60 });
+        _title: null, _titleW: 80, _valueW: 60 });
     return TitleValue;
 }(widget_1.Widget));
 exports.TitleValue = TitleValue;

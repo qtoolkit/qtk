@@ -415,7 +415,7 @@ export class Widget extends Emitter {
 		this.untranslatePointerEvent(evt);
 	}
 	
-	public dispatchClick(evt:any) {
+	public dispatchClick(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -430,7 +430,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchContextMenu(evt:any) {
+	public dispatchContextMenu(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -445,7 +445,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchDblClick(evt:any) {
+	public dispatchDblClick(evt:Events.PointerEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -460,7 +460,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 
-	public dispatchKeyDown(evt:any) {
+	public dispatchKeyDown(evt:Events.KeyEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -475,7 +475,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchKeyUp(evt:any) {
+	public dispatchKeyUp(evt:Events.KeyEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}
@@ -490,7 +490,7 @@ export class Widget extends Emitter {
 		this.dispatchEvent(evt, false);
 	}
 	
-	public dispatchWheel(evt:any) {
+	public dispatchWheel(evt:Events.WheelEvent) {
 		if(!this._enable || !this._sensitive) {
 			return;
 		}

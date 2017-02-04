@@ -26680,6 +26680,12 @@ var qtk =
 	                }
 	            };
 	            valueWidget.dataBindingRule = bindRule;
+	            if (item.titleW) {
+	                titleValue.titleW = item.titleW;
+	            }
+	            if (item.valueW) {
+	                titleValue.valueW = item.valueW;
+	            }
 	        }
 	    };
 	    PropertyPage.prototype.initWithPropsDesc = function (propsDesc) {
@@ -26921,7 +26927,7 @@ var qtk =
 	        this._valueWidget = null;
 	    };
 	    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-	        _title: null, _titleW: 60, _valueW: 60 });
+	        _title: null, _titleW: 80, _valueW: 60 });
 	    return TitleValue;
 	}(widget_1.Widget));
 	exports.TitleValue = TitleValue;
@@ -28118,10 +28124,12 @@ var qtk =
 	            }
 	        });
 	    };
-	    PropDesc.prototype.setBasic = function (name, value, desc) {
+	    PropDesc.prototype.setBasic = function (name, value, desc, titleW, valueW) {
 	        this.name = name;
 	        this.desc = desc;
 	        this.value = value;
+	        this.titleW = titleW;
+	        this.valueW = valueW;
 	    };
 	    PropDesc.prototype.setDataBindingRule = function (path, converter, validationRule) {
 	        this.path = path;
@@ -28424,7 +28432,7 @@ var qtk =
 	                return;
 	            }
 	            items.push(desc);
-	            desc.setBasic(data.name, data.value, data.desc);
+	            desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
 	            desc.setDataBindingRule(data.path, data.converter, data.validationRule);
 	        });
 	        this._items = items;

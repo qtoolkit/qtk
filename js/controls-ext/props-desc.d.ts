@@ -4,11 +4,13 @@ export declare class PropDesc {
     name: string;
     desc: string;
     value: any;
+    titleW: string;
+    valueW: string;
     static keys: string[];
     toJson(): any;
     fromJson(json: any): void;
     constructor(type: string);
-    setBasic(name: string, value: any, desc?: string): void;
+    setBasic(name: string, value: any, desc?: string, titleW?: string, valueW?: string): void;
     /**
      * DataBinding
      */
