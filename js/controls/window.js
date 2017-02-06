@@ -193,7 +193,7 @@ var Window = (function (_super) {
         if (key) {
             keys += (keys ? ("+" + key) : key);
             var e = this._shortcutEvent;
-            e.init(Events.SHORTCUT, keys);
+            e.init(Events.SHORTCUT, keys.toLowerCase());
             this.dispatchShortcut(e);
         }
     };

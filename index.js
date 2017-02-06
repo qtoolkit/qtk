@@ -4176,6 +4176,7 @@ var qtk =
 	    detail.timeStamp = evt.timeStamp;
 	    dispatchEvent(evt.target, Events.KEYDOWN, detail);
 	    detail.dispose();
+	    evt.preventDefault();
 	}
 	function onKeyUp(evt) {
 	    updateKeysStatus(evt.keyCode, false);
@@ -4183,6 +4184,7 @@ var qtk =
 	    detail.timeStamp = evt.timeStamp;
 	    dispatchEvent(evt.target, Events.KEYUP, detail);
 	    detail.dispose();
+	    evt.preventDefault();
 	}
 	function dispatchKeyEvent(target, keyCode) {
 	    var detail = event_detail_1.KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);
@@ -18911,7 +18913,7 @@ var qtk =
 	        if (key) {
 	            keys += (keys ? ("+" + key) : key);
 	            var e = this._shortcutEvent;
-	            e.init(Events.SHORTCUT, keys);
+	            e.init(Events.SHORTCUT, keys.toLowerCase());
 	            this.dispatchShortcut(e);
 	        }
 	    };
