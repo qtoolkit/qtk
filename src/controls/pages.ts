@@ -25,6 +25,10 @@ export class Pages extends Widget {
 		return this;
 	}
 
+	public set target(widget:Widget){
+		this.value = this.children.indexOf(widget);
+	}
+
 	public get target() : Widget {
 		if(this.children.length) {
 			return this.children[this.value];

@@ -41,6 +41,9 @@ var Pages = (function (_super) {
                 return null;
             }
         },
+        set: function (widget) {
+            this.value = this.children.indexOf(widget);
+        },
         enumerable: true,
         configurable: true
     });

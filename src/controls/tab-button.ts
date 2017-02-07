@@ -111,6 +111,11 @@ export class TabButton extends RadioButton {
 		if(this._currentIcon || this._normalIcon) {
 			w += this.h;
 		}
+		
+		if(this._closeButton) {
+			w += this.h;
+		}
+
 		if(text && style) {
 			var font = style.font;
 			w += Graphics.measureText(text, font) + style.fontSize;
@@ -135,9 +140,9 @@ export class TabButton extends RadioButton {
 		var text = this.getLocaleText();
 		var icon = this.value ? this._currentIcon : this._normalIcon;
 
+		var w = 0;
+		var h = 0;
 		if(icon) {
-			var w = 0;
-			var h = 0;
 			var x = this.leftPadding;
 			var y = this.topPadding;
 
@@ -159,11 +164,18 @@ export class TabButton extends RadioButton {
 				if(text) {
 					x += w + this.leftPadding;
 					w = this.w - x - this.rightPadding;
+					if(this._closeButton) {
+						w -= this.h;
+					}
 					Graphics.drawTextSL(ctx, text, style, Rect.rect.init(x, y, w, h));
 				}
 			}
 		}else{
-			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(0, 0, this.w, this.h));
+			w = this.w;
+			if(this._closeButton) {
+				w -= this.h;
+			}
+			Graphics.drawTextSL(ctx, text, style, Rect.rect.init(0, 0, w, this.h));
 		}
 
 		return this;

@@ -7,7 +7,7 @@ import { Widget } from "./widget";
 export declare class Pages extends Widget {
     value: number;
     setValueByPage(page: Widget): Widget;
-    readonly target: Widget;
+    target: Widget;
     relayoutChildren(): Rect;
     protected drawChildren(ctx: any): Widget;
     protected findEventTargetChild(x: number, y: number): Widget;

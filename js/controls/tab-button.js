@@ -113,6 +113,9 @@ var TabButton = (function (_super) {
             if (this._currentIcon || this._normalIcon) {
                 w += this.h;
             }
+            if (this._closeButton) {
+                w += this.h;
+            }
             if (text && style) {
                 var font = style.font;
                 w += graphics_1.Graphics.measureText(text, font) + style.fontSize;
@@ -139,9 +142,9 @@ var TabButton = (function (_super) {
     TabButton.prototype.drawImage = function (ctx, style) {
         var text = this.getLocaleText();
         var icon = this.value ? this._currentIcon : this._normalIcon;
+        var w = 0;
+        var h = 0;
         if (icon) {
-            var w = 0;
-            var h = 0;
             var x = this.leftPadding;
             var y = this.topPadding;
             if (this._orn === consts_1.Orientation.V) {
@@ -163,12 +166,19 @@ var TabButton = (function (_super) {
                 if (text) {
                     x += w + this.leftPadding;
                     w = this.w - x - this.rightPadding;
+                    if (this._closeButton) {
+                        w -= this.h;
+                    }
                     graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(x, y, w, h));
                 }
             }
         }
         else {
-            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, 0, this.w, this.h));
+            w = this.w;
+            if (this._closeButton) {
+                w -= this.h;
+            }
+            graphics_1.Graphics.drawTextSL(ctx, text, style, rect_1.Rect.rect.init(0, 0, w, this.h));
         }
         return this;
     };
