@@ -114,7 +114,7 @@ export class MenuBar extends Widget {
 
 	protected onReset() {
 		super.onReset();
-		this.childrenLayouter = LinearLayouter.createH({spacing:1}); 
+		this.childrenLayouter = LinearLayouter.createHWithOptions({spacing:1}); 
 	}
 	
 	protected static defProps = Object.assign({}, Widget.defProps, {_itemWidth:40});

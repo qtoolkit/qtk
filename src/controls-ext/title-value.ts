@@ -68,14 +68,14 @@ export abstract class TitleValue extends Widget {
 	public onInit() {
 		super.onInit();
 		this.titleWidget.text = this._title;
-		this.titleWidget.layoutParam = LinearLayouterParam.create({w:this._titleW, h:"100%"});
-		this.valueWidget.layoutParam = LinearLayouterParam.create({w:this._valueW, h:"100%"});
+		this.titleWidget.layoutParam = LinearLayouterParam.createWithOptions({w:this._titleW, h:"100%"});
+		this.valueWidget.layoutParam = LinearLayouterParam.createWithOptions({w:this._valueW, h:"100%"});
 	}
 
 	public onReset() {
 		super.onReset();
 
-		this.childrenLayouter = LinearLayouter.createH({spacing:5});
+		this.childrenLayouter = LinearLayouter.createHWithOptions({spacing:5});
 
 		var titleWidget = Label.create();
 		this.addChild(titleWidget);

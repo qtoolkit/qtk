@@ -61,9 +61,12 @@ var ListLayouter = (function (_super) {
         return this.rect;
     };
     ListLayouter.prototype.createParam = function (options) {
-        return ListLayouterParam.create(options);
+        return ListLayouterParam.createWithOptions(options);
     };
-    ListLayouter.create = function (options) {
+    ListLayouter.create = function (h, spacing) {
+        return ListLayouter.createWithOptions({ h: h, spacing: spacing });
+    };
+    ListLayouter.createWithOptions = function (options) {
         var layouter = new ListLayouter();
         return layouter.setOptions(options);
     };
@@ -71,7 +74,7 @@ var ListLayouter = (function (_super) {
 }(layouter_1.Layouter));
 exports.ListLayouter = ListLayouter;
 ;
-layouter_1.LayouterFactory.register(TYPE, ListLayouter.create);
+layouter_1.LayouterFactory.register(TYPE, ListLayouter.createWithOptions);
 /**
  * 列表布局器的参数。
  *
@@ -85,7 +88,10 @@ var ListLayouterParam = (function (_super) {
         this.h = h || 0;
         this.spacing = spacing || 0;
     }
-    ListLayouterParam.create = function (opt) {
+    ListLayouterParam.create = function (h, spacing) {
+        return new ListLayouterParam(h, spacing);
+    };
+    ListLayouterParam.createWithOptions = function (opt) {
         var options = opt || {};
         return new ListLayouterParam(options.h || options.height, options.spacing);
     };
@@ -93,4 +99,4 @@ var ListLayouterParam = (function (_super) {
 }(layouter_1.LayouterParam));
 exports.ListLayouterParam = ListLayouterParam;
 ;
-layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.create);
+layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.createWithOptions);

@@ -77,17 +77,21 @@ export class DockLayouter extends Layouter {
 	}
 
 	public createParam(options?:any) {
-		return DockLayouterParam.create(options);
+		return DockLayouterParam.createWithOptions(options);
 	}
 
-	static create(options?:any) : DockLayouter {
+	static create() : DockLayouter {
+		return DockLayouter.createWithOptions({});
+	}
+
+	static createWithOptions(options?:any) : DockLayouter {
 		var layouter = new DockLayouter();
 
 		return layouter.setOptions(options);
 	}
 };
 
-LayouterFactory.register(TYPE, DockLayouter.create);
+LayouterFactory.register(TYPE, DockLayouter.createWithOptions);
 
 /**
  * Dock布局器的参数。
@@ -131,12 +135,16 @@ export class DockLayouterParam extends LayouterParam {
 		widget.parent.relayoutChildren();
 	}
 
-	static create(opts:any) {
+	public static create(position:Direction, size:string) {
+		return new DockLayouterParam(position, size);
+	}
+
+	public static createWithOptions(opts:any) {
 		var options = opts || {};
 
 		return new DockLayouterParam(options.position, options.size||"");
 	}
 };
 
-LayouterParamFactory.register(TYPE, DockLayouterParam.create);
+LayouterParamFactory.register(TYPE, DockLayouterParam.createWithOptions);
 

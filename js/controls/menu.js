@@ -173,7 +173,7 @@ var Menu = (function (_super) {
         var item = MenuItem.create();
         var h = text === "-" ? this.itemH >> 1 : this.itemH;
         item.set({ iconURL: iconURL, text: text, shortcut: shortcut, onInitSubMenu: onInitSubMenu });
-        item.layoutParam = list_layouter_1.ListLayouterParam.create({ h: h });
+        item.layoutParam = list_layouter_1.ListLayouterParam.createWithOptions({ h: h });
         listView.addChild(item);
         item.on(Events.POINTER_ENTER, function (evt) {
             _this.onItemEnter(item);
@@ -184,7 +184,7 @@ var Menu = (function (_super) {
         _super.prototype.onReset.call(this);
         this.hasOwnCanvas = true;
         this.styleType = "widget.transparent";
-        this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+        this.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
         var listView = list_view_1.ListView.create();
         listView.padding = 0;
         listView.itemH = 25;
@@ -192,7 +192,7 @@ var Menu = (function (_super) {
         listView.dragToScroll = false;
         listView.slideToScroll = false;
         listView.bottomPadding = 4;
-        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
+        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "0", y: "0px", w: "100%", h: "100%" });
         this.addChild(listView);
         this.target = listView;
         this._listView = listView;

@@ -171,10 +171,10 @@ function addPageDataBinding(propertySheets, title) {
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 
 	var propertySheets = qtk.PropertySheets.create({padding:1, titleH:30});
-	propertySheets.layoutParam = qtk.SimpleLayouterParam.create({x:"10%", y:"10%", w:"80%", h:"80%"});
+	propertySheets.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"10%", y:"10%", w:"80%", h:"80%"});
 	win.addChild(propertySheets);
 
 	addPage(propertySheets, "Normal");

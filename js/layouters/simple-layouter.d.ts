@@ -9,7 +9,8 @@ export declare class SimpleLayouter extends Layouter {
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     layoutChild(child: Widget, r: Rect): void;
     createParam(options?: any): SimpleLayouterParam;
-    static create(options?: any): SimpleLayouter;
+    static create(): SimpleLayouter;
+    static createWithOptions(options?: any): SimpleLayouter;
 }
 /**
  * 简单的布局器的参数。
@@ -45,5 +46,6 @@ export declare class SimpleLayouterParam extends LayouterParam {
     minH: number;
     maxH: number;
     constructor(x: string, y: string, w: string, h: string);
-    static create(opts: any): SimpleLayouterParam;
+    static create(x: string, y: string, w: string, h: string): SimpleLayouterParam;
+    static createWithOptions(opts: any): SimpleLayouterParam;
 }

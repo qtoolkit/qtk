@@ -10,7 +10,8 @@ export declare class DockLayouter extends Layouter {
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     layoutChild(child: Widget, r: Rect): void;
     createParam(options?: any): DockLayouterParam;
-    static create(options?: any): DockLayouter;
+    static create(): DockLayouter;
+    static createWithOptions(options?: any): DockLayouter;
 }
 /**
  * Dock布局器的参数。
@@ -31,5 +32,6 @@ export declare class DockLayouterParam extends LayouterParam {
      * 对应的Widget被用户RESIZE之后，重排兄弟控件。
      */
     protected onWidgetResized(): void;
-    static create(opts: any): DockLayouterParam;
+    static create(position: Direction, size: string): DockLayouterParam;
+    static createWithOptions(opts: any): DockLayouterParam;
 }

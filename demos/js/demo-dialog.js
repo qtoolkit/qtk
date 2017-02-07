@@ -21,10 +21,10 @@ function createDialog(app, x, y, w, h) {
 	
 	dialog.moveToCenter();
 	dialog.scaleTo(1, 1, 300);
-	dialog.childrenLayouter = SimpleLayouter.create();
+	dialog.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var button = Button.create({text : "Close"});
-	button.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"200", h:"60"});
+	button.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"200", h:"60"});
 	dialog.addChild(button);
 	
 	button.on(Events.CLICK, function(evt) {
@@ -42,11 +42,11 @@ function createDialog(app, x, y, w, h) {
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	win.z = 100;
 
 	var button = Button.create({text : "Open Dialog"});
-	button.layoutParam = SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
+	button.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"25%", w:"50%", h:"50%"});
 	button.on(Events.CLICK, function(evt) {
 		createDialog(app, 10, 10, 300, 300);
 	});

@@ -233,12 +233,12 @@ var ComboBoxBase = (function (_super) {
         }
         dialog.set({ x: x, y: y, w: w, h: h });
         dialog.styleType = "widget.transparent";
-        dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+        dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
         var listView = list_view_1.ListView.create();
         listView.padding = padding;
         listView.itemH = itemH;
         listView.styleType = "combo-box-popup";
-        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
+        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "0", y: "0px", w: "100%", h: "100%" });
         listView.dragToScroll = scrollable;
         dialog.addChild(listView);
         dialog.target = listView;

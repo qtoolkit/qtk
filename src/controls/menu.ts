@@ -182,7 +182,7 @@ export class Menu extends Dialog {
 		var h = text === "-" ? this.itemH >> 1 : this.itemH;
 
 		item.set({iconURL:iconURL, text:text, shortcut:shortcut, onInitSubMenu:onInitSubMenu});
-		item.layoutParam = ListLayouterParam.create({h:h});
+		item.layoutParam = ListLayouterParam.createWithOptions({h:h});
 		listView.addChild(item);
 
 		item.on(Events.POINTER_ENTER, (evt:PointerEvent) => {
@@ -196,7 +196,7 @@ export class Menu extends Dialog {
 		super.onReset();
 		this.hasOwnCanvas = true;
 		this.styleType = "widget.transparent";
-		this.childrenLayouter = SimpleLayouter.create();
+		this.childrenLayouter = SimpleLayouter.createWithOptions();
 		
 		var listView = <ListView>ListView.create();
 		listView.padding = 0;
@@ -205,7 +205,7 @@ export class Menu extends Dialog {
 		listView.dragToScroll = false;
 		listView.slideToScroll = false;
 		listView.bottomPadding = 4;	
-		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
+		listView.layoutParam = SimpleLayouterParam.createWithOptions({x:"0", y:"0px", w:"100%", h:"100%"});
 		
 		this.addChild(listView);
 		this.target = listView;

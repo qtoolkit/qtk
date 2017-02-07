@@ -130,7 +130,7 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app,  w:vp.width, h:vp.height, padding : 10});
 	
-	win.childrenLayouter = qtk.GridLayouter.create({rowHeight:60, cols:3, margin:10});
+	win.childrenLayouter = qtk.GridLayouter.createWithOptions({rowHeight:60, cols:3, margin:10});
 
 	var text = "确保已经实现的控件，对使用者都是友好的，你可以无障碍的使用它们，请告诉我们任何让你产生挫>折的地方，一定会得到优先解决。在开发的过程中我们也会在博客中写出QTK内部实现原理，以及做出某些决策的原因。";
 	addShowMessage(win, "Hello QToolKit!");

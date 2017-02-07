@@ -173,7 +173,11 @@ function onKeyDown(evt) {
 	detail.timeStamp = evt.timeStamp;
 	dispatchEvent(evt.target, Events.KEYDOWN, detail);
 	detail.dispose();
-	evt.preventDefault();
+	
+	var tagName = evt.target.tagName;
+	if(tagName !== "INPUT" && tagName !== "TEXTAREA") {
+		evt.preventDefault();
+	}
 }
 
 function onKeyUp(evt) {
@@ -182,7 +186,11 @@ function onKeyUp(evt) {
 	detail.timeStamp = evt.timeStamp;
 	dispatchEvent(evt.target, Events.KEYUP, detail);
 	detail.dispose();
-	evt.preventDefault();
+
+	var tagName = evt.target.tagName;
+	if(tagName !== "INPUT" && tagName !== "TEXTAREA") {
+		evt.preventDefault();
+	}
 }
 
 function dispatchKeyEvent(target, keyCode) {

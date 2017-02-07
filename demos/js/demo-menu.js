@@ -39,10 +39,10 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 
-	win.childrenLayouter = qtk.DockLayouter.create();
+	win.childrenLayouter = qtk.DockLayouter.createWithOptions();
 
 	var menuBar = qtk.MenuBar.create({h:30, itemWidth:40});
-	menuBar.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP});
+	menuBar.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.TOP});
 	win.addChild(menuBar);
 	
 	menuBar.addLogo("/demos/assets/icons/@density/apple.png", null);	

@@ -144,7 +144,7 @@ export class GridView extends ScrollView {
 
 	protected onReset() {
 		super.onReset();
-		this._childrenLayouter = GridLayouter.create({cols:this.cols, rows:this.rows});
+		this._childrenLayouter = GridLayouter.createWithOptions({cols:this.cols, rows:this.rows});
 	}
 	
 	protected static defProps = Object.assign({}, ScrollView.defProps, 

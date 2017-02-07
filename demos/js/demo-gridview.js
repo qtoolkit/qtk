@@ -4,7 +4,7 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create();
 	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	
 	createGridView(win , "0", "0", "49%", "49%", 6, 0, 6, 0, 36);
 	createGridView(win , "50%", "0", "49%", "49%", 6, 0, 0, 60, 3600);
@@ -17,7 +17,7 @@ function onReady(app) {
 function createGridView(win, x, y, w, h, cols, colWidth, rows, rowHeight, n) {
 	var gridView = qtk.GridView.create();
 	gridView.setItemMargins({all:5});
-	gridView.layoutParam = qtk.SimpleLayouterParam.create({x:x, y:y, w:w, h:h});
+	gridView.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:x, y:y, w:w, h:h});
 	gridView.set({cols:cols, rows:rows, colWidth:colWidth, rowHeight:rowHeight});
 	gridView.set({leftPadding:2, rightPadding:0, topPadding:2, bottomPadding:2});
 	gridView.set({name:"gridView", contentWidth:500, contentH:2000, dragToScroll:true, slideToScroll:true});

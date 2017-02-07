@@ -2,11 +2,11 @@
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.w, h:vp.h});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	
 	var scrollView = qtk.ScrollView.create({dragToScroll:true, slideToScroll:true});
 
-	scrollView.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
+	scrollView.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"25%", y:"25%", w:"50%", h:"50%"});
 	scrollView.set({name:"scrollView", contentWidth:500, contentH:2000});	
 	win.addChild(scrollView);
 

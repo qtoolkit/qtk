@@ -97,9 +97,13 @@ var GridLayouter = (function (_super) {
         return ret;
     };
     GridLayouter.prototype.createParam = function (options) {
-        return GridLayouterParam.create(options);
+        return GridLayouterParam.createWithOptions(options);
     };
-    GridLayouter.create = function (options) {
+    GridLayouter.create = function (cols, rows, margin) {
+        return GridLayouter.createWithOptions({ cols: cols, rows: rows, leftMargin: margin, rightMargin: margin,
+            topMargin: margin, bottomMargin: margin });
+    };
+    GridLayouter.createWithOptions = function (options) {
         var layouter = new GridLayouter();
         return layouter.setOptions(options);
     };
@@ -107,7 +111,7 @@ var GridLayouter = (function (_super) {
 }(layouter_1.Layouter));
 exports.GridLayouter = GridLayouter;
 ;
-layouter_1.LayouterFactory.register(TYPE, GridLayouter.create);
+layouter_1.LayouterFactory.register(TYPE, GridLayouter.createWithOptions);
 /**
  * 网格布局器的参数。
  *
@@ -123,7 +127,10 @@ var GridLayouterParam = (function (_super) {
         this.spanRows = spanRows || 1;
         this.spanCols = spanCols || 1;
     }
-    GridLayouterParam.create = function (opts) {
+    GridLayouterParam.create = function (row, spanRows, col, spanCols) {
+        return new GridLayouterParam(row, spanRows, col, spanCols);
+    };
+    GridLayouterParam.createWithOptions = function (opts) {
         var options = opts || {};
         return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
     };
@@ -131,4 +138,4 @@ var GridLayouterParam = (function (_super) {
 }(layouter_1.LayouterParam));
 exports.GridLayouterParam = GridLayouterParam;
 ;
-layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.create);
+layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.createWithOptions);

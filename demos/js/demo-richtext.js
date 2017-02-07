@@ -107,11 +107,11 @@ function onReady(app) {
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var richText = RichText.create();
-	richText.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"80%", h:"80%"});
-	richText.childrenLayouter = SimpleLayouter.create();
+	richText.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"80%", h:"80%"});
+	richText.childrenLayouter = SimpleLayouter.createWithOptions();
 	richText.data = data;
 	win.addChild(richText);
 

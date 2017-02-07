@@ -13,10 +13,10 @@ function onReady(app) {
 
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var titleContent = TitleContent.create({movable:true});
-	titleContent.layoutParam = SimpleLayouterParam.create({x:"center", w:"50%", h:"50%"});
+	titleContent.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", w:"50%", h:"50%"});
 	win.addChild(titleContent);
 
 	titleContent.titleWidget = Label.create({text:"draggable && collapsable", styleType:"dialog.title-bg"});

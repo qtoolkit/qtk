@@ -6,30 +6,30 @@ describe('DockLayouter', function() {
 
 	var win = qtk.WindowNormal.create({app:app});
 	win.resizeTo(600, 600);
-	win.childrenLayouter = qtk.DockLayouter.create();
+	win.childrenLayouter = qtk.DockLayouter.createWithOptions();
    
     it('test basic', (done) => {
 
 		var topButton = qtk.Button.create().set({text:"Top", h:50});
-		topButton.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP});
+		topButton.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.TOP});
 		win.addChild(topButton);
 		
 		var bottomButton = qtk.Button.create().set({text:"Bottom", h:50});
-		bottomButton.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.BOTTOM});
+		bottomButton.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.BOTTOM});
 		win.addChild(bottomButton);
 
 
 		var leftButton = qtk.Button.create().set({text:"Left", w:150});
-		leftButton.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.LEFT});
+		leftButton.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.LEFT});
 		win.addChild(leftButton);
 
 		var rightButton = qtk.Button.create().set({text:"Right", w:150});
-		rightButton.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.RIGHT});
+		rightButton.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.RIGHT});
 		rightButton.useBehavior("resizable", {all:true});
 		win.addChild(rightButton);
 		
 		var centerButton = qtk.Button.create().set({text:"Center"});
-		centerButton.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP, size:"100%"});
+		centerButton.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.TOP, size:"100%"});
 		win.addChild(centerButton);
 		win.open();
 

@@ -82,9 +82,12 @@ var DockLayouter = (function (_super) {
         }
     };
     DockLayouter.prototype.createParam = function (options) {
-        return DockLayouterParam.create(options);
+        return DockLayouterParam.createWithOptions(options);
     };
-    DockLayouter.create = function (options) {
+    DockLayouter.create = function () {
+        return DockLayouter.createWithOptions({});
+    };
+    DockLayouter.createWithOptions = function (options) {
         var layouter = new DockLayouter();
         return layouter.setOptions(options);
     };
@@ -92,7 +95,7 @@ var DockLayouter = (function (_super) {
 }(layouter_1.Layouter));
 exports.DockLayouter = DockLayouter;
 ;
-layouter_1.LayouterFactory.register(TYPE, DockLayouter.create);
+layouter_1.LayouterFactory.register(TYPE, DockLayouter.createWithOptions);
 /**
  * Dock布局器的参数。
  *
@@ -134,7 +137,10 @@ var DockLayouterParam = (function (_super) {
         }
         widget.parent.relayoutChildren();
     };
-    DockLayouterParam.create = function (opts) {
+    DockLayouterParam.create = function (position, size) {
+        return new DockLayouterParam(position, size);
+    };
+    DockLayouterParam.createWithOptions = function (opts) {
         var options = opts || {};
         return new DockLayouterParam(options.position, options.size || "");
     };
@@ -142,4 +148,4 @@ var DockLayouterParam = (function (_super) {
 }(layouter_1.LayouterParam));
 exports.DockLayouterParam = DockLayouterParam;
 ;
-layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.create);
+layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.createWithOptions);

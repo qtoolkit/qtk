@@ -109,7 +109,7 @@ var MenuBar = (function (_super) {
     };
     MenuBar.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
+        this.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions({ spacing: 1 });
     };
     MenuBar.prototype.getDefProps = function () {
         return MenuBar.defProps;

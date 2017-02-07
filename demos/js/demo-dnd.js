@@ -22,11 +22,11 @@ function onReady(app) {
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var image = Image.create({name:"image1", text:"DragMe", value:imageURL});
 	image.useBehavior("draggable");
-	image.layoutParam = SimpleLayouterParam.create({x:"center", y:"10", w:"100", h:"100"});
+	image.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"10", w:"100", h:"100"});
 	
 	image.on(Events.DRAGSTART, function(evt) {
 		console.log("DRAGSTART");
@@ -54,7 +54,7 @@ function onReady(app) {
 			"lineWidth" : 1,
 			"fontSize" : 16
 		});
-	targetImage.layoutParam = SimpleLayouterParam.create({x:"center", y:"-210", w:"100%", h:"200"});
+	targetImage.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"-210", w:"100%", h:"200"});
 	targetImage.on(Events.DRAGENTER, function(evt) {
 		console.log("DRAGENTER");
 	});

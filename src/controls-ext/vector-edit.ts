@@ -193,7 +193,7 @@ export class VectorEdit extends Widget {
 		var cols = this.d;
 		var rows = 2;
 		
-		this.childrenLayouter = GridLayouter.create({rows:rows, cols:cols, rightMargin:10}); 
+		this.childrenLayouter = GridLayouter.createWithOptions({rows:rows, cols:cols, rightMargin:10}); 
 		
 		this._xLabel = this.createLabel(this._xTitle);
 		this._yLabel = this.createLabel(this._yTitle);

@@ -44,31 +44,31 @@ function onReady(app) {
 	var Events = Events;
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var comboBox = ComboBox.create();
-	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
+	comboBox.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"10px", w:"50%", h:"30px"});
 	comboBox.addOption("item1", 1, imageURL + "favor.normal.png");
 	comboBox.addOption("item1", 2, imageURL + "home.current.png");
 	comboBox.addOption("item1", 3, imageURL + "close.normal.png");
 	win.addChild(comboBox);
 
 	var comboBox = ComboBoxEditable.create({value:1});
-	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"100px", w:"50%", h:"30px"});
+	comboBox.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"100px", w:"50%", h:"30px"});
 	comboBox.addOption("red", 1, null, "red");
 	comboBox.addOption("green", 2, null, "green");
 	comboBox.addOption("blue", 3, null, "blue");
 	win.addChild(comboBox);
 	
 	comboBox = ComboBox.create({value:1, customDraw:drawCommbox, customItemDraw:drawCommboxItem});
-	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"-60px", w:"50%", h:"30px"});
+	comboBox.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"-60px", w:"50%", h:"30px"});
 	comboBox.addOption(null, 1);
 	comboBox.addOption(null, 2);
 	comboBox.addOption(null, 3);
 	win.addChild(comboBox);
 	
 	comboBox = ComboBox.create({value:1});
-	comboBox.layoutParam = SimpleLayouterParam.create({x:"25%", y:"-120px", w:"50%", h:"30px"});
+	comboBox.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"-120px", w:"50%", h:"30px"});
 	for(var i = 0; i < 100; i++) {
 		comboBox.addOption("item"+i, i);
 	}

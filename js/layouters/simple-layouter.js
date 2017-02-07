@@ -56,9 +56,12 @@ var SimpleLayouter = (function (_super) {
         }
     };
     SimpleLayouter.prototype.createParam = function (options) {
-        return SimpleLayouterParam.create(options);
+        return SimpleLayouterParam.createWithOptions(options);
     };
-    SimpleLayouter.create = function (options) {
+    SimpleLayouter.create = function () {
+        return SimpleLayouter.createWithOptions({});
+    };
+    SimpleLayouter.createWithOptions = function (options) {
         var layouter = new SimpleLayouter();
         return layouter.setOptions(options);
     };
@@ -66,7 +69,7 @@ var SimpleLayouter = (function (_super) {
 }(layouter_1.Layouter));
 exports.SimpleLayouter = SimpleLayouter;
 ;
-layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.create);
+layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.createWithOptions);
 /**
  * 简单的布局器的参数。
  *
@@ -103,7 +106,10 @@ var SimpleLayouterParam = (function (_super) {
         this.maxW = -1;
         this.maxH = -1;
     }
-    SimpleLayouterParam.create = function (opts) {
+    SimpleLayouterParam.create = function (x, y, w, h) {
+        return new SimpleLayouterParam(x, y, w, h);
+    };
+    SimpleLayouterParam.createWithOptions = function (opts) {
         var options = opts || {};
         return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
     };
@@ -111,4 +117,4 @@ var SimpleLayouterParam = (function (_super) {
 }(layouter_1.LayouterParam));
 exports.SimpleLayouterParam = SimpleLayouterParam;
 ;
-layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
+layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.createWithOptions);

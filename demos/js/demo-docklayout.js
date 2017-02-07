@@ -22,30 +22,30 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app,  w:vp.width, h:vp.height});
 
-	win.childrenLayouter = DockLayouter.create();
+	win.childrenLayouter = DockLayouter.createWithOptions();
 
 	var topButton = Button.create().set({text:"Top", h:50});
-	topButton.layoutParam = DockLayouterParam.create({position:Direction.TOP});
+	topButton.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP});
 	topButton.useBehavior("resizable", {south:true});
 	win.addChild(topButton);
 	
 	var bottomButton = Button.create().set({text:"Bottom", h:50});
-	bottomButton.layoutParam = DockLayouterParam.create({position:Direction.BOTTOM});
+	bottomButton.layoutParam = DockLayouterParam.createWithOptions({position:Direction.BOTTOM});
 	bottomButton.useBehavior("resizable", {north:true});
 	win.addChild(bottomButton);
 
 	var leftButton = Button.create().set({text:"Left", w:150});
-	leftButton.layoutParam = DockLayouterParam.create({position:Direction.LEFT});
+	leftButton.layoutParam = DockLayouterParam.createWithOptions({position:Direction.LEFT});
 	leftButton.useBehavior("resizable", {east:true});
 	win.addChild(leftButton);
 
 	var rightButton = Button.create().set({text:"Right", w:150});
-	rightButton.layoutParam = DockLayouterParam.create({position:Direction.RIGHT});
+	rightButton.layoutParam = DockLayouterParam.createWithOptions({position:Direction.RIGHT});
 	rightButton.useBehavior("resizable", {west:true});
 	win.addChild(rightButton);
 	
 	var centerButton = Button.create().set({text:"Center"});
-	centerButton.layoutParam = DockLayouterParam.create({position:Direction.TOP, size:"100%"});
+	centerButton.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP, size:"100%"});
 	win.addChild(centerButton);
 	
 	win.open();

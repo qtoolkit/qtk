@@ -233,13 +233,13 @@ export abstract class ComboBoxBase extends Widget {
 
 		dialog.set({x:x, y:y, w:w, h:h});
 		dialog.styleType = "widget.transparent";
-		dialog.childrenLayouter = SimpleLayouter.create();
+		dialog.childrenLayouter = SimpleLayouter.createWithOptions();
 		
 		var listView = <ListView>ListView.create();
 		listView.padding = padding;
 		listView.itemH = itemH;
 		listView.styleType = "combo-box-popup";
-		listView.layoutParam = SimpleLayouterParam.create({x:"0", y:"0px", w:"100%", h:"100%"});
+		listView.layoutParam = SimpleLayouterParam.createWithOptions({x:"0", y:"0px", w:"100%", h:"100%"});
 		listView.dragToScroll = scrollable;
 	
 		dialog.addChild(listView);

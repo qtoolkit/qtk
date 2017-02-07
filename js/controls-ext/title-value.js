@@ -79,12 +79,12 @@ var TitleValue = (function (_super) {
     TitleValue.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
         this.titleWidget.text = this._title;
-        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
-        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
+        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ w: this._titleW, h: "100%" });
+        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ w: this._valueW, h: "100%" });
     };
     TitleValue.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+        this.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions({ spacing: 5 });
         var titleWidget = label_1.Label.create();
         this.addChild(titleWidget);
         this._titleWidget = titleWidget;

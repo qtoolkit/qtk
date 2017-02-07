@@ -24,14 +24,14 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app,  w:vp.width, h:vp.height});
 
-	win.childrenLayouter = DockLayouter.create();
+	win.childrenLayouter = DockLayouter.createWithOptions();
 
 	var topRuler = HRuler.create().set({text:"Top", h:20}).setOrigin(100, 100);
-	topRuler.layoutParam = DockLayouterParam.create({position:Direction.TOP});
+	topRuler.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP});
 	win.addChild(topRuler);
 
 	var leftRuler = VRuler.create().set({text:"Left", w:20}).setOrigin(100, 100);
-	leftRuler.layoutParam = DockLayouterParam.create({position:Direction.LEFT});
+	leftRuler.layoutParam = DockLayouterParam.createWithOptions({position:Direction.LEFT});
 	win.addChild(leftRuler);
 
 	win.on(qtk.Events.POINTER_MOVE, function(evt) {

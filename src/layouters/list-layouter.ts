@@ -72,17 +72,21 @@ export class ListLayouter extends Layouter {
 	}
 
 	public createParam(options?:any) { 
-		return ListLayouterParam.create(options);
+		return ListLayouterParam.createWithOptions(options);
 	}
 
-	static create(options:any) : ListLayouter {
+	static create(h:number, spacing:number) : ListLayouter {
+		return ListLayouter.createWithOptions({h:h, spacing:spacing});
+	}
+
+	static createWithOptions(options:any) : ListLayouter {
 		var layouter = new ListLayouter();
 
 		return layouter.setOptions(options);
 	}
 };
 
-LayouterFactory.register(TYPE, ListLayouter.create);
+LayouterFactory.register(TYPE, ListLayouter.createWithOptions);
 
 /**
  * 列表布局器的参数。
@@ -107,11 +111,15 @@ export class ListLayouterParam extends LayouterParam {
 		this.spacing = spacing || 0;
 	}
 
-	static create(opt:any) {
+	public static create(h:number, spacing:number) {
+		return new ListLayouterParam(h, spacing);
+	}
+
+	public static createWithOptions(opt:any) {
 		var options = opt || {};
 		return new ListLayouterParam(options.h || options.height, options.spacing);
 	}
 };
 
-LayouterParamFactory.register(TYPE, ListLayouterParam.create);
+LayouterParamFactory.register(TYPE, ListLayouterParam.createWithOptions);
 

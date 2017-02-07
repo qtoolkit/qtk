@@ -21,11 +21,11 @@ function createImage(text) {
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.w, h:vp.h});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	
 	var image = createImage("I'm resizable");
 	image.useBehavior("resizable", {all:true});
-	image.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"middle", w:"200", h:"200"});
+	image.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"200", h:"200"});
 	
 	win.addChild(image);
 	win.open();

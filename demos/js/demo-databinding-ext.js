@@ -11,14 +11,14 @@ function genData() {
 function createTemplateItem() {
 	var templateItem = qtk.ListItem.create();
 	
-	templateItem.childrenLayouter = qtk.SimpleLayouter.create();
+	templateItem.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	var nameLabel = qtk.Label.create({
-		layoutParam:qtk.SimpleLayouterParam.create({w:"80%", h:"100%", y:"center"})});
+		layoutParam:qtk.SimpleLayouterParam.createWithOptions({w:"80%", h:"100%", y:"center"})});
 	templateItem.addChild(nameLabel);
 	nameLabel.dataBindingRule = "name";
 
 	var photoImage = qtk.Image.create({
-		layoutParam:qtk.SimpleLayouterParam.create({x:"-40", y:"center", w:30, h:30})});
+		layoutParam:qtk.SimpleLayouterParam.createWithOptions({x:"-40", y:"center", w:30, h:30})});
 	photoImage.dataBindingRule = "photo";
 	templateItem.addChild(photoImage);
 	templateItem.dataBindingRule = {click:{command:"activate"}}
@@ -41,35 +41,35 @@ function createViewModel() {
 function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 
 	var listView = qtk.ListView.create({dragToScroll:true, slideToScroll:true, 
 		itemH : 40, 
 		templateItem: createTemplateItem(),
-		layoutParam : qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({x:"25%", y:"25%", w:"50%", h:"50%"})
 	});
 	win.addChild(listView);
 	
 	var group = qtk.Group.create({
-		childrenLayouter : qtk.GridLayouter.create({cols:3, rows:1}),
-		layoutParam : qtk.SimpleLayouterParam.create({y:"-50", w:"100%", h:"40"})
+		childrenLayouter : qtk.GridLayouter.createWithOptions({cols:3, rows:1}),
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({y:"-50", w:"100%", h:"40"})
 	});
 	win.addChild(group);
 
 	var viewModel = createViewModel();
 	var addButton = qtk.Button.create({text:"Add",
 		dataBindingRule : {click:{command:"add"}},
-		layoutParam : qtk.GridLayouterParam.create({margin:2})
+		layoutParam : qtk.GridLayouterParam.createWithOptions({margin:2})
 	}).bindData(viewModel);
 
 	var removeButton = qtk.Button.create({text:"Remove",
 		dataBindingRule : {click:{command:"remove"}},
-		layoutParam : qtk.GridLayouterParam.create({margin:2})
+		layoutParam : qtk.GridLayouterParam.createWithOptions({margin:2})
 	}).bindData(viewModel);
 	
 	var currentName = qtk.Label.create({text:"current",
 		dataBindingRule : "name",
-		layoutParam : qtk.GridLayouterParam.create({margin:2})
+		layoutParam : qtk.GridLayouterParam.createWithOptions({margin:2})
 	}).bindData(viewModel);
 	
 	group.addChild(addButton);

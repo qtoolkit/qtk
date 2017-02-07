@@ -201,7 +201,7 @@ var VectorEdit = (function (_super) {
         this.d = Math.max(2, Math.min(4, this.d || 2));
         var cols = this.d;
         var rows = 2;
-        this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
+        this.childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({ rows: rows, cols: cols, rightMargin: 10 });
         this._xLabel = this.createLabel(this._xTitle);
         this._yLabel = this.createLabel(this._yTitle);
         if (this.d > 2) {

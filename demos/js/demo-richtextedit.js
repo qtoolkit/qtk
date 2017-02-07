@@ -109,36 +109,36 @@ function onReady(app) {
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = DockLayouter.create();
+	win.childrenLayouter = DockLayouter.createWithOptions();
 	
 	var toolBar = qtk.Group.create({h:40});
-	toolBar.layoutParam = DockLayouterParam.create({position:Direction.TOP});
-	toolBar.childrenLayouter = LinearLayouter.createH();
+	toolBar.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP});
+	toolBar.childrenLayouter = LinearLayouter.createHWithOptions();
 	win.addChild(toolBar);
 
 	var bold = qtk.CheckButton.create({text:"bold"});
-	bold.layoutParam = LinearLayouterParam.create({w:80});
+	bold.layoutParam = LinearLayouterParam.createWithOptions({w:80});
 	toolBar.addChild(bold);
 	bold.on(Events.CHANGE, function(evt) {
 		richTextEdit.setSelectedBold(evt.value);
 	});
 	
 	var italic = qtk.CheckButton.create({text:"italic"});
-	italic.layoutParam = LinearLayouterParam.create({w:80});
+	italic.layoutParam = LinearLayouterParam.createWithOptions({w:80});
 	toolBar.addChild(italic);
 	italic.on(Events.CHANGE, function(evt) {
 		richTextEdit.setSelectedItalic(evt.value);
 	});
 	
 	var underline = qtk.CheckButton.create({text:"underline"});
-	underline.layoutParam = LinearLayouterParam.create({w:80});
+	underline.layoutParam = LinearLayouterParam.createWithOptions({w:80});
 	toolBar.addChild(underline);
 	underline.on(Events.CHANGE, function(evt) {
 		richTextEdit.setSelectedUnderline(evt.value);
 	});
 	
 	var richTextEdit = RichTextEdit.create();
-	richTextEdit.layoutParam = DockLayouterParam.create({position:Direction.TOP, size:"100%"});
+	richTextEdit.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP, size:"100%"});
 	richTextEdit.data = data;
 	win.addChild(richTextEdit);
 	

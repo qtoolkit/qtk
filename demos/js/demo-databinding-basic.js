@@ -62,10 +62,10 @@ function onReady(app) {
 	function addItem(titleValue, bindingRule, h) {
 		var item = ListItem.create({styleType:"widget.tansparent"});
 		if(h) {
-			item.layoutParam = qtk.ListLayouterParam.create({h:h});
+			item.layoutParam = qtk.ListLayouterParam.createWithOptions({h:h});
 		}
 		listView.addChild(item, true);
-		item.childrenLayouter = qtk.SimpleLayouter.create();
+		item.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 		item.addChild(titleValue);
 		if(titleValue.valueWidget) {
 			titleValue.valueWidget.dataBindingRule = bindingRule;
@@ -79,7 +79,7 @@ function onReady(app) {
 				title:"Name", 
 				titleW:"60", 
 				valueW:"40%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}), {value: {path:"name", updateTiming:"changed"}});
 
 	addItem(qtk.TitleEdit.create({
@@ -87,21 +87,21 @@ function onReady(app) {
 				title:"Age", 
 				titleW:"60", 
 				valueW:"40%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}), {value: {path:"age", validationRule:"age", updateTiming:"changing"}});
 	
 	addItem(qtk.TitleEdit.create({
 				title:"Desc", 
 				titleW:"60", 
 				valueW:"80%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}), {value: {path:"desc", updateTiming:"explicit"}});
 
 	addItem(qtk.TitleComboBox.create({
 				title:"Gender", 
 				titleW:"60", 
 				valueW:"60%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}), {value: {path:"gender", converter:"gender"}, 
 			options: {value:[{text:"female"}, {text:"male"}]}});
 
@@ -109,49 +109,49 @@ function onReady(app) {
 		title:"Name(*)", 
 		titleW:"60", 
 		valueW:"40%", 
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), "name");
 
 	addItem(qtk.TitleLabel.create({
 		title:"Age(*)", 
 		titleW:"60", 
 		valueW:"120", 
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), "age");
 
 	addItem(qtk.TitleLabel.create({
 		title:"Desc(*)", 
 		titleW:"60", 
 		valueW:"80%", 
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), "desc");
 
 	addItem(qtk.TitleLabel.create({
 		title:"Gender(*)", 
 		titleW:"60", 
 		valueW:"100", 
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), {value: {path:"gender", converter:"gender"}});
 	
 	addItem(qtk.TitleLabel.create({
 		title:"Org Name(*)", 
 		titleW:"120", 
 		valueW:"100", 
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), "/org/name");
 	
 	var command = addItem(qtk.Button.create({text:"command",
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}), {"click" : {command:"dummy"}});
 	
 	var save = addItem(qtk.Button.create({text:"save explicit",
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	})).on(qtk.Events.CLICK, function(evt) {
 		win.updateExplicit();
 	});
 
 	var summary = addItem(qtk.Label.create({text:"",
-		layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+		layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 	}));
 
 	var viewModel = createViewModel();

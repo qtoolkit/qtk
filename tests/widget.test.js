@@ -125,9 +125,9 @@ describe('Widget', function() {
   	
   	it('test clone/toJson', (done) => {
 		var widget = qtk.Button.create({w:400, h:300});
-		widget.childrenLayouter = qtk.LinearLayouter.createH({spacing:10});
+		widget.childrenLayouter = qtk.LinearLayouter.createHWithOptions({spacing:10});
 		widget.addChild(qtk.Button.create({text:"button", 
-			layoutParam : qtk.LinearLayouterParam.create({w:20, h:20})
+			layoutParam : qtk.LinearLayouterParam.createWithOptions({w:20, h:20})
 		}));
 
 		widget.addChild(qtk.Label.create({text:"hello"}));

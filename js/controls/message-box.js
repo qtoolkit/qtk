@@ -89,25 +89,25 @@ var MessageBox = (function (_super) {
         if (titleOptions) {
             var title = group_1.Group.create({ styleType: "dialog.title-bg" });
             var titleH = titleOptions.h || MessageBox.TITLE_H;
-            title.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.TOP, size: titleH });
-            title.childrenLayouter = linear_layouter_1.LinearLayouter.createH();
+            title.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.TOP, size: titleH });
+            title.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions();
             this.addChild(title);
             if (titleOptions.draggable) {
                 title.useBehavior("movable", { moveParent: true });
             }
             if (titleOptions.iconStyleType) {
                 var icon = button_1.Button.create({ name: "icon", styleType: titleOptions.iconStyleType });
-                icon.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 1, h: "100%", w: title.h });
+                icon.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: 1, h: "100%", w: title.h });
                 title.addChild(icon);
             }
             if (titleOptions.text) {
                 var label = label_1.Label.create({ name: "text", text: titleOptions.text, styleType: "dialog.title-text" });
-                label.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 2, h: "100%", w: w - titleH * 2 });
+                label.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: 2, h: "100%", w: w - titleH * 2 });
                 title.addChild(label);
             }
             if (titleOptions.hasCloseButton) {
                 var button = button_1.Button.create({ name: "close", styleType: "messagebox.button.close" });
-                button.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: -1, h: "100%", w: titleH });
+                button.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: -1, h: "100%", w: titleH });
                 title.addChild(button);
                 button.on(Events.CLICK, function (evt) {
                     win.animateClose();
@@ -124,8 +124,8 @@ var MessageBox = (function (_super) {
             var n = buttonsOptions.buttons.length;
             var buttonsH = buttonsOptions.h || MessageBox.BUTTONS_H;
             var margin = n < 2 ? w / (4 * n) : w / (8 * n);
-            buttons.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: buttonsH });
-            buttons.childrenLayouter = grid_layouter_1.GridLayouter.create({
+            buttons.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.BOTTOM, size: buttonsH });
+            buttons.childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({
                 topMargin: 5,
                 bottomMargin: 5,
                 leftMargin: margin,
@@ -150,12 +150,12 @@ var MessageBox = (function (_super) {
     };
     MessageBox.prototype.initContent = function (data) {
         var content = group_1.Group.create();
-        content.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: "100%" });
+        content.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.BOTTOM, size: "100%" });
         this.addChild(content);
         if (data) {
-            content.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+            content.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
             var label = label_1.Label.create({ text: data, multiLineMode: true, padding: this._contentPadding });
-            label.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" });
+            label.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ w: "100%", h: "100%" });
             content.addChild(label);
         }
         this._content = content;
@@ -192,7 +192,7 @@ var MessageBox = (function (_super) {
     MessageBox.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
         this.padding = 1;
-        this.childrenLayouter = dock_layouter_1.DockLayouter.create();
+        this.childrenLayouter = dock_layouter_1.DockLayouter.createWithOptions();
     };
     MessageBox.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -270,8 +270,8 @@ var MessageBox = (function (_super) {
         var progressBar = progress_bar_1.ProgressBar.create();
         group.padding = 10;
         group.topPadding = 20;
-        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "20px" });
+        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "20px" });
         var closeButton = messageBox.buttons.children[0];
         closeButton.enable = false;
         function onProgress(value) {
@@ -301,8 +301,8 @@ var MessageBox = (function (_super) {
         var edit = edit_1.Edit.create({ inputTips: inputTips, value: value, inputType: inputType || "text" });
         group.padding = 10;
         group.topPadding = 15;
-        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "25px" });
+        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "25px" });
         function onOK() {
             onDone(edit.text);
         }
@@ -331,8 +331,8 @@ var MessageBox = (function (_super) {
         var listView = list_view_1.ListView.create({ itemH: itemH, dragToScroll: true });
         group.padding = 5;
         group.topPadding = 5;
-        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "100%" });
+        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "100%" });
         data.forEach(function (iter) {
             var item = list_item_1.ListItemCheckable.create({
                 multiCheckable: multiple,

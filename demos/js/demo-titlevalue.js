@@ -19,10 +19,10 @@ function onReady(app) {
 	function addItem(titleValue, h) {
 		var item = ListItem.create({styleType:"widget.tansparent"});
 		if(h) {
-			item.layoutParam = qtk.ListLayouterParam.create({h:h});
+			item.layoutParam = qtk.ListLayouterParam.createWithOptions({h:h});
 		}
 		listView.addChild(item, true);
-		item.childrenLayouter = qtk.SimpleLayouter.create();
+		item.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 		item.addChild(titleValue);
 
 		return titleValue;
@@ -33,7 +33,7 @@ function onReady(app) {
 				title:"URL", 
 				titleW:"60", 
 				valueW:"100%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		})).onChoose = function() {
 			this.value = "choose";	
 		}
@@ -44,14 +44,14 @@ function onReady(app) {
 				title:"Age", 
 				titleW:"60", 
 				valueW:"100", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}));
 	addItem(qtk.TitleComboBox.create({
 				value:"Red",
 				title:"Color", 
 				titleW:"60", 
 				valueW:"60%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"70%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"70%"})
 		})).addOption("Red").addOption("Green").addOption("Blue");;
 	
 	addItem(qtk.TitleComboBoxEditable.create({
@@ -59,7 +59,7 @@ function onReady(app) {
 				title:"Color", 
 				titleW:"60", 
 				valueW:"60%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"70%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"70%"})
 		})).addOption("Red").addOption("Green").addOption("Blue");;
 	
 	addItem(qtk.TitleSlider.create({
@@ -67,7 +67,7 @@ function onReady(app) {
 				title:"Opacity", 
 				titleW:"60", 
 				valueW:"80%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}));
 
 	addItem(qtk.TitleTextArea.create({
@@ -75,7 +75,7 @@ function onReady(app) {
 				title:"Desc", 
 				titleW:"60", 
 				valueW:"80%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}), 200);
 	
 	addItem(qtk.TitleRange.create({
@@ -83,7 +83,7 @@ function onReady(app) {
 				title:"Opacity", 
 				titleW:"60", 
 				valueW:"80%", 
-				layoutParam : qtk.SimpleLayouterParam.create({h:"80%"})
+				layoutParam : qtk.SimpleLayouterParam.createWithOptions({h:"80%"})
 		}));
 
 	win.target = listView;

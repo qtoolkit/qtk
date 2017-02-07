@@ -91,15 +91,15 @@ function randomizeData() {
 
 function onReady(app) {
 	var win = qtk.WindowNormal.create({app:app}).maximize();
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 
 	var chartView = qtk.ChartView.create({config:config});
-	chartView.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"center", w:"50%", h:"50%"});
+	chartView.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"center", y:"center", w:"50%", h:"50%"});
 	win.addChild(chartView);
 
 	var group = qtk.Group.create();
-	group.layoutParam = qtk.SimpleLayouterParam.create({x:"center", y:"-90", w:"50%", h:"50"});
-	group.childrenLayouter = qtk.GridLayouter.create({rowHeight:40, cols:3, margin:5});
+	group.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"center", y:"-90", w:"50%", h:"50"});
+	group.childrenLayouter = qtk.GridLayouter.createWithOptions({rowHeight:40, cols:3, margin:5});
 	
 	win.addChild(group);
 

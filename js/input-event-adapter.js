@@ -151,7 +151,10 @@ function onKeyDown(evt) {
     detail.timeStamp = evt.timeStamp;
     dispatchEvent(evt.target, Events.KEYDOWN, detail);
     detail.dispose();
-    evt.preventDefault();
+    var tagName = evt.target.tagName;
+    if (tagName !== "INPUT" && tagName !== "TEXTAREA") {
+        evt.preventDefault();
+    }
 }
 function onKeyUp(evt) {
     updateKeysStatus(evt.keyCode, false);
@@ -159,7 +162,10 @@ function onKeyUp(evt) {
     detail.timeStamp = evt.timeStamp;
     dispatchEvent(evt.target, Events.KEYUP, detail);
     detail.dispose();
-    evt.preventDefault();
+    var tagName = evt.target.tagName;
+    if (tagName !== "INPUT" && tagName !== "TEXTAREA") {
+        evt.preventDefault();
+    }
 }
 function dispatchKeyEvent(target, keyCode) {
     var detail = event_detail_1.KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);

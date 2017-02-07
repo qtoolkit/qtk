@@ -149,15 +149,21 @@ var LinearLayouter = (function (_super) {
         }
     };
     LinearLayouter.prototype.createParam = function (options) {
-        return LinearLayouterParam.create(options);
+        return LinearLayouterParam.createWithOptions(options);
     };
-    LinearLayouter.createV = function (options) {
+    LinearLayouter.createH = function (spacing) {
+        return LinearLayouter.createVWithOptions({ spacing: spacing });
+    };
+    LinearLayouter.createV = function (spacing) {
+        return LinearLayouter.createHWithOptions({ spacing: spacing });
+    };
+    LinearLayouter.createVWithOptions = function (options) {
         var layouter = new LinearLayouter();
         layouter.setOptions(options);
         layouter.orientation = consts_1.Orientation.V;
         return layouter;
     };
-    LinearLayouter.createH = function (options) {
+    LinearLayouter.createHWithOptions = function (options) {
         var layouter = new LinearLayouter();
         layouter.setOptions(options || {});
         layouter.orientation = consts_1.Orientation.H;
@@ -167,8 +173,8 @@ var LinearLayouter = (function (_super) {
 }(layouter_1.Layouter));
 exports.LinearLayouter = LinearLayouter;
 ;
-layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createH);
-layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
+layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createHWithOptions);
+layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createVWithOptions);
 /**
  * Linear布局器的参数。
  *
@@ -193,13 +199,16 @@ var LinearLayouterParam = (function (_super) {
         var options = opts || {};
         return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
     };
-    LinearLayouterParam.create = function (opts) {
+    LinearLayouterParam.create = function (w, h, spacing, align, position) {
+        return new LinearLayouterParam(LinearLayouterParam.TYPE, w, h, spacing, align, position);
+    };
+    LinearLayouterParam.createWithOptions = function (opts) {
         return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
     };
     LinearLayouterParam.TYPE = "linear";
-    LinearLayouterParam.defParam = LinearLayouterParam.create(null);
+    LinearLayouterParam.defParam = LinearLayouterParam.createWithOptions(null);
     return LinearLayouterParam;
 }(layouter_1.LayouterParam));
 exports.LinearLayouterParam = LinearLayouterParam;
 ;
-layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);
+layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.createWithOptions);

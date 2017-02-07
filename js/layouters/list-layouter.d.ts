@@ -22,7 +22,8 @@ export declare class ListLayouter extends Layouter {
     setOptions(options: any): any;
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     createParam(options?: any): ListLayouterParam;
-    static create(options: any): ListLayouter;
+    static create(h: number, spacing: number): ListLayouter;
+    static createWithOptions(options: any): ListLayouter;
 }
 /**
  * 列表布局器的参数。
@@ -40,5 +41,6 @@ export declare class ListLayouterParam extends LayouterParam {
      */
     spacing: number;
     constructor(h: number, spacing: number);
-    static create(opt: any): ListLayouterParam;
+    static create(h: number, spacing: number): ListLayouterParam;
+    static createWithOptions(opt: any): ListLayouterParam;
 }

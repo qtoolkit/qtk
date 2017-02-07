@@ -86,8 +86,8 @@ export class MessageBox extends Dialog {
 		if(titleOptions) {
 			var title = Group.create({styleType:"dialog.title-bg"});
 			var titleH = titleOptions.h || MessageBox.TITLE_H;
-			title.layoutParam = DockLayouterParam.create({position:Direction.TOP, size:titleH});
-			title.childrenLayouter = LinearLayouter.createH();
+			title.layoutParam = DockLayouterParam.createWithOptions({position:Direction.TOP, size:titleH});
+			title.childrenLayouter = LinearLayouter.createHWithOptions();
 			
 			this.addChild(title);
 
@@ -97,19 +97,19 @@ export class MessageBox extends Dialog {
 
 			if(titleOptions.iconStyleType) {
 				var icon = Button.create({name:"icon", styleType:titleOptions.iconStyleType});
-				icon.layoutParam = LinearLayouterParam.create({position:1, h:"100%", w:title.h});
+				icon.layoutParam = LinearLayouterParam.createWithOptions({position:1, h:"100%", w:title.h});
 				title.addChild(icon);
 			}
 
 			if(titleOptions.text) {
 				var label = Label.create({name:"text", text:titleOptions.text, styleType:"dialog.title-text"});
-				label.layoutParam = LinearLayouterParam.create({position:2, h:"100%", w:w-titleH*2});
+				label.layoutParam = LinearLayouterParam.createWithOptions({position:2, h:"100%", w:w-titleH*2});
 				title.addChild(label);
 			}
 
 			if(titleOptions.hasCloseButton) {
 				var button = Button.create({name:"close", styleType:"messagebox.button.close"});
-				button.layoutParam = LinearLayouterParam.create({position:-1, h:"100%", w:titleH});
+				button.layoutParam = LinearLayouterParam.createWithOptions({position:-1, h:"100%", w:titleH});
 				title.addChild(button);
 				button.on(Events.CLICK, function(evt) {
 					win.animateClose();
@@ -130,8 +130,8 @@ export class MessageBox extends Dialog {
 			var buttonsH = buttonsOptions.h || MessageBox.BUTTONS_H;
 
 			var margin = n <2 ? w/(4*n) : w/(8*n);
-			buttons.layoutParam = DockLayouterParam.create({position:Direction.BOTTOM, size:buttonsH});
-			buttons.childrenLayouter = GridLayouter.create({
+			buttons.layoutParam = DockLayouterParam.createWithOptions({position:Direction.BOTTOM, size:buttonsH});
+			buttons.childrenLayouter = GridLayouter.createWithOptions({
 				topMargin:5,
 				bottomMargin:5,
 				leftMargin : margin,
@@ -162,13 +162,13 @@ export class MessageBox extends Dialog {
 		
 	protected initContent(data?:string) {
 		var content = Group.create();
-		content.layoutParam = DockLayouterParam.create({position:Direction.BOTTOM, size:"100%"});
+		content.layoutParam = DockLayouterParam.createWithOptions({position:Direction.BOTTOM, size:"100%"});
 		this.addChild(content);
 		
 		if(data) {
-			content.childrenLayouter = SimpleLayouter.create();
+			content.childrenLayouter = SimpleLayouter.createWithOptions();
 			var label = Label.create({text:data, multiLineMode:true, padding:this._contentPadding});
-			label.layoutParam = SimpleLayouterParam.create({w:"100%", h:"100%"});
+			label.layoutParam = SimpleLayouterParam.createWithOptions({w:"100%", h:"100%"});
 			content.addChild(label);
 		}
 
@@ -212,7 +212,7 @@ export class MessageBox extends Dialog {
 	protected onReset() {
 		super.onReset();
 		this.padding = 1;
-		this.childrenLayouter = DockLayouter.create();
+		this.childrenLayouter = DockLayouter.createWithOptions();
 	}
 
 	public dispose() {
@@ -311,8 +311,8 @@ export class MessageBox extends Dialog {
 		var progressBar = ProgressBar.create();
 		group.padding = 10;
 		group.topPadding = 20;
-		group.childrenLayouter = SimpleLayouter.create();
-		progressBar.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"100%", h:"20px"});
+		group.childrenLayouter = SimpleLayouter.createWithOptions();
+		progressBar.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"100%", h:"20px"});
 
 		var closeButton = messageBox.buttons.children[0];
 		closeButton.enable = false;
@@ -351,8 +351,8 @@ export class MessageBox extends Dialog {
 		var edit = Edit.create({inputTips:inputTips, value:value, inputType:inputType||"text"});
 		group.padding = 10;
 		group.topPadding = 15;
-		group.childrenLayouter = SimpleLayouter.create();
-		edit.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"100%", h:"25px"});
+		group.childrenLayouter = SimpleLayouter.createWithOptions();
+		edit.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"100%", h:"25px"});
 
 		function onOK() {
 			onDone(edit.text);
@@ -391,8 +391,8 @@ export class MessageBox extends Dialog {
 		var listView = ListView.create({itemH:itemH, dragToScroll:true});
 		group.padding = 5;
 		group.topPadding = 5;
-		group.childrenLayouter = SimpleLayouter.create();
-		listView.layoutParam = SimpleLayouterParam.create({x:"center", y:"middle", w:"100%", h:"100%"});
+		group.childrenLayouter = SimpleLayouter.createWithOptions();
+		listView.layoutParam = SimpleLayouterParam.createWithOptions({x:"center", y:"middle", w:"100%", h:"100%"});
 
 		data.forEach(iter => {
 			var item = ListItemCheckable.create({

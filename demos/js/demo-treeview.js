@@ -3,7 +3,7 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create();
 	win.set({app:app, x:0, y:0, w:vp.width, h:vp.height, hasOwnCanvas:true});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 
 	createTreeView1(win);
 	createTreeView2(win);
@@ -21,7 +21,7 @@ function createTreeView1(win) {
 		{text:"item4",children:[{text:"item41"}, {text:"item42"}]},
 		{text:"item5",children:[{text:"item11"}, {text:"item12"}]},
 		{text:"item6",children:[{text:"item11"}, {text:"item12"}]},
-		{text:"qtk.TreeView.create",children:[{text:"qtk."}, {text:"qtk.SimpleLayouter.create children"}]}
+		{text:"qtk.TreeView.create",children:[{text:"qtk."}, {text:"qtk.SimpleLayouter.createWithOptions children"}]}
 		]
 	};
 
@@ -29,7 +29,7 @@ function createTreeView1(win) {
 	treeView.dragToScroll = true;
 	treeView.slideToScroll = true;
 	treeView.itemH = 30;
-	treeView.layoutParam = qtk.SimpleLayouterParam.create({x:"5%", y:"5%", w:"45%", h:"45%"});
+	treeView.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"5%", y:"5%", w:"45%", h:"45%"});
 	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentH:2000});	
 	win.addChild(treeView);
 	
@@ -41,7 +41,7 @@ function createTreeView2(win) {
 	treeView.dragToScroll = true;
 
 	treeView.itemH = 30;
-	treeView.layoutParam = qtk.SimpleLayouterParam.create({x:"52%", y:"5%", w:"45%", h:"45%"});
+	treeView.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"52%", y:"5%", w:"45%", h:"45%"});
 	treeView.set({name:"treeView", multiSelectable:true,  contentWidth:500, contentH:2000});	
 	win.addChild(treeView);
 	var item = treeView.addItem(null, "item1");

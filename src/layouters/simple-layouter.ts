@@ -56,17 +56,21 @@ export class SimpleLayouter extends Layouter {
 	}
 
 	public createParam(options?:any) {
-		return SimpleLayouterParam.create(options);
+		return SimpleLayouterParam.createWithOptions(options);
 	}
 
-	static create(options?:any) : SimpleLayouter {
+	static create() : SimpleLayouter {
+		return SimpleLayouter.createWithOptions({});	
+	}
+
+	static createWithOptions(options?:any) : SimpleLayouter {
 		var layouter = new SimpleLayouter();
 
 		return layouter.setOptions(options);
 	}
 };
 
-LayouterFactory.register(TYPE, SimpleLayouter.create);
+LayouterFactory.register(TYPE, SimpleLayouter.createWithOptions);
 
 /**
  * 简单的布局器的参数。
@@ -115,12 +119,16 @@ export class SimpleLayouterParam extends LayouterParam {
 		this.maxH = -1;
 	}
 
-	static create(opts:any) {
+	public static create(x:string, y:string, w:string, h:string) {
+		return new SimpleLayouterParam(x, y, w, h);
+	}
+
+	public static createWithOptions(opts:any) {
 		var options = opts || {};
 		return new SimpleLayouterParam(options.x||'0px', options.y||'center', 
 									   options.w||'100%', options.h||'100%');
 	}
 };
 
-LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
+LayouterParamFactory.register(TYPE, SimpleLayouterParam.createWithOptions);
 

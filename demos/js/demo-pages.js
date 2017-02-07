@@ -2,11 +2,11 @@
 var imageURL = "/demos/assets/test.jpg";
 function createPage(pages, index) {
 	var page = qtk.Page.create();
-	page.childrenLayouter = qtk.SimpleLayouter.create();
+	page.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	pages.addChild(page);
 
 	var button = qtk.Button.create();
-	button.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
+	button.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"25%", y:"25%", w:"50%", h:"50%"});
 	button.text = "This button is on page-" + index.toString();
 	button.on(qtk.Events.CLICK, function(evt) {
 		console.log(this.text);
@@ -21,11 +21,11 @@ function onReady(app) {
 	var Events = qtk.Events;
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.w, h:vp.h});
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 	
 	var imageURL = "/demos/assets/theme/default/images/@density/check-button-checked.png";
 	var pages = qtk.Pages.create();
-	pages.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"25%", w:"50%", h:"50%"});
+	pages.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"25%", y:"25%", w:"50%", h:"50%"});
 	win.addChild(pages);
 
 	createPage(pages, 0);
@@ -35,7 +35,7 @@ function onReady(app) {
 	pages.value = 3;
 
 	var comboBox = qtk.ComboBox.create();
-	comboBox.layoutParam = qtk.SimpleLayouterParam.create({x:"25%", y:"-100px", w:"50%", h:"30px"});
+	comboBox.layoutParam = qtk.SimpleLayouterParam.createWithOptions({x:"25%", y:"-100px", w:"50%", h:"30px"});
 	comboBox.addOption("item0", 0);
 	comboBox.addOption("item1", 1);
 	comboBox.addOption("item2", 2);

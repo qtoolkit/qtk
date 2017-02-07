@@ -90,7 +90,7 @@ var ListView = (function (_super) {
     ListView.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
         this.scrollerOptions.scrollingX = false;
-        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemH, spacing: 0 });
+        this._childrenLayouter = list_layouter_1.ListLayouter.createWithOptions({ height: this.itemH, spacing: 0 });
     };
     ListView.prototype.getDefProps = function () {
         return ListView.defProps;

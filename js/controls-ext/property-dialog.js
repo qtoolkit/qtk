@@ -27,7 +27,7 @@ var PropertyDialog = (function (_super) {
         var vp = app.getViewPort();
         var rw = Math.min(vp.w, w || 300);
         var dataCopy = onNo ? JSON.parse(JSON.stringify(data)) : data;
-        var page = property_page_1.PropertyPage.create({ layoutParam: simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" }) });
+        var page = property_page_1.PropertyPage.create({ layoutParam: simple_layouter_1.SimpleLayouterParam.createWithOptions({ w: "100%", h: "100%" }) });
         page.initWithPropsDesc(pagePropsDesc.propsDesc);
         var h = page.h + message_box_1.MessageBox.TITLE_H + message_box_1.MessageBox.BUTTONS_H + 20;
         var messageBox = PropertyDialog.create({ app: app, styleType: message_box_1.MessageBox.TYPE, w: rw, h: h });
@@ -46,7 +46,7 @@ var PropertyDialog = (function (_super) {
                 }
             } });
         messageBox.createChildren(titleOptions, buttonsOption, null);
-        var group = messageBox.content.set({ padding: 5, childrenLayouter: simple_layouter_1.SimpleLayouter.create() });
+        var group = messageBox.content.set({ padding: 5, childrenLayouter: simple_layouter_1.SimpleLayouter.createWithOptions() });
         group.addChild(page);
         var vm = view_model_1.ViewModel.create(dataCopy);
         page.bindData(vm);

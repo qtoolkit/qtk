@@ -163,10 +163,18 @@ export class LinearLayouter extends Layouter {
 	}
 
 	public createParam(options?:any) {
-		return LinearLayouterParam.create(options);
+		return LinearLayouterParam.createWithOptions(options);
 	}
 
-	public static createV(options:any) : LinearLayouter {
+	public static createH(spacing:number) : LinearLayouter{
+		return LinearLayouter.createVWithOptions({spacing:spacing});
+	}
+
+	public static createV(spacing:number) : LinearLayouter{
+		return LinearLayouter.createHWithOptions({spacing:spacing});
+	}
+
+	public static createVWithOptions(options:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
 		layouter.setOptions(options);
 		layouter.orientation = Orientation.V;
@@ -174,7 +182,7 @@ export class LinearLayouter extends Layouter {
 		return layouter;
 	}
 
-	public static createH(options?:any) : LinearLayouter {
+	public static createHWithOptions(options?:any) : LinearLayouter {
 		var layouter = new LinearLayouter();
 		layouter.setOptions(options || {});
 		layouter.orientation = Orientation.H;
@@ -183,8 +191,8 @@ export class LinearLayouter extends Layouter {
 	}
 };
 
-LayouterFactory.register(TYPE_H, LinearLayouter.createH);
-LayouterFactory.register(TYPE_V, LinearLayouter.createV);
+LayouterFactory.register(TYPE_H, LinearLayouter.createHWithOptions);
+LayouterFactory.register(TYPE_V, LinearLayouter.createVWithOptions);
 
 /**
  * Linear布局器的参数。
@@ -233,7 +241,7 @@ export class LinearLayouterParam extends LayouterParam {
 	}
 
 	public static TYPE = "linear";
-	public static defParam = LinearLayouterParam.create(null);
+	public static defParam = LinearLayouterParam.createWithOptions(null);
 	public static createWithType(type:string, opts:any) : LinearLayouterParam {
 		var options = opts || {};
 		return new LinearLayouterParam(LinearLayouterParam.TYPE,
@@ -242,9 +250,13 @@ export class LinearLayouterParam extends LayouterParam {
 				options.position === undefined ? 1 : options.position);
 	}
 
-	public static create(opts:any) : LinearLayouterParam {
+	public static create(w:string, h:string, spacing:number, align:Align, position:number) {
+		return new LinearLayouterParam(LinearLayouterParam.TYPE, w, h, spacing, align, position);
+	}
+
+	public static createWithOptions(opts:any) : LinearLayouterParam {
 		return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
 	}
 };
 
-LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);
+LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.createWithOptions);

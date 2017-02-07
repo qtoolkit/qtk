@@ -106,7 +106,7 @@ export class GridLayouter extends Layouter {
 	}
 	
 	public createParam(options?:any) { 
-		return GridLayouterParam.create(options);
+		return GridLayouterParam.createWithOptions(options);
 	}
 
 	
@@ -152,14 +152,19 @@ export class GridLayouter extends Layouter {
 	
 	private rect : Rect;
 
-	static create(options:any) : GridLayouter {
+	public static create(cols:number, rows:number, margin:number) {
+		return GridLayouter.createWithOptions({cols:cols, rows:rows, leftMargin:margin, rightMargin:margin,
+			topMargin:margin, bottomMargin:margin});
+	}
+
+	public static createWithOptions(options:any) : GridLayouter {
 		var layouter = new GridLayouter();
 
 		return layouter.setOptions(options);
 	}
 };
 
-LayouterFactory.register(TYPE, GridLayouter.create);
+LayouterFactory.register(TYPE, GridLayouter.createWithOptions);
 
 /**
  * 网格布局器的参数。
@@ -197,10 +202,14 @@ export class GridLayouterParam extends LayouterParam {
 		this.spanCols = spanCols || 1;
 	}
 
-	static create(opts:any) {
+	public static create(row?:number, spanRows?:number, col?:number, spanCols?:number) {
+		return new GridLayouterParam(row, spanRows, col, spanCols);
+	}
+
+	public static createWithOptions(opts:any) {
 		var options = opts || {};
 		return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
 	}
 };
 
-LayouterParamFactory.register(TYPE, GridLayouterParam.create);
+LayouterParamFactory.register(TYPE, GridLayouterParam.createWithOptions);

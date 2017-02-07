@@ -46,7 +46,8 @@ export declare class GridLayouter extends Layouter {
      */
     rowHeight: number;
     private rect;
-    static create(options: any): GridLayouter;
+    static create(cols: number, rows: number, margin: number): GridLayouter;
+    static createWithOptions(options: any): GridLayouter;
 }
 /**
  * 网格布局器的参数。
@@ -72,5 +73,6 @@ export declare class GridLayouterParam extends LayouterParam {
      */
     spanRows: number;
     constructor(row?: number, spanRows?: number, col?: number, spanCols?: number);
-    static create(opts: any): GridLayouterParam;
+    static create(row?: number, spanRows?: number, col?: number, spanCols?: number): GridLayouterParam;
+    static createWithOptions(opts: any): GridLayouterParam;
 }

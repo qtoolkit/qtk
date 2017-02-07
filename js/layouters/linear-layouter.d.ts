@@ -22,8 +22,10 @@ export declare class LinearLayouter extends Layouter {
     layoutChildren(widget: Widget, children: Array<Widget>, rect: Rect): Rect;
     layoutChild(child: Widget, r: Rect, index: number): void;
     createParam(options?: any): LinearLayouterParam;
-    static createV(options: any): LinearLayouter;
-    static createH(options?: any): LinearLayouter;
+    static createH(spacing: number): LinearLayouter;
+    static createV(spacing: number): LinearLayouter;
+    static createVWithOptions(options: any): LinearLayouter;
+    static createHWithOptions(options?: any): LinearLayouter;
 }
 /**
  * Linear布局器的参数。
@@ -64,5 +66,6 @@ export declare class LinearLayouterParam extends LayouterParam {
     static TYPE: string;
     static defParam: LinearLayouterParam;
     static createWithType(type: string, opts: any): LinearLayouterParam;
-    static create(opts: any): LinearLayouterParam;
+    static create(w: string, h: string, spacing: number, align: Align, position: number): LinearLayouterParam;
+    static createWithOptions(opts: any): LinearLayouterParam;
 }

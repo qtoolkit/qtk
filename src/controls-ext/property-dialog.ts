@@ -23,7 +23,7 @@ export class PropertyDialog extends MessageBox {
 		var rw = Math.min(vp.w, w || 300);
 		var dataCopy = onNo ? JSON.parse(JSON.stringify(data)) : data;
 
-		var page = PropertyPage.create({layoutParam:SimpleLayouterParam.create({w:"100%", h:"100%"})});
+		var page = PropertyPage.create({layoutParam:SimpleLayouterParam.createWithOptions({w:"100%", h:"100%"})});
 		page.initWithPropsDesc(pagePropsDesc.propsDesc);
 		
 		var h = page.h + MessageBox.TITLE_H + MessageBox.BUTTONS_H + 20;
@@ -48,7 +48,7 @@ export class PropertyDialog extends MessageBox {
 
 		messageBox.createChildren(titleOptions, buttonsOption, null);
 		
-		var group = messageBox.content.set({padding:5, childrenLayouter:SimpleLayouter.create()});
+		var group = messageBox.content.set({padding:5, childrenLayouter:SimpleLayouter.createWithOptions()});
 		group.addChild(page);
 
 		var vm = ViewModel.create(dataCopy);

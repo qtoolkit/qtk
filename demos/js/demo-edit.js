@@ -53,16 +53,16 @@ function onReady(app) {
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var edit = Edit.create({inputTips:"Title"});
-	edit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"10px", w:"50%", h:"30px"});
-	edit.childrenLayouter = SimpleLayouter.create();
+	edit.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"10px", w:"50%", h:"30px"});
+	edit.childrenLayouter = SimpleLayouter.createWithOptions();
 	win.addChild(edit);
 
 	var mlEdit = Edit.create({inputTips:"Content"});
-	mlEdit.layoutParam = SimpleLayouterParam.create({x:"25%", y:"60px", w:"50%", h:"300px"});
-	mlEdit.childrenLayouter = SimpleLayouter.create();
+	mlEdit.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"60px", w:"50%", h:"300px"});
+	mlEdit.childrenLayouter = SimpleLayouter.createWithOptions();
 	mlEdit.multiLineMode = true;
 	win.addChild(mlEdit);
 

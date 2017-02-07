@@ -4176,7 +4176,10 @@ var qtk =
 	    detail.timeStamp = evt.timeStamp;
 	    dispatchEvent(evt.target, Events.KEYDOWN, detail);
 	    detail.dispose();
-	    evt.preventDefault();
+	    var tagName = evt.target.tagName;
+	    if (tagName !== "INPUT" && tagName !== "TEXTAREA") {
+	        evt.preventDefault();
+	    }
 	}
 	function onKeyUp(evt) {
 	    updateKeysStatus(evt.keyCode, false);
@@ -4184,7 +4187,10 @@ var qtk =
 	    detail.timeStamp = evt.timeStamp;
 	    dispatchEvent(evt.target, Events.KEYUP, detail);
 	    detail.dispose();
-	    evt.preventDefault();
+	    var tagName = evt.target.tagName;
+	    if (tagName !== "INPUT" && tagName !== "TEXTAREA") {
+	        evt.preventDefault();
+	    }
 	}
 	function dispatchKeyEvent(target, keyCode) {
 	    var detail = event_detail_1.KeyEventDetail.create(keyCode, altKey, ctrlKey, shiftKey, commandKey);
@@ -23100,12 +23106,12 @@ var qtk =
 	        }
 	        dialog.set({ x: x, y: y, w: w, h: h });
 	        dialog.styleType = "widget.transparent";
-	        dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        dialog.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
 	        var listView = list_view_1.ListView.create();
 	        listView.padding = padding;
 	        listView.itemH = itemH;
 	        listView.styleType = "combo-box-popup";
-	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
+	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "0", y: "0px", w: "100%", h: "100%" });
 	        listView.dragToScroll = scrollable;
 	        dialog.addChild(listView);
 	        dialog.target = listView;
@@ -23389,7 +23395,7 @@ var qtk =
 	    ListView.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this.scrollerOptions.scrollingX = false;
-	        this._childrenLayouter = list_layouter_1.ListLayouter.create({ height: this.itemH, spacing: 0 });
+	        this._childrenLayouter = list_layouter_1.ListLayouter.createWithOptions({ height: this.itemH, spacing: 0 });
 	    };
 	    ListView.prototype.getDefProps = function () {
 	        return ListView.defProps;
@@ -23474,9 +23480,12 @@ var qtk =
 	        return this.rect;
 	    };
 	    ListLayouter.prototype.createParam = function (options) {
-	        return ListLayouterParam.create(options);
+	        return ListLayouterParam.createWithOptions(options);
 	    };
-	    ListLayouter.create = function (options) {
+	    ListLayouter.create = function (h, spacing) {
+	        return ListLayouter.createWithOptions({ h: h, spacing: spacing });
+	    };
+	    ListLayouter.createWithOptions = function (options) {
 	        var layouter = new ListLayouter();
 	        return layouter.setOptions(options);
 	    };
@@ -23484,7 +23493,7 @@ var qtk =
 	}(layouter_1.Layouter));
 	exports.ListLayouter = ListLayouter;
 	;
-	layouter_1.LayouterFactory.register(TYPE, ListLayouter.create);
+	layouter_1.LayouterFactory.register(TYPE, ListLayouter.createWithOptions);
 	/**
 	 * 列表布局器的参数。
 	 *
@@ -23498,7 +23507,10 @@ var qtk =
 	        this.h = h || 0;
 	        this.spacing = spacing || 0;
 	    }
-	    ListLayouterParam.create = function (opt) {
+	    ListLayouterParam.create = function (h, spacing) {
+	        return new ListLayouterParam(h, spacing);
+	    };
+	    ListLayouterParam.createWithOptions = function (opt) {
 	        var options = opt || {};
 	        return new ListLayouterParam(options.h || options.height, options.spacing);
 	    };
@@ -23506,7 +23518,7 @@ var qtk =
 	}(layouter_1.LayouterParam));
 	exports.ListLayouterParam = ListLayouterParam;
 	;
-	layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.create);
+	layouter_1.LayouterParamFactory.register(TYPE, ListLayouterParam.createWithOptions);
 
 
 /***/ },
@@ -23751,9 +23763,12 @@ var qtk =
 	        }
 	    };
 	    SimpleLayouter.prototype.createParam = function (options) {
-	        return SimpleLayouterParam.create(options);
+	        return SimpleLayouterParam.createWithOptions(options);
 	    };
-	    SimpleLayouter.create = function (options) {
+	    SimpleLayouter.create = function () {
+	        return SimpleLayouter.createWithOptions({});
+	    };
+	    SimpleLayouter.createWithOptions = function (options) {
 	        var layouter = new SimpleLayouter();
 	        return layouter.setOptions(options);
 	    };
@@ -23761,7 +23776,7 @@ var qtk =
 	}(layouter_1.Layouter));
 	exports.SimpleLayouter = SimpleLayouter;
 	;
-	layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.create);
+	layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.createWithOptions);
 	/**
 	 * 简单的布局器的参数。
 	 *
@@ -23798,7 +23813,10 @@ var qtk =
 	        this.maxW = -1;
 	        this.maxH = -1;
 	    }
-	    SimpleLayouterParam.create = function (opts) {
+	    SimpleLayouterParam.create = function (x, y, w, h) {
+	        return new SimpleLayouterParam(x, y, w, h);
+	    };
+	    SimpleLayouterParam.createWithOptions = function (opts) {
 	        var options = opts || {};
 	        return new SimpleLayouterParam(options.x || '0px', options.y || 'center', options.w || '100%', options.h || '100%');
 	    };
@@ -23806,7 +23824,7 @@ var qtk =
 	}(layouter_1.LayouterParam));
 	exports.SimpleLayouterParam = SimpleLayouterParam;
 	;
-	layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.create);
+	layouter_1.LayouterParamFactory.register(TYPE, SimpleLayouterParam.createWithOptions);
 
 
 /***/ },
@@ -23962,7 +23980,7 @@ var qtk =
 	    };
 	    GridView.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
+	        this._childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({ cols: this.cols, rows: this.rows });
 	    };
 	    GridView.prototype.getDefProps = function () {
 	        return GridView.defProps;
@@ -24083,9 +24101,13 @@ var qtk =
 	        return ret;
 	    };
 	    GridLayouter.prototype.createParam = function (options) {
-	        return GridLayouterParam.create(options);
+	        return GridLayouterParam.createWithOptions(options);
 	    };
-	    GridLayouter.create = function (options) {
+	    GridLayouter.create = function (cols, rows, margin) {
+	        return GridLayouter.createWithOptions({ cols: cols, rows: rows, leftMargin: margin, rightMargin: margin,
+	            topMargin: margin, bottomMargin: margin });
+	    };
+	    GridLayouter.createWithOptions = function (options) {
 	        var layouter = new GridLayouter();
 	        return layouter.setOptions(options);
 	    };
@@ -24093,7 +24115,7 @@ var qtk =
 	}(layouter_1.Layouter));
 	exports.GridLayouter = GridLayouter;
 	;
-	layouter_1.LayouterFactory.register(TYPE, GridLayouter.create);
+	layouter_1.LayouterFactory.register(TYPE, GridLayouter.createWithOptions);
 	/**
 	 * 网格布局器的参数。
 	 *
@@ -24109,7 +24131,10 @@ var qtk =
 	        this.spanRows = spanRows || 1;
 	        this.spanCols = spanCols || 1;
 	    }
-	    GridLayouterParam.create = function (opts) {
+	    GridLayouterParam.create = function (row, spanRows, col, spanCols) {
+	        return new GridLayouterParam(row, spanRows, col, spanCols);
+	    };
+	    GridLayouterParam.createWithOptions = function (opts) {
 	        var options = opts || {};
 	        return new GridLayouterParam(options.row, options.spanRows, options.col, options.spanCols);
 	    };
@@ -24117,7 +24142,7 @@ var qtk =
 	}(layouter_1.LayouterParam));
 	exports.GridLayouterParam = GridLayouterParam;
 	;
-	layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.create);
+	layouter_1.LayouterParamFactory.register(TYPE, GridLayouterParam.createWithOptions);
 
 
 /***/ },
@@ -25596,25 +25621,25 @@ var qtk =
 	        if (titleOptions) {
 	            var title = group_1.Group.create({ styleType: "dialog.title-bg" });
 	            var titleH = titleOptions.h || MessageBox.TITLE_H;
-	            title.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.TOP, size: titleH });
-	            title.childrenLayouter = linear_layouter_1.LinearLayouter.createH();
+	            title.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.TOP, size: titleH });
+	            title.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions();
 	            this.addChild(title);
 	            if (titleOptions.draggable) {
 	                title.useBehavior("movable", { moveParent: true });
 	            }
 	            if (titleOptions.iconStyleType) {
 	                var icon = button_1.Button.create({ name: "icon", styleType: titleOptions.iconStyleType });
-	                icon.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 1, h: "100%", w: title.h });
+	                icon.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: 1, h: "100%", w: title.h });
 	                title.addChild(icon);
 	            }
 	            if (titleOptions.text) {
 	                var label = label_1.Label.create({ name: "text", text: titleOptions.text, styleType: "dialog.title-text" });
-	                label.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: 2, h: "100%", w: w - titleH * 2 });
+	                label.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: 2, h: "100%", w: w - titleH * 2 });
 	                title.addChild(label);
 	            }
 	            if (titleOptions.hasCloseButton) {
 	                var button = button_1.Button.create({ name: "close", styleType: "messagebox.button.close" });
-	                button.layoutParam = linear_layouter_1.LinearLayouterParam.create({ position: -1, h: "100%", w: titleH });
+	                button.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ position: -1, h: "100%", w: titleH });
 	                title.addChild(button);
 	                button.on(Events.CLICK, function (evt) {
 	                    win.animateClose();
@@ -25631,8 +25656,8 @@ var qtk =
 	            var n = buttonsOptions.buttons.length;
 	            var buttonsH = buttonsOptions.h || MessageBox.BUTTONS_H;
 	            var margin = n < 2 ? w / (4 * n) : w / (8 * n);
-	            buttons.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: buttonsH });
-	            buttons.childrenLayouter = grid_layouter_1.GridLayouter.create({
+	            buttons.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.BOTTOM, size: buttonsH });
+	            buttons.childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({
 	                topMargin: 5,
 	                bottomMargin: 5,
 	                leftMargin: margin,
@@ -25657,12 +25682,12 @@ var qtk =
 	    };
 	    MessageBox.prototype.initContent = function (data) {
 	        var content = group_1.Group.create();
-	        content.layoutParam = dock_layouter_1.DockLayouterParam.create({ position: consts_1.Direction.BOTTOM, size: "100%" });
+	        content.layoutParam = dock_layouter_1.DockLayouterParam.createWithOptions({ position: consts_1.Direction.BOTTOM, size: "100%" });
 	        this.addChild(content);
 	        if (data) {
-	            content.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	            content.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
 	            var label = label_1.Label.create({ text: data, multiLineMode: true, padding: this._contentPadding });
-	            label.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" });
+	            label.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ w: "100%", h: "100%" });
 	            content.addChild(label);
 	        }
 	        this._content = content;
@@ -25699,7 +25724,7 @@ var qtk =
 	    MessageBox.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
 	        this.padding = 1;
-	        this.childrenLayouter = dock_layouter_1.DockLayouter.create();
+	        this.childrenLayouter = dock_layouter_1.DockLayouter.createWithOptions();
 	    };
 	    MessageBox.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
@@ -25777,8 +25802,8 @@ var qtk =
 	        var progressBar = progress_bar_1.ProgressBar.create();
 	        group.padding = 10;
 	        group.topPadding = 20;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "20px" });
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+	        progressBar.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "20px" });
 	        var closeButton = messageBox.buttons.children[0];
 	        closeButton.enable = false;
 	        function onProgress(value) {
@@ -25808,8 +25833,8 @@ var qtk =
 	        var edit = edit_1.Edit.create({ inputTips: inputTips, value: value, inputType: inputType || "text" });
 	        group.padding = 10;
 	        group.topPadding = 15;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "25px" });
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+	        edit.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "25px" });
 	        function onOK() {
 	            onDone(edit.text);
 	        }
@@ -25838,8 +25863,8 @@ var qtk =
 	        var listView = list_view_1.ListView.create({ itemH: itemH, dragToScroll: true });
 	        group.padding = 5;
 	        group.topPadding = 5;
-	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
-	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "center", y: "middle", w: "100%", h: "100%" });
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
+	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "center", y: "middle", w: "100%", h: "100%" });
 	        data.forEach(function (iter) {
 	            var item = list_item_1.ListItemCheckable.create({
 	                multiCheckable: multiple,
@@ -25966,9 +25991,12 @@ var qtk =
 	        }
 	    };
 	    DockLayouter.prototype.createParam = function (options) {
-	        return DockLayouterParam.create(options);
+	        return DockLayouterParam.createWithOptions(options);
 	    };
-	    DockLayouter.create = function (options) {
+	    DockLayouter.create = function () {
+	        return DockLayouter.createWithOptions({});
+	    };
+	    DockLayouter.createWithOptions = function (options) {
 	        var layouter = new DockLayouter();
 	        return layouter.setOptions(options);
 	    };
@@ -25976,7 +26004,7 @@ var qtk =
 	}(layouter_1.Layouter));
 	exports.DockLayouter = DockLayouter;
 	;
-	layouter_1.LayouterFactory.register(TYPE, DockLayouter.create);
+	layouter_1.LayouterFactory.register(TYPE, DockLayouter.createWithOptions);
 	/**
 	 * Dock布局器的参数。
 	 *
@@ -26018,7 +26046,10 @@ var qtk =
 	        }
 	        widget.parent.relayoutChildren();
 	    };
-	    DockLayouterParam.create = function (opts) {
+	    DockLayouterParam.create = function (position, size) {
+	        return new DockLayouterParam(position, size);
+	    };
+	    DockLayouterParam.createWithOptions = function (opts) {
 	        var options = opts || {};
 	        return new DockLayouterParam(options.position, options.size || "");
 	    };
@@ -26026,7 +26057,7 @@ var qtk =
 	}(layouter_1.LayouterParam));
 	exports.DockLayouterParam = DockLayouterParam;
 	;
-	layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.create);
+	layouter_1.LayouterParamFactory.register(TYPE, DockLayouterParam.createWithOptions);
 
 
 /***/ },
@@ -26184,15 +26215,21 @@ var qtk =
 	        }
 	    };
 	    LinearLayouter.prototype.createParam = function (options) {
-	        return LinearLayouterParam.create(options);
+	        return LinearLayouterParam.createWithOptions(options);
 	    };
-	    LinearLayouter.createV = function (options) {
+	    LinearLayouter.createH = function (spacing) {
+	        return LinearLayouter.createVWithOptions({ spacing: spacing });
+	    };
+	    LinearLayouter.createV = function (spacing) {
+	        return LinearLayouter.createHWithOptions({ spacing: spacing });
+	    };
+	    LinearLayouter.createVWithOptions = function (options) {
 	        var layouter = new LinearLayouter();
 	        layouter.setOptions(options);
 	        layouter.orientation = consts_1.Orientation.V;
 	        return layouter;
 	    };
-	    LinearLayouter.createH = function (options) {
+	    LinearLayouter.createHWithOptions = function (options) {
 	        var layouter = new LinearLayouter();
 	        layouter.setOptions(options || {});
 	        layouter.orientation = consts_1.Orientation.H;
@@ -26202,8 +26239,8 @@ var qtk =
 	}(layouter_1.Layouter));
 	exports.LinearLayouter = LinearLayouter;
 	;
-	layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createH);
-	layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createV);
+	layouter_1.LayouterFactory.register(TYPE_H, LinearLayouter.createHWithOptions);
+	layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createVWithOptions);
 	/**
 	 * Linear布局器的参数。
 	 *
@@ -26228,16 +26265,19 @@ var qtk =
 	        var options = opts || {};
 	        return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
 	    };
-	    LinearLayouterParam.create = function (opts) {
+	    LinearLayouterParam.create = function (w, h, spacing, align, position) {
+	        return new LinearLayouterParam(LinearLayouterParam.TYPE, w, h, spacing, align, position);
+	    };
+	    LinearLayouterParam.createWithOptions = function (opts) {
 	        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
 	    };
 	    LinearLayouterParam.TYPE = "linear";
-	    LinearLayouterParam.defParam = LinearLayouterParam.create(null);
+	    LinearLayouterParam.defParam = LinearLayouterParam.createWithOptions(null);
 	    return LinearLayouterParam;
 	}(layouter_1.LayouterParam));
 	exports.LinearLayouterParam = LinearLayouterParam;
 	;
-	layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.create);
+	layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.createWithOptions);
 
 
 /***/ },
@@ -26316,7 +26356,7 @@ var qtk =
 	        var vp = app.getViewPort();
 	        var rw = Math.min(vp.w, w || 300);
 	        var dataCopy = onNo ? JSON.parse(JSON.stringify(data)) : data;
-	        var page = property_page_1.PropertyPage.create({ layoutParam: simple_layouter_1.SimpleLayouterParam.create({ w: "100%", h: "100%" }) });
+	        var page = property_page_1.PropertyPage.create({ layoutParam: simple_layouter_1.SimpleLayouterParam.createWithOptions({ w: "100%", h: "100%" }) });
 	        page.initWithPropsDesc(pagePropsDesc.propsDesc);
 	        var h = page.h + message_box_1.MessageBox.TITLE_H + message_box_1.MessageBox.BUTTONS_H + 20;
 	        var messageBox = PropertyDialog.create({ app: app, styleType: message_box_1.MessageBox.TYPE, w: rw, h: h });
@@ -26335,7 +26375,7 @@ var qtk =
 	                }
 	            } });
 	        messageBox.createChildren(titleOptions, buttonsOption, null);
-	        var group = messageBox.content.set({ padding: 5, childrenLayouter: simple_layouter_1.SimpleLayouter.create() });
+	        var group = messageBox.content.set({ padding: 5, childrenLayouter: simple_layouter_1.SimpleLayouter.createWithOptions() });
 	        group.addChild(page);
 	        var vm = view_model_1.ViewModel.create(dataCopy);
 	        page.bindData(vm);
@@ -26898,12 +26938,12 @@ var qtk =
 	    TitleValue.prototype.onInit = function () {
 	        _super.prototype.onInit.call(this);
 	        this.titleWidget.text = this._title;
-	        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._titleW, h: "100%" });
-	        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.create({ w: this._valueW, h: "100%" });
+	        this.titleWidget.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ w: this._titleW, h: "100%" });
+	        this.valueWidget.layoutParam = linear_layouter_1.LinearLayouterParam.createWithOptions({ w: this._valueW, h: "100%" });
 	    };
 	    TitleValue.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 5 });
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions({ spacing: 5 });
 	        var titleWidget = label_1.Label.create();
 	        this.addChild(titleWidget);
 	        this._titleWidget = titleWidget;
@@ -27822,7 +27862,7 @@ var qtk =
 	        this.d = Math.max(2, Math.min(4, this.d || 2));
 	        var cols = this.d;
 	        var rows = 2;
-	        this.childrenLayouter = grid_layouter_1.GridLayouter.create({ rows: rows, cols: cols, rightMargin: 10 });
+	        this.childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({ rows: rows, cols: cols, rightMargin: 10 });
 	        this._xLabel = this.createLabel(this._xTitle);
 	        this._yLabel = this.createLabel(this._yTitle);
 	        if (this.d > 2) {
@@ -29787,7 +29827,7 @@ var qtk =
 	        var item = MenuItem.create();
 	        var h = text === "-" ? this.itemH >> 1 : this.itemH;
 	        item.set({ iconURL: iconURL, text: text, shortcut: shortcut, onInitSubMenu: onInitSubMenu });
-	        item.layoutParam = list_layouter_1.ListLayouterParam.create({ h: h });
+	        item.layoutParam = list_layouter_1.ListLayouterParam.createWithOptions({ h: h });
 	        listView.addChild(item);
 	        item.on(Events.POINTER_ENTER, function (evt) {
 	            _this.onItemEnter(item);
@@ -29798,7 +29838,7 @@ var qtk =
 	        _super.prototype.onReset.call(this);
 	        this.hasOwnCanvas = true;
 	        this.styleType = "widget.transparent";
-	        this.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        this.childrenLayouter = simple_layouter_1.SimpleLayouter.createWithOptions();
 	        var listView = list_view_1.ListView.create();
 	        listView.padding = 0;
 	        listView.itemH = 25;
@@ -29806,7 +29846,7 @@ var qtk =
 	        listView.dragToScroll = false;
 	        listView.slideToScroll = false;
 	        listView.bottomPadding = 4;
-	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.create({ x: "0", y: "0px", w: "100%", h: "100%" });
+	        listView.layoutParam = simple_layouter_1.SimpleLayouterParam.createWithOptions({ x: "0", y: "0px", w: "100%", h: "100%" });
 	        this.addChild(listView);
 	        this.target = listView;
 	        this._listView = listView;
@@ -30117,7 +30157,7 @@ var qtk =
 	    };
 	    MenuBar.prototype.onReset = function () {
 	        _super.prototype.onReset.call(this);
-	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH({ spacing: 1 });
+	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createHWithOptions({ spacing: 1 });
 	    };
 	    MenuBar.prototype.getDefProps = function () {
 	        return MenuBar.defProps;

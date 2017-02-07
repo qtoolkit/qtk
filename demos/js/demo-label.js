@@ -24,15 +24,15 @@ function onReady(app) {
 	
 	var vp = app.getViewPort();
 	var win = WindowNormal.create({app:app, w:vp.width, h:vp.height});
-	win.childrenLayouter = SimpleLayouter.create();
+	win.childrenLayouter = SimpleLayouter.createWithOptions();
 	
 	var label = Label.create({multiLineMode:true, name:"text1"});
-	label.layoutParam = SimpleLayouterParam.create({x:"25%", y:"40px", w:"50%", h:"100px"});
+	label.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"40px", w:"50%", h:"100px"});
 	label.text = "1.注册hello world登录后，所有生成的二维码\n都会保存在账号里";
 	win.addChild(label);
 	
 	label = Label.create({multiLineMode:true, name:"text2"});
-	label.layoutParam = SimpleLayouterParam.create({x:"25%", y:"150px", w:"50%", h:"100px"});
+	label.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"150px", w:"50%", h:"100px"});
 	label.text = "2.注册hello world登录后，所有生成的二维码\n都会保存在账号里";
 	label.setStyle(WidgetState.NORMAL, Style.create({
 			"textColor" : "green",
@@ -43,7 +43,7 @@ function onReady(app) {
 	win.addChild(label);
 	
 	label = Label.create({multiLineMode:true, name:"text3"});
-	label.layoutParam = SimpleLayouterParam.create({x:"25%", y:"260px", w:"50%", h:"100px"});
+	label.layoutParam = SimpleLayouterParam.createWithOptions({x:"25%", y:"260px", w:"50%", h:"100px"});
 	label.text = "2.注册hello world登录后，所有生成的二维码\n都会保存在账号里";
 	label.setStyle(WidgetState.NORMAL, Style.create({
 			"textColor" : "green",

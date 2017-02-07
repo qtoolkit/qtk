@@ -86,7 +86,7 @@ export class ListView extends ScrollView {
 	protected onReset() {
 		super.onReset();
 		this.scrollerOptions.scrollingX = false;
-		this._childrenLayouter = ListLayouter.create({height:this.itemH, spacing:0});
+		this._childrenLayouter = ListLayouter.createWithOptions({height:this.itemH, spacing:0});
 	}
 	
 	protected static defProps = Object.assign({}, Widget.defProps, {_ih:30, _is:0});

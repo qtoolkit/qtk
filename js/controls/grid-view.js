@@ -147,7 +147,7 @@ var GridView = (function (_super) {
     };
     GridView.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
-        this._childrenLayouter = grid_layouter_1.GridLayouter.create({ cols: this.cols, rows: this.rows });
+        this._childrenLayouter = grid_layouter_1.GridLayouter.createWithOptions({ cols: this.cols, rows: this.rows });
     };
     GridView.prototype.getDefProps = function () {
         return GridView.defProps;

@@ -3,7 +3,7 @@ describe('LinearLayouter', function() {
    
 	function addButton(group, z, w, h, spacing, align) {
 		var button = qtk.Button.create().set({text:z.toString(),
-			layoutParam: qtk.LinearLayouterParam.create({w:w, h:h, spacing:spacing, align:align, position:z})
+			layoutParam: qtk.LinearLayouterParam.createWithOptions({w:w, h:h, spacing:spacing, align:align, position:z})
 		});
 		group.addChild(button);
 
@@ -15,12 +15,12 @@ describe('LinearLayouter', function() {
 	var win = qtk.WindowNormal.create();
 	win.set({app:app, x:0, y:0, w:1000, h:1000, hasOwnCanvas:true});
 
-	win.childrenLayouter = qtk.DockLayouter.create();
+	win.childrenLayouter = qtk.DockLayouter.createWithOptions();
 
 	var topGroup = qtk.Group.create().set({text:"Top", h:60});
-	topGroup.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.TOP});
+	topGroup.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.TOP});
 	win.addChild(topGroup);
-	topGroup.childrenLayouter = qtk.LinearLayouter.createH({spacing:10});
+	topGroup.childrenLayouter = qtk.LinearLayouter.createHWithOptions({spacing:10});
 	var h1 = addButton(topGroup, 1, "60", "50%", 10, qtk.Align.TOP);
 	var h2 = addButton(topGroup, 2, "60", "50%", 10, qtk.Align.MIDDLE);
 	var h3 = addButton(topGroup, 3, "60", "50%", 10, qtk.Align.BOTTOM);
@@ -34,8 +34,8 @@ describe('LinearLayouter', function() {
 	var hm3 = addButton(topGroup, -3, "60", "50%", 10, qtk.Align.MIDDLE);
 
 	var leftGroup = qtk.Group.create().set({text:"Left", w:120});
-	leftGroup.layoutParam = qtk.DockLayouterParam.create({position:qtk.Direction.LEFT});
-	leftGroup.childrenLayouter = qtk.LinearLayouter.createV({spacing:10});
+	leftGroup.layoutParam = qtk.DockLayouterParam.createWithOptions({position:qtk.Direction.LEFT});
+	leftGroup.childrenLayouter = qtk.LinearLayouter.createVWithOptions({spacing:10});
 	win.addChild(leftGroup);
 
 	var v1 = addButton(leftGroup, 1, "50%", "30", 10, qtk.Align.LEFT);

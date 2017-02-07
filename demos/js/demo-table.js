@@ -39,11 +39,11 @@ function onReady(app) {
 	var vp = app.getViewPort();
 	var win = qtk.WindowNormal.create({app:app, w:vp.width, h:vp.height});
 	
-	win.childrenLayouter = qtk.SimpleLayouter.create();
+	win.childrenLayouter = qtk.SimpleLayouter.createWithOptions();
 
 	var indexBarW = 80;
 	var table = qtk.Table.create({indexBarW:indexBarW});
-	table.layoutParam = qtk.SimpleLayouterParam.create({w:"100%", h:"100%"});
+	table.layoutParam = qtk.SimpleLayouterParam.createWithOptions({w:"100%", h:"100%"});
 	
 	win.addChild(table);
 	
