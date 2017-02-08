@@ -66,6 +66,6 @@ export declare class LinearLayouterParam extends LayouterParam {
     static TYPE: string;
     static defParam: LinearLayouterParam;
     static createWithType(type: string, opts: any): LinearLayouterParam;
-    static create(w: string, h: string, spacing: number, align: Align, position: number): LinearLayouterParam;
+    static create(w: string | number, h: string | number, spacing?: number, align?: Align, position?: number): LinearLayouterParam;
     static createWithOptions(opts: any): LinearLayouterParam;
 }

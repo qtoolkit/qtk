@@ -46,6 +46,6 @@ export declare class SimpleLayouterParam extends LayouterParam {
     minH: number;
     maxH: number;
     constructor(x: string, y: string, w: string, h: string);
-    static create(x: string, y: string, w: string, h: string): SimpleLayouterParam;
+    static create(x: string | number, y: string | number, w: string | number, h: string | number): SimpleLayouterParam;
     static createWithOptions(opts: any): SimpleLayouterParam;
 }

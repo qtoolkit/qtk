@@ -107,7 +107,7 @@ var SimpleLayouterParam = (function (_super) {
         this.maxH = -1;
     }
     SimpleLayouterParam.create = function (x, y, w, h) {
-        return new SimpleLayouterParam(x, y, w, h);
+        return new SimpleLayouterParam(x.toString(), y.toString(), w.toString(), h.toString());
     };
     SimpleLayouterParam.createWithOptions = function (opts) {
         var options = opts || {};

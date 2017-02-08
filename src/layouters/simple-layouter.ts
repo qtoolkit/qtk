@@ -119,8 +119,8 @@ export class SimpleLayouterParam extends LayouterParam {
 		this.maxH = -1;
 	}
 
-	public static create(x:string, y:string, w:string, h:string) {
-		return new SimpleLayouterParam(x, y, w, h);
+	public static create(x:string|number, y:string|number, w:string|number, h:string|number) {
+		return new SimpleLayouterParam(x.toString(), y.toString(), w.toString(), h.toString());
 	}
 
 	public static createWithOptions(opts:any) {

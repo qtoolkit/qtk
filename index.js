@@ -23814,7 +23814,7 @@ var qtk =
 	        this.maxH = -1;
 	    }
 	    SimpleLayouterParam.create = function (x, y, w, h) {
-	        return new SimpleLayouterParam(x, y, w, h);
+	        return new SimpleLayouterParam(x.toString(), y.toString(), w.toString(), h.toString());
 	    };
 	    SimpleLayouterParam.createWithOptions = function (opts) {
 	        var options = opts || {};
@@ -26218,10 +26218,10 @@ var qtk =
 	        return LinearLayouterParam.createWithOptions(options);
 	    };
 	    LinearLayouter.createH = function (spacing) {
-	        return LinearLayouter.createVWithOptions({ spacing: spacing });
+	        return LinearLayouter.createHWithOptions({ spacing: spacing });
 	    };
 	    LinearLayouter.createV = function (spacing) {
-	        return LinearLayouter.createHWithOptions({ spacing: spacing });
+	        return LinearLayouter.createVWithOptions({ spacing: spacing });
 	    };
 	    LinearLayouter.createVWithOptions = function (options) {
 	        var layouter = new LinearLayouter();
@@ -26266,7 +26266,13 @@ var qtk =
 	        return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
 	    };
 	    LinearLayouterParam.create = function (w, h, spacing, align, position) {
-	        return new LinearLayouterParam(LinearLayouterParam.TYPE, w, h, spacing, align, position);
+	        if (align === undefined) {
+	            align = consts_1.Align.C;
+	        }
+	        if (position === undefined) {
+	            position = 1;
+	        }
+	        return new LinearLayouterParam(LinearLayouterParam.TYPE, w.toString(), h.toString(), spacing || 0, align, position | 0);
 	    };
 	    LinearLayouterParam.createWithOptions = function (opts) {
 	        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);

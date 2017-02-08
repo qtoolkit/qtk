@@ -167,11 +167,11 @@ export class LinearLayouter extends Layouter {
 	}
 
 	public static createH(spacing:number) : LinearLayouter{
-		return LinearLayouter.createVWithOptions({spacing:spacing});
+		return LinearLayouter.createHWithOptions({spacing:spacing});
 	}
 
 	public static createV(spacing:number) : LinearLayouter{
-		return LinearLayouter.createHWithOptions({spacing:spacing});
+		return LinearLayouter.createVWithOptions({spacing:spacing});
 	}
 
 	public static createVWithOptions(options:any) : LinearLayouter {
@@ -250,8 +250,17 @@ export class LinearLayouterParam extends LayouterParam {
 				options.position === undefined ? 1 : options.position);
 	}
 
-	public static create(w:string, h:string, spacing:number, align:Align, position:number) {
-		return new LinearLayouterParam(LinearLayouterParam.TYPE, w, h, spacing, align, position);
+	public static create(w:string|number, h:string|number, spacing?:number, align?:Align, position?:number) {
+		if(align === undefined) {
+			align = Align.C;
+		}
+
+		if(position === undefined) {
+			position = 1;
+		}
+
+		return new LinearLayouterParam(LinearLayouterParam.TYPE, 
+					 w.toString(), h.toString(), spacing || 0, align, position|0);
 	}
 
 	public static createWithOptions(opts:any) : LinearLayouterParam {
