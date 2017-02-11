@@ -1,5 +1,10 @@
 import { Rect } from "../rect";
 import { Widget } from "./widget";
+/**
+ * class TabButtonGroup
+ * @extends Widget
+ * 标签控件上的标签按钮分组。一般不需要直接使用。
+ */
 export declare class TabButtonGroup extends Widget {
     protected _ae: boolean;
     value: number;

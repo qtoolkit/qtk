@@ -5,15 +5,17 @@ import {TabButton} from "./tab-button";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
+/**
+ * @class TabPage 
+ * @extends Widget
+ * 标签控件上的标签页。它只是一个普通容器控件，需要自己向其中添加子控件。
+ */
 export class TabPage extends Page{
-	protected _tabButton : TabButton;
-
-	public set tabButton(value:TabButton) {
-		this._tabButton = value;
-	}
-	public get tabButton() : TabButton {
-		return this._tabButton;
-	}
+	/**
+	 * @property {TabButton} tabButton
+	 * 与之关联标签按钮。
+	 */
+	public tabButton : TabButton;
 
 	constructor() {
 		super(TabPage.TYPE);
@@ -21,7 +23,7 @@ export class TabPage extends Page{
 
 	public dispose() {
 		super.dispose();
-		this._tabButton = null;
+		this.tabButton = null;
 	}
 
 	public  static TYPE = "page";

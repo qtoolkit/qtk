@@ -14,7 +14,8 @@ import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
  * @class TabButton 
- * 标签控件上的标签按钮。它其实是一个单选控件，当前只有一个按钮处于active状态。
+ * @extends Widget
+ * 标签控件上的标签按钮，一般不需要直接使用它。它其实是单项按钮，只有一个按钮处于active状态下，用来指示当前页面。
  */ 
 export class TabButton extends RadioButton {
 	protected _normalIcon : ImageTile;
@@ -29,12 +30,16 @@ export class TabButton extends RadioButton {
 
 	/**
 	 * @property {Widget}  closeButton
-	 * 关闭按钮。
+	 * 关闭按钮（仅当closable为true时才有效）。
 	 */
 	public get closeButton() : Widget {
 		return this._closeButton;
 	}
 
+	/**
+	 * @property {boolean}  closeButtonAtLeft
+	 * true表示关闭按钮在左边，false表示关闭按钮在右边。
+	 */
 	public set closeButtonAtLeft(value:boolean) {
 		this._cbAtLeft = value;
 		this.relayoutChildren();
@@ -43,14 +48,61 @@ export class TabButton extends RadioButton {
 		return this._cbAtLeft;
 	}
 	
+	/**
+	 * @property {Orientation}  Orientation
+	 * 按钮上的文字和图标排列的方向。Orientation.H表示水平方向上排列，Orientation.V表示垂直方向上排列。
+	 */
 	public set orientation(value:Orientation) {
 		this._orn = value;
 	}
+	
 	public get orientation() : Orientation{
 		return this._orn;
 	}
+	
+	/**
+	 * @property {boolean}  closable
+	 * 表示当前标签是否可关闭，如果可关闭，则会显示一个小的关闭按钮。
+	 */
+	public set closable(value:boolean) {
+		if(value && this._closeButton || !value && !this._closeButton) {
+			return;
+		}
 
-	public setIcons(normalIconURL:string, currentIconURL:string) {
+		if(this._closeButton) {
+			this.removeChild(this._closeButton);
+			this._closeButton = null;
+		}else{
+			var closeButton = Button.create();
+			closeButton.set({styleType:"tab-button.close"});
+			this.addChild(closeButton);
+
+			this._closeButton = closeButton;
+		}
+	}
+	public get closable() : boolean {
+		return !!this._closeButton;
+	}
+
+	/**
+	 * @property {TabPage} tabPage
+	 * 与当前按钮关联的TabPage。
+	 */
+	public set tabPage(value:TabPage) {
+		this._tabPage = value;
+	}
+	public get tabPage() : TabPage {
+		return this._tabPage;
+	}
+
+	/**
+	 * @method setIcons
+	 * 设置图标。
+	 * @param {string} normalIconURL 正常情况下的图标URL。
+	 * @param {string} currentIconURL 处于active时的图标URL。
+	 * return {TabButton} 控件本身。
+	 */
+	public setIcons(normalIconURL:string, currentIconURL:string) : TabButton {
 		if(normalIconURL) {
 			this._normalIcon = ImageTile.create(normalIconURL, evt => {
 				this.requestRedraw();
@@ -68,28 +120,8 @@ export class TabButton extends RadioButton {
 			this._currentIcon = null;
 		}
 		this._currentIconURL = currentIconURL ? currentIconURL : null;
-	}
 
-
-	public set closable(value:boolean) {
-		if(value && this._closeButton || !value && !this._closeButton) {
-			return;
-		}
-
-		if(this._closeButton) {
-			this.removeChild(this._closeButton);
-			this._closeButton = null;
-		}else{
-			var closeButton = Button.create();
-			closeButton.set({styleType:"tab-button.close"});
-			this.addChild(closeButton);
-
-			this._closeButton = closeButton;
-		}
-	}
-
-	public get closable() : boolean {
-		return !!this._closeButton;
+		return this;
 	}
 
 	public relayoutChildren() : Rect {
@@ -130,18 +162,12 @@ export class TabButton extends RadioButton {
 		return w;
 	}
 
-	public set tabPage(value:TabPage) {
-		this._tabPage = value;
-	}
-	public get tabPage() : TabPage {
-		return this._tabPage;
-	}
-
 	protected getStyleType() : string {
 		var appendix = this.value ? "current" : "normal";
 		
 		return (this._styleType || this.type) +"."+appendix;
 	}
+
 	protected drawImage(ctx:any, style:Style) : Widget {
 		var text = this.getLocaleText();
 		var icon = this.value ? this._currentIcon : this._normalIcon;

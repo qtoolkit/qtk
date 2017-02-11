@@ -9,6 +9,11 @@ var widget_1 = require("./widget");
 var image_tile_1 = require("../image-tile");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var linear_layouter_1 = require("../layouters/linear-layouter");
+/**
+ * @class ToolBarItem
+ * @extends Widget
+ * 工具条上的图标按钮。一般不需直接创建，而是调用ToolBar的addItem函数。
+ */
 var ToolBarItem = (function (_super) {
     __extends(ToolBarItem, _super);
     function ToolBarItem(type) {
@@ -42,6 +47,11 @@ var ToolBarItem = (function (_super) {
     return ToolBarItem;
 }(widget_1.Widget));
 exports.ToolBarItem = ToolBarItem;
+/**
+ * @class ToolBar
+ * @extends Widget
+ * 工具条。一般显示在主菜单下方，为用户提供一种便捷的操作。
+ */
 var ToolBar = (function (_super) {
     __extends(ToolBar, _super);
     function ToolBar() {
@@ -51,13 +61,31 @@ var ToolBar = (function (_super) {
         _super.prototype.onInit.call(this);
         this.childrenLayouter = linear_layouter_1.LinearLayouter.createH(0);
     };
+    /**
+     * @method addSpacer
+     * 向ToolBar中增加一个占位符。
+     * @param {number} width 宽度。
+     *
+     * return {Widget} 返回增加的控件。
+     */
     ToolBar.prototype.addSpacer = function (width) {
         var size = this.h - 2;
         var item = group_1.Group.create({
             layoutParam: linear_layouter_1.LinearLayouterParam.create(width, size, 1)
         });
-        this.addChild(item);
+        return this.addChild(item);
     };
+    /**
+     * @method addItem
+     * 向ToolBar中增加一个按钮。
+     * @param {string} cmd 命令名称。
+     * @param {string} text 文字。
+     * @param {string} tips 提示。
+     * @param {normalIconURL} 图标URL。
+     * @param {disableIconURL} 禁用时的图标URL。
+     *
+     * return {Widget} 返回增加的控件。
+     */
     ToolBar.prototype.addItem = function (cmd, text, tips, normalIconURL, disableIconURL) {
         var size = this.h - 2;
         var item = ToolBarItem.create({
@@ -67,7 +95,7 @@ var ToolBar = (function (_super) {
             layoutParam: linear_layouter_1.LinearLayouterParam.create(size, size, 1)
         });
         item.set({ dataBindingRule: { click: { command: cmd } } });
-        this.addChild(item);
+        return this.addChild(item);
     };
     ToolBar.create = function (options) {
         return ToolBar.recycleBin.create(options);

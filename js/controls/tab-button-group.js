@@ -8,6 +8,11 @@ var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
+/**
+ * class TabButtonGroup
+ * @extends Widget
+ * 标签控件上的标签按钮分组。一般不需要直接使用。
+ */
 var TabButtonGroup = (function (_super) {
     __extends(TabButtonGroup, _super);
     function TabButtonGroup() {

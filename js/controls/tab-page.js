@@ -7,24 +7,19 @@ var __extends = (this && this.__extends) || function (d, b) {
 var page_1 = require("./page");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
+/**
+ * @class TabPage
+ * @extends Widget
+ * 标签控件上的标签页。它只是一个普通容器控件，需要自己向其中添加子控件。
+ */
 var TabPage = (function (_super) {
     __extends(TabPage, _super);
     function TabPage() {
         _super.call(this, TabPage.TYPE);
     }
-    Object.defineProperty(TabPage.prototype, "tabButton", {
-        get: function () {
-            return this._tabButton;
-        },
-        set: function (value) {
-            this._tabButton = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     TabPage.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
-        this._tabButton = null;
+        this.tabButton = null;
     };
     TabPage.create = function (options) {
         return TabPage.r.create(options);

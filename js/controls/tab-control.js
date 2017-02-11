@@ -13,6 +13,11 @@ var tab_button_1 = require("./tab-button");
 var tab_button_group_1 = require("./tab-button-group");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
+/**
+ * @class TabControl
+ * @extends Widget
+ * 标签控件。
+ */
 var TabControl = (function (_super) {
     __extends(TabControl, _super);
     function TabControl() {
@@ -22,6 +27,10 @@ var TabControl = (function (_super) {
         get: function () {
             return this._pages.value;
         },
+        /**
+         * @property {number} value
+         * 标签控件的值代表当前标签页的索引。可以修改value来指定当前的标签页，也可以用activePage来指定当前的标签页。
+         */
         set: function (value) {
             var oldValue = this.value;
             this._value = value;
@@ -34,7 +43,28 @@ var TabControl = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TabControl.prototype, "activePage", {
+        get: function () {
+            return (this.pages.children[this.value]);
+        },
+        /**
+         * @property {TabPage} activePage
+         * 当前的标签页。
+         */
+        set: function (tabPage) {
+            var value = this.pages.indexOfChild(tabPage);
+            if (value >= 0) {
+                this.value = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TabControl.prototype, "pages", {
+        /**
+         * @property {Pages} pages
+         * 标签页的集合。
+         */
         get: function () {
             return this._pages;
         },
@@ -42,6 +72,10 @@ var TabControl = (function (_super) {
         configurable: true
     });
     Object.defineProperty(TabControl.prototype, "buttonGroup", {
+        /**
+         * @property {TabButtonGroup} buttonGroup
+         * 标签按钮的集合。
+         */
         get: function () {
             return this._buttonGroup;
         },
@@ -52,6 +86,10 @@ var TabControl = (function (_super) {
         get: function () {
             return this.buttonGroup.autoExpand;
         },
+        /**
+         * @property {boolean} expandButton
+         * 是否扩展标签按钮的宽度。如果为false，则根据当前的标题和图标计算标签按钮的宽度，否则所有标签按钮平分button group的宽度。
+         */
         set: function (value) {
             this.buttonGroup.autoExpand = value;
         },
@@ -62,6 +100,10 @@ var TabControl = (function (_super) {
         get: function () {
             return this._bgAtTop;
         },
+        /**
+         * @property {boolean} buttonGroupAtTop
+         * true表示标签按钮组的位置在顶部，否则在底部。
+         */
         set: function (value) {
             this._bgAtTop = value;
             this.relayoutChildren();
@@ -73,6 +115,10 @@ var TabControl = (function (_super) {
         get: function () {
             return this._bgh;
         },
+        /**
+         * @property {number} buttonGroupHeight
+         * 标签按钮组的高度。
+         */
         set: function (value) {
             this._bgh = value;
             this.relayoutChildren();
@@ -80,6 +126,11 @@ var TabControl = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @method setPageTitle
+     * 设置指定TabPage的标题。
+     * return {TabControl} 控件本身。
+     */
     TabControl.prototype.setPageTitle = function (tabPage, title) {
         var index = this.pages.indexOfChild(tabPage);
         if (index >= 0) {
@@ -88,6 +139,10 @@ var TabControl = (function (_super) {
         }
         return this;
     };
+    /**
+     * @method getPageTitle
+     * 获取指定TabPage的标题。
+     */
     TabControl.prototype.getPageTitle = function (tabPage) {
         var index = this.pages.indexOfChild(tabPage);
         if (index >= 0) {
@@ -96,19 +151,21 @@ var TabControl = (function (_super) {
         }
         return null;
     };
-    TabControl.prototype.activatePage = function (tabPage) {
-        var value = this.pages.indexOfChild(tabPage);
-        if (value >= 0) {
-            this.value = value;
-        }
-        return this;
-    };
-    TabControl.prototype.getActivePage = function () {
-        return (this.pages.children[this.value]);
-    };
-    TabControl.prototype.closePage = function (tabPage) {
+    /**
+     * @method onClosePage
+     * 在点击标签按钮上的关闭按钮时会调用此函数，子类可以重载本函数，以提供关闭确认之类的功能。
+     */
+    TabControl.prototype.onClosePage = function (tabPage) {
         this.removePage(tabPage, true);
     };
+    /**
+     * @method removePage
+     * 移除指定的标签页，相应的标签按钮也会移出。
+     * @param {TabPage} tabPage 要移出的标签页。
+     * @param {boolean} destroy 是否移出该标签页。
+     *
+     * return {TabControl} 控件本身。
+     */
     TabControl.prototype.removePage = function (tabPage, destroy) {
         if (tabPage) {
             var tabButton = tabPage.tabButton;
@@ -116,7 +173,19 @@ var TabControl = (function (_super) {
             this.buttonGroup.removeChild(tabButton, false, destroy);
             this.value--;
         }
+        return this;
     };
+    /**
+     * @method addPage
+     * 向标签控件中增加一个标签页。
+     * @param {string} title 标题，作为标签按钮的文本。
+     * @param {string} normalIconURL 正常时的图标的URL。
+     * @param {string} currentIconURL 处于当前页时的图标的URL。
+     * @param {boolean} closable 是否显示关闭按钮。
+     * @param {boolean} closeButtonAtLeft 如果显示关闭按钮，关闭按钮是否显示在左边。
+     *
+     * @return {TabPage} 返回被创建的TabPage。
+     */
     TabControl.prototype.addPage = function (title, normalIconURL, currentIconURL, closable, closeButtonAtLeft) {
         if (!this.pages.app) {
             this.pages.app = this.app;
@@ -134,9 +203,9 @@ var TabControl = (function (_super) {
         this.buttonGroup.addChild(tabButton);
         var tabControl = this;
         tabButton.on(Events.CLICK, function (evt) {
-            tabControl.activatePage(this.tabPage);
+            tabControl.activePage = this.tabPage;
             if (closable && this.target && this.target === this.closeButton) {
-                tabControl.closePage(this.tabPage);
+                tabControl.onClosePage(this.tabPage);
             }
         });
         this.value = this._value;

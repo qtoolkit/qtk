@@ -19415,24 +19415,19 @@ var qtk =
 	var page_1 = __webpack_require__(88);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TabPage
+	 * @extends Widget
+	 * 标签控件上的标签页。它只是一个普通容器控件，需要自己向其中添加子控件。
+	 */
 	var TabPage = (function (_super) {
 	    __extends(TabPage, _super);
 	    function TabPage() {
 	        _super.call(this, TabPage.TYPE);
 	    }
-	    Object.defineProperty(TabPage.prototype, "tabButton", {
-	        get: function () {
-	            return this._tabButton;
-	        },
-	        set: function (value) {
-	            this._tabButton = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
 	    TabPage.prototype.dispose = function () {
 	        _super.prototype.dispose.call(this);
-	        this._tabButton = null;
+	        this.tabButton = null;
 	    };
 	    TabPage.create = function (options) {
 	        return TabPage.r.create(options);
@@ -21656,7 +21651,9 @@ var qtk =
 	var image_tile_1 = __webpack_require__(7);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	/**
-	 * 标签控件上的标签按钮。
+	 * @class TabButton
+	 * @extends Widget
+	 * 标签控件上的标签按钮，一般不需要直接使用它。它其实是单项按钮，只有一个按钮处于active状态下，用来指示当前页面。
 	 */
 	var TabButton = (function (_super) {
 	    __extends(TabButton, _super);
@@ -21664,6 +21661,10 @@ var qtk =
 	        _super.call(this, TabButton.TYPE);
 	    }
 	    Object.defineProperty(TabButton.prototype, "closeButton", {
+	        /**
+	         * @property {Widget}  closeButton
+	         * 关闭按钮（仅当closable为true时才有效）。
+	         */
 	        get: function () {
 	            return this._closeButton;
 	        },
@@ -21674,6 +21675,10 @@ var qtk =
 	        get: function () {
 	            return this._cbAtLeft;
 	        },
+	        /**
+	         * @property {boolean}  closeButtonAtLeft
+	         * true表示关闭按钮在左边，false表示关闭按钮在右边。
+	         */
 	        set: function (value) {
 	            this._cbAtLeft = value;
 	            this.relayoutChildren();
@@ -21685,12 +21690,63 @@ var qtk =
 	        get: function () {
 	            return this._orn;
 	        },
+	        /**
+	         * @property {Orientation}  Orientation
+	         * 按钮上的文字和图标排列的方向。Orientation.H表示水平方向上排列，Orientation.V表示垂直方向上排列。
+	         */
 	        set: function (value) {
 	            this._orn = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(TabButton.prototype, "closable", {
+	        get: function () {
+	            return !!this._closeButton;
+	        },
+	        /**
+	         * @property {boolean}  closable
+	         * 表示当前标签是否可关闭，如果可关闭，则会显示一个小的关闭按钮。
+	         */
+	        set: function (value) {
+	            if (value && this._closeButton || !value && !this._closeButton) {
+	                return;
+	            }
+	            if (this._closeButton) {
+	                this.removeChild(this._closeButton);
+	                this._closeButton = null;
+	            }
+	            else {
+	                var closeButton = button_1.Button.create();
+	                closeButton.set({ styleType: "tab-button.close" });
+	                this.addChild(closeButton);
+	                this._closeButton = closeButton;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(TabButton.prototype, "tabPage", {
+	        get: function () {
+	            return this._tabPage;
+	        },
+	        /**
+	         * @property {TabPage} tabPage
+	         * 与当前按钮关联的TabPage。
+	         */
+	        set: function (value) {
+	            this._tabPage = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    /**
+	     * @method setIcons
+	     * 设置图标。
+	     * @param {string} normalIconURL 正常情况下的图标URL。
+	     * @param {string} currentIconURL 处于active时的图标URL。
+	     * return {TabButton} 控件本身。
+	     */
 	    TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
 	        var _this = this;
 	        if (normalIconURL) {
@@ -21711,29 +21767,8 @@ var qtk =
 	            this._currentIcon = null;
 	        }
 	        this._currentIconURL = currentIconURL ? currentIconURL : null;
+	        return this;
 	    };
-	    Object.defineProperty(TabButton.prototype, "closable", {
-	        get: function () {
-	            return !!this._closeButton;
-	        },
-	        set: function (value) {
-	            if (value && this._closeButton || !value && !this._closeButton) {
-	                return;
-	            }
-	            if (this._closeButton) {
-	                this.removeChild(this._closeButton);
-	                this._closeButton = null;
-	            }
-	            else {
-	                var closeButton = button_1.Button.create();
-	                closeButton.set({ styleType: "tab-button.close" });
-	                this.addChild(closeButton);
-	                this._closeButton = closeButton;
-	            }
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
 	    TabButton.prototype.relayoutChildren = function () {
 	        if (this._closeButton) {
 	            var h = this.h >> 1;
@@ -21763,16 +21798,6 @@ var qtk =
 	                w += graphics_1.Graphics.measureText(text, font) + style.fontSize;
 	            }
 	            return w;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(TabButton.prototype, "tabPage", {
-	        get: function () {
-	            return this._tabPage;
-	        },
-	        set: function (value) {
-	            this._tabPage = value;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -22109,6 +22134,11 @@ var qtk =
 	var tab_button_group_1 = __webpack_require__(111);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TabControl
+	 * @extends Widget
+	 * 标签控件。
+	 */
 	var TabControl = (function (_super) {
 	    __extends(TabControl, _super);
 	    function TabControl() {
@@ -22118,6 +22148,10 @@ var qtk =
 	        get: function () {
 	            return this._pages.value;
 	        },
+	        /**
+	         * @property {number} value
+	         * 标签控件的值代表当前标签页的索引。可以修改value来指定当前的标签页，也可以用activePage来指定当前的标签页。
+	         */
 	        set: function (value) {
 	            var oldValue = this.value;
 	            this._value = value;
@@ -22130,7 +22164,28 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Object.defineProperty(TabControl.prototype, "activePage", {
+	        get: function () {
+	            return (this.pages.children[this.value]);
+	        },
+	        /**
+	         * @property {TabPage} activePage
+	         * 当前的标签页。
+	         */
+	        set: function (tabPage) {
+	            var value = this.pages.indexOfChild(tabPage);
+	            if (value >= 0) {
+	                this.value = value;
+	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(TabControl.prototype, "pages", {
+	        /**
+	         * @property {Pages} pages
+	         * 标签页的集合。
+	         */
 	        get: function () {
 	            return this._pages;
 	        },
@@ -22138,6 +22193,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(TabControl.prototype, "buttonGroup", {
+	        /**
+	         * @property {TabButtonGroup} buttonGroup
+	         * 标签按钮的集合。
+	         */
 	        get: function () {
 	            return this._buttonGroup;
 	        },
@@ -22148,6 +22207,10 @@ var qtk =
 	        get: function () {
 	            return this.buttonGroup.autoExpand;
 	        },
+	        /**
+	         * @property {boolean} expandButton
+	         * 是否扩展标签按钮的宽度。如果为false，则根据当前的标题和图标计算标签按钮的宽度，否则所有标签按钮平分button group的宽度。
+	         */
 	        set: function (value) {
 	            this.buttonGroup.autoExpand = value;
 	        },
@@ -22158,6 +22221,10 @@ var qtk =
 	        get: function () {
 	            return this._bgAtTop;
 	        },
+	        /**
+	         * @property {boolean} buttonGroupAtTop
+	         * true表示标签按钮组的位置在顶部，否则在底部。
+	         */
 	        set: function (value) {
 	            this._bgAtTop = value;
 	            this.relayoutChildren();
@@ -22169,6 +22236,10 @@ var qtk =
 	        get: function () {
 	            return this._bgh;
 	        },
+	        /**
+	         * @property {number} buttonGroupHeight
+	         * 标签按钮组的高度。
+	         */
 	        set: function (value) {
 	            this._bgh = value;
 	            this.relayoutChildren();
@@ -22176,6 +22247,11 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * @method setPageTitle
+	     * 设置指定TabPage的标题。
+	     * return {TabControl} 控件本身。
+	     */
 	    TabControl.prototype.setPageTitle = function (tabPage, title) {
 	        var index = this.pages.indexOfChild(tabPage);
 	        if (index >= 0) {
@@ -22184,6 +22260,10 @@ var qtk =
 	        }
 	        return this;
 	    };
+	    /**
+	     * @method getPageTitle
+	     * 获取指定TabPage的标题。
+	     */
 	    TabControl.prototype.getPageTitle = function (tabPage) {
 	        var index = this.pages.indexOfChild(tabPage);
 	        if (index >= 0) {
@@ -22192,19 +22272,21 @@ var qtk =
 	        }
 	        return null;
 	    };
-	    TabControl.prototype.activatePage = function (tabPage) {
-	        var value = this.pages.indexOfChild(tabPage);
-	        if (value >= 0) {
-	            this.value = value;
-	        }
-	        return this;
-	    };
-	    TabControl.prototype.getActivePage = function () {
-	        return (this.pages.children[this.value]);
-	    };
-	    TabControl.prototype.closePage = function (tabPage) {
+	    /**
+	     * @method onClosePage
+	     * 在点击标签按钮上的关闭按钮时会调用此函数，子类可以重载本函数，以提供关闭确认之类的功能。
+	     */
+	    TabControl.prototype.onClosePage = function (tabPage) {
 	        this.removePage(tabPage, true);
 	    };
+	    /**
+	     * @method removePage
+	     * 移除指定的标签页，相应的标签按钮也会移出。
+	     * @param {TabPage} tabPage 要移出的标签页。
+	     * @param {boolean} destroy 是否移出该标签页。
+	     *
+	     * return {TabControl} 控件本身。
+	     */
 	    TabControl.prototype.removePage = function (tabPage, destroy) {
 	        if (tabPage) {
 	            var tabButton = tabPage.tabButton;
@@ -22212,7 +22294,19 @@ var qtk =
 	            this.buttonGroup.removeChild(tabButton, false, destroy);
 	            this.value--;
 	        }
+	        return this;
 	    };
+	    /**
+	     * @method addPage
+	     * 向标签控件中增加一个标签页。
+	     * @param {string} title 标题，作为标签按钮的文本。
+	     * @param {string} normalIconURL 正常时的图标的URL。
+	     * @param {string} currentIconURL 处于当前页时的图标的URL。
+	     * @param {boolean} closable 是否显示关闭按钮。
+	     * @param {boolean} closeButtonAtLeft 如果显示关闭按钮，关闭按钮是否显示在左边。
+	     *
+	     * @return {TabPage} 返回被创建的TabPage。
+	     */
 	    TabControl.prototype.addPage = function (title, normalIconURL, currentIconURL, closable, closeButtonAtLeft) {
 	        if (!this.pages.app) {
 	            this.pages.app = this.app;
@@ -22230,9 +22324,9 @@ var qtk =
 	        this.buttonGroup.addChild(tabButton);
 	        var tabControl = this;
 	        tabButton.on(Events.CLICK, function (evt) {
-	            tabControl.activatePage(this.tabPage);
+	            tabControl.activePage = this.tabPage;
 	            if (closable && this.target && this.target === this.closeButton) {
-	                tabControl.closePage(this.tabPage);
+	                tabControl.onClosePage(this.tabPage);
 	            }
 	        });
 	        this.value = this._value;
@@ -22310,6 +22404,11 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * class TabButtonGroup
+	 * @extends Widget
+	 * 标签控件上的标签按钮分组。一般不需要直接使用。
+	 */
 	var TabButtonGroup = (function (_super) {
 	    __extends(TabButtonGroup, _super);
 	    function TabButtonGroup() {
@@ -30352,6 +30451,11 @@ var qtk =
 	var image_tile_1 = __webpack_require__(7);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	var linear_layouter_1 = __webpack_require__(134);
+	/**
+	 * @class ToolBarItem
+	 * @extends Widget
+	 * 工具条上的图标按钮。一般不需直接创建，而是调用ToolBar的addItem函数。
+	 */
 	var ToolBarItem = (function (_super) {
 	    __extends(ToolBarItem, _super);
 	    function ToolBarItem(type) {
@@ -30385,6 +30489,11 @@ var qtk =
 	    return ToolBarItem;
 	}(widget_1.Widget));
 	exports.ToolBarItem = ToolBarItem;
+	/**
+	 * @class ToolBar
+	 * @extends Widget
+	 * 工具条。一般显示在主菜单下方，为用户提供一种便捷的操作。
+	 */
 	var ToolBar = (function (_super) {
 	    __extends(ToolBar, _super);
 	    function ToolBar() {
@@ -30394,13 +30503,31 @@ var qtk =
 	        _super.prototype.onInit.call(this);
 	        this.childrenLayouter = linear_layouter_1.LinearLayouter.createH(0);
 	    };
+	    /**
+	     * @method addSpacer
+	     * 向ToolBar中增加一个占位符。
+	     * @param {number} width 宽度。
+	     *
+	     * return {Widget} 返回增加的控件。
+	     */
 	    ToolBar.prototype.addSpacer = function (width) {
 	        var size = this.h - 2;
 	        var item = group_1.Group.create({
 	            layoutParam: linear_layouter_1.LinearLayouterParam.create(width, size, 1)
 	        });
-	        this.addChild(item);
+	        return this.addChild(item);
 	    };
+	    /**
+	     * @method addItem
+	     * 向ToolBar中增加一个按钮。
+	     * @param {string} cmd 命令名称。
+	     * @param {string} text 文字。
+	     * @param {string} tips 提示。
+	     * @param {normalIconURL} 图标URL。
+	     * @param {disableIconURL} 禁用时的图标URL。
+	     *
+	     * return {Widget} 返回增加的控件。
+	     */
 	    ToolBar.prototype.addItem = function (cmd, text, tips, normalIconURL, disableIconURL) {
 	        var size = this.h - 2;
 	        var item = ToolBarItem.create({
@@ -30410,7 +30537,7 @@ var qtk =
 	            layoutParam: linear_layouter_1.LinearLayouterParam.create(size, size, 1)
 	        });
 	        item.set({ dataBindingRule: { click: { command: cmd } } });
-	        this.addChild(item);
+	        return this.addChild(item);
 	    };
 	    ToolBar.create = function (options) {
 	        return ToolBar.recycleBin.create(options);

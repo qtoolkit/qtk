@@ -14,7 +14,9 @@ var widget_factory_1 = require("./widget-factory");
 var image_tile_1 = require("../image-tile");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
- * 标签控件上的标签按钮。
+ * @class TabButton
+ * @extends Widget
+ * 标签控件上的标签按钮，一般不需要直接使用它。它其实是单项按钮，只有一个按钮处于active状态下，用来指示当前页面。
  */
 var TabButton = (function (_super) {
     __extends(TabButton, _super);
@@ -22,6 +24,10 @@ var TabButton = (function (_super) {
         _super.call(this, TabButton.TYPE);
     }
     Object.defineProperty(TabButton.prototype, "closeButton", {
+        /**
+         * @property {Widget}  closeButton
+         * 关闭按钮（仅当closable为true时才有效）。
+         */
         get: function () {
             return this._closeButton;
         },
@@ -32,6 +38,10 @@ var TabButton = (function (_super) {
         get: function () {
             return this._cbAtLeft;
         },
+        /**
+         * @property {boolean}  closeButtonAtLeft
+         * true表示关闭按钮在左边，false表示关闭按钮在右边。
+         */
         set: function (value) {
             this._cbAtLeft = value;
             this.relayoutChildren();
@@ -43,12 +53,63 @@ var TabButton = (function (_super) {
         get: function () {
             return this._orn;
         },
+        /**
+         * @property {Orientation}  Orientation
+         * 按钮上的文字和图标排列的方向。Orientation.H表示水平方向上排列，Orientation.V表示垂直方向上排列。
+         */
         set: function (value) {
             this._orn = value;
         },
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TabButton.prototype, "closable", {
+        get: function () {
+            return !!this._closeButton;
+        },
+        /**
+         * @property {boolean}  closable
+         * 表示当前标签是否可关闭，如果可关闭，则会显示一个小的关闭按钮。
+         */
+        set: function (value) {
+            if (value && this._closeButton || !value && !this._closeButton) {
+                return;
+            }
+            if (this._closeButton) {
+                this.removeChild(this._closeButton);
+                this._closeButton = null;
+            }
+            else {
+                var closeButton = button_1.Button.create();
+                closeButton.set({ styleType: "tab-button.close" });
+                this.addChild(closeButton);
+                this._closeButton = closeButton;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabButton.prototype, "tabPage", {
+        get: function () {
+            return this._tabPage;
+        },
+        /**
+         * @property {TabPage} tabPage
+         * 与当前按钮关联的TabPage。
+         */
+        set: function (value) {
+            this._tabPage = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @method setIcons
+     * 设置图标。
+     * @param {string} normalIconURL 正常情况下的图标URL。
+     * @param {string} currentIconURL 处于active时的图标URL。
+     * return {TabButton} 控件本身。
+     */
     TabButton.prototype.setIcons = function (normalIconURL, currentIconURL) {
         var _this = this;
         if (normalIconURL) {
@@ -69,29 +130,8 @@ var TabButton = (function (_super) {
             this._currentIcon = null;
         }
         this._currentIconURL = currentIconURL ? currentIconURL : null;
+        return this;
     };
-    Object.defineProperty(TabButton.prototype, "closable", {
-        get: function () {
-            return !!this._closeButton;
-        },
-        set: function (value) {
-            if (value && this._closeButton || !value && !this._closeButton) {
-                return;
-            }
-            if (this._closeButton) {
-                this.removeChild(this._closeButton);
-                this._closeButton = null;
-            }
-            else {
-                var closeButton = button_1.Button.create();
-                closeButton.set({ styleType: "tab-button.close" });
-                this.addChild(closeButton);
-                this._closeButton = closeButton;
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
     TabButton.prototype.relayoutChildren = function () {
         if (this._closeButton) {
             var h = this.h >> 1;
@@ -121,16 +161,6 @@ var TabButton = (function (_super) {
                 w += graphics_1.Graphics.measureText(text, font) + style.fontSize;
             }
             return w;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TabButton.prototype, "tabPage", {
-        get: function () {
-            return this._tabPage;
-        },
-        set: function (value) {
-            this._tabPage = value;
         },
         enumerable: true,
         configurable: true

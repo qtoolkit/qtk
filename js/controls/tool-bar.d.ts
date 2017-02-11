@@ -1,6 +1,11 @@
 import { Style } from "../style";
 import { Widget } from "./widget";
 import { ImageTile } from "../image-tile";
+/**
+ * @class ToolBarItem
+ * @extends Widget
+ * 工具条上的图标按钮。一般不需直接创建，而是调用ToolBar的addItem函数。
+ */
 export declare class ToolBarItem extends Widget {
     constructor(type?: string);
     protected drawImage(ctx: any, style: Style): Widget;
@@ -47,10 +52,33 @@ export declare class ToolBarItem extends Widget {
     private static recycleBin;
     static create(options?: any): ToolBarItem;
 }
+/**
+ * @class ToolBar
+ * @extends Widget
+ * 工具条。一般显示在主菜单下方，为用户提供一种便捷的操作。
+ */
 export declare class ToolBar extends Widget {
     protected onInit(): void;
-    addSpacer(width: number): void;
-    addItem(cmd: string, text: string, tips: string, normalIconURL: string, disableIconURL: string): void;
+    /**
+     * @method addSpacer
+     * 向ToolBar中增加一个占位符。
+     * @param {number} width 宽度。
+     *
+     * return {Widget} 返回增加的控件。
+     */
+    addSpacer(width: number): Widget;
+    /**
+     * @method addItem
+     * 向ToolBar中增加一个按钮。
+     * @param {string} cmd 命令名称。
+     * @param {string} text 文字。
+     * @param {string} tips 提示。
+     * @param {normalIconURL} 图标URL。
+     * @param {disableIconURL} 禁用时的图标URL。
+     *
+     * return {Widget} 返回增加的控件。
+     */
+    addItem(cmd: string, text: string, tips: string, normalIconURL: string, disableIconURL: string): Widget;
     static TYPE: string;
     private static recycleBin;
     static create(options?: any): ToolBar;

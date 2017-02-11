@@ -10,6 +10,11 @@ import {TabButtonGroup} from "./tab-button-group";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
+/**
+ * @class TabControl
+ * @extends Widget
+ * 标签控件。
+ */
 export class TabControl extends Widget {
 	protected _pages : Pages;
 	protected _orientation : Orientation;
@@ -17,6 +22,10 @@ export class TabControl extends Widget {
 	protected _bgh : number;
 	protected _buttonGroup : TabButtonGroup;
 
+	/**
+	 * @property {number} value
+	 * 标签控件的值代表当前标签页的索引。可以修改value来指定当前的标签页，也可以用activePage来指定当前的标签页。
+	 */
 	public set value(value:number) {
 		var oldValue = this.value;
 
@@ -32,22 +41,52 @@ export class TabControl extends Widget {
 		return this._pages.value;
 	}
 
+	/**
+	 * @property {TabPage} activePage 
+	 * 当前的标签页。
+	 */
+	public set activePage(tabPage:TabPage) {
+		var value = this.pages.indexOfChild(tabPage);
+
+		if(value >= 0) {
+			this.value = value;
+		}
+	}
+	public get activePage() : TabPage {
+		return <TabPage>(this.pages.children[this.value]);
+	}
+
+	/**
+	 * @property {Pages} pages 
+	 * 标签页的集合。
+	 */
 	public get pages() : Pages{
 		return this._pages;
 	}
 	
+	/**
+	 * @property {TabButtonGroup} buttonGroup 
+	 * 标签按钮的集合。
+	 */
 	public get buttonGroup() : TabButtonGroup{
 		return this._buttonGroup;
 	}
 
+	/**
+	 * @property {boolean} expandButton 
+	 * 是否扩展标签按钮的宽度。如果为false，则根据当前的标题和图标计算标签按钮的宽度，否则所有标签按钮平分button group的宽度。
+	 */
 	public set expandButton(value:boolean) {
 		this.buttonGroup.autoExpand = value;
 	}
-
 	public get expandButton() : boolean {
 		return this.buttonGroup.autoExpand;
 	}
 
+	/**
+	 * @property {boolean} buttonGroupAtTop
+	 * true表示标签按钮组的位置在顶部，否则在底部。
+	 */
 	public set buttonGroupAtTop(value:boolean) {
 		this._bgAtTop = value;
 		this.relayoutChildren();
@@ -56,6 +95,10 @@ export class TabControl extends Widget {
 		return this._bgAtTop;
 	}
 	
+	/**
+	 * @property {number} buttonGroupHeight
+	 * 标签按钮组的高度。
+	 */
 	public set buttonGroupHeight(value:number) {
 		this._bgh = value;
 		this.relayoutChildren();
@@ -64,7 +107,12 @@ export class TabControl extends Widget {
 		return this._bgh;
 	}
 
-	public setPageTitle(tabPage:TabPage, title:string) : Widget {
+	/**
+	 * @method setPageTitle
+	 * 设置指定TabPage的标题。
+	 * return {TabControl} 控件本身。
+	 */
+	public setPageTitle(tabPage:TabPage, title:string) : TabControl {
 		var index = this.pages.indexOfChild(tabPage);
 		if(index >= 0) {
 			var button = this.buttonGroup.children[index];
@@ -74,6 +122,10 @@ export class TabControl extends Widget {
 		return this;
 	}
 
+	/**
+	 * @method getPageTitle
+	 * 获取指定TabPage的标题。
+	 */
 	public getPageTitle(tabPage:TabPage) : string {
 		var index = this.pages.indexOfChild(tabPage);
 		if(index >= 0) {
@@ -84,33 +136,44 @@ export class TabControl extends Widget {
 		return null;
 	}
 
-	public activatePage(tabPage:TabPage) : Widget {
-		var value = this.pages.indexOfChild(tabPage);
-
-		if(value >= 0) {
-			this.value = value;
-		}
-		
-		return this;
-	}
-
-	public getActivePage() : TabPage {
-		return <TabPage>(this.pages.children[this.value]);
-	}
-
-	public closePage(tabPage:TabPage) {
+	/**
+	 * @method onClosePage 
+	 * 在点击标签按钮上的关闭按钮时会调用此函数，子类可以重载本函数，以提供关闭确认之类的功能。
+	 */
+	protected onClosePage(tabPage:TabPage) {
 		this.removePage(tabPage, true);	
 	}
 
-	public removePage(tabPage:TabPage, destroy?:boolean) {
+	/**
+	 * @method removePage
+	 * 移除指定的标签页，相应的标签按钮也会移出。
+	 * @param {TabPage} tabPage 要移出的标签页。
+	 * @param {boolean} destroy 是否移出该标签页。
+	 * 
+	 * return {TabControl} 控件本身。
+	 */
+	public removePage(tabPage:TabPage, destroy?:boolean) : TabControl {
 		if(tabPage) {
 			var tabButton = tabPage.tabButton;
 			this.pages.removeChild(tabPage, false, destroy);
 			this.buttonGroup.removeChild(tabButton, false, destroy);
 			this.value--;
 		}
+		
+		return this;
 	}
 
+	/**
+	 * @method addPage
+	 * 向标签控件中增加一个标签页。
+	 * @param {string} title 标题，作为标签按钮的文本。
+	 * @param {string} normalIconURL 正常时的图标的URL。
+	 * @param {string} currentIconURL 处于当前页时的图标的URL。
+	 * @param {boolean} closable 是否显示关闭按钮。
+	 * @param {boolean} closeButtonAtLeft 如果显示关闭按钮，关闭按钮是否显示在左边。
+	 * 
+	 * @return {TabPage} 返回被创建的TabPage。
+	 */
 	public addPage(title:string, normalIconURL?:string, currentIconURL?:string, 
 				   closable?:boolean, closeButtonAtLeft?:boolean) : TabPage {
 		
@@ -136,9 +199,9 @@ export class TabControl extends Widget {
 
 		var tabControl = this;
 		tabButton.on(Events.CLICK, function(evt) {
-			tabControl.activatePage(this.tabPage);
+			tabControl.activePage = this.tabPage;
 			if(closable && this.target && this.target === this.closeButton) {
-				tabControl.closePage(this.tabPage);
+				tabControl.onClosePage(this.tabPage);
 			}
 		});
 

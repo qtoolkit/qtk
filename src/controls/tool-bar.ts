@@ -8,6 +8,11 @@ import {ImageTile, ImageDrawType} from "../image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 
+/**
+ * @class ToolBarItem
+ * @extends Widget
+ * 工具条上的图标按钮。一般不需直接创建，而是调用ToolBar的addItem函数。
+ */
 export class ToolBarItem extends Widget {
     constructor(type?:string) {
         super(ToolBarItem.TYPE);
@@ -48,22 +53,45 @@ export class ToolBarItem extends Widget {
     };
 }
 
+/**
+ * @class ToolBar
+ * @extends Widget
+ * 工具条。一般显示在主菜单下方，为用户提供一种便捷的操作。
+ */
 export class ToolBar extends Widget {
     protected onInit() {
         super.onInit();
         this.childrenLayouter = LinearLayouter.createH(0);
     }
 
-    public addSpacer(width:number) {
+    /**
+     * @method addSpacer
+     * 向ToolBar中增加一个占位符。
+     * @param {number} width 宽度。
+     * 
+     * return {Widget} 返回增加的控件。
+     */
+    public addSpacer(width:number) : Widget{
         var size = this.h - 2;
         var item = Group.create({
             layoutParam : LinearLayouterParam.create(width, size, 1)
         });
 
-       this.addChild(item);
+       return this.addChild(item);
     }
 
-    public addItem(cmd:string, text:string, tips:string, normalIconURL:string, disableIconURL:string) {
+    /**
+     * @method addItem
+     * 向ToolBar中增加一个按钮。
+     * @param {string} cmd 命令名称。
+     * @param {string} text 文字。
+     * @param {string} tips 提示。
+     * @param {normalIconURL} 图标URL。
+     * @param {disableIconURL} 禁用时的图标URL。
+     * 
+     * return {Widget} 返回增加的控件。
+     */
+    public addItem(cmd:string, text:string, tips:string, normalIconURL:string, disableIconURL:string)  : Widget {
         var size = this.h - 2;
         var item = ToolBarItem.create({
             tips:tips,
@@ -74,7 +102,7 @@ export class ToolBar extends Widget {
 
        item.set({dataBindingRule:{click:{command:cmd}}}); 
        
-       this.addChild(item);
+       return this.addChild(item);
     }
 
     public static TYPE = "tool-bar";

@@ -9,6 +9,11 @@ import {WidgetFactory} from "./widget-factory";
 import {ImageDrawType, ImageTile} from "../image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
+/**
+ * class TabButtonGroup
+ * @extends Widget
+ * 标签控件上的标签按钮分组。一般不需要直接使用。
+ */
 export class TabButtonGroup extends Widget {
 	protected _ae : boolean;
 	
