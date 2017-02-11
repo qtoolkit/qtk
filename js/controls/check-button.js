@@ -96,8 +96,9 @@ var CheckButton = (function (_super) {
         return this;
     };
     CheckButton.prototype.dispatchClick = function (evt) {
+        var oldValue = this.value;
         this.value = !this.value;
-        this.notifyChange();
+        this.notifyChange(oldValue);
         _super.prototype.dispatchClick.call(this, evt);
     };
     CheckButton.create = function (options) {

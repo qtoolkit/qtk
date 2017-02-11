@@ -1,6 +1,7 @@
 import {Point} from "../point";
 import {Widget} from "./widget";
 import Events = require("../events");
+import {KeyEvent} from "../key-event";
 import {IApplication} from "../iapplication";
 import inputEventAdapter = require("../input-event-adapter");
 
@@ -201,9 +202,13 @@ export abstract class Window extends Widget {
 			keys += keys ? "+shift" : "shift";
 		}
 
-		var key = String.fromCharCode(evt.keyCode).toLowerCase();	
+		var code = evt.keyCode;
+		if(code !== KeyEvent.VK_CONTROL 
+		   && code !== KeyEvent.VK_ALT
+	       && code !== KeyEvent.VK_COMMAND
+		   && code !== KeyEvent.VK_SHIFT) {
 
-		if(key) {
+			var key = String.fromCharCode(evt.keyCode).toLowerCase();	
 			keys += (keys ? ("+" + key) : key);
 			var e = this._shortcutEvent;
 			e.init(Events.SHORTCUT, keys.toLowerCase());

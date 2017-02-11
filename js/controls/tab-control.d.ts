@@ -13,8 +13,14 @@ export declare class TabControl extends Widget {
     value: number;
     readonly pages: Pages;
     readonly buttonGroup: TabButtonGroup;
+    expandButton: boolean;
     buttonGroupAtTop: boolean;
     buttonGroupHeight: number;
+    setPageTitle(tabPage: TabPage, title: string): Widget;
+    getPageTitle(tabPage: TabPage): string;
+    activatePage(tabPage: TabPage): Widget;
+    getActivePage(): TabPage;
+    closePage(tabPage: TabPage): void;
     removePage(tabPage: TabPage, destroy?: boolean): void;
     addPage(title: string, normalIconURL?: string, currentIconURL?: string, closable?: boolean, closeButtonAtLeft?: boolean): TabPage;
     relayoutChildren(): Rect;

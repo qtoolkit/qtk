@@ -743,6 +743,10 @@ export class Widget extends Emitter {
 		else{
 			this._childrenLayouter = layouter;
 		}
+		
+		if(this.children.length) {
+			this.relayoutChildren();
+		}
 	}
 
 	public get childrenLayouter() : Layouter{
@@ -764,6 +768,15 @@ export class Widget extends Emitter {
 		return this._layoutParam;
 	}
 
+	public getParentByType(type:string) : Widget{
+		var iter = this.parent;
+		
+		while(iter && iter.type !== type) {
+			iter = iter.parent;
+		}
+
+		return iter;
+	}
 ///////////////////////////////////////////
 	/**
 	 * @method indexOfChild
@@ -1840,11 +1853,13 @@ export class Widget extends Emitter {
 	protected eChangeEvent = Events.ChangeEvent.create();
 	protected ePropChangeEvent = Events.PropChangeEvent.create();
 	
-	protected notifyChange() {
-		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:!this.value}));
+	protected notifyChange(oldValue:any) {
+		this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, {newValue:this.value, oldValue:oldValue}));
 	}
 	
 	public setValue(value:boolean, notify:boolean, exclude:boolean) {
+		var oldValue = this.value;
+
 		if(exclude) {
 			var type = this.type;
 			if(this.parent && value) {
@@ -1861,8 +1876,9 @@ export class Widget extends Emitter {
 		}else{
 			this.setProp("value", value, notify);
 		}
+
 		if(notify) {
-			this.notifyChange();	
+			this.notifyChange(oldValue);	
 		}
 	}
 

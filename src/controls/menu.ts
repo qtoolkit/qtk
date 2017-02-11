@@ -372,6 +372,7 @@ export class MenuItem extends Widget {
 	public dispose() {
 		super.dispose();
 		this._icon = null;
+		this._shortCutStyle = null;
 		this.onInitSubMenu = null;
 	}
 

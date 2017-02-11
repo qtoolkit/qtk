@@ -46,6 +46,7 @@ export { CheckButton } from "./controls/check-button";
 export { WindowNormal } from "./controls/window-normal";
 export { WidgetFactory } from "./controls/widget-factory";
 export { MenuBar, MenuBarItem } from "./controls/menu-bar";
+export { ToolBar, ToolBarItem } from "./controls/tool-bar";
 export { ColorTile, ColorLine } from "./controls/color-tile";
 export { ListItem, ListItemStyle } from "./controls/list-item";
 export { ChartView } from "./controls-ext/chart-view";

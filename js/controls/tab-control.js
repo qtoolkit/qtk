@@ -23,9 +23,13 @@ var TabControl = (function (_super) {
             return this._pages.value;
         },
         set: function (value) {
+            var oldValue = this.value;
+            this._value = value;
             this._pages.value = value;
             this.buttonGroup.value = value;
-            this._value = value;
+            if (value !== oldValue) {
+                this.notifyChange(oldValue);
+            }
         },
         enumerable: true,
         configurable: true
@@ -40,6 +44,16 @@ var TabControl = (function (_super) {
     Object.defineProperty(TabControl.prototype, "buttonGroup", {
         get: function () {
             return this._buttonGroup;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabControl.prototype, "expandButton", {
+        get: function () {
+            return this.buttonGroup.autoExpand;
+        },
+        set: function (value) {
+            this.buttonGroup.autoExpand = value;
         },
         enumerable: true,
         configurable: true
@@ -66,6 +80,35 @@ var TabControl = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    TabControl.prototype.setPageTitle = function (tabPage, title) {
+        var index = this.pages.indexOfChild(tabPage);
+        if (index >= 0) {
+            var button = this.buttonGroup.children[index];
+            button.text = title;
+        }
+        return this;
+    };
+    TabControl.prototype.getPageTitle = function (tabPage) {
+        var index = this.pages.indexOfChild(tabPage);
+        if (index >= 0) {
+            var button = this.buttonGroup.children[index];
+            return button.text;
+        }
+        return null;
+    };
+    TabControl.prototype.activatePage = function (tabPage) {
+        var value = this.pages.indexOfChild(tabPage);
+        if (value >= 0) {
+            this.value = value;
+        }
+        return this;
+    };
+    TabControl.prototype.getActivePage = function () {
+        return (this.pages.children[this.value]);
+    };
+    TabControl.prototype.closePage = function (tabPage) {
+        this.removePage(tabPage, true);
+    };
     TabControl.prototype.removePage = function (tabPage, destroy) {
         if (tabPage) {
             var tabButton = tabPage.tabButton;
@@ -91,9 +134,9 @@ var TabControl = (function (_super) {
         this.buttonGroup.addChild(tabButton);
         var tabControl = this;
         tabButton.on(Events.CLICK, function (evt) {
-            tabControl.pages.setValueByPage(this.tabPage);
+            tabControl.activatePage(this.tabPage);
             if (closable && this.target && this.target === this.closeButton) {
-                tabControl.removePage(this.tabPage);
+                tabControl.closePage(this.tabPage);
             }
         });
         this.value = this._value;

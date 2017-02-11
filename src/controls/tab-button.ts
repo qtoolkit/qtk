@@ -13,8 +13,9 @@ import {ImageDrawType, ImageTile} from "../image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**
- * 标签控件上的标签按钮。
- */
+ * @class TabButton 
+ * 标签控件上的标签按钮。它其实是一个单选控件，当前只有一个按钮处于active状态。
+ */ 
 export class TabButton extends RadioButton {
 	protected _normalIcon : ImageTile;
 	protected _currentIcon : ImageTile;
@@ -26,6 +27,10 @@ export class TabButton extends RadioButton {
 	protected _orn : Orientation;
 	protected _cbAtLeft : boolean;
 
+	/**
+	 * @property {Widget}  closeButton
+	 * 关闭按钮。
+	 */
 	public get closeButton() : Widget {
 		return this._closeButton;
 	}
@@ -89,12 +94,13 @@ export class TabButton extends RadioButton {
 
 	public relayoutChildren() : Rect {
 		if(this._closeButton) {
-			var x = this.leftPadding;
-			var y = this.topPadding;
-			var h = this.h - this.topPadding - this.bottomPadding;
+			var h = this.h >> 1;
 			var w = h;
+			var x = (this.h - h) >> 1;
+			var y = x;
+
 			if(!this.closeButtonAtLeft) {
-				x = this.w - this.rightPadding - w;
+				x = this.w - x - w;
 			}
 			
 			this._closeButton.moveResizeTo(x, y, w, h);

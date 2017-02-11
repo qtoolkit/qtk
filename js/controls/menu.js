@@ -339,6 +339,7 @@ var MenuItem = (function (_super) {
     MenuItem.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
         this._icon = null;
+        this._shortCutStyle = null;
         this.onInitSubMenu = null;
     };
     MenuItem.create = function (options) {

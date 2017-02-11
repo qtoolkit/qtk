@@ -94,12 +94,12 @@ var TabButton = (function (_super) {
     });
     TabButton.prototype.relayoutChildren = function () {
         if (this._closeButton) {
-            var x = this.leftPadding;
-            var y = this.topPadding;
-            var h = this.h - this.topPadding - this.bottomPadding;
+            var h = this.h >> 1;
             var w = h;
+            var x = (this.h - h) >> 1;
+            var y = x;
             if (!this.closeButtonAtLeft) {
-                x = this.w - this.rightPadding - w;
+                x = this.w - x - w;
             }
             this._closeButton.moveResizeTo(x, y, w, h);
         }

@@ -18,9 +18,14 @@ export class TabControl extends Widget {
 	protected _buttonGroup : TabButtonGroup;
 
 	public set value(value:number) {
+		var oldValue = this.value;
+
+		this._value = value;
 		this._pages.value = value;
 		this.buttonGroup.value = value;
-		this._value = value;
+		if(value !== oldValue) {		
+			this.notifyChange(oldValue);
+		}
 	}
 
 	public get value() : number {
@@ -33,6 +38,14 @@ export class TabControl extends Widget {
 	
 	public get buttonGroup() : TabButtonGroup{
 		return this._buttonGroup;
+	}
+
+	public set expandButton(value:boolean) {
+		this.buttonGroup.autoExpand = value;
+	}
+
+	public get expandButton() : boolean {
+		return this.buttonGroup.autoExpand;
 	}
 
 	public set buttonGroupAtTop(value:boolean) {
@@ -49,6 +62,44 @@ export class TabControl extends Widget {
 	}
 	public get buttonGroupHeight() : number{
 		return this._bgh;
+	}
+
+	public setPageTitle(tabPage:TabPage, title:string) : Widget {
+		var index = this.pages.indexOfChild(tabPage);
+		if(index >= 0) {
+			var button = this.buttonGroup.children[index];
+			button.text = title;
+		}
+
+		return this;
+	}
+
+	public getPageTitle(tabPage:TabPage) : string {
+		var index = this.pages.indexOfChild(tabPage);
+		if(index >= 0) {
+			var button = this.buttonGroup.children[index];
+			return button.text;
+		}
+		
+		return null;
+	}
+
+	public activatePage(tabPage:TabPage) : Widget {
+		var value = this.pages.indexOfChild(tabPage);
+
+		if(value >= 0) {
+			this.value = value;
+		}
+		
+		return this;
+	}
+
+	public getActivePage() : TabPage {
+		return <TabPage>(this.pages.children[this.value]);
+	}
+
+	public closePage(tabPage:TabPage) {
+		this.removePage(tabPage, true);	
 	}
 
 	public removePage(tabPage:TabPage, destroy?:boolean) {
@@ -85,9 +136,9 @@ export class TabControl extends Widget {
 
 		var tabControl = this;
 		tabButton.on(Events.CLICK, function(evt) {
-			tabControl.pages.setValueByPage(this.tabPage);
+			tabControl.activatePage(this.tabPage);
 			if(closable && this.target && this.target === this.closeButton) {
-				tabControl.removePage(this.tabPage);
+				tabControl.closePage(this.tabPage);
 			}
 		});
 

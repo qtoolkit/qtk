@@ -240,6 +240,7 @@ export declare class Widget extends Emitter {
      * 布局参数是父控件在布局当前控件时使用的参数。
      */
     layoutParam: any;
+    getParentByType(type: string): Widget;
     /**
      * @method indexOfChild
      * 获取指定子控件的位置序数。
@@ -585,7 +586,7 @@ export declare class Widget extends Emitter {
     protected _childrenLayouter: Layouter;
     protected eChangeEvent: Events.ChangeEvent;
     protected ePropChangeEvent: Events.PropChangeEvent;
-    protected notifyChange(): void;
+    protected notifyChange(oldValue: any): void;
     setValue(value: boolean, notify: boolean, exclude: boolean): void;
     protected onReset(): void;
     protected onCreated(): void;

@@ -7,6 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var point_1 = require("../point");
 var widget_1 = require("./widget");
 var Events = require("../events");
+var key_event_1 = require("../key-event");
 (function (WindowType) {
     WindowType[WindowType["NORMAL"] = 0] = "NORMAL";
     WindowType[WindowType["POPUP"] = 1] = "POPUP";
@@ -189,8 +190,12 @@ var Window = (function (_super) {
         if (evt.shiftKey) {
             keys += keys ? "+shift" : "shift";
         }
-        var key = String.fromCharCode(evt.keyCode).toLowerCase();
-        if (key) {
+        var code = evt.keyCode;
+        if (code !== key_event_1.KeyEvent.VK_CONTROL
+            && code !== key_event_1.KeyEvent.VK_ALT
+            && code !== key_event_1.KeyEvent.VK_COMMAND
+            && code !== key_event_1.KeyEvent.VK_SHIFT) {
+            var key = String.fromCharCode(evt.keyCode).toLowerCase();
             keys += (keys ? ("+" + key) : key);
             var e = this._shortcutEvent;
             e.init(Events.SHORTCUT, keys.toLowerCase());

@@ -671,6 +671,9 @@ var Widget = (function (_super) {
             else {
                 this._childrenLayouter = layouter;
             }
+            if (this.children.length) {
+                this.relayoutChildren();
+            }
         },
         enumerable: true,
         configurable: true
@@ -692,6 +695,13 @@ var Widget = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Widget.prototype.getParentByType = function (type) {
+        var iter = this.parent;
+        while (iter && iter.type !== type) {
+            iter = iter.parent;
+        }
+        return iter;
+    };
     ///////////////////////////////////////////
     /**
      * @method indexOfChild
@@ -1746,11 +1756,12 @@ var Widget = (function (_super) {
         }
         return behavior;
     };
-    Widget.prototype.notifyChange = function () {
-        this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: !this.value }));
+    Widget.prototype.notifyChange = function (oldValue) {
+        this.dispatchEvent(this.eChangeEvent.init(Events.CHANGE, { newValue: this.value, oldValue: oldValue }));
     };
     Widget.prototype.setValue = function (value, notify, exclude) {
         var _this = this;
+        var oldValue = this.value;
         if (exclude) {
             var type = this.type;
             if (this.parent && value) {
@@ -1769,7 +1780,7 @@ var Widget = (function (_super) {
             this.setProp("value", value, notify);
         }
         if (notify) {
-            this.notifyChange();
+            this.notifyChange(oldValue);
         }
     };
     Widget.prototype.onReset = function () {
