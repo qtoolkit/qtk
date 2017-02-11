@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">&quot;use strict&quot;;
+<span id='InputInfo'>/**
+</span> * @class InputInfo
+ * InteractionRequest.input的参数。
+ */
+var InputInfo = (function () {
+    function InputInfo(title, value, inputTips, inputType, w) {
+        this.w = w;
+        this.value = value;
+        this.title = title;
+        this.inputTips = inputTips;
+        this.inputType = inputType;
+        this.isValueValid = function (value) {
+            return !!value;
+        };
+    }
+<span id='InputInfo-static-method-create'>    /**
+</span>     * @method create
+     * @static
+     * 创建InputInfo对象。
+     *
+     * @param {string} title 标题。
+     * @param {string} value 缺省值。
+     * @param {string} inputTips 输入提示（可选）。
+     * @param {string} inputType 输入类型（可选）, &quot;text&quot;表示文本，&quot;number&quot;表示数值。
+     * @param {number} w 宽度（单位为像素）（可选）。
+     *
+     * @return {InputInfo}
+     */
+    InputInfo.create = function (title, value, inputTips, inputType, w) {
+        return new InputInfo(title, value, inputTips, inputType, w);
+    };
+    return InputInfo;
+}());
+exports.InputInfo = InputInfo;
+;
+</pre>
+</body>
+</html>

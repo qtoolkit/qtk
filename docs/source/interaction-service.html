@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">&quot;use strict&quot;;
+var emitter_1 = require(&quot;../emitter&quot;);
+var Events = require(&quot;../events&quot;);
+var toast_dialog_1 = require(&quot;./toast-dialog&quot;);
+var input_dialog_1 = require(&quot;./input-dialog&quot;);
+var props_dialog_1 = require(&quot;./props-dialog&quot;);
+var choice_dialog_1 = require(&quot;./choice-dialog&quot;);
+var progress_dialog_1 = require(&quot;./progress-dialog&quot;);
+var confirmation_dialog_1 = require(&quot;./confirmation-dialog&quot;);
+var notification_dialog_1 = require(&quot;./notification-dialog&quot;);
+var interaction_types_1 = require(&quot;./interaction-types&quot;);
+var InteractionService = (function () {
+    function InteractionService() {
+        this._emitter = new emitter_1.Emitter();
+    }
+    InteractionService.prototype.onRequest = function (callback) {
+        this._emitter.on(Events.INTERACTION_REQUEST, callback);
+    };
+    InteractionService.prototype.offRequest = function (callback) {
+        this._emitter.off(Events.INTERACTION_REQUEST, callback);
+    };
+    InteractionService.prototype.dispatchRequest = function (detail) {
+        var type = Events.INTERACTION_REQUEST;
+        var e = Events.InteractionRequestEvent.create(type, detail);
+        this._emitter.dispatchEvent(e);
+        if (!e.defaultPrevented) {
+            this.defaultHandler(e);
+        }
+        e.dispose();
+    };
+    InteractionService.prototype.defaultHandler = function (e) {
+        var name = e.name;
+        var payload = e.payload;
+        switch (name) {
+            case interaction_types_1.InteractionTypes.TOAST: {
+                toast_dialog_1.ToastDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.INPUT: {
+                input_dialog_1.InputDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.PROGRESS: {
+                progress_dialog_1.ProgressDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.CHOICE: {
+                choice_dialog_1.ChoiceDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.PROPS: {
+                props_dialog_1.PropsDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.NOTIFICATION: {
+                notification_dialog_1.NotificationDialog.show(e);
+                break;
+            }
+            case interaction_types_1.InteractionTypes.CONFIRMATION: {
+                confirmation_dialog_1.ConfirmationDialog.show(e);
+                break;
+            }
+            default: break;
+        }
+    };
+    InteractionService.getInstance = function () {
+        return InteractionService.instance;
+    };
+    InteractionService.init = function () {
+        InteractionService.instance = new InteractionService();
+        return InteractionService.instance;
+    };
+    InteractionService.onRequest = function (callback) {
+        InteractionService.instance.onRequest(callback);
+    };
+    InteractionService.offRequest = function (callback) {
+        InteractionService.instance.offRequest(callback);
+    };
+    return InteractionService;
+}());
+exports.InteractionService = InteractionService;
+;
+</pre>
+</body>
+</html>

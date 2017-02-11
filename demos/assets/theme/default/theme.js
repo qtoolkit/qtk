@@ -2,7 +2,7 @@ window.sysThemeJson = {
 	"widget" : {
 		"common" : {
 			"lineWidth" : 1,
-			"fontSize" : 12,
+			"fontSize" : 14,
 			"textColor" : "black",
 			"backGroundColor" : "#FFFFFF"
 		},
@@ -455,6 +455,14 @@ window.sysThemeJson = {
 	"widget.transparent": {
 		 "normal" : {}
 	},
+	"tab-button-group": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth":1,
+			"roundRadius":0,
+			"backGroundColor":"#F3F3F3"
+		}
+	},
 	"tab-button.close": {
 		"extends": "button",
 		"common" : {
@@ -505,6 +513,34 @@ window.sysThemeJson = {
 		"extends": "widget",
 		"common" : {
 			"backGroundColor" : "#E8EbF2"
+		}
+	},
+	"tool-bar-item": {
+		"extends": "button",
+		"normal" : {
+			"lineColor" : null,
+			"backGroundColor" : null
+		},
+		"over" : {
+			"lineColor" : "#A8A8A8",
+			"backGroundColor" : ["#F4F4F4","#F0F0F0","#EDEDED", "#E7E7E7", "#E4E4E4"]
+		},
+		"disable" : {
+			"lineColor" : null,
+			"textColor" : "#B1B1B1",
+			"backGroundColor" : "#F6F6F6"
+		},
+		"active" : {
+			"lineColor" : "#4D90FC",
+			"backGroundColor" : ["#E8E8E8","#E7E7E7","#E4E4E4", "#E0E0E0", "#D8D8D8"]
+		}
+	},
+	"tool-bar": {
+		"extends": "widget",
+		"common" : {
+			"lineWidth" : 1,
+			"lineColor" : "#D4D3D4",
+			"backGroundColor" : "#F2F2F2"
 		}
 	},
 	"menu-bar-item": {
