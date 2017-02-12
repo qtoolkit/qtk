@@ -2428,7 +2428,7 @@ export class Widget extends Emitter {
 	}
 
 	protected hitTest(x:number, y:number) : HitTestResult {
-		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w, this.h));
+		return this.doHitTest(x, y, Rect.rect.init(0, 0, this.w+1, this.h+1));
 	}
 	
 	protected doHitTest(x:number, y:number, r:Rect) : HitTestResult {

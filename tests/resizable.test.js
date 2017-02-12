@@ -4,14 +4,19 @@ describe('Resizable', function() {
 	var app = new qtk.Application.create("test");
 	app.init({sysThemeDataURL:"/base/www/theme/default/theme.json"});
 	var win = qtk.WindowNormal.create(app, {hasOwnCanvas:true});
-	var widget = qtk.Button.create();
-	widget.moveResizeTo(0, 0, 100, 100);
-	win.addChild(widget);
-	widget.useBehavior("resizable", {all:true, animateDuration:0});	
-	var matrixStack = qtk.MatrixStack.create();
+	var widget = null;
+
+	beforeEach(() => {
+		widget = qtk.Button.create();
+		widget.moveResizeTo(0, 0, 100, 100);
+		win.addChild(widget);
+		widget.useBehavior("resizable", {all:true, animateDuration:0});	
+	})
+	afterEach(() => {
+		win.removeAllChildren();
+	});
 
 	function testResize(name, done, downX, downY, moveX, moveY, x, y, w, h) {
-		widget.moveResizeTo(0, 0, 100, 100);
     	widget.on(Events.POINTER_UP, evt => {
 			var result = widget.x === x && widget.y === y && widget.w === w && widget.h === h;
 	
@@ -20,14 +25,17 @@ describe('Resizable', function() {
 
     	var detail = {PointerDown:true, pointerDownX:downX, pointerDownY:downY, x:downX, y:downY, id:1};	
     	var e = Events.PointerEvent.create(Events.POINTER_DOWN, detail);
-		widget.dispatchPointerDown(e, matrixStack);
+		widget.dispatchPointerDown(e);
 		detail.x = moveX;
 		detail.y = moveY;
+		detail.dx = moveX-downX;
+		detail.dy = moveY-downY;
     	e = Events.PointerEvent.create(Events.POINTER_MOVE, detail);
-		widget.dispatchPointerMove(e, matrixStack);
+		widget.dispatchPointerMove(e);
     	e = Events.PointerEvent.create(Events.POINTER_UP, detail);
-		widget.dispatchPointerMove(e, matrixStack);
+		widget.dispatchPointerUp(e);
 	}
+
     it('test ResizableOptions', (done) => {
     	var options = new qtk.ResizableOptions({all:true});
     	var result = options.north && options.south && options.east && options.west 

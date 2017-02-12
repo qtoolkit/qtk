@@ -2225,7 +2225,7 @@ var Widget = (function (_super) {
         });
     };
     Widget.prototype.hitTest = function (x, y) {
-        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w, this.h));
+        return this.doHitTest(x, y, rect_1.Rect.rect.init(0, 0, this.w + 1, this.h + 1));
     };
     Widget.prototype.doHitTest = function (x, y, r) {
         return r.containsPoint(x, y) ? HitTestResult.MM : HitTestResult.NONE;
