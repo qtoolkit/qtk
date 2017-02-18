@@ -420,14 +420,23 @@ export class Widget extends Emitter {
 			return;
 		}
 		
-		this.dispatchEvent(evt, true);
-		if(this.target) {
-			this.target.dispatchClick(evt);
+		this.translatePointerEvent(evt);
+		var x = evt.localX;
+		var y = evt.localY;
+		var hitTestResult = this.selfHitTest(x, y);
+
+		if(hitTestResult) {
+			this.dispatchEvent(evt, true);
+			if(this.target) {
+				this.target.dispatchClick(evt);
+			}
+			if(this.onclick) {
+				this.onclick(evt);
+			}
+			this.dispatchEvent(evt, false);
 		}
-		if(this.onclick) {
-			this.onclick(evt);
-		}
-		this.dispatchEvent(evt, false);
+
+		this.untranslatePointerEvent(evt);
 	}
 	
 	public dispatchContextMenu(evt:Events.PointerEvent) {
