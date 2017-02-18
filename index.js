@@ -5264,7 +5264,8 @@ var qtk =
 	        var x = evt.localX;
 	        var y = evt.localY;
 	        var hitTestResult = this.selfHitTest(x, y);
-	        if (hitTestResult) {
+	        var isClick = Math.abs(evt.dx) < 5 && Math.abs(evt.dy) < 5;
+	        if (isClick || hitTestResult) {
 	            this.dispatchEvent(evt, true);
 	            if (this.target) {
 	                this.target.dispatchClick(evt);
