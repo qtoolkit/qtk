@@ -148,6 +148,12 @@ var Edit = (function (_super) {
         }
         this.requestRedraw();
     };
+    Edit.prototype.notifyChangeEx = function (type, value, oldValue) {
+        var e = this.eChangeEvent;
+        e.init(type, { value: value, oldValue: oldValue });
+        ;
+        this.dispatchEvent(e);
+    };
     Edit.prototype.showEditor = function () {
         var _this = this;
         var style = this.getStyle();
@@ -176,20 +182,14 @@ var Edit = (function (_super) {
             _this.hideEditor();
         });
         input.on(Events.CHANGING, function (evt) {
-            var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
             var value = _this.inputType === "number" ? +_this.text : _this.text;
-            e.init(Events.CHANGING, { value: value });
-            ;
-            _this.dispatchEvent(e);
+            _this.notifyChangeEx(Events.CHANGING, value, null);
         });
         input.on(Events.CHANGE, function (evt) {
-            var e = _this.eChangeEvent;
             _this.text = _this.filterText(evt.value);
             var value = _this.inputType === "number" ? +_this.text : _this.text;
-            e.init(Events.CHANGE, { value: value, oldValue: oldValue });
-            ;
-            _this.dispatchEvent(e);
+            _this.notifyChangeEx(Events.CHANGE, value, oldValue);
         });
         input.on(Events.KEYDOWN, function (evt) {
             _this.dispatchEvent(evt);

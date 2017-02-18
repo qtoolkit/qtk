@@ -38,8 +38,22 @@ var ChoosableEdit = (function (_super) {
         set: function (value) {
             this._value = value;
             if (this._edit) {
-                this._edit.text = value;
+                var oldValue = this._edit.text;
+                if (oldValue !== value) {
+                    this._edit.text = value;
+                    this._edit.notifyChangeEx(Events.CHANGE, value, oldValue);
+                }
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ChoosableEdit.prototype, "dataBindingRule", {
+        get: function () {
+            return this._edit.dataBindingRule;
+        },
+        set: function (dataBindingRule) {
+            this._edit.dataBindingRule = dataBindingRule;
         },
         enumerable: true,
         configurable: true

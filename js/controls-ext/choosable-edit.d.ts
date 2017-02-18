@@ -12,6 +12,7 @@ export declare class ChoosableEdit extends Widget {
     onChoose: Function;
     inputTips: string;
     value: any;
+    dataBindingRule: any;
     relayoutChildren(): Rect;
     dispose(): void;
     protected onReset(): void;

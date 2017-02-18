@@ -32,6 +32,7 @@ export declare class PropertyPage extends Widget {
     addVector3(title: string, x?: number, y?: number, z?: number, xTitle?: string, yTitle?: string, zTitle?: string): TitleVector;
     addVector4(title: string, x?: number, y?: number, z?: number, w?: number, xTitle?: string, yTitle?: string, zTitle?: string, wTitle?: string): TitleVector;
     addEdit(title: string, value?: string, inputTips?: string, inputType?: string, inputFilter?: Function): TitleEdit;
+    addColorEdit(title: string, value?: string, inputTips?: string): TitleChoosableEdit;
     addChoosableEdit(title: string, value?: string, inputTips?: string): TitleChoosableEdit;
     addComboBox(title: string, value?: string): TitleComboBox;
     addComboBoxEditable(title: string, value?: string): TitleComboBoxEditable;
@@ -76,6 +77,7 @@ export declare class PropertyPage extends Widget {
         _rp: number;
         _bp: number;
     } & {
+        _bp: number;
         _itemH: number;
         _titleW: string;
         _valueW: string;

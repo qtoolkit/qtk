@@ -3,6 +3,13 @@ import { Widget } from "../controls/widget";
 import { ScrollView } from "../controls/scroll-view";
 import { TitleContent } from "../controls/title-content";
 import { Layouter } from '../layouters/layouter';
+export declare class TitlePage extends TitleContent {
+    protected onReset(): void;
+    relayoutChildren(): Rect;
+    static TYPE: string;
+    private static rb;
+    static create(options?: any): TitlePage;
+}
 /**
  * 管理多个页面，每个页面可以展开或折叠。
  */

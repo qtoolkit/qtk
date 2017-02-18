@@ -32,12 +32,24 @@ export class ChoosableEdit extends Widget {
 	public set value(value:any) {
 		this._value = value;
 		if(this._edit) {
-			this._edit.text = value;
+			var oldValue = this._edit.text;
+			if(oldValue !== value) {
+				this._edit.text = value;
+				this._edit.notifyChangeEx(Events.CHANGE, value, oldValue);
+			}
 		}
 	}
 
 	public get value() : any {
 		return this._edit ? this._edit.text : this._value;
+	}
+
+	public set dataBindingRule(dataBindingRule:any) {
+		this._edit.dataBindingRule = dataBindingRule;
+	}
+
+	public get dataBindingRule() : any {
+		return this._edit.dataBindingRule;
 	}
 
 	public relayoutChildren() : Rect {

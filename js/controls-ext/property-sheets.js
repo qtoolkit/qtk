@@ -4,11 +4,38 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var Events = require("../events");
 var scroll_view_1 = require("../controls/scroll-view");
 var widget_factory_1 = require("../controls/widget-factory");
 var title_content_1 = require("../controls/title-content");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 var collapsable_title_1 = require("../controls/collapsable-title");
+var TitlePage = (function (_super) {
+    __extends(TitlePage, _super);
+    function TitlePage() {
+        _super.apply(this, arguments);
+    }
+    TitlePage.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
+    };
+    TitlePage.prototype.relayoutChildren = function () {
+        var rect = _super.prototype.relayoutChildren.call(this);
+        if (!this._collapsed) {
+            this.contentH = this.contentWidget.h;
+        }
+        this.reComputeH();
+        return rect;
+    };
+    TitlePage.create = function (options) {
+        return TitlePage.rb.create(options);
+    };
+    TitlePage.TYPE = "title-page";
+    TitlePage.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitlePage);
+    return TitlePage;
+}(title_content_1.TitleContent));
+exports.TitlePage = TitlePage;
+;
+widget_factory_1.WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 /**
  * 管理多个页面，每个页面可以展开或折叠。
  */
@@ -47,9 +74,10 @@ var PropertySheets = (function (_super) {
      * @returns 返回新增加的TitleContent。
      */
     PropertySheets.prototype.addPage = function (title, contentWidget) {
+        var _this = this;
         var me = this;
         var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
-        var titleContent = title_content_1.TitleContent.create({
+        var titleContent = TitlePage.create({
             collapsed: true,
             titleWidget: titleWidget,
             contentWidget: contentWidget,
@@ -60,6 +88,9 @@ var PropertySheets = (function (_super) {
             me.relayoutChildren();
         };
         this.addChild(titleContent);
+        contentWidget.on(Events.CHANGE, function (evt) {
+            _this.relayoutChildren();
+        });
         return titleContent;
     };
     PropertySheets.prototype.computeDesireContentHeight = function () {

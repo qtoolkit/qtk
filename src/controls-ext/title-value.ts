@@ -27,13 +27,20 @@ export abstract class TitleValue extends Widget {
 
 	public set titleW(value:string) {
 		this._titleW = value;
+		if(this.titleWidget && this.titleWidget.layoutParam) {
+			this.titleWidget.layoutParam.w = value;
+		}
 	}
+
 	public get titleW() : string {
 		return this._titleW;
 	}
 	
 	public set valueW(value:string) {
 		this._valueW = value;
+		if(this.valueWidget && this.valueWidget.layoutParam) {
+			this.valueWidget.layoutParam.w = value;
+		}
 	}
 	public get valueW() : string {
 		return this._valueW;

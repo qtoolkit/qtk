@@ -21,8 +21,11 @@ var title_choosable_edit_1 = require("./title-choosable-edit");
 var props_desc_1 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
 var props_desc_2 = require("./props-desc");
+var html_element_1 = require("../html/html-element");
+var iview_model_1 = require("../mvvm/iview-model");
 var props_desc_3 = require("./props-desc");
 var props_desc_4 = require("./props-desc");
+var props_desc_5 = require("./props-desc");
 /**
  * 属性编辑页，包装了各种TitleValue。
  */
@@ -201,6 +204,16 @@ var PropertyPage = (function (_super) {
             this.addChild(widget, true);
         return widget;
     };
+    PropertyPage.prototype.addColorEdit = function (title, value, inputTips) {
+        var choosableEdit = this.addChoosableEdit(title, value, inputTips);
+        choosableEdit.onChoose = function () {
+            html_element_1.HtmlElement.showColocPicker(value || "#FFFFFF", function (newValue) {
+                choosableEdit.value = newValue;
+                console.log("new color" + newValue);
+            });
+        };
+        return choosableEdit;
+    };
     PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
         var itemH = this.itemH;
         var widget = title_choosable_edit_1.TitleChoosableEdit.create({
@@ -273,16 +286,19 @@ var PropertyPage = (function (_super) {
     };
     PropertyPage.prototype.addWithPropDesc = function (item) {
         var titleValue = null;
-        if (item.type === props_desc_3.NumberPropDesc.TYPE) {
+        if (item.type === props_desc_4.NumberPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
         }
-        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
+        else if (item.type === props_desc_4.TextPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+        }
+        else if (item.type === props_desc_3.ColorPropDesc.TYPE) {
+            titleValue = this.addColorEdit(item.name, item.value, item.desc);
         }
         else if (item.type === props_desc_3.ReadonlyTextPropDesc.TYPE) {
             titleValue = this.addLabel(item.name, item.value);
         }
-        else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
+        else if (item.type === props_desc_5.SliderPropDesc.TYPE) {
             titleValue = this.addSlider(item.name, item.value);
         }
         else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
@@ -299,16 +315,16 @@ var PropertyPage = (function (_super) {
                 titleValue = this.addGroupEnd();
             }
         }
-        else if (item.type === props_desc_4.RangePropDesc.TYPE) {
+        else if (item.type === props_desc_5.RangePropDesc.TYPE) {
             var value = item.value || { first: 0, second: 0 };
             titleValue = this.addRange(item.name, value.first, value.second);
         }
-        else if (item.type === props_desc_4.Vector2PropDesc.TYPE) {
+        else if (item.type === props_desc_5.Vector2PropDesc.TYPE) {
             var p2 = item;
             var value = item.value || { x: 0, y: 0 };
             titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
         }
-        else if (item.type === props_desc_4.OptionsPropDesc.TYPE) {
+        else if (item.type === props_desc_5.OptionsPropDesc.TYPE) {
             var value = item.value || { x: 0, y: 0 };
             var propDesc = item;
             titleValue = this.addComboBox(item.name, value);
@@ -317,7 +333,7 @@ var PropertyPage = (function (_super) {
                 comboBox.optionsJson = propDesc.options;
             }
         }
-        else if (item.type === props_desc_4.Vector3PropDesc.TYPE) {
+        else if (item.type === props_desc_5.Vector3PropDesc.TYPE) {
             var p3 = item;
             var value = item.value || { x: 0, y: 0, z: 0 };
             titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
@@ -333,7 +349,8 @@ var PropertyPage = (function (_super) {
                 value: {
                     path: item.path,
                     converter: item.converter,
-                    validationRule: item.validationRule
+                    validationRule: item.validationRule,
+                    updateTiming: iview_model_1.toUpdateTiming(item.updateTiming)
                 }
             };
             valueWidget.dataBindingRule = bindRule;
@@ -362,9 +379,10 @@ var PropertyPage = (function (_super) {
             });
         }
         this.relayoutChildren();
+        this.dispatchEvent(Events.ChangeEvent.create().init(Events.CHANGE, {}));
     };
     PropertyPage.prototype.initWithJson = function (json) {
-        var propsDesc = props_desc_3.PropsDesc.create(json);
+        var propsDesc = props_desc_4.PropsDesc.create(json);
         this.initWithPropsDesc(propsDesc);
     };
     PropertyPage.prototype.onAddChild = function (child) {
@@ -399,7 +417,7 @@ var PropertyPage = (function (_super) {
     PropertyPage.create = function (options) {
         return PropertyPage.rBin.create(options);
     };
-    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
+    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _bp: 5, _itemH: 30, _titleW: "80px", _valueW: "100%" });
     PropertyPage.TYPE = "property-page";
     PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
     return PropertyPage;

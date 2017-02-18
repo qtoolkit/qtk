@@ -17,5 +17,6 @@ export declare class HtmlElement extends Emitter {
     readonly borderWidth: number;
     resize(w: number, h: number): HtmlElement;
     destroy(): void;
+    static showColocPicker(value: any, onChange: any): void;
     create(tag: string): HtmlElement;
 }

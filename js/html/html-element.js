@@ -113,6 +113,24 @@ var HtmlElement = (function (_super) {
             this.element = null;
         }
     };
+    HtmlElement.showColocPicker = function (value, onChange) {
+        var input = document.getElementById("color-picker");
+        if (!input) {
+            input = document.createElement("input");
+            input.id = "color-picker";
+            input.type = "color";
+            input.style.position = "absolute";
+            ;
+            input.style.left = "-100px";
+            input.style.top = "-100px";
+            document.body.appendChild(input);
+        }
+        input.value = value;
+        input.oninput = function () {
+            onChange(this.value);
+        };
+        input.click();
+    };
     HtmlElement.prototype.create = function (tag) {
         this.element = document.createElement(tag);
         document.body.appendChild(this.element);

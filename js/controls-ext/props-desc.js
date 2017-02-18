@@ -37,13 +37,15 @@ var PropDesc = (function () {
         this.titleW = titleW;
         this.valueW = valueW;
     };
-    PropDesc.prototype.setDataBindingRule = function (path, converter, validationRule) {
+    PropDesc.prototype.setDataBindingRule = function (path, updateTiming, converter, validationRule) {
         this.path = path;
         this.converter = converter;
         this.validationRule = validationRule;
+        this.updateTiming = updateTiming || "changed";
         return this;
     };
-    PropDesc.keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
+    PropDesc.keys = ["type", "name", "desc", "value", "path",
+        "titleW", "valueW", "converter", "validationRule"];
     return PropDesc;
 }());
 exports.PropDesc = PropDesc;
@@ -86,6 +88,18 @@ var TextPropDesc = (function (_super) {
     return TextPropDesc;
 }(PropDesc));
 exports.TextPropDesc = TextPropDesc;
+var ColorPropDesc = (function (_super) {
+    __extends(ColorPropDesc, _super);
+    function ColorPropDesc() {
+        _super.call(this, ColorPropDesc.TYPE);
+    }
+    ColorPropDesc.create = function () {
+        return new ColorPropDesc();
+    };
+    ColorPropDesc.TYPE = "color";
+    return ColorPropDesc;
+}(PropDesc));
+exports.ColorPropDesc = ColorPropDesc;
 var LinkPropDesc = (function (_super) {
     __extends(LinkPropDesc, _super);
     function LinkPropDesc() {
@@ -306,6 +320,9 @@ var PropsDesc = (function (_super) {
             else if (type === TextPropDesc.TYPE) {
                 desc = TextPropDesc.create();
             }
+            else if (type === ColorPropDesc.TYPE) {
+                desc = ColorPropDesc.create();
+            }
             else if (type === LinkPropDesc.TYPE) {
                 desc = LinkPropDesc.create();
             }
@@ -339,7 +356,7 @@ var PropsDesc = (function (_super) {
             }
             items.push(desc);
             desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
-            desc.setDataBindingRule(data.path, data.converter, data.validationRule);
+            desc.setDataBindingRule(data.path, data.updateTiming, data.converter, data.validationRule);
         });
         this._items = items;
         return this;

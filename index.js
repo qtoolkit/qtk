@@ -4132,11 +4132,9 @@ var qtk =
 	    }
 	    else if (type === Events.POINTER_UP) {
 	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+	        dispatchEvent(target, Events.CLICK, detail);
 	        pointerDown = false;
 	        pointerMoved = false;
-	        if (!pointerMoved) {
-	            dispatchEvent(target, Events.CLICK, detail);
-	        }
 	    }
 	    else {
 	        pointerMoved = true;
@@ -4651,6 +4649,12 @@ var qtk =
 	        }
 	        this.requestRedraw();
 	    };
+	    Edit.prototype.notifyChangeEx = function (type, value, oldValue) {
+	        var e = this.eChangeEvent;
+	        e.init(type, { value: value, oldValue: oldValue });
+	        ;
+	        this.dispatchEvent(e);
+	    };
 	    Edit.prototype.showEditor = function () {
 	        var _this = this;
 	        var style = this.getStyle();
@@ -4679,20 +4683,14 @@ var qtk =
 	            _this.hideEditor();
 	        });
 	        input.on(Events.CHANGING, function (evt) {
-	            var e = _this.eChangeEvent;
 	            _this.text = _this.filterText(evt.value);
 	            var value = _this.inputType === "number" ? +_this.text : _this.text;
-	            e.init(Events.CHANGING, { value: value });
-	            ;
-	            _this.dispatchEvent(e);
+	            _this.notifyChangeEx(Events.CHANGING, value, null);
 	        });
 	        input.on(Events.CHANGE, function (evt) {
-	            var e = _this.eChangeEvent;
 	            _this.text = _this.filterText(evt.value);
 	            var value = _this.inputType === "number" ? +_this.text : _this.text;
-	            e.init(Events.CHANGE, { value: value, oldValue: oldValue });
-	            ;
-	            _this.dispatchEvent(e);
+	            _this.notifyChangeEx(Events.CHANGE, value, oldValue);
 	        });
 	        input.on(Events.KEYDOWN, function (evt) {
 	            _this.dispatchEvent(evt);
@@ -5262,14 +5260,21 @@ var qtk =
 	        if (!this._enable || !this._sensitive) {
 	            return;
 	        }
-	        this.dispatchEvent(evt, true);
-	        if (this.target) {
-	            this.target.dispatchClick(evt);
+	        this.translatePointerEvent(evt);
+	        var x = evt.localX;
+	        var y = evt.localY;
+	        var hitTestResult = this.selfHitTest(x, y);
+	        if (hitTestResult) {
+	            this.dispatchEvent(evt, true);
+	            if (this.target) {
+	                this.target.dispatchClick(evt);
+	            }
+	            if (this.onclick) {
+	                this.onclick(evt);
+	            }
+	            this.dispatchEvent(evt, false);
 	        }
-	        if (this.onclick) {
-	            this.onclick(evt);
-	        }
-	        this.dispatchEvent(evt, false);
+	        this.untranslatePointerEvent(evt);
 	    };
 	    Widget.prototype.dispatchContextMenu = function (evt) {
 	        if (!this._enable || !this._sensitive) {
@@ -18343,6 +18348,24 @@ var qtk =
 	            this.element = null;
 	        }
 	    };
+	    HtmlElement.showColocPicker = function (value, onChange) {
+	        var input = document.getElementById("color-picker");
+	        if (!input) {
+	            input = document.createElement("input");
+	            input.id = "color-picker";
+	            input.type = "color";
+	            input.style.position = "absolute";
+	            ;
+	            input.style.left = "-100px";
+	            input.style.top = "-100px";
+	            document.body.appendChild(input);
+	        }
+	        input.value = value;
+	        input.oninput = function () {
+	            onChange(this.value);
+	        };
+	        input.click();
+	    };
 	    HtmlElement.prototype.create = function (tag) {
 	        this.element = document.createElement(tag);
 	        document.body.appendChild(this.element);
@@ -26640,8 +26663,11 @@ var qtk =
 	var props_desc_1 = __webpack_require__(154);
 	var title_combo_box_1 = __webpack_require__(155);
 	var props_desc_2 = __webpack_require__(154);
+	var html_element_1 = __webpack_require__(87);
+	var iview_model_1 = __webpack_require__(83);
 	var props_desc_3 = __webpack_require__(154);
 	var props_desc_4 = __webpack_require__(154);
+	var props_desc_5 = __webpack_require__(154);
 	/**
 	 * 属性编辑页，包装了各种TitleValue。
 	 */
@@ -26820,6 +26846,16 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    PropertyPage.prototype.addColorEdit = function (title, value, inputTips) {
+	        var choosableEdit = this.addChoosableEdit(title, value, inputTips);
+	        choosableEdit.onChoose = function () {
+	            html_element_1.HtmlElement.showColocPicker(value || "#FFFFFF", function (newValue) {
+	                choosableEdit.value = newValue;
+	                console.log("new color" + newValue);
+	            });
+	        };
+	        return choosableEdit;
+	    };
 	    PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
 	        var itemH = this.itemH;
 	        var widget = title_choosable_edit_1.TitleChoosableEdit.create({
@@ -26892,16 +26928,19 @@ var qtk =
 	    };
 	    PropertyPage.prototype.addWithPropDesc = function (item) {
 	        var titleValue = null;
-	        if (item.type === props_desc_3.NumberPropDesc.TYPE) {
+	        if (item.type === props_desc_4.NumberPropDesc.TYPE) {
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 	        }
-	        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
+	        else if (item.type === props_desc_4.TextPropDesc.TYPE) {
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+	        }
+	        else if (item.type === props_desc_3.ColorPropDesc.TYPE) {
+	            titleValue = this.addColorEdit(item.name, item.value, item.desc);
 	        }
 	        else if (item.type === props_desc_3.ReadonlyTextPropDesc.TYPE) {
 	            titleValue = this.addLabel(item.name, item.value);
 	        }
-	        else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
+	        else if (item.type === props_desc_5.SliderPropDesc.TYPE) {
 	            titleValue = this.addSlider(item.name, item.value);
 	        }
 	        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
@@ -26918,16 +26957,16 @@ var qtk =
 	                titleValue = this.addGroupEnd();
 	            }
 	        }
-	        else if (item.type === props_desc_4.RangePropDesc.TYPE) {
+	        else if (item.type === props_desc_5.RangePropDesc.TYPE) {
 	            var value = item.value || { first: 0, second: 0 };
 	            titleValue = this.addRange(item.name, value.first, value.second);
 	        }
-	        else if (item.type === props_desc_4.Vector2PropDesc.TYPE) {
+	        else if (item.type === props_desc_5.Vector2PropDesc.TYPE) {
 	            var p2 = item;
 	            var value = item.value || { x: 0, y: 0 };
 	            titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
 	        }
-	        else if (item.type === props_desc_4.OptionsPropDesc.TYPE) {
+	        else if (item.type === props_desc_5.OptionsPropDesc.TYPE) {
 	            var value = item.value || { x: 0, y: 0 };
 	            var propDesc = item;
 	            titleValue = this.addComboBox(item.name, value);
@@ -26936,7 +26975,7 @@ var qtk =
 	                comboBox.optionsJson = propDesc.options;
 	            }
 	        }
-	        else if (item.type === props_desc_4.Vector3PropDesc.TYPE) {
+	        else if (item.type === props_desc_5.Vector3PropDesc.TYPE) {
 	            var p3 = item;
 	            var value = item.value || { x: 0, y: 0, z: 0 };
 	            titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
@@ -26952,7 +26991,8 @@ var qtk =
 	                value: {
 	                    path: item.path,
 	                    converter: item.converter,
-	                    validationRule: item.validationRule
+	                    validationRule: item.validationRule,
+	                    updateTiming: iview_model_1.toUpdateTiming(item.updateTiming)
 	                }
 	            };
 	            valueWidget.dataBindingRule = bindRule;
@@ -26981,9 +27021,10 @@ var qtk =
 	            });
 	        }
 	        this.relayoutChildren();
+	        this.dispatchEvent(Events.ChangeEvent.create().init(Events.CHANGE, {}));
 	    };
 	    PropertyPage.prototype.initWithJson = function (json) {
-	        var propsDesc = props_desc_3.PropsDesc.create(json);
+	        var propsDesc = props_desc_4.PropsDesc.create(json);
 	        this.initWithPropsDesc(propsDesc);
 	    };
 	    PropertyPage.prototype.onAddChild = function (child) {
@@ -27018,7 +27059,7 @@ var qtk =
 	    PropertyPage.create = function (options) {
 	        return PropertyPage.rBin.create(options);
 	    };
-	    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemH: 30, _titleW: "60px", _valueW: "100%" });
+	    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _bp: 5, _itemH: 30, _titleW: "80px", _valueW: "100%" });
 	    PropertyPage.TYPE = "property-page";
 	    PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
 	    return PropertyPage;
@@ -27109,6 +27150,9 @@ var qtk =
 	        },
 	        set: function (value) {
 	            this._titleW = value;
+	            if (this.titleWidget && this.titleWidget.layoutParam) {
+	                this.titleWidget.layoutParam.w = value;
+	            }
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -27119,6 +27163,9 @@ var qtk =
 	        },
 	        set: function (value) {
 	            this._valueW = value;
+	            if (this.valueWidget && this.valueWidget.layoutParam) {
+	                this.valueWidget.layoutParam.w = value;
+	            }
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -28309,8 +28356,22 @@ var qtk =
 	        set: function (value) {
 	            this._value = value;
 	            if (this._edit) {
-	                this._edit.text = value;
+	                var oldValue = this._edit.text;
+	                if (oldValue !== value) {
+	                    this._edit.text = value;
+	                    this._edit.notifyChangeEx(Events.CHANGE, value, oldValue);
+	                }
 	            }
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    Object.defineProperty(ChoosableEdit.prototype, "dataBindingRule", {
+	        get: function () {
+	            return this._edit.dataBindingRule;
+	        },
+	        set: function (dataBindingRule) {
+	            this._edit.dataBindingRule = dataBindingRule;
 	        },
 	        enumerable: true,
 	        configurable: true
@@ -28407,13 +28468,15 @@ var qtk =
 	        this.titleW = titleW;
 	        this.valueW = valueW;
 	    };
-	    PropDesc.prototype.setDataBindingRule = function (path, converter, validationRule) {
+	    PropDesc.prototype.setDataBindingRule = function (path, updateTiming, converter, validationRule) {
 	        this.path = path;
 	        this.converter = converter;
 	        this.validationRule = validationRule;
+	        this.updateTiming = updateTiming || "changed";
 	        return this;
 	    };
-	    PropDesc.keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
+	    PropDesc.keys = ["type", "name", "desc", "value", "path",
+	        "titleW", "valueW", "converter", "validationRule"];
 	    return PropDesc;
 	}());
 	exports.PropDesc = PropDesc;
@@ -28456,6 +28519,18 @@ var qtk =
 	    return TextPropDesc;
 	}(PropDesc));
 	exports.TextPropDesc = TextPropDesc;
+	var ColorPropDesc = (function (_super) {
+	    __extends(ColorPropDesc, _super);
+	    function ColorPropDesc() {
+	        _super.call(this, ColorPropDesc.TYPE);
+	    }
+	    ColorPropDesc.create = function () {
+	        return new ColorPropDesc();
+	    };
+	    ColorPropDesc.TYPE = "color";
+	    return ColorPropDesc;
+	}(PropDesc));
+	exports.ColorPropDesc = ColorPropDesc;
 	var LinkPropDesc = (function (_super) {
 	    __extends(LinkPropDesc, _super);
 	    function LinkPropDesc() {
@@ -28676,6 +28751,9 @@ var qtk =
 	            else if (type === TextPropDesc.TYPE) {
 	                desc = TextPropDesc.create();
 	            }
+	            else if (type === ColorPropDesc.TYPE) {
+	                desc = ColorPropDesc.create();
+	            }
 	            else if (type === LinkPropDesc.TYPE) {
 	                desc = LinkPropDesc.create();
 	            }
@@ -28709,7 +28787,7 @@ var qtk =
 	            }
 	            items.push(desc);
 	            desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
-	            desc.setDataBindingRule(data.path, data.converter, data.validationRule);
+	            desc.setDataBindingRule(data.path, data.updateTiming, data.converter, data.validationRule);
 	        });
 	        this._items = items;
 	        return this;
@@ -29551,19 +29629,21 @@ var qtk =
 	    }
 	    Draggable.prototype.init = function (options) {
 	        this.onDrawDragging = function (evt) {
-	            var ctx = evt.ctx;
-	            var win = evt.widget;
-	            var p = win.pointerPosition;
-	            var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
-	            var image = e.dataTransfer.dragImage;
-	            if (image) {
-	                if (image.draw) {
-	                    image.draw(ctx, p.x, p.y);
+	            if (Events.DragEvent.isDragging) {
+	                var ctx = evt.ctx;
+	                var win = evt.widget;
+	                var p = win.pointerPosition;
+	                var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
+	                var image = e.dataTransfer.dragImage;
+	                if (image) {
+	                    if (image.draw) {
+	                        image.draw(ctx, p.x, p.y);
+	                    }
 	                }
-	            }
-	            else {
-	                ctx.fillStyle = "green";
-	                ctx.fillRect(p.x, p.y, 10, 10);
+	                else {
+	                    ctx.fillStyle = "green";
+	                    ctx.fillRect(p.x, p.y, 10, 10);
+	                }
 	            }
 	        };
 	    };
@@ -29588,13 +29668,13 @@ var qtk =
 	    Draggable.prototype.onPointerUp = function (evt) {
 	        if (this.dragging) {
 	            this.dragging = false;
-	            Events.DragEvent.isDragging = false;
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
 	        }
+	        Events.DragEvent.isDragging = false;
 	        this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
 	    };
 	    Draggable.prototype.onPointerMove = function (evt) {
-	        if (evt.pointerDown && !this.dragging) {
+	        if (evt.pointerDown && !this.dragging && !Events.DragEvent.isDragging) {
 	            this.dragging = true;
 	            Events.DragEvent.isDragging = true;
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART, evt.x, evt.y));
@@ -57510,11 +57590,38 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var Events = __webpack_require__(6);
 	var scroll_view_1 = __webpack_require__(102);
 	var widget_factory_1 = __webpack_require__(24);
 	var title_content_1 = __webpack_require__(327);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	var collapsable_title_1 = __webpack_require__(328);
+	var TitlePage = (function (_super) {
+	    __extends(TitlePage, _super);
+	    function TitlePage() {
+	        _super.apply(this, arguments);
+	    }
+	    TitlePage.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
+	    };
+	    TitlePage.prototype.relayoutChildren = function () {
+	        var rect = _super.prototype.relayoutChildren.call(this);
+	        if (!this._collapsed) {
+	            this.contentH = this.contentWidget.h;
+	        }
+	        this.reComputeH();
+	        return rect;
+	    };
+	    TitlePage.create = function (options) {
+	        return TitlePage.rb.create(options);
+	    };
+	    TitlePage.TYPE = "title-page";
+	    TitlePage.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitlePage);
+	    return TitlePage;
+	}(title_content_1.TitleContent));
+	exports.TitlePage = TitlePage;
+	;
+	widget_factory_1.WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 	/**
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
@@ -57553,9 +57660,10 @@ var qtk =
 	     * @returns 返回新增加的TitleContent。
 	     */
 	    PropertySheets.prototype.addPage = function (title, contentWidget) {
+	        var _this = this;
 	        var me = this;
 	        var titleWidget = collapsable_title_1.CollapsableTitle.create({ text: title });
-	        var titleContent = title_content_1.TitleContent.create({
+	        var titleContent = TitlePage.create({
 	            collapsed: true,
 	            titleWidget: titleWidget,
 	            contentWidget: contentWidget,
@@ -57566,6 +57674,9 @@ var qtk =
 	            me.relayoutChildren();
 	        };
 	        this.addChild(titleContent);
+	        contentWidget.on(Events.CHANGE, function (evt) {
+	            _this.relayoutChildren();
+	        });
 	        return titleContent;
 	    };
 	    PropertySheets.prototype.computeDesireContentHeight = function () {

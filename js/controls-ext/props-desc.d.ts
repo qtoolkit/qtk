@@ -6,6 +6,7 @@ export declare class PropDesc {
     value: any;
     titleW: string;
     valueW: string;
+    updateTiming: string;
     static keys: string[];
     toJson(): any;
     fromJson(json: any): void;
@@ -17,7 +18,7 @@ export declare class PropDesc {
     path: string;
     converter: string;
     validationRule: string;
-    setDataBindingRule(path: string, converter?: string, validationRule?: string): PropDesc;
+    setDataBindingRule(path: string, updateTiming?: string, converter?: string, validationRule?: string): PropDesc;
 }
 export declare class NumberPropDesc extends PropDesc {
     max: number;
@@ -32,6 +33,11 @@ export declare class TextPropDesc extends PropDesc {
     constructor();
     static TYPE: string;
     static create(): TextPropDesc;
+}
+export declare class ColorPropDesc extends PropDesc {
+    constructor();
+    static TYPE: string;
+    static create(): ColorPropDesc;
 }
 export declare class LinkPropDesc extends PropDesc {
     constructor();

@@ -18,19 +18,21 @@ var Draggable = (function (_super) {
     }
     Draggable.prototype.init = function (options) {
         this.onDrawDragging = function (evt) {
-            var ctx = evt.ctx;
-            var win = evt.widget;
-            var p = win.pointerPosition;
-            var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
-            var image = e.dataTransfer.dragImage;
-            if (image) {
-                if (image.draw) {
-                    image.draw(ctx, p.x, p.y);
+            if (Events.DragEvent.isDragging) {
+                var ctx = evt.ctx;
+                var win = evt.widget;
+                var p = win.pointerPosition;
+                var e = Events.DragEvent.get(Events.DRAGSTART, p.x, p.y);
+                var image = e.dataTransfer.dragImage;
+                if (image) {
+                    if (image.draw) {
+                        image.draw(ctx, p.x, p.y);
+                    }
                 }
-            }
-            else {
-                ctx.fillStyle = "green";
-                ctx.fillRect(p.x, p.y, 10, 10);
+                else {
+                    ctx.fillStyle = "green";
+                    ctx.fillRect(p.x, p.y, 10, 10);
+                }
             }
         };
     };
@@ -55,13 +57,13 @@ var Draggable = (function (_super) {
     Draggable.prototype.onPointerUp = function (evt) {
         if (this.dragging) {
             this.dragging = false;
-            Events.DragEvent.isDragging = false;
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, evt.x, evt.y));
         }
+        Events.DragEvent.isDragging = false;
         this.widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
     };
     Draggable.prototype.onPointerMove = function (evt) {
-        if (evt.pointerDown && !this.dragging) {
+        if (evt.pointerDown && !this.dragging && !Events.DragEvent.isDragging) {
             this.dragging = true;
             Events.DragEvent.isDragging = true;
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGSTART, evt.x, evt.y));

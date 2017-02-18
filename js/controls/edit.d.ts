@@ -31,6 +31,7 @@ export declare class Edit extends Label {
     protected getStyleType(): string;
     protected filterText(value: string): string;
     protected hideEditor(): void;
+    notifyChangeEx(type: string, value: any, oldValue: any): void;
     protected showEditor(): void;
     protected _validationTips: string;
     validationTips: string;

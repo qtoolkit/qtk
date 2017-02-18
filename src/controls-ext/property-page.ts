@@ -20,7 +20,12 @@ import {BoolPropDesc, LinePropDesc, LinkPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
 import {LinearLayouterParam, LinearLayouter} from '../layouters/linear-layouter';
 import {Vector4PropDesc} from "./props-desc";
-import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, ReadonlyTextPropDesc} from "./props-desc";
+
+import {HtmlElement} from "../html/html-element";
+import {toUpdateTiming, toBindingMode} from "../mvvm/iview-model";
+
+import {ColorPropDesc, ReadonlyTextPropDesc} from "./props-desc";
+import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc} from "./props-desc";
 import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 
 /**
@@ -226,6 +231,19 @@ export class PropertyPage extends Widget {
 
 		return widget;
 	}
+	
+	public addColorEdit(title:string, value?:string, inputTips?:string) : TitleChoosableEdit {
+		var choosableEdit = this.addChoosableEdit(title, value, inputTips);
+		
+		choosableEdit.onChoose = function() {
+			HtmlElement.showColocPicker(value||"#FFFFFF", (newValue:string) => {
+				choosableEdit.value = newValue;
+				console.log("new color" + newValue);
+			});
+		}
+
+		return choosableEdit;
+	}
 
 	public addChoosableEdit(title:string, value?:string, inputTips?:string) : TitleChoosableEdit {
 		var itemH = this.itemH;
@@ -315,6 +333,8 @@ export class PropertyPage extends Widget {
 			titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 		}else if(item.type === TextPropDesc.TYPE) {
 			titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+		}else if(item.type === ColorPropDesc.TYPE) {
+			titleValue = this.addColorEdit(item.name, item.value, item.desc);
 		}else if(item.type === ReadonlyTextPropDesc.TYPE) {
 			titleValue = this.addLabel(item.name, item.value);
 		}else if(item.type === SliderPropDesc.TYPE) {
@@ -361,7 +381,8 @@ export class PropertyPage extends Widget {
 				value:{
 					path:item.path, 
 					converter:item.converter, 
-					validationRule:item.validationRule
+					validationRule:item.validationRule,
+					updateTiming:toUpdateTiming(item.updateTiming)
 				}
 			};
 			valueWidget.dataBindingRule = bindRule;
@@ -393,6 +414,7 @@ export class PropertyPage extends Widget {
 		}
 
 		this.relayoutChildren();
+		this.dispatchEvent(Events.ChangeEvent.create().init(Events.CHANGE, {}));
 	}
 
 	public initWithJson(json:any) {
@@ -432,6 +454,7 @@ export class PropertyPage extends Widget {
 
 		this.h = this.bottomPadding + y;
 		this.requestRedraw();
+
 		return r;
 	}
 
@@ -439,7 +462,8 @@ export class PropertyPage extends Widget {
 		super(PropertyPage.TYPE);
 	}
 	
-	protected static defProps = Object.assign({}, Widget.defProps, {_itemH:30, _titleW:"60px", _valueW:"100%"});
+	protected static defProps = Object.assign({}, Widget.defProps, 
+				{_bp : 5, _itemH:30, _titleW:"80px", _valueW:"100%"});
 	protected getDefProps() : any {
 		return PropertyPage.defProps;
 	}

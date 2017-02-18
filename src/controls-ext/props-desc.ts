@@ -9,8 +9,10 @@ export class PropDesc {
 	public value : any;
 	public titleW : string;
 	public valueW : string;
+	public updateTiming : string;
 
-	public static keys = ["type", "name", "desc", "value", "path", "converter", "validationRule"];
+	public static keys = ["type", "name", "desc", "value", "path", 
+		"titleW", "valueW", "converter", "validationRule"];
 	
 	public toJson() : any {
 		var json : any = {};
@@ -52,10 +54,12 @@ export class PropDesc {
 	public path : string;
 	public converter : string;
 	public validationRule : string;
-	public setDataBindingRule(path:string, converter?:string, validationRule?:string) : PropDesc {
+	public setDataBindingRule(path:string, updateTiming?:string, 
+							  converter?:string, validationRule?:string) : PropDesc {
 		this.path = path;
 		this.converter = converter;
 		this.validationRule = validationRule;
+		this.updateTiming = updateTiming || "changed";
 
 		return this;
 	}
@@ -99,6 +103,17 @@ export class TextPropDesc extends PropDesc {
 	public static TYPE = "text";
 	public static create() {
 		return new TextPropDesc();
+	}
+}
+
+export class ColorPropDesc extends PropDesc {
+	constructor() {
+		super(ColorPropDesc.TYPE);
+	}
+	
+	public static TYPE = "color";
+	public static create() {
+		return new ColorPropDesc();
 	}
 }
 
@@ -340,6 +355,8 @@ export class PropsDesc extends Emitter {
 				desc = SliderPropDesc.create();
 			}else if(type === TextPropDesc.TYPE) {
 				desc = TextPropDesc.create();
+			}else if(type === ColorPropDesc.TYPE) {
+				desc = ColorPropDesc.create();
 			}else if(type === LinkPropDesc.TYPE) {
 				desc = LinkPropDesc.create();
 			}else if(type === ReadonlyTextPropDesc.TYPE) {
@@ -365,7 +382,7 @@ export class PropsDesc extends Emitter {
 			
 			items.push(desc);
 			desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
-			desc.setDataBindingRule(data.path, data.converter, data.validationRule);
+			desc.setDataBindingRule(data.path, data.updateTiming, data.converter, data.validationRule);
 		});
 	
 		this._items = items;

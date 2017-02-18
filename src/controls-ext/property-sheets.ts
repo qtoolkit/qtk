@@ -1,5 +1,6 @@
 
 import {Rect} from "../rect";
+import Events = require("../events");
 import {Widget} from "../controls/widget";
 import {ScrollView} from "../controls/scroll-view";
 import {WidgetFactory} from "../controls/widget-factory";
@@ -7,6 +8,31 @@ import {TitleContent} from "../controls/title-content";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {CollapsableTitle} from "../controls/collapsable-title";
 import {Layouter, LayouterFactory} from '../layouters/layouter';
+
+export class TitlePage extends TitleContent {
+	protected onReset() {
+		super.onReset();
+	}
+
+	public relayoutChildren() : Rect {
+		var rect = super.relayoutChildren();
+		
+		if(!this._collapsed) {
+			this.contentH = this.contentWidget.h;
+		}
+		this.reComputeH();
+
+		return rect;
+	}
+
+	public static TYPE = "title-page";
+	private static rb = WidgetRecyclableCreator.create(TitlePage);
+	public static create(options?:any) : TitlePage {
+		return <TitlePage>TitlePage.rb.create(options);
+	}
+};
+
+WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 
 /**
  * 管理多个页面，每个页面可以展开或折叠。
@@ -41,7 +67,7 @@ export class PropertySheets extends ScrollView{
 		var me = this;
 		var titleWidget = CollapsableTitle.create({text:title});
 		
-		var titleContent = TitleContent.create({
+		var titleContent = TitlePage.create({
 			collapsed : true,
 			titleWidget : titleWidget,
 			contentWidget : contentWidget,
@@ -53,6 +79,10 @@ export class PropertySheets extends ScrollView{
 			me.relayoutChildren();
 		}
 		this.addChild(titleContent);
+
+		contentWidget.on(Events.CHANGE, (evt) => {
+			this.relayoutChildren();
+		});
 
 		return titleContent;
 	}

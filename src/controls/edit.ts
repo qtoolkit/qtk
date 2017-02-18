@@ -117,6 +117,12 @@ export class Edit extends Label {
 		this.requestRedraw();
 	}
 
+	public notifyChangeEx(type:string, value:any, oldValue:any) {
+		var e = this.eChangeEvent;
+		e.init(type, {value:value, oldValue:oldValue});;
+		this.dispatchEvent(e);
+	}
+
 	protected showEditor() {
 		var style = this.getStyle();
 		this._input = this.multiLineMode ? HtmlEdit.textArea : HtmlEdit.input;
@@ -148,20 +154,17 @@ export class Edit extends Label {
 		});
 		
 		input.on(Events.CHANGING, evt => {
-			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
 			var value = this.inputType === "number" ? +this.text : this.text;	
-			e.init(Events.CHANGING, {value:value});;
-			this.dispatchEvent(e);
+
+			this.notifyChangeEx(Events.CHANGING, value, null);
 		});
 		
 		input.on(Events.CHANGE, evt => {
-			var e = this.eChangeEvent;
 			this.text = this.filterText(evt.value);
 			var value = this.inputType === "number" ? +this.text : this.text;	
 			
-			e.init(Events.CHANGE, {value:value, oldValue:oldValue});;
-			this.dispatchEvent(e);
+			this.notifyChangeEx(Events.CHANGE, value, oldValue);
 		});
 		
 		input.on(Events.KEYDOWN, evt => {

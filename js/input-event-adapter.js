@@ -51,11 +51,9 @@ function dispatchPointerEvent(type, target, detail) {
     }
     else if (type === Events.POINTER_UP) {
         detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
+        dispatchEvent(target, Events.CLICK, detail);
         pointerDown = false;
         pointerMoved = false;
-        if (!pointerMoved) {
-            dispatchEvent(target, Events.CLICK, detail);
-        }
     }
     else {
         pointerMoved = true;

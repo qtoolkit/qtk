@@ -29,6 +29,9 @@ var TitleValue = (function (_super) {
         },
         set: function (value) {
             this._titleW = value;
+            if (this.titleWidget && this.titleWidget.layoutParam) {
+                this.titleWidget.layoutParam.w = value;
+            }
         },
         enumerable: true,
         configurable: true
@@ -39,6 +42,9 @@ var TitleValue = (function (_super) {
         },
         set: function (value) {
             this._valueW = value;
+            if (this.valueWidget && this.valueWidget.layoutParam) {
+                this.valueWidget.layoutParam.w = value;
+            }
         },
         enumerable: true,
         configurable: true
