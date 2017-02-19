@@ -37,6 +37,8 @@ exports.TitlePage = TitlePage;
 ;
 widget_factory_1.WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 /**
+ * @class PropertySheets
+ * @extends Widget
  * 管理多个页面，每个页面可以展开或折叠。
  */
 var PropertySheets = (function (_super) {

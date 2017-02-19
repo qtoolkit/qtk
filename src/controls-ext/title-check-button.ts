@@ -5,6 +5,11 @@ import {CheckButton} from "../controls/check-button";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleCheckButton
+ * @extends Widget
+ * 带标题的CheckButton。
+ */
 export class TitleCheckButton extends TitleValue {
 	constructor(type?:string) {
 		super(type || TitleCheckButton.TYPE);

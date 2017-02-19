@@ -10,12 +10,19 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
+ * @class ChoosableEdit
+ * @extends Widget
  * 编辑器+选择按钮。
  */
 export class ChoosableEdit extends Widget {
 	protected _edit : Edit;
 	protected _button : Button;
 	protected _inputTips : string;
+	
+	/**
+	 * @property {Function} onChoose
+	 * 点击选择按钮时，会调用该回调函数。
+	 */
 	public onChoose : Function;
 
 	public set inputTips(value:string) {

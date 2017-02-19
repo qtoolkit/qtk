@@ -8,8 +8,8 @@ var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 /**
+ * @class Pages
  * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
- * value表示该活跃页面的索引。
  */
 var Pages = (function (_super) {
     __extends(Pages, _super);
@@ -20,6 +20,10 @@ var Pages = (function (_super) {
         get: function () {
             return this._value;
         },
+        /**
+         * @property {number} value
+         * 表示该活跃页面的索引。
+         */
         set: function (value) {
             var n = this.children.length - 1;
             this._value = Math.max(0, Math.min(value, n));
@@ -28,10 +32,6 @@ var Pages = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Pages.prototype.setValueByPage = function (page) {
-        this.value = this.indexOfChild(page);
-        return this;
-    };
     Object.defineProperty(Pages.prototype, "target", {
         get: function () {
             if (this.children.length) {
@@ -47,6 +47,9 @@ var Pages = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Pages.prototype.findEventTargetChild = function (x, y) {
+        return this.target;
+    };
     Pages.prototype.relayoutChildren = function () {
         var r = this.getLayoutRect();
         this.children.forEach(function (child) {
@@ -61,10 +64,8 @@ var Pages = (function (_super) {
         }
         return this;
     };
-    Pages.prototype.findEventTargetChild = function (x, y) {
-        return this.target;
-    };
     Pages.prototype.onReset = function () {
+        _super.prototype.onReset.call(this);
         this.value = 0;
     };
     Pages.create = function (options) {

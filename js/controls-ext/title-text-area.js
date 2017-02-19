@@ -8,6 +8,11 @@ var edit_1 = require("../controls/edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleTextArea
+ * @extends Widget
+ * 带标题的多行编辑器。
+ */
 var TitleTextArea = (function (_super) {
     __extends(TitleTextArea, _super);
     function TitleTextArea(type) {
@@ -17,6 +22,10 @@ var TitleTextArea = (function (_super) {
         get: function () {
             return this._inputTips;
         },
+        /**
+         * @property {string} inputTips
+         * 输入提示。
+         */
         set: function (value) {
             this._inputTips = value;
             if (this._valueWidget) {

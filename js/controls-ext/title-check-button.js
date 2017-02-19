@@ -8,6 +8,11 @@ var title_value_1 = require("./title-value");
 var check_button_1 = require("../controls/check-button");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleCheckButton
+ * @extends Widget
+ * 带标题的CheckButton。
+ */
 var TitleCheckButton = (function (_super) {
     __extends(TitleCheckButton, _super);
     function TitleCheckButton(type) {

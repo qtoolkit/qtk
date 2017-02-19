@@ -4,16 +4,29 @@ import { Edit } from "../controls/edit";
 import { Widget } from "../controls/widget";
 import Events = require("../events");
 /**
- * 范围编辑器。
+ * @class  RangeEdit
+ * @extends Widget
+ * 范围编辑器。范围包括first和second两个值。
  */
 export declare class RangeEdit extends Widget {
     protected _firstEditor: Edit;
     protected _secondEditor: Edit;
     protected _label: Label;
     readonly inputable: boolean;
+    /**
+     * @property {Edit} firstEditor
+     * 第一个编辑器。
+     */
     readonly firstEditor: Edit;
+    /**
+     * @property {Edit} secondEditor
+     * 第二个编辑器。
+     */
     readonly secondEditor: Edit;
-    value: any;
+    value: {
+        first: number;
+        second: number;
+    };
     protected onToJson(json: any): void;
     relayoutChildren(): Rect;
     dispose(): void;

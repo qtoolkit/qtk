@@ -2,17 +2,54 @@
 import Events = require("../events");
 import {Emitter} from "../emitter";
 
+/**
+ * @class PropDesc
+ * 属性描述的基类。
+ */
 export class PropDesc {
+	/**
+	 * @property {string} type
+	 * 属性的类型。
+	 */
 	public type : string;
+	
+	/**
+	 * @property {string} name
+	 * 属性的名称。
+	 */
 	public name : string;
+	
+	/**
+	 * @property {string} desc 
+	 * 属性的描述。
+	 */
 	public desc : string;
+	
+	/**
+	 * @property {string} value 
+	 * 属性的值。
+	 */
 	public value : any;
+	
+	/**
+	 * @property {string} titleW 
+	 * 标题的宽度。
+	 */
 	public titleW : string;
+
+	/**
+	 * @property {string} valueW 
+	 * 值的宽度。
+	 */
 	public valueW : string;
+	
+	/**
+	 * @property {string} updateTiming
+	 * 更新时机。可选择值："changing", "changed", "explicit"
+	 */
 	public updateTiming : string;
 
-	public static keys = ["type", "name", "desc", "value", "path", 
-		"titleW", "valueW", "converter", "validationRule"];
+	public static keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
 	
 	public toJson() : any {
 		var json : any = {};
@@ -49,11 +86,23 @@ export class PropDesc {
 	}
 
 	/**
-	 * DataBinding
+	 * @property {string} path
+	 * 数据绑定的path。
 	 */
 	public path : string;
+
+	/**
+	 * @property {string} converter
+	 * 数据绑定的数据转换器的名称。
+	 */
 	public converter : string;
+	
+	/**
+	 * @property {string} validationRule
+	 * 数据绑定的数据有效性验证规则的名称。
+	 */
 	public validationRule : string;
+
 	public setDataBindingRule(path:string, updateTiming?:string, 
 							  converter?:string, validationRule?:string) : PropDesc {
 		this.path = path;
@@ -65,6 +114,11 @@ export class PropDesc {
 	}
 };
 
+/**
+ * @class NumberPropDesc
+ * @extends PropDesc
+ * 数值类属性描述。
+ */
 export class NumberPropDesc extends PropDesc {
 	public max : number;
 	public min : number;
@@ -95,6 +149,11 @@ export class NumberPropDesc extends PropDesc {
 	}
 };
 
+/**
+ * @class TextPropDesc
+ * @extends PropDesc
+ * 文本类属性描述。
+ */
 export class TextPropDesc extends PropDesc {
 	constructor() {
 		super(TextPropDesc.TYPE);
@@ -106,6 +165,11 @@ export class TextPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class ColorPropDesc
+ * @extends PropDesc
+ * 颜色类属性描述。
+ */
 export class ColorPropDesc extends PropDesc {
 	constructor() {
 		super(ColorPropDesc.TYPE);
@@ -117,6 +181,11 @@ export class ColorPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class LinkPropDesc
+ * @extends PropDesc
+ * 超链接类属性描述。
+ */
 export class LinkPropDesc extends PropDesc {
 	constructor() {
 		super(LinkPropDesc.TYPE);
@@ -128,6 +197,11 @@ export class LinkPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class ReadonlyTextPropDesc
+ * @extends PropDesc
+ * 只读文本类属性描述。
+ */
 export class ReadonlyTextPropDesc extends PropDesc {
 	constructor() {
 		super(ReadonlyTextPropDesc.TYPE);
@@ -139,6 +213,11 @@ export class ReadonlyTextPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class SliderPropDesc
+ * @extends PropDesc
+ * Slider类属性描述。
+ */
 export class SliderPropDesc extends PropDesc {
 	constructor() {
 		super(SliderPropDesc.TYPE);
@@ -150,6 +229,11 @@ export class SliderPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class RangePropDesc
+ * @extends PropDesc
+ * 范围类属性描述。
+ */
 export class RangePropDesc extends PropDesc {
 	constructor() {
 		super(RangePropDesc.TYPE);
@@ -161,6 +245,11 @@ export class RangePropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class Vector2PropDesc
+ * @extends PropDesc
+ * 2维向量类属性描述。
+ */
 export class Vector2PropDesc extends PropDesc {
 	public xTitle : string;
 	public yTitle : string;
@@ -191,6 +280,11 @@ export class Vector2PropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class Vector3PropDesc
+ * @extends PropDesc
+ * 3维向量类属性描述。
+ */
 export class Vector3PropDesc extends PropDesc {
 	public xTitle : string;
 	public yTitle : string;
@@ -225,6 +319,11 @@ export class Vector3PropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class Vector4PropDesc
+ * @extends PropDesc
+ * 4维向量类属性描述。
+ */
 export class Vector4PropDesc extends PropDesc {
 	public xTitle : string;
 	public yTitle : string;
@@ -263,6 +362,11 @@ export class Vector4PropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class LinePropDesc
+ * @extends PropDesc
+ * 分组类属性描述。
+ */
 export class LinePropDesc extends PropDesc {
 	constructor() {
 		super(LinePropDesc.TYPE);
@@ -274,6 +378,11 @@ export class LinePropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class BoolPropDesc
+ * @extends PropDesc
+ * 布尔类属性描述。
+ */
 export class BoolPropDesc extends PropDesc {
 	constructor() {
 		super(BoolPropDesc.TYPE);
@@ -285,6 +394,11 @@ export class BoolPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class OptionsPropDesc
+ * @extends PropDesc
+ * 下拉框类属性描述。
+ */
 export class OptionsPropDesc extends PropDesc {
 	public options:any;
 
@@ -311,6 +425,11 @@ export class OptionsPropDesc extends PropDesc {
 	}
 }
 
+/**
+ * @class PropsDesc
+ * @extends Emitter
+ * 属性组。
+ */
 export class PropsDesc extends Emitter {
 	public _items : Array<PropDesc>;
 

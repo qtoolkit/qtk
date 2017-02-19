@@ -5,9 +5,18 @@ import {ChoosableEdit} from "./choosable-edit";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleChoosableEdit
+ * @extends Widget
+ * 带标题的编辑器，同时提供一个选择按钮，用来实现颜色选择和文件选择等功能。
+ */
 export class TitleChoosableEdit extends TitleValue {
     protected _inputTips : string;
 
+	/**
+	 * @property {Function} onChoose
+	 * 点击选择按钮时的回调函数。
+	 */
 	public set onChoose(value:Function) {
 		var edit = <ChoosableEdit>this._valueWidget;
 
@@ -18,13 +27,16 @@ export class TitleChoosableEdit extends TitleValue {
 		return edit.onChoose;
 	}
 
+	/**
+	 * @property {string} inputTips
+	 * 输入提示。
+	 */
 	public set inputTips(value:string) {
 		this._inputTips = value;
 		if(this._valueWidget) {
 			this._valueWidget.set({inputTips:value});
 		}
 	}
-
 	public get inputTips() : string {
 		return this._inputTips;
 	}

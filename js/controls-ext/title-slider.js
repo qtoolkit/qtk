@@ -8,6 +8,11 @@ var slider_1 = require("../controls/slider");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleSlider
+ * @extends Widget
+ * 带标题的滑块。
+ */
 var TitleSlider = (function (_super) {
     __extends(TitleSlider, _super);
     function TitleSlider(type) {

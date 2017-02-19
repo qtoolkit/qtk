@@ -8,6 +8,11 @@ var edit_1 = require("../controls/edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleEdit
+ * @extends Widget
+ * 带标题的编辑器。
+ */
 var TitleEdit = (function (_super) {
     __extends(TitleEdit, _super);
     function TitleEdit(type) {
@@ -17,6 +22,10 @@ var TitleEdit = (function (_super) {
         get: function () {
             return this._inputFilter;
         },
+        /**
+         * @property {Function} inputFilter
+         * 输入过滤器函数。
+         */
         set: function (value) {
             this._inputFilter = value;
             if (this._valueWidget) {
@@ -26,27 +35,35 @@ var TitleEdit = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TitleEdit.prototype, "inputType", {
+    Object.defineProperty(TitleEdit.prototype, "inputTips", {
         get: function () {
-            return this._inputType;
+            return this._inputTips;
         },
+        /**
+         * @property {string} inputTips
+         * 输入提示。
+         */
         set: function (value) {
-            this._inputType = value;
+            this._inputTips = value;
             if (this._valueWidget) {
-                this._valueWidget.set({ inputType: value });
+                this._valueWidget.set({ inputTips: value });
             }
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TitleEdit.prototype, "inputTips", {
+    Object.defineProperty(TitleEdit.prototype, "inputType", {
         get: function () {
-            return this._inputTips;
+            return this._inputType;
         },
+        /**
+         * @property {string} inputType
+         * 输入类型。
+         */
         set: function (value) {
-            this._inputTips = value;
+            this._inputType = value;
             if (this._valueWidget) {
-                this._valueWidget.set({ inputTips: value });
+                this._valueWidget.set({ inputType: value });
             }
         },
         enumerable: true,

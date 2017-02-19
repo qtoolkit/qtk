@@ -5,15 +5,19 @@ import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleVector
+ * @extends Widget
+ * 带标题的向量编辑器。
+ */
 export class TitleVector extends TitleValue {
 	protected _d : number;
 	/**
-	 * dimension
+	 * 向量的维度。
 	 */
 	public get d() : number {
 		return this._d;
 	}
-	
 	public set d(value:number){
 		this._d = value;;
 	}

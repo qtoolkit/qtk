@@ -6,6 +6,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Events = require("../events");
 var emitter_1 = require("../emitter");
+/**
+ * @class PropDesc
+ * 属性描述的基类。
+ */
 var PropDesc = (function () {
     function PropDesc(type) {
         this.type = type;
@@ -44,12 +48,16 @@ var PropDesc = (function () {
         this.updateTiming = updateTiming || "changed";
         return this;
     };
-    PropDesc.keys = ["type", "name", "desc", "value", "path",
-        "titleW", "valueW", "converter", "validationRule"];
+    PropDesc.keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
     return PropDesc;
 }());
 exports.PropDesc = PropDesc;
 ;
+/**
+ * @class NumberPropDesc
+ * @extends PropDesc
+ * 数值类属性描述。
+ */
 var NumberPropDesc = (function (_super) {
     __extends(NumberPropDesc, _super);
     function NumberPropDesc(min, max) {
@@ -76,6 +84,11 @@ var NumberPropDesc = (function (_super) {
 }(PropDesc));
 exports.NumberPropDesc = NumberPropDesc;
 ;
+/**
+ * @class TextPropDesc
+ * @extends PropDesc
+ * 文本类属性描述。
+ */
 var TextPropDesc = (function (_super) {
     __extends(TextPropDesc, _super);
     function TextPropDesc() {
@@ -88,6 +101,11 @@ var TextPropDesc = (function (_super) {
     return TextPropDesc;
 }(PropDesc));
 exports.TextPropDesc = TextPropDesc;
+/**
+ * @class ColorPropDesc
+ * @extends PropDesc
+ * 颜色类属性描述。
+ */
 var ColorPropDesc = (function (_super) {
     __extends(ColorPropDesc, _super);
     function ColorPropDesc() {
@@ -100,6 +118,11 @@ var ColorPropDesc = (function (_super) {
     return ColorPropDesc;
 }(PropDesc));
 exports.ColorPropDesc = ColorPropDesc;
+/**
+ * @class LinkPropDesc
+ * @extends PropDesc
+ * 超链接类属性描述。
+ */
 var LinkPropDesc = (function (_super) {
     __extends(LinkPropDesc, _super);
     function LinkPropDesc() {
@@ -112,6 +135,11 @@ var LinkPropDesc = (function (_super) {
     return LinkPropDesc;
 }(PropDesc));
 exports.LinkPropDesc = LinkPropDesc;
+/**
+ * @class ReadonlyTextPropDesc
+ * @extends PropDesc
+ * 只读文本类属性描述。
+ */
 var ReadonlyTextPropDesc = (function (_super) {
     __extends(ReadonlyTextPropDesc, _super);
     function ReadonlyTextPropDesc() {
@@ -124,6 +152,11 @@ var ReadonlyTextPropDesc = (function (_super) {
     return ReadonlyTextPropDesc;
 }(PropDesc));
 exports.ReadonlyTextPropDesc = ReadonlyTextPropDesc;
+/**
+ * @class SliderPropDesc
+ * @extends PropDesc
+ * Slider类属性描述。
+ */
 var SliderPropDesc = (function (_super) {
     __extends(SliderPropDesc, _super);
     function SliderPropDesc() {
@@ -136,6 +169,11 @@ var SliderPropDesc = (function (_super) {
     return SliderPropDesc;
 }(PropDesc));
 exports.SliderPropDesc = SliderPropDesc;
+/**
+ * @class RangePropDesc
+ * @extends PropDesc
+ * 范围类属性描述。
+ */
 var RangePropDesc = (function (_super) {
     __extends(RangePropDesc, _super);
     function RangePropDesc() {
@@ -148,6 +186,11 @@ var RangePropDesc = (function (_super) {
     return RangePropDesc;
 }(PropDesc));
 exports.RangePropDesc = RangePropDesc;
+/**
+ * @class Vector2PropDesc
+ * @extends PropDesc
+ * 2维向量类属性描述。
+ */
 var Vector2PropDesc = (function (_super) {
     __extends(Vector2PropDesc, _super);
     function Vector2PropDesc(xTitle, yTitle) {
@@ -173,6 +216,11 @@ var Vector2PropDesc = (function (_super) {
     return Vector2PropDesc;
 }(PropDesc));
 exports.Vector2PropDesc = Vector2PropDesc;
+/**
+ * @class Vector3PropDesc
+ * @extends PropDesc
+ * 3维向量类属性描述。
+ */
 var Vector3PropDesc = (function (_super) {
     __extends(Vector3PropDesc, _super);
     function Vector3PropDesc(xTitle, yTitle, zTitle) {
@@ -201,6 +249,11 @@ var Vector3PropDesc = (function (_super) {
     return Vector3PropDesc;
 }(PropDesc));
 exports.Vector3PropDesc = Vector3PropDesc;
+/**
+ * @class Vector4PropDesc
+ * @extends PropDesc
+ * 4维向量类属性描述。
+ */
 var Vector4PropDesc = (function (_super) {
     __extends(Vector4PropDesc, _super);
     function Vector4PropDesc(xTitle, yTitle, zTitle, wTitle) {
@@ -232,6 +285,11 @@ var Vector4PropDesc = (function (_super) {
     return Vector4PropDesc;
 }(PropDesc));
 exports.Vector4PropDesc = Vector4PropDesc;
+/**
+ * @class LinePropDesc
+ * @extends PropDesc
+ * 分组类属性描述。
+ */
 var LinePropDesc = (function (_super) {
     __extends(LinePropDesc, _super);
     function LinePropDesc() {
@@ -244,6 +302,11 @@ var LinePropDesc = (function (_super) {
     return LinePropDesc;
 }(PropDesc));
 exports.LinePropDesc = LinePropDesc;
+/**
+ * @class BoolPropDesc
+ * @extends PropDesc
+ * 布尔类属性描述。
+ */
 var BoolPropDesc = (function (_super) {
     __extends(BoolPropDesc, _super);
     function BoolPropDesc() {
@@ -256,6 +319,11 @@ var BoolPropDesc = (function (_super) {
     return BoolPropDesc;
 }(PropDesc));
 exports.BoolPropDesc = BoolPropDesc;
+/**
+ * @class OptionsPropDesc
+ * @extends PropDesc
+ * 下拉框类属性描述。
+ */
 var OptionsPropDesc = (function (_super) {
     __extends(OptionsPropDesc, _super);
     function OptionsPropDesc(options) {
@@ -278,6 +346,11 @@ var OptionsPropDesc = (function (_super) {
     return OptionsPropDesc;
 }(PropDesc));
 exports.OptionsPropDesc = OptionsPropDesc;
+/**
+ * @class PropsDesc
+ * @extends Emitter
+ * 属性组。
+ */
 var PropsDesc = (function (_super) {
     __extends(PropsDesc, _super);
     function PropsDesc() {

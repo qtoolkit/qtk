@@ -6,6 +6,11 @@ import {AlignH, AlignV, Orientation} from "../consts";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleLine
+ * @extends Widget
+ * 带标题的直线，用于属性的分组。
+ */
 export class TitleLine extends TitleValue {
 	constructor(type?:string) {
 		super(type || TitleLine.TYPE);

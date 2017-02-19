@@ -11,7 +11,9 @@ var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
- * 范围编辑器。
+ * @class  RangeEdit
+ * @extends Widget
+ * 范围编辑器。范围包括first和second两个值。
  */
 var RangeEdit = (function (_super) {
     __extends(RangeEdit, _super);
@@ -26,6 +28,10 @@ var RangeEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(RangeEdit.prototype, "firstEditor", {
+        /**
+         * @property {Edit} firstEditor
+         * 第一个编辑器。
+         */
         get: function () {
             return this._firstEditor;
         },
@@ -33,6 +39,10 @@ var RangeEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(RangeEdit.prototype, "secondEditor", {
+        /**
+         * @property {Edit} secondEditor
+         * 第二个编辑器。
+         */
         get: function () {
             return this._secondEditor;
         },

@@ -35,6 +35,8 @@ export class TitlePage extends TitleContent {
 WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 
 /**
+ * @class PropertySheets 
+ * @extends Widget
  * 管理多个页面，每个页面可以展开或折叠。
  */
 export class PropertySheets extends ScrollView{

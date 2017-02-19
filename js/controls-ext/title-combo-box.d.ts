@@ -6,6 +6,11 @@ export declare class TitleComboBoxBase extends TitleValue {
     resetOptions(): Widget;
     addOption(text: string, value?: any, imageURL?: string, color?: string): Widget;
 }
+/**
+ * @class TitleComboBox
+ * @extends Widget
+ * 带标题的下拉框。
+ */
 export declare class TitleComboBox extends TitleComboBoxBase {
     constructor(type?: string);
     protected createValueWidget(options?: any): Widget;
@@ -13,6 +18,11 @@ export declare class TitleComboBox extends TitleComboBoxBase {
     private static recycleBin;
     static create(options?: any): TitleComboBox;
 }
+/**
+ * @class TitleComboBoxEditable
+ * @extends Widget
+ * 带标题的可编辑的下拉框。
+ */
 export declare class TitleComboBoxEditable extends TitleComboBoxBase {
     constructor(type?: string);
     protected createValueWidget(options?: any): Widget;

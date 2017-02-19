@@ -5,43 +5,58 @@ import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleEdit
+ * @extends Widget
+ * 带标题的编辑器。
+ */
 export class TitleEdit extends TitleValue {
 	protected _inputType : string;
     protected _inputTips : string;
     protected _inputFilter : (value:string) => string;
 
+	/**
+	 * @property {Function} inputFilter
+	 * 输入过滤器函数。
+	 */
 	public set inputFilter(value:(value:string) => string) {
 		this._inputFilter = value;
 		if(this._valueWidget) {
 			this._valueWidget.set({inputFilter:value});
 		}
 	}
-
-	public set inputType(value:string) {
-		this._inputType = value;
-		if(this._valueWidget) {
-			this._valueWidget.set({inputType:value});
-		}
+	public get inputFilter() : (value:string) => string{
+		return this._inputFilter;
 	}
-	
+
+	/**
+	 * @property {string} inputTips
+	 * 输入提示。
+	 */
 	public set inputTips(value:string) {
 		this._inputTips = value;
 		if(this._valueWidget) {
 			this._valueWidget.set({inputTips:value});
 		}
 	}
-
 	public get inputTips() : string {
 		return this._inputTips;
 	}
-	
+
+	/**
+	 * @property {string} inputType
+	 * 输入类型。
+	 */	
+	public set inputType(value:string) {
+		this._inputType = value;
+		if(this._valueWidget) {
+			this._valueWidget.set({inputType:value});
+		}
+	}
 	public get inputType() : string {
 		return this._inputType;
 	}
 
-	public get inputFilter() : (value:string) => string{
-		return this._inputFilter;
-	}
 	constructor(type?:string) {
 		super(type || TitleEdit.TYPE);
 	}

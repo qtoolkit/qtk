@@ -11,6 +11,8 @@ var Events = require("../events");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
 /**
+ * @class ChoosableEdit
+ * @extends Widget
  * 编辑器+选择按钮。
  */
 var ChoosableEdit = (function (_super) {

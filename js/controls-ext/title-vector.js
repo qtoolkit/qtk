@@ -8,6 +8,11 @@ var vector_edit_1 = require("./vector-edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleVector
+ * @extends Widget
+ * 带标题的向量编辑器。
+ */
 var TitleVector = (function (_super) {
     __extends(TitleVector, _super);
     function TitleVector(type) {
@@ -15,7 +20,7 @@ var TitleVector = (function (_super) {
     }
     Object.defineProperty(TitleVector.prototype, "d", {
         /**
-         * dimension
+         * 向量的维度。
          */
         get: function () {
             return this._d;

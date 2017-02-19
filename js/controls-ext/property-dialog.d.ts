@@ -1,6 +1,8 @@
 import { PagePropsDesc } from "./props-desc";
 import { MessageBox, TitleOptions, ButtonsOptions } from "../controls/message-box";
 /**
+ * @class PropertyDialog
+ * @extends Widget
  * 属性对话框。
  */
 export declare class PropertyDialog extends MessageBox {

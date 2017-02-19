@@ -5,6 +5,11 @@ import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleRange
+ * @extends Widget
+ * 带标题的范围的编辑器。
+ */
 export class TitleRange extends TitleValue {
 	constructor(type?:string) {
 		super(type || TitleRange.TYPE);

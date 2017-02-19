@@ -12,6 +12,8 @@ import {RecyclableCreator} from "../recyclable-creator";
 import {GridLayouter, GridLayouterParam} from "../layouters/grid-layouter";
 
 /**
+ * @class VectorEdit
+ * @extends Widget
  * 范围编辑器。
  */
 export class VectorEdit extends Widget {
@@ -33,6 +35,10 @@ export class VectorEdit extends Widget {
 	protected _wEditor : Edit;
 	protected _wTitle : string;
 
+	/**
+	 * @property {string} xTitle
+	 * X分量的标题。
+	 */
 	public set xTitle(value:string) {
 		if(value || value === "") {
 			this._xTitle;
@@ -43,6 +49,10 @@ export class VectorEdit extends Widget {
 		return this._xTitle;
 	}
 
+	/**
+	 * @property {string} yTitle
+	 * Y分量的标题。
+	 */
 	public set yTitle(value:string) {
 		if(value || value === "") {
 			this._yTitle;
@@ -53,6 +63,10 @@ export class VectorEdit extends Widget {
 		return this._yTitle;
 	}
 
+	/**
+	 * @property {string} zTitle
+	 * Z分量的标题。
+	 */
 	public set zTitle(value:string) {
 		if(value || value === "") {
 			this._zTitle;
@@ -63,6 +77,10 @@ export class VectorEdit extends Widget {
 		return this._zTitle;
 	}
 	
+	/**
+	 * @property {string} wTitle
+	 * W分量的标题。
+	 */
 	public set wTitle(value:string) {
 		if(value || value === "") {
 			this._wTitle;
@@ -78,33 +96,48 @@ export class VectorEdit extends Widget {
 	}
 
 	/**
-	 * dimension
+	 * 向量的维度。
 	 */
 	public get d() : number {
 		return this._d;
 	}
-	
 	public set d(value:number){
 		this._d = value;;
 	}
 
+	/**
+	 * @property {Edit} xEditor
+	 * X分量的编辑器。
+	 */
 	public get xEditor() : Edit {
 		return this._xEditor;
 	}
 
+	/**
+	 * @property {Edit} yEditor
+	 * Y分量的编辑器。
+	 */
 	public get yEditor() : Edit {
 		return this._yEditor;
 	}
 	
+	/**
+	 * @property {Edit} zEditor
+	 * Z分量的编辑器。
+	 */
 	public get zEditor() : Edit {
 		return this._zEditor;
 	}
 	
+	/**
+	 * @property {Edit} zEditor
+	 * Z分量的编辑器。
+	 */
 	public get wEditor() : Edit {
 		return this._wEditor;
 	}
 
-	public set value(value:any) {
+	public set value(value:{x:number, y:number, z:number, w:number}) {
 		this._value = value;
 		if(this._xEditor) {
 			this._xEditor.value = +value.x;
@@ -120,7 +153,7 @@ export class VectorEdit extends Widget {
 		}
 	}
 
-	public get value() : any {
+	public get value() : {x:number, y:number, z:number, w:number} {
 		if(!this._value) {
 			this._value = {};
 		}

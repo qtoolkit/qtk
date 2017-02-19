@@ -5,6 +5,11 @@ import {TitleValue} from "./title-value";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
+/**
+ * @class TitleSlider
+ * @extends Widget
+ * 带标题的滑块。
+ */
 export class TitleSlider extends TitleValue {
 	constructor(type?:string) {
 		super(type || TitleSlider.TYPE);

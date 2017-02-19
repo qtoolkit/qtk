@@ -12,6 +12,8 @@ var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var grid_layouter_1 = require("../layouters/grid-layouter");
 /**
+ * @class VectorEdit
+ * @extends Widget
  * 范围编辑器。
  */
 var VectorEdit = (function (_super) {
@@ -23,6 +25,10 @@ var VectorEdit = (function (_super) {
         get: function () {
             return this._xTitle;
         },
+        /**
+         * @property {string} xTitle
+         * X分量的标题。
+         */
         set: function (value) {
             if (value || value === "") {
                 this._xTitle;
@@ -36,6 +42,10 @@ var VectorEdit = (function (_super) {
         get: function () {
             return this._yTitle;
         },
+        /**
+         * @property {string} yTitle
+         * Y分量的标题。
+         */
         set: function (value) {
             if (value || value === "") {
                 this._yTitle;
@@ -49,6 +59,10 @@ var VectorEdit = (function (_super) {
         get: function () {
             return this._zTitle;
         },
+        /**
+         * @property {string} zTitle
+         * Z分量的标题。
+         */
         set: function (value) {
             if (value || value === "") {
                 this._zTitle;
@@ -62,6 +76,10 @@ var VectorEdit = (function (_super) {
         get: function () {
             return this._wTitle;
         },
+        /**
+         * @property {string} wTitle
+         * W分量的标题。
+         */
         set: function (value) {
             if (value || value === "") {
                 this._wTitle;
@@ -80,7 +98,7 @@ var VectorEdit = (function (_super) {
     });
     Object.defineProperty(VectorEdit.prototype, "d", {
         /**
-         * dimension
+         * 向量的维度。
          */
         get: function () {
             return this._d;
@@ -93,6 +111,10 @@ var VectorEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(VectorEdit.prototype, "xEditor", {
+        /**
+         * @property {Edit} xEditor
+         * X分量的编辑器。
+         */
         get: function () {
             return this._xEditor;
         },
@@ -100,6 +122,10 @@ var VectorEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(VectorEdit.prototype, "yEditor", {
+        /**
+         * @property {Edit} yEditor
+         * Y分量的编辑器。
+         */
         get: function () {
             return this._yEditor;
         },
@@ -107,6 +133,10 @@ var VectorEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(VectorEdit.prototype, "zEditor", {
+        /**
+         * @property {Edit} zEditor
+         * Z分量的编辑器。
+         */
         get: function () {
             return this._zEditor;
         },
@@ -114,6 +144,10 @@ var VectorEdit = (function (_super) {
         configurable: true
     });
     Object.defineProperty(VectorEdit.prototype, "wEditor", {
+        /**
+         * @property {Edit} zEditor
+         * Z分量的编辑器。
+         */
         get: function () {
             return this._wEditor;
         },

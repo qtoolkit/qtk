@@ -38,6 +38,11 @@ var TitleComboBoxBase = (function (_super) {
     return TitleComboBoxBase;
 }(title_value_1.TitleValue));
 exports.TitleComboBoxBase = TitleComboBoxBase;
+/**
+ * @class TitleComboBox
+ * @extends Widget
+ * 带标题的下拉框。
+ */
 var TitleComboBox = (function (_super) {
     __extends(TitleComboBox, _super);
     function TitleComboBox(type) {
@@ -56,6 +61,11 @@ var TitleComboBox = (function (_super) {
 exports.TitleComboBox = TitleComboBox;
 ;
 widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
+/**
+ * @class TitleComboBoxEditable
+ * @extends Widget
+ * 带标题的可编辑的下拉框。
+ */
 var TitleComboBoxEditable = (function (_super) {
     __extends(TitleComboBoxEditable, _super);
     function TitleComboBoxEditable(type) {

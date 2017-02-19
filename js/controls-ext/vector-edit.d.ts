@@ -3,6 +3,8 @@ import { Edit } from "../controls/edit";
 import { Widget } from "../controls/widget";
 import Events = require("../events");
 /**
+ * @class VectorEdit
+ * @extends Widget
  * 范围编辑器。
  */
 export declare class VectorEdit extends Widget {
@@ -19,20 +21,57 @@ export declare class VectorEdit extends Widget {
     protected _wLabel: Label;
     protected _wEditor: Edit;
     protected _wTitle: string;
+    /**
+     * @property {string} xTitle
+     * X分量的标题。
+     */
     xTitle: string;
+    /**
+     * @property {string} yTitle
+     * Y分量的标题。
+     */
     yTitle: string;
+    /**
+     * @property {string} zTitle
+     * Z分量的标题。
+     */
     zTitle: string;
+    /**
+     * @property {string} wTitle
+     * W分量的标题。
+     */
     wTitle: string;
     readonly inputable: boolean;
     /**
-     * dimension
+     * 向量的维度。
      */
     d: number;
+    /**
+     * @property {Edit} xEditor
+     * X分量的编辑器。
+     */
     readonly xEditor: Edit;
+    /**
+     * @property {Edit} yEditor
+     * Y分量的编辑器。
+     */
     readonly yEditor: Edit;
+    /**
+     * @property {Edit} zEditor
+     * Z分量的编辑器。
+     */
     readonly zEditor: Edit;
+    /**
+     * @property {Edit} zEditor
+     * Z分量的编辑器。
+     */
     readonly wEditor: Edit;
-    value: any;
+    value: {
+        x: number;
+        y: number;
+        z: number;
+        w: number;
+    };
     protected onToJson(json: any): void;
     dispose(): void;
     protected forwardChangeEvent(evt: Events.ChangeEvent): void;

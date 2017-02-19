@@ -169,25 +169,25 @@ var qtk =
 	exports.TitleContent = title_content_1.TitleContent;
 	var title_label_1 = __webpack_require__(144);
 	exports.TitleLabel = title_label_1.TitleLabel;
-	var title_range_1 = __webpack_require__(146);
+	var title_range_1 = __webpack_require__(145);
 	exports.TitleRange = title_range_1.TitleRange;
-	var title_vector_1 = __webpack_require__(148);
+	var title_vector_1 = __webpack_require__(147);
 	exports.TitleVector = title_vector_1.TitleVector;
 	var title_edit_1 = __webpack_require__(143);
 	exports.TitleEdit = title_edit_1.TitleEdit;
-	var title_slider_1 = __webpack_require__(150);
+	var title_slider_1 = __webpack_require__(149);
 	exports.TitleSlider = title_slider_1.TitleSlider;
 	var property_page_1 = __webpack_require__(138);
 	exports.PropertyPage = property_page_1.PropertyPage;
 	var property_dialog_1 = __webpack_require__(137);
 	exports.PropertyDialog = property_dialog_1.PropertyDialog;
-	var range_edit_1 = __webpack_require__(147);
+	var range_edit_1 = __webpack_require__(146);
 	exports.RangeEdit = range_edit_1.RangeEdit;
-	var vector_edit_1 = __webpack_require__(149);
+	var vector_edit_1 = __webpack_require__(148);
 	exports.VectorEdit = vector_edit_1.VectorEdit;
 	var choosable_edit_1 = __webpack_require__(153);
 	exports.ChoosableEdit = choosable_edit_1.ChoosableEdit;
-	var title_text_area_1 = __webpack_require__(151);
+	var title_text_area_1 = __webpack_require__(150);
 	exports.TitleTextArea = title_text_area_1.TitleTextArea;
 	var property_sheets_1 = __webpack_require__(330);
 	exports.PropertySheets = property_sheets_1.PropertySheets;
@@ -18392,6 +18392,10 @@ var qtk =
 	var widget_1 = __webpack_require__(19);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class Page
+	 * 页面管理器中的页面。
+	 */
 	var Page = (function (_super) {
 	    __extends(Page, _super);
 	    function Page(type) {
@@ -18524,8 +18528,8 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	/**
+	 * @class Pages
 	 * 页面管理器。管理多个页面，只有一个页面处于活跃状态，仅该页面可见，可以处理事件。
-	 * value表示该活跃页面的索引。
 	 */
 	var Pages = (function (_super) {
 	    __extends(Pages, _super);
@@ -18536,6 +18540,10 @@ var qtk =
 	        get: function () {
 	            return this._value;
 	        },
+	        /**
+	         * @property {number} value
+	         * 表示该活跃页面的索引。
+	         */
 	        set: function (value) {
 	            var n = this.children.length - 1;
 	            this._value = Math.max(0, Math.min(value, n));
@@ -18544,10 +18552,6 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Pages.prototype.setValueByPage = function (page) {
-	        this.value = this.indexOfChild(page);
-	        return this;
-	    };
 	    Object.defineProperty(Pages.prototype, "target", {
 	        get: function () {
 	            if (this.children.length) {
@@ -18563,6 +18567,9 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    Pages.prototype.findEventTargetChild = function (x, y) {
+	        return this.target;
+	    };
 	    Pages.prototype.relayoutChildren = function () {
 	        var r = this.getLayoutRect();
 	        this.children.forEach(function (child) {
@@ -18577,10 +18584,8 @@ var qtk =
 	        }
 	        return this;
 	    };
-	    Pages.prototype.findEventTargetChild = function (x, y) {
-	        return this.target;
-	    };
 	    Pages.prototype.onReset = function () {
+	        _super.prototype.onReset.call(this);
 	        this.value = 0;
 	    };
 	    Pages.create = function (options) {
@@ -26586,6 +26591,8 @@ var qtk =
 	var message_box_1 = __webpack_require__(132);
 	var simple_layouter_1 = __webpack_require__(117);
 	/**
+	 * @class PropertyDialog
+	 * @extends Widget
 	 * 属性对话框。
 	 */
 	var PropertyDialog = (function (_super) {
@@ -26652,25 +26659,26 @@ var qtk =
 	var title_line_1 = __webpack_require__(141);
 	var title_edit_1 = __webpack_require__(143);
 	var title_label_1 = __webpack_require__(144);
-	var title_check_button_1 = __webpack_require__(145);
-	var title_range_1 = __webpack_require__(146);
-	var title_vector_1 = __webpack_require__(148);
+	var title_range_1 = __webpack_require__(145);
+	var title_vector_1 = __webpack_require__(147);
 	var widget_1 = __webpack_require__(19);
-	var title_slider_1 = __webpack_require__(150);
-	var title_text_area_1 = __webpack_require__(151);
+	var title_slider_1 = __webpack_require__(149);
+	var title_text_area_1 = __webpack_require__(150);
+	var title_check_button_1 = __webpack_require__(151);
 	var widget_factory_1 = __webpack_require__(24);
-	var widget_recyclable_creator_1 = __webpack_require__(84);
 	var title_choosable_edit_1 = __webpack_require__(152);
 	var props_desc_1 = __webpack_require__(154);
 	var title_combo_box_1 = __webpack_require__(155);
-	var props_desc_2 = __webpack_require__(154);
+	var widget_recyclable_creator_1 = __webpack_require__(84);
 	var html_element_1 = __webpack_require__(87);
 	var iview_model_1 = __webpack_require__(83);
+	var props_desc_2 = __webpack_require__(154);
 	var props_desc_3 = __webpack_require__(154);
 	var props_desc_4 = __webpack_require__(154);
-	var props_desc_5 = __webpack_require__(154);
 	/**
-	 * 属性编辑页，包装了各种TitleValue。
+	 * @class PropertyPage
+	 * @extends Widget
+	 * 属性编辑页，包装了各种TitleValue，可以直接通过JSON创建属性页。
 	 */
 	var PropertyPage = (function (_super) {
 	    __extends(PropertyPage, _super);
@@ -26681,6 +26689,10 @@ var qtk =
 	        get: function () {
 	            return this._itemH;
 	        },
+	        /**
+	         * @property {number} itemH
+	         * 每一项的高度。
+	         */
 	        set: function (value) {
 	            this._itemH = value;
 	        },
@@ -26691,6 +26703,10 @@ var qtk =
 	        get: function () {
 	            return this._titleW;
 	        },
+	        /**
+	         * @property {number} titleW
+	         * 属性的标题的宽度。
+	         */
 	        set: function (value) {
 	            this._titleW = value;
 	        },
@@ -26701,12 +26717,23 @@ var qtk =
 	        get: function () {
 	            return this._valueW;
 	        },
+	        /**
+	         * @property {number} valueW
+	         * 属性的Value的宽度。
+	         */
 	        set: function (value) {
 	            this._valueW = value;
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
+	    /**
+	     * @method addLabel
+	     * 增加一个文本控件。
+	     * @param {string} title 标题。
+	     * @param {string} label 文本内容。
+	     * @return {TitleLabel} 返回新创建的TitleLabel控件。
+	     */
 	    PropertyPage.prototype.addLabel = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_label_1.TitleLabel.create({
@@ -26720,6 +26747,13 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addCheckButton
+	     * 增加一个CheckButton控件。
+	     * @param {string} title 标题。
+	     * @param {string} value CheckButton的值。
+	     * @return {TitleCheckButton} 返回新创建的TitleCheckButton控件。
+	     */
 	    PropertyPage.prototype.addCheckButton = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_check_button_1.TitleCheckButton.create({
@@ -26734,6 +26768,13 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addLink
+	     * 增加一个超链接控件。
+	     * @param {string} title 标题。
+	     * @param {string} value URL。
+	     * @return {TitleLink} 返回新创建的TitleLink控件。
+	     */
 	    PropertyPage.prototype.addLink = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_link_1.TitleLink.create({
@@ -26747,6 +26788,12 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addGroupBegin
+	     * 增加一个分组开始控件。
+	     * @param {string} title 标题。
+	     * @return {TitleLine} 返回新创建的TitleLine控件。
+	     */
 	    PropertyPage.prototype.addGroupBegin = function (title) {
 	        var itemH = this.itemH;
 	        var widget = title_line_1.TitleLine.create({
@@ -26759,6 +26806,11 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addGroupEnd
+	     * 增加一个分组结束控件。
+	     * @return {TitleLine} 返回新创建的TitleLine控件。
+	     */
 	    PropertyPage.prototype.addGroupEnd = function () {
 	        var itemH = this.itemH;
 	        var widget = title_line_1.TitleLine.create({
@@ -26769,6 +26821,14 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addRange
+	     * 增加一个范围控件。
+	     * @param {string} title 标题。
+	     * @param {number} firstValue 起始值
+	     * @param {number} secondValue 结束值
+	     * @return {TitleRange} 返回新创建的TitleRange控件。
+	     */
 	    PropertyPage.prototype.addRange = function (title, firstValue, secondValue) {
 	        var itemH = this.itemH;
 	        var widget = title_range_1.TitleRange.create({
@@ -26782,6 +26842,16 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addVector2
+	     * 增加一个二维向量控件。
+	     * @param {string} title 标题。
+	     * @param {number} x X分量。
+	     * @param {number} y Y分量。
+	     * @param {string} xTitle X分量标题。
+	     * @param {string} yTitle X分量标题。
+	     * @return {TitleVector} 返回新创建的TitleVector控件。
+	     */
 	    PropertyPage.prototype.addVector2 = function (title, x, y, xTitle, yTitle) {
 	        var itemH = this.itemH * 2;
 	        var widget = title_vector_1.TitleVector.create({
@@ -26798,6 +26868,18 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addVector3
+	     * 增加一个三维向量控件。
+	     * @param {string} title 标题。
+	     * @param {number} x X分量。
+	     * @param {number} y Y分量。
+	     * @param {number} z Z分量。
+	     * @param {string} xTitle X分量标题。
+	     * @param {string} yTitle X分量标题。
+	     * @param {string} zTitle Z分量标题。
+	     * @return {TitleVector} 返回新创建的TitleVector控件。
+	     */
 	    PropertyPage.prototype.addVector3 = function (title, x, y, z, xTitle, yTitle, zTitle) {
 	        var itemH = this.itemH * 2;
 	        var widget = title_vector_1.TitleVector.create({
@@ -26814,6 +26896,20 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addVector4
+	     * 增加一个四维向量控件。
+	     * @param {string} title 标题。
+	     * @param {number} x X分量。
+	     * @param {number} y Y分量。
+	     * @param {number} z Z分量。
+	     * @param {number} w W分量。
+	     * @param {string} xTitle X分量标题。
+	     * @param {string} yTitle X分量标题。
+	     * @param {string} zTitle Z分量标题。
+	     * @param {string} wTitle W分量标题。
+	     * @return {TitleVector} 返回新创建的TitleVector控件。
+	     */
 	    PropertyPage.prototype.addVector4 = function (title, x, y, z, w, xTitle, yTitle, zTitle, wTitle) {
 	        var itemH = this.itemH * 2;
 	        var widget = title_vector_1.TitleVector.create({
@@ -26830,6 +26926,16 @@ var qtk =
 	        this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addEdit
+	     * 增加一个编辑控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 编辑器的值。
+	     * @param {string} inputTips 输入提示。
+	     * @param {string} inputType 输入类型，"text"为文本，"number"为数字。
+	     * @param {Function} inputFilter输入过滤器，对输入的值进行过滤。
+	     * @return {TitleEdit} 返回新创建的TitleEdit控件。
+	     */
 	    PropertyPage.prototype.addEdit = function (title, value, inputTips, inputType, inputFilter) {
 	        var itemH = this.itemH;
 	        var valueW = inputType === "number" ? "50%" : this.valueW;
@@ -26847,6 +26953,14 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addColorEdit
+	     * 增加一个颜色编辑控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 编辑器的值。
+	     * @param {string} inputTips 输入提示。
+	     * @return {TitleChoosableEdit} 返回新创建的TitleChoosableEdit控件。
+	     */
 	    PropertyPage.prototype.addColorEdit = function (title, value, inputTips) {
 	        var choosableEdit = this.addChoosableEdit(title, value, inputTips);
 	        choosableEdit.onChoose = function () {
@@ -26857,6 +26971,14 @@ var qtk =
 	        };
 	        return choosableEdit;
 	    };
+	    /**
+	     * @method addChoosableEdit
+	     * 增加一个可选择的编辑控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 编辑器的值。
+	     * @param {string} inputTips 输入提示。
+	     * @return {TitleChoosableEdit} 返回新创建的TitleChoosableEdit控件。
+	     */
 	    PropertyPage.prototype.addChoosableEdit = function (title, value, inputTips) {
 	        var itemH = this.itemH;
 	        var widget = title_choosable_edit_1.TitleChoosableEdit.create({
@@ -26871,6 +26993,13 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addComboBox
+	     * 增加一个下拉选择控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 值。
+	     * @return {TitleComboBox} 返回新创建的TitleComboBox控件。
+	     */
 	    PropertyPage.prototype.addComboBox = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_combo_box_1.TitleComboBox.create({
@@ -26884,6 +27013,13 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addComboBoxEditable
+	     * 增加一个可编辑的下拉选择控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 值。
+	     * @return {TitleComboBoxEditable} 返回新创建的TitleComboBoxEditable控件。
+	     */
 	    PropertyPage.prototype.addComboBoxEditable = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_combo_box_1.TitleComboBoxEditable.create({
@@ -26898,6 +27034,13 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addSlider
+	     * 增加一个滑块控件。
+	     * @param {string} title 标题。
+	     * @param {string} value 值。
+	     * @return {TitleSlider} 返回新创建的TitleSlider控件。
+	     */
 	    PropertyPage.prototype.addSlider = function (title, value) {
 	        var itemH = this.itemH;
 	        var widget = title_slider_1.TitleSlider.create({
@@ -26911,6 +27054,14 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method addTextArea
+	     * 增加一个多行编辑器。
+	     * @param {string} title 标题。
+	     * @param {string} value 值。
+	     * @param {number} h高度。
+	     * @return {TitleTextArea} 返回新创建的TitleTextArea控件。
+	     */
 	    PropertyPage.prototype.addTextArea = function (title, value, h) {
 	        var itemH = h || (this.itemH * 4);
 	        var widget = title_text_area_1.TitleTextArea.create({
@@ -26924,24 +27075,30 @@ var qtk =
 	            this.addChild(widget, true);
 	        return widget;
 	    };
+	    /**
+	     * @method findByTitle
+	     * 通过标题查找指定的子控件。
+	     * @param {string} title 标题。
+	     * @return {Widget} 返回子控件或null。
+	     */
 	    PropertyPage.prototype.findByTitle = function (title) {
 	        return this.findChildByName(title);
 	    };
 	    PropertyPage.prototype.addWithPropDesc = function (item) {
 	        var titleValue = null;
-	        if (item.type === props_desc_4.NumberPropDesc.TYPE) {
+	        if (item.type === props_desc_3.NumberPropDesc.TYPE) {
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 	        }
-	        else if (item.type === props_desc_4.TextPropDesc.TYPE) {
+	        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "text");
 	        }
-	        else if (item.type === props_desc_3.ColorPropDesc.TYPE) {
+	        else if (item.type === props_desc_2.ColorPropDesc.TYPE) {
 	            titleValue = this.addColorEdit(item.name, item.value, item.desc);
 	        }
-	        else if (item.type === props_desc_3.ReadonlyTextPropDesc.TYPE) {
+	        else if (item.type === props_desc_2.ReadonlyTextPropDesc.TYPE) {
 	            titleValue = this.addLabel(item.name, item.value);
 	        }
-	        else if (item.type === props_desc_5.SliderPropDesc.TYPE) {
+	        else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
 	            titleValue = this.addSlider(item.name, item.value);
 	        }
 	        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
@@ -26958,16 +27115,16 @@ var qtk =
 	                titleValue = this.addGroupEnd();
 	            }
 	        }
-	        else if (item.type === props_desc_5.RangePropDesc.TYPE) {
+	        else if (item.type === props_desc_4.RangePropDesc.TYPE) {
 	            var value = item.value || { first: 0, second: 0 };
 	            titleValue = this.addRange(item.name, value.first, value.second);
 	        }
-	        else if (item.type === props_desc_5.Vector2PropDesc.TYPE) {
+	        else if (item.type === props_desc_4.Vector2PropDesc.TYPE) {
 	            var p2 = item;
 	            var value = item.value || { x: 0, y: 0 };
 	            titleValue = this.addVector2(item.name, value.x, value.y, p2.xTitle, p2.yTitle);
 	        }
-	        else if (item.type === props_desc_5.OptionsPropDesc.TYPE) {
+	        else if (item.type === props_desc_4.OptionsPropDesc.TYPE) {
 	            var value = item.value || { x: 0, y: 0 };
 	            var propDesc = item;
 	            titleValue = this.addComboBox(item.name, value);
@@ -26976,7 +27133,7 @@ var qtk =
 	                comboBox.optionsJson = propDesc.options;
 	            }
 	        }
-	        else if (item.type === props_desc_5.Vector3PropDesc.TYPE) {
+	        else if (item.type === props_desc_4.Vector3PropDesc.TYPE) {
 	            var p3 = item;
 	            var value = item.value || { x: 0, y: 0, z: 0 };
 	            titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
@@ -27005,6 +27162,9 @@ var qtk =
 	            }
 	        }
 	    };
+	    /**
+	     * 通过propsDesc初始化。
+	     */
 	    PropertyPage.prototype.initWithPropsDesc = function (propsDesc) {
 	        var _this = this;
 	        this.removeAllChildren();
@@ -27024,17 +27184,23 @@ var qtk =
 	        this.relayoutChildren();
 	        this.dispatchEvent(Events.ChangeEvent.create().init(Events.CHANGE, {}));
 	    };
+	    /**
+	     * 通过JSON初始化。
+	     */
 	    PropertyPage.prototype.initWithJson = function (json) {
-	        var propsDesc = props_desc_4.PropsDesc.create(json);
+	        var propsDesc = props_desc_3.PropsDesc.create(json);
 	        this.initWithPropsDesc(propsDesc);
 	    };
 	    PropertyPage.prototype.onAddChild = function (child) {
-	        this.reComputeH();
+	        this.recomputeHeight();
 	    };
 	    PropertyPage.prototype.onRemoveChild = function (child) {
-	        this.reComputeH();
+	        this.recomputeHeight();
 	    };
-	    PropertyPage.prototype.reComputeH = function () {
+	    /*
+	     * 根据子控件重新计算本身的高度。
+	     */
+	    PropertyPage.prototype.recomputeHeight = function () {
 	        var h = this.topPadding + this.bottomPadding;
 	        this.children.forEach(function (child) {
 	            h += child.h;
@@ -27085,6 +27251,11 @@ var qtk =
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleLink
+	 * @extends Widget
+	 * 带标题的超链接。
+	 */
 	var TitleLink = (function (_super) {
 	    __extends(TitleLink, _super);
 	    function TitleLink(type) {
@@ -27130,6 +27301,11 @@ var qtk =
 	var label_1 = __webpack_require__(18);
 	var widget_1 = __webpack_require__(19);
 	var linear_layouter_1 = __webpack_require__(134);
+	/**
+	 * @class TitleValue
+	 * @extends Widget
+	 * 带标题控件的基类。
+	 */
 	var TitleValue = (function (_super) {
 	    __extends(TitleValue, _super);
 	    function TitleValue(type) {
@@ -27139,6 +27315,10 @@ var qtk =
 	        get: function () {
 	            return this._title;
 	        },
+	        /**
+	         * @property {string} title
+	         * 标题。
+	         */
 	        set: function (value) {
 	            this._title = value;
 	        },
@@ -27149,6 +27329,10 @@ var qtk =
 	        get: function () {
 	            return this._titleW;
 	        },
+	        /**
+	         * @property {string} titleW
+	         * 标题控件的宽度。
+	         */
 	        set: function (value) {
 	            this._titleW = value;
 	            if (this.titleWidget && this.titleWidget.layoutParam) {
@@ -27162,6 +27346,10 @@ var qtk =
 	        get: function () {
 	            return this._valueW;
 	        },
+	        /**
+	         * @prproperty {string} valueW
+	         * 值控件的宽度。
+	         */
 	        set: function (value) {
 	            this._valueW = value;
 	            if (this.valueWidget && this.valueWidget.layoutParam) {
@@ -27172,6 +27360,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(TitleValue.prototype, "titleWidget", {
+	        /**
+	         * @property {Widget} titleWidget
+	         * 标题控件。
+	         */
 	        get: function () {
 	            return this._titleWidget;
 	        },
@@ -27179,6 +27371,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(TitleValue.prototype, "valueWidget", {
+	        /**
+	         * @property {Widget} valueWidget
+	         * 值控件。
+	         */
 	        get: function () {
 	            return this._valueWidget;
 	        },
@@ -27198,8 +27394,9 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    /*
-	     * Child must override
+	    /**
+	     * @method createValueWidget
+	     * 创建值控件，子类需要重载此函数。
 	     */
 	    TitleValue.prototype.createValueWidget = function (options) {
 	        return null;
@@ -27272,6 +27469,11 @@ var qtk =
 	var color_tile_1 = __webpack_require__(142);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleLine
+	 * @extends Widget
+	 * 带标题的直线，用于属性的分组。
+	 */
 	var TitleLine = (function (_super) {
 	    __extends(TitleLine, _super);
 	    function TitleLine(type) {
@@ -27566,6 +27768,11 @@ var qtk =
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleEdit
+	 * @extends Widget
+	 * 带标题的编辑器。
+	 */
 	var TitleEdit = (function (_super) {
 	    __extends(TitleEdit, _super);
 	    function TitleEdit(type) {
@@ -27575,6 +27782,10 @@ var qtk =
 	        get: function () {
 	            return this._inputFilter;
 	        },
+	        /**
+	         * @property {Function} inputFilter
+	         * 输入过滤器函数。
+	         */
 	        set: function (value) {
 	            this._inputFilter = value;
 	            if (this._valueWidget) {
@@ -27584,27 +27795,35 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(TitleEdit.prototype, "inputType", {
+	    Object.defineProperty(TitleEdit.prototype, "inputTips", {
 	        get: function () {
-	            return this._inputType;
+	            return this._inputTips;
 	        },
+	        /**
+	         * @property {string} inputTips
+	         * 输入提示。
+	         */
 	        set: function (value) {
-	            this._inputType = value;
+	            this._inputTips = value;
 	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputType: value });
+	                this._valueWidget.set({ inputTips: value });
 	            }
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    Object.defineProperty(TitleEdit.prototype, "inputTips", {
+	    Object.defineProperty(TitleEdit.prototype, "inputType", {
 	        get: function () {
-	            return this._inputTips;
+	            return this._inputType;
 	        },
+	        /**
+	         * @property {string} inputType
+	         * 输入类型。
+	         */
 	        set: function (value) {
-	            this._inputTips = value;
+	            this._inputType = value;
 	            if (this._valueWidget) {
-	                this._valueWidget.set({ inputTips: value });
+	                this._valueWidget.set({ inputType: value });
 	            }
 	        },
 	        enumerable: true,
@@ -27649,6 +27868,11 @@ var qtk =
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleLabel
+	 * @extends Widget
+	 * 带标题的文本。
+	 */
 	var TitleLabel = (function (_super) {
 	    __extends(TitleLabel, _super);
 	    function TitleLabel(type) {
@@ -27679,44 +27903,15 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var title_value_1 = __webpack_require__(140);
-	var check_button_1 = __webpack_require__(109);
-	var widget_factory_1 = __webpack_require__(24);
-	var widget_recyclable_creator_1 = __webpack_require__(84);
-	var TitleCheckButton = (function (_super) {
-	    __extends(TitleCheckButton, _super);
-	    function TitleCheckButton(type) {
-	        _super.call(this, type || TitleCheckButton.TYPE);
-	    }
-	    TitleCheckButton.prototype.createValueWidget = function (options) {
-	        return check_button_1.CheckButton.create(options);
-	    };
-	    TitleCheckButton.create = function (options) {
-	        return TitleCheckButton.recycleBin.create(options);
-	    };
-	    TitleCheckButton.TYPE = "title-check-button";
-	    TitleCheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleCheckButton);
-	    return TitleCheckButton;
-	}(title_value_1.TitleValue));
-	exports.TitleCheckButton = TitleCheckButton;
-	;
-	widget_factory_1.WidgetFactory.register(TitleCheckButton.TYPE, TitleCheckButton.create);
-
-
-/***/ },
-/* 146 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var range_edit_1 = __webpack_require__(147);
+	var range_edit_1 = __webpack_require__(146);
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleRange
+	 * @extends Widget
+	 * 带标题的范围的编辑器。
+	 */
 	var TitleRange = (function (_super) {
 	    __extends(TitleRange, _super);
 	    function TitleRange(type) {
@@ -27738,7 +27933,7 @@ var qtk =
 
 
 /***/ },
-/* 147 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27754,7 +27949,9 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	/**
-	 * 范围编辑器。
+	 * @class  RangeEdit
+	 * @extends Widget
+	 * 范围编辑器。范围包括first和second两个值。
 	 */
 	var RangeEdit = (function (_super) {
 	    __extends(RangeEdit, _super);
@@ -27769,6 +27966,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(RangeEdit.prototype, "firstEditor", {
+	        /**
+	         * @property {Edit} firstEditor
+	         * 第一个编辑器。
+	         */
 	        get: function () {
 	            return this._firstEditor;
 	        },
@@ -27776,6 +27977,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(RangeEdit.prototype, "secondEditor", {
+	        /**
+	         * @property {Edit} secondEditor
+	         * 第二个编辑器。
+	         */
 	        get: function () {
 	            return this._secondEditor;
 	        },
@@ -27874,7 +28079,7 @@ var qtk =
 
 
 /***/ },
-/* 148 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27883,10 +28088,15 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var vector_edit_1 = __webpack_require__(149);
+	var vector_edit_1 = __webpack_require__(148);
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleVector
+	 * @extends Widget
+	 * 带标题的向量编辑器。
+	 */
 	var TitleVector = (function (_super) {
 	    __extends(TitleVector, _super);
 	    function TitleVector(type) {
@@ -27894,7 +28104,7 @@ var qtk =
 	    }
 	    Object.defineProperty(TitleVector.prototype, "d", {
 	        /**
-	         * dimension
+	         * 向量的维度。
 	         */
 	        get: function () {
 	            return this._d;
@@ -27925,7 +28135,7 @@ var qtk =
 
 
 /***/ },
-/* 149 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27942,6 +28152,8 @@ var qtk =
 	var recyclable_creator_1 = __webpack_require__(85);
 	var grid_layouter_1 = __webpack_require__(119);
 	/**
+	 * @class VectorEdit
+	 * @extends Widget
 	 * 范围编辑器。
 	 */
 	var VectorEdit = (function (_super) {
@@ -27953,6 +28165,10 @@ var qtk =
 	        get: function () {
 	            return this._xTitle;
 	        },
+	        /**
+	         * @property {string} xTitle
+	         * X分量的标题。
+	         */
 	        set: function (value) {
 	            if (value || value === "") {
 	                this._xTitle;
@@ -27966,6 +28182,10 @@ var qtk =
 	        get: function () {
 	            return this._yTitle;
 	        },
+	        /**
+	         * @property {string} yTitle
+	         * Y分量的标题。
+	         */
 	        set: function (value) {
 	            if (value || value === "") {
 	                this._yTitle;
@@ -27979,6 +28199,10 @@ var qtk =
 	        get: function () {
 	            return this._zTitle;
 	        },
+	        /**
+	         * @property {string} zTitle
+	         * Z分量的标题。
+	         */
 	        set: function (value) {
 	            if (value || value === "") {
 	                this._zTitle;
@@ -27992,6 +28216,10 @@ var qtk =
 	        get: function () {
 	            return this._wTitle;
 	        },
+	        /**
+	         * @property {string} wTitle
+	         * W分量的标题。
+	         */
 	        set: function (value) {
 	            if (value || value === "") {
 	                this._wTitle;
@@ -28010,7 +28238,7 @@ var qtk =
 	    });
 	    Object.defineProperty(VectorEdit.prototype, "d", {
 	        /**
-	         * dimension
+	         * 向量的维度。
 	         */
 	        get: function () {
 	            return this._d;
@@ -28023,6 +28251,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(VectorEdit.prototype, "xEditor", {
+	        /**
+	         * @property {Edit} xEditor
+	         * X分量的编辑器。
+	         */
 	        get: function () {
 	            return this._xEditor;
 	        },
@@ -28030,6 +28262,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(VectorEdit.prototype, "yEditor", {
+	        /**
+	         * @property {Edit} yEditor
+	         * Y分量的编辑器。
+	         */
 	        get: function () {
 	            return this._yEditor;
 	        },
@@ -28037,6 +28273,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(VectorEdit.prototype, "zEditor", {
+	        /**
+	         * @property {Edit} zEditor
+	         * Z分量的编辑器。
+	         */
 	        get: function () {
 	            return this._zEditor;
 	        },
@@ -28044,6 +28284,10 @@ var qtk =
 	        configurable: true
 	    });
 	    Object.defineProperty(VectorEdit.prototype, "wEditor", {
+	        /**
+	         * @property {Edit} zEditor
+	         * Z分量的编辑器。
+	         */
 	        get: function () {
 	            return this._wEditor;
 	        },
@@ -28169,7 +28413,7 @@ var qtk =
 
 
 /***/ },
-/* 150 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28182,6 +28426,11 @@ var qtk =
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleSlider
+	 * @extends Widget
+	 * 带标题的滑块。
+	 */
 	var TitleSlider = (function (_super) {
 	    __extends(TitleSlider, _super);
 	    function TitleSlider(type) {
@@ -28203,7 +28452,7 @@ var qtk =
 
 
 /***/ },
-/* 151 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28216,6 +28465,11 @@ var qtk =
 	var title_value_1 = __webpack_require__(140);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleTextArea
+	 * @extends Widget
+	 * 带标题的多行编辑器。
+	 */
 	var TitleTextArea = (function (_super) {
 	    __extends(TitleTextArea, _super);
 	    function TitleTextArea(type) {
@@ -28225,6 +28479,10 @@ var qtk =
 	        get: function () {
 	            return this._inputTips;
 	        },
+	        /**
+	         * @property {string} inputTips
+	         * 输入提示。
+	         */
 	        set: function (value) {
 	            this._inputTips = value;
 	            if (this._valueWidget) {
@@ -28255,6 +28513,45 @@ var qtk =
 
 
 /***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var title_value_1 = __webpack_require__(140);
+	var check_button_1 = __webpack_require__(109);
+	var widget_factory_1 = __webpack_require__(24);
+	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleCheckButton
+	 * @extends Widget
+	 * 带标题的CheckButton。
+	 */
+	var TitleCheckButton = (function (_super) {
+	    __extends(TitleCheckButton, _super);
+	    function TitleCheckButton(type) {
+	        _super.call(this, type || TitleCheckButton.TYPE);
+	    }
+	    TitleCheckButton.prototype.createValueWidget = function (options) {
+	        return check_button_1.CheckButton.create(options);
+	    };
+	    TitleCheckButton.create = function (options) {
+	        return TitleCheckButton.recycleBin.create(options);
+	    };
+	    TitleCheckButton.TYPE = "title-check-button";
+	    TitleCheckButton.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleCheckButton);
+	    return TitleCheckButton;
+	}(title_value_1.TitleValue));
+	exports.TitleCheckButton = TitleCheckButton;
+	;
+	widget_factory_1.WidgetFactory.register(TitleCheckButton.TYPE, TitleCheckButton.create);
+
+
+/***/ },
 /* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28268,6 +28565,11 @@ var qtk =
 	var choosable_edit_1 = __webpack_require__(153);
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	/**
+	 * @class TitleChoosableEdit
+	 * @extends Widget
+	 * 带标题的编辑器，同时提供一个选择按钮，用来实现颜色选择和文件选择等功能。
+	 */
 	var TitleChoosableEdit = (function (_super) {
 	    __extends(TitleChoosableEdit, _super);
 	    function TitleChoosableEdit(type) {
@@ -28278,6 +28580,10 @@ var qtk =
 	            var edit = this._valueWidget;
 	            return edit.onChoose;
 	        },
+	        /**
+	         * @property {Function} onChoose
+	         * 点击选择按钮时的回调函数。
+	         */
 	        set: function (value) {
 	            var edit = this._valueWidget;
 	            edit.onChoose = value;
@@ -28289,6 +28595,10 @@ var qtk =
 	        get: function () {
 	            return this._inputTips;
 	        },
+	        /**
+	         * @property {string} inputTips
+	         * 输入提示。
+	         */
 	        set: function (value) {
 	            this._inputTips = value;
 	            if (this._valueWidget) {
@@ -28330,6 +28640,8 @@ var qtk =
 	var widget_factory_1 = __webpack_require__(24);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
 	/**
+	 * @class ChoosableEdit
+	 * @extends Widget
 	 * 编辑器+选择按钮。
 	 */
 	var ChoosableEdit = (function (_super) {
@@ -28438,6 +28750,10 @@ var qtk =
 	};
 	var Events = __webpack_require__(6);
 	var emitter_1 = __webpack_require__(4);
+	/**
+	 * @class PropDesc
+	 * 属性描述的基类。
+	 */
 	var PropDesc = (function () {
 	    function PropDesc(type) {
 	        this.type = type;
@@ -28476,12 +28792,16 @@ var qtk =
 	        this.updateTiming = updateTiming || "changed";
 	        return this;
 	    };
-	    PropDesc.keys = ["type", "name", "desc", "value", "path",
-	        "titleW", "valueW", "converter", "validationRule"];
+	    PropDesc.keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
 	    return PropDesc;
 	}());
 	exports.PropDesc = PropDesc;
 	;
+	/**
+	 * @class NumberPropDesc
+	 * @extends PropDesc
+	 * 数值类属性描述。
+	 */
 	var NumberPropDesc = (function (_super) {
 	    __extends(NumberPropDesc, _super);
 	    function NumberPropDesc(min, max) {
@@ -28508,6 +28828,11 @@ var qtk =
 	}(PropDesc));
 	exports.NumberPropDesc = NumberPropDesc;
 	;
+	/**
+	 * @class TextPropDesc
+	 * @extends PropDesc
+	 * 文本类属性描述。
+	 */
 	var TextPropDesc = (function (_super) {
 	    __extends(TextPropDesc, _super);
 	    function TextPropDesc() {
@@ -28520,6 +28845,11 @@ var qtk =
 	    return TextPropDesc;
 	}(PropDesc));
 	exports.TextPropDesc = TextPropDesc;
+	/**
+	 * @class ColorPropDesc
+	 * @extends PropDesc
+	 * 颜色类属性描述。
+	 */
 	var ColorPropDesc = (function (_super) {
 	    __extends(ColorPropDesc, _super);
 	    function ColorPropDesc() {
@@ -28532,6 +28862,11 @@ var qtk =
 	    return ColorPropDesc;
 	}(PropDesc));
 	exports.ColorPropDesc = ColorPropDesc;
+	/**
+	 * @class LinkPropDesc
+	 * @extends PropDesc
+	 * 超链接类属性描述。
+	 */
 	var LinkPropDesc = (function (_super) {
 	    __extends(LinkPropDesc, _super);
 	    function LinkPropDesc() {
@@ -28544,6 +28879,11 @@ var qtk =
 	    return LinkPropDesc;
 	}(PropDesc));
 	exports.LinkPropDesc = LinkPropDesc;
+	/**
+	 * @class ReadonlyTextPropDesc
+	 * @extends PropDesc
+	 * 只读文本类属性描述。
+	 */
 	var ReadonlyTextPropDesc = (function (_super) {
 	    __extends(ReadonlyTextPropDesc, _super);
 	    function ReadonlyTextPropDesc() {
@@ -28556,6 +28896,11 @@ var qtk =
 	    return ReadonlyTextPropDesc;
 	}(PropDesc));
 	exports.ReadonlyTextPropDesc = ReadonlyTextPropDesc;
+	/**
+	 * @class SliderPropDesc
+	 * @extends PropDesc
+	 * Slider类属性描述。
+	 */
 	var SliderPropDesc = (function (_super) {
 	    __extends(SliderPropDesc, _super);
 	    function SliderPropDesc() {
@@ -28568,6 +28913,11 @@ var qtk =
 	    return SliderPropDesc;
 	}(PropDesc));
 	exports.SliderPropDesc = SliderPropDesc;
+	/**
+	 * @class RangePropDesc
+	 * @extends PropDesc
+	 * 范围类属性描述。
+	 */
 	var RangePropDesc = (function (_super) {
 	    __extends(RangePropDesc, _super);
 	    function RangePropDesc() {
@@ -28580,6 +28930,11 @@ var qtk =
 	    return RangePropDesc;
 	}(PropDesc));
 	exports.RangePropDesc = RangePropDesc;
+	/**
+	 * @class Vector2PropDesc
+	 * @extends PropDesc
+	 * 2维向量类属性描述。
+	 */
 	var Vector2PropDesc = (function (_super) {
 	    __extends(Vector2PropDesc, _super);
 	    function Vector2PropDesc(xTitle, yTitle) {
@@ -28605,6 +28960,11 @@ var qtk =
 	    return Vector2PropDesc;
 	}(PropDesc));
 	exports.Vector2PropDesc = Vector2PropDesc;
+	/**
+	 * @class Vector3PropDesc
+	 * @extends PropDesc
+	 * 3维向量类属性描述。
+	 */
 	var Vector3PropDesc = (function (_super) {
 	    __extends(Vector3PropDesc, _super);
 	    function Vector3PropDesc(xTitle, yTitle, zTitle) {
@@ -28633,6 +28993,11 @@ var qtk =
 	    return Vector3PropDesc;
 	}(PropDesc));
 	exports.Vector3PropDesc = Vector3PropDesc;
+	/**
+	 * @class Vector4PropDesc
+	 * @extends PropDesc
+	 * 4维向量类属性描述。
+	 */
 	var Vector4PropDesc = (function (_super) {
 	    __extends(Vector4PropDesc, _super);
 	    function Vector4PropDesc(xTitle, yTitle, zTitle, wTitle) {
@@ -28664,6 +29029,11 @@ var qtk =
 	    return Vector4PropDesc;
 	}(PropDesc));
 	exports.Vector4PropDesc = Vector4PropDesc;
+	/**
+	 * @class LinePropDesc
+	 * @extends PropDesc
+	 * 分组类属性描述。
+	 */
 	var LinePropDesc = (function (_super) {
 	    __extends(LinePropDesc, _super);
 	    function LinePropDesc() {
@@ -28676,6 +29046,11 @@ var qtk =
 	    return LinePropDesc;
 	}(PropDesc));
 	exports.LinePropDesc = LinePropDesc;
+	/**
+	 * @class BoolPropDesc
+	 * @extends PropDesc
+	 * 布尔类属性描述。
+	 */
 	var BoolPropDesc = (function (_super) {
 	    __extends(BoolPropDesc, _super);
 	    function BoolPropDesc() {
@@ -28688,6 +29063,11 @@ var qtk =
 	    return BoolPropDesc;
 	}(PropDesc));
 	exports.BoolPropDesc = BoolPropDesc;
+	/**
+	 * @class OptionsPropDesc
+	 * @extends PropDesc
+	 * 下拉框类属性描述。
+	 */
 	var OptionsPropDesc = (function (_super) {
 	    __extends(OptionsPropDesc, _super);
 	    function OptionsPropDesc(options) {
@@ -28710,6 +29090,11 @@ var qtk =
 	    return OptionsPropDesc;
 	}(PropDesc));
 	exports.OptionsPropDesc = OptionsPropDesc;
+	/**
+	 * @class PropsDesc
+	 * @extends Emitter
+	 * 属性组。
+	 */
 	var PropsDesc = (function (_super) {
 	    __extends(PropsDesc, _super);
 	    function PropsDesc() {
@@ -28871,6 +29256,11 @@ var qtk =
 	    return TitleComboBoxBase;
 	}(title_value_1.TitleValue));
 	exports.TitleComboBoxBase = TitleComboBoxBase;
+	/**
+	 * @class TitleComboBox
+	 * @extends Widget
+	 * 带标题的下拉框。
+	 */
 	var TitleComboBox = (function (_super) {
 	    __extends(TitleComboBox, _super);
 	    function TitleComboBox(type) {
@@ -28889,6 +29279,11 @@ var qtk =
 	exports.TitleComboBox = TitleComboBox;
 	;
 	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
+	/**
+	 * @class TitleComboBoxEditable
+	 * @extends Widget
+	 * 带标题的可编辑的下拉框。
+	 */
 	var TitleComboBoxEditable = (function (_super) {
 	    __extends(TitleComboBoxEditable, _super);
 	    function TitleComboBoxEditable(type) {
@@ -29717,22 +30112,22 @@ var qtk =
 	    }
 	    Droppable.prototype.onPointerEnter = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.x, evt.y));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.localX, evt.localY));
 	        }
 	    };
 	    Droppable.prototype.onPointerLeave = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.x, evt.y));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.localX, evt.localY));
 	        }
 	    };
 	    Droppable.prototype.onPointerUp = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.x, evt.y));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.localX, evt.localY));
 	        }
 	    };
 	    Droppable.prototype.onPointerMove = function (evt) {
 	        if (Events.DragEvent.isDragging) {
-	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.x, evt.y));
+	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.localX, evt.localY));
 	        }
 	    };
 	    ;
@@ -57624,6 +58019,8 @@ var qtk =
 	;
 	widget_factory_1.WidgetFactory.register(TitlePage.TYPE, TitlePage.create);
 	/**
+	 * @class PropertySheets
+	 * @extends Widget
 	 * 管理多个页面，每个页面可以展开或折叠。
 	 */
 	var PropertySheets = (function (_super) {

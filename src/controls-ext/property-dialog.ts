@@ -10,6 +10,8 @@ import {MessageBox, TitleOptions, ButtonsOptions} from "../controls/message-box"
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
 /**
+ * @class PropertyDialog
+ * @extends Widget
  * 属性对话框。
  */
 export class PropertyDialog extends MessageBox {

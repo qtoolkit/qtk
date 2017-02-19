@@ -4,6 +4,7 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {ComboBox, ComboBoxEditable} from "../controls/combo-box";
 
+
 export class TitleComboBoxBase extends TitleValue {
 	constructor(type:string) {
 		super(type);
@@ -36,6 +37,11 @@ export class TitleComboBoxBase extends TitleValue {
 	}
 }
 
+/**
+ * @class TitleComboBox
+ * @extends Widget
+ * 带标题的下拉框。
+ */
 export class TitleComboBox extends TitleComboBoxBase {
 	constructor(type?:string) {
 		super(type || TitleComboBox.TYPE);
@@ -52,6 +58,11 @@ export class TitleComboBox extends TitleComboBoxBase {
 
 WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
 
+/**
+ * @class TitleComboBoxEditable
+ * @extends Widget
+ * 带标题的可编辑的下拉框。
+ */
 export class TitleComboBoxEditable extends TitleComboBoxBase {
 	constructor(type?:string) {
 		super(type || TitleComboBoxEditable.TYPE);

@@ -8,6 +8,11 @@ var title_value_1 = require("./title-value");
 var choosable_edit_1 = require("./choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleChoosableEdit
+ * @extends Widget
+ * 带标题的编辑器，同时提供一个选择按钮，用来实现颜色选择和文件选择等功能。
+ */
 var TitleChoosableEdit = (function (_super) {
     __extends(TitleChoosableEdit, _super);
     function TitleChoosableEdit(type) {
@@ -18,6 +23,10 @@ var TitleChoosableEdit = (function (_super) {
             var edit = this._valueWidget;
             return edit.onChoose;
         },
+        /**
+         * @property {Function} onChoose
+         * 点击选择按钮时的回调函数。
+         */
         set: function (value) {
             var edit = this._valueWidget;
             edit.onChoose = value;
@@ -29,6 +38,10 @@ var TitleChoosableEdit = (function (_super) {
         get: function () {
             return this._inputTips;
         },
+        /**
+         * @property {string} inputTips
+         * 输入提示。
+         */
         set: function (value) {
             this._inputTips = value;
             if (this._valueWidget) {

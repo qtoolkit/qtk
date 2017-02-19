@@ -8,6 +8,11 @@ var label_1 = require("../controls/label");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleLabel
+ * @extends Widget
+ * 带标题的文本。
+ */
 var TitleLabel = (function (_super) {
     __extends(TitleLabel, _super);
     function TitleLabel(type) {

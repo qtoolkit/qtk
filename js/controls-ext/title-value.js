@@ -8,6 +8,11 @@ var Events = require("../events");
 var label_1 = require("../controls/label");
 var widget_1 = require("../controls/widget");
 var linear_layouter_1 = require("../layouters/linear-layouter");
+/**
+ * @class TitleValue
+ * @extends Widget
+ * 带标题控件的基类。
+ */
 var TitleValue = (function (_super) {
     __extends(TitleValue, _super);
     function TitleValue(type) {
@@ -17,6 +22,10 @@ var TitleValue = (function (_super) {
         get: function () {
             return this._title;
         },
+        /**
+         * @property {string} title
+         * 标题。
+         */
         set: function (value) {
             this._title = value;
         },
@@ -27,6 +36,10 @@ var TitleValue = (function (_super) {
         get: function () {
             return this._titleW;
         },
+        /**
+         * @property {string} titleW
+         * 标题控件的宽度。
+         */
         set: function (value) {
             this._titleW = value;
             if (this.titleWidget && this.titleWidget.layoutParam) {
@@ -40,6 +53,10 @@ var TitleValue = (function (_super) {
         get: function () {
             return this._valueW;
         },
+        /**
+         * @prproperty {string} valueW
+         * 值控件的宽度。
+         */
         set: function (value) {
             this._valueW = value;
             if (this.valueWidget && this.valueWidget.layoutParam) {
@@ -50,6 +67,10 @@ var TitleValue = (function (_super) {
         configurable: true
     });
     Object.defineProperty(TitleValue.prototype, "titleWidget", {
+        /**
+         * @property {Widget} titleWidget
+         * 标题控件。
+         */
         get: function () {
             return this._titleWidget;
         },
@@ -57,6 +78,10 @@ var TitleValue = (function (_super) {
         configurable: true
     });
     Object.defineProperty(TitleValue.prototype, "valueWidget", {
+        /**
+         * @property {Widget} valueWidget
+         * 值控件。
+         */
         get: function () {
             return this._valueWidget;
         },
@@ -76,8 +101,9 @@ var TitleValue = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /*
-     * Child must override
+    /**
+     * @method createValueWidget
+     * 创建值控件，子类需要重载此函数。
      */
     TitleValue.prototype.createValueWidget = function (options) {
         return null;

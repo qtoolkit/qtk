@@ -8,6 +8,11 @@ var title_value_1 = require("./title-value");
 var color_tile_1 = require("../controls/color-tile");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleLine
+ * @extends Widget
+ * 带标题的直线，用于属性的分组。
+ */
 var TitleLine = (function (_super) {
     __extends(TitleLine, _super);
     function TitleLine(type) {

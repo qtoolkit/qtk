@@ -11,6 +11,8 @@ export declare class TitlePage extends TitleContent {
     static create(options?: any): TitlePage;
 }
 /**
+ * @class PropertySheets
+ * @extends Widget
  * 管理多个页面，每个页面可以展开或折叠。
  */
 export declare class PropertySheets extends ScrollView {

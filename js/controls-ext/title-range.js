@@ -8,6 +8,11 @@ var range_edit_1 = require("./range-edit");
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+/**
+ * @class TitleRange
+ * @extends Widget
+ * 带标题的范围的编辑器。
+ */
 var TitleRange = (function (_super) {
     __extends(TitleRange, _super);
     function TitleRange(type) {

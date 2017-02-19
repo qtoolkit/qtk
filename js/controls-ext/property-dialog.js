@@ -12,6 +12,8 @@ var widget_factory_1 = require("../controls/widget-factory");
 var message_box_1 = require("../controls/message-box");
 var simple_layouter_1 = require("../layouters/simple-layouter");
 /**
+ * @class PropertyDialog
+ * @extends Widget
  * 属性对话框。
  */
 var PropertyDialog = (function (_super) {

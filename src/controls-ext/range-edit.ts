@@ -11,7 +11,9 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 
 /**
- * 范围编辑器。
+ * @class  RangeEdit
+ * @extends Widget
+ * 范围编辑器。范围包括first和second两个值。
  */
 export class RangeEdit extends Widget {
 	protected _firstEditor : Edit;
@@ -22,15 +24,23 @@ export class RangeEdit extends Widget {
 		return true;
 	}
 
+	/**
+	 * @property {Edit} firstEditor 
+	 * 第一个编辑器。
+	 */
 	public get firstEditor() : Edit {
 		return this._firstEditor;
 	}
 
+	/**
+	 * @property {Edit} secondEditor
+	 * 第二个编辑器。
+	 */
 	public get secondEditor() : Edit {
 		return this._secondEditor;
 	}
 
-	public set value(value:any) {
+	public set value(value:{first:number, second:number}) {
 		this._value = value;
 		if(this._firstEditor) {
 			this._firstEditor.value = value.first;
@@ -40,7 +50,7 @@ export class RangeEdit extends Widget {
 		}
 	}
 
-	public get value() : any {
+	public get value() : {first:number, second:number} {
 		if(!this._value) {
 			this._value = {};
 		}

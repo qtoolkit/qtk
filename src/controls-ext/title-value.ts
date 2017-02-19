@@ -6,6 +6,11 @@ import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 
+/**
+ * @class TitleValue
+ * @extends Widget
+ * 带标题控件的基类。
+ */
 export abstract class TitleValue extends Widget {
 	protected _title : string;
 	protected _titleW : string;
@@ -16,26 +21,36 @@ export abstract class TitleValue extends Widget {
 	constructor(type?:string) {
 		super(type);
 	}
-	
+
+	/**
+	 * @property {string} title
+	 * 标题。
+	 */	
 	public set title(value:string) {
 		this._title = value;
 	}
-
 	public get title() : string {
 		return this._title;
 	}
 
+	/**
+	 * @property {string} titleW
+	 * 标题控件的宽度。
+	 */
 	public set titleW(value:string) {
 		this._titleW = value;
 		if(this.titleWidget && this.titleWidget.layoutParam) {
 			this.titleWidget.layoutParam.w = value;
 		}
 	}
-
 	public get titleW() : string {
 		return this._titleW;
 	}
-	
+
+	/**
+	 * @prproperty {string} valueW
+	 * 值控件的宽度。
+	 */	
 	public set valueW(value:string) {
 		this._valueW = value;
 		if(this.valueWidget && this.valueWidget.layoutParam) {
@@ -46,10 +61,18 @@ export abstract class TitleValue extends Widget {
 		return this._valueW;
 	}
 
+	/**
+	 * @property {Widget} titleWidget
+	 * 标题控件。
+	 */
 	public get titleWidget() : Widget{
 		return this._titleWidget;
 	}
 
+	/**
+	 * @property {Widget} valueWidget
+	 * 值控件。
+	 */
 	public get valueWidget() : Widget {
 		return this._valueWidget;
 	}
@@ -65,8 +88,9 @@ export abstract class TitleValue extends Widget {
 		}
 	}
 
-	/*
-	 * Child must override
+	/**
+	 * @method createValueWidget
+	 * 创建值控件，子类需要重载此函数。
 	 */
 	protected createValueWidget(options?:any) : Widget {
 		return null;
@@ -95,7 +119,6 @@ export abstract class TitleValue extends Widget {
 		if(this._value !== undefined) {
 			valueWidget.value = this._value;
 		}
-
 	}
 
 	protected forwardChangeEvent(evt:Events.ChangeEvent) {

@@ -7,6 +7,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
+/**
+ * @class Page
+ * 页面管理器中的页面。
+ */
 var Page = (function (_super) {
     __extends(Page, _super);
     function Page(type) {
