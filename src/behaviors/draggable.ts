@@ -40,7 +40,7 @@ export class Draggable extends Behavior {
 		widget.win.requestRedraw();
 		Events.DragEvent.isDragging = false;
 		widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-		widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, p.x, p.y));
+		widget.dispatchEvent(Events.DragEvent.get(Events.DRAGCANCEL, p.x, p.y));
 	}
 
 	protected onKeyDownGlobal(evt:CustomEvent) {
