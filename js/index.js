@@ -291,3 +291,5 @@ var vector2_fixer_1 = require("./mvvm/vector2-fixer");
 exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
 var vector3_fixer_1 = require("./mvvm/vector3-fixer");
 exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
+var html_element_1 = require("./html/html-element");
+exports.HtmlElement = html_element_1.HtmlElement;

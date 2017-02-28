@@ -155,13 +155,16 @@ export class NumberPropDesc extends PropDesc {
  * 文本类属性描述。
  */
 export class TextPropDesc extends PropDesc {
-	constructor() {
+	public lines : number;
+
+	constructor(lines:number) {
 		super(TextPropDesc.TYPE);
+		this.lines = lines || 1;
 	}
 	
 	public static TYPE = "text";
-	public static create() {
-		return new TextPropDesc();
+	public static create(lines:number) {
+		return new TextPropDesc(lines);
 	}
 }
 
@@ -473,7 +476,7 @@ export class PropsDesc extends Emitter {
 			}else if(type === SliderPropDesc.TYPE) {
 				desc = SliderPropDesc.create();
 			}else if(type === TextPropDesc.TYPE) {
-				desc = TextPropDesc.create();
+				desc = TextPropDesc.create(data.lines);
 			}else if(type === ColorPropDesc.TYPE) {
 				desc = ColorPropDesc.create();
 			}else if(type === LinkPropDesc.TYPE) {

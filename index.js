@@ -338,6 +338,8 @@ var qtk =
 	exports.Vector2Fixer = vector2_fixer_1.Vector2Fixer;
 	var vector3_fixer_1 = __webpack_require__(358);
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
+	var html_element_1 = __webpack_require__(87);
+	exports.HtmlElement = html_element_1.HtmlElement;
 
 
 /***/ },
@@ -1493,7 +1495,7 @@ var qtk =
 	exports.DROP = "drop";
 	exports.DRAGEND = "dragend";
 	exports.DRAGENTER = "dragenter";
-	exports.DRAGEXIT = "dragexit";
+	exports.DRAGCANCEL = "dragcancel";
 	exports.DRAGLEAVE = "dragleave";
 	exports.DRAGOVER = "dragover";
 	exports.DRAGSTART = "dragstart";
@@ -18367,6 +18369,17 @@ var qtk =
 	        };
 	        input.click();
 	    };
+	    HtmlElement.showFilePicker = function (onChoose, multiple) {
+	        var input = document.createElement("input");
+	        input.type = "file";
+	        input.multiple = multiple || false;
+	        input.onchange = function (e) {
+	            if (input.files && this.files.length) {
+	                onChoose(input.files);
+	            }
+	        };
+	        input.click();
+	    };
 	    HtmlElement.prototype.create = function (tag) {
 	        this.element = document.createElement(tag);
 	        document.body.appendChild(this.element);
@@ -27090,7 +27103,13 @@ var qtk =
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 	        }
 	        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
-	            titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+	            var lines = item.lines;
+	            if (lines > 1) {
+	                titleValue = this.addTextArea(item.name, item.value, lines * 12);
+	            }
+	            else {
+	                titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+	            }
 	        }
 	        else if (item.type === props_desc_2.ColorPropDesc.TYPE) {
 	            titleValue = this.addColorEdit(item.name, item.value, item.desc);
@@ -28492,12 +28511,33 @@ var qtk =
 	        enumerable: true,
 	        configurable: true
 	    });
+	    TitleTextArea.prototype.relayoutChildren = function () {
+	        this.requestRedraw();
+	        var titleWidget = this.titleWidget;
+	        var valueWidget = this.valueWidget;
+	        var w = this.w - this.leftPadding - this.topPadding;
+	        if (titleWidget && valueWidget) {
+	            titleWidget.x = this.leftPadding;
+	            titleWidget.y = this.topPadding;
+	            titleWidget.w = w;
+	            titleWidget.h = 20;
+	            valueWidget.x = this.leftPadding;
+	            valueWidget.y = titleWidget.y + titleWidget.h;
+	            valueWidget.w = w;
+	            this.h = valueWidget.y + valueWidget.h + this.bottomPadding;
+	        }
+	        return this.getLayoutRect();
+	    };
+	    TitleTextArea.prototype.onCreated = function () {
+	        _super.prototype.onCreated.call(this);
+	        this.valueWidget.h = this.h;
+	    };
 	    TitleTextArea.prototype.createValueWidget = function (options) {
 	        var opts = options || {};
 	        if (this._inputTips) {
 	            opts.inputTips = this._inputTips;
 	        }
-	        opts.multiLines = true;
+	        opts.multiLineMode = true;
 	        return edit_1.Edit.create(opts);
 	    };
 	    TitleTextArea.create = function (options) {
@@ -28835,11 +28875,12 @@ var qtk =
 	 */
 	var TextPropDesc = (function (_super) {
 	    __extends(TextPropDesc, _super);
-	    function TextPropDesc() {
+	    function TextPropDesc(lines) {
 	        _super.call(this, TextPropDesc.TYPE);
+	        this.lines = lines || 1;
 	    }
-	    TextPropDesc.create = function () {
-	        return new TextPropDesc();
+	    TextPropDesc.create = function (lines) {
+	        return new TextPropDesc(lines);
 	    };
 	    TextPropDesc.TYPE = "text";
 	    return TextPropDesc;
@@ -29135,7 +29176,7 @@ var qtk =
 	                desc = SliderPropDesc.create();
 	            }
 	            else if (type === TextPropDesc.TYPE) {
-	                desc = TextPropDesc.create();
+	                desc = TextPropDesc.create(data.lines);
 	            }
 	            else if (type === ColorPropDesc.TYPE) {
 	                desc = ColorPropDesc.create();
@@ -30049,7 +30090,7 @@ var qtk =
 	        widget.win.requestRedraw();
 	        Events.DragEvent.isDragging = false;
 	        widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, p.x, p.y));
+	        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGCANCEL, p.x, p.y));
 	    };
 	    Draggable.prototype.onKeyDownGlobal = function (evt) {
 	        var keyCode = evt.detail.keyCode;
@@ -30100,6 +30141,7 @@ var qtk =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Events = __webpack_require__(6);
+	var key_event_1 = __webpack_require__(16);
 	var behavior_1 = __webpack_require__(79);
 	/**
 	 * 让Widget可作为拖放功能的Drop目标。
@@ -30112,22 +30154,37 @@ var qtk =
 	    }
 	    Droppable.prototype.onPointerEnter = function (evt) {
 	        if (Events.DragEvent.isDragging) {
+	            this.dragging = true;
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.localX, evt.localY));
 	        }
 	    };
 	    Droppable.prototype.onPointerLeave = function (evt) {
 	        if (Events.DragEvent.isDragging) {
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.localX, evt.localY));
+	            this.dragging = false;
 	        }
 	    };
 	    Droppable.prototype.onPointerUp = function (evt) {
 	        if (Events.DragEvent.isDragging) {
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.localX, evt.localY));
+	            Events.DragEvent.isDragging = false;
+	            this.dragging = false;
 	        }
 	    };
 	    Droppable.prototype.onPointerMove = function (evt) {
 	        if (Events.DragEvent.isDragging) {
 	            this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.localX, evt.localY));
+	        }
+	    };
+	    Droppable.prototype.onCancelled = function () {
+	        var p = this.widget.win.pointerPosition;
+	        this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGCANCEL, p.x, p.y));
+	        this.dragging = false;
+	    };
+	    Droppable.prototype.onKeyDownGlobal = function (evt) {
+	        var keyCode = evt.detail.keyCode;
+	        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
+	            this.onCancelled();
 	        }
 	    };
 	    ;

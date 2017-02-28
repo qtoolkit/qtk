@@ -116,6 +116,20 @@ export class HtmlElement extends Emitter {
 		input.click();
 	}
 
+	public static showFilePicker(onChoose:Function, multiple?:boolean) {
+		var input:any = document.createElement("input");
+		input.type = "file";
+        input.multiple = multiple || false;
+		
+		input.onchange = function(e) {
+            if(input.files && this.files.length) {
+                onChoose(input.files);
+            }
+        }
+
+        input.click();
+	}
+
 	public create(tag:string) : HtmlElement {
 		this.element = document.createElement(tag);
 		document.body.appendChild(this.element);

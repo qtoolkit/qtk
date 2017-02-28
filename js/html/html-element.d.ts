@@ -18,5 +18,6 @@ export declare class HtmlElement extends Emitter {
     resize(w: number, h: number): HtmlElement;
     destroy(): void;
     static showColocPicker(value: any, onChange: any): void;
+    static showFilePicker(onChoose: Function, multiple?: boolean): void;
     create(tag: string): HtmlElement;
 }

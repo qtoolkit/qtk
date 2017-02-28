@@ -64,7 +64,7 @@ export declare const DRAG: string;
 export declare const DROP: string;
 export declare const DRAGEND: string;
 export declare const DRAGENTER: string;
-export declare const DRAGEXIT: string;
+export declare const DRAGCANCEL: string;
 export declare const DRAGLEAVE: string;
 export declare const DRAGOVER: string;
 export declare const DRAGSTART: string;

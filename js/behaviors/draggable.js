@@ -42,7 +42,7 @@ var Draggable = (function (_super) {
         widget.win.requestRedraw();
         Events.DragEvent.isDragging = false;
         widget.win.off(Events.AFTER_DRAW, this.onDrawDragging);
-        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGEND, p.x, p.y));
+        widget.dispatchEvent(Events.DragEvent.get(Events.DRAGCANCEL, p.x, p.y));
     };
     Draggable.prototype.onKeyDownGlobal = function (evt) {
         var keyCode = evt.detail.keyCode;

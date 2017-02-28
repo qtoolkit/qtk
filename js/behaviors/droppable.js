@@ -5,6 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Events = require("../events");
+var key_event_1 = require("../key-event");
 var behavior_1 = require("./behavior");
 /**
  * 让Widget可作为拖放功能的Drop目标。
@@ -17,22 +18,37 @@ var Droppable = (function (_super) {
     }
     Droppable.prototype.onPointerEnter = function (evt) {
         if (Events.DragEvent.isDragging) {
+            this.dragging = true;
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGENTER, evt.localX, evt.localY));
         }
     };
     Droppable.prototype.onPointerLeave = function (evt) {
         if (Events.DragEvent.isDragging) {
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGLEAVE, evt.localX, evt.localY));
+            this.dragging = false;
         }
     };
     Droppable.prototype.onPointerUp = function (evt) {
         if (Events.DragEvent.isDragging) {
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DROP, evt.localX, evt.localY));
+            Events.DragEvent.isDragging = false;
+            this.dragging = false;
         }
     };
     Droppable.prototype.onPointerMove = function (evt) {
         if (Events.DragEvent.isDragging) {
             this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGOVER, evt.localX, evt.localY));
+        }
+    };
+    Droppable.prototype.onCancelled = function () {
+        var p = this.widget.win.pointerPosition;
+        this.widget.dispatchEvent(Events.DragEvent.get(Events.DRAGCANCEL, p.x, p.y));
+        this.dragging = false;
+    };
+    Droppable.prototype.onKeyDownGlobal = function (evt) {
+        var keyCode = evt.detail.keyCode;
+        if (keyCode === key_event_1.KeyEvent.VK_ESCAPE && this.dragging) {
+            this.onCancelled();
         }
     };
     ;

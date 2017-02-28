@@ -91,11 +91,12 @@ exports.NumberPropDesc = NumberPropDesc;
  */
 var TextPropDesc = (function (_super) {
     __extends(TextPropDesc, _super);
-    function TextPropDesc() {
+    function TextPropDesc(lines) {
         _super.call(this, TextPropDesc.TYPE);
+        this.lines = lines || 1;
     }
-    TextPropDesc.create = function () {
-        return new TextPropDesc();
+    TextPropDesc.create = function (lines) {
+        return new TextPropDesc(lines);
     };
     TextPropDesc.TYPE = "text";
     return TextPropDesc;
@@ -391,7 +392,7 @@ var PropsDesc = (function (_super) {
                 desc = SliderPropDesc.create();
             }
             else if (type === TextPropDesc.TYPE) {
-                desc = TextPropDesc.create();
+                desc = TextPropDesc.create(data.lines);
             }
             else if (type === ColorPropDesc.TYPE) {
                 desc = ColorPropDesc.create();

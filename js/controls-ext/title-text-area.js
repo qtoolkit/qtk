@@ -35,12 +35,33 @@ var TitleTextArea = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    TitleTextArea.prototype.relayoutChildren = function () {
+        this.requestRedraw();
+        var titleWidget = this.titleWidget;
+        var valueWidget = this.valueWidget;
+        var w = this.w - this.leftPadding - this.topPadding;
+        if (titleWidget && valueWidget) {
+            titleWidget.x = this.leftPadding;
+            titleWidget.y = this.topPadding;
+            titleWidget.w = w;
+            titleWidget.h = 20;
+            valueWidget.x = this.leftPadding;
+            valueWidget.y = titleWidget.y + titleWidget.h;
+            valueWidget.w = w;
+            this.h = valueWidget.y + valueWidget.h + this.bottomPadding;
+        }
+        return this.getLayoutRect();
+    };
+    TitleTextArea.prototype.onCreated = function () {
+        _super.prototype.onCreated.call(this);
+        this.valueWidget.h = this.h;
+    };
     TitleTextArea.prototype.createValueWidget = function (options) {
         var opts = options || {};
         if (this._inputTips) {
             opts.inputTips = this._inputTips;
         }
-        opts.multiLines = true;
+        opts.multiLineMode = true;
         return edit_1.Edit.create(opts);
     };
     TitleTextArea.create = function (options) {

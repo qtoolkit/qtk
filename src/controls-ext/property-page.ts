@@ -483,7 +483,12 @@ export class PropertyPage extends Widget {
 		if(item.type === NumberPropDesc.TYPE) {
 			titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 		}else if(item.type === TextPropDesc.TYPE) {
-			titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+			var lines = (<TextPropDesc>item).lines;
+			if(lines > 1) {
+				titleValue = this.addTextArea(item.name, item.value, lines * 12);
+			}else{
+				titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+			}
 		}else if(item.type === ColorPropDesc.TYPE) {
 			titleValue = this.addColorEdit(item.name, item.value, item.desc);
 		}else if(item.type === ReadonlyTextPropDesc.TYPE) {

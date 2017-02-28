@@ -131,6 +131,17 @@ var HtmlElement = (function (_super) {
         };
         input.click();
     };
+    HtmlElement.showFilePicker = function (onChoose, multiple) {
+        var input = document.createElement("input");
+        input.type = "file";
+        input.multiple = multiple || false;
+        input.onchange = function (e) {
+            if (input.files && this.files.length) {
+                onChoose(input.files);
+            }
+        };
+        input.click();
+    };
     HtmlElement.prototype.create = function (tag) {
         this.element = document.createElement(tag);
         document.body.appendChild(this.element);

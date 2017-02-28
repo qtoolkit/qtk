@@ -1,4 +1,5 @@
 
+import {Rect} from "../rect";
 import {Edit} from "../controls/edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";
@@ -27,6 +28,33 @@ export class TitleTextArea extends TitleValue {
 		return this._inputTips;
 	}
 	
+	public relayoutChildren() : Rect {
+		this.requestRedraw();
+		var titleWidget = this.titleWidget;
+		var valueWidget = this.valueWidget;
+		var w = this.w - this.leftPadding - this.topPadding;
+
+		if(titleWidget && valueWidget) {
+			titleWidget.x = this.leftPadding;
+			titleWidget.y = this.topPadding;
+			titleWidget.w = w;
+			titleWidget.h = 20;
+
+			valueWidget.x = this.leftPadding;
+			valueWidget.y = titleWidget.y + titleWidget.h;
+			valueWidget.w = w;
+		
+			this.h = valueWidget.y + valueWidget.h + this.bottomPadding;
+		}
+
+		return this.getLayoutRect();
+	}
+
+	protected onCreated() {
+		super.onCreated();
+		this.valueWidget.h = this.h;
+	}
+	
 	constructor(type?:string) {
 		super(type || TitleTextArea.TYPE);
 	}
@@ -37,7 +65,7 @@ export class TitleTextArea extends TitleValue {
 			opts.inputTips = this._inputTips;
 		}
 
-		opts.multiLines = true;
+		opts.multiLineMode = true;
 		return Edit.create(opts);
 	}
 

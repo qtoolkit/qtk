@@ -440,7 +440,13 @@ var PropertyPage = (function (_super) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
         }
         else if (item.type === props_desc_3.TextPropDesc.TYPE) {
-            titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+            var lines = item.lines;
+            if (lines > 1) {
+                titleValue = this.addTextArea(item.name, item.value, lines * 12);
+            }
+            else {
+                titleValue = this.addEdit(item.name, item.value, item.desc, "text");
+            }
         }
         else if (item.type === props_desc_2.ColorPropDesc.TYPE) {
             titleValue = this.addColorEdit(item.name, item.value, item.desc);

@@ -140,4 +140,5 @@ export {RangeFixer} from "./mvvm/range-fixer";
 export {NumberFixer} from "./mvvm/number-fixer";
 export {Vector2Fixer} from "./mvvm/vector2-fixer";
 export {Vector3Fixer} from "./mvvm/vector3-fixer";
+export {HtmlElement} from "./html/html-element";
 

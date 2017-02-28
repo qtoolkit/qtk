@@ -81,9 +81,10 @@ export declare class NumberPropDesc extends PropDesc {
  * 文本类属性描述。
  */
 export declare class TextPropDesc extends PropDesc {
-    constructor();
+    lines: number;
+    constructor(lines: number);
     static TYPE: string;
-    static create(): TextPropDesc;
+    static create(lines: number): TextPropDesc;
 }
 /**
  * @class ColorPropDesc

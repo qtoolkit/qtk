@@ -6,10 +6,13 @@ import { Behavior } from "./behavior";
  *
  */
 export declare class Droppable extends Behavior {
+    protected dragging: boolean;
     protected onPointerEnter(evt: Events.PointerEvent): void;
     protected onPointerLeave(evt: Events.PointerEvent): void;
     protected onPointerUp(evt: Events.PointerEvent): void;
     protected onPointerMove(evt: Events.PointerEvent): void;
+    protected onCancelled(): void;
+    protected onKeyDownGlobal(evt: CustomEvent): void;
     constructor(widget: Widget, options: any);
     static TYPE: string;
 }
