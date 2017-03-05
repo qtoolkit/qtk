@@ -17,6 +17,7 @@ var pointerDownY = 0;
 var pointerDownTime = 0;
 var pointerMoved = false;
 var globalInputEmitter = new Emitter();
+var lastClickTime = 0;
 
 function dispatchEvent(target:any, type:string, detail:any) {
 	var realTarget = target;
@@ -54,8 +55,15 @@ function dispatchPointerEvent(type, target, detail) {
 		pointerDownTime = Date.now();
 		pointerMoved = false;
 	}else if(type === Events.POINTER_UP) {
+		var now = Date.now();
 		detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
-		dispatchEvent(target, Events.CLICK, detail);
+
+		if((now-lastClickTime) > 500) {
+			//双击只触发一次click事件。
+			dispatchEvent(target, Events.CLICK, detail);
+		}
+
+		lastClickTime = now;
 		pointerDown = false;
 		pointerMoved = false;
 	}else{
