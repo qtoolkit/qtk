@@ -221,7 +221,7 @@ var qtk =
 	exports.AlignH = consts_1.AlignH;
 	exports.AlignV = consts_1.AlignV;
 	exports.Orientation = consts_1.Orientation;
-	var title_combo_box_1 = __webpack_require__(155);
+	var title_combo_box_1 = __webpack_require__(154);
 	exports.TitleComboBox = title_combo_box_1.TitleComboBox;
 	exports.TitleComboBoxEditable = title_combo_box_1.TitleComboBoxEditable;
 	var message_box_1 = __webpack_require__(132);
@@ -258,18 +258,18 @@ var qtk =
 	exports.BindingRuleItem = binding_rule_1.BindingRuleItem;
 	var iview_model_1 = __webpack_require__(83);
 	exports.BindingMode = iview_model_1.BindingMode;
-	var props_desc_1 = __webpack_require__(154);
+	var props_desc_1 = __webpack_require__(155);
 	exports.PagePropsDesc = props_desc_1.PagePropsDesc;
 	exports.PropsDesc = props_desc_1.PropsDesc;
 	exports.PropDesc = props_desc_1.PropDesc;
 	exports.NumberPropDesc = props_desc_1.NumberPropDesc;
 	exports.SliderPropDesc = props_desc_1.SliderPropDesc;
-	var props_desc_2 = __webpack_require__(154);
+	var props_desc_2 = __webpack_require__(155);
 	exports.TextPropDesc = props_desc_2.TextPropDesc;
 	exports.ReadonlyTextPropDesc = props_desc_2.ReadonlyTextPropDesc;
 	exports.OptionsPropDesc = props_desc_2.OptionsPropDesc;
 	exports.RangePropDesc = props_desc_2.RangePropDesc;
-	var props_desc_3 = __webpack_require__(154);
+	var props_desc_3 = __webpack_require__(155);
 	exports.Vector2PropDesc = props_desc_3.Vector2PropDesc;
 	exports.Vector3PropDesc = props_desc_3.Vector3PropDesc;
 	exports.LinePropDesc = props_desc_3.LinePropDesc;
@@ -4100,6 +4100,7 @@ var qtk =
 	var pointerDownTime = 0;
 	var pointerMoved = false;
 	var globalInputEmitter = new emitter_1.Emitter();
+	var lastClickTime = 0;
 	function dispatchEvent(target, type, detail) {
 	    var realTarget = target;
 	    if (grabs.length) {
@@ -4133,8 +4134,13 @@ var qtk =
 	        pointerMoved = false;
 	    }
 	    else if (type === Events.POINTER_UP) {
+	        var now = Date.now();
 	        detail.setPointerDown(pointerDown, pointerDownX, pointerDownY, pointerDownTime);
-	        dispatchEvent(target, Events.CLICK, detail);
+	        if ((now - lastClickTime) > 500) {
+	            //双击只触发一次click事件。
+	            dispatchEvent(target, Events.CLICK, detail);
+	        }
+	        lastClickTime = now;
 	        pointerDown = false;
 	        pointerMoved = false;
 	    }
@@ -18587,6 +18593,7 @@ var qtk =
 	        var r = this.getLayoutRect();
 	        this.children.forEach(function (child) {
 	            child.moveResizeTo(r.x, r.y, r.w, r.h);
+	            child.relayoutChildren();
 	        });
 	        return r;
 	    };
@@ -26025,6 +26032,17 @@ var qtk =
 	        messageBox.createChildren(titleOptions, buttonsOption, msg);
 	        messageBox.open();
 	    };
+	    MessageBox.showDialog = function (title, w, h, onYes, onNo) {
+	        var app = application_1.Application.get();
+	        var messageBox = MessageBox.create({ app: app, w: w, h: h });
+	        var buttonsOption = new ButtonsOptions();
+	        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: onNo });
+	        buttonsOption.buttons.push({ styleType: "button.ok", text: "Yes", onClick: onYes });
+	        var titleOptions = new TitleOptions(title, null, false);
+	        messageBox.createChildren(titleOptions, buttonsOption, null);
+	        messageBox.open();
+	        return messageBox;
+	    };
 	    MessageBox.showToast = function (msg, duration, w) {
 	        var app = application_1.Application.get();
 	        var vp = app.getViewPort();
@@ -26674,20 +26692,23 @@ var qtk =
 	var title_label_1 = __webpack_require__(144);
 	var title_range_1 = __webpack_require__(145);
 	var title_vector_1 = __webpack_require__(147);
+	var group_1 = __webpack_require__(93);
+	var button_1 = __webpack_require__(96);
 	var widget_1 = __webpack_require__(19);
 	var title_slider_1 = __webpack_require__(149);
 	var title_text_area_1 = __webpack_require__(150);
 	var title_check_button_1 = __webpack_require__(151);
 	var widget_factory_1 = __webpack_require__(24);
 	var title_choosable_edit_1 = __webpack_require__(152);
-	var props_desc_1 = __webpack_require__(154);
-	var title_combo_box_1 = __webpack_require__(155);
+	var title_combo_box_1 = __webpack_require__(154);
 	var widget_recyclable_creator_1 = __webpack_require__(84);
+	var simple_layouter_1 = __webpack_require__(117);
 	var html_element_1 = __webpack_require__(87);
 	var iview_model_1 = __webpack_require__(83);
-	var props_desc_2 = __webpack_require__(154);
-	var props_desc_3 = __webpack_require__(154);
-	var props_desc_4 = __webpack_require__(154);
+	var props_desc_1 = __webpack_require__(155);
+	var props_desc_2 = __webpack_require__(155);
+	var props_desc_3 = __webpack_require__(155);
+	var props_desc_4 = __webpack_require__(155);
 	/**
 	 * @class PropertyPage
 	 * @extends Widget
@@ -26758,6 +26779,25 @@ var qtk =
 	        });
 	        widget.value = value,
 	            this.addChild(widget, true);
+	        return widget;
+	    };
+	    /**
+	     * @method addButton
+	     * 增加一个按钮控件。
+	     * @param {string} title 标题。
+	     * @param {string} command 文本内容。
+	     * @return {Button} 返回新创建的Button控件。
+	     */
+	    PropertyPage.prototype.addButton = function (text, command, width) {
+	        var group = group_1.Group.create({ h: this.itemH });
+	        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+	        var widget = button_1.Button.create({
+	            text: text,
+	            dataBindingRule: { click: { command: command } }
+	        });
+	        widget.layoutParam = simple_layouter_1.SimpleLayouterParam.create("c", "m", width || "50%", "90%");
+	        this.addChild(group, true);
+	        group.addChild(widget, false);
 	        return widget;
 	    };
 	    /**
@@ -27102,6 +27142,9 @@ var qtk =
 	        if (item.type === props_desc_3.NumberPropDesc.TYPE) {
 	            titleValue = this.addEdit(item.name, item.value, item.desc, "number");
 	        }
+	        else if (item.type === props_desc_2.ButtonPropDesc.TYPE) {
+	            this.addButton(item.name, item.command, item.titleW);
+	        }
 	        else if (item.type === props_desc_3.TextPropDesc.TYPE) {
 	            var lines = item.lines;
 	            if (lines > 1) {
@@ -27111,22 +27154,22 @@ var qtk =
 	                titleValue = this.addEdit(item.name, item.value, item.desc, "text");
 	            }
 	        }
-	        else if (item.type === props_desc_2.ColorPropDesc.TYPE) {
+	        else if (item.type === props_desc_1.ColorPropDesc.TYPE) {
 	            titleValue = this.addColorEdit(item.name, item.value, item.desc);
 	        }
-	        else if (item.type === props_desc_2.ReadonlyTextPropDesc.TYPE) {
+	        else if (item.type === props_desc_1.ReadonlyTextPropDesc.TYPE) {
 	            titleValue = this.addLabel(item.name, item.value);
 	        }
 	        else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
 	            titleValue = this.addSlider(item.name, item.value);
 	        }
-	        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
+	        else if (item.type === props_desc_2.LinkPropDesc.TYPE) {
 	            titleValue = this.addLink(item.name, item.value);
 	        }
-	        else if (item.type === props_desc_1.BoolPropDesc.TYPE) {
+	        else if (item.type === props_desc_2.BoolPropDesc.TYPE) {
 	            titleValue = this.addCheckButton(item.name, item.value);
 	        }
-	        else if (item.type === props_desc_1.LinePropDesc.TYPE) {
+	        else if (item.type === props_desc_2.LinePropDesc.TYPE) {
 	            if (item.name) {
 	                titleValue = this.addGroupBegin(item.name);
 	            }
@@ -27157,7 +27200,7 @@ var qtk =
 	            var value = item.value || { x: 0, y: 0, z: 0 };
 	            titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
 	        }
-	        else if (item.type === props_desc_2.Vector4PropDesc.TYPE) {
+	        else if (item.type === props_desc_1.Vector4PropDesc.TYPE) {
 	            var p4 = item;
 	            var value = item.value || { x: 0, y: 0, z: 0, w: 0 };
 	            titleValue = this.addVector4(item.name, value.x, value.y, value.z, value.w, p4.xTitle, p4.yTitle, p4.zTitle, p4.wTitle);
@@ -28788,6 +28831,98 @@ var qtk =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var title_value_1 = __webpack_require__(140);
+	var widget_factory_1 = __webpack_require__(24);
+	var widget_recyclable_creator_1 = __webpack_require__(84);
+	var combo_box_1 = __webpack_require__(113);
+	var TitleComboBoxBase = (function (_super) {
+	    __extends(TitleComboBoxBase, _super);
+	    function TitleComboBoxBase(type) {
+	        _super.call(this, type);
+	    }
+	    Object.defineProperty(TitleComboBoxBase.prototype, "itemH", {
+	        get: function () {
+	            var comboBox = this._valueWidget;
+	            return comboBox.itemH;
+	        },
+	        set: function (value) {
+	            var comboBox = this._valueWidget;
+	            comboBox.itemH = value;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    TitleComboBoxBase.prototype.resetOptions = function () {
+	        var comboBox = this._valueWidget;
+	        comboBox.resetOptions();
+	        return this;
+	    };
+	    TitleComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
+	        var comboBox = this._valueWidget;
+	        comboBox.addOption(text, value, imageURL, color);
+	        return this;
+	    };
+	    return TitleComboBoxBase;
+	}(title_value_1.TitleValue));
+	exports.TitleComboBoxBase = TitleComboBoxBase;
+	/**
+	 * @class TitleComboBox
+	 * @extends Widget
+	 * 带标题的下拉框。
+	 */
+	var TitleComboBox = (function (_super) {
+	    __extends(TitleComboBox, _super);
+	    function TitleComboBox(type) {
+	        _super.call(this, type || TitleComboBox.TYPE);
+	    }
+	    TitleComboBox.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBox.create(options);
+	    };
+	    TitleComboBox.create = function (options) {
+	        return TitleComboBox.recycleBin.create(options);
+	    };
+	    TitleComboBox.TYPE = "title-combo-box";
+	    TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
+	    return TitleComboBox;
+	}(TitleComboBoxBase));
+	exports.TitleComboBox = TitleComboBox;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
+	/**
+	 * @class TitleComboBoxEditable
+	 * @extends Widget
+	 * 带标题的可编辑的下拉框。
+	 */
+	var TitleComboBoxEditable = (function (_super) {
+	    __extends(TitleComboBoxEditable, _super);
+	    function TitleComboBoxEditable(type) {
+	        _super.call(this, type || TitleComboBoxEditable.TYPE);
+	    }
+	    TitleComboBoxEditable.prototype.createValueWidget = function (options) {
+	        return combo_box_1.ComboBoxEditable.create(options);
+	    };
+	    TitleComboBoxEditable.create = function (options) {
+	        return TitleComboBoxEditable.recycleBin.create(options);
+	    };
+	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
+	    TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
+	    return TitleComboBoxEditable;
+	}(TitleComboBoxBase));
+	exports.TitleComboBoxEditable = TitleComboBoxEditable;
+	;
+	widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var Events = __webpack_require__(6);
 	var emitter_1 = __webpack_require__(4);
 	/**
@@ -28886,6 +29021,24 @@ var qtk =
 	    return TextPropDesc;
 	}(PropDesc));
 	exports.TextPropDesc = TextPropDesc;
+	/**
+	 * @class ButtonPropDesc
+	 * @extends PropDesc
+	 * 文本类属性描述。
+	 */
+	var ButtonPropDesc = (function (_super) {
+	    __extends(ButtonPropDesc, _super);
+	    function ButtonPropDesc(command) {
+	        _super.call(this, ButtonPropDesc.TYPE);
+	        this.command = command;
+	    }
+	    ButtonPropDesc.create = function (command) {
+	        return new ButtonPropDesc(command);
+	    };
+	    ButtonPropDesc.TYPE = "button";
+	    return ButtonPropDesc;
+	}(PropDesc));
+	exports.ButtonPropDesc = ButtonPropDesc;
 	/**
 	 * @class ColorPropDesc
 	 * @extends PropDesc
@@ -29208,6 +29361,9 @@ var qtk =
 	            else if (type === BoolPropDesc.TYPE) {
 	                desc = BoolPropDesc.create();
 	            }
+	            else if (type === ButtonPropDesc.TYPE) {
+	                desc = ButtonPropDesc.create(data.command);
+	            }
 	            else {
 	                console.log("not supported:" + type);
 	                return;
@@ -29251,98 +29407,6 @@ var qtk =
 	}());
 	exports.PagePropsDesc = PagePropsDesc;
 	;
-
-
-/***/ },
-/* 155 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var title_value_1 = __webpack_require__(140);
-	var widget_factory_1 = __webpack_require__(24);
-	var widget_recyclable_creator_1 = __webpack_require__(84);
-	var combo_box_1 = __webpack_require__(113);
-	var TitleComboBoxBase = (function (_super) {
-	    __extends(TitleComboBoxBase, _super);
-	    function TitleComboBoxBase(type) {
-	        _super.call(this, type);
-	    }
-	    Object.defineProperty(TitleComboBoxBase.prototype, "itemH", {
-	        get: function () {
-	            var comboBox = this._valueWidget;
-	            return comboBox.itemH;
-	        },
-	        set: function (value) {
-	            var comboBox = this._valueWidget;
-	            comboBox.itemH = value;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    TitleComboBoxBase.prototype.resetOptions = function () {
-	        var comboBox = this._valueWidget;
-	        comboBox.resetOptions();
-	        return this;
-	    };
-	    TitleComboBoxBase.prototype.addOption = function (text, value, imageURL, color) {
-	        var comboBox = this._valueWidget;
-	        comboBox.addOption(text, value, imageURL, color);
-	        return this;
-	    };
-	    return TitleComboBoxBase;
-	}(title_value_1.TitleValue));
-	exports.TitleComboBoxBase = TitleComboBoxBase;
-	/**
-	 * @class TitleComboBox
-	 * @extends Widget
-	 * 带标题的下拉框。
-	 */
-	var TitleComboBox = (function (_super) {
-	    __extends(TitleComboBox, _super);
-	    function TitleComboBox(type) {
-	        _super.call(this, type || TitleComboBox.TYPE);
-	    }
-	    TitleComboBox.prototype.createValueWidget = function (options) {
-	        return combo_box_1.ComboBox.create(options);
-	    };
-	    TitleComboBox.create = function (options) {
-	        return TitleComboBox.recycleBin.create(options);
-	    };
-	    TitleComboBox.TYPE = "title-combo-box";
-	    TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
-	    return TitleComboBox;
-	}(TitleComboBoxBase));
-	exports.TitleComboBox = TitleComboBox;
-	;
-	widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
-	/**
-	 * @class TitleComboBoxEditable
-	 * @extends Widget
-	 * 带标题的可编辑的下拉框。
-	 */
-	var TitleComboBoxEditable = (function (_super) {
-	    __extends(TitleComboBoxEditable, _super);
-	    function TitleComboBoxEditable(type) {
-	        _super.call(this, type || TitleComboBoxEditable.TYPE);
-	    }
-	    TitleComboBoxEditable.prototype.createValueWidget = function (options) {
-	        return combo_box_1.ComboBoxEditable.create(options);
-	    };
-	    TitleComboBoxEditable.create = function (options) {
-	        return TitleComboBoxEditable.recycleBin.create(options);
-	    };
-	    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
-	    TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
-	    return TitleComboBoxEditable;
-	}(TitleComboBoxBase));
-	exports.TitleComboBoxEditable = TitleComboBoxEditable;
-	;
-	widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);
 
 
 /***/ },

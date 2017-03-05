@@ -39,6 +39,7 @@ function addPageFromJson(propertySheets, title) {
 		{type:"bool", name:"Check", value:true, desc:"check"},
 		{type:"number", name:"Age", value:"100", desc:"age"},
 		{type:"text", name:"Name", value:"QTK"},
+		{type:"button", name:"Click Me", titleW:"50%", command:"QTK"},
 		{type:"text-readonly", name:"Desc", value:"QToolKit"},
 		{type:"vector2", name:"Point", value:{x:10, y:20}},
 		{type:"vector3", name:"Point3D", value:{x:10, y:20, z:30}, zTitle:"Radius"},

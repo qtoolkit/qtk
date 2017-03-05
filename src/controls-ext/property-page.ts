@@ -8,6 +8,8 @@ import {TitleValue} from "./title-value";
 import {TitleLabel} from "./title-label";
 import {TitleRange} from "./title-range";
 import {TitleVector} from "./title-vector";
+import {Group} from "../controls/group";
+import {Button} from "../controls/button";
 import {Widget} from "../controls/widget";
 import {TitleSlider} from "./title-slider";
 import {ComboBox} from "../controls/combo-box";
@@ -15,15 +17,16 @@ import {TitleTextArea} from "./title-text-area";
 import {TitleCheckButton} from "./title-check-button";
 import {WidgetFactory} from "../controls/widget-factory";
 import {TitleChoosableEdit} from "./title-choosable-edit";
-import {BoolPropDesc, LinePropDesc, LinkPropDesc} from "./props-desc";
 import {TitleComboBox, TitleComboBoxEditable} from "./title-combo-box";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 import {LinearLayouterParam, LinearLayouter} from '../layouters/linear-layouter';
+import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
 import {HtmlElement} from "../html/html-element";
 import {toUpdateTiming, toBindingMode} from "../mvvm/iview-model";
 
 import {Vector4PropDesc, ColorPropDesc, ReadonlyTextPropDesc} from "./props-desc";
+import {BoolPropDesc, LinePropDesc, LinkPropDesc, ButtonPropDesc} from "./props-desc";
 import {PropsDesc, PropDesc, NumberPropDesc, TextPropDesc, PagePropsDesc} from "./props-desc";
 import {RangePropDesc, Vector2PropDesc, Vector3PropDesc, SliderPropDesc, OptionsPropDesc} from "./props-desc";
 
@@ -92,7 +95,30 @@ export class PropertyPage extends Widget {
 
 		return widget;
 	}
-	
+
+	/**
+	 * @method addButton
+	 * 增加一个按钮控件。
+	 * @param {string} title 标题。
+	 * @param {string} command 文本内容。
+	 * @return {Button} 返回新创建的Button控件。
+	 */
+	public addButton(text:string, command:string, width?:string) : Button {
+		var group = Group.create({h:this.itemH});
+		group.childrenLayouter = SimpleLayouter.create();
+
+		var widget = Button.create({
+				text:text,
+				dataBindingRule : {click : {command:command}}
+			});
+		widget.layoutParam = SimpleLayouterParam.create("c", "m", width||"50%", "90%"); 
+		
+		this.addChild(group, true);
+		group.addChild(widget, false);
+
+		return widget;
+	}
+
 	/**
 	 * @method addCheckButton
 	 * 增加一个CheckButton控件。
@@ -482,6 +508,8 @@ export class PropertyPage extends Widget {
 
 		if(item.type === NumberPropDesc.TYPE) {
 			titleValue = this.addEdit(item.name, item.value, item.desc, "number");
+		}else if(item.type === ButtonPropDesc.TYPE) {
+			this.addButton(item.name, (<ButtonPropDesc>item).command, item.titleW);
 		}else if(item.type === TextPropDesc.TYPE) {
 			var lines = (<TextPropDesc>item).lines;
 			if(lines > 1) {

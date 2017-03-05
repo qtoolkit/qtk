@@ -43,6 +43,7 @@ export class Pages extends Widget {
 
 		this.children.forEach(child => {
 			child.moveResizeTo(r.x, r.y, r.w, r.h);
+			child.relayoutChildren();
 		});
 
 		return r;

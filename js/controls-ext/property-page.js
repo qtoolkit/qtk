@@ -11,17 +11,20 @@ var title_edit_1 = require("./title-edit");
 var title_label_1 = require("./title-label");
 var title_range_1 = require("./title-range");
 var title_vector_1 = require("./title-vector");
+var group_1 = require("../controls/group");
+var button_1 = require("../controls/button");
 var widget_1 = require("../controls/widget");
 var title_slider_1 = require("./title-slider");
 var title_text_area_1 = require("./title-text-area");
 var title_check_button_1 = require("./title-check-button");
 var widget_factory_1 = require("../controls/widget-factory");
 var title_choosable_edit_1 = require("./title-choosable-edit");
-var props_desc_1 = require("./props-desc");
 var title_combo_box_1 = require("./title-combo-box");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
+var simple_layouter_1 = require("../layouters/simple-layouter");
 var html_element_1 = require("../html/html-element");
 var iview_model_1 = require("../mvvm/iview-model");
+var props_desc_1 = require("./props-desc");
 var props_desc_2 = require("./props-desc");
 var props_desc_3 = require("./props-desc");
 var props_desc_4 = require("./props-desc");
@@ -95,6 +98,25 @@ var PropertyPage = (function (_super) {
         });
         widget.value = value,
             this.addChild(widget, true);
+        return widget;
+    };
+    /**
+     * @method addButton
+     * 增加一个按钮控件。
+     * @param {string} title 标题。
+     * @param {string} command 文本内容。
+     * @return {Button} 返回新创建的Button控件。
+     */
+    PropertyPage.prototype.addButton = function (text, command, width) {
+        var group = group_1.Group.create({ h: this.itemH });
+        group.childrenLayouter = simple_layouter_1.SimpleLayouter.create();
+        var widget = button_1.Button.create({
+            text: text,
+            dataBindingRule: { click: { command: command } }
+        });
+        widget.layoutParam = simple_layouter_1.SimpleLayouterParam.create("c", "m", width || "50%", "90%");
+        this.addChild(group, true);
+        group.addChild(widget, false);
         return widget;
     };
     /**
@@ -439,6 +461,9 @@ var PropertyPage = (function (_super) {
         if (item.type === props_desc_3.NumberPropDesc.TYPE) {
             titleValue = this.addEdit(item.name, item.value, item.desc, "number");
         }
+        else if (item.type === props_desc_2.ButtonPropDesc.TYPE) {
+            this.addButton(item.name, item.command, item.titleW);
+        }
         else if (item.type === props_desc_3.TextPropDesc.TYPE) {
             var lines = item.lines;
             if (lines > 1) {
@@ -448,22 +473,22 @@ var PropertyPage = (function (_super) {
                 titleValue = this.addEdit(item.name, item.value, item.desc, "text");
             }
         }
-        else if (item.type === props_desc_2.ColorPropDesc.TYPE) {
+        else if (item.type === props_desc_1.ColorPropDesc.TYPE) {
             titleValue = this.addColorEdit(item.name, item.value, item.desc);
         }
-        else if (item.type === props_desc_2.ReadonlyTextPropDesc.TYPE) {
+        else if (item.type === props_desc_1.ReadonlyTextPropDesc.TYPE) {
             titleValue = this.addLabel(item.name, item.value);
         }
         else if (item.type === props_desc_4.SliderPropDesc.TYPE) {
             titleValue = this.addSlider(item.name, item.value);
         }
-        else if (item.type === props_desc_1.LinkPropDesc.TYPE) {
+        else if (item.type === props_desc_2.LinkPropDesc.TYPE) {
             titleValue = this.addLink(item.name, item.value);
         }
-        else if (item.type === props_desc_1.BoolPropDesc.TYPE) {
+        else if (item.type === props_desc_2.BoolPropDesc.TYPE) {
             titleValue = this.addCheckButton(item.name, item.value);
         }
-        else if (item.type === props_desc_1.LinePropDesc.TYPE) {
+        else if (item.type === props_desc_2.LinePropDesc.TYPE) {
             if (item.name) {
                 titleValue = this.addGroupBegin(item.name);
             }
@@ -494,7 +519,7 @@ var PropertyPage = (function (_super) {
             var value = item.value || { x: 0, y: 0, z: 0 };
             titleValue = this.addVector3(item.name, value.x, value.y, value.z, p3.xTitle, p3.yTitle, p3.zTitle);
         }
-        else if (item.type === props_desc_2.Vector4PropDesc.TYPE) {
+        else if (item.type === props_desc_1.Vector4PropDesc.TYPE) {
             var p4 = item;
             var value = item.value || { x: 0, y: 0, z: 0, w: 0 };
             titleValue = this.addVector4(item.name, value.x, value.y, value.z, value.w, p4.xTitle, p4.yTitle, p4.zTitle, p4.wTitle);

@@ -236,6 +236,17 @@ var MessageBox = (function (_super) {
         messageBox.createChildren(titleOptions, buttonsOption, msg);
         messageBox.open();
     };
+    MessageBox.showDialog = function (title, w, h, onYes, onNo) {
+        var app = application_1.Application.get();
+        var messageBox = MessageBox.create({ app: app, w: w, h: h });
+        var buttonsOption = new ButtonsOptions();
+        buttonsOption.buttons.push({ styleType: "button.cancel", text: "Cancel", onClick: onNo });
+        buttonsOption.buttons.push({ styleType: "button.ok", text: "Yes", onClick: onYes });
+        var titleOptions = new TitleOptions(title, null, false);
+        messageBox.createChildren(titleOptions, buttonsOption, null);
+        messageBox.open();
+        return messageBox;
+    };
     MessageBox.showToast = function (msg, duration, w) {
         var app = application_1.Application.get();
         var vp = app.getViewPort();

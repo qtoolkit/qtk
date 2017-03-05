@@ -169,6 +169,25 @@ export class TextPropDesc extends PropDesc {
 }
 
 /**
+ * @class ButtonPropDesc
+ * @extends PropDesc
+ * 文本类属性描述。
+ */
+export class ButtonPropDesc extends PropDesc {
+	public command : string;
+
+	constructor(command:string) {
+		super(ButtonPropDesc.TYPE);
+		this.command = command;
+	}
+	
+	public static TYPE = "button";
+	public static create(command:string) {
+		return new ButtonPropDesc(command);
+	}
+}
+
+/**
  * @class ColorPropDesc
  * @extends PropDesc
  * 颜色类属性描述。
@@ -497,6 +516,8 @@ export class PropsDesc extends Emitter {
 				desc = LinePropDesc.create();
 			}else if(type === BoolPropDesc.TYPE) {
 				desc = BoolPropDesc.create();
+			}else if(type === ButtonPropDesc.TYPE) {
+				desc = ButtonPropDesc.create(data.command);
 			}else{
 				console.log("not supported:" + type);
 				return;

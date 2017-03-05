@@ -103,6 +103,24 @@ var TextPropDesc = (function (_super) {
 }(PropDesc));
 exports.TextPropDesc = TextPropDesc;
 /**
+ * @class ButtonPropDesc
+ * @extends PropDesc
+ * 文本类属性描述。
+ */
+var ButtonPropDesc = (function (_super) {
+    __extends(ButtonPropDesc, _super);
+    function ButtonPropDesc(command) {
+        _super.call(this, ButtonPropDesc.TYPE);
+        this.command = command;
+    }
+    ButtonPropDesc.create = function (command) {
+        return new ButtonPropDesc(command);
+    };
+    ButtonPropDesc.TYPE = "button";
+    return ButtonPropDesc;
+}(PropDesc));
+exports.ButtonPropDesc = ButtonPropDesc;
+/**
  * @class ColorPropDesc
  * @extends PropDesc
  * 颜色类属性描述。
@@ -423,6 +441,9 @@ var PropsDesc = (function (_super) {
             }
             else if (type === BoolPropDesc.TYPE) {
                 desc = BoolPropDesc.create();
+            }
+            else if (type === ButtonPropDesc.TYPE) {
+                desc = ButtonPropDesc.create(data.command);
             }
             else {
                 console.log("not supported:" + type);

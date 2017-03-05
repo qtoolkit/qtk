@@ -5,6 +5,7 @@ import { TitleEdit } from "./title-edit";
 import { TitleLabel } from "./title-label";
 import { TitleRange } from "./title-range";
 import { TitleVector } from "./title-vector";
+import { Button } from "../controls/button";
 import { Widget } from "../controls/widget";
 import { TitleSlider } from "./title-slider";
 import { TitleTextArea } from "./title-text-area";
@@ -44,6 +45,14 @@ export declare class PropertyPage extends Widget {
      * @return {TitleLabel} 返回新创建的TitleLabel控件。
      */
     addLabel(title: string, value: string): TitleLabel;
+    /**
+     * @method addButton
+     * 增加一个按钮控件。
+     * @param {string} title 标题。
+     * @param {string} command 文本内容。
+     * @return {Button} 返回新创建的Button控件。
+     */
+    addButton(text: string, command: string, width?: string): Button;
     /**
      * @method addCheckButton
      * 增加一个CheckButton控件。

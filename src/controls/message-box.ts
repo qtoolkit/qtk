@@ -269,6 +269,23 @@ export class MessageBox extends Dialog {
 		messageBox.open();
 	}
 	
+	public static showDialog(title:string, w:number, h:number, onYes:Function, onNo:Function) : MessageBox {
+		var app = Application.get();
+		var messageBox = MessageBox.create({app:app, w:w, h:h});
+
+		var buttonsOption = new ButtonsOptions();
+		buttonsOption.buttons.push({styleType: "button.cancel", text:"Cancel", onClick : onNo});
+		buttonsOption.buttons.push({styleType: "button.ok", text:"Yes", onClick : onYes});
+
+		var titleOptions = new TitleOptions(title, null, false);
+
+		messageBox.createChildren(titleOptions, buttonsOption, null);
+
+		messageBox.open();
+		
+		return messageBox;
+	}
+	
 	public static showToast(msg:string, duration:number, w?:number) {
 		var app = Application.get();
 		var vp = app.getViewPort();

@@ -39,6 +39,7 @@ export declare class MessageBox extends Dialog {
     animateClose(): void;
     static showMessage(msg: string, onClose: Function, w?: number): void;
     static showConfirm(msg: string, onYes: Function, onNo: Function, w?: number): void;
+    static showDialog(title: string, w: number, h: number, onYes: Function, onNo: Function): MessageBox;
     static showToast(msg: string, duration: number, w?: number): void;
     static showProgress(msg: string, taskStart: Function, onDone: Function, w?: number): void;
     static showInput(title: string, inputTips: string, value: string, isValueValid: Function, onDone: Function, inputType?: string, w?: number): void;

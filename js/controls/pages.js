@@ -54,6 +54,7 @@ var Pages = (function (_super) {
         var r = this.getLayoutRect();
         this.children.forEach(function (child) {
             child.moveResizeTo(r.x, r.y, r.w, r.h);
+            child.relayoutChildren();
         });
         return r;
     };

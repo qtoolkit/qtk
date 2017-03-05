@@ -87,6 +87,17 @@ export declare class TextPropDesc extends PropDesc {
     static create(lines: number): TextPropDesc;
 }
 /**
+ * @class ButtonPropDesc
+ * @extends PropDesc
+ * 文本类属性描述。
+ */
+export declare class ButtonPropDesc extends PropDesc {
+    command: string;
+    constructor(command: string);
+    static TYPE: string;
+    static create(command: string): ButtonPropDesc;
+}
+/**
  * @class ColorPropDesc
  * @extends PropDesc
  * 颜色类属性描述。
