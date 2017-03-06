@@ -340,6 +340,8 @@ var qtk =
 	exports.Vector3Fixer = vector3_fixer_1.Vector3Fixer;
 	var html_element_1 = __webpack_require__(87);
 	exports.HtmlElement = html_element_1.HtmlElement;
+	var html_edit_1 = __webpack_require__(86);
+	exports.HtmlEdit = html_edit_1.HtmlEdit;
 
 
 /***/ },
@@ -5087,9 +5089,7 @@ var qtk =
 	     * @return {Point}  屏幕上的坐标。
 	     */
 	    Widget.prototype.toViewPoint = function (p) {
-	        p.x += this.x;
-	        p.y += this.y;
-	        var iter = this.parent;
+	        var iter = this;
 	        while (iter) {
 	            p.x += iter.x;
 	            p.y += iter.y;

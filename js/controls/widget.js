@@ -203,9 +203,7 @@ var Widget = (function (_super) {
      * @return {Point}  屏幕上的坐标。
      */
     Widget.prototype.toViewPoint = function (p) {
-        p.x += this.x;
-        p.y += this.y;
-        var iter = this.parent;
+        var iter = this;
         while (iter) {
             p.x += iter.x;
             p.y += iter.y;

@@ -206,10 +206,8 @@ export class Widget extends Emitter {
 	 * @return {Point}  屏幕上的坐标。
 	 */
 	public toViewPoint(p:Point) : Point {
-		p.x += this.x;
-		p.y += this.y;
-		var iter:any = this.parent;
-		
+		var iter:any = this;
+
 		while(iter) {
 			p.x += iter.x;
 			p.y += iter.y;
