@@ -12,6 +12,10 @@ export declare class ValidationResult {
     message: string;
     constructor(code: number, message: string);
     /**
+     * 创建函数。
+     */
+    static create(code: number, message: string): ValidationResult;
+    /**
      * 数据有效时，可以共用的结果，不能在运行时修改。
      */
     static validResult: ValidationResult;
@@ -19,10 +23,6 @@ export declare class ValidationResult {
      * 数据无效时，可以共用的结果，不能在运行时修改。
      */
     static invalidResult: ValidationResult;
-    /**
-     * 创建函数。
-     */
-    static create(code: number, message: string): ValidationResult;
 }
 /**
  * 检查数据是否有效的接口。

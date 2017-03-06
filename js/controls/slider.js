@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var button_1 = require("./button");
 var graphics_1 = require("../graphics");
@@ -16,7 +22,7 @@ var progress_bar_1 = require("./progress-bar");
 var Slider = (function (_super) {
     __extends(Slider, _super);
     function Slider(type) {
-        _super.call(this, type || Slider.TYPE);
+        return _super.call(this, type || Slider.TYPE) || this;
     }
     Object.defineProperty(Slider.prototype, "inputable", {
         get: function () {
@@ -37,6 +43,7 @@ var Slider = (function (_super) {
                 y -= h >> 1;
             }
             else {
+                //	y = y;
             }
             this._value = y / this.h;
         }
@@ -44,6 +51,7 @@ var Slider = (function (_super) {
             var w = this.dragger.w;
             var x = this.dragger.x;
             if (x < w) {
+                //	x = x;
             }
             else if (x < (this.w - 2 * w)) {
                 x += w >> 1;
@@ -145,10 +153,10 @@ var Slider = (function (_super) {
     Slider.create = function (options) {
         return Slider.r.create(options);
     };
-    Slider.TYPE = "slider";
-    Slider.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Slider);
     return Slider;
 }(progress_bar_1.ProgressBar));
+Slider.TYPE = "slider";
+Slider.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Slider);
 exports.Slider = Slider;
 ;
 widget_factory_1.WidgetFactory.register(Slider.TYPE, Slider.create);

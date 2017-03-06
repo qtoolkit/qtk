@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var pointer = require('json-pointer');
 var emitter_1 = require("../emitter");
 var Events = require("../events");
@@ -12,14 +18,15 @@ var iview_model_1 = require("./iview-model");
 var ViewModelDefault = (function (_super) {
     __extends(ViewModelDefault, _super);
     function ViewModelDefault(data) {
-        _super.call(this);
-        this._commands = {};
-        this._converters = {};
-        this._data = data || {};
-        this._validationRules = {};
-        this.isCollection = false;
-        this._bindingMode = iview_model_1.BindingMode.TWO_WAY;
-        this._ePropChange = Events.PropChangeEvent.create();
+        var _this = _super.call(this) || this;
+        _this._commands = {};
+        _this._converters = {};
+        _this._data = data || {};
+        _this._validationRules = {};
+        _this.isCollection = false;
+        _this._bindingMode = iview_model_1.BindingMode.TWO_WAY;
+        _this._ePropChange = Events.PropChangeEvent.create();
+        return _this;
     }
     Object.defineProperty(ViewModelDefault.prototype, "data", {
         get: function () {

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var tree_item_1 = require("./tree-item");
 var list_view_1 = require("./list-view");
 var tree_item_data_1 = require("./tree-item-data");
@@ -15,8 +21,9 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TreeView = (function (_super) {
     __extends(TreeView, _super);
     function TreeView() {
-        _super.call(this);
-        this.type = TreeView.TYPE;
+        var _this = _super.call(this) || this;
+        _this.type = TreeView.TYPE;
+        return _this;
     }
     Object.defineProperty(TreeView.prototype, "multiSelectable", {
         get: function () {
@@ -140,10 +147,10 @@ var TreeView = (function (_super) {
     TreeView.create = function (options) {
         return TreeView.recycleBinTreeView.create(options);
     };
-    TreeView.TYPE = "tree-view";
-    TreeView.recycleBinTreeView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeView);
     return TreeView;
 }(list_view_1.ListView));
+TreeView.TYPE = "tree-view";
+TreeView.recycleBinTreeView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TreeView);
 exports.TreeView = TreeView;
 ;
 widget_factory_1.WidgetFactory.register(TreeView.TYPE, TreeView.create);

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * 输入事件的详细信息。
  */
@@ -24,14 +30,15 @@ exports.InputEventDetail = InputEventDetail;
 var PointerEventDetail = (function (_super) {
     __extends(PointerEventDetail, _super);
     function PointerEventDetail(id, x, y, altKey, ctrlKey, shiftKey, commandKey) {
-        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.pointerDown = false;
-        this.pointerDownX = 0;
-        this.pointerDownY = 0;
-        this.pointerDownTime = 0;
+        var _this = _super.call(this, altKey, ctrlKey, shiftKey, commandKey) || this;
+        _this.id = id;
+        _this.x = x;
+        _this.y = y;
+        _this.pointerDown = false;
+        _this.pointerDownX = 0;
+        _this.pointerDownY = 0;
+        _this.pointerDownTime = 0;
+        return _this;
     }
     /**
      * 设置指针按下的状态。
@@ -58,8 +65,9 @@ exports.PointerEventDetail = PointerEventDetail;
 var KeyEventDetail = (function (_super) {
     __extends(KeyEventDetail, _super);
     function KeyEventDetail(keyCode, altKey, ctrlKey, shiftKey, commandKey) {
-        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-        this.keyCode = keyCode;
+        var _this = _super.call(this, altKey, ctrlKey, shiftKey, commandKey) || this;
+        _this.keyCode = keyCode;
+        return _this;
     }
     KeyEventDetail.prototype.dispose = function () {
     };
@@ -77,8 +85,9 @@ exports.KeyEventDetail = KeyEventDetail;
 var WheelEventDetail = (function (_super) {
     __extends(WheelEventDetail, _super);
     function WheelEventDetail(delta, altKey, ctrlKey, shiftKey, commandKey) {
-        _super.call(this, altKey, ctrlKey, shiftKey, commandKey);
-        this.delta = delta;
+        var _this = _super.call(this, altKey, ctrlKey, shiftKey, commandKey) || this;
+        _this.delta = delta;
+        return _this;
     }
     WheelEventDetail.prototype.dispose = function () {
     };

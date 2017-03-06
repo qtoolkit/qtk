@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var matrix_1 = require("./matrix");
 var MatrixStack = (function () {
     function MatrixStack() {

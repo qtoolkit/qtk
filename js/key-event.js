@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.KeyEvent = {
     VK_CANCEL: 3,
     VK_HELP: 6,

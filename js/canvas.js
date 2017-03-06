@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var emitter_1 = require("./emitter");
 var Events = require("./events");
 var event_detail_1 = require("./event-detail");
@@ -21,30 +27,31 @@ var inputEventAdapter = require("./input-event-adapter");
 var Canvas = (function (_super) {
     __extends(Canvas, _super);
     function Canvas(x, y, w, h, devicePixelRatio, offline) {
-        _super.call(this);
-        this._x = x || 0;
-        this._y = y || 0;
-        this._w = w || 0;
-        this._h = h || 0;
-        this._offline = offline || false;
-        this._devicePixelRatio = devicePixelRatio || 1;
-        var me = this;
-        this.onPointerEvent = function (evt) {
+        var _this = _super.call(this) || this;
+        _this._x = x || 0;
+        _this._y = y || 0;
+        _this._w = w || 0;
+        _this._h = h || 0;
+        _this._offline = offline || false;
+        _this._devicePixelRatio = devicePixelRatio || 1;
+        var me = _this;
+        _this.onPointerEvent = function (evt) {
             me.transformXY(evt.detail);
             var e = Events.PointerEvent.create(evt.type, evt.detail);
             me.dispatchEvent(e);
             e.dispose();
         };
-        this.onKeyEvent = function (evt) {
+        _this.onKeyEvent = function (evt) {
             var e = Events.KeyEvent.create(evt.type, evt.detail);
             me.dispatchEvent(e);
             e.dispose();
         };
-        this.onWheelEvent = function (evt) {
+        _this.onWheelEvent = function (evt) {
             var e = Events.WheelEvent.create(evt.detail);
             me.dispatchEvent(e);
             e.dispose();
         };
+        return _this;
     }
     Object.defineProperty(Canvas.prototype, "x", {
         /**

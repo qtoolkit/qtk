@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @class DeviceInfo
  * 设备信息。可以获取语言，操作系统和浏览器等相关信息(单例对象，直接调用)。

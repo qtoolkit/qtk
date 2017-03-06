@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var key_event_1 = require("../key-event");
 var behavior_1 = require("./behavior");
@@ -36,11 +42,12 @@ exports.MovableOptions = MovableOptions;
 var Movable = (function (_super) {
     __extends(Movable, _super);
     function Movable(widget, options) {
-        _super.call(this, Movable.TYPE, widget, options);
-        this.movingEvent = { type: Events.MOVING };
-        this.moveEndEvent = { type: Events.MOVE_END };
-        this.moveBeginEvent = { type: Events.MOVE_BEGIN };
-        this.moveCancelEvent = { type: Events.MOVE_CANCEL };
+        var _this = _super.call(this, Movable.TYPE, widget, options) || this;
+        _this.movingEvent = { type: Events.MOVING };
+        _this.moveEndEvent = { type: Events.MOVE_END };
+        _this.moveBeginEvent = { type: Events.MOVE_BEGIN };
+        _this.moveCancelEvent = { type: Events.MOVE_CANCEL };
+        return _this;
     }
     Movable.prototype.init = function (options) {
         this.options = new MovableOptions(options);
@@ -120,9 +127,9 @@ var Movable = (function (_super) {
         }
     };
     ;
-    Movable.TYPE = "movable";
     return Movable;
 }(behavior_1.Behavior));
+Movable.TYPE = "movable";
 exports.Movable = Movable;
 behavior_1.BehaviorFactory.register(Movable.TYPE, function (widget, options) {
     return new Movable(widget, options);

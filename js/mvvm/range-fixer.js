@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var RangeFixer = (function () {
     function RangeFixer(firstMin, firstMax, secondMin, secondMax, secondMustGreater) {
         this._value = { first: 0, second: 0 };

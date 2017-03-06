@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @class Rect
  * 用左上角坐标、宽度和高度来描述一个矩形区域。
@@ -90,8 +91,8 @@ var Rect = (function () {
         var r = new Rect(x || 0, y || 0, w || 0, h || 0);
         return r;
     };
-    Rect.rect = Rect.create(0, 0, 0, 0);
     return Rect;
 }());
+Rect.rect = Rect.create(0, 0, 0, 0);
 exports.Rect = Rect;
 ;

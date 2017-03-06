@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var widget_1 = require("./widget");
 var scroll_view_1 = require("./scroll-view");
 var widget_factory_1 = require("./widget-factory");
@@ -12,7 +18,7 @@ var list_layouter_1 = require("../layouters/list-layouter");
 var ListView = (function (_super) {
     __extends(ListView, _super);
     function ListView(type) {
-        _super.call(this, type || ListView.TYPE);
+        return _super.call(this, type || ListView.TYPE) || this;
     }
     Object.defineProperty(ListView.prototype, "itemSpacing", {
         get: function () {
@@ -98,11 +104,11 @@ var ListView = (function (_super) {
     ListView.create = function (options) {
         return ListView.recycleBinListView.create(options);
     };
-    ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
-    ListView.TYPE = "list-view";
-    ListView.recycleBinListView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListView);
     return ListView;
 }(scroll_view_1.ScrollView));
+ListView.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 30, _is: 0 });
+ListView.TYPE = "list-view";
+ListView.recycleBinListView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListView);
 exports.ListView = ListView;
 ;
 widget_factory_1.WidgetFactory.register(ListView.TYPE, ListView.create);

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 require("chart.js");
 var point_1 = require("../point");
 var Events = require("../events");
@@ -25,7 +31,7 @@ Chart.helpers.getMaximumHeight = function (domNode) {
 var ChartView = (function (_super) {
     __extends(ChartView, _super);
     function ChartView() {
-        _super.call(this, ChartView.TYPE);
+        return _super.call(this, ChartView.TYPE) || this;
     }
     Object.defineProperty(ChartView.prototype, "config", {
         get: function () {
@@ -124,10 +130,10 @@ var ChartView = (function (_super) {
     ChartView.create = function (options) {
         return ChartView.recycleBin.create(options);
     };
-    ChartView.TYPE = "chart-view";
-    ChartView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChartView);
     return ChartView;
 }(widget_1.Widget));
+ChartView.TYPE = "chart-view";
+ChartView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ChartView);
 exports.ChartView = ChartView;
 ;
 widget_factory_1.WidgetFactory.register(ChartView.TYPE, ChartView.create);

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var delegate_command_1 = require("./delegate-command");
 var ivalidation_rule_1 = require("./ivalidation-rule");
@@ -15,13 +21,14 @@ var view_model_default_1 = require("./view-model-default");
 var CollectionViewModel = (function (_super) {
     __extends(CollectionViewModel, _super);
     function CollectionViewModel(data) {
-        _super.call(this, data);
-        this.isCollection = true;
-        this.filters = {};
-        this.comparators = {};
-        this._current = 0;
-        this._collection = data;
-        this.needUpdateViewModelItems = true;
+        var _this = _super.call(this, data) || this;
+        _this.isCollection = true;
+        _this.filters = {};
+        _this.comparators = {};
+        _this._current = 0;
+        _this._collection = data;
+        _this.needUpdateViewModelItems = true;
+        return _this;
     }
     Object.defineProperty(CollectionViewModel.prototype, "collection", {
         /**
@@ -306,9 +313,10 @@ exports.CollectionViewModel = CollectionViewModel;
 var ItemViewModel = (function (_super) {
     __extends(ItemViewModel, _super);
     function ItemViewModel() {
-        _super.call(this, null);
-        this.isCollection = false;
-        this.initCommands();
+        var _this = _super.call(this, null) || this;
+        _this.isCollection = false;
+        _this.initCommands();
+        return _this;
     }
     ItemViewModel.prototype.getCommand = function (name) {
         var cmd = _super.prototype.getCommand.call(this, name);
@@ -396,7 +404,7 @@ var ItemViewModel = (function (_super) {
         var vm = ItemViewModel.cache.length > 0 ? ItemViewModel.cache.pop() : (new ItemViewModel());
         return vm.init(collectionViewModel, index, data);
     };
-    ItemViewModel.cache = [];
     return ItemViewModel;
 }(view_model_default_1.ViewModelDefault));
+ItemViewModel.cache = [];
 exports.ItemViewModel = ItemViewModel;

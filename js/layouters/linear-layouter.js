@@ -1,12 +1,18 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var consts_1 = require('../consts');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var consts_1 = require("../consts");
 var utils_1 = require("../utils");
-var layouter_1 = require('./layouter');
+var layouter_1 = require("./layouter");
 var TYPE_H = "linear-h";
 var TYPE_V = "linear-v";
 /**
@@ -15,7 +21,7 @@ var TYPE_V = "linear-v";
 var LinearLayouter = (function (_super) {
     __extends(LinearLayouter, _super);
     function LinearLayouter() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(LinearLayouter.prototype, "type", {
         get: function () {
@@ -188,13 +194,17 @@ layouter_1.LayouterFactory.register(TYPE_V, LinearLayouter.createVWithOptions);
 var LinearLayouterParam = (function (_super) {
     __extends(LinearLayouterParam, _super);
     function LinearLayouterParam(type, w, h, spacing, align, position) {
-        _super.call(this, type || LinearLayouterParam.TYPE);
-        this.w = w || "100%";
-        this.h = h || "100%";
-        this.align = align;
-        this.spacing = spacing;
-        this.position = position;
+        var _this = _super.call(this, type || LinearLayouterParam.TYPE) || this;
+        _this.w = w || "100%";
+        _this.h = h || "100%";
+        _this.align = align;
+        _this.spacing = spacing;
+        _this.position = position;
+        return _this;
     }
+    LinearLayouterParam.createWithOptions = function (opts) {
+        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
+    };
     LinearLayouterParam.createWithType = function (type, opts) {
         var options = opts || {};
         return new LinearLayouterParam(LinearLayouterParam.TYPE, options.w || options.width, options.h || options.height, options.spacing || 0, options.align || consts_1.Align.C, options.position === undefined ? 1 : options.position);
@@ -208,13 +218,10 @@ var LinearLayouterParam = (function (_super) {
         }
         return new LinearLayouterParam(LinearLayouterParam.TYPE, w.toString(), h.toString(), spacing || 0, align, position | 0);
     };
-    LinearLayouterParam.createWithOptions = function (opts) {
-        return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
-    };
-    LinearLayouterParam.TYPE = "linear";
-    LinearLayouterParam.defParam = LinearLayouterParam.createWithOptions(null);
     return LinearLayouterParam;
 }(layouter_1.LayouterParam));
+LinearLayouterParam.TYPE = "linear";
+LinearLayouterParam.defParam = LinearLayouterParam.createWithOptions(null);
 exports.LinearLayouterParam = LinearLayouterParam;
 ;
 layouter_1.LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.createWithOptions);

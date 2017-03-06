@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * 常见事件名称的定义。
  */
@@ -134,7 +140,7 @@ exports.Event = Event;
 var AnyEvent = (function (_super) {
     __extends(AnyEvent, _super);
     function AnyEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     AnyEvent.prototype.init = function (type, payload) {
         _super.prototype.init.call(this, type);
@@ -155,7 +161,7 @@ exports.AnyEvent = AnyEvent;
 var InteractionRequestEvent = (function (_super) {
     __extends(InteractionRequestEvent, _super);
     function InteractionRequestEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ;
     InteractionRequestEvent.prototype.returnResult = function () {
@@ -181,7 +187,7 @@ exports.InteractionRequestEvent = InteractionRequestEvent;
 var InputEvent = (function (_super) {
     __extends(InputEvent, _super);
     function InputEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     InputEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
@@ -198,7 +204,7 @@ exports.InputEvent = InputEvent;
 var PointerEvent = (function (_super) {
     __extends(PointerEvent, _super);
     function PointerEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     PointerEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
@@ -226,7 +232,7 @@ exports.PointerEvent = PointerEvent;
 var WheelEvent = (function (_super) {
     __extends(WheelEvent, _super);
     function WheelEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     WheelEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
@@ -244,7 +250,7 @@ exports.WheelEvent = WheelEvent;
 var KeyEvent = (function (_super) {
     __extends(KeyEvent, _super);
     function KeyEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     KeyEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
@@ -262,7 +268,7 @@ exports.KeyEvent = KeyEvent;
 var ShortcutEvent = (function (_super) {
     __extends(ShortcutEvent, _super);
     function ShortcutEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ShortcutEvent.prototype.init = function (type, keys) {
         _super.prototype.init.call(this, type, {});
@@ -279,7 +285,7 @@ exports.ShortcutEvent = ShortcutEvent;
 var TickEvent = (function (_super) {
     __extends(TickEvent, _super);
     function TickEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     TickEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
@@ -299,7 +305,7 @@ exports.TickEvent = TickEvent;
 var ChangeEvent = (function (_super) {
     __extends(ChangeEvent, _super);
     function ChangeEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ChangeEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type);
@@ -320,7 +326,7 @@ exports.ChangeEvent = ChangeEvent;
 var PropChangeEvent = (function (_super) {
     __extends(PropChangeEvent, _super);
     function PropChangeEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     PropChangeEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
@@ -366,8 +372,9 @@ exports.DataTransfer = DataTransfer;
 var DragEvent = (function (_super) {
     __extends(DragEvent, _super);
     function DragEvent() {
-        _super.call(this);
-        this.dataTransfer = new DataTransfer();
+        var _this = _super.call(this) || this;
+        _this.dataTransfer = new DataTransfer();
+        return _this;
     }
     DragEvent.prototype.init = function (type, detail) {
         _super.prototype.init.call(this, type, detail);
@@ -389,16 +396,16 @@ var DragEvent = (function (_super) {
         var e = DragEvent.event;
         return e.init(type, { x: x, y: y });
     };
-    DragEvent._isDragging = false;
-    DragEvent.event = new DragEvent();
     return DragEvent;
 }(Event));
+DragEvent._isDragging = false;
+DragEvent.event = new DragEvent();
 exports.DragEvent = DragEvent;
 ;
 var DrawEvent = (function (_super) {
     __extends(DrawEvent, _super);
     function DrawEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     DrawEvent.prototype.reset = function (type, ctx, widget) {
         _super.prototype.init.call(this, type);
@@ -409,15 +416,15 @@ var DrawEvent = (function (_super) {
     DrawEvent.get = function () {
         return DrawEvent.event;
     };
-    DrawEvent.event = new DrawEvent();
     return DrawEvent;
 }(Event));
+DrawEvent.event = new DrawEvent();
 exports.DrawEvent = DrawEvent;
 ;
 var ApplyTransformEvent = (function (_super) {
     __extends(ApplyTransformEvent, _super);
     function ApplyTransformEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ApplyTransformEvent.prototype.reset = function (type, ctx, widget) {
         _super.prototype.init.call(this, type);
@@ -428,15 +435,15 @@ var ApplyTransformEvent = (function (_super) {
     ApplyTransformEvent.get = function () {
         return ApplyTransformEvent.event;
     };
-    ApplyTransformEvent.event = new ApplyTransformEvent();
     return ApplyTransformEvent;
 }(Event));
+ApplyTransformEvent.event = new ApplyTransformEvent();
 exports.ApplyTransformEvent = ApplyTransformEvent;
 ;
 var ScrollEvent = (function (_super) {
     __extends(ScrollEvent, _super);
     function ScrollEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ScrollEvent.prototype.reset = function (type, widget, offsetX, offsetY) {
         _super.prototype.init.call(this, type);
@@ -455,7 +462,7 @@ exports.ScrollEvent = ScrollEvent;
 var WindowEvent = (function (_super) {
     __extends(WindowEvent, _super);
     function WindowEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     WindowEvent.prototype.reset = function (type, widget) {
         _super.prototype.init.call(this, type);
@@ -472,7 +479,7 @@ exports.WindowEvent = WindowEvent;
 var ProgressEvent = (function (_super) {
     __extends(ProgressEvent, _super);
     function ProgressEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ProgressEvent.prototype.reset = function (progress, total, done) {
         _super.prototype.init.call(this, exports.PROGRESS);
@@ -494,7 +501,7 @@ exports.ProgressEvent = ProgressEvent;
 var SortEvent = (function (_super) {
     __extends(SortEvent, _super);
     function SortEvent() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     SortEvent.prototype.init = function (key, isDec) {
         _super.prototype.init.call(this, exports.SORT);

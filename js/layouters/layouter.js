@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var factory_1 = require("../factory");
 /**
  * 子控件布局算法。
@@ -88,7 +94,7 @@ exports.Layouter = Layouter;
 var LayouterFactory = (function (_super) {
     __extends(LayouterFactory, _super);
     function LayouterFactory() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     LayouterFactory.register = function (type, creator) {
         return LayouterFactory.factory.register(type, creator);
@@ -101,9 +107,9 @@ var LayouterFactory = (function (_super) {
         layouter.fromJson(json);
         return layouter;
     };
-    LayouterFactory.factory = new factory_1.Factory();
     return LayouterFactory;
 }(factory_1.Factory));
+LayouterFactory.factory = new factory_1.Factory();
 exports.LayouterFactory = LayouterFactory;
 /**
  * 布局参数。
@@ -163,7 +169,7 @@ exports.LayouterParam = LayouterParam;
 var LayouterParamFactory = (function (_super) {
     __extends(LayouterParamFactory, _super);
     function LayouterParamFactory() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     LayouterParamFactory.register = function (type, creator) {
         return LayouterParamFactory.factory.register(type, creator);
@@ -176,7 +182,7 @@ var LayouterParamFactory = (function (_super) {
         layouter.fromJson(json);
         return layouter;
     };
-    LayouterParamFactory.factory = new factory_1.Factory();
     return LayouterParamFactory;
 }(factory_1.Factory));
+LayouterParamFactory.factory = new factory_1.Factory();
 exports.LayouterParamFactory = LayouterParamFactory;

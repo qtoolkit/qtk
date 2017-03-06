@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var menu_1 = require("./menu");
 var point_1 = require("../point");
 var Events = require("../events");
@@ -15,7 +21,7 @@ var linear_layouter_1 = require("../layouters/linear-layouter");
 var MenuBar = (function (_super) {
     __extends(MenuBar, _super);
     function MenuBar() {
-        _super.call(this, MenuBar.TYPE);
+        return _super.call(this, MenuBar.TYPE) || this;
     }
     Object.defineProperty(MenuBar.prototype, "openedMenu", {
         get: function () {
@@ -117,17 +123,17 @@ var MenuBar = (function (_super) {
     MenuBar.create = function (options) {
         return MenuBar.recycleBin.create(options);
     };
-    MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
-    MenuBar.TYPE = "menu-bar";
-    MenuBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBar);
     return MenuBar;
 }(widget_1.Widget));
+MenuBar.defProps = Object.assign({}, widget_1.Widget.defProps, { _itemWidth: 40 });
+MenuBar.TYPE = "menu-bar";
+MenuBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBar);
 exports.MenuBar = MenuBar;
 ;
 var MenuBarItem = (function (_super) {
     __extends(MenuBarItem, _super);
     function MenuBarItem() {
-        _super.call(this, MenuBarItem.TYPE);
+        return _super.call(this, MenuBarItem.TYPE) || this;
     }
     MenuBarItem.prototype.setIcons = function (normalIconURL, overIconURL, activeIconURL, disableIconURL, checkedIconURL) {
         var redraw = this.requestRedraw.bind(this);
@@ -206,13 +212,13 @@ var MenuBarItem = (function (_super) {
     MenuBarItem.create = function (options) {
         return MenuBarItem.recycleBin.create(options);
     };
-    MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
-        _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
-    });
-    MenuBarItem.TYPE = "menu-bar-item";
-    MenuBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBarItem);
     return MenuBarItem;
 }(widget_1.Widget));
+MenuBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, {
+    _normalIconURL: null, _overIconURL: null, _activeIconURL: null, _disableIconURL: null, _checkedIconURL: null
+});
+MenuBarItem.TYPE = "menu-bar-item";
+MenuBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuBarItem);
 exports.MenuBarItem = MenuBarItem;
 ;
 widget_factory_1.WidgetFactory.register(MenuBar.TYPE, MenuBar.create);

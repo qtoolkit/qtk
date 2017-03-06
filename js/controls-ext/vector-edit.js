@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var label_1 = require("../controls/label");
 var edit_1 = require("../controls/edit");
 var widget_1 = require("../controls/widget");
@@ -19,7 +25,7 @@ var grid_layouter_1 = require("../layouters/grid-layouter");
 var VectorEdit = (function (_super) {
     __extends(VectorEdit, _super);
     function VectorEdit() {
-        _super.call(this, VectorEdit.TYPE);
+        return _super.call(this, VectorEdit.TYPE) || this;
     }
     Object.defineProperty(VectorEdit.prototype, "xTitle", {
         get: function () {
@@ -260,13 +266,13 @@ var VectorEdit = (function (_super) {
     VectorEdit.create = function (options) {
         return VectorEdit.rBin.create().reset(VectorEdit.TYPE, options);
     };
-    VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z", _wTitle: "W" });
-    VectorEdit.TYPE = "vector.edit";
-    VectorEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
-        return new VectorEdit();
-    });
     return VectorEdit;
 }(widget_1.Widget));
+VectorEdit.defProps = Object.assign({}, widget_1.Widget.defProps, { _d: 2, _xTitle: "X", _yTitle: "Y", _zTitle: "Z", _wTitle: "W" });
+VectorEdit.TYPE = "vector.edit";
+VectorEdit.rBin = new recyclable_creator_1.RecyclableCreator(function () {
+    return new VectorEdit();
+});
 exports.VectorEdit = VectorEdit;
 ;
 widget_factory_1.WidgetFactory.register(VectorEdit.TYPE, VectorEdit.create);

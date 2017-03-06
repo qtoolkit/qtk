@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var emitter_1 = require("../emitter");
 var Events = require("../events");
 var toast_dialog_1 = require("./toast-dialog");

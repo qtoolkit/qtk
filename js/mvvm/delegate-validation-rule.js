@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var DelegateValidationRule = (function () {
     function DelegateValidationRule(validate) {
         this._validate = validate;

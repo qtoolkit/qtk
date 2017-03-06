@@ -1,11 +1,17 @@
 /// <reference path="../../typings/globals/scroller/index.d.ts"/>
 /// <reference path="../../typings/globals/tween.js/index.d.ts"/>
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var scroller_1 = require("scroller");
@@ -21,8 +27,9 @@ var widget_1 = require("./widget");
 var ScrollView = (function (_super) {
     __extends(ScrollView, _super);
     function ScrollView(type) {
-        _super.call(this, type ? type : ScrollView.TYPE);
-        this.isScrollView = true;
+        var _this = _super.call(this, type ? type : ScrollView.TYPE) || this;
+        _this.isScrollView = true;
+        return _this;
     }
     Object.defineProperty(ScrollView.prototype, "scrollBarOpacity", {
         get: function () {
@@ -624,19 +631,19 @@ var ScrollView = (function (_super) {
     ScrollView.create = function (options) {
         return ScrollView.recycleBin.create(options);
     };
-    ScrollView.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2 });
-    ScrollView.TYPE = "scroll-view";
-    ScrollView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ScrollView);
     return ScrollView;
 }(widget_1.Widget));
+ScrollView.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2 });
+ScrollView.TYPE = "scroll-view";
+ScrollView.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ScrollView);
 exports.ScrollView = ScrollView;
 ;
+var ScrollerBarVisibility;
 (function (ScrollerBarVisibility) {
     ScrollerBarVisibility[ScrollerBarVisibility["INVISIBLE"] = 0] = "INVISIBLE";
     ScrollerBarVisibility[ScrollerBarVisibility["AUTO"] = 1] = "AUTO";
     ScrollerBarVisibility[ScrollerBarVisibility["ALWAYS"] = 2] = "ALWAYS";
-})(exports.ScrollerBarVisibility || (exports.ScrollerBarVisibility = {}));
-var ScrollerBarVisibility = exports.ScrollerBarVisibility;
+})(ScrollerBarVisibility = exports.ScrollerBarVisibility || (exports.ScrollerBarVisibility = {}));
 ;
 var ScrollBarStyle = (function () {
     function ScrollBarStyle() {

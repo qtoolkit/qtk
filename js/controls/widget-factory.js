@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var factory_1 = require("../factory");
 /**
  * Widget工厂，注册控件的创建函数和根据控件的类型创建控件。
@@ -24,7 +25,7 @@ var WidgetFactory = (function () {
         widget.fromJson(json);
         return widget;
     };
-    WidgetFactory.factory = new factory_1.Factory();
     return WidgetFactory;
 }());
+WidgetFactory.factory = new factory_1.Factory();
 exports.WidgetFactory = WidgetFactory;

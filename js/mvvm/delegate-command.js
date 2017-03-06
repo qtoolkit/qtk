@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var DelegateCommand = (function () {
     function DelegateCommand(execute, canExecute) {
         this._execute = execute;

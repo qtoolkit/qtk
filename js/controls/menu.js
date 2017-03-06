@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var dialog_1 = require("./dialog");
@@ -19,7 +25,7 @@ var simple_layouter_1 = require("../layouters/simple-layouter");
 var Menu = (function (_super) {
     __extends(Menu, _super);
     function Menu() {
-        _super.call(this, Menu.TYPE);
+        return _super.call(this, Menu.TYPE) || this;
     }
     Object.defineProperty(Menu.prototype, "openedMenu", {
         get: function () {
@@ -210,16 +216,16 @@ var Menu = (function (_super) {
     Menu.create = function (options) {
         return Menu.r.create(options);
     };
-    Menu.TYPE = "menu";
-    Menu.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Menu);
     return Menu;
 }(dialog_1.Dialog));
+Menu.TYPE = "menu";
+Menu.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Menu);
 exports.Menu = Menu;
 ;
 var MenuItem = (function (_super) {
     __extends(MenuItem, _super);
     function MenuItem() {
-        _super.call(this, MenuItem.TYPE);
+        return _super.call(this, MenuItem.TYPE) || this;
     }
     Object.defineProperty(MenuItem.prototype, "iconURL", {
         set: function (value) {
@@ -345,13 +351,13 @@ var MenuItem = (function (_super) {
     MenuItem.create = function (options) {
         return MenuItem.recycleBin.create(options);
     };
-    MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
-        checkable: false, shortcut: null, _lp: 2, _rp: 4
-    });
-    MenuItem.TYPE = "menu-item";
-    MenuItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuItem);
     return MenuItem;
 }(widget_1.Widget));
+MenuItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _iconURL: null,
+    checkable: false, shortcut: null, _lp: 2, _rp: 4
+});
+MenuItem.TYPE = "menu-item";
+MenuItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(MenuItem);
 exports.MenuItem = MenuItem;
 ;
 widget_factory_1.WidgetFactory.register(Menu.TYPE, Menu.create);

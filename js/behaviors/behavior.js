@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var inputEventAdapter = require("../input-event-adapter");
 /**
@@ -146,7 +147,7 @@ var BehaviorFactory = (function () {
         var create = BehaviorFactory.creators[type];
         return create ? create(widget, options) : null;
     };
-    BehaviorFactory.creators = {};
     return BehaviorFactory;
 }());
+BehaviorFactory.creators = {};
 exports.BehaviorFactory = BehaviorFactory;

@@ -1,11 +1,17 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var rect_1 = require('../rect');
-var layouter_1 = require('./layouter');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var rect_1 = require("../rect");
+var layouter_1 = require("./layouter");
 var TYPE = "grid";
 /**
  * 网格布局器。
@@ -13,8 +19,9 @@ var TYPE = "grid";
 var GridLayouter = (function (_super) {
     __extends(GridLayouter, _super);
     function GridLayouter() {
-        _super.call(this);
-        this.rect = rect_1.Rect.create(0, 0, 0, 0);
+        var _this = _super.call(this) || this;
+        _this.rect = rect_1.Rect.create(0, 0, 0, 0);
+        return _this;
     }
     Object.defineProperty(GridLayouter.prototype, "type", {
         get: function () {
@@ -121,11 +128,12 @@ layouter_1.LayouterFactory.register(TYPE, GridLayouter.createWithOptions);
 var GridLayouterParam = (function (_super) {
     __extends(GridLayouterParam, _super);
     function GridLayouterParam(row, spanRows, col, spanCols) {
-        _super.call(this, TYPE);
-        this.row = row >= 0 ? row : -1;
-        this.col = col >= 0 ? col : -1;
-        this.spanRows = spanRows || 1;
-        this.spanCols = spanCols || 1;
+        var _this = _super.call(this, TYPE) || this;
+        _this.row = row >= 0 ? row : -1;
+        _this.col = col >= 0 ? col : -1;
+        _this.spanRows = spanRows || 1;
+        _this.spanCols = spanCols || 1;
+        return _this;
     }
     GridLayouterParam.create = function (row, spanRows, col, spanCols) {
         return new GridLayouterParam(row, spanRows, col, spanCols);

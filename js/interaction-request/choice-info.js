@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ChoiceOption = (function () {
     function ChoiceOption(text, iconURL) {
         this.text = text;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Point = (function () {
     function Point(x, y) {
         this.x = x;
@@ -27,8 +28,8 @@ var Point = (function () {
     Point.create = function (x, y) {
         return new Point(x, y);
     };
-    Point.point = Point.create(0, 0);
     return Point;
 }());
+Point.point = Point.create(0, 0);
 exports.Point = Point;
 ;

@@ -1,12 +1,17 @@
 /// <reference path="../typings/globals/node/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
-/// <reference path="../typings/globals/whatwg-fetch/index.d.ts"/>
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 require("whatwg-fetch");
 var path = require("path");
 var Events = require("./events");
@@ -40,6 +45,7 @@ function load(url, type) {
  * @enum AssetType
  * 资源类型。
  */
+var AssetType;
 (function (AssetType) {
     /**
      * @property {number} [AUDIO=1]
@@ -71,8 +77,7 @@ function load(url, type) {
      * 文本资源。
      */
     AssetType[AssetType["TEXT"] = 6] = "TEXT";
-})(exports.AssetType || (exports.AssetType = {}));
-var AssetType = exports.AssetType;
+})(AssetType = exports.AssetType || (exports.AssetType = {}));
 ;
 /**
  * @class AssetManager
@@ -237,21 +242,22 @@ exports.AssetItem = AssetItem;
 var AssetGroup = (function (_super) {
     __extends(AssetGroup, _super);
     function AssetGroup(items, onProgress) {
-        _super.call(this);
-        this.event = {
+        var _this = _super.call(this) || this;
+        _this.event = {
             total: 0,
             loaded: 0,
             type: Events.PROGRESS
         };
         var i = 0;
         var n = items.length;
-        this.loaded = 0;
-        this.total = items.length;
-        this.event.total = this.total;
+        _this.loaded = 0;
+        _this.total = items.length;
+        _this.event.total = _this.total;
         if (onProgress) {
-            this.onProgress(onProgress);
+            _this.onProgress(onProgress);
         }
-        items.forEach(this.loadOne.bind(this));
+        items.forEach(_this.loadOne.bind(_this));
+        return _this;
     }
     /**
      * 注册加载进度的回调函数。

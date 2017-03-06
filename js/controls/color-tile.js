@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var style_1 = require("../style");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
@@ -16,7 +22,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var Color = (function (_super) {
     __extends(Color, _super);
     function Color(type) {
-        _super.call(this, type);
+        return _super.call(this, type) || this;
     }
     Object.defineProperty(Color.prototype, "color", {
         get: function () {
@@ -90,7 +96,7 @@ exports.Color = Color;
 var ColorTile = (function (_super) {
     __extends(ColorTile, _super);
     function ColorTile() {
-        _super.call(this, ColorTile.TYPE);
+        return _super.call(this, ColorTile.TYPE) || this;
     }
     Object.defineProperty(ColorTile.prototype, "color", {
         get: function () {
@@ -115,17 +121,17 @@ var ColorTile = (function (_super) {
     ColorTile.create = function (options) {
         return ColorTile.recycleBin.create(options);
     };
-    ColorTile.TYPE = "color-tile";
-    ColorTile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorTile);
     return ColorTile;
 }(Color));
+ColorTile.TYPE = "color-tile";
+ColorTile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorTile);
 exports.ColorTile = ColorTile;
 ;
 widget_factory_1.WidgetFactory.register(ColorTile.TYPE, ColorTile.create);
 var ColorLine = (function (_super) {
     __extends(ColorLine, _super);
     function ColorLine() {
-        _super.call(this, ColorLine.TYPE);
+        return _super.call(this, ColorLine.TYPE) || this;
     }
     Object.defineProperty(ColorLine.prototype, "color", {
         get: function () {
@@ -245,10 +251,10 @@ var ColorLine = (function (_super) {
     ColorLine.create = function (options) {
         return ColorLine.recycleBin.create(options);
     };
-    ColorLine.TYPE = "color-tile";
-    ColorLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorLine);
     return ColorLine;
 }(Color));
+ColorLine.TYPE = "color-tile";
+ColorLine.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ColorLine);
 exports.ColorLine = ColorLine;
 ;
 widget_factory_1.WidgetFactory.register(ColorLine.TYPE, ColorLine.create);

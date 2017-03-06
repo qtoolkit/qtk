@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var label_1 = require("./label");
@@ -20,15 +26,15 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var Edit = (function (_super) {
     __extends(Edit, _super);
     function Edit() {
-        _super.call(this, Edit.TYPE);
-        this.onWheel = function () {
+        var _this = _super.call(this, Edit.TYPE) || this;
+        _this.onWheel = function () {
             var input = this._input;
             if (input) {
                 input.hide();
                 this.hideEditor();
             }
-        }.bind(this);
-        this.drawInvalidInputTips = function (evt) {
+        }.bind(_this);
+        _this.drawInvalidInputTips = function (evt) {
             var win = this.win;
             var tm = this._themeManager;
             var text = this._validationTips;
@@ -55,7 +61,8 @@ var Edit = (function (_super) {
             }
             graphics_1.Graphics.drawRoundRect(ctx, style.backGroundColor, style.lineColor, style.lineWidth, r.x, r.y, r.w, r.h, style.roundRadius);
             graphics_1.Graphics.drawTextSL(ctx, text, style, r);
-        }.bind(this);
+        }.bind(_this);
+        return _this;
     }
     Object.defineProperty(Edit.prototype, "inputable", {
         get: function () {
@@ -238,11 +245,11 @@ var Edit = (function (_super) {
     Edit.create = function (options) {
         return Edit.r.create(options);
     };
-    Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
-    Edit.TYPE = "edit";
-    Edit.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Edit);
     return Edit;
 }(label_1.Label));
+Edit.defProps = Object.assign({}, label_1.Label.defProps, { _mlm: false, _it: null, _itp: null });
+Edit.TYPE = "edit";
+Edit.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Edit);
 exports.Edit = Edit;
 ;
 widget_factory_1.WidgetFactory.register(Edit.TYPE, Edit.create);

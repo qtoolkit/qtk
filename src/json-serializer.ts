@@ -3,7 +3,7 @@
  */
 export class JsonSerializer {
 	public toJson() : any {
-		var json = {};
+		var json:any = {};
 
 		for(var key in this) {
 			var value = this[key];

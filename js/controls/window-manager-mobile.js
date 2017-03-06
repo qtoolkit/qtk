@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var window_1 = require("./window");
 var window_manager_1 = require("./window-manager");
 var widget_factory_1 = require("./widget-factory");
@@ -14,7 +20,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var WindowManagerMobile = (function (_super) {
     __extends(WindowManagerMobile, _super);
     function WindowManagerMobile() {
-        _super.call(this, WindowManagerMobile.TYPE);
+        return _super.call(this, WindowManagerMobile.TYPE) || this;
     }
     Object.defineProperty(WindowManagerMobile.prototype, "target", {
         get: function () {
@@ -110,10 +116,10 @@ var WindowManagerMobile = (function (_super) {
     WindowManagerMobile.create = function (options) {
         return WindowManagerMobile.recycleBin.create(options);
     };
-    WindowManagerMobile.TYPE = "window-manager-mobile";
-    WindowManagerMobile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(WindowManagerMobile);
     return WindowManagerMobile;
 }(window_manager_1.WindowManager));
+WindowManagerMobile.TYPE = "window-manager-mobile";
+WindowManagerMobile.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(WindowManagerMobile);
 exports.WindowManagerMobile = WindowManagerMobile;
 ;
 widget_factory_1.WidgetFactory.register(WindowManagerMobile.TYPE, WindowManagerMobile.create);

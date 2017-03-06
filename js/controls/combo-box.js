@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var edit_1 = require("./edit");
@@ -33,7 +39,7 @@ exports.ComboBoxOption = ComboBoxOption;
 var ComboBoxItem = (function (_super) {
     __extends(ComboBoxItem, _super);
     function ComboBoxItem() {
-        _super.call(this, ComboBoxItem.TYPE);
+        return _super.call(this, ComboBoxItem.TYPE) || this;
     }
     ComboBoxItem.prototype.onReset = function () {
         _super.prototype.onReset.call(this);
@@ -92,16 +98,16 @@ var ComboBoxItem = (function (_super) {
     ComboBoxItem.create = function (options) {
         return ComboBoxItem.r.create().reset(ComboBoxItem.TYPE, options);
     };
-    ComboBoxItem.TYPE = "combo-box-item";
-    ComboBoxItem.r = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBoxItem(); });
     return ComboBoxItem;
 }(list_item_1.ListItem));
+ComboBoxItem.TYPE = "combo-box-item";
+ComboBoxItem.r = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBoxItem(); });
 exports.ComboBoxItem = ComboBoxItem;
 ;
 var ComboBoxBase = (function (_super) {
     __extends(ComboBoxBase, _super);
     function ComboBoxBase(type) {
-        _super.call(this, type);
+        return _super.call(this, type) || this;
     }
     Object.defineProperty(ComboBoxBase.prototype, "options", {
         get: function () {
@@ -296,15 +302,15 @@ var ComboBoxBase = (function (_super) {
     ComboBoxBase.prototype.getDefProps = function () {
         return ComboBoxBase.defProps;
     };
-    ComboBoxBase.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 25, _lp: 2, _rp: 2 });
     return ComboBoxBase;
 }(widget_1.Widget));
+ComboBoxBase.defProps = Object.assign({}, widget_1.Widget.defProps, { _ih: 25, _lp: 2, _rp: 2 });
 exports.ComboBoxBase = ComboBoxBase;
 ;
 var ComboBox = (function (_super) {
     __extends(ComboBox, _super);
     function ComboBox() {
-        _super.call(this, ComboBox.TYPE);
+        return _super.call(this, ComboBox.TYPE) || this;
     }
     Object.defineProperty(ComboBox.prototype, "customDraw", {
         get: function () {
@@ -346,17 +352,17 @@ var ComboBox = (function (_super) {
     ComboBox.create = function (options) {
         return ComboBox.recycleBin.create().reset(ComboBox.TYPE, options);
     };
-    ComboBox.TYPE = "combo-box";
-    ComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBox(); });
     return ComboBox;
 }(ComboBoxBase));
+ComboBox.TYPE = "combo-box";
+ComboBox.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new ComboBox(); });
 exports.ComboBox = ComboBox;
 ;
 widget_factory_1.WidgetFactory.register(ComboBox.TYPE, ComboBox.create);
 var ComboBoxEditable = (function (_super) {
     __extends(ComboBoxEditable, _super);
     function ComboBoxEditable() {
-        _super.call(this, ComboBoxEditable.TYPE);
+        return _super.call(this, ComboBoxEditable.TYPE) || this;
     }
     Object.defineProperty(ComboBoxEditable.prototype, "value", {
         get: function () {
@@ -415,12 +421,12 @@ var ComboBoxEditable = (function (_super) {
     ComboBoxEditable.create = function (options) {
         return ComboBoxEditable.recycleBin.create().reset(ComboBoxEditable.TYPE, options);
     };
-    ComboBoxEditable.TYPE = "combo-box.editable";
-    ComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () {
-        return new ComboBoxEditable();
-    });
     return ComboBoxEditable;
 }(ComboBoxBase));
+ComboBoxEditable.TYPE = "combo-box.editable";
+ComboBoxEditable.recycleBin = new recyclable_creator_1.RecyclableCreator(function () {
+    return new ComboBoxEditable();
+});
 exports.ComboBoxEditable = ComboBoxEditable;
 ;
 widget_factory_1.WidgetFactory.register(ComboBoxEditable.TYPE, ComboBoxEditable.create);

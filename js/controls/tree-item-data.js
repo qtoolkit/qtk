@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = require("../utils");
 var emitter_1 = require("../emitter");
 var image_tile_1 = require("../image-tile");
@@ -13,18 +19,18 @@ var image_tile_1 = require("../image-tile");
 var TreeItemData = (function (_super) {
     __extends(TreeItemData, _super);
     function TreeItemData(text, iconURL, userData) {
-        _super.call(this);
-        this.userData = userData;
-        this.text = text;
+        var _this = _super.call(this) || this;
+        _this.userData = userData;
+        _this.text = text;
         if (iconURL) {
-            this.icon = image_tile_1.ImageTile.create(iconURL, function (evt) {
+            _this.icon = image_tile_1.ImageTile.create(iconURL, function (evt) {
             });
         }
         else {
-            this.icon = null;
+            _this.icon = null;
         }
-        this.children = [];
-        return;
+        _this.children = [];
+        return _this;
     }
     /**
      * 从子节点数组中删除指定的子节点。

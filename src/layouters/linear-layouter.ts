@@ -240,6 +240,11 @@ export class LinearLayouterParam extends LayouterParam {
 		this.position = position;
 	}
 
+	
+	public static createWithOptions(opts:any) : LinearLayouterParam {
+		return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
+	}
+	
 	public static TYPE = "linear";
 	public static defParam = LinearLayouterParam.createWithOptions(null);
 	public static createWithType(type:string, opts:any) : LinearLayouterParam {
@@ -263,9 +268,6 @@ export class LinearLayouterParam extends LayouterParam {
 					 w.toString(), h.toString(), spacing || 0, align, position|0);
 	}
 
-	public static createWithOptions(opts:any) : LinearLayouterParam {
-		return LinearLayouterParam.createWithType(LinearLayouterParam.TYPE, opts);
-	}
 };
 
 LayouterParamFactory.register(LinearLayouterParam.TYPE, LinearLayouterParam.createWithOptions);

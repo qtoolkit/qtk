@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var property_dialog_1 = require("../controls-ext/property-dialog");
 var PropsDialog = (function () {
     function PropsDialog() {

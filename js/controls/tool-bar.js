@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var group_1 = require("./group");
 var widget_1 = require("./widget");
 var image_tile_1 = require("../image-tile");
@@ -17,7 +23,7 @@ var linear_layouter_1 = require("../layouters/linear-layouter");
 var ToolBarItem = (function (_super) {
     __extends(ToolBarItem, _super);
     function ToolBarItem(type) {
-        _super.call(this, ToolBarItem.TYPE);
+        return _super.call(this, ToolBarItem.TYPE) || this;
     }
     ToolBarItem.prototype.drawImage = function (ctx, style) {
         var icon = this.enable ? this.normalIcon : this.disableIcon;
@@ -41,11 +47,11 @@ var ToolBarItem = (function (_super) {
         return ToolBarItem.recycleBin.create(options);
     };
     ;
-    ToolBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, { normalIconURL: null, disableIconURL: null });
-    ToolBarItem.TYPE = "tool-bar-item";
-    ToolBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ToolBarItem);
     return ToolBarItem;
 }(widget_1.Widget));
+ToolBarItem.defProps = Object.assign({}, widget_1.Widget.defProps, { normalIconURL: null, disableIconURL: null });
+ToolBarItem.TYPE = "tool-bar-item";
+ToolBarItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ToolBarItem);
 exports.ToolBarItem = ToolBarItem;
 /**
  * @class ToolBar
@@ -55,7 +61,7 @@ exports.ToolBarItem = ToolBarItem;
 var ToolBar = (function (_super) {
     __extends(ToolBar, _super);
     function ToolBar() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     ToolBar.prototype.onInit = function () {
         _super.prototype.onInit.call(this);
@@ -101,8 +107,8 @@ var ToolBar = (function (_super) {
         return ToolBar.recycleBin.create(options);
     };
     ;
-    ToolBar.TYPE = "tool-bar";
-    ToolBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ToolBar);
     return ToolBar;
 }(widget_1.Widget));
+ToolBar.TYPE = "tool-bar";
+ToolBar.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ToolBar);
 exports.ToolBar = ToolBar;

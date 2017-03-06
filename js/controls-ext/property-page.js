@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var title_link_1 = require("./title-link");
 var title_line_1 = require("./title-line");
@@ -36,7 +42,7 @@ var props_desc_4 = require("./props-desc");
 var PropertyPage = (function (_super) {
     __extends(PropertyPage, _super);
     function PropertyPage() {
-        _super.call(this, PropertyPage.TYPE);
+        return _super.call(this, PropertyPage.TYPE) || this;
     }
     Object.defineProperty(PropertyPage.prototype, "itemH", {
         get: function () {
@@ -607,11 +613,11 @@ var PropertyPage = (function (_super) {
     PropertyPage.create = function (options) {
         return PropertyPage.rBin.create(options);
     };
-    PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _bp: 5, _itemH: 30, _titleW: "80px", _valueW: "100%" });
-    PropertyPage.TYPE = "property-page";
-    PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
     return PropertyPage;
 }(widget_1.Widget));
+PropertyPage.defProps = Object.assign({}, widget_1.Widget.defProps, { _bp: 5, _itemH: 30, _titleW: "80px", _valueW: "100%" });
+PropertyPage.TYPE = "property-page";
+PropertyPage.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyPage);
 exports.PropertyPage = PropertyPage;
 ;
 widget_factory_1.WidgetFactory.register(PropertyPage.TYPE, PropertyPage.create);

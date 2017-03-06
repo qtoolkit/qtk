@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
@@ -16,7 +22,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabButtonGroup = (function (_super) {
     __extends(TabButtonGroup, _super);
     function TabButtonGroup() {
-        _super.call(this, TabButtonGroup.TYPE);
+        return _super.call(this, TabButtonGroup.TYPE) || this;
     }
     Object.defineProperty(TabButtonGroup.prototype, "value", {
         get: function () {
@@ -98,11 +104,11 @@ var TabButtonGroup = (function (_super) {
     TabButtonGroup.create = function (options) {
         return TabButtonGroup.r.create(options);
     };
-    TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
-    TabButtonGroup.TYPE = "tab-button-group";
-    TabButtonGroup.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButtonGroup);
     return TabButtonGroup;
 }(widget_1.Widget));
+TabButtonGroup.defProps = Object.assign({}, widget_1.Widget.defProps, { _ae: true });
+TabButtonGroup.TYPE = "tab-button-group";
+TabButtonGroup.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButtonGroup);
 exports.TabButtonGroup = TabButtonGroup;
 ;
 widget_factory_1.WidgetFactory.register(TabButtonGroup.TYPE, TabButtonGroup.create);

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var page_1 = require("./page");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
@@ -15,7 +21,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabPage = (function (_super) {
     __extends(TabPage, _super);
     function TabPage() {
-        _super.call(this, TabPage.TYPE);
+        return _super.call(this, TabPage.TYPE) || this;
     }
     TabPage.prototype.dispose = function () {
         _super.prototype.dispose.call(this);
@@ -24,10 +30,10 @@ var TabPage = (function (_super) {
     TabPage.create = function (options) {
         return TabPage.r.create(options);
     };
-    TabPage.TYPE = "page";
-    TabPage.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabPage);
     return TabPage;
 }(page_1.Page));
+TabPage.TYPE = "page";
+TabPage.r = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabPage);
 exports.TabPage = TabPage;
 ;
 widget_factory_1.WidgetFactory.register(TabPage.TYPE, TabPage.create);

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Range = (function () {
     function Range(first, second) {
         this.first = first;
@@ -14,8 +15,8 @@ var Range = (function () {
     Range.create = function (first, second) {
         return new Range(first, second);
     };
-    Range.range = Range.create(0, 0);
     return Range;
 }());
+Range.range = Range.create(0, 0);
 exports.Range = Range;
 ;

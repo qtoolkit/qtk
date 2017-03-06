@@ -1,21 +1,28 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var widget_1 = require("../controls/widget");
 var widget_factory_1 = require("../controls/widget-factory");
 var recyclable_creator_1 = require("../recyclable-creator");
 var Ruler = (function (_super) {
     __extends(Ruler, _super);
     function Ruler(type) {
-        _super.call(this, type);
-        this.scale = 1;
-        this.originX = 0;
-        this.originY = 0;
-        this.pointerX = 0;
-        this.pointerY = 0;
+        var _this = _super.call(this, type) || this;
+        _this.scale = 1;
+        _this.originX = 0;
+        _this.originY = 0;
+        _this.pointerX = 0;
+        _this.pointerY = 0;
+        return _this;
     }
     Object.defineProperty(Ruler.prototype, "originX", {
         get: function () {
@@ -90,15 +97,15 @@ var Ruler = (function (_super) {
         this.drawColorBackground(ctx, style);
         return this;
     };
-    Ruler.SIZE = 10;
     return Ruler;
 }(widget_1.Widget));
+Ruler.SIZE = 10;
 exports.Ruler = Ruler;
 ;
 var VRuler = (function (_super) {
     __extends(VRuler, _super);
     function VRuler() {
-        _super.call(this, VRuler.TYPE);
+        return _super.call(this, VRuler.TYPE) || this;
     }
     VRuler.prototype.drawColorBackground = function (ctx, style) {
         var h = this.w;
@@ -199,17 +206,17 @@ var VRuler = (function (_super) {
     VRuler.create = function (options) {
         return VRuler.recycleBin.create().reset(VRuler.TYPE, options);
     };
-    VRuler.TYPE = "vruler";
-    VRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new VRuler(); });
     return VRuler;
 }(Ruler));
+VRuler.TYPE = "vruler";
+VRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new VRuler(); });
 exports.VRuler = VRuler;
 ;
 widget_factory_1.WidgetFactory.register(VRuler.TYPE, VRuler.create);
 var HRuler = (function (_super) {
     __extends(HRuler, _super);
     function HRuler() {
-        _super.call(this, HRuler.TYPE);
+        return _super.call(this, HRuler.TYPE) || this;
     }
     HRuler.prototype.drawColorBackground = function (ctx, style) {
         var w = this.w;
@@ -294,10 +301,10 @@ var HRuler = (function (_super) {
     HRuler.create = function (options) {
         return HRuler.recycleBin.create().reset(HRuler.TYPE, options);
     };
-    HRuler.TYPE = "hruler";
-    HRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new HRuler(); });
     return HRuler;
 }(Ruler));
+HRuler.TYPE = "hruler";
+HRuler.recycleBin = new recyclable_creator_1.RecyclableCreator(function () { return new HRuler(); });
 exports.HRuler = HRuler;
 ;
 widget_factory_1.WidgetFactory.register(HRuler.TYPE, HRuler.create);

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var DelegateValueConverter = (function () {
     function DelegateValueConverter(convert, convertBack) {
         this._convert = convert;

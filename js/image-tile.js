@@ -1,16 +1,23 @@
 /// <reference path="../typings/globals/node/index.d.ts"/>
 /// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 require("whatwg-fetch");
 var path = require("path");
 var emitter_1 = require("./emitter");
 var assets_1 = require("./assets");
 var Events = require("./events");
+var ImageDrawType;
 (function (ImageDrawType) {
     /**
      * 画在填满指定的矩形区域。
@@ -52,8 +59,7 @@ var Events = require("./events");
      * ICON
      */
     ImageDrawType[ImageDrawType["ICON"] = 10] = "ICON";
-})(exports.ImageDrawType || (exports.ImageDrawType = {}));
-var ImageDrawType = exports.ImageDrawType;
+})(ImageDrawType = exports.ImageDrawType || (exports.ImageDrawType = {}));
 /**
  * 把多个小的图片合并成一张大图，不但可以减少网路请求和GPU的调用次数，还可以提高内存的利用率。
  * ImageTile用来表示大图中的一张小图，QTK中支持下面几种方式：
@@ -88,17 +94,18 @@ var ImageDrawType = exports.ImageDrawType;
 var ImageTile = (function (_super) {
     __extends(ImageTile, _super);
     function ImageTile(src) {
-        _super.call(this);
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-        this._id = 0;
-        this.img = null;
-        this.src = src;
+        var _this = _super.call(this) || this;
+        _this.x = 0;
+        _this.y = 0;
+        _this.w = 0;
+        _this.h = 0;
+        _this._id = 0;
+        _this.img = null;
+        _this.src = src;
         if (src) {
-            this.create(src);
+            _this.create(src);
         }
+        return _this;
     }
     ImageTile.prototype.toJson = function () {
         return this.src;
@@ -402,10 +409,10 @@ var ImageTile = (function (_super) {
         }
         return it;
     };
-    ImageTile.scale = 1;
-    ImageTile.density = 1;
-    ImageTile.cache = {};
     return ImageTile;
 }(emitter_1.Emitter));
+ImageTile.scale = 1;
+ImageTile.density = 1;
+ImageTile.cache = {};
 exports.ImageTile = ImageTile;
 ;

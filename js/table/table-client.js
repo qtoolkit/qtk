@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var range_1 = require("../range");
@@ -17,7 +23,7 @@ var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator
 var TableClient = (function (_super) {
     __extends(TableClient, _super);
     function TableClient() {
-        _super.call(this, TableClient.TYPE);
+        return _super.call(this, TableClient.TYPE) || this;
     }
     Object.defineProperty(TableClient.prototype, "colsWidth", {
         get: function () {
@@ -249,10 +255,10 @@ var TableClient = (function (_super) {
     TableClient.create = function (options) {
         return TableClient.rBin.create(options);
     };
-    TableClient.TYPE = "table-client";
-    TableClient.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableClient);
     return TableClient;
 }(list_view_1.ListView));
+TableClient.TYPE = "table-client";
+TableClient.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableClient);
 exports.TableClient = TableClient;
 ;
 widget_factory_1.WidgetFactory.register(TableClient.TYPE, TableClient.create);

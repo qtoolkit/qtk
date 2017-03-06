@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var emitter_1 = require("../emitter");
 /**
@@ -48,9 +54,9 @@ var PropDesc = (function () {
         this.updateTiming = updateTiming || "changed";
         return this;
     };
-    PropDesc.keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
     return PropDesc;
 }());
+PropDesc.keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
 exports.PropDesc = PropDesc;
 ;
 /**
@@ -61,9 +67,10 @@ exports.PropDesc = PropDesc;
 var NumberPropDesc = (function (_super) {
     __extends(NumberPropDesc, _super);
     function NumberPropDesc(min, max) {
-        _super.call(this, NumberPropDesc.TYPE);
-        this.min = min;
-        this.max = max;
+        var _this = _super.call(this, NumberPropDesc.TYPE) || this;
+        _this.min = min;
+        _this.max = max;
+        return _this;
     }
     NumberPropDesc.prototype.toJson = function () {
         var json = _super.prototype.toJson.call(this);
@@ -79,9 +86,9 @@ var NumberPropDesc = (function (_super) {
     NumberPropDesc.create = function (min, max) {
         return new NumberPropDesc(min, max);
     };
-    NumberPropDesc.TYPE = "number";
     return NumberPropDesc;
 }(PropDesc));
+NumberPropDesc.TYPE = "number";
 exports.NumberPropDesc = NumberPropDesc;
 ;
 /**
@@ -92,15 +99,16 @@ exports.NumberPropDesc = NumberPropDesc;
 var TextPropDesc = (function (_super) {
     __extends(TextPropDesc, _super);
     function TextPropDesc(lines) {
-        _super.call(this, TextPropDesc.TYPE);
-        this.lines = lines || 1;
+        var _this = _super.call(this, TextPropDesc.TYPE) || this;
+        _this.lines = lines || 1;
+        return _this;
     }
     TextPropDesc.create = function (lines) {
         return new TextPropDesc(lines);
     };
-    TextPropDesc.TYPE = "text";
     return TextPropDesc;
 }(PropDesc));
+TextPropDesc.TYPE = "text";
 exports.TextPropDesc = TextPropDesc;
 /**
  * @class ButtonPropDesc
@@ -110,15 +118,16 @@ exports.TextPropDesc = TextPropDesc;
 var ButtonPropDesc = (function (_super) {
     __extends(ButtonPropDesc, _super);
     function ButtonPropDesc(command) {
-        _super.call(this, ButtonPropDesc.TYPE);
-        this.command = command;
+        var _this = _super.call(this, ButtonPropDesc.TYPE) || this;
+        _this.command = command;
+        return _this;
     }
     ButtonPropDesc.create = function (command) {
         return new ButtonPropDesc(command);
     };
-    ButtonPropDesc.TYPE = "button";
     return ButtonPropDesc;
 }(PropDesc));
+ButtonPropDesc.TYPE = "button";
 exports.ButtonPropDesc = ButtonPropDesc;
 /**
  * @class ColorPropDesc
@@ -128,14 +137,14 @@ exports.ButtonPropDesc = ButtonPropDesc;
 var ColorPropDesc = (function (_super) {
     __extends(ColorPropDesc, _super);
     function ColorPropDesc() {
-        _super.call(this, ColorPropDesc.TYPE);
+        return _super.call(this, ColorPropDesc.TYPE) || this;
     }
     ColorPropDesc.create = function () {
         return new ColorPropDesc();
     };
-    ColorPropDesc.TYPE = "color";
     return ColorPropDesc;
 }(PropDesc));
+ColorPropDesc.TYPE = "color";
 exports.ColorPropDesc = ColorPropDesc;
 /**
  * @class LinkPropDesc
@@ -145,14 +154,14 @@ exports.ColorPropDesc = ColorPropDesc;
 var LinkPropDesc = (function (_super) {
     __extends(LinkPropDesc, _super);
     function LinkPropDesc() {
-        _super.call(this, LinkPropDesc.TYPE);
+        return _super.call(this, LinkPropDesc.TYPE) || this;
     }
     LinkPropDesc.create = function () {
         return new LinkPropDesc();
     };
-    LinkPropDesc.TYPE = "link";
     return LinkPropDesc;
 }(PropDesc));
+LinkPropDesc.TYPE = "link";
 exports.LinkPropDesc = LinkPropDesc;
 /**
  * @class ReadonlyTextPropDesc
@@ -162,14 +171,14 @@ exports.LinkPropDesc = LinkPropDesc;
 var ReadonlyTextPropDesc = (function (_super) {
     __extends(ReadonlyTextPropDesc, _super);
     function ReadonlyTextPropDesc() {
-        _super.call(this, ReadonlyTextPropDesc.TYPE);
+        return _super.call(this, ReadonlyTextPropDesc.TYPE) || this;
     }
     ReadonlyTextPropDesc.create = function () {
         return new ReadonlyTextPropDesc();
     };
-    ReadonlyTextPropDesc.TYPE = "text-readonly";
     return ReadonlyTextPropDesc;
 }(PropDesc));
+ReadonlyTextPropDesc.TYPE = "text-readonly";
 exports.ReadonlyTextPropDesc = ReadonlyTextPropDesc;
 /**
  * @class SliderPropDesc
@@ -179,14 +188,14 @@ exports.ReadonlyTextPropDesc = ReadonlyTextPropDesc;
 var SliderPropDesc = (function (_super) {
     __extends(SliderPropDesc, _super);
     function SliderPropDesc() {
-        _super.call(this, SliderPropDesc.TYPE);
+        return _super.call(this, SliderPropDesc.TYPE) || this;
     }
     SliderPropDesc.create = function () {
         return new SliderPropDesc();
     };
-    SliderPropDesc.TYPE = "slider";
     return SliderPropDesc;
 }(PropDesc));
+SliderPropDesc.TYPE = "slider";
 exports.SliderPropDesc = SliderPropDesc;
 /**
  * @class RangePropDesc
@@ -196,14 +205,14 @@ exports.SliderPropDesc = SliderPropDesc;
 var RangePropDesc = (function (_super) {
     __extends(RangePropDesc, _super);
     function RangePropDesc() {
-        _super.call(this, RangePropDesc.TYPE);
+        return _super.call(this, RangePropDesc.TYPE) || this;
     }
     RangePropDesc.create = function () {
         return new RangePropDesc();
     };
-    RangePropDesc.TYPE = "range";
     return RangePropDesc;
 }(PropDesc));
+RangePropDesc.TYPE = "range";
 exports.RangePropDesc = RangePropDesc;
 /**
  * @class Vector2PropDesc
@@ -213,9 +222,10 @@ exports.RangePropDesc = RangePropDesc;
 var Vector2PropDesc = (function (_super) {
     __extends(Vector2PropDesc, _super);
     function Vector2PropDesc(xTitle, yTitle) {
-        _super.call(this, Vector2PropDesc.TYPE);
-        this.xTitle = xTitle;
-        this.yTitle = yTitle;
+        var _this = _super.call(this, Vector2PropDesc.TYPE) || this;
+        _this.xTitle = xTitle;
+        _this.yTitle = yTitle;
+        return _this;
     }
     Vector2PropDesc.prototype.toJson = function () {
         var json = _super.prototype.toJson.call(this);
@@ -231,9 +241,9 @@ var Vector2PropDesc = (function (_super) {
     Vector2PropDesc.create = function (xTitle, yTitle) {
         return new Vector2PropDesc(xTitle, yTitle);
     };
-    Vector2PropDesc.TYPE = "vector2";
     return Vector2PropDesc;
 }(PropDesc));
+Vector2PropDesc.TYPE = "vector2";
 exports.Vector2PropDesc = Vector2PropDesc;
 /**
  * @class Vector3PropDesc
@@ -243,10 +253,11 @@ exports.Vector2PropDesc = Vector2PropDesc;
 var Vector3PropDesc = (function (_super) {
     __extends(Vector3PropDesc, _super);
     function Vector3PropDesc(xTitle, yTitle, zTitle) {
-        _super.call(this, Vector3PropDesc.TYPE);
-        this.xTitle = xTitle;
-        this.yTitle = yTitle;
-        this.zTitle = zTitle;
+        var _this = _super.call(this, Vector3PropDesc.TYPE) || this;
+        _this.xTitle = xTitle;
+        _this.yTitle = yTitle;
+        _this.zTitle = zTitle;
+        return _this;
     }
     Vector3PropDesc.prototype.toJson = function () {
         var json = _super.prototype.toJson.call(this);
@@ -264,9 +275,9 @@ var Vector3PropDesc = (function (_super) {
     Vector3PropDesc.create = function (xTitle, yTitle, zTitle) {
         return new Vector3PropDesc(xTitle, yTitle, zTitle);
     };
-    Vector3PropDesc.TYPE = "vector3";
     return Vector3PropDesc;
 }(PropDesc));
+Vector3PropDesc.TYPE = "vector3";
 exports.Vector3PropDesc = Vector3PropDesc;
 /**
  * @class Vector4PropDesc
@@ -276,11 +287,12 @@ exports.Vector3PropDesc = Vector3PropDesc;
 var Vector4PropDesc = (function (_super) {
     __extends(Vector4PropDesc, _super);
     function Vector4PropDesc(xTitle, yTitle, zTitle, wTitle) {
-        _super.call(this, Vector4PropDesc.TYPE);
-        this.xTitle = xTitle;
-        this.yTitle = yTitle;
-        this.zTitle = zTitle;
-        this.wTitle = wTitle;
+        var _this = _super.call(this, Vector4PropDesc.TYPE) || this;
+        _this.xTitle = xTitle;
+        _this.yTitle = yTitle;
+        _this.zTitle = zTitle;
+        _this.wTitle = wTitle;
+        return _this;
     }
     Vector4PropDesc.prototype.toJson = function () {
         var json = _super.prototype.toJson.call(this);
@@ -300,9 +312,9 @@ var Vector4PropDesc = (function (_super) {
     Vector4PropDesc.create = function (xTitle, yTitle, zTitle, wTitle) {
         return new Vector4PropDesc(xTitle, yTitle, zTitle, wTitle);
     };
-    Vector4PropDesc.TYPE = "vector4";
     return Vector4PropDesc;
 }(PropDesc));
+Vector4PropDesc.TYPE = "vector4";
 exports.Vector4PropDesc = Vector4PropDesc;
 /**
  * @class LinePropDesc
@@ -312,14 +324,14 @@ exports.Vector4PropDesc = Vector4PropDesc;
 var LinePropDesc = (function (_super) {
     __extends(LinePropDesc, _super);
     function LinePropDesc() {
-        _super.call(this, LinePropDesc.TYPE);
+        return _super.call(this, LinePropDesc.TYPE) || this;
     }
     LinePropDesc.create = function () {
         return new LinePropDesc();
     };
-    LinePropDesc.TYPE = "line";
     return LinePropDesc;
 }(PropDesc));
+LinePropDesc.TYPE = "line";
 exports.LinePropDesc = LinePropDesc;
 /**
  * @class BoolPropDesc
@@ -329,14 +341,14 @@ exports.LinePropDesc = LinePropDesc;
 var BoolPropDesc = (function (_super) {
     __extends(BoolPropDesc, _super);
     function BoolPropDesc() {
-        _super.call(this, BoolPropDesc.TYPE);
+        return _super.call(this, BoolPropDesc.TYPE) || this;
     }
     BoolPropDesc.create = function () {
         return new BoolPropDesc();
     };
-    BoolPropDesc.TYPE = "bool";
     return BoolPropDesc;
 }(PropDesc));
+BoolPropDesc.TYPE = "bool";
 exports.BoolPropDesc = BoolPropDesc;
 /**
  * @class OptionsPropDesc
@@ -346,8 +358,9 @@ exports.BoolPropDesc = BoolPropDesc;
 var OptionsPropDesc = (function (_super) {
     __extends(OptionsPropDesc, _super);
     function OptionsPropDesc(options) {
-        _super.call(this, OptionsPropDesc.TYPE);
-        this.options = options;
+        var _this = _super.call(this, OptionsPropDesc.TYPE) || this;
+        _this.options = options;
+        return _this;
     }
     OptionsPropDesc.prototype.toJson = function () {
         var json = _super.prototype.toJson.call(this);
@@ -361,9 +374,9 @@ var OptionsPropDesc = (function (_super) {
     OptionsPropDesc.create = function (options) {
         return new OptionsPropDesc(options);
     };
-    OptionsPropDesc.TYPE = "options";
     return OptionsPropDesc;
 }(PropDesc));
+OptionsPropDesc.TYPE = "options";
 exports.OptionsPropDesc = OptionsPropDesc;
 /**
  * @class PropsDesc
@@ -373,7 +386,7 @@ exports.OptionsPropDesc = OptionsPropDesc;
 var PropsDesc = (function (_super) {
     __extends(PropsDesc, _super);
     function PropsDesc() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     PropsDesc.prototype.notifyChange = function () {
         var e = Events.ChangeEvent.create().init(Events.CHANGE, { value: null });

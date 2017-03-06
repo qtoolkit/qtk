@@ -16,6 +16,13 @@ export class ValidationResult {
 	}
 
 	/**
+	 * 创建函数。
+	 */
+	public static create(code:number, message:string) {
+		return new ValidationResult(code, message);
+	}
+	
+	/**
 	 * 数据有效时，可以共用的结果，不能在运行时修改。
 	 */
 	public static validResult = ValidationResult.create(0, "valid");
@@ -25,12 +32,6 @@ export class ValidationResult {
 	 */
 	public static invalidResult = ValidationResult.create(-1, "invalid");
 
-	/**
-	 * 创建函数。
-	 */
-	public static create(code:number, message:string) {
-		return new ValidationResult(code, message);
-	}
 };
 
 /**

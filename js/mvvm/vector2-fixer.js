@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Vector2Fixer = (function () {
     function Vector2Fixer(xMin, xMax, yMin, yMax) {
         this._value = { x: 0, y: 0 };

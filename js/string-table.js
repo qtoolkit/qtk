@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var device_info_1 = require("./device-info");
 var StringTable = (function () {
     function StringTable() {
@@ -32,8 +33,8 @@ var StringTable = (function () {
         var tr = table ? table[str] : str;
         return tr ? tr : str;
     };
-    StringTable.table = {};
     return StringTable;
 }());
+StringTable.table = {};
 exports.StringTable = StringTable;
 ;

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var json_serializer_1 = require("../json-serializer");
 var iview_model_1 = require("../mvvm/iview-model");
 var iview_model_2 = require("../mvvm/iview-model");
@@ -14,25 +20,26 @@ var iview_model_2 = require("../mvvm/iview-model");
 var BindingDataSource = (function (_super) {
     __extends(BindingDataSource, _super);
     function BindingDataSource(path, value, mode, updateTiming, validationRule, converter) {
-        _super.call(this);
-        this.converter = converter;
-        this.type = BindingDataSource.TYPE;
-        this.validationRule = validationRule;
-        this.mode = mode || iview_model_2.BindingMode.TWO_WAY;
-        this.updateTiming = updateTiming !== undefined ? updateTiming : iview_model_2.UpdateTiming.CHANGING;
+        var _this = _super.call(this) || this;
+        _this.converter = converter;
+        _this.type = BindingDataSource.TYPE;
+        _this.validationRule = validationRule;
+        _this.mode = mode || iview_model_2.BindingMode.TWO_WAY;
+        _this.updateTiming = updateTiming !== undefined ? updateTiming : iview_model_2.UpdateTiming.CHANGING;
         if (path !== undefined) {
-            this.path = path;
+            _this.path = path;
         }
         if (value !== undefined) {
-            this.value = value;
+            _this.value = value;
         }
+        return _this;
     }
     BindingDataSource.create = function (path, value, mode, updateTiming, validationRule, converter) {
         return new BindingDataSource(path, value, mode, updateTiming, validationRule, converter);
     };
-    BindingDataSource.TYPE = "data";
     return BindingDataSource;
 }(json_serializer_1.JsonSerializer));
+BindingDataSource.TYPE = "data";
 exports.BindingDataSource = BindingDataSource;
 ;
 /**
@@ -41,18 +48,19 @@ exports.BindingDataSource = BindingDataSource;
 var BindingCommandSource = (function (_super) {
     __extends(BindingCommandSource, _super);
     function BindingCommandSource(command, commandArgs) {
-        _super.call(this);
-        this.command = command;
-        this.eventHandler = null;
-        this.commandArgs = commandArgs;
-        this.type = BindingCommandSource.TYPE;
+        var _this = _super.call(this) || this;
+        _this.command = command;
+        _this.eventHandler = null;
+        _this.commandArgs = commandArgs;
+        _this.type = BindingCommandSource.TYPE;
+        return _this;
     }
     BindingCommandSource.create = function (command, commandArgs) {
         return new BindingCommandSource(command, commandArgs);
     };
-    BindingCommandSource.TYPE = "command";
     return BindingCommandSource;
 }(json_serializer_1.JsonSerializer));
+BindingCommandSource.TYPE = "command";
 exports.BindingCommandSource = BindingCommandSource;
 /**
  * 单项数据绑定规则。

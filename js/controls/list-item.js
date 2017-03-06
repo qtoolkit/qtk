@@ -1,21 +1,27 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var widget_factory_1 = require("./widget-factory");
 var graphics_1 = require("../graphics");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var image_tile_1 = require("../image-tile");
+var ListItemStyle;
 (function (ListItemStyle) {
     ListItemStyle[ListItemStyle["NORMAL"] = 0] = "NORMAL";
     ListItemStyle[ListItemStyle["FIRST"] = 1] = "FIRST";
     ListItemStyle[ListItemStyle["LAST"] = 2] = "LAST";
-})(exports.ListItemStyle || (exports.ListItemStyle = {}));
-var ListItemStyle = exports.ListItemStyle;
+})(ListItemStyle = exports.ListItemStyle || (exports.ListItemStyle = {}));
 ;
 /**
  * 列表项。
@@ -23,7 +29,7 @@ var ListItemStyle = exports.ListItemStyle;
 var ListItem = (function (_super) {
     __extends(ListItem, _super);
     function ListItem(type) {
-        _super.call(this, type || ListItem.TYPE);
+        return _super.call(this, type || ListItem.TYPE) || this;
     }
     Object.defineProperty(ListItem.prototype, "oddEvenStyle", {
         get: function () {
@@ -112,18 +118,18 @@ var ListItem = (function (_super) {
     ListItem.create = function (options) {
         return ListItem.recycleBin.create(options);
     };
-    ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _oddEvenStyle: false, _iconURL: null });
-    ListItem.TYPE = "list-item";
-    ListItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItem);
     return ListItem;
 }(widget_1.Widget));
+ListItem.defProps = Object.assign({}, widget_1.Widget.defProps, { _oddEvenStyle: false, _iconURL: null });
+ListItem.TYPE = "list-item";
+ListItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItem);
 exports.ListItem = ListItem;
 ;
 widget_factory_1.WidgetFactory.register(ListItem.TYPE, ListItem.create);
 var ListItemCheckable = (function (_super) {
     __extends(ListItemCheckable, _super);
     function ListItemCheckable(type) {
-        _super.call(this, type || ListItemCheckable.TYPE);
+        return _super.call(this, type || ListItemCheckable.TYPE) || this;
     }
     Object.defineProperty(ListItemCheckable.prototype, "multiCheckable", {
         get: function () {
@@ -165,10 +171,10 @@ var ListItemCheckable = (function (_super) {
     ListItemCheckable.create = function (options) {
         return ListItemCheckable.rBin.create(options);
     };
-    ListItemCheckable.TYPE = "list-item.checkable";
-    ListItemCheckable.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItemCheckable);
     return ListItemCheckable;
 }(ListItem));
+ListItemCheckable.TYPE = "list-item.checkable";
+ListItemCheckable.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(ListItemCheckable);
 exports.ListItemCheckable = ListItemCheckable;
 ;
 widget_factory_1.WidgetFactory.register(ListItemCheckable.TYPE, ListItemCheckable.create);

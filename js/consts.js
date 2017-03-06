@@ -1,12 +1,14 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Orientation;
 (function (Orientation) {
     Orientation[Orientation["V"] = 1] = "V";
     Orientation[Orientation["VERTICAL"] = 1] = "VERTICAL";
     Orientation[Orientation["H"] = 2] = "H";
     Orientation[Orientation["HORIZONTAL"] = 2] = "HORIZONTAL";
-})(exports.Orientation || (exports.Orientation = {}));
-var Orientation = exports.Orientation;
+})(Orientation = exports.Orientation || (exports.Orientation = {}));
 ;
+var Direction;
 (function (Direction) {
     Direction[Direction["W"] = 1] = "W";
     Direction[Direction["WEST"] = 1] = "WEST";
@@ -24,9 +26,9 @@ var Orientation = exports.Orientation;
     Direction[Direction["TOP"] = 3] = "TOP";
     Direction[Direction["B"] = 4] = "B";
     Direction[Direction["BOTTOM"] = 4] = "BOTTOM";
-})(exports.Direction || (exports.Direction = {}));
-var Direction = exports.Direction;
+})(Direction = exports.Direction || (exports.Direction = {}));
 ;
+var AlignH;
 (function (AlignH) {
     AlignH[AlignH["L"] = 1] = "L";
     AlignH[AlignH["LEFT"] = 1] = "LEFT";
@@ -34,9 +36,9 @@ var Direction = exports.Direction;
     AlignH[AlignH["CENTER"] = 2] = "CENTER";
     AlignH[AlignH["R"] = 3] = "R";
     AlignH[AlignH["RIGHT"] = 3] = "RIGHT";
-})(exports.AlignH || (exports.AlignH = {}));
-var AlignH = exports.AlignH;
+})(AlignH = exports.AlignH || (exports.AlignH = {}));
 ;
+var AlignV;
 (function (AlignV) {
     AlignV[AlignV["T"] = 1] = "T";
     AlignV[AlignV["TOP"] = 1] = "TOP";
@@ -44,9 +46,9 @@ var AlignH = exports.AlignH;
     AlignV[AlignV["MIDDLE"] = 2] = "MIDDLE";
     AlignV[AlignV["B"] = 3] = "B";
     AlignV[AlignV["BOTTOM"] = 3] = "BOTTOM";
-})(exports.AlignV || (exports.AlignV = {}));
-var AlignV = exports.AlignV;
+})(AlignV = exports.AlignV || (exports.AlignV = {}));
 ;
+var Align;
 (function (Align) {
     Align[Align["L"] = 1] = "L";
     Align[Align["LEFT"] = 1] = "LEFT";
@@ -60,6 +62,5 @@ var AlignV = exports.AlignV;
     Align[Align["MIDDLE"] = 2] = "MIDDLE";
     Align[Align["B"] = 3] = "B";
     Align[Align["BOTTOM"] = 3] = "BOTTOM";
-})(exports.Align || (exports.Align = {}));
-var Align = exports.Align;
+})(Align = exports.Align || (exports.Align = {}));
 ;

@@ -1,18 +1,25 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("./rect");
 var point_1 = require("./point");
 var matrix_stack_1 = require("./matrix-stack");
 var DirtyRectContext = (function (_super) {
     __extends(DirtyRectContext, _super);
     function DirtyRectContext() {
-        _super.call(this);
-        this._rect = rect_1.Rect.create(0, 0, 0, 0);
-        this.reset();
+        var _this = _super.call(this) || this;
+        _this._rect = rect_1.Rect.create(0, 0, 0, 0);
+        _this.reset();
+        return _this;
     }
     DirtyRectContext.prototype.addRect = function (x, y, w, h) {
         var p = point_1.Point.point;

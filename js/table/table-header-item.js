@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var Events = require("../events");
 var widget_1 = require("../controls/widget");
@@ -15,8 +21,9 @@ var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator
 var TableHeaderItem = (function (_super) {
     __extends(TableHeaderItem, _super);
     function TableHeaderItem() {
-        _super.call(this, TableHeaderItem.TYPE);
-        this._sortEvent = Events.SortEvent.create(null, false);
+        var _this = _super.call(this, TableHeaderItem.TYPE) || this;
+        _this._sortEvent = Events.SortEvent.create(null, false);
+        return _this;
     }
     Object.defineProperty(TableHeaderItem.prototype, "sortKey", {
         get: function () {
@@ -86,12 +93,12 @@ var TableHeaderItem = (function (_super) {
     TableHeaderItem.create = function (options) {
         return TableHeaderItem.recycleBin.create(options);
     };
-    TableHeaderItem.SORT_INC = "inc";
-    TableHeaderItem.SORT_DEC = "dec";
-    TableHeaderItem.TYPE = "table-header-item";
-    TableHeaderItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeaderItem);
     return TableHeaderItem;
 }(widget_1.Widget));
+TableHeaderItem.SORT_INC = "inc";
+TableHeaderItem.SORT_DEC = "dec";
+TableHeaderItem.TYPE = "table-header-item";
+TableHeaderItem.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TableHeaderItem);
 exports.TableHeaderItem = TableHeaderItem;
 ;
 widget_factory_1.WidgetFactory.register(TableHeaderItem.TYPE, TableHeaderItem.create);

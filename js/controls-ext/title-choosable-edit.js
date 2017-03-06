@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var title_value_1 = require("./title-value");
 var choosable_edit_1 = require("./choosable-edit");
 var widget_factory_1 = require("../controls/widget-factory");
@@ -16,7 +22,7 @@ var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator
 var TitleChoosableEdit = (function (_super) {
     __extends(TitleChoosableEdit, _super);
     function TitleChoosableEdit(type) {
-        _super.call(this, type || TitleChoosableEdit.TYPE);
+        return _super.call(this, type || TitleChoosableEdit.TYPE) || this;
     }
     Object.defineProperty(TitleChoosableEdit.prototype, "onChoose", {
         get: function () {
@@ -57,10 +63,10 @@ var TitleChoosableEdit = (function (_super) {
     TitleChoosableEdit.create = function (options) {
         return TitleChoosableEdit.recycleBin.create(options);
     };
-    TitleChoosableEdit.TYPE = "title-choosable-edit";
-    TitleChoosableEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleChoosableEdit);
     return TitleChoosableEdit;
 }(title_value_1.TitleValue));
+TitleChoosableEdit.TYPE = "title-choosable-edit";
+TitleChoosableEdit.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleChoosableEdit);
 exports.TitleChoosableEdit = TitleChoosableEdit;
 ;
 widget_factory_1.WidgetFactory.register(TitleChoosableEdit.TYPE, TitleChoosableEdit.create);

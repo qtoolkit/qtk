@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var window_1 = require("./window");
 var window_manager_1 = require("./window-manager");
 var widget_factory_1 = require("./widget-factory");
@@ -14,7 +20,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var WindowManagerDesktop = (function (_super) {
     __extends(WindowManagerDesktop, _super);
     function WindowManagerDesktop() {
-        _super.call(this, WindowManagerDesktop.TYPE);
+        return _super.call(this, WindowManagerDesktop.TYPE) || this;
     }
     WindowManagerDesktop.prototype.createCanvas = function () {
         return this;
@@ -29,10 +35,10 @@ var WindowManagerDesktop = (function (_super) {
     WindowManagerDesktop.create = function (options) {
         return WindowManagerDesktop.recycleBin.create(options);
     };
-    WindowManagerDesktop.TYPE = "window-manager-desktop";
-    WindowManagerDesktop.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(WindowManagerDesktop);
     return WindowManagerDesktop;
 }(window_manager_1.WindowManager));
+WindowManagerDesktop.TYPE = "window-manager-desktop";
+WindowManagerDesktop.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(WindowManagerDesktop);
 exports.WindowManagerDesktop = WindowManagerDesktop;
 ;
 widget_factory_1.WidgetFactory.register(WindowManagerDesktop.TYPE, WindowManagerDesktop.create);

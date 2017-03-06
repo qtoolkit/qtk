@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var style_1 = require("./style");
 var utils_1 = require("./utils");
 /**

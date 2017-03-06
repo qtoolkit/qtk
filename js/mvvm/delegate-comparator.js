@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var DelegateComparator = (function () {
     function DelegateComparator(compare) {
         this._compare = compare;

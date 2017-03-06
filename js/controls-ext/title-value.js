@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var label_1 = require("../controls/label");
 var widget_1 = require("../controls/widget");
@@ -16,7 +22,7 @@ var linear_layouter_1 = require("../layouters/linear-layouter");
 var TitleValue = (function (_super) {
     __extends(TitleValue, _super);
     function TitleValue(type) {
-        _super.call(this, type);
+        return _super.call(this, type) || this;
     }
     Object.defineProperty(TitleValue.prototype, "title", {
         get: function () {
@@ -154,9 +160,9 @@ var TitleValue = (function (_super) {
         this._titleWidget = null;
         this._valueWidget = null;
     };
-    TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-        _title: null, _titleW: 80, _valueW: 60 });
     return TitleValue;
 }(widget_1.Widget));
+TitleValue.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+    _title: null, _titleW: 80, _valueW: 60 });
 exports.TitleValue = TitleValue;
 ;

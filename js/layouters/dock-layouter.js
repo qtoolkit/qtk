@@ -1,12 +1,18 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
-var consts_1 = require('../consts');
-var layouter_1 = require('./layouter');
+var consts_1 = require("../consts");
+var layouter_1 = require("./layouter");
 var TYPE = "dock";
 /**
  * Dock布局器。
@@ -14,7 +20,7 @@ var TYPE = "dock";
 var DockLayouter = (function (_super) {
     __extends(DockLayouter, _super);
     function DockLayouter() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(DockLayouter.prototype, "type", {
         get: function () {
@@ -109,9 +115,10 @@ layouter_1.LayouterFactory.register(TYPE, DockLayouter.createWithOptions);
 var DockLayouterParam = (function (_super) {
     __extends(DockLayouterParam, _super);
     function DockLayouterParam(position, size) {
-        _super.call(this, TYPE);
-        this.size = size;
-        this.position = position;
+        var _this = _super.call(this, TYPE) || this;
+        _this.size = size;
+        _this.position = position;
+        return _this;
     }
     Object.defineProperty(DockLayouterParam.prototype, "widget", {
         set: function (widget) {

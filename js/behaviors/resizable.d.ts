@@ -68,7 +68,7 @@ export declare class Resizable extends Behavior {
     protected onKeyDownGlobal(evt: CustomEvent): void;
     protected onPointerDown(evt: Events.PointerEvent): void;
     protected onPointerUp(evt: Events.PointerEvent): void;
-    protected testPointerPosition(evt: Events.PointerEvent): string;
+    protected testPointerPosition(evt: Events.PointerEvent): "w" | "nw" | "n" | "ne" | "e" | "sw" | "s" | "se";
     protected onPointerMove(evt: Events.PointerEvent): void;
     protected x: number;
     protected y: number;

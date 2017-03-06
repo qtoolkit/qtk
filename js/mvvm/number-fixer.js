@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var NumberFixer = (function () {
     function NumberFixer(vMin, vMax) {
         this.vMin = vMin;

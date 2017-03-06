@@ -1,6 +1,7 @@
 //! stable.js 0.1.5, https://github.com/Two-Screen/stable
 //! © 2014 Angry Bytes and contributors. MIT licensed.
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // A stable array sort, because `Array#sort()` is not guaranteed stable.
 // This is an implementation of merge sort, without recursion.
 function stableSort(arr, comp) {

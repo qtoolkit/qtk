@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var grid_layouter_1 = require("../layouters/grid-layouter");
@@ -14,7 +20,7 @@ var scroll_view_1 = require("./scroll-view");
 var GridView = (function (_super) {
     __extends(GridView, _super);
     function GridView() {
-        _super.call(this, GridView.TYPE);
+        return _super.call(this, GridView.TYPE) || this;
     }
     Object.defineProperty(GridView.prototype, "cols", {
         get: function () {
@@ -155,11 +161,11 @@ var GridView = (function (_super) {
     GridView.create = function (options) {
         return GridView.recycleBinGridView.create(options);
     };
-    GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
-    GridView.TYPE = "grid-view";
-    GridView.recycleBinGridView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(GridView);
     return GridView;
 }(scroll_view_1.ScrollView));
+GridView.defProps = Object.assign({}, scroll_view_1.ScrollView.defProps, { _cols: 3, _rows: 3, _rowHeight: 0, _colWidth: 0 });
+GridView.TYPE = "grid-view";
+GridView.recycleBinGridView = widget_recyclable_creator_1.WidgetRecyclableCreator.create(GridView);
 exports.GridView = GridView;
 ;
 widget_factory_1.WidgetFactory.register(GridView.TYPE, GridView.create);

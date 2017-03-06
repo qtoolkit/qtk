@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("./rect");
 exports.Rect = rect_1.Rect;
 var point_1 = require("./point");

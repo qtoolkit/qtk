@@ -52,7 +52,7 @@ export class Layouter {
 	 * 转换成JSON数据。
 	 */
 	public toJson() : any {
-		var json = {};
+		var json:any = {};
 		for(var key in this) {
 			var value = this[key];
 			var type = typeof value;
@@ -147,7 +147,7 @@ export class LayouterParam {
 	 * 转换成JSON数据。
 	 */
 	public toJson() : any {
-		var json = {};
+		var json:any = {};
 		for(var key in this) {
 			var value = this[key];
 			var type = typeof value;

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var title_value_1 = require("./title-value");
 var widget_factory_1 = require("../controls/widget-factory");
 var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator");
@@ -11,7 +17,7 @@ var combo_box_1 = require("../controls/combo-box");
 var TitleComboBoxBase = (function (_super) {
     __extends(TitleComboBoxBase, _super);
     function TitleComboBoxBase(type) {
-        _super.call(this, type);
+        return _super.call(this, type) || this;
     }
     Object.defineProperty(TitleComboBoxBase.prototype, "itemH", {
         get: function () {
@@ -46,7 +52,7 @@ exports.TitleComboBoxBase = TitleComboBoxBase;
 var TitleComboBox = (function (_super) {
     __extends(TitleComboBox, _super);
     function TitleComboBox(type) {
-        _super.call(this, type || TitleComboBox.TYPE);
+        return _super.call(this, type || TitleComboBox.TYPE) || this;
     }
     TitleComboBox.prototype.createValueWidget = function (options) {
         return combo_box_1.ComboBox.create(options);
@@ -54,10 +60,10 @@ var TitleComboBox = (function (_super) {
     TitleComboBox.create = function (options) {
         return TitleComboBox.recycleBin.create(options);
     };
-    TitleComboBox.TYPE = "title-combo-box";
-    TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
     return TitleComboBox;
 }(TitleComboBoxBase));
+TitleComboBox.TYPE = "title-combo-box";
+TitleComboBox.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBox);
 exports.TitleComboBox = TitleComboBox;
 ;
 widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create);
@@ -69,7 +75,7 @@ widget_factory_1.WidgetFactory.register(TitleComboBox.TYPE, TitleComboBox.create
 var TitleComboBoxEditable = (function (_super) {
     __extends(TitleComboBoxEditable, _super);
     function TitleComboBoxEditable(type) {
-        _super.call(this, type || TitleComboBoxEditable.TYPE);
+        return _super.call(this, type || TitleComboBoxEditable.TYPE) || this;
     }
     TitleComboBoxEditable.prototype.createValueWidget = function (options) {
         return combo_box_1.ComboBoxEditable.create(options);
@@ -77,10 +83,10 @@ var TitleComboBoxEditable = (function (_super) {
     TitleComboBoxEditable.create = function (options) {
         return TitleComboBoxEditable.recycleBin.create(options);
     };
-    TitleComboBoxEditable.TYPE = "title-combo-box-editable";
-    TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
     return TitleComboBoxEditable;
 }(TitleComboBoxBase));
+TitleComboBoxEditable.TYPE = "title-combo-box-editable";
+TitleComboBoxEditable.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleComboBoxEditable);
 exports.TitleComboBoxEditable = TitleComboBoxEditable;
 ;
 widget_factory_1.WidgetFactory.register(TitleComboBoxEditable.TYPE, TitleComboBoxEditable.create);

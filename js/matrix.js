@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var point_1 = require("./point");
 /**
  * 2维矩阵变换
@@ -118,8 +119,8 @@ var Matrix = (function () {
         }
         return new Matrix();
     };
-    Matrix.cache = [];
     return Matrix;
 }());
+Matrix.cache = [];
 exports.Matrix = Matrix;
 ;

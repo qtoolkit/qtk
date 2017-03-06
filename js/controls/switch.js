@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var widget_1 = require("./widget");
 var TWEEN = require("tween.js");
 var graphics_1 = require("../graphics");
@@ -15,7 +21,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var Switch = (function (_super) {
     __extends(Switch, _super);
     function Switch() {
-        _super.call(this, Switch.TYPE);
+        return _super.call(this, Switch.TYPE) || this;
     }
     Object.defineProperty(Switch.prototype, "offset", {
         get: function () {
@@ -92,10 +98,10 @@ var Switch = (function (_super) {
     Switch.create = function (options) {
         return Switch.recycleBin.create(options);
     };
-    Switch.TYPE = "switch";
-    Switch.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Switch);
     return Switch;
 }(widget_1.Widget));
+Switch.TYPE = "switch";
+Switch.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(Switch);
 exports.Switch = Switch;
 ;
 widget_factory_1.WidgetFactory.register(Switch.TYPE, Switch.create);

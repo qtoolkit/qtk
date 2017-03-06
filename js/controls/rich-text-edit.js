@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rich_text_1 = require("./rich-text");
 var widget_factory_1 = require("./widget-factory");
 var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
@@ -26,22 +32,23 @@ var toggles = {
 var RichTextEdit = (function (_super) {
     __extends(RichTextEdit, _super);
     function RichTextEdit() {
-        _super.call(this, RichTextEdit.TYPE);
-        this._element = null;
-        this._textArea = null;
-        this._keyboardX = null;
-        this._focusChar = null;
-        this._textAreaDiv = null;
-        this._keyboardSelect = 0;
-        this._textAreaContent = '';
-        this._nextKeyboardX = null;
-        this._richClipboard = null;
-        this._plainClipboard = null;
-        this._selectDragStart = null;
-        this.focused = false;
-        this.cachedWidth = 0;
-        this.cachedHeight = 0;
-        this.nextCaretToggle = Date.now();
+        var _this = _super.call(this, RichTextEdit.TYPE) || this;
+        _this._element = null;
+        _this._textArea = null;
+        _this._keyboardX = null;
+        _this._focusChar = null;
+        _this._textAreaDiv = null;
+        _this._keyboardSelect = 0;
+        _this._textAreaContent = '';
+        _this._nextKeyboardX = null;
+        _this._richClipboard = null;
+        _this._plainClipboard = null;
+        _this._selectDragStart = null;
+        _this.focused = false;
+        _this.cachedWidth = 0;
+        _this.cachedHeight = 0;
+        _this.nextCaretToggle = Date.now();
+        return _this;
     }
     Object.defineProperty(RichTextEdit.prototype, "inputable", {
         get: function () {
@@ -510,10 +517,10 @@ var RichTextEdit = (function (_super) {
     RichTextEdit.create = function (options) {
         return RichTextEdit.rBin.create(options);
     };
-    RichTextEdit.TYPE = "rich-text-edit";
-    RichTextEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichTextEdit);
     return RichTextEdit;
 }(rich_text_1.RichText));
+RichTextEdit.TYPE = "rich-text-edit";
+RichTextEdit.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(RichTextEdit);
 exports.RichTextEdit = RichTextEdit;
 ;
 widget_factory_1.WidgetFactory.register(RichTextEdit.TYPE, RichTextEdit.create);

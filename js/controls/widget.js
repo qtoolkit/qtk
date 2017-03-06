@@ -1,11 +1,17 @@
 /// <reference path="../../typings/globals/tween.js/index.d.ts"/>
 /// <reference path="../../typings/globals/eventemitter3/index.d.ts"/>
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var style_1 = require("../style");
 var canvas_1 = require("../canvas");
@@ -19,7 +25,7 @@ var graphics_1 = require("../graphics");
 var dirty_rect_context_1 = require("../dirty-rect-context");
 var image_tile_1 = require("../image-tile");
 var behavior_1 = require("../behaviors/behavior");
-var layouter_1 = require('../layouters/layouter');
+var layouter_1 = require("../layouters/layouter");
 var binding_rule_1 = require("../mvvm/binding-rule");
 var binding_rule_2 = require("../mvvm/binding-rule");
 var iview_model_1 = require("../mvvm/iview-model");
@@ -27,6 +33,7 @@ var iview_model_1 = require("../mvvm/iview-model");
  * @enum WidgetState
  * 控件的状态
  */
+var WidgetState;
 (function (WidgetState) {
     /**
      * @property {number}
@@ -53,13 +60,13 @@ var iview_model_1 = require("../mvvm/iview-model");
      * 选中状态。只对部分设备有效。
      */
     WidgetState[WidgetState["SELECTED"] = 4] = "SELECTED";
-})(exports.WidgetState || (exports.WidgetState = {}));
-var WidgetState = exports.WidgetState;
+})(WidgetState = exports.WidgetState || (exports.WidgetState = {}));
 ;
 /**
  * @enum HitTestResult
  * 点击测试结果。
  */
+var HitTestResult;
 (function (HitTestResult) {
     /**
      * @property {number}
@@ -111,8 +118,7 @@ var WidgetState = exports.WidgetState;
      * 点击在控件右下角。
      */
     HitTestResult[HitTestResult["BR"] = 9] = "BR";
-})(exports.HitTestResult || (exports.HitTestResult = {}));
-var HitTestResult = exports.HitTestResult;
+})(HitTestResult = exports.HitTestResult || (exports.HitTestResult = {}));
 ;
 /**
  * @class Widget
@@ -121,19 +127,20 @@ var HitTestResult = exports.HitTestResult;
 var Widget = (function (_super) {
     __extends(Widget, _super);
     function Widget(type) {
-        _super.call(this);
+        var _this = _super.call(this) || this;
         ///////////////////////////////////////////
-        this.layoutRect = rect_1.Rect.create(0, 0, 0, 0);
-        this.eChangeEvent = Events.ChangeEvent.create();
-        this.ePropChangeEvent = Events.PropChangeEvent.create();
-        this.viewModelChangeFunc = function (evt) {
+        _this.layoutRect = rect_1.Rect.create(0, 0, 0, 0);
+        _this.eChangeEvent = Events.ChangeEvent.create();
+        _this.ePropChangeEvent = Events.PropChangeEvent.create();
+        _this.viewModelChangeFunc = function (evt) {
             var viewModel = this._viewModel;
             var dataBindingRule = this._dataBindingRule;
             if (dataBindingRule && viewModel) {
                 this.onBindData(viewModel, dataBindingRule);
             }
-        }.bind(this);
-        this.type = type;
+        }.bind(_this);
+        _this.type = type;
+        return _this;
     }
     /**
      * @method set
@@ -2239,38 +2246,38 @@ var Widget = (function (_super) {
     Widget.prototype.selfHitTest = function (x, y) {
         return this.hitTest(x, y);
     };
-    Widget.defProps = {
-        _x: 0,
-        _y: 0,
-        _z: 0,
-        _w: 0,
-        _h: 0,
-        _state: 0,
-        _value: 0,
-        _enable: true,
-        _visible: true,
-        _selected: false,
-        _opacity: 1,
-        _scaleX: 1,
-        _scaleY: 1,
-        _pivotX: 0.5,
-        _pivotY: 0.5,
-        _rotation: 0,
-        _sensitive: true,
-        _tips: null,
-        _text: null,
-        _name: null,
-        _hitTestResult: 0,
-        _isWindow: false,
-        _mode: 0,
-        _styleType: null,
-        _lp: 0,
-        _tp: 0,
-        _rp: 0,
-        _bp: 0
-    };
-    Widget.ID = 10000;
     return Widget;
 }(emitter_1.Emitter));
+Widget.defProps = {
+    _x: 0,
+    _y: 0,
+    _z: 0,
+    _w: 0,
+    _h: 0,
+    _state: 0,
+    _value: 0,
+    _enable: true,
+    _visible: true,
+    _selected: false,
+    _opacity: 1,
+    _scaleX: 1,
+    _scaleY: 1,
+    _pivotX: 0.5,
+    _pivotY: 0.5,
+    _rotation: 0,
+    _sensitive: true,
+    _tips: null,
+    _text: null,
+    _name: null,
+    _hitTestResult: 0,
+    _isWindow: false,
+    _mode: 0,
+    _styleType: null,
+    _lp: 0,
+    _tp: 0,
+    _rp: 0,
+    _bp: 0
+};
+Widget.ID = 10000;
 exports.Widget = Widget;
 ;

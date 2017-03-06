@@ -1,11 +1,17 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var rect_1 = require('../rect');
-var layouter_1 = require('./layouter');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var rect_1 = require("../rect");
+var layouter_1 = require("./layouter");
 var TYPE = "list";
 /**
  * 列表布局器。
@@ -13,8 +19,9 @@ var TYPE = "list";
 var ListLayouter = (function (_super) {
     __extends(ListLayouter, _super);
     function ListLayouter() {
-        _super.call(this);
-        this.rect = rect_1.Rect.create(0, 0, 0, 0);
+        var _this = _super.call(this) || this;
+        _this.rect = rect_1.Rect.create(0, 0, 0, 0);
+        return _this;
     }
     Object.defineProperty(ListLayouter.prototype, "type", {
         get: function () {
@@ -84,9 +91,10 @@ layouter_1.LayouterFactory.register(TYPE, ListLayouter.createWithOptions);
 var ListLayouterParam = (function (_super) {
     __extends(ListLayouterParam, _super);
     function ListLayouterParam(h, spacing) {
-        _super.call(this, TYPE);
-        this.h = h || 0;
-        this.spacing = spacing || 0;
+        var _this = _super.call(this, TYPE) || this;
+        _this.h = h || 0;
+        _this.spacing = spacing || 0;
+        return _this;
     }
     ListLayouterParam.create = function (h, spacing) {
         return new ListLayouterParam(h, spacing);

@@ -1,10 +1,16 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var layouter_1 = require('./layouter');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var layouter_1 = require("./layouter");
 var TYPE = "simple";
 /**
  * 简单的布局器。
@@ -12,7 +18,7 @@ var TYPE = "simple";
 var SimpleLayouter = (function (_super) {
     __extends(SimpleLayouter, _super);
     function SimpleLayouter() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Object.defineProperty(SimpleLayouter.prototype, "type", {
         get: function () {
@@ -96,15 +102,16 @@ layouter_1.LayouterFactory.register(TYPE, SimpleLayouter.createWithOptions);
 var SimpleLayouterParam = (function (_super) {
     __extends(SimpleLayouterParam, _super);
     function SimpleLayouterParam(x, y, w, h) {
-        _super.call(this, TYPE);
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.minW = -1;
-        this.minH = -1;
-        this.maxW = -1;
-        this.maxH = -1;
+        var _this = _super.call(this, TYPE) || this;
+        _this.x = x;
+        _this.y = y;
+        _this.w = w;
+        _this.h = h;
+        _this.minW = -1;
+        _this.minH = -1;
+        _this.maxW = -1;
+        _this.maxH = -1;
+        return _this;
     }
     SimpleLayouterParam.create = function (x, y, w, h) {
         return new SimpleLayouterParam(x.toString(), y.toString(), w.toString(), h.toString());

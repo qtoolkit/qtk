@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var interaction_types_1 = require("./interaction-types");
 /**
  * @class InteractionRequest

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("./events");
 var emitter_1 = require("./emitter");
 /**
@@ -20,11 +26,12 @@ var emitter_1 = require("./emitter");
 var MainLoop = (function (_super) {
     __extends(MainLoop, _super);
     function MainLoop() {
-        _super.call(this);
-        this.pendingRedraw = 0;
-        this.predrawEvent = Events.TickEvent.create(Events.PRETICK);
-        this.drawEvent = Events.TickEvent.create(Events.TICK);
-        this.postdrawEvent = Events.TickEvent.create(Events.POSTTICK);
+        var _this = _super.call(this) || this;
+        _this.pendingRedraw = 0;
+        _this.predrawEvent = Events.TickEvent.create(Events.PRETICK);
+        _this.drawEvent = Events.TickEvent.create(Events.TICK);
+        _this.postdrawEvent = Events.TickEvent.create(Events.POSTTICK);
+        return _this;
     }
     MainLoop.prototype.requestRedraw = function () {
         var _this = this;

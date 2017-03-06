@@ -1,17 +1,18 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var style_1 = require("./style");
 var carota = require('carota');
 var ut = require('unicode-tokenizer');
 var tokenizer = ut.createTokenizerStream();
 var Token = ut.Token;
 var Break = ut.Break;
+var RoundType;
 (function (RoundType) {
     RoundType[RoundType["TL"] = 1] = "TL";
     RoundType[RoundType["TR"] = 2] = "TR";
     RoundType[RoundType["BL"] = 4] = "BL";
     RoundType[RoundType["BR"] = 8] = "BR";
-})(exports.RoundType || (exports.RoundType = {}));
-var RoundType = exports.RoundType;
+})(RoundType = exports.RoundType || (exports.RoundType = {}));
 ;
 var TextLine = (function () {
     function TextLine() {
@@ -284,8 +285,8 @@ var Graphics = (function () {
         ctx.closePath();
         ctx.translate(-x, -y);
     };
-    Graphics.canvas = document.createElement("canvas");
     return Graphics;
 }());
+Graphics.canvas = document.createElement("canvas");
 exports.Graphics = Graphics;
 ;

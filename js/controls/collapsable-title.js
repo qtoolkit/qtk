@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var point_1 = require("../point");
 var widget_1 = require("./widget");
@@ -16,7 +22,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var CollapsableTitle = (function (_super) {
     __extends(CollapsableTitle, _super);
     function CollapsableTitle() {
-        _super.call(this, CollapsableTitle.TYPE);
+        return _super.call(this, CollapsableTitle.TYPE) || this;
     }
     Object.defineProperty(CollapsableTitle.prototype, "collapsed", {
         get: function () {
@@ -72,9 +78,9 @@ var CollapsableTitle = (function (_super) {
     CollapsableTitle.create = function (options) {
         return CollapsableTitle.rBin.create(options);
     };
-    CollapsableTitle.TYPE = "collapsable-title";
-    CollapsableTitle.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CollapsableTitle);
     return CollapsableTitle;
 }(widget_1.Widget));
+CollapsableTitle.TYPE = "collapsable-title";
+CollapsableTitle.rBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(CollapsableTitle);
 exports.CollapsableTitle = CollapsableTitle;
 ;

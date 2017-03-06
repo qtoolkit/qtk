@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var Events = require("../events");
 var label_1 = require("../controls/label");
 var title_value_1 = require("./title-value");
@@ -17,7 +23,7 @@ var widget_recyclable_creator_1 = require("../controls/widget-recyclable-creator
 var TitleLink = (function (_super) {
     __extends(TitleLink, _super);
     function TitleLink(type) {
-        _super.call(this, type || TitleLink.TYPE);
+        return _super.call(this, type || TitleLink.TYPE) || this;
     }
     TitleLink.prototype.createValueWidget = function (options) {
         var link = label_1.Label.create(options);
@@ -36,10 +42,10 @@ var TitleLink = (function (_super) {
     TitleLink.create = function (options) {
         return TitleLink.recycleBin.create(options);
     };
-    TitleLink.TYPE = "title-link";
-    TitleLink.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLink);
     return TitleLink;
 }(title_value_1.TitleValue));
+TitleLink.TYPE = "title-link";
+TitleLink.recycleBin = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TitleLink);
 exports.TitleLink = TitleLink;
 ;
 widget_factory_1.WidgetFactory.register(TitleLink.TYPE, TitleLink.create);

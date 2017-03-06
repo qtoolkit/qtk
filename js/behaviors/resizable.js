@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var point_1 = require("../point");
 var Events = require("../events");
 var key_event_1 = require("../key-event");
@@ -36,12 +42,13 @@ exports.ResizableOptions = ResizableOptions;
 var Resizable = (function (_super) {
     __extends(Resizable, _super);
     function Resizable(widget, options, type) {
-        _super.call(this, type || Resizable.TYPE, widget, options);
-        this.resizingEvent = { type: Events.RESIZING };
-        this.resizeEndEvent = { type: Events.RESIZE_END };
-        this.resizeBeginEvent = { type: Events.RESIZE_BEGIN };
-        this.resizeCancelEvent = { type: Events.RESIZE_CANCEL };
-        this.border = 5;
+        var _this = _super.call(this, type || Resizable.TYPE, widget, options) || this;
+        _this.resizingEvent = { type: Events.RESIZING };
+        _this.resizeEndEvent = { type: Events.RESIZE_END };
+        _this.resizeBeginEvent = { type: Events.RESIZE_BEGIN };
+        _this.resizeCancelEvent = { type: Events.RESIZE_CANCEL };
+        _this.border = 5;
+        return _this;
     }
     Resizable.prototype.init = function (options) {
         this.options = new ResizableOptions(options);
@@ -190,9 +197,9 @@ var Resizable = (function (_super) {
             }
         }
     };
-    Resizable.TYPE = "resizable";
     return Resizable;
 }(behavior_1.Behavior));
+Resizable.TYPE = "resizable";
 exports.Resizable = Resizable;
 behavior_1.BehaviorFactory.register(Resizable.TYPE, function (widget, options) {
     return new Resizable(widget, options);

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var application_1 = require("../application");
 var property_page_1 = require("./property-page");
 var view_model_1 = require("../mvvm/view-model");
@@ -19,7 +25,7 @@ var simple_layouter_1 = require("../layouters/simple-layouter");
 var PropertyDialog = (function (_super) {
     __extends(PropertyDialog, _super);
     function PropertyDialog() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     PropertyDialog.prototype.createChildren = function (titleOptions, buttonsOptions, content) {
         _super.prototype.createChildren.call(this, titleOptions, buttonsOptions, content);
@@ -57,9 +63,9 @@ var PropertyDialog = (function (_super) {
     PropertyDialog.create = function (options) {
         return PropertyDialog.rb.create(options);
     };
-    PropertyDialog.TYPE = "property-dialog";
-    PropertyDialog.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyDialog);
     return PropertyDialog;
 }(message_box_1.MessageBox));
+PropertyDialog.TYPE = "property-dialog";
+PropertyDialog.rb = widget_recyclable_creator_1.WidgetRecyclableCreator.create(PropertyDialog);
 exports.PropertyDialog = PropertyDialog;
 widget_factory_1.WidgetFactory.register(PropertyDialog.TYPE, PropertyDialog.create);

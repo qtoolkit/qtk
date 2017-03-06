@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @class ProgressInfo
  * InteractionRequest.progress的参数。

@@ -1,9 +1,15 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var rect_1 = require("../rect");
 var widget_1 = require("./widget");
 var button_1 = require("./button");
@@ -21,7 +27,7 @@ var widget_recyclable_creator_1 = require("./widget-recyclable-creator");
 var TabButton = (function (_super) {
     __extends(TabButton, _super);
     function TabButton() {
-        _super.call(this, TabButton.TYPE);
+        return _super.call(this, TabButton.TYPE) || this;
     }
     Object.defineProperty(TabButton.prototype, "closeButton", {
         /**
@@ -234,12 +240,12 @@ var TabButton = (function (_super) {
     TabButton.create = function (options) {
         return TabButton.re.create(options);
     };
-    TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
-        _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
-    TabButton.TYPE = "tab-button";
-    TabButton.re = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButton);
     return TabButton;
 }(radio_button_1.RadioButton));
+TabButton.defProps = Object.assign({}, widget_1.Widget.defProps, { _lp: 2, _tp: 2, _rp: 2, _bp: 2,
+    _normalIconURL: null, _currentIconURL: null, closable: false, _cbAtLeft: false, _orn: consts_1.Orientation.H });
+TabButton.TYPE = "tab-button";
+TabButton.re = widget_recyclable_creator_1.WidgetRecyclableCreator.create(TabButton);
 exports.TabButton = TabButton;
 ;
 widget_factory_1.WidgetFactory.register(TabButton.TYPE, TabButton.create);

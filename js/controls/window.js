@@ -1,18 +1,24 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var point_1 = require("../point");
 var widget_1 = require("./widget");
 var Events = require("../events");
 var key_event_1 = require("../key-event");
+var WindowType;
 (function (WindowType) {
     WindowType[WindowType["NORMAL"] = 0] = "NORMAL";
     WindowType[WindowType["POPUP"] = 1] = "POPUP";
-})(exports.WindowType || (exports.WindowType = {}));
-var WindowType = exports.WindowType;
+})(WindowType = exports.WindowType || (exports.WindowType = {}));
 ;
 /**
  * 窗口的基类。
@@ -20,8 +26,9 @@ var WindowType = exports.WindowType;
 var Window = (function (_super) {
     __extends(Window, _super);
     function Window(type) {
-        _super.call(this, type);
-        this._windowEvent = Events.WindowEvent.create();
+        var _this = _super.call(this, type) || this;
+        _this._windowEvent = Events.WindowEvent.create();
+        return _this;
     }
     Object.defineProperty(Window.prototype, "windowType", {
         get: function () {
