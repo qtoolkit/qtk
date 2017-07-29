@@ -1,5 +1,5 @@
 
-import Events = require("../events");
+import Events = require("../base/events");
 export type InteractionRequestHandler = (evt:Events.InteractionRequestEvent) => void;
 
 export interface IInteractionService {

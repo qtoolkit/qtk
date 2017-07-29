@@ -1,5 +1,5 @@
 
-import {Rect} from "../rect";
+import {Rect} from "../base/rect";
 import {Widget} from "./widget";
 import {TreeItem} from "./tree-item";
 import {ListView} from "./list-view";

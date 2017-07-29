@@ -1,7 +1,7 @@
 
 import {Widget} from "./widget";
 import {Window, WindowType} from "./window";
-import {IViewPort} from "../iview-port";
+import {IViewPort} from "../base/iview-port";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";

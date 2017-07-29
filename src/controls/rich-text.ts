@@ -1,8 +1,8 @@
 
-import {Style} from "../style";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
-import Events = require("../events");
-import {MatrixStack} from "../matrix-stack";
+import Events = require("../base/events");
+import {MatrixStack} from "../base/matrix-stack";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ScrollView, ScrollerBarVisibility} from "./scroll-view";

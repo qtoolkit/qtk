@@ -1,6 +1,6 @@
 import {Widget} from "../controls/widget";
-import Events = require("../events");
-import inputEventAdapter = require("../input-event-adapter");
+import Events = require("../base/events");
+import inputEventAdapter = require("../base/input-event-adapter");
 
 /**
  * Behavior代表控件的一种行为特性，比如Resizable/Movable/Draggable/Droppable等。

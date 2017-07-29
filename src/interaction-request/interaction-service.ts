@@ -1,6 +1,6 @@
 
-import {Emitter} from "../emitter";
-import Events = require("../events");
+import {Emitter} from "../base/emitter";
+import Events = require("../base/events");
 
 import {ToastDialog} from "./toast-dialog";
 import {InputDialog} from "./input-dialog";

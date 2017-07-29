@@ -1,7 +1,7 @@
 
-import Events = require("../events");
+import Events = require("../base/events");
 import {HtmlElement} from "./html-element";
-import {KeyEventDetail} from "../event-detail";
+import {KeyEventDetail} from "../base/event-detail";
 
 export class HtmlEdit extends HtmlElement {
 	protected _visible : boolean;	

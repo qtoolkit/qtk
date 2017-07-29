@@ -1,12 +1,12 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
-var Events = require("../events");
+var Events = require("../base/events");
 import {Button} from "./button";
-import {Graphics} from "../graphics";
+import {Graphics} from "../base/graphics";
 import {WidgetFactory} from "./widget-factory";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ProgressBarType, ProgressBar} from "./progress-bar";
 

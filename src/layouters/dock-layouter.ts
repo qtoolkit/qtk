@@ -1,6 +1,6 @@
-import {Rect} from '../rect';
-import Events = require("../events");
-import {Direction} from '../consts';
+import {Rect} from '../base/rect';
+import Events = require("../base/events");
+import {Direction} from '../base/consts';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 

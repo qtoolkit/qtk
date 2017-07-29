@@ -1,7 +1,7 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
-import Events = require("../events");
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
+import Events = require("../base/events");
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";

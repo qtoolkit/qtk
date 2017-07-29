@@ -1,4 +1,4 @@
-import {Rect} from '../rect';
+import {Rect} from '../base/rect';
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 

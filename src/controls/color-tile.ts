@@ -1,9 +1,9 @@
 
-import {Style} from "../style";
+import {Style} from "../base/style";
 import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {RoundType, Graphics} from "../graphics";
-import {AlignH, AlignV, Orientation} from "../consts";
+import {RoundType, Graphics} from "../base/graphics";
+import {AlignH, AlignV, Orientation} from "../base/consts";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**

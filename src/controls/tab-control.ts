@@ -1,10 +1,10 @@
 
-import {Rect} from "../rect";
+import {Rect} from "../base/rect";
 import {Pages} from "./pages";
 import {Widget} from "./widget";
 import {TabPage} from "./tab-page";
-import Events = require("../events");
-import {Orientation} from "../consts";
+import Events = require("../base/events");
+import {Orientation} from "../base/consts";
 import {TabButton} from "./tab-button";
 import {TabButtonGroup} from "./tab-button-group";
 import {WidgetFactory} from "./widget-factory";

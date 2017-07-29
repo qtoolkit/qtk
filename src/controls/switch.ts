@@ -1,11 +1,11 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
-import {Point} from "../point";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
+import {Point} from "../base/point";
 import {Widget} from "./widget";
 import TWEEN = require("tween.js");
-import Events = require("../events");
-import {Graphics} from "../graphics";
+import Events = require("../base/events");
+import {Graphics} from "../base/graphics";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 

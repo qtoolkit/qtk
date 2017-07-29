@@ -1,17 +1,17 @@
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
 import {Label} from "./label";
-import Events = require("../events");
-import {KeyEvent} from "../key-event";
+import Events = require("../base/events");
+import {KeyEvent} from "../base/key-event";
 import {HtmlEdit} from "../html/html-edit";
-import {IViewPort} from "../iview-port";
+import {IViewPort} from "../base/iview-port";
 import {IApplication} from "../iapplication";
 import {Widget, WidgetState} from "./widget";
-import {IThemeManager} from "../itheme-manager";
+import {IThemeManager} from "../base/itheme-manager";
 import {WidgetFactory} from "./widget-factory";
-import {RoundType, Graphics} from "../graphics";
+import {RoundType, Graphics} from "../base/graphics";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**

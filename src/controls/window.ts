@@ -1,9 +1,9 @@
-import {Point} from "../point";
+import {Point} from "../base/point";
 import {Widget} from "./widget";
-import Events = require("../events");
-import {KeyEvent} from "../key-event";
+import Events = require("../base/events");
+import {KeyEvent} from "../base/key-event";
 import {IApplication} from "../iapplication";
-import inputEventAdapter = require("../input-event-adapter");
+import inputEventAdapter = require("../base/input-event-adapter");
 
 export enum WindowType {
 	NORMAL,

@@ -1,12 +1,12 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
-import {Point} from "../point";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
+import {Point} from "../base/point";
 import {Label} from "../controls/label";
 import {Edit} from "../controls/edit";
 import {Button} from "../controls/button";
 import {Widget} from "../controls/widget";
-import Events = require("../events");
+import Events = require("../base/events");
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";
 

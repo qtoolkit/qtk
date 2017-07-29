@@ -1,14 +1,14 @@
 /// <reference path="../../typings/globals/scroller/index.d.ts"/>
 /// <reference path="../../typings/globals/tween.js/index.d.ts"/>
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
 import {Window} from "./window";
 import {Scroller} from "scroller";
 import TWEEN = require("tween.js");
-import Events = require("../events");
-import {Graphics} from "../graphics";
+import Events = require("../base/events");
+import {Graphics} from "../base/graphics";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";

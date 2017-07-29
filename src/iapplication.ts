@@ -1,6 +1,6 @@
-import {IViewPort} from "./iview-port";
-import {IMainLoop} from "./imain-loop";
-import {IThemeManager} from "./itheme-manager";
+import {IViewPort} from "./base/iview-port";
+import {IMainLoop} from "./base/imain-loop";
+import {IThemeManager} from "./base/itheme-manager";
 import {IWindowManager} from "./controls/iwindow-manager";
 
 /**

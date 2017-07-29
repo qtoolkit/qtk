@@ -1,8 +1,8 @@
 
-import {aRemove} from "../utils";
-import {Emitter} from "../emitter";
+import {aRemove} from "../base/utils";
+import {Emitter} from "../base/emitter";
 import {TreeItem} from "./tree-item";
-import {ImageTile} from "../image-tile";
+import {ImageTile} from "../base/image-tile";
 
 /**
  * TreeItem对应的数据信息。

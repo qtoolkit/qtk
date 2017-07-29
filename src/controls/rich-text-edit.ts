@@ -1,8 +1,8 @@
 
-import {Style} from "../style";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
 import {RichText} from "./rich-text";
-import Events = require("../events");
+import Events = require("../base/events");
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 

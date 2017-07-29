@@ -1,5 +1,5 @@
 
-import {Rect} from "../rect";
+import {Rect} from "../base/rect";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {Layouter} from "../layouters/layouter";

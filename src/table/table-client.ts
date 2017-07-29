@@ -1,9 +1,9 @@
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Range} from "../range";
-import {Style} from "../style";
-import Events = require("../events");
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Range} from "../base/range";
+import {Style} from "../base/style";
+import Events = require("../base/events");
 import {ListView} from "../controls/list-view";
 import {Widget, WidgetState} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";

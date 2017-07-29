@@ -1,6 +1,6 @@
 
-import {Emitter} from "../emitter";
-import Events = require("../events");
+import {Emitter} from "../base/emitter";
+import Events = require("../base/events");
 import {ICommand} from "./icommand";
 import {IValueConverter} from "./ivalue-converter";
 import {IValidationRule} from "./ivalidation-rule";

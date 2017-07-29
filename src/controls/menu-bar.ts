@@ -1,11 +1,11 @@
 
 import {Menu} from "./menu";
-import {Point} from "../point";
-import {Style} from "../style";
-import Events = require("../events");
+import {Point} from "../base/point";
+import {Style} from "../base/style";
+import Events = require("../base/events");
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {LinearLayouter, LinearLayouterParam} from "../layouters/linear-layouter";
 

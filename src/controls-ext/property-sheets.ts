@@ -1,6 +1,6 @@
 
-import {Rect} from "../rect";
-import Events = require("../events");
+import {Rect} from "../base/rect";
+import Events = require("../base/events");
 import {Widget} from "../controls/widget";
 import {ScrollView} from "../controls/scroll-view";
 import {WidgetFactory} from "../controls/widget-factory";

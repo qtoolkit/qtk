@@ -1,5 +1,5 @@
 
-import {Emitter} from "../emitter";
+import {Emitter} from "../base/emitter";
 
 export class HtmlElement extends Emitter {
 	public element : any;

@@ -1,7 +1,7 @@
 
 var pointer = require('json-pointer');
-import {Emitter} from "../emitter";
-import Events = require("../events");
+import {Emitter} from "../base/emitter";
+import Events = require("../base/events");
 import {ICommand} from "./icommand";
 import {BindingDataSource} from "./binding-rule";
 import {IValueConverter} from "./ivalue-converter";

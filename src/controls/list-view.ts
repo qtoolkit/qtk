@@ -1,5 +1,5 @@
 
-import {Rect} from "../rect";
+import {Rect} from "../base/rect";
 import {Widget} from "./widget";
 import {ScrollView} from "./scroll-view";
 import {WidgetFactory} from "./widget-factory";

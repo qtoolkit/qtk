@@ -1,6 +1,6 @@
 
-import Events = require("../events");
-import {Emitter} from "../emitter";
+import Events = require("../base/events");
+import {Emitter} from "../base/emitter";
 
 /**
  * @class PropDesc

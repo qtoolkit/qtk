@@ -1,4 +1,4 @@
-import Events = require("../events");
+import Events = require("../base/events");
 import {InputInfo} from "./input-info";
 import {MessageBox} from "../controls/message-box";
 

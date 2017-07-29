@@ -1,5 +1,5 @@
 import {Widget} from "./widget"
-import {RecyclableCreator} from "../recyclable-creator"
+import {RecyclableCreator} from "../base/recyclable-creator"
 
 /**
  * 可循环的创建器。

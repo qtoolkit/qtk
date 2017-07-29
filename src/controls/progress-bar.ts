@@ -1,9 +1,9 @@
 
 import {Widget} from "./widget";
-import {Style} from "../style";
-import {Graphics} from "../graphics";
+import {Style} from "../base/style";
+import {Graphics} from "../base/graphics";
 import {WidgetFactory} from "./widget-factory";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**

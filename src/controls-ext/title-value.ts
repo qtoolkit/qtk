@@ -1,5 +1,5 @@
 
-import Events = require("../events");
+import Events = require("../base/events");
 import {Label} from "../controls/label";
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";

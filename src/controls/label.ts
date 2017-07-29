@@ -1,7 +1,7 @@
-import {Rect} from "../rect";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
 import {Widget, WidgetState} from "./widget";
-import {Graphics, TextLine} from "../graphics";
+import {Graphics, TextLine} from "../base/graphics";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 

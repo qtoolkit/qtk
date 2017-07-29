@@ -1,12 +1,12 @@
 
 import {Widget} from "./widget";
 import {Window, WindowType} from "./window";
-import Events = require("../events");
+import Events = require("../base/events");
 import {WindowManager} from "./window-manager";
 import {IWindowManager} from "./iwindow-manager";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
-import {DirtyRectContext} from "../dirty-rect-context";
+import {RecyclableCreator} from "../base/recyclable-creator";
+import {DirtyRectContext} from "../base/dirty-rect-context";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**

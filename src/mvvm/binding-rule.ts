@@ -1,4 +1,4 @@
-import {JsonSerializer} from "../json-serializer"
+import {JsonSerializer} from "../base/json-serializer"
 import {toUpdateTiming, toBindingMode} from "../mvvm/iview-model";
 import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
 

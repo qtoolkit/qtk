@@ -1,11 +1,11 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {RoundType, Graphics} from "../graphics";
+import {RoundType, Graphics} from "../base/graphics";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 
 export enum ListItemStyle {
 	NORMAL,

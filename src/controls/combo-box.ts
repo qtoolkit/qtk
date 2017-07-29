@@ -1,19 +1,19 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
-import {Point} from "../point";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
+import {Point} from "../base/point";
 import {Edit} from "./edit";
 import {Button} from "./button";
 import {Widget} from "./widget";
 import {Dialog} from "./dialog";
-import {Graphics} from "../graphics";
-import {IViewPort} from "../iview-port";
-import Events = require("../events");
+import {Graphics} from "../base/graphics";
+import {IViewPort} from "../base/iview-port";
+import Events = require("../base/events");
 import {ListView} from "./list-view";
 import {ListItem} from "./list-item";
 import {WidgetFactory} from "./widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {RecyclableCreator} from "../base/recyclable-creator";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";
 
 import {IViewModel, BindingMode} from "../mvvm/iview-model";

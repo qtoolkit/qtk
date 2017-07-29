@@ -1,8 +1,8 @@
 
-import {Style} from "../style";
+import {Style} from "../base/style";
 import {Widget} from "../controls/widget";
 import {WidgetFactory} from "../controls/widget-factory";
-import {RecyclableCreator} from "../recyclable-creator";
+import {RecyclableCreator} from "../base/recyclable-creator";
 
 export class Ruler extends Widget {
 	protected _originX : number;

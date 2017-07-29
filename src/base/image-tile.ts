@@ -1,5 +1,5 @@
-/// <reference path="../typings/globals/node/index.d.ts"/>
-/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+/// <reference path="../../typings/globals/node/index.d.ts"/>
+/// <reference path="../../typings/globals/eventemitter3/index.d.ts"/>
 
 import "whatwg-fetch";
 import path = require("path");

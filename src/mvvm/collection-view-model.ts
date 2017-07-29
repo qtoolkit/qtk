@@ -1,6 +1,6 @@
 
-import {Emitter} from "../emitter";
-import Events = require("../events");
+import {Emitter} from "../base/emitter";
+import Events = require("../base/events");
 import {ICommand} from "./icommand";
 import {IFilter} from "./ifilter";
 import {IComparator} from "./icomparator";

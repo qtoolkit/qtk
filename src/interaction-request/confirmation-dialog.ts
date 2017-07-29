@@ -1,4 +1,4 @@
-import Events = require("../events");
+import Events = require("../base/events");
 import {ConfirmationInfo} from "./confirmation-info";
 import {MessageBox} from "../controls/message-box";
 

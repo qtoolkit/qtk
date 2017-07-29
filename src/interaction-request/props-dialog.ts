@@ -1,4 +1,4 @@
-import Events = require("../events");
+import Events = require("../base/events");
 import {PropsInfo} from "./props-info";
 import {PagePropsDesc} from "../controls-ext/props-desc";
 import {PropertyDialog} from "../controls-ext/property-dialog";

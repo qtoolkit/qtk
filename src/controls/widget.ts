@@ -1,24 +1,24 @@
 /// <reference path="../../typings/globals/tween.js/index.d.ts"/>
 /// <reference path="../../typings/globals/eventemitter3/index.d.ts"/>
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
-import {Canvas} from "../canvas";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
+import {Canvas} from "../base/canvas";
 import {Window} from "./window";
 import TWEEN = require("tween.js");
-import {Emitter} from "../emitter";
-import {stableSort} from "../utils";
-import Events = require("../events");
-import {IMainLoop} from "../imain-loop";
-import {StringTable} from "../string-table";
-import {MatrixStack} from "../matrix-stack";
+import {Emitter} from "../base/emitter";
+import {stableSort} from "../base/utils";
+import Events = require("../base/events");
+import {IMainLoop} from "../base/imain-loop";
+import {StringTable} from "../base/string-table";
+import {MatrixStack} from "../base/matrix-stack";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "./widget-factory";
-import {IThemeManager} from "../itheme-manager";
-import {RoundType, Graphics} from "../graphics";
-import {DirtyRectContext} from "../dirty-rect-context";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {IThemeManager} from "../base/itheme-manager";
+import {RoundType, Graphics} from "../base/graphics";
+import {DirtyRectContext} from "../base/dirty-rect-context";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '../layouters/layouter';
 

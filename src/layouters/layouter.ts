@@ -1,5 +1,5 @@
-import {Rect} from "../rect";
-import {Factory} from "../factory";
+import {Rect} from "../base/rect";
+import {Factory} from "../base/factory";
 import {Widget} from "../controls/widget";
 
 /**

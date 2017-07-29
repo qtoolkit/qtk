@@ -1,7 +1,7 @@
-import {Rect} from '../rect';
-import {Align, Orientation} from '../consts';
-import {Direction} from '../consts';
-import {stableSort} from "../utils";
+import {Rect} from '../base/rect';
+import {Align, Orientation} from '../base/consts';
+import {Direction} from '../base/consts';
+import {stableSort} from "../base/utils";
 import {Widget} from '../controls/widget';
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from './layouter';
 

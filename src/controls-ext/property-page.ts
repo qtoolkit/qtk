@@ -1,6 +1,6 @@
 
-import {Rect} from "../rect";
-import Events = require("../events");
+import {Rect} from "../base/rect";
+import Events = require("../base/events");
 import {TitleLink} from "./title-link";
 import {TitleLine} from "./title-line";
 import {TitleEdit} from "./title-edit";

@@ -1,7 +1,7 @@
 
 import {Widget} from "./widget";
 import {Window} from "./window";
-import Events = require("../events");
+import Events = require("../base/events");
 
 /**
  * 实现窗口管理器的基本功能。

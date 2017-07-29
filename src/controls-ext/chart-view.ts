@@ -1,9 +1,9 @@
 import "chart.js"
-import {Point} from "../point";
-import {Style} from "../style";
-import Events = require("../events");
+import {Point} from "../base/point";
+import {Style} from "../base/style";
+import Events = require("../base/events");
 import {Widget} from "../controls/widget";
-import {IMainLoop} from "../imain-loop";
+import {IMainLoop} from "../base/imain-loop";
 import {IApplication} from "../iapplication";
 import {WidgetFactory} from "../controls/widget-factory";
 import {WidgetRecyclableCreator} from "../controls/widget-recyclable-creator";

@@ -1,12 +1,12 @@
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
 import {TreeView} from "./tree-view";
 import {TreeItemData} from "./tree-item-data";
 import {WidgetFactory} from "./widget-factory";
-import {RoundType, Graphics} from "../graphics";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {RoundType, Graphics} from "../base/graphics";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {Widget, WidgetState, HitTestResult} from "./widget";
 

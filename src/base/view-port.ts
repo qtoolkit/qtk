@@ -1,4 +1,4 @@
-/// <reference path="../typings/globals/eventemitter3/index.d.ts"/>
+/// <reference path="../../typings/globals/eventemitter3/index.d.ts"/>
 
 import {Emitter} from "./emitter";
 import {IViewPort} from "./iview-port";

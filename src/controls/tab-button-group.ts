@@ -1,12 +1,12 @@
 
-import {Rect} from "../rect";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
-import {Graphics} from "../graphics";
-import {Orientation} from "../consts";
+import {Graphics} from "../base/graphics";
+import {Orientation} from "../base/consts";
 import {RadioButton} from "./radio-button";
 import {WidgetFactory} from "./widget-factory";
-import {ImageDrawType, ImageTile} from "../image-tile";
+import {ImageDrawType, ImageTile} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 
 /**

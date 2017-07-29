@@ -1,5 +1,5 @@
 
-import {Rect} from "../rect";
+import {Rect} from "../base/rect";
 import {Edit} from "../controls/edit";
 import {Widget} from "../controls/widget";
 import {TitleValue} from "./title-value";

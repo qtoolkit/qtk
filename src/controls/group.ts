@@ -1,5 +1,5 @@
 
-import {Style} from "../style";
+import {Style} from "../base/style";
 import {WidgetState, Widget} from "./widget";
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";

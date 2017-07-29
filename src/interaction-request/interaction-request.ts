@@ -1,4 +1,4 @@
-import Events = require("../events");
+import Events = require("../base/events");
 
 import {ToastInfo} from "./toast-info";
 import {InputInfo} from "./input-info";

@@ -1,14 +1,14 @@
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
 import {Dialog} from "./dialog";
-import {Graphics} from "../graphics";
+import {Graphics} from "../base/graphics";
 import {ListView} from "./list-view";
-import Events = require("../events");
+import Events = require("../base/events");
 import {Widget, WidgetState} from "./widget";
 import {WidgetFactory} from "./widget-factory";
-import {ImageTile, ImageDrawType} from "../image-tile";
+import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 import {ListLayouter, ListLayouterParam} from "../layouters/list-layouter";
 import {SimpleLayouter, SimpleLayouterParam} from "../layouters/simple-layouter";

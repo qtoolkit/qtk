@@ -1,9 +1,9 @@
 
-import {Rect} from "../rect";
-import {Point} from "../point";
-import {Style} from "../style";
+import {Rect} from "../base/rect";
+import {Point} from "../base/point";
+import {Style} from "../base/style";
 import {Widget} from "./widget";
-import Events = require("../events");
+import Events = require("../base/events");
 import {WidgetFactory} from "./widget-factory";
 import {WidgetRecyclableCreator} from "./widget-recyclable-creator";
 

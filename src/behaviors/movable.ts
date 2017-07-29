@@ -1,9 +1,9 @@
 
-import Events = require("../events");
-import {KeyEvent} from "../key-event";
+import Events = require("../base/events");
+import {KeyEvent} from "../base/key-event";
 import {Widget} from "../controls/widget";
 import {Behavior, BehaviorFactory} from "./behavior";
-import inputEventAdapter = require("../input-event-adapter");
+import inputEventAdapter = require("../base/input-event-adapter");
 
 /**
  * Movable Behavior的初始化参数。
