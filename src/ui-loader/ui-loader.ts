@@ -2,6 +2,7 @@
 import {Edit} from "../controls/edit";
 import {Application} from "../application";
 import {Widget} from "../controls/widget";
+import {Window} from "../controls/window";
 import {Label} from "../controls/label";
 import {Group} from "../controls/group";
 import {Pages} from "../controls/pages";
@@ -67,11 +68,11 @@ export class UILoader {
         return widget;
     }
 
-    public load(app:Application, json:any) : Widget {
+    public load(app:Application, json:any) : Window {
         var widgetJson = json.ui.widgets[0];
 
         if(widgetJson) {
-            return this.createWidget(app, null, widgetJson);
+            return <Window>this.createWidget(app, null, widgetJson);
         }
 
         return null;
