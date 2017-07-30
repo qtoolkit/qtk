@@ -1,8 +1,4 @@
-
-import {ICommand} from "./icommand";
 import {BindingDataSource} from "./binding-rule";
-import {IValueConverter} from "./ivalue-converter";
-import {IValidationRule, ValidationResult} from "./ivalidation-rule";
 
 /**
  * ViewModel的接口定义。
@@ -14,43 +10,20 @@ export interface IViewModel {
 	isCollection : boolean;
 
 	/**
-	 * 绑定的模式。
-	 */
-	bindingMode : BindingMode;
-
-	/**
 	 * 获取属性的值。
 	 * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer
-	 * @param converter 数据转换器的名称。用于把数据转成适合界面显示的格式。 
 	 * @returns 属性的值。
 	 */
-	getProp(path:string, converter?:string) : any; 
-	
-	/**
-	 * 删除属性。
-	 * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer
-	 */
-	delProp(path:string) : IViewModel;
+	getProp(path:string) : any; 
 	
 	/**
 	 * 设置属性的值。
 	 * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer
 	 * @param value 属性的值。
-	 * @param converter 数据转换器的名称。用于把数据转成适合存储的格式。 
-	 * @param validator 用于验证数据有效性的验证器的名称。
 	 * @returns 返回ValidationResult, ValidationResult.code为0表示设置成功。
 	 */
-	setProp(path:string, value:any, converter?:string, validator?:string) : ValidationResult;
+	setProp(path:string, value:any) : boolean ;
 	
-	/**
-	 * 设置属性的值。
-	 * @param source BindingDataSource。
-	 * @param value 属性的值。
-	 * @param oldValue 旧的属性的值。主要用于实现Undo/Redo
-	 * @returns 返回ValidationResult, ValidationResult.code为0表示设置成功。
-	 */
-	setPropEx(source:BindingDataSource, value: any, oldValue?:any) : ValidationResult;
-
 	/**
 	 * 注册数据改变事件。
 	 * @param callback 事件处理函数。
@@ -81,11 +54,28 @@ export interface IViewModel {
 	execCommand(name:string, args:any) : boolean;
 	
 	/**
-	 * 通过指定名称的命令。
-	 * @param name 命令的名称。
-	 * @returns 指定名称的命令。
+	 * 将数据value转换成适合在界面上显示的格式。
+	 * @param name 转换器的名称。
+	 * @param value 值
+	 * @returns 转换后的值。
 	 */
-	getCommand(name:string) : ICommand;
+	convert(name:string, value:any) : any;
+
+	/**
+	 * 将数据value转换成适合存储的格式。
+	 * @param name 转换器的名称。
+	 * @param value 值
+	 * @returns 转换后的值。
+	 */
+	convertBack(name:string, value:any) : any;
+
+	/**
+	 * 检查数据是否有效。
+	 * @param name 校验器的名称。
+	 * @param value 值
+	 * @returns 是否有效。
+	 */
+	isValueValid(name:string, value:any, msg:any) : boolean;
 };
 
 /**
@@ -96,6 +86,7 @@ export interface ICollectionViewModel extends IViewModel {
 	 * 集合中数据项的总数。
 	 */
 	total : number;
+
 	/**
 	 * 当前项的索引。
 	 */
@@ -161,6 +152,7 @@ export enum BindingMode {
 	 */
 	ONE_WAY_TO_SOURCE
 };
+
 const BindingModeNames = ["two-way", "one-way", "one-time", "one-way-to-source"];
 export function toBindingMode(name:string) : BindingMode {
 	return <BindingMode>Math.max(0, BindingModeNames.indexOf(name));
@@ -183,6 +175,7 @@ export enum UpdateTiming {
 	 */
 	EXPLICIT
 };
+
 const UpdateTimingNames = ["changing", "changed", "explicit"];
 export function toUpdateTiming(name:string) : UpdateTiming {
 	return <UpdateTiming>Math.max(0, UpdateTimingNames.indexOf(name));

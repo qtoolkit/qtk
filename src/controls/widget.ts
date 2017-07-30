@@ -22,9 +22,6 @@ import {ImageTile, ImageDrawType} from "../base/image-tile";
 import {Behavior, BehaviorFactory} from "../behaviors/behavior";
 import {Layouter, LayouterFactory, LayouterParam, LayouterParamFactory} from '../layouters/layouter';
 
-import {ICommand} from "../mvvm/icommand";
-import {IValueConverter} from "../mvvm/ivalue-converter";
-import {IValidationRule, ValidationResult} from "../mvvm/ivalidation-rule";
 import {BindingDataSource, BindingCommandSource} from "../mvvm/binding-rule";
 import {BindingRule, BindingRuleItem, IBindingSource} from "../mvvm/binding-rule";
 import {IViewModel, ICollectionViewModel, UpdateTiming, BindingMode} from "../mvvm/iview-model";
@@ -2230,7 +2227,7 @@ export class Widget extends Emitter {
 
 		this.onBeforeBindData();
 		if(dataBindingRule && viewModel) {
-			var bindingMode = viewModel.bindingMode;
+			var bindingMode = bindingMode === BindingMode.TWO_WAY; 
 			
 			this.onBindCommand(viewModel, dataBindingRule);
 			if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
@@ -2353,7 +2350,11 @@ export class Widget extends Emitter {
 				var bindingMode = dataSource.mode || BindingMode.TWO_WAY;
 				
 				if(value === undefined && dataSource.path) {
-					value = viewModel.getProp(dataSource.path, dataSource.converter);
+					var path = dataSource.path;
+					value = viewModel.getProp(path);
+					if(dataSource.converter) {
+						value = viewModel.convert(dataSource.converter, value);
+					}
 				}
 				
 				if(bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
@@ -2392,8 +2393,13 @@ export class Widget extends Emitter {
 	 * 把界面数据更新到模型。
 	 */
 	protected updateValueToSource(value:any, dataSource:BindingDataSource, oldValue?:any) {
-		var result = this._viewModel.setPropEx(dataSource, value, oldValue);
-		this.onInvalidInput(result.code ? result.message : null);
+		var msg = ";"
+		var vm:IViewModel = this._viewModel;
+		if(vm.isValueValid(dataSource.validator, value, msg)) {
+			vm.setProp(dataSource.path, value);
+		}
+
+		this.onInvalidInput(msg);
 	}
 
 	/*

@@ -1,14 +1,9 @@
-
+import {IFilter} from "./ifilter";
 import {Emitter} from "../base/emitter";
 import Events = require("../base/events");
-import {ICommand} from "./icommand";
-import {IFilter} from "./ifilter";
 import {IComparator} from "./icomparator";
-import {DelegateCommand} from "./delegate-command";
-import {IValueConverter} from "./ivalue-converter";
-import {IValidationRule, ValidationResult} from "./ivalidation-rule";
-import {IViewModel, BindingMode, ICollectionViewModel} from "./iview-model";
 import {ViewModelDefault} from "./view-model-default"
+import {IViewModel, BindingMode, ICollectionViewModel} from "./iview-model";
 
 /**
  * 集合ViewModel。delProp/getProp/setProp操作当前的项。 
@@ -61,18 +56,15 @@ export class CollectionViewModel extends ViewModelDefault implements ICollection
 	/*
 	 * 对于属性操作，都是针对当前项的ViewModel的操作。
 	 */
-	public getProp(path:string, converterName?:string) : any {
+	public getProp(path:string) : any {
 		var vm = this.currentViewModel;
 
-		return vm ? vm.getProp(path, converterName) : null;
+		return vm ? vm.getProp(path) : null;
 	}
-	public delProp(path:string) : IViewModel {
+
+	public setProp(path:string, value:any) : boolean {
 		var vm = this.currentViewModel;
-		return vm ? vm.delProp(path) : this;
-	}
-	public setProp(path:string, value:any, converterName?:string, validator?:string) : ValidationResult {
-		var vm = this.currentViewModel;
-		return vm ? vm.setProp(path, value, converterName, validator) : ValidationResult.invalidResult;
+		return vm ? vm.setProp(path, value) : false;
 	}
 	/**
 	 * 当前项的ViewModel
@@ -322,95 +314,18 @@ export class ItemViewModel extends ViewModelDefault implements IViewModel {
 	public isCollection = false;
 	public collectionViewModel : CollectionViewModel;
 
-	public getCommand(name:string) : ICommand {
-		var cmd = super.getCommand(name);
-		if(!cmd) {
-			cmd = this.collectionViewModel.getCommand(name);
-		}
-
-		return cmd;
-	}
-
-	public canExecute(name:string, args:any) : boolean {
-		if(super.canExecute(name, args)) {
-			return true;
-		}else{
-			return this.collectionViewModel.canExecute(name, args);
-		}
-	}
-
-	public execCommand(name:string, args:any) : boolean{
-		var cmd = super.getCommand(name);
-		if(cmd) {
-			return super.execCommand(name, args);
-		}else{
-			if(args == undefined) {
-				args = this.index;
-			}
-			return this.collectionViewModel.execCommand(name, args);
-		}
-	}
-
-	public convert(converterName:string, value:any) : any {
-		return this.collectionViewModel.convert(converterName, value);	
-	}
-
-	public convertBack(converterName:string, value:any) : any {
-		return this.collectionViewModel.convertBack(converterName, value);
-	}
-
-	public isValueValid(ruleName:string, value:any) : ValidationResult {
-		return this.collectionViewModel.isValueValid(ruleName, value);
-	}
-
-	public getValueConverter(name:string) : IValueConverter {
-		return this.collectionViewModel.getValueConverter(name);
-	}
-
-	public getValidationRule(name:string) : IValidationRule {
-		return this.collectionViewModel.getValidationRule(name);
-	}
-
 	public isCurrent() : boolean {
 		return this.collectionViewModel.current === this.index; 
 	}
 	
-	public notifyChange(type:string, path:string, value:any) {
-		var collectionViewModel = this.collectionViewModel;
-		if(collectionViewModel.bindingMode === BindingMode.ONE_WAY) {
-			return;
-		}
-
-		if(collectionViewModel.comparator || collectionViewModel.filter) {
-			collectionViewModel.updateViewModelItems(true);
-		}else{
-			if(this.isCurrent) {
-				collectionViewModel.notifyChange(type, path, value);
-			}
-			super.notifyChange(type, path, value);
-		}
-	}
-
-	protected initCommands() {
-		this.registerCommand("activate", DelegateCommand.create(args => {
-			this.collectionViewModel.current = this.index;
-		}));
-
-		this.registerCommand("remove", DelegateCommand.create(args => {
-			this.collectionViewModel.removeItem(this.collectionViewModel.getRawIndexOf(this.index));
-		}));
-	}
-	
 	public constructor() {
 		super(null);
-		this.initCommands();
 	}
 	
 	public init(collectionViewModel:CollectionViewModel, index:number, data:any) : ItemViewModel {
 		this.collectionViewModel = collectionViewModel;
 		this.index = index;
-		this.setData(data, false);
-		this.bindingMode = collectionViewModel.bindingMode;
+		this.setModel(data, false);
 
 		return this;
 	}

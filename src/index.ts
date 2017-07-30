@@ -89,16 +89,10 @@ export {ButtonOption, ButtonsOptions, TitleOptions, MessageBox} from "./controls
 export {ScrollerOptions, ScrollerBarVisibility, ScrollBarStyle, ScrollView} from "./controls/scroll-view";
 
 export {ViewModel}                   from "./mvvm/view-model";
-export {ICommand, IUndoCommand}      from "./mvvm/icommand";
-export {IValueConverter}             from "./mvvm/ivalue-converter";
-export {DelegateCommand}             from "./mvvm/delegate-command";
 export {CollectionViewModel}         from "./mvvm/collection-view-model";
-export {DelegateValueConverter}      from "./mvvm/delegate-value-converter";
 export {WidgetRecyclableCreator}     from "./controls/widget-recyclable-creator";
-export {IValidationRule, ValidationResult} from "./mvvm/ivalidation-rule";
-export {DelegateValidationRule}      from "./mvvm/delegate-validation-rule";
 export {BindingRule, IBindingSource, BindingDataSource,
-	BindingCommandSource, BindingRuleItem} from "./mvvm/binding-rule";
+	BindingCommandSource, BindingRuleItem}             from "./mvvm/binding-rule";
 export {BindingMode, IViewModel, ICollectionViewModel} from "./mvvm/iview-model";
 
 export {PagePropsDesc, PropsDesc, PropDesc, NumberPropDesc, SliderPropDesc} from "./controls-ext/props-desc";
@@ -116,24 +110,18 @@ export {InteractionTypes}             from "./interaction-request/interaction-ty
 export {InteractionRequest}           from "./interaction-request/interaction-request";
 export {InteractionService}           from "./interaction-request/interaction-service";
 
+export {Table, TableColInfo}          from "./table/table";
 export {TableRow}                     from "./table/table-row";
 export {TableClient}                  from "./table/table-client";
 export {TableIndex}                   from "./table/table-index";
 export {TableHeader}                  from "./table/table-header";
-export {Table, TableColInfo}          from "./table/table";
 export {TableIndexItem}               from "./table/table-index-item";
 export {TableHeaderItem}              from "./table/table-header-item";
 
 export {IFilter}                      from "./mvvm/ifilter";
 export {IComparator}                  from "./mvvm/icomparator";
-export {DelegateFilter}               from "./mvvm/delegate-filter";
-export {DelegateComparator}           from "./mvvm/delegate-comparator";
 export {NumberComparator, StringComparator, RevertComparator, ObjectPropComparator} from "./mvvm/comparators";
 
-export {RangeFixer}                    from "./mvvm/range-fixer";
-export {NumberFixer}                   from "./mvvm/number-fixer";
-export {Vector2Fixer}                  from "./mvvm/vector2-fixer";
-export {Vector3Fixer}                  from "./mvvm/vector3-fixer";
 export {HtmlElement}                   from "./html/html-element";
 export {HtmlEdit}                      from "./html/html-edit";
 export {UILoader}                      from "./ui-loader/ui-loader"
