@@ -70,9 +70,9 @@ export class CollectionViewModel extends ViewModelDefault implements ICollection
 		var vm = this.currentViewModel;
 		return vm ? vm.delProp(path) : this;
 	}
-	public setProp(path:string, value:any, converterName?:string, validationRule?:string) : ValidationResult {
+	public setProp(path:string, value:any, converterName?:string, validator?:string) : ValidationResult {
 		var vm = this.currentViewModel;
-		return vm ? vm.setProp(path, value, converterName, validationRule) : ValidationResult.invalidResult;
+		return vm ? vm.setProp(path, value, converterName, validator) : ValidationResult.invalidResult;
 	}
 	/**
 	 * 当前项的ViewModel
@@ -331,11 +331,11 @@ export class ItemViewModel extends ViewModelDefault implements IViewModel {
 		return cmd;
 	}
 
-	public canExecute(name:string) : boolean {
-		if(super.canExecute(name)) {
+	public canExecute(name:string, args:any) : boolean {
+		if(super.canExecute(name, args)) {
 			return true;
 		}else{
-			return this.collectionViewModel.canExecute(name);
+			return this.collectionViewModel.canExecute(name, args);
 		}
 	}
 

@@ -43,19 +43,19 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
 	/**
 	 * 验证器。
 	 */
-	public validationRule : string;
+	public validator : string;
 	/**
 	 * 更新ViewModel的时机。
 	 */
 	public updateTiming : UpdateTiming;
 
 	constructor(path?:string, value?:any, mode?:BindingMode, updateTiming?:UpdateTiming, 
-				validationRule?:string, converter?:string){
+				validator?:string, converter?:string){
 		super();
 
 		this.converter = converter;
 		this.type = <DataSourceType>BindingDataSource.TYPE;
-		this.validationRule = validationRule;
+		this.validator = validator;
 		this.mode = mode || BindingMode.TWO_WAY;
 		this.updateTiming = updateTiming !== undefined ? updateTiming :  UpdateTiming.CHANGING;
 
@@ -69,8 +69,8 @@ export class BindingDataSource extends JsonSerializer implements IBindingSource{
 
 	public static TYPE = "data";
 	public static create(path?:string, value?:any, mode?:BindingMode, updateTiming?:UpdateTiming, 
-						 validationRule?:string, converter?:string) {
-		return new BindingDataSource(path, value, mode, updateTiming, validationRule, converter);
+						 validator?:string, converter?:string) {
+		return new BindingDataSource(path, value, mode, updateTiming, validator, converter);
 	}
 };
 
@@ -92,9 +92,14 @@ export class BindingCommandSource extends JsonSerializer implements IBindingSour
 	 */
 	public eventHandler : Function;
 
+	public updateModel : boolean;
+	public closeWindow : boolean;
+
 	constructor(command:string, commandArgs?:any) {
 		super();
 		this.command = command;
+		this.updateModel = false;
+		this.closeWindow = false;
 		this.eventHandler = null;
 		this.commandArgs = commandArgs;
 		this.type = <DataSourceType>BindingCommandSource.TYPE;
@@ -130,7 +135,7 @@ export class BindingRuleItem {
 			this.source = BindingCommandSource.create(source.command, source.commandArgs); 
 		}else{
 			this.source = BindingDataSource.create(source.path, source.value, source.mode, source.updateTiming,
-							source.validationRule, source.converter);
+							source.validator, source.converter);
 		}
 
 		return this;
@@ -177,7 +182,7 @@ export class BindingRule {
 				source = BindingCommandSource.create(sJson.command, sJson.commandArgs) 
 			}else{
 				source = BindingDataSource.create(sJson.path, sJson.value, sJson.mode, sJson.updateTiming, 
-												  sJson.validationRule, sJson.converter); 
+												  sJson.validator, sJson.converter); 
 			}
 			this._items[prop] = BindingRuleItem.create(prop, source);
 		}
@@ -196,7 +201,7 @@ export class BindingRule {
 				source = BindingCommandSource.create(sourceJson.command, sourceJson.commandArgs) 
 			}else{
 				source = BindingDataSource.create(sourceJson.path, sourceJson.value, sourceJson.mode, 
-								sourceJson.updateTiming, sourceJson.validationRule, sourceJson.converter); 
+								sourceJson.updateTiming, sourceJson.validator, sourceJson.converter); 
 			}
 
 			this._items[prop] = BindingRuleItem.create(prop, source);

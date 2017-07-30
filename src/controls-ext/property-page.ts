@@ -565,7 +565,7 @@ export class PropertyPage extends Widget {
 				value:{
 					path:item.path, 
 					converter:item.converter, 
-					validationRule:item.validationRule,
+					validator:item.validator,
 					updateTiming:toUpdateTiming(item.updateTiming)
 				}
 			};

@@ -41,7 +41,7 @@ static void ConvertElement(xml_node& node, FILE* writer, int level) {
     xml_node first = node.first_child();
 
     fwrite(spaces, level, 1, writer);
-    if(strcmp(name, "property") == 0) {
+    if(strcmp(name, "property") == 0 || strcmp(name, "attribute") == 0) {
         fprintf(writer, "\"%s\": {\n", get_name_in_attr(node));
     } else if(strcmp(name, "widget") == 0 || strcmp(name, "action") == 0) {
         fprintf(writer, "{\n");
@@ -51,10 +51,12 @@ static void ConvertElement(xml_node& node, FILE* writer, int level) {
     if(attrs_nr) {
         for (xml_attribute attrib = node.first_attribute(); attrib; 
                 attrib = attrib.next_attribute()) {
-            if(strcmp(attrib.name(), "name") == 0 && strcmp(name, "property") == 0) {
+            if(strcmp(attrib.name(), "name") == 0 && (strcmp(name, "property") == 0
+                        || strcmp(name, "attribute") == 0)) {
                 continue;
             }
-            fwrite(spaces, level+1, 1, writer);
+
+            fwrite(spaces, level, 1, writer);
             fprintf(writer, "\"%s\":\"%s\",\n", attrib.name(), attrib.value());
         }
     }
@@ -100,7 +102,6 @@ static int Convert(xml_node& node, FILE* writer, int level) {
             const char* name = iter.name();
             if(strcmp(name, "widget") == 0 
                     || strcmp(name, "addaction") == 0
-                    || strcmp(name, "attribute") == 0
                     || strcmp(name, "action") == 0) {
                 continue;
             }
@@ -136,7 +137,7 @@ static int Convert(xml_node& node, FILE* writer, int level) {
                 const char* name = iter.name();
                 if(strcmp(name, "addaction") == 0) {
                     fwrite(spaces, level+1, 1, writer);
-                    fprintf(writer, "\"%s\",\n", name);
+                    fprintf(writer, "\"%s\",\n", get_name_in_attr(iter));
                 }
             }
         }
@@ -171,7 +172,7 @@ int main(int argc, char* argv[]) {
         xml_document doc;
         string name = argv[1];
         string ui_filename = name + ".ui"; 
-        string js_filename = name + ".ts";
+        string js_filename = name + "-ui.ts";
 
         xml_parse_result result = doc.load_file(ui_filename.c_str());
 
@@ -179,7 +180,7 @@ int main(int argc, char* argv[]) {
             FILE* writer = fopen(js_filename.c_str(), "w+");
             xml_node node = doc.first_child();
             if(writer) {
-                fprintf(writer, "export var %sJson = {\n", name.c_str());
+                fprintf(writer, "export var %sUI = {\n", name.c_str());
                 Convert(node, writer, 1);
                 fprintf(writer, "};\n");
                 fclose(writer);

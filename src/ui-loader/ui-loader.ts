@@ -27,10 +27,14 @@ import {ListItem, ListItemStyle} from "../controls/list-item";
 import {ChartView} from "../controls-ext/chart-view";
 import {Accordion} from "../controls/accordion";
 
+import {DataRuleParser, CommandRuleParser} from "./rule-parser"
+import {IViewModel} from "../mvvm/iview-model"
+
 export class UILoader {
     public constructor() {}
 
     public createWidget(app:Application, parentJson:any, widgetJson:any) : Widget {
+        var rule : string; 
         var widget:Widget;
         var type:string = widgetJson["class"];
         var geometry = widgetJson.geometry || parentJson.geometry;
@@ -50,6 +54,10 @@ export class UILoader {
             widget = Button.create(options);
         }
 
+        if(!widget) {
+            return null;
+        }
+
         if(widgetJson.widgets) {
             widgetJson.widgets.forEach(iter => {
                 var child:Widget = this.createWidget(app, widgetJson, iter);
@@ -59,23 +67,49 @@ export class UILoader {
             });
         }
 
+        var dataBindingRule:any = {}
         if(widgetJson.text) {
-            if(widget) {
+            rule = widgetJson.text.string;
+            if(!this.isValidRule(rule)) {
                 widget.text = widgetJson.text.string;
+            }else{
+                if(widgetJson["binding.value"]) {
+                    rule = widgetJson["binding.value"].string; 
+                }
+            }
+
+            if(this.isValidRule(rule)) {
+                 dataBindingRule["text"] = DataRuleParser.parseOne(rule);
             }
         }
+
+        if(widgetJson["binding.command"]) {
+            rule = widgetJson["binding.command"].string;
+            if(this.isValidRule(rule)) {
+                dataBindingRule["click"] = CommandRuleParser.parseOne(rule);
+            }
+        }
+
+        widget.dataBindingRule = dataBindingRule;
 
         return widget;
     }
 
-    public load(app:Application, json:any) : Window {
-        var widgetJson = json.ui.widgets[0];
+    public load(app:Application, jsonView:any, viewModel:IViewModel) : Window {
+        var widgetJson = jsonView.ui.widgets[0];
 
         if(widgetJson) {
-            return <Window>this.createWidget(app, null, widgetJson);
+            var win : Window = <Window>this.createWidget(app, null, widgetJson);
+            win.bindData(viewModel);
+
+            return win;
         }
 
         return null;
+    }
+
+    private isValidRule(rule:string) : boolean {
+        return rule && rule.indexOf("{") == 0 && rule.indexOf("}") > 0;
     }
 }
 

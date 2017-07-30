@@ -2241,7 +2241,7 @@ export class Widget extends Emitter {
 				this.watchTargetChange(dataBindingRule);
 			}
 
-			if(bindingMode !== BindingMode.ONE_TIME && bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
+			if(bindingMode !== BindingMode.ONCE && bindingMode !== BindingMode.ONE_WAY_TO_SOURCE) {
 				viewModel.onChange(this.viewModelChangeFunc);
 			}
 
@@ -2254,7 +2254,7 @@ export class Widget extends Emitter {
 						var source = item.source;
 						if(source.type === BindingCommandSource.TYPE) {
 							var commandSource = <BindingCommandSource>source;
-							enable = enable && vm.canExecute(commandSource.command)	
+							enable = enable && vm.canExecute(commandSource.command, commandSource.commandArgs)	
 						}
 					});
 				}

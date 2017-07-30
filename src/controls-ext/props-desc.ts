@@ -49,7 +49,7 @@ export class PropDesc {
 	 */
 	public updateTiming : string;
 
-	public static keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validationRule"];
+	public static keys = ["type", "name", "desc", "value", "path", "titleW", "valueW", "converter", "validator"];
 	
 	public toJson() : any {
 		var json : any = {};
@@ -98,16 +98,16 @@ export class PropDesc {
 	public converter : string;
 	
 	/**
-	 * @property {string} validationRule
+	 * @property {string} validator
 	 * 数据绑定的数据有效性验证规则的名称。
 	 */
-	public validationRule : string;
+	public validator : string;
 
 	public setDataBindingRule(path:string, updateTiming?:string, 
-							  converter?:string, validationRule?:string) : PropDesc {
+							  converter?:string, validator?:string) : PropDesc {
 		this.path = path;
 		this.converter = converter;
-		this.validationRule = validationRule;
+		this.validator = validator;
 		this.updateTiming = updateTiming || "changed";
 
 		return this;
@@ -525,7 +525,7 @@ export class PropsDesc extends Emitter {
 			
 			items.push(desc);
 			desc.setBasic(data.name, data.value, data.desc, data.titleW, data.valueW);
-			desc.setDataBindingRule(data.path, data.updateTiming, data.converter, data.validationRule);
+			desc.setDataBindingRule(data.path, data.updateTiming, data.converter, data.validator);
 		});
 	
 		this._items = items;

@@ -12,7 +12,7 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 	private _data : any;
 	private _commands : any;
 	private _converters : any;
-	private _validationRules : any;
+	private _validators : any;
 	private _ePropChange : Events.PropChangeEvent;
 
 	public isCollection : boolean;
@@ -40,7 +40,7 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 		this._commands = {};
 		this._converters = {};
 		this._data = data || {};
-		this._validationRules = {};
+		this._validators = {};
 		this.isCollection = false;
 		this._bindingMode = BindingMode.TWO_WAY;
 		this._ePropChange = Events.PropChangeEvent.create();
@@ -96,15 +96,15 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 	public setPropEx(source:BindingDataSource, value: any, oldValue?:any) : ValidationResult {
 		var path = source.path;
 		var converterName = source.converter;
-		var validationRule = source.validationRule;
+		var validator = source.validator;
 
-		return this.setProp(path, value, converterName, validationRule);
+		return this.setProp(path, value, converterName, validator);
 	}
 
-	public setProp(path:string, v:any, converterName?:string, validationRule?:string) : ValidationResult {
+	public setProp(path:string, v:any, converterName?:string, validator?:string) : ValidationResult {
 		
 		var value = this.convertBack(converterName, v);
-		var validateResult = this.isValueValid(validationRule, value);
+		var validateResult = this.isValueValid(validator, value);
 		if(!validateResult.code) {
 			pointer.set(this._data, path, value);
 			this.notifyChange(Events.PROP_CHANGE, this.fixPath(path), value);
@@ -119,12 +119,20 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 		return this._commands[name];
 	}
 	
-	public canExecute(name:string) : boolean {
+	public canExecute(name:string, args:any) : boolean {
 		var ret = false;
 		var cmd = this.getCommand(name);
 
 		if(cmd && cmd.canExecute()) {
 			ret = true;
+		}else{
+			var model:any = this.data;
+			var func = "can" + name[0].toUpperCase() + name.substr(1);
+			if(model[func]) {
+				ret = model[func]();
+			}else{
+				ret = true;
+			}
 		}
 
 		return ret;
@@ -136,6 +144,12 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 
 		if(cmd && cmd.canExecute()) {
 			ret = cmd.execute(args);
+		}else{
+			var model:any = this.data;
+			var func = name[0].toLowerCase() + name.substr(1);
+			if(model[func]) {
+				ret = model[func](args);
+			}
 		}
 
 		return ret;
@@ -177,23 +191,23 @@ export class ViewModelDefault extends Emitter implements IViewModel {
 	}
 
 	public getValidationRule(name:string) : IValidationRule {
-		return this._validationRules[name];
+		return this._validators[name];
 	}
-	public registerValidationRule(name:string, validationRule:IValidationRule) : IViewModel {
-		this._validationRules[name] = validationRule;
+	public registerValidationRule(name:string, validator:IValidationRule) : IViewModel {
+		this._validators[name] = validator;
 
 		return this;
 	}
 	public unregisterValidationRule(name:string) : IViewModel {
-		this._validationRules[name] = null;
+		this._validators[name] = null;
 	
 		return this;
 	}
 
 	public isValueValid(ruleName:string, value:any) : ValidationResult {
-		var validationRule = ruleName ? this.getValidationRule(ruleName) : null;
+		var validator = ruleName ? this.getValidationRule(ruleName) : null;
 
-		return validationRule ? validationRule.validate(value) : ValidationResult.validResult;
+		return validator ? validator.validate(value) : ValidationResult.validResult;
 	}
 
 };

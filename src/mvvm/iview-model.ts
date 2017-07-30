@@ -37,10 +37,10 @@ export interface IViewModel {
 	 * @param path 属性的路径。请参考：https://github.com/manuelstofer/json-pointer
 	 * @param value 属性的值。
 	 * @param converter 数据转换器的名称。用于把数据转成适合存储的格式。 
-	 * @param validationRule 用于验证数据有效性的验证器的名称。
+	 * @param validator 用于验证数据有效性的验证器的名称。
 	 * @returns 返回ValidationResult, ValidationResult.code为0表示设置成功。
 	 */
-	setProp(path:string, value:any, converter?:string, validationRule?:string) : ValidationResult;
+	setProp(path:string, value:any, converter?:string, validator?:string) : ValidationResult;
 	
 	/**
 	 * 设置属性的值。
@@ -70,7 +70,7 @@ export interface IViewModel {
 	 * @param name 命令的名称。
 	 * @returns 命令能否执行。
 	 */
-	canExecute(name:string) : boolean;
+	canExecute(name:string, args:any) : boolean;
 
 	/**
 	 * 执行指定的命令。
@@ -154,7 +154,7 @@ export enum BindingMode {
 	 * 只在初始化时绑定。
 	 * 界面数据变化时不更新ViewModel，ViewModel数据有变化时不更新界面。
 	 */
-	ONE_TIME,
+	ONCE,
 	/**
 	 * 单向数据绑定。
 	 * 界面数据变化时自动更新ViewModel，ViewModel数据有变化时不更新界面。

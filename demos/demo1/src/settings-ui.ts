@@ -1,10 +1,10 @@
-export var mainwindowJson = {
+export var SettingsUI = {
   "ui": {
-   "version":"4.0",
+  "version":"4.0",
    "class":"MainWindow",
     "layoutdefault": {
-     "spacing":"6",
-     "margin":"11",
+    "spacing":"6",
+    "margin":"11",
     },
     "resources": {
     },
@@ -12,8 +12,8 @@ export var mainwindowJson = {
     },
    "widgets" : [
     {
-     "class":"QMainWindow",
-     "name":"MainWindow",
+    "class":"QMainWindow",
+    "name":"MainWindow",
       "geometry": {
         "rect": {
          "x":0,
@@ -27,54 +27,54 @@ export var mainwindowJson = {
       },
      "actions" : [
       {
-       "name":"actionSave",
+      "name":"actionSave",
         "text": {
          "string":"Save",
         },
         "binding.command": {
-         "stdset":"0",
+        "stdset":"0",
          "string":"{Save}",
         },
       },
       {
-       "name":"actionExit",
+      "name":"actionExit",
         "text": {
          "string":"Exit",
         },
         "binding.command": {
-         "stdset":"0",
+        "stdset":"0",
          "string":"{xxx,CloseWindow=True}",
         },
       },
       {
-       "name":"actionEnglish",
+      "name":"actionEnglish",
         "text": {
          "string":"English",
         },
         "binding.command": {
-         "stdset":"0",
+        "stdset":"0",
          "string":"{SetLanguage, Args=en}",
         },
       },
       {
-       "name":"actionChanese",
+      "name":"actionChanese",
         "text": {
          "string":"Chinese",
         },
         "binding.command": {
-         "stdset":"0",
+        "stdset":"0",
          "string":"{SetLanguage, Args=zh}",
         },
       },
      ],
      "widgets" : [
       {
-       "class":"QWidget",
-       "name":"centralwidget",
+      "class":"QWidget",
+      "name":"centralwidget",
        "widgets" : [
         {
-         "class":"QLineEdit",
-         "name":"lineEdit_2",
+        "class":"QLineEdit",
+        "name":"lineEdit_2",
           "geometry": {
             "rect": {
              "x":250,
@@ -88,8 +88,8 @@ export var mainwindowJson = {
           },
         },
         {
-         "class":"QPushButton",
-         "name":"pushButton",
+        "class":"QPushButton",
+        "name":"pushButton",
           "geometry": {
             "rect": {
              "x":80,
@@ -100,20 +100,20 @@ export var mainwindowJson = {
           },
           "styleSheet": {
             "string": {
-             "notr":"true",
+            "notr":"true",
             },
           },
           "text": {
            "string":"OK",
           },
           "binding.command": {
-           "stdset":"0",
+          "stdset":"0",
            "string":"{Save, CloseWindow=True}",
           },
         },
         {
-         "class":"QLineEdit",
-         "name":"lineEdit_4",
+        "class":"QLineEdit",
+        "name":"lineEdit_4",
           "geometry": {
             "rect": {
              "x":249,
@@ -127,8 +127,8 @@ export var mainwindowJson = {
           },
         },
         {
-         "class":"QLabel",
-         "name":"label_path",
+        "class":"QLabel",
+        "name":"label_path",
           "geometry": {
             "rect": {
              "x":50,
@@ -142,8 +142,8 @@ export var mainwindowJson = {
           },
         },
         {
-         "class":"QLineEdit",
-         "name":"lineEdit_3",
+        "class":"QLineEdit",
+        "name":"lineEdit_3",
           "geometry": {
             "rect": {
              "x":250,
@@ -157,8 +157,8 @@ export var mainwindowJson = {
           },
         },
         {
-         "class":"QPushButton",
-         "name":"pushButton_2",
+        "class":"QPushButton",
+        "name":"pushButton_2",
           "geometry": {
             "rect": {
              "x":330,
@@ -171,13 +171,13 @@ export var mainwindowJson = {
            "string":"Cancel",
           },
           "binding.command": {
-           "stdset":"0",
+          "stdset":"0",
            "string":"{cancel, CloseWindow=True}",
           },
         },
         {
-         "class":"QLabel",
-         "name":"label_name",
+        "class":"QLabel",
+        "name":"label_name",
           "geometry": {
             "rect": {
              "x":50,
@@ -191,8 +191,8 @@ export var mainwindowJson = {
           },
         },
         {
-         "class":"QLabel",
-         "name":"label_fullpath",
+        "class":"QLabel",
+        "name":"label_fullpath",
           "geometry": {
             "rect": {
              "x":50,
@@ -208,8 +208,8 @@ export var mainwindowJson = {
        ],
       },
       {
-       "class":"QMenuBar",
-       "name":"menubar",
+      "class":"QMenuBar",
+      "name":"menubar",
         "geometry": {
           "rect": {
            "x":0,
@@ -219,53 +219,59 @@ export var mainwindowJson = {
           },
         },
        "addactions" : [
-        "addaction",
-        "addaction",
+        "menuFile",
+        "menuLanguage",
        ],
        "widgets" : [
         {
-         "class":"QMenu",
-         "name":"menuFile",
+        "class":"QMenu",
+        "name":"menuFile",
           "title": {
            "string":"File",
           },
          "addactions" : [
-          "addaction",
-          "addaction",
-          "addaction",
+          "separator",
+          "actionSave",
+          "actionExit",
          ],
         },
         {
-         "class":"QMenu",
-         "name":"menuLanguage",
+        "class":"QMenu",
+        "name":"menuLanguage",
           "title": {
            "string":"Language",
           },
          "addactions" : [
-          "addaction",
-          "addaction",
-          "addaction",
+          "separator",
+          "actionEnglish",
+          "actionChanese",
          ],
         },
        ],
       },
       {
-       "class":"QStatusBar",
-       "name":"statusbar",
+      "class":"QStatusBar",
+      "name":"statusbar",
         "binding.value": {
-         "stdset":"0",
+        "stdset":"0",
          "string":"{\"Full Path Is: \"+path($path+$name)}",
         },
       },
       {
-       "class":"QToolBar",
-       "name":"toolBar",
+      "class":"QToolBar",
+      "name":"toolBar",
         "windowTitle": {
          "string":"toolBar",
         },
+        "toolBarArea": {
+         "enum":"TopToolBarArea",
+        },
+        "toolBarBreak": {
+         "bool":false,
+        },
        "addactions" : [
-        "addaction",
-        "addaction",
+        "actionSave",
+        "actionExit",
        ],
       },
      ],
