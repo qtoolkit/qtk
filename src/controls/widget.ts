@@ -366,7 +366,6 @@ export class Widget extends Emitter {
 				this.onpointermove(evt);
 			}
 			this.dispatchEvent(evt, false);
-			this.state = WidgetState.NORMAL;
 		}
 	}
 
